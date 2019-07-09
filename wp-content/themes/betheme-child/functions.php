@@ -39,6 +39,11 @@ function mfnch_enqueue_styles()
 }
 add_action('wp_enqueue_scripts', 'mfnch_enqueue_styles', 101);
 
+function remove_posts_menu() {
+    remove_menu_page('edit.php');
+}
+add_action('admin_menu', 'remove_posts_menu');
+
 /**
  * Load Textdomain
  */
