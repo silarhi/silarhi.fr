@@ -66,9 +66,9 @@
 #Sliding-top.active a.sliding-top-control .minus{display:block}
 #Sliding-top.active a.sliding-top-control .plus{display:none}
 #Sliding-top.st-center a.sliding-top-control{border-color:transparent;border-width:45px 45px 0;left:50%;right:auto;margin-left:-22px;margin-right:0}
-#Sliding-top.st-center a.sliding-top-control span{left:-14px;top:-45px}
+#Sliding-top.st-center a.sliding-top-control span{left:-14px;right:auto;top:-45px}
 #Sliding-top.st-left a.sliding-top-control{border-color:transparent;border-width:45px 45px 0 0;left:0;right:auto;margin-right:0}
-#Sliding-top.st-left a.sliding-top-control span{left:-3px;top:-45px}
+#Sliding-top.st-left a.sliding-top-control span{left:-3px;right:auto;top:-45px}
 #Sliding-top .Recent_posts ul li .desc{background:rgba(0,0,0,.1)}
 #Sliding-top .widget_mfn_menu ul li a{background:rgba(0,0,0,.1);color:#ccc}
 #Sliding-top .widget_recent_entries ul li{background:rgba(0,0,0,.1)}

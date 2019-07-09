@@ -1171,7 +1171,7 @@ if (! function_exists('mfn_hex2rgba')) {
 			$b = hexdec(substr($hex, 4, 2));
 		}
 
-		$rgba = 'rgba('. $r.', '. $g .', '. $b .', '. $alpha .')';
+		$rgba = 'rgba('. $r.','. $g .','. $b .','. $alpha .')';
 
 		if ($echo) {
 			echo esc_attr($rgba);

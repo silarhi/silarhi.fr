@@ -14,7 +14,7 @@ mfn_post_navigation_sort();
 $single_post_nav = array(
 	'hide-header'	=> false,
 	'hide-sticky'	=> false,
-	'in-same-term'	=> false,
+	'in-same-term' => false,
 );
 
 $opts_single_post_nav = mfn_opts_get('prev-next-nav');
@@ -86,6 +86,7 @@ $translate['task'] = mfn_opts_get('translate') ? mfn_opts_get('translate-task', 
 
 	<?php
 		// single post navigation | sticky
+
 		if (! $single_post_nav['hide-sticky']) {
 			echo mfn_post_navigation_sticky($post_prev, 'prev', 'icon-left-open-big');
 			echo mfn_post_navigation_sticky($post_next, 'next', 'icon-right-open-big');
@@ -99,6 +100,7 @@ $translate['task'] = mfn_opts_get('translate') ? mfn_opts_get('translate-task', 
 
 				<?php
 					// single post navigation | header
+
 					if (! $single_post_nav['hide-header']) {
 						echo mfn_post_navigation_header($post_prev, $post_next, mfn_wpml_ID($portfolio_page_id), $translate);
 					}
@@ -200,6 +202,7 @@ $translate['task'] = mfn_opts_get('translate') ? mfn_opts_get('translate-task', 
 				<div class="column one project-description">
 					<ul>
 						<?php
+
 							// client
 							if ($client = get_post_meta(get_the_ID(), 'mfn-post-client', true)) {
 								echo '<li class="one-third"><span class="label">'. esc_html($translate['client']) .'</span>'. esc_html($client) .'</li>';
@@ -240,7 +243,7 @@ $translate['task'] = mfn_opts_get('translate') ? mfn_opts_get('translate-task', 
 
 			<div class="column one post-pager">
 				<?php
-					// List of pages
+					// list of pages
 					wp_link_pages(array(
 						'before' => '<div class="pager-single">',
 						'after' => '</div>',

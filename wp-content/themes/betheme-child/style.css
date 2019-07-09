@@ -7,3 +7,32 @@ Description: Child Theme for Betheme
 Template: betheme
 Version: 1.6.2
 */
+
+#main-section img {
+	opacity: 0.75;
+}
+
+#main-section h1 {
+	color: white;
+}
+
+#main-section h1 span {
+	font-size: 50%;
+	display: block;
+	text-transform: uppercase;
+	line-height: 1.2;
+}
+
+#main-section h2 {
+	color: white;
+	text-transform: uppercase;
+}
+
+.text-uppercase {
+	text-transform: uppercase;
+}
+
+li.list_phone:before {content: '\e8f4'; top: 0;}
+li.list_email:before {content: '\e872'; top: 0;}
+li.list_location:before {content: '\e8c6'; top: 0;}
+li.list_clock:before {content: '\e843'; top: 0;}
