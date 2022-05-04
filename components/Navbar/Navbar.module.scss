@@ -1,0 +1,11 @@
+@import "styles/core";
+
+
+.navbar {
+  position: absolute;
+
+  &.floating {
+    position: fixed;
+    opacity: 1;
+  }
+}

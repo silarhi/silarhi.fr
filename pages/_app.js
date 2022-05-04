@@ -1,7 +1,14 @@
-import '../styles/globals.css'
+import '../styles/app.scss'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import DefaultLayout from "layouts/DefaultLayout/DefaultLayout";
+
+config.autoAddCss = false
+
+export default function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => (<DefaultLayout navbarFloatingClass={Component.navbarFloatingClass} navbarInitialClass={Component.navbarFloatingClass}>{page}</DefaultLayout>));
+
+  return getLayout(<Component {...pageProps} />)
 }
-
-export default MyApp

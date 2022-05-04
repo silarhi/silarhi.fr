@@ -1,0 +1,29 @@
+$enable-rfs: true;
+
+$body-bg: #F8F9FA;
+
+//Colors
+$primary: #2556cf;
+$sub-primary: #ffaf30;
+
+//Forms
+$input-border-radius: 0;
+
+//Shadow
+$input-icon-color: $primary;
+
+//Theme colors
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$theme-colors: (
+        "primary": $primary,
+        "sub-primary": $sub-primary,
+        "secondary": $secondary,
+        "success": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "light": $light,
+        "dark": $dark
+);

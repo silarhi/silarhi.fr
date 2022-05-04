@@ -1,0 +1,30 @@
+@import "core";
+
+//Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+//Components
+@import "components/input-icon";
+
+//Layouts
+html, body {
+  height: 100%;
+}
+
+//Cards
+.row-cards {
+  min-width: 0;
+  .row-cards {
+    flex: 1;
+  }
+}
+
+.row-deck>.col,
+.row-deck>[class*=col-] {
+  display: flex;
+  align-items: stretch;
+
+  .card {
+    flex: 1 1 auto
+  }
+}

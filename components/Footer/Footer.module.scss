@@ -1,0 +1,23 @@
+@import "styles/core";
+
+.footer {
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      color: orange;
+      text-decoration: underline;
+    }
+  }
+
+  .footerTop {
+    background: $info;
+    color: white;
+  }
+
+  .footerBottom {
+    background: $primary;
+    color: white;
+  }
+}
