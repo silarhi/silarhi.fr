@@ -10,15 +10,13 @@ export default function Navbar({initialClass, floatingClass}) {
 
   const [floating, setFloating] = useState(false);
   const [floatingStyle, setFloatingStyle] = useState({});
+  const [navbarHeight, setNavbarHeight] = useState(56);
 
-  //Don't execute on SSR
-  if (typeof window !== 'undefined') {
-    const [navbarHeight, setNavbarHeight] = useState(56);
+  useLayoutEffect(() => {
+    setNavbarHeight(ref.current.clientHeight);
+  }, []);
 
-    useLayoutEffect(() => {
-      setNavbarHeight(ref.current.clientHeight);
-    }, []);
-
+  useEffect(() => {
     const onScroll = () => {
       setFloating(window.scrollY > navbarHeight)
       if (window.scrollY > navbarHeight && window.scrollY <= 2 * navbarHeight) {
@@ -31,15 +29,13 @@ export default function Navbar({initialClass, floatingClass}) {
       }
     }
 
-    useEffect(() => {
-      onScroll();
-      window.addEventListener('scroll', onScroll, {passive: true});
+    onScroll();
+    window.addEventListener('scroll', onScroll, {passive: true});
 
-      return () => {
-        window.removeEventListener('scroll', onScroll);
-      }
-    }, [])
-  }
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    }
+  }, [navbarHeight, setFloating, setFloatingStyle])
 
   return (
     <nav className={`navbar navbar-expand-lg fixed-top ${styles.navbar} ${floating ? `${styles.floating} ${floatingClass}` : initialClass}`} style={floatingStyle} ref={ref}>
