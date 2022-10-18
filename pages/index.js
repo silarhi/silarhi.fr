@@ -108,7 +108,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Développement d'applications Web & PHP à Toulouse - Silarhi</title>
+        <title>Développement d{"'"}applications Web & PHP à Toulouse - Silarhi</title>
       </Head>
       {/* Header */}
       <div className={styles.bgWrap}>
@@ -116,7 +116,7 @@ export default function Home() {
         <div className={styles.contentWrapper}>
           <Container>
             <h1>
-              Développement d'applications Web
+              Développement d{"'"}applications Web
               <span>À Toulouse & en France</span>
             </h1>
             <h2>Donnez vie à vos idées</h2>
@@ -151,7 +151,7 @@ export default function Home() {
           title="Nos services"
           subtitle="Vérifiez que votre besoin colle avec notre savoir faire"
         />
-        <h3>Ce qu'on adore faire</h3>
+        <h3>Ce qu{"'"}on adore faire</h3>
         <Row className="g-lg-5">
           {chunk(SERVICES.filter(service => service.supported), 2).map((services, chunkKey) => (
             <Col lg={6} key={chunkKey}>

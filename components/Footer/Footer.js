@@ -8,7 +8,7 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className={`py-5 ${styles.footerTop}`}>
                 <Container className={"text-center"}>
-                    <h4>Développement d'applications Web à Toulouse et en France</h4>
+                    <h4>Développement d{"'"}applications Web à Toulouse et en France</h4>
                 </Container>
             </div>
             <div className={`py-4 ${styles.footerBottom}`}>

@@ -16,6 +16,7 @@ const BaseWidget = forwardRef(({value, isValid, isInvalid, ...props}, ref) => {
 })
 
 BaseWidget.propTypes = {}
+BaseWidget.displayName = 'BaseWidget'
 
 const Input = forwardRef(({ value, isValid, isInvalid, iconPrepend, iconAppend, ...props }, ref) => {
   if (iconPrepend || iconAppend) {
@@ -30,5 +31,6 @@ const Input = forwardRef(({ value, isValid, isInvalid, iconPrepend, iconAppend, 
 })
 
 Input.propTypes = {}
+Input.displayName = 'Input'
 
 export default Input;
