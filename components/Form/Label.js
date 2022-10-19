@@ -1,5 +1,5 @@
-import Form from 'react-bootstrap/Form';
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
+import Form from 'react-bootstrap/Form'
 
 export default function Label({label, htmlFor, children, ...props}) {
   return (

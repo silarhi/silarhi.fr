@@ -1,18 +1,18 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
-import { faCloudBolt } from '@fortawesome/free-solid-svg-icons/faCloudBolt';
-import { faCode } from '@fortawesome/free-solid-svg-icons/faCode';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
-import { faLightbulb } from '@fortawesome/free-solid-svg-icons/faLightbulb';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass';
-import {faUser} from "@fortawesome/free-solid-svg-icons/faUser";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import PropTypes from "prop-types";
-import {faPhone} from "@fortawesome/free-solid-svg-icons/faPhone";
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
+import { faCloudBolt } from '@fortawesome/free-solid-svg-icons/faCloudBolt'
+import { faCode } from '@fortawesome/free-solid-svg-icons/faCode'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope'
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons/faLightbulb'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
+import {faPhone} from "@fortawesome/free-solid-svg-icons/faPhone"
+import {faUser} from "@fortawesome/free-solid-svg-icons/faUser"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import PropTypes from "prop-types"
 
 export function BaseIcon({icon, className, ...props}) {
   return (
     <FontAwesomeIcon icon={icon} className={`${className || ''} icon`.trim()} {...props} />
-  );
+  )
 }
 
 BaseIcon.propTypes = {

@@ -1,6 +1,6 @@
-import Navbar from "components/Navbar/Navbar";
-import Footer from "components/Footer/Footer";
-import PropTypes from "prop-types";
+import Footer from "components/Footer/Footer"
+import Navbar from "components/Navbar/Navbar"
+import PropTypes from "prop-types"
 
 import styles from './DefaultLayout.module.scss'
 

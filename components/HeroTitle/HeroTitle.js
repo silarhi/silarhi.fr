@@ -1,5 +1,5 @@
-import Section from "components/Section/Section";
-import Title from "components/Title/Title";
+import Section from "components/Section/Section"
+import Title from "components/Title/Title"
 
 export default function HeroTitle({title}) {
   return (

@@ -1,4 +1,4 @@
-import Section from "../components/Section/Section";
+import Section from "../components/Section/Section"
 
 export default function Page2() {
   return (

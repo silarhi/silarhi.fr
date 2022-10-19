@@ -1,18 +1,19 @@
-import Section from "../components/Section/Section";
-import home from '../public/images/home.jpg';
-import Image from "next/future/image";
-import styles from './index.module.scss';
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import IconWrapper from "../components/IconWrapper/IconWrapper";
-import CallToAction from "../components/CallToAction/CallToAction";
-import Head from "next/head";
-import SectionHeader from "../components/SectionHeader/SectionHeader";
-import {chunk} from "../utils/array";
-import Markdown from "marked-react";
-import {Check, CloudBolt, Code, LightBulb, MagnifyingGlass} from "../components/Icons/Icons";
+import Markdown from "marked-react"
+import Image from "next/future/image"
+import Head from "next/head"
+import Button from "react-bootstrap/Button"
+import Col from "react-bootstrap/Col"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+
+import CallToAction from "../components/CallToAction/CallToAction"
+import {Check, CloudBolt, Code, LightBulb, MagnifyingGlass} from "../components/Icons/Icons"
+import IconWrapper from "../components/IconWrapper/IconWrapper"
+import Section from "../components/Section/Section"
+import SectionHeader from "../components/SectionHeader/SectionHeader"
+import home from '../public/images/home.jpg'
+import {chunk} from "../utils/array"
+import styles from './index.module.scss'
 
 const FEATURES = [
   {
@@ -35,7 +36,7 @@ const FEATURES = [
     title: 'Déploiement',
     description: 'L\'application est hébergée sur l\'infrastructure de votre choix. OVH, AWS, GCP, si tous ces sigles ne vous disent rien, laissez-vous guider !',
   },
-];
+]
 
 const SERVICES = [
   {

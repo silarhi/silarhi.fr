@@ -1,6 +1,7 @@
-import Link from "next/link";
-import styles from './Footer.module.scss';
-import Container from "react-bootstrap/Container";
+import Link from "next/link"
+import Container from "react-bootstrap/Container"
+
+import styles from './Footer.module.scss'
 
 
 export default function Footer() {
@@ -34,5 +35,5 @@ export default function Footer() {
                 </div>
             </div>
         </footer>
-    );
+    )
 }

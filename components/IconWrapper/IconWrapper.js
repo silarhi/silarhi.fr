@@ -1,4 +1,4 @@
-import styles from './IconWrapper.module.scss';
+import styles from './IconWrapper.module.scss'
 
 export default function IconWrapper({children}) {
   return (
@@ -7,5 +7,5 @@ export default function IconWrapper({children}) {
         {children}
       </div>
     </div>
-  );
+  )
 }

@@ -1,7 +1,8 @@
-import Head from "next/head";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Section from "../components/Section/Section";
-import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import {faDownload} from "@fortawesome/free-solid-svg-icons"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import Head from "next/head"
+
+import Section from "../components/Section/Section"
 
 export default function CGV() {
     return (
@@ -99,5 +100,5 @@ export default function CGV() {
                     juridiction compétente est celle de TOULOUSE.</p>
             </Section>
         </>
-    );
+    )
 }

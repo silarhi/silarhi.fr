@@ -1,6 +1,7 @@
-import Form from 'react-bootstrap/Form';
-import InputIcon from "./InputIcon";
-import {forwardRef} from "react";
+import {forwardRef} from "react"
+import Form from 'react-bootstrap/Form'
+
+import InputIcon from "./InputIcon"
 
 const BaseWidget = forwardRef(({value, isValid, isInvalid, ...props}, ref) => {
   return (
@@ -33,4 +34,4 @@ const Input = forwardRef(({ value, isValid, isInvalid, iconPrepend, iconAppend, 
 Input.propTypes = {}
 Input.displayName = 'Input'
 
-export default Input;
+export default Input

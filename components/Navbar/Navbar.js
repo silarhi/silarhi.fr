@@ -1,20 +1,21 @@
-import Link from "next/link";
-import {useRouter} from "next/router";
-import {useEffect, useLayoutEffect, useRef, useState} from "react";
-import styles from './Navbar.module.scss';
-import PropTypes from "prop-types";
+import Link from "next/link"
+import {useRouter} from "next/router"
+import PropTypes from "prop-types"
+import {useEffect, useLayoutEffect, useRef, useState} from "react"
+
+import styles from './Navbar.module.scss'
 
 export default function Navbar({initialClass, floatingClass}) {
-  const router = useRouter();
-  const ref = useRef(null);
+  const router = useRouter()
+  const ref = useRef(null)
 
-  const [floating, setFloating] = useState(false);
-  const [floatingStyle, setFloatingStyle] = useState({});
-  const [navbarHeight, setNavbarHeight] = useState(56);
+  const [floating, setFloating] = useState(false)
+  const [floatingStyle, setFloatingStyle] = useState({})
+  const [navbarHeight, setNavbarHeight] = useState(56)
 
   useLayoutEffect(() => {
-    setNavbarHeight(ref.current.clientHeight);
-  }, []);
+    setNavbarHeight(ref.current.clientHeight)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -23,17 +24,17 @@ export default function Navbar({initialClass, floatingClass}) {
         setFloatingStyle({
           top: Math.round(window.scrollY - 2 * navbarHeight),
           opacity: 1 - (2 * navbarHeight - window.scrollY) / navbarHeight
-        });
+        })
       } else {
-        setFloatingStyle({});
+        setFloatingStyle({})
       }
     }
 
-    onScroll();
-    window.addEventListener('scroll', onScroll, {passive: true});
+    onScroll()
+    window.addEventListener('scroll', onScroll, {passive: true})
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onScroll)
     }
   }, [navbarHeight, setFloating, setFloatingStyle])
 

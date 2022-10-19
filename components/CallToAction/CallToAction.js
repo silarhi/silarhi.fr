@@ -1,11 +1,12 @@
-import Button from "react-bootstrap/Button";
-import styles from './CallToAction.module.scss';
-import {useCallback, useState} from "react";
-import Modal from 'react-bootstrap/Modal';
-import ContactForm from "../ContactForm/ContactForm";
+import {useCallback, useState} from "react"
+import Button from "react-bootstrap/Button"
+import Modal from 'react-bootstrap/Modal'
+
+import ContactForm from "../ContactForm/ContactForm"
+import styles from './CallToAction.module.scss'
 
 function MyVerticallyCenteredModal({onHide, ... props}) {
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
 
   const hideAndHandleFormSubmit = useCallback(() => {
     onHide()
@@ -32,14 +33,14 @@ function MyVerticallyCenteredModal({onHide, ... props}) {
         <Button onClick={() => setIsFormSubmitted(true)}>Envoyer</Button>
       </Modal.Footer>
     </Modal>
-  );
+  )
 }
 
 export default function CallToAction() {
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false)
 
   const renderModal = useCallback((e) => {
-    e.preventDefault();
+    e.preventDefault()
     setModalShow(true)
   }, [])
 

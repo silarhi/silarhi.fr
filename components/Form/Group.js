@@ -1,7 +1,8 @@
-import Form from 'react-bootstrap/Form';
-import PropTypes from "prop-types";
-import Label from "./Label";
 import cx from 'classnames'
+import PropTypes from "prop-types"
+import Form from 'react-bootstrap/Form'
+
+import Label from "./Label"
 
 export default function Group({label, groupClassName, id, valid, children}) {
   return (

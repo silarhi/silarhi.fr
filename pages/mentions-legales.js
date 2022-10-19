@@ -1,6 +1,6 @@
-import Section from "components/Section/Section";
-import Head from "next/head";
-import Hero from "components/HeroTitle/HeroTitle";
+import Hero from "components/HeroTitle/HeroTitle"
+import Section from "components/Section/Section"
+import Head from "next/head"
 
 export default function LegalMentions() {
     return (

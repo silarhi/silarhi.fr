@@ -1,10 +1,11 @@
-import Group from "../Form/Group";
-import Input from "../Form/Input";
-import {Enveloppe, Person, Phone} from "../Icons/Icons";
-import Textarea from "../Form/Textarea";
-import {useForm} from "react-hook-form";
-import Help from "../Form/Help";
-import {useEffect} from "react";
+import {useEffect} from "react"
+import {useForm} from "react-hook-form"
+
+import Group from "../Form/Group"
+import Help from "../Form/Help"
+import Input from "../Form/Input"
+import Textarea from "../Form/Textarea"
+import {Enveloppe, Person, Phone} from "../Icons/Icons"
 
 
 export default function ContactForm({isSubmitted, onSuccess}) {
@@ -12,7 +13,7 @@ export default function ContactForm({isSubmitted, onSuccess}) {
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     criteriaMode: 'all',
-  });
+  })
 
   useEffect(() => {
     if(isSubmitted) {
@@ -20,7 +21,7 @@ export default function ContactForm({isSubmitted, onSuccess}) {
     }
   }, [isSubmitted, handleSubmit])
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => console.log(data)
 
   const isFilled = (fieldName) => !!touchedFields[fieldName]
   const isValid = (fieldName) => isFilled(fieldName) && !errors[fieldName]
