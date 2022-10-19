@@ -4,6 +4,7 @@ $body-bg: #F8F9FA;
 
 //Colors
 $primary: #2556cf;
+$primary-dark: #172e59;
 $sub-primary: #ffaf30;
 
 //Forms
@@ -18,6 +19,7 @@ $input-icon-color: $primary;
 
 $theme-colors: (
         "primary": $primary,
+        "primary-dark": $primary-dark,
         "sub-primary": $sub-primary,
         "secondary": $secondary,
         "success": $success,
