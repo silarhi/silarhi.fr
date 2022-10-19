@@ -1,4 +1,4 @@
-import '../styles/app.scss'
+import 'styles/app.scss'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import { config } from '@fortawesome/fontawesome-svg-core'

@@ -1,18 +1,18 @@
+import CallToAction from "components/CallToAction/CallToAction"
+import {Check, CloudBolt, Code, LightBulb, MagnifyingGlass} from "components/Icons/Icons"
+import IconWrapper from "components/IconWrapper/IconWrapper"
+import Section from "components/Section/Section"
+import SectionHeader from "components/SectionHeader/SectionHeader"
 import Markdown from "marked-react"
 import Image from "next/future/image"
 import Head from "next/head"
+import home from 'public/images/home.jpg'
 import Button from "react-bootstrap/Button"
 import Col from "react-bootstrap/Col"
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
+import {chunk} from "utils/array"
 
-import CallToAction from "../components/CallToAction/CallToAction"
-import {Check, CloudBolt, Code, LightBulb, MagnifyingGlass} from "../components/Icons/Icons"
-import IconWrapper from "../components/IconWrapper/IconWrapper"
-import Section from "../components/Section/Section"
-import SectionHeader from "../components/SectionHeader/SectionHeader"
-import home from '../public/images/home.jpg'
-import {chunk} from "../utils/array"
 import styles from './index.module.scss'
 
 const FEATURES = [

@@ -1,4 +1,4 @@
-import {ChildrenPropTypes} from "../../props/types"
+import {ChildrenPropTypes} from "props/types"
 
 export default function Title({children}) {
     return (

@@ -1,8 +1,8 @@
 import cx from "classnames"
 import PropTypes from "prop-types"
+import {ChildrenPropTypes} from "props/types"
 import Container from "react-bootstrap/Container"
 
-import {ChildrenPropTypes} from "../../props/types"
 import styles from './Section.module.scss'
 
 export default function Section({container, fluid, size, children, className, ... props}) {

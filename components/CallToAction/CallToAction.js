@@ -1,8 +1,8 @@
+import ContactForm from "components/ContactForm/ContactForm"
 import {useCallback, useState} from "react"
 import Button from "react-bootstrap/Button"
 import Modal from 'react-bootstrap/Modal'
 
-import ContactForm from "../ContactForm/ContactForm"
 import styles from './CallToAction.module.scss'
 
 function MyVerticallyCenteredModal({onHide, ... props}) {

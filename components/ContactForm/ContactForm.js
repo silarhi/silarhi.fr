@@ -1,11 +1,10 @@
+import Group from "components/Form/Group"
+import Help from "components/Form/Help"
+import Input from "components/Form/Input"
+import Textarea from "components/Form/Textarea"
+import {Enveloppe, Person, Phone} from "components/Icons/Icons"
 import {useEffect} from "react"
 import {useForm} from "react-hook-form"
-
-import Group from "../Form/Group"
-import Help from "../Form/Help"
-import Input from "../Form/Input"
-import Textarea from "../Form/Textarea"
-import {Enveloppe, Person, Phone} from "../Icons/Icons"
 
 
 export default function ContactForm({isSubmitted, onSuccess}) {
