@@ -19,3 +19,19 @@
     padding: 4rem;
   }
 }
+
+.sectionXl {
+  height: 100vh;
+
+  @include media-breakpoint-up(sm) {
+    height: (3 / 4 * 100vh); //4/3
+  }
+
+  @include media-breakpoint-up(md) {
+    height: (9 / 16 * 100vh); //16/9
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: (9 / 21 * 100vh); //21/9
+  }
+}

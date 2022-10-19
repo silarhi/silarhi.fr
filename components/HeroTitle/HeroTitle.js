@@ -3,8 +3,8 @@ import Title from "components/Title/Title";
 
 export default function HeroTitle({title}) {
   return (
-    <Section className="text-bg-primary" fluid>
-        <Title>{title}</Title>
+    <Section className="text-bg-primary d-flex align-content-center justify-content-center" size={"xl"} fluid>
+      <Title>{title}</Title>
     </Section>
   )
 }
