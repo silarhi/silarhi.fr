@@ -2,9 +2,9 @@
 
 .iconWrapper {
   background-color: white;
-  border: 6px solid #f8f8f8;
+  border: 8px solid #f8f8f8;
   border-radius: 100%;
-  color: $primary;
+  color: $sub-primary;
   width: 10em;
   height: 10em;
   margin: 0 auto;
@@ -28,11 +28,11 @@
   }
 
   &:hover {
-    background-color: $primary;
+    background-color: $sub-primary;
     color: white;
 
     &:before {
-      border-color: $primary;
+      border-color: $sub-primary;
     }
   }
 

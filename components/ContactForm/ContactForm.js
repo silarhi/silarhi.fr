@@ -3,28 +3,45 @@ import Help from "components/Form/Help"
 import Input from "components/Form/Input"
 import Textarea from "components/Form/Textarea"
 import {Enveloppe, Person, Phone} from "components/Icons/Icons"
-import {useEffect} from "react"
+import {useCallback, useEffect, useState} from "react"
 import {useForm} from "react-hook-form"
 
 
-export default function ContactForm({isSubmitted, onSuccess}) {
-  const {register, handleSubmit, formState: {touchedFields, errors}} = useForm({
+export default function ContactForm({isSubmitted, onFinish}) {
+  const [isSuccess, setIsSuccess] = useState(false)
+  const {register, handleSubmit, reset, formState: {touchedFields, errors}} = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     criteriaMode: 'all',
   })
 
+  const onSubmit = useCallback(data => {
+    reset()
+    setIsSuccess(true)
+    if (onFinish) {
+      onFinish(data)
+    }
+  }, [setIsSuccess, reset, onFinish])
+
   useEffect(() => {
-    if(isSubmitted) {
+    if (isSubmitted) {
       handleSubmit(onSubmit)()
     }
-  }, [isSubmitted, handleSubmit])
+  }, [isSubmitted, handleSubmit, onSubmit])
 
-  const onSubmit = data => console.log(data)
 
   const isFilled = (fieldName) => !!touchedFields[fieldName]
   const isValid = (fieldName) => isFilled(fieldName) && !errors[fieldName]
   const isInvalid = (fieldName) => !!errors[fieldName]
+
+  if (isSuccess) {
+    return (
+      <div className={"alert alert-success mb-0"} role="alert">
+        <h4 className="alert-heading">Merci !</h4>
+        <p>Votre message a bien été envoyé, je vous répondrai dans les plus brefs délais.</p>
+      </div>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

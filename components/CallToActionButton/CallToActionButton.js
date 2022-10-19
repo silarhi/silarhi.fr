@@ -1,18 +1,31 @@
 import ContactForm from "components/ContactForm/ContactForm"
+import useForceReducer from "hooks/reducer"
 import {useCallback, useState} from "react"
 import Button from "react-bootstrap/Button"
 import Modal from 'react-bootstrap/Modal'
 
 function MyVerticallyCenteredModal({onHide, ...props}) {
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
+  const {
+    value: isFormSubmitted,
+    updateValue: forceIsFormSubmitted,
+    resetValue: resetFormSubmitted
+  } = useForceReducer()
+  const [showSendButton, setShowSendButton] = useState(true)
+
+  const onFinish = useCallback(() => {
+    setShowSendButton(false)
+    resetFormSubmitted()
+  }, [setShowSendButton, resetFormSubmitted])
 
   const hideAndHandleFormSubmit = useCallback(() => {
     onHide()
-    setIsFormSubmitted(false)
-  }, [onHide, setIsFormSubmitted])
+    resetFormSubmitted()
+    setShowSendButton(true)
+  }, [onHide, resetFormSubmitted, setShowSendButton])
 
   return (
     <Modal
+      backdrop={"static"}
       onHide={hideAndHandleFormSubmit}
       {...props}
       size="lg"
@@ -20,15 +33,17 @@ function MyVerticallyCenteredModal({onHide, ...props}) {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          Contactez-moi
+          Contact / Demande de devis
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ContactForm isSubmitted={isFormSubmitted}></ContactForm>
+        <ContactForm isSubmitted={isFormSubmitted} onFinish={onFinish}></ContactForm>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={hideAndHandleFormSubmit} variant={"secondary"}>Close</Button>
-        <Button onClick={() => setIsFormSubmitted(true)}>Envoyer</Button>
+        <Button onClick={hideAndHandleFormSubmit} variant={"secondary"}>Fermer</Button>
+        {showSendButton && (
+          <Button onClick={() => forceIsFormSubmitted()}>Envoyer</Button>
+        )}
       </Modal.Footer>
     </Modal>
   )
