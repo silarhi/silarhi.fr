@@ -1,8 +1,12 @@
+import cx from "classnames"
+import Image from "next/future/image"
 import Link from "next/link"
 import {useRouter} from "next/router"
 import PropTypes from "prop-types"
+import logo from 'public/images/logo-light-4096.png'
 import {useEffect, useLayoutEffect, useRef, useState} from "react"
 
+import CallToActionButton from "../CallToActionButton/CallToActionButton"
 import styles from './Navbar.module.scss'
 
 export default function Navbar({initialClass, floatingClass}) {
@@ -38,24 +42,57 @@ export default function Navbar({initialClass, floatingClass}) {
     }
   }, [navbarHeight, setFloating, setFloatingStyle])
 
+  const menuItems = [
+    {
+      path: '/#about',
+      indexPath: '#about',
+      label: 'À propos',
+    },
+    {
+      path: '/#services',
+      indexPath: '#services',
+      label: 'Services',
+    },
+    {
+      path: '/#chiffres',
+      indexPath: '#chiffres',
+      label: 'Chiffres',
+    },
+    {
+      path: 'https://blog.silarhi.fr',
+      label: 'Blog',
+      target: '_blank',
+    },
+  ]
+
   return (
-    <nav className={`navbar navbar-expand-lg fixed-top ${styles.navbar} ${floating ? `${styles.floating} ${floatingClass}` : initialClass}`} style={floatingStyle} ref={ref}>
+    <nav id={"app-navbar"} className={`navbar navbar-expand-lg fixed-top ${styles.navbar} ${floating ? `${styles.floating} ${floatingClass}` : initialClass}`} style={floatingStyle} ref={ref}>
       <div className="container">
+        <Link href="/">
+          <a className="navbar-brand">
+            <Image src={logo} alt={"SILARHI"} height={60} className={"img-fluid"} />
+          </a>
+        </Link>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link href="/">
-                <a className={`nav-link ${router.asPath === '/' ? 'active' : ''}`}>
-                  Page 1
-                </a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/page2">
-                <a className={`nav-link ${router.asPath === '/page2' ? 'active' : ''}`}>
-                  Page 2
-                </a>
-              </Link>
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+            {menuItems.map((item, i) => (
+              <li className="nav-item" key={i}>
+                {router.asPath !== '/' && (
+                  <Link href={item.path}>
+                    <a className={cx({'nav-link': true, 'active': router.asPath === item.path})}>
+                      {item.label}
+                    </a>
+                  </Link>
+                )}
+                {router.asPath === '/' && (
+                  <a className={cx({'nav-link': true, 'active': router.asPath === item.path})} href={item.indexPath || item.path} target={item.target}>
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))}
+            <li className="nav-item ms-4">
+              <CallToActionButton size={"lg"}>Contact</CallToActionButton>
             </li>
           </ul>
         </div>
@@ -65,7 +102,7 @@ export default function Navbar({initialClass, floatingClass}) {
 }
 
 Navbar.defaultProps = {
-  floatingClass: 'navbar-light bg-light',
+  floatingClass: 'navbar-dark bg-primary-dark',
   initialClass: 'navbar-dark'
 }
 
