@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Group from "components/Form/Group"
 import Help from "components/Form/Help"
 import Input from "components/Form/Input"
@@ -6,22 +7,48 @@ import {Enveloppe, Person, Phone} from "components/Icons/Icons"
 import {useCallback, useEffect, useState} from "react"
 import {useForm} from "react-hook-form"
 
+export default function ContactForm({isSubmitted, onFinish, onPending}) {
+  const [pending, setPending] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
 
-export default function ContactForm({isSubmitted, onFinish}) {
-  const [isSuccess, setIsSuccess] = useState(false)
   const {register, handleSubmit, reset, formState: {touchedFields, errors}} = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     criteriaMode: 'all',
   })
 
-  const onSubmit = useCallback(data => {
-    reset()
-    setIsSuccess(true)
+  const onSubmit = useCallback(async (data) => {
+    setPending(true)
+    if (onPending) {
+      onPending()
+    }
+
+    setPending(false)
     if (onFinish) {
       onFinish(data)
     }
-  }, [setIsSuccess, reset, onFinish])
+
+    return axios({
+      method: 'POST',
+      url: 'https://formspree.io/f/maykddyv',
+      data,
+    })
+      .then(() => {
+        setPending(false)
+        setSuccess(true)
+        setError(false)
+        reset()
+        if (onFinish) {
+          onFinish(data)
+        }
+      })
+      .catch(() => {
+        setPending(false)
+        setSuccess(false)
+        setError(true)
+      })
+  }, [reset, onFinish, onPending])
 
   useEffect(() => {
     if (isSubmitted) {
@@ -34,7 +61,7 @@ export default function ContactForm({isSubmitted, onFinish}) {
   const isValid = (fieldName) => isFilled(fieldName) && !errors[fieldName]
   const isInvalid = (fieldName) => !!errors[fieldName]
 
-  if (isSuccess) {
+  if (success) {
     return (
       <div className={"alert alert-success mb-0"} role="alert">
         <h4 className="alert-heading">Merci !</h4>
@@ -45,6 +72,11 @@ export default function ContactForm({isSubmitted, onFinish}) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {error && (
+        <div className={"alert alert-danger"}>
+          Une erreur est survenue pendant l{"'"}envoi du formulaire.
+        </div>
+      )}
       <div className={"row"}>
         <div className={"col-12 col-md-6"}>
           <Group valid={isValid('name')}>
@@ -55,6 +87,7 @@ export default function ContactForm({isSubmitted, onFinish}) {
               autoComplete="name"
               size="40"
               placeholder="Nom"
+              disabled={pending}
               iconPrepend={<Person />}
               isValid={isValid('name')}
               isInvalid={isInvalid('name')}
@@ -77,6 +110,7 @@ export default function ContactForm({isSubmitted, onFinish}) {
               inputMode="email"
               name="email"
               placeholder="Email"
+              disabled={pending}
               iconPrepend={<Enveloppe />}
               isValid={isValid('email')}
               isInvalid={isInvalid('email')}
@@ -99,6 +133,7 @@ export default function ContactForm({isSubmitted, onFinish}) {
               inputMode="tel"
               name="phone"
               placeholder="Téléphone"
+              disabled={pending}
               iconPrepend={<Phone />}
               isValid={isValid('phone')}
               isInvalid={isInvalid('phone')}
@@ -116,6 +151,7 @@ export default function ContactForm({isSubmitted, onFinish}) {
               name="message"
               rows={7}
               placeholder="Message"
+              disabled={pending}
               isValid={isValid('message')}
               isInvalid={isInvalid('message')}
               {...register('message', {

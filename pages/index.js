@@ -142,6 +142,11 @@ export default function Home() {
     resetValue: resetFormSubmitted
   } = useForceReducer()
   const [showSendButton, setShowSendButton] = useState(true)
+  const [isFormPending, setIsFormPending] = useState(false)
+
+  const onPending = useCallback(() => {
+    setIsFormPending(true)
+  }, [setIsFormPending])
 
   const onFinish = useCallback(() => {
     setShowSendButton(false)
@@ -257,9 +262,15 @@ export default function Home() {
           <Section id={"contact"} className={"bg-white h-100"}>
             <h2>Contact</h2>
             <p className={"text-muted"}>Laissez-nous un message et nous vous répondrons dans les plus brefs délais</p>
-            <ContactForm onFinish={onFinish} isSubmitted={isFormSubmitted}/>
+            <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={isFormSubmitted}/>
             {showSendButton && (
-              <Button variant={"sub-primary"} size={"lg"} className={"mt-4 btn-block rounded-0"} onClick={() => forceIsFormSubmitted()}>Envoyer</Button>
+              <Button
+                variant={"sub-primary"}
+                size={"lg"}
+                className={"mt-4 btn-block rounded-0"}
+                onClick={() => forceIsFormSubmitted()}
+                disabled={isFormPending}
+              >Envoyer</Button>
             )}
           </Section>
         </Col>

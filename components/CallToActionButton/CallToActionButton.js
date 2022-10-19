@@ -11,6 +11,11 @@ function MyVerticallyCenteredModal({onHide, ...props}) {
     resetValue: resetFormSubmitted
   } = useForceReducer()
   const [showSendButton, setShowSendButton] = useState(true)
+  const [isFormPending, setIsFormPending] = useState(false)
+
+  const onPending = useCallback(() => {
+    setIsFormPending(true)
+  }, [setIsFormPending])
 
   const onFinish = useCallback(() => {
     setShowSendButton(false)
@@ -37,12 +42,12 @@ function MyVerticallyCenteredModal({onHide, ...props}) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ContactForm isSubmitted={isFormSubmitted} onFinish={onFinish}></ContactForm>
+        <ContactForm isSubmitted={isFormSubmitted} onFinish={onFinish} onPending={onPending}></ContactForm>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={hideAndHandleFormSubmit} variant={"secondary"}>Fermer</Button>
         {showSendButton && (
-          <Button onClick={() => forceIsFormSubmitted()}>Envoyer</Button>
+          <Button onClick={() => forceIsFormSubmitted()} disabled={isFormPending}>Envoyer</Button>
         )}
       </Modal.Footer>
     </Modal>
