@@ -27,6 +27,8 @@ import {chunk} from "utils/array"
 
 import ContactForm from "../components/ContactForm/ContactForm"
 import useForceReducer from "../hooks/reducer"
+import {getDaysSince} from "../utils/dates"
+import {getTotalEmployeeCoffees, getTotalEmployeeHours} from "../utils/employees"
 import styles from './index.module.scss'
 
 const FEATURES = [
@@ -120,13 +122,40 @@ const SERVICES = [
 ]
 
 const COMPANY_START_DATE = new Date('2018-08-01')
-const DAYS_SINCE_COMPANY_START_DATE = Math.ceil((new Date().getTime() - COMPANY_START_DATE.getTime()) / (1000 * 3600 * 24))
+const DAYS_SINCE_COMPANY_START_DATE = getDaysSince(COMPANY_START_DATE)
+
+const EMPLOYEES = [
+  {
+    name: 'Guillaume',
+    from: new Date('2018-01-01'),
+    coffeesPerDay: 3,
+    hoursPerDay: 9,
+  },
+  {
+    name: 'Florian',
+    from: new Date('2020-09-01'),
+    coffeesPerDay: 0,
+    hoursPerDay: 7,
+  },
+  {
+    name: 'Rémy',
+    from: new Date('2022-01-01'),
+    coffeesPerDay: 4,
+    hoursPerDay: 8,
+  },
+  {
+    name: 'Maxime',
+    from: new Date('2022-11-02'),
+    coffeesPerDay: 3,
+    hoursPerDay: 8,
+  },
+]
 
 const NUMBERS = [
   {
-    value: DAYS_SINCE_COMPANY_START_DATE,
-    unit: 'Jours',
-    text: `${Math.trunc(DAYS_SINCE_COMPANY_START_DATE / 365)} années extraordinaires, de jolis projets pour des clients formidables.`,
+    value: getTotalEmployeeHours(EMPLOYEES),
+    unit: 'Heures',
+    text: `passées à travailler sur les projets de nos clients.`,
   },
   {
     value: 10,
@@ -139,7 +168,7 @@ const NUMBERS = [
     text: `Plus de 8 projets par client en moyenne, signe de la relation de confiance établie.`,
   },
   {
-    value: DAYS_SINCE_COMPANY_START_DATE * 3,
+    value: getTotalEmployeeCoffees(EMPLOYEES),
     unit: 'Cafés',
     text: `Être toujours à votre écoute et force de proposition, telle est notre mission !`,
   },
@@ -257,8 +286,8 @@ export default function Home() {
         <Row className="g-lg-5">
           {NUMBERS.map((number, key) => (
             <Col md={6} lg={3} key={key} className={"text-center"}>
-              <div className={"text-sub-primary display-1 fw-bold"}>{number.value}</div>
-              <h4 className="text-primary fw-light">{number.unit}</h4>
+              <div className={"text-sub-primary display-1 fw-bold mb-3"}>{number.value}</div>
+              <h4 className="text-primary fw-light mb-3">{number.unit}</h4>
               <hr style={{width: '40%'}} className={'mx-auto'} />
               <p className="text-muted">{number.text}</p>
             </Col>
