@@ -258,7 +258,7 @@ export default function Home() {
       <Row className="g-0">
         {/* Contact */}
         <Col md={6} className={'bg-white'}>
-          <Section id={"contact"} paddingX={false} container={false}>
+          <Section id={"contact"} className={"pe-md-3 pe-lg-4 pe-xl-5"} paddingX={false} container={false}>
             <div className={"container container-half-md me-md-0"}>
               <h2>Contact</h2>
               <p className={"text-muted"}>Laissez-nous un message et nous vous répondrons dans les plus brefs délais</p>
@@ -277,7 +277,7 @@ export default function Home() {
         </Col>
         {/* SILARHI */}
         <Col md={6} className={styles.bgLight2}>
-          <Section id={"silarhi"} paddingX={false} container={false}>
+          <Section id={"silarhi"} className={"ps-md-3 ps-lg-4 ps-xl-5"} paddingX={false} container={false}>
             <div className={"container container-half-md ms-md-0"}>
               <h2>SILARHI</h2>
               <p className={"text-muted"}>Les infos pratiques, c{"'"}est ici</p>
