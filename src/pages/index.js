@@ -17,7 +17,7 @@ import SectionHeader from "components/SectionHeader/SectionHeader"
 import Markdown from "marked-react"
 import Image from "next/future/image"
 import Head from "next/head"
-import home from 'public/images/home.jpg'
+import home from '../../public/images/home.jpg'
 import {useCallback, useState} from "react"
 import Button from "react-bootstrap/Button"
 import Col from "react-bootstrap/Col"

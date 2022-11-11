@@ -3,8 +3,8 @@ import Image from "next/future/image"
 import Link from "next/link"
 import {useRouter} from "next/router"
 import PropTypes from "prop-types"
-import logoDark from 'public/images/logo-dark-4096.png'
-import logoLight from 'public/images/logo-light-4096.png'
+import logoDark from '../../../public/images/logo-dark-4096.png'
+import logoLight from '../../../public/images/logo-light-4096.png'
 import {useEffect, useRef, useState} from "react"
 import {Offcanvas} from "react-bootstrap"
 import BsNavbar from "react-bootstrap/Navbar"
