@@ -108,10 +108,7 @@ export default function Navbar({initialClass, floatingClass}) {
               ))}
               <li className="nav-item ms-lg-4">
                 <hr className={"d-block d-lg-none"} />
-                <CallToActionButton size={"lg"} variant={cx({
-                  'primary': !floating,
-                  'sub-primary': floating
-                })}>Contact</CallToActionButton>
+                <CallToActionButton size={"lg"} variant="sub-primary">Contact</CallToActionButton>
               </li>
             </ul>
           </Offcanvas.Body>
