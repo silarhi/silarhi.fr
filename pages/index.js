@@ -1,4 +1,3 @@
-import cx from "classnames"
 import CallToAction from "components/CallToAction/CallToAction"
 import {Check, CloudBolt, Code, LightBulb, MagnifyingGlass, XMark} from "components/Icons/Icons"
 import IconWrapper from "components/IconWrapper/IconWrapper"
@@ -8,7 +7,7 @@ import Markdown from "marked-react"
 import Image from "next/future/image"
 import Head from "next/head"
 import home from 'public/images/home.jpg'
-import {useCallback, useReducer, useRef, useState} from "react"
+import {useCallback, useState} from "react"
 import Button from "react-bootstrap/Button"
 import Col from "react-bootstrap/Col"
 import Container from "react-bootstrap/Container"
@@ -259,24 +258,26 @@ export default function Home() {
       <Row className="g-0">
         {/* Contact */}
         <Col md={6}>
-          <Section id={"contact"} className={"bg-white h-100"}>
-            <h2>Contact</h2>
-            <p className={"text-muted"}>Laissez-nous un message et nous vous répondrons dans les plus brefs délais</p>
-            <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={isFormSubmitted}/>
-            {showSendButton && (
-              <Button
-                variant={"sub-primary"}
-                size={"lg"}
-                className={"mt-4 btn-block rounded-0"}
-                onClick={() => forceIsFormSubmitted()}
-                disabled={isFormPending}
-              >Envoyer</Button>
-            )}
+          <Section id={"contact"} className={"bg-white h-100"} container={false}>
+            <div className={"container-half px-0 me-0"}>
+              <h2>Contact</h2>
+              <p className={"text-muted"}>Laissez-nous un message et nous vous répondrons dans les plus brefs délais</p>
+              <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={isFormSubmitted} />
+              {showSendButton && (
+                <Button
+                  variant={"sub-primary"}
+                  size={"lg"}
+                  className={"mt-4 btn-block rounded-0"}
+                  onClick={() => forceIsFormSubmitted()}
+                  disabled={isFormPending}
+                >Envoyer</Button>
+              )}
+            </div>
           </Section>
         </Col>
         {/* SILARHI */}
         <Col md={6}>
-          <Section id={"silarhi"} className={`${styles.bgLight2} h-100`}>
+          <Section id={"silarhi"} className={`${styles.bgLight2} h-100`} container={false}>
             <h2>SILARHI</h2>
             <p className={"text-muted"}>Les infos pratiques, c{"'"}est ici</p>
           </Section>
