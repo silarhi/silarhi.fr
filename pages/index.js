@@ -257,9 +257,9 @@ export default function Home() {
       </Section>
       <Row className="g-0">
         {/* Contact */}
-        <Col md={6}>
-          <Section id={"contact"} className={"bg-white h-100"} container={false}>
-            <div className={"container-half px-0 me-0"}>
+        <Col md={6} className={'bg-white'}>
+          <Section id={"contact"} paddingX={false} container={false}>
+            <div className={"container container-half-md me-md-0"}>
               <h2>Contact</h2>
               <p className={"text-muted"}>Laissez-nous un message et nous vous répondrons dans les plus brefs délais</p>
               <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={isFormSubmitted} />
@@ -276,10 +276,12 @@ export default function Home() {
           </Section>
         </Col>
         {/* SILARHI */}
-        <Col md={6}>
-          <Section id={"silarhi"} className={`${styles.bgLight2} h-100`} container={false}>
-            <h2>SILARHI</h2>
-            <p className={"text-muted"}>Les infos pratiques, c{"'"}est ici</p>
+        <Col md={6} className={styles.bgLight2}>
+          <Section id={"silarhi"} paddingX={false} container={false}>
+            <div className={"container container-half-md ms-md-0"}>
+              <h2>SILARHI</h2>
+              <p className={"text-muted"}>Les infos pratiques, c{"'"}est ici</p>
+            </div>
           </Section>
         </Col>
       </Row>
