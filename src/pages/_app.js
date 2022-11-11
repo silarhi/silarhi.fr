@@ -1,8 +1,8 @@
-import 'styles/app.scss'
+import '../../styles/app.scss'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import { config } from '@fortawesome/fontawesome-svg-core'
-import DefaultLayout from "layouts/DefaultLayout/DefaultLayout"
+import DefaultLayout from "_layouts/DefaultLayout/DefaultLayout"
 
 config.autoAddCss = false
 

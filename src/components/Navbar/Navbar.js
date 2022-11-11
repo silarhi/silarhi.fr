@@ -1,5 +1,5 @@
 import cx from "classnames"
-import Image from "next/future/image"
+import Image from "next/image"
 import Link from "next/link"
 import {useRouter} from "next/router"
 import PropTypes from "prop-types"
@@ -74,10 +74,8 @@ export default function Navbar({initialClass, floatingClass}) {
   return (
     <BsNavbar expand={"lg"} id={"app-navbar"} className={`navbar navbar-expand-lg fixed-top ${styles.navbar} ${floating ? `${styles.floating} ${floatingClass}` : initialClass}`} style={floatingStyle} ref={ref}>
       <div className="container">
-        <Link href="/">
-          <a className="navbar-brand">
+        <Link href="/" className="navbar-brand">
             <Image src={logoLight} alt={"SILARHI"} height={60} className={"img-fluid"} />
-          </a>
         </Link>
         <BsNavbar.Toggle />
         <BsNavbar.Offcanvas
@@ -91,17 +89,13 @@ export default function Navbar({initialClass, floatingClass}) {
               {menuItems.map((item, i) => (
                 <li className="nav-item" key={i}>
                   {!isMainPage && (
-                    <ActiveLink href={item.path} activeClassName={"active"}>
-                      <a className="nav-link">
-                        {item.label}
-                      </a>
+                    <ActiveLink href={item.path} className="nav-link" activeClassName={"active"}>
+                      {item.label}
                     </ActiveLink>
                   )}
                   {isMainPage && (
-                    <ActiveLink href={item.indexPath || item.path} activeClassName={"active"}>
-                      <a className="nav-link" target={item.target}>
-                        {item.label}
-                      </a>
+                    <ActiveLink href={item.indexPath || item.path} className="nav-link" target={item.target} activeClassName={"active"}>
+                      {item.label}
                     </ActiveLink>
                   )}
                 </li>

@@ -15,7 +15,7 @@ import IconWrapper from "components/IconWrapper/IconWrapper"
 import Section from "components/Section/Section"
 import SectionHeader from "components/SectionHeader/SectionHeader"
 import Markdown from "marked-react"
-import Image from "next/future/image"
+import Image from "next/image"
 import Head from "next/head"
 import home from '../../public/images/home.jpg'
 import {useCallback, useState} from "react"

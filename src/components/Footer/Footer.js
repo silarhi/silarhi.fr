@@ -18,11 +18,11 @@ export default function Footer() {
             ©&nbsp;{new Date().getFullYear()} Silarhi. Tous droits réservés
             &nbsp;|&nbsp;
             <Link href={"/mentions-legales"}>
-              <a>Mentions légales</a>
+              Mentions légales
             </Link>
             &nbsp;|&nbsp;
             <Link href={"/conditions-generales-de-vente"}>
-              <a>CGV</a>
+              CGV
             </Link>
           </div>
           <div>Site développé par un <a href="https://sainthillier.fr">développeur Web freelance à
