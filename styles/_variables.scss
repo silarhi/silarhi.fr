@@ -11,7 +11,11 @@ $sub-primary: #ffaf30;
 //Buttons
 $btn-padding-y-lg: 0.75rem;
 
+//Lists
+$list-group-bg: transparent;
+
 //Forms
+$input-padding-y: 0.5rem;
 $input-border-radius: 0;
 
 //Navbar
@@ -19,6 +23,11 @@ $navbar-nav-link-padding-x: 1rem;
 
 //Shadow
 $input-icon-color: $primary;
+
+//Misc
+$link-color: $sub-primary;
+$link-decoration: none;
+$link-hover-decoration: underline;
 
 //Theme colors
 @import "~bootstrap/scss/functions";
