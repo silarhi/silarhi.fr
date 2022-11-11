@@ -276,7 +276,7 @@ export default function Home() {
               <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={isFormSubmitted} />
               {showSendButton && (
                 <Button
-                  variant={"sub-primary"}
+                  variant={"primary"}
                   size={"lg"}
                   className={"mt-4 btn-block rounded-0"}
                   onClick={() => forceIsFormSubmitted()}
