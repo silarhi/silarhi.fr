@@ -1,5 +1,16 @@
 import CallToAction from "components/CallToAction/CallToAction"
-import {Check, CloudBolt, Code, LightBulb, MagnifyingGlass, XMark} from "components/Icons/Icons"
+import {
+  Check,
+  Clock,
+  CloudBolt,
+  Code,
+  Enveloppe,
+  LightBulb,
+  MagnifyingGlass,
+  Map,
+  Phone,
+  XMark
+} from "components/Icons/Icons"
 import IconWrapper from "components/IconWrapper/IconWrapper"
 import Section from "components/Section/Section"
 import SectionHeader from "components/SectionHeader/SectionHeader"
@@ -281,6 +292,36 @@ export default function Home() {
             <div className={"container container-half-md ms-md-0"}>
               <h2>SILARHI</h2>
               <p className={"text-muted"}>Les infos pratiques, c{"'"}est ici</p>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex flex-nowrap">
+                  <span className={"me-1 me-md-2 me-lg-3"}><Map /></span>
+                  <span className={"text-muted"}>
+                    116 Route d{"'"}Espagne<br />
+                    HELIOPOLIS 4<br />
+                    BAT 113<br />
+                    31100 Toulouse
+                  </span>
+                </li>
+                <li className="list-group-item d-flex flex-nowrap">
+                  <span className={"me-1 me-md-2 me-lg-3"}><Clock /></span>
+                  <span className={"text-muted"}>
+                    Du lundi au vendredi<br />
+                    De 9h à 18h
+                  </span>
+                </li>
+                <li className="list-group-item d-flex flex-nowrap">
+                  <span className={"me-1 me-md-2 me-lg-3"}><Phone /></span>
+                  <span className={"text-muted"}>
+                    <a href="tel:+33607275826">0 607.275.826</a>
+                  </span>
+                </li>
+                <li className="list-group-item d-flex flex-nowrap">
+                  <span className={"me-1 me-md-2 me-lg-3"}><Enveloppe /></span>
+                  <span className={"text-muted"}>
+                    <a href="mailto:%68ell%6F@si%6Ca%72hi.fr">hello@silarhi.fr</a>
+                  </span>
+                </li>
+              </ul>
             </div>
           </Section>
         </Col>
