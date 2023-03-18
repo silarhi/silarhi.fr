@@ -195,10 +195,14 @@ export default function Home() {
     resetFormSubmitted()
   }, [setShowSendButton, resetFormSubmitted])
 
+
+  // We store title in variable because of ' special chars which render multiple children
+  const title = `Développement d'applications Web & PHP à Toulouse - Silarhi`
+
   return (
     <>
       <Head>
-        <title>Développement d{"'"}applications Web & PHP à Toulouse - Silarhi</title>
+        <title>{title}</title>
       </Head>
       {/* Header */}
       <div className={styles.bgWrap}>
