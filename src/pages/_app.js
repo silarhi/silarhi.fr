@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import DefaultLayout from "_layouts/DefaultLayout/DefaultLayout"
 import {config} from '@fortawesome/fontawesome-svg-core'
-import {Montserrat} from '@next/font/google'
+import {Montserrat} from "next/font/google"
 import Head from "next/head"
 
 const montserrat = Montserrat({
