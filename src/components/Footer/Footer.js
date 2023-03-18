@@ -15,7 +15,7 @@ export default function Footer() {
       <div className={`py-4 text-bg-primary`}>
         <div className="container">
           <div>
-            ©&nbsp;{new Date().getFullYear()} Silarhi. Tous droits réservés
+            ©&nbsp;{new Date().getFullYear()} SILARHI. Tous droits réservés
             &nbsp;|&nbsp;
             <Link href={"/mentions-legales"}>
               Mentions légales

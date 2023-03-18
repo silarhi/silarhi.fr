@@ -2,7 +2,9 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
 import {faClock} from "@fortawesome/free-solid-svg-icons/faClock"
 import { faCloudBolt } from '@fortawesome/free-solid-svg-icons/faCloudBolt'
 import { faCode } from '@fortawesome/free-solid-svg-icons/faCode'
+import {faDownload} from "@fortawesome/free-solid-svg-icons/faDownload"
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope'
+import {faFileContract} from "@fortawesome/free-solid-svg-icons/faFileContract"
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons/faLightbulb'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
 import {faMap} from "@fortawesome/free-solid-svg-icons/faMap"
@@ -24,6 +26,7 @@ BaseIcon.propTypes = {
   icon: PropTypes.object
 }
 
+export const Download = ({ ...props }) => <BaseIcon icon={faDownload} {...props} />
 export const Map = ({ ...props }) => <BaseIcon icon={faMapMarkerAlt} {...props} />
 export const Clock = ({ ...props }) => <BaseIcon icon={faClock} {...props} />
 export const Phone = ({ ...props }) => <BaseIcon icon={faPhone} {...props} />
@@ -34,4 +37,5 @@ export const CloudBolt = ({ ...props }) => <BaseIcon icon={faCloudBolt} {...prop
 export const Code = ({ ...props }) => <BaseIcon icon={faCode} {...props} />
 export const LightBulb = ({ ...props }) => <BaseIcon icon={faLightbulb} {...props} />
 export const MagnifyingGlass = ({ ...props }) => <BaseIcon icon={faMagnifyingGlass} {...props} />
+export const FileContract = ({ ...props }) => <BaseIcon icon={faFileContract} {...props} />
 export const XMark = ({ ...props }) => <BaseIcon icon={faXmark} {...props} />

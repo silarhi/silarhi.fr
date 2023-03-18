@@ -34,10 +34,12 @@
   color: white;
 
   h1 {
-    @include font-size(4rem);
-    font-weight: bold;
+    @include font-size(5rem);
+    line-height: 1;
+    font-weight: 700;
 
     span {
+      margin-top: 0.75rem;
       @include font-size(2.5rem);
       display: block;
       text-transform: uppercase;

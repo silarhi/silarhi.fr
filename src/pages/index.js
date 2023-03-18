@@ -5,8 +5,8 @@ import {
   CloudBolt,
   Code,
   Enveloppe,
+  FileContract,
   LightBulb,
-  MagnifyingGlass,
   Map,
   Phone,
   XMark
@@ -15,16 +15,15 @@ import IconWrapper from "components/IconWrapper/IconWrapper"
 import Section from "components/Section/Section"
 import SectionHeader from "components/SectionHeader/SectionHeader"
 import Markdown from "marked-react"
-import Image from "next/image"
 import Head from "next/head"
-import home from '../../public/images/home.jpg'
+import Image from "next/image"
 import {useCallback, useState} from "react"
 import Button from "react-bootstrap/Button"
 import Col from "react-bootstrap/Col"
-import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import {chunk} from "utils/array"
 
+import home from '../../public/images/home.jpg'
 import ContactForm from "../components/ContactForm/ContactForm"
 import useForceReducer from "../hooks/reducer"
 import {getDaysSince} from "../utils/dates"
@@ -33,7 +32,7 @@ import styles from './index.module.scss'
 
 const FEATURES = [
   {
-    icon: () => <MagnifyingGlass />,
+    icon: () => <FileContract />,
     title: 'Analyse',
     description: 'On vous aide à spécifier votre projet si vous en avez besoin. On peut également vous guider dans l\'étude de la faisabilité technique.',
   },
@@ -73,14 +72,18 @@ const SERVICES = [
   },
   {
     text: `Développement de site e-Commerce`,
-    supported: true,
+    supported: false,
   },
   {
     text: `Développement de plugin (Wordpress, Drupal)`,
-    supported: true,
+    supported: false,
   },
   {
     text: `Upgrade de version Symfony`,
+    supported: true,
+  },
+  {
+    text: `Migration de version PHP`,
     supported: true,
   },
   {
@@ -105,11 +108,11 @@ const SERVICES = [
   },
   {
     text: `Audit SEO`,
-    supported: true,
+    supported: false,
   },
   {
     text: `Webmarketing`,
-    supported: true,
+    supported: false,
   },
   {
     text: `Hébergement de sites Internet`,
@@ -202,28 +205,26 @@ export default function Home() {
         <div className={styles.backdrop}></div>
         <Image src={home} sizes="100vw" fill style={{objectFit: 'cover'}} priority alt="" />
         <div className={styles.contentWrapper}>
-          <Container>
-            <div style={{maxWidth: '55em'}} className={"mx-auto"}>
-              <h1>
-                Développement d{"'"}applications Web
-                <span>À Toulouse & en France</span>
-              </h1>
-              <h2 className={"text-uppercase fw-light"}>Donnez vie à vos idées</h2>
-              <Button as={"a"} size={"lg"} href={"#about"} className={"mt-4"}>En savoir plus</Button>
-            </div>
-          </Container>
+          <div style={{maxWidth: '55em'}} className={"mx-auto"}>
+            <h1>
+              Développement d{"'"}applications Web
+              <span>À Toulouse & en France</span>
+            </h1>
+            <h2 className={"text-uppercase fw-light"}>Donnez vie à vos idées</h2>
+            <Button as={"a"} size={"lg"} href={"#about"} className={"mt-4"}>En savoir plus</Button>
+          </div>
         </div>
       </div>
       {/* About */}
       <Section id={"about"}>
         <SectionHeader
           title="On développe des applications Web"
-          subtitle="Et ça se passe comme ça"
+          subtitle="Et ça se passe comme ça."
         />
-        <Row className={"row-cards row-deck"}>
+        <Row className={"gx-5 row-cards row-deck"}>
           {FEATURES.map((feature, key) => (
             <Col xs={12} lg={4} xl={3} key={key}>
-              <div className={`card shadow mb-4 text-center`}>
+              <div className={`card shadow mb-4 text-center rounded-4`}>
                 <div className={"card-body"}>
                   <IconWrapper>{feature.icon()}</IconWrapper>
                   <h3 className={"card-title h4 fw-bold my-3"}>{feature.title}</h3>
@@ -239,10 +240,10 @@ export default function Home() {
       <Section id={"services"} className={"bg-white"}>
         <SectionHeader
           title="Nos services"
-          subtitle="Vérifiez que votre besoin colle avec notre savoir faire"
+          subtitle="Vérifiez que votre besoin colle avec notre savoir faire."
         />
-        <h3 className={"h4 text-primary fw-light"}>Ce qu{"'"}on adore faire</h3>
-        <Row className="g-lg-5">
+        <h3 className={"h4 text-primary fw-light"}>Notre savoir faire</h3>
+        <Row className="g-lg-5 mb-5">
           {chunk(SERVICES.filter(service => service.supported), 2).map((services, chunkKey) => (
             <Col lg={6} key={chunkKey}>
               <ul className="list-group list-group-flush">
@@ -258,8 +259,8 @@ export default function Home() {
             </Col>
           ))}
         </Row>
-        <h3 className={"mt-5 h4 text-primary fw-light"}>Ce qu{"'"}on ne fait PAS</h3>
-        <Row className="g-lg-5">
+        <h3 className={"h4 text-primary fw-light"}>Ce qu{"'"}on ne fait PAS</h3>
+        <Row className="g-lg-5 mb-5">
           {chunk(SERVICES.filter(service => !service.supported), 2).map((services, chunkKey) => (
             <Col lg={6} key={chunkKey}>
               <ul className="list-group list-group-flush">
@@ -281,7 +282,7 @@ export default function Home() {
       <Section id={"chiffres"}>
         <SectionHeader
           title="Les chiffres"
-          subtitle="Quelques chiffres de cette jeune entreprise fondée en 2018"
+          subtitle="Quelques chiffres de cette jeune entreprise fondée en 2018."
         />
         <Row className="g-lg-5">
           {NUMBERS.map((number, key) => (
@@ -301,13 +302,13 @@ export default function Home() {
           <Section id={"contact"} className={"pe-md-3 pe-lg-4 pe-xl-5"} paddingX={false} container={false}>
             <div className={"container container-half-md me-md-0"}>
               <h2>Contact</h2>
-              <p className={"text-muted"}>Laissez-nous un message et nous vous répondrons dans les plus brefs délais</p>
+              <p className={"text-muted"}>Laissez-nous un message et nous vous répondrons dans les plus brefs délais.</p>
               <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={isFormSubmitted} />
               {showSendButton && (
                 <Button
                   variant={"primary"}
                   size={"lg"}
-                  className={"mt-4 btn-block rounded-0"}
+                  className={"mt-4 btn-block"}
                   onClick={() => forceIsFormSubmitted()}
                   disabled={isFormPending}
                 >Envoyer</Button>
@@ -320,10 +321,10 @@ export default function Home() {
           <Section id={"silarhi"} className={"ps-md-3 ps-lg-4 ps-xl-5"} paddingX={false} container={false}>
             <div className={"container container-half-md ms-md-0"}>
               <h2>SILARHI</h2>
-              <p className={"text-muted"}>Les infos pratiques, c{"'"}est ici</p>
+              <p className={"text-muted"}>Les infos pratiques, c{"'"}est ici.</p>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex flex-nowrap">
-                  <span className={"me-1 me-md-2 me-lg-3"}><Map /></span>
+                  <span className={"me-1 me-md-2 me-lg-3 text-primary"}><Map /></span>
                   <span className={"text-muted"}>
                     116 Route d{"'"}Espagne<br />
                     HELIOPOLIS 4<br />
@@ -332,20 +333,20 @@ export default function Home() {
                   </span>
                 </li>
                 <li className="list-group-item d-flex flex-nowrap">
-                  <span className={"me-1 me-md-2 me-lg-3"}><Clock /></span>
+                  <span className={"me-1 me-md-2 me-lg-3 text-primary"}><Clock /></span>
                   <span className={"text-muted"}>
                     Du lundi au vendredi<br />
                     De 9h à 18h
                   </span>
                 </li>
                 <li className="list-group-item d-flex flex-nowrap">
-                  <span className={"me-1 me-md-2 me-lg-3"}><Phone /></span>
+                  <span className={"me-1 me-md-2 me-lg-3 text-primary"}><Phone /></span>
                   <span className={"text-muted"}>
                     <a href="tel:+33607275826">0 607.275.826</a>
                   </span>
                 </li>
                 <li className="list-group-item d-flex flex-nowrap">
-                  <span className={"me-1 me-md-2 me-lg-3"}><Enveloppe /></span>
+                  <span className={"me-1 me-md-2 me-lg-3 text-primary"}><Enveloppe /></span>
                   <span className={"text-muted"}>
                     <a href="mailto:%68ell%6F@si%6Ca%72hi.fr">hello@silarhi.fr</a>
                   </span>

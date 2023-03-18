@@ -1,7 +1,8 @@
-import {faDownload} from "@fortawesome/free-solid-svg-icons"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import Section from "components/Section/Section"
 import Head from "next/head"
+
+import Hero from "../components/HeroTitle/HeroTitle"
+import {Download} from "../components/Icons/Icons"
 
 export default function CGV() {
     return (
@@ -9,11 +10,12 @@ export default function CGV() {
             <Head>
                 <title>Conditions générales de vente</title>
             </Head>
+            <Hero title="Conditions générales de vente" />
             <Section>
                 <p>
                     <em className={"text-muted d-inline-block me-2"}>Mis à jour le 29/03/2019</em>
-                    <a href="https://silarhi.fr/wp-content/uploads/2019/07/CGV.pdf" className={"btn btn-sm btn-secondary"} download>
-                        <FontAwesomeIcon icon={faDownload} />
+                    <a href="/pdf/CGV.pdf" className={"btn btn-sm btn-secondary"} download>
+                        <Download className={"me-1"}/>
                         Télécharger au format PDF
                     </a>
                 </p>
@@ -21,7 +23,7 @@ export default function CGV() {
                 <p>Le terme « Client » désigne toute personne morale ou physique, ayant requis les compétences du
                     Prestataire pour toute prestation de services ou produit proposé audit Client.</p>
                 <p>Le terme « Prestataire » désigne la société SILARHI, SASU au capital de 1 000 €, 116 Route d’Espagne
-                    – BAT 113 BAL 411, 31100 Toulouse,immatriculée au RCS de TOULOUSE sous le numéro 841541667 et
+                    – BAT 113 BAL 411, 31100 Toulouse, immatriculée au RCS de TOULOUSE sous le numéro 841541667 et
                     représentée par Guillaume Sainthillier en sa qualité de Gérant.</p>
                 <h2>Article 2 : L’objet du contrat</h2>
                 <p>Le contrat établi les relations commerciales entre le Prestataire et le Client.</p>

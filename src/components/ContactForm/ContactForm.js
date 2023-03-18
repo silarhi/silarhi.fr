@@ -114,6 +114,7 @@ export default function ContactForm({isSubmitted, onFinish, onPending}) {
               iconPrepend={<Enveloppe />}
               isValid={isValid('email')}
               isInvalid={isInvalid('email')}
+              required
               {...register('email', {
                 required: 'Veuillez fournir votre email',
                 pattern: {
@@ -137,6 +138,7 @@ export default function ContactForm({isSubmitted, onFinish, onPending}) {
               iconPrepend={<Phone />}
               isValid={isValid('phone')}
               isInvalid={isInvalid('phone')}
+              required
               {...register('phone', {
                 required: 'Veuillez fournir votre numéro de téléphone afin que je puisse vous rappeler',
               })} />
@@ -144,7 +146,7 @@ export default function ContactForm({isSubmitted, onFinish, onPending}) {
           </Group>
         </div>
         <div className={"col-12"}>
-          <Group groupClassName={"mb-0"} valid={isValid('phone')}>
+          <Group groupClassName={"mb-0"} valid={isValid('message')}>
             <Textarea
               id="message"
               type="email"
@@ -154,6 +156,7 @@ export default function ContactForm({isSubmitted, onFinish, onPending}) {
               disabled={pending}
               isValid={isValid('message')}
               isInvalid={isInvalid('message')}
+              required
               {...register('message', {
                 required: 'Veuillez écrire votre message',
               })} />

@@ -3,12 +3,11 @@ import Image from "next/image"
 import Link from "next/link"
 import {useRouter} from "next/router"
 import PropTypes from "prop-types"
-import logoDark from '../../../public/images/logo-dark-4096.png'
-import logoLight from '../../../public/images/logo-light-4096.png'
 import {useEffect, useRef, useState} from "react"
 import {Offcanvas} from "react-bootstrap"
 import BsNavbar from "react-bootstrap/Navbar"
 
+import logo from '../../../public/images/logo-4096.png'
 import ActiveLink from "../ActiveLink/ActiveLink"
 import CallToActionButton from "../CallToActionButton/CallToActionButton"
 import styles from './Navbar.module.scss'
@@ -75,14 +74,16 @@ export default function Navbar({initialClass, floatingClass}) {
     <BsNavbar expand={"lg"} id={"app-navbar"} className={`navbar navbar-expand-lg fixed-top ${styles.navbar} ${floating ? `${styles.floating} ${floatingClass}` : initialClass}`} style={floatingStyle} ref={ref}>
       <div className="container">
         <Link href="/" className="navbar-brand">
-            <Image src={logoLight} alt={"SILARHI"} height={60} className={"img-fluid"} />
+            <Image src={logo} alt={"SILARHI"} height={60} className={"img-fluid me-1"} />
+            SILARHI
         </Link>
         <BsNavbar.Toggle />
         <BsNavbar.Offcanvas
           placement="start"
         >
           <Offcanvas.Header closeButton>
-            <Image src={logoDark} alt={"SILARHI"} height={60} className={"img-fluid"} />
+            <Image src={logo} alt={"SILARHI"} height={60} className={"img-fluid me-1"} />
+            SILARHI
           </Offcanvas.Header>
           <Offcanvas.Body>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
