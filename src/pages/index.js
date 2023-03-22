@@ -209,14 +209,16 @@ export default function Home() {
         <div className={styles.backdrop}></div>
         <Image src={home} sizes="100vw" fill style={{objectFit: 'cover'}} priority alt="" />
         <div className={styles.contentWrapper}>
-          <div style={{maxWidth: '55em'}} className={"mx-auto"}>
-            <h1>
-              Développement d{"'"}applications Web
-              <span>À Toulouse & en France</span>
-            </h1>
-            <h2 className={"text-uppercase fw-light"}>Donnez vie à vos idées</h2>
-            <Button as={"a"} size={"lg"} href={"#about"} className={"mt-4"}>En savoir plus</Button>
-          </div>
+            <Section>
+              <div style={{maxWidth: '55em'}} className={"mx-auto"}>
+                <h1>
+                  Développement d{"'"}applications Web
+                  <span>À Toulouse & en France</span>
+                </h1>
+                <h2 className={"text-uppercase fw-light"}>Donnez vie à vos idées</h2>
+                <Button as={"a"} size={"lg"} href={"#about"} className={"mt-4"}>En savoir plus</Button>
+              </div>
+            </Section>
         </div>
       </div>
       {/* About */}
