@@ -44,12 +44,12 @@ const FEATURES = [
   {
     icon: () => <Code />,
     title: 'Développement',
-    description: 'On donne vie à votre idée. Vous intervenez dans chaque étape majeure du développement pour confirmer la trajectoire.',
+    description: 'On donne vie à votre idée. Vous intervenez à chaque étape majeure du développement pour confirmer la trajectoire du projet.',
   },
   {
     icon: () => <CloudBolt />,
     title: 'Déploiement',
-    description: 'L\'application est hébergée sur l\'infrastructure de votre choix. OVH, AWS, GCP, si tous ces sigles ne vous disent rien, laissez-vous guider !',
+    description: 'L\'application est hébergée sur l\'infrastructure de votre choix. Intranet, OVH, AWS, GCP, on s\'adapte, et si tous ces sigles ne vous disent rien, laissez-vous guider !',
   },
 ]
 
@@ -63,7 +63,7 @@ const SERVICES = [
     supported: true,
   },
   {
-    text: `Développement d'API`,
+    text: `Développement spécifique d'API`,
     supported: true,
   },
   {
@@ -75,7 +75,7 @@ const SERVICES = [
     supported: false,
   },
   {
-    text: `Développement de plugin (Wordpress, Drupal)`,
+    text: `Développement de plugin type Wordpress, Drupal`,
     supported: false,
   },
   {
@@ -87,15 +87,15 @@ const SERVICES = [
     supported: true,
   },
   {
+    text: `Reprise d'application PHP existante`,
+    supported: true,
+  },
+  {
     text: `Gestion de l'infrastructure serveur / cloud`,
     supported: true,
   },
   {
-    text: `Mise en place d'intégration continue`,
-    supported: true,
-  },
-  {
-    text: `Mise en place de déploiement continu`,
+    text: `Mise en place d'intégration continue / déploiement continu`,
     supported: true,
   },
   {
@@ -130,7 +130,7 @@ const DAYS_SINCE_COMPANY_START_DATE = getDaysSince(COMPANY_START_DATE)
 const EMPLOYEES = [
   {
     name: 'Guillaume',
-    from: new Date('2018-01-01'),
+    from: new Date(COMPANY_START_DATE),
     coffeesPerDay: 3,
     hoursPerDay: 9,
   },
@@ -154,6 +154,9 @@ const EMPLOYEES = [
   },
 ]
 
+const NB_CLIENTS = 10
+const NB_PROJECTS = 83
+
 const NUMBERS = [
   {
     value: getTotalEmployeeHours(EMPLOYEES),
@@ -161,14 +164,14 @@ const NUMBERS = [
     text: `passées à travailler sur les projets de nos clients.`,
   },
   {
-    value: 10,
+    value: NB_CLIENTS,
     unit: 'Clients',
-    text: `Et 100% de satisfaction. Venez vérifier par vous-même !`,
+    text: `Et 100% de satisfaction au cours de ces ${Math.trunc(DAYS_SINCE_COMPANY_START_DATE / 365)} années. Venez vérifier par vous-même !`,
   },
   {
-    value: 83,
+    value: NB_PROJECTS,
     unit: 'Projets',
-    text: `Plus de 8 projets par client en moyenne, signe de la relation de confiance établie.`,
+    text: `Plus de ${Math.trunc(NB_PROJECTS / NB_CLIENTS)} projets par client en moyenne, signe de la relation de confiance établie.`,
   },
   {
     value: getTotalEmployeeCoffees(EMPLOYEES),
@@ -197,7 +200,7 @@ export default function Home() {
 
 
   // We store title in variable because of ' special chars which render multiple children
-  const title = `Développement d'applications Web & PHP à Toulouse - Silarhi`
+  const title = `Développement d'applications Web & PHP à Toulouse - SILARHI`
 
   return (
     <>
