@@ -1,5 +1,10 @@
 @import "styles/core";
 
+.offcanvasSeparator {
+  margin-left: calc(-1 * var(--bs-offcanvas-padding-y));
+  margin-right: calc(-1 * var(--bs-offcanvas-padding-y));
+}
+
 .navbar {
   position: absolute;
 

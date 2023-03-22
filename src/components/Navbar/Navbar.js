@@ -1,4 +1,3 @@
-import cx from "classnames"
 import Image from "next/image"
 import Link from "next/link"
 import {useRouter} from "next/router"
@@ -82,8 +81,10 @@ export default function Navbar({initialClass, floatingClass}) {
           placement="start"
         >
           <Offcanvas.Header closeButton>
-            <Image src={logo} alt={"SILARHI"} height={60} className={"img-fluid me-1"} />
-            SILARHI
+            <div className={"d-flex align-items-center"}>
+              <Image src={logo} alt={"SILARHI"} height={60} className={"img-fluid me-1"} />
+              <Offcanvas.Title as={"span"} className={"h2"}>SILARHI</Offcanvas.Title>
+            </div>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
@@ -102,7 +103,7 @@ export default function Navbar({initialClass, floatingClass}) {
                 </li>
               ))}
               <li className="nav-item ms-lg-4">
-                <hr className={"d-block d-lg-none"} />
+                <hr className={`${styles.offcanvasSeparator} d-block d-lg-none`} />
                 <CallToActionButton variant="sub-primary">Contact</CallToActionButton>
               </li>
             </ul>
