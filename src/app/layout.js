@@ -24,6 +24,7 @@ export const metadata = {
 const montserrat = Montserrat({
     weight: ['300', '700'],
     subsets: ['latin'],
+    variable: '--body-font',
 })
 
 export default function RootLayout({ children }) {
@@ -34,7 +35,7 @@ export default function RootLayout({ children }) {
             <meta name="theme-color" content="#ffffff" />
             <link rel="manifest" href="/site.webmanifest" />
             <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-            <body className={`${montserrat.className}`}>
+            <body className={`${montserrat.className} ${montserrat.variable}`}>
                 <DefaultLayout>{children}</DefaultLayout>
             </body>
         </html>
