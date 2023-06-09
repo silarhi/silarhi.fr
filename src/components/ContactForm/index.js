@@ -7,7 +7,7 @@ import { Enveloppe, Person, Phone } from 'components/Icons'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function ContactForm({ isSubmitted, onFinish, onPending }) {
+export default function ContactForm({ isSubmitted = false, onFinish, onPending }) {
     const [pending, setPending] = useState(false)
     const [success, setSuccess] = useState(false)
     const [error, setError] = useState(false)
@@ -177,8 +177,4 @@ export default function ContactForm({ isSubmitted, onFinish, onPending }) {
             <input type={'submit'} className={'d-none'} />
         </form>
     )
-}
-
-ContactForm.defaultProps = {
-    isSubmitted: false,
 }

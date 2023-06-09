@@ -5,7 +5,16 @@ import Container from 'react-bootstrap/Container'
 
 import styles from './index.module.scss'
 
-export default function Section({ container, fluid, size, children, className, paddingX, paddingY, ...props }) {
+export default function Section({
+    container = true,
+    fluid = false,
+    size = 'default',
+    children,
+    className,
+    paddingX = true,
+    paddingY = true,
+    ...props
+}) {
     return (
         <section
             className={cx({
@@ -26,18 +35,9 @@ export default function Section({ container, fluid, size, children, className, p
     )
 }
 
-Section.defaultProps = {
-    size: 'default',
-    paddingX: true,
-    paddingY: true,
-    container: true,
-    fluid: false,
-}
-
 Section.propTypes = {
     size: PropTypes.oneOf(['default', 'xl']),
     className: PropTypes.string,
-    container: PropTypes.bool.isRequired,
     paddingX: PropTypes.bool,
     paddingY: PropTypes.bool,
     fluid: PropTypes.oneOf([true, false, 'sm', 'md', 'lg', 'xl', 'xxl']),

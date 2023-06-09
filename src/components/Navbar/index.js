@@ -11,7 +11,7 @@ import ActiveLink from '../ActiveLink'
 import CallToActionButton from '../CallToActionButton'
 import styles from './index.module.scss'
 
-export default function Navbar({ initialClass, floatingClass }) {
+export default function Navbar({ initialClass = 'navbar-dark', floatingClass = 'navbar-dark bg-primary-dark' }) {
     const router = useRouter()
     const ref = useRef(null)
 
@@ -125,11 +125,6 @@ export default function Navbar({ initialClass, floatingClass }) {
             </div>
         </BsNavbar>
     )
-}
-
-Navbar.defaultProps = {
-    floatingClass: 'navbar-dark bg-primary-dark',
-    initialClass: 'navbar-dark',
 }
 
 Navbar.propTypes = {
