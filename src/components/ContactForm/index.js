@@ -3,7 +3,7 @@ import Group from "components/Form/Group"
 import Help from "components/Form/Help"
 import Input from "components/Form/Input"
 import Textarea from "components/Form/Textarea"
-import {Enveloppe, Person, Phone} from "components/Icons/Icons"
+import {Enveloppe, Person, Phone} from "components/Icons"
 import {useCallback, useEffect, useState} from "react"
 import {useForm} from "react-hook-form"
 

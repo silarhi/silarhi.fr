@@ -1,7 +1,7 @@
 import '../../styles/app.scss'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
-import DefaultLayout from "_layouts/DefaultLayout/DefaultLayout"
+import DefaultLayout from "_layouts/DefaultLayout"
 import {config} from '@fortawesome/fontawesome-svg-core'
 import {Montserrat} from "next/font/google"
 import Head from "next/head"

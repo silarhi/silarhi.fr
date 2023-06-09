@@ -7,9 +7,9 @@ import {Offcanvas} from "react-bootstrap"
 import BsNavbar from "react-bootstrap/Navbar"
 
 import logo from '../../../public/images/logo-4096.png'
-import ActiveLink from "../ActiveLink/ActiveLink"
-import CallToActionButton from "../CallToActionButton/CallToActionButton"
-import styles from './Navbar.module.scss'
+import ActiveLink from "../ActiveLink"
+import CallToActionButton from "../CallToActionButton"
+import styles from './index.module.scss'
 
 export default function Navbar({initialClass, floatingClass}) {
   const router = useRouter()

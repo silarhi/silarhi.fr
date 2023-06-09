@@ -1,6 +1,6 @@
-import CallToActionButton from "components/CallToActionButton/CallToActionButton"
+import CallToActionButton from "components/CallToActionButton"
 
-import styles from './CallToAction.module.scss'
+import styles from './index.module.scss'
 
 export default function CallToAction() {
   return (

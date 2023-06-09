@@ -1,4 +1,4 @@
-import ContactForm from "components/ContactForm/ContactForm"
+import ContactForm from "components/ContactForm"
 import useForceReducer from "hooks/reducer"
 import {useCallback, useState} from "react"
 import Button from "react-bootstrap/Button"

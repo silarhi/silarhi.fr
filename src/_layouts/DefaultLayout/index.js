@@ -1,8 +1,8 @@
-import Footer from "components/Footer/Footer"
-import Navbar from "components/Navbar/Navbar"
+import Footer from "components/Footer"
+import Navbar from "components/Navbar"
 import PropTypes from "prop-types"
 
-import styles from './DefaultLayout.module.scss'
+import styles from './index.module.scss'
 
 export default function DefaultLayout({children, navbarInitialClass, navbarFloatingClass}) {
     return (

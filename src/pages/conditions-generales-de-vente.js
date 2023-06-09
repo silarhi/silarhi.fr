@@ -1,8 +1,8 @@
-import Section from "components/Section/Section"
+import Section from "components/Section"
 import Head from "next/head"
 
-import Hero from "../components/HeroTitle/HeroTitle"
-import {Download} from "../components/Icons/Icons"
+import Hero from "../components/HeroTitle"
+import {Download} from "../components/Icons"
 
 export default function CGV() {
     return (

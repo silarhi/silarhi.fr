@@ -1,4 +1,4 @@
-import CallToAction from "components/CallToAction/CallToAction"
+import CallToAction from "components/CallToAction"
 import {
   Check,
   Clock,
@@ -10,10 +10,10 @@ import {
   Map,
   Phone,
   XMark
-} from "components/Icons/Icons"
-import IconWrapper from "components/IconWrapper/IconWrapper"
-import Section from "components/Section/Section"
-import SectionHeader from "components/SectionHeader/SectionHeader"
+} from "components/Icons"
+import IconWrapper from "components/IconWrapper"
+import Section from "components/Section"
+import SectionHeader from "components/SectionHeader"
 import Markdown from "marked-react"
 import Head from "next/head"
 import Image from "next/image"
@@ -24,7 +24,7 @@ import Row from "react-bootstrap/Row"
 import {chunk} from "utils/array"
 
 import home from '../../public/images/home.jpg'
-import ContactForm from "../components/ContactForm/ContactForm"
+import ContactForm from "../components/ContactForm"
 import useForceReducer from "../hooks/reducer"
 import {getDaysSince} from "../utils/dates"
 import {getTotalEmployeeCoffees, getTotalEmployeeHours} from "../utils/employees"

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import {ChildrenPropTypes} from "props/types"
 import Container from "react-bootstrap/Container"
 
-import styles from './Section.module.scss'
+import styles from './index.module.scss'
 
 export default function Section({container, fluid, size, children, className, paddingX, paddingY,... props}) {
   return (

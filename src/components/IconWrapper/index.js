@@ -1,4 +1,4 @@
-import styles from './IconWrapper.module.scss'
+import styles from './index.module.scss'
 
 export default function IconWrapper({children}) {
   return (
