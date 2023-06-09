@@ -1,29 +1,27 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
-import {faClock} from "@fortawesome/free-solid-svg-icons/faClock"
+import { faClock } from '@fortawesome/free-solid-svg-icons/faClock'
 import { faCloudBolt } from '@fortawesome/free-solid-svg-icons/faCloudBolt'
 import { faCode } from '@fortawesome/free-solid-svg-icons/faCode'
-import {faDownload} from "@fortawesome/free-solid-svg-icons/faDownload"
+import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope'
-import {faFileContract} from "@fortawesome/free-solid-svg-icons/faFileContract"
+import { faFileContract } from '@fortawesome/free-solid-svg-icons/faFileContract'
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons/faLightbulb'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass'
-import {faMap} from "@fortawesome/free-solid-svg-icons/faMap"
-import {faMapMarker} from "@fortawesome/free-solid-svg-icons/faMapMarker"
-import {faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons/faMapMarkerAlt"
-import {faPhone} from "@fortawesome/free-solid-svg-icons/faPhone"
-import {faUser} from "@fortawesome/free-solid-svg-icons/faUser"
-import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import PropTypes from "prop-types"
+import { faMap } from '@fortawesome/free-solid-svg-icons/faMap'
+import { faMapMarker } from '@fortawesome/free-solid-svg-icons/faMapMarker'
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt'
+import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone'
+import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
+import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import PropTypes from 'prop-types'
 
-export function BaseIcon({icon, className, ...props}) {
-  return (
-    <FontAwesomeIcon icon={icon} className={`${className || ''} icon`.trim()} {...props} />
-  )
+export function BaseIcon({ icon, className, ...props }) {
+    return <FontAwesomeIcon icon={icon} className={`${className || ''} icon`.trim()} {...props} />
 }
 
 BaseIcon.propTypes = {
-  icon: PropTypes.object
+    icon: PropTypes.object,
 }
 
 export const Download = ({ ...props }) => <BaseIcon icon={faDownload} {...props} />

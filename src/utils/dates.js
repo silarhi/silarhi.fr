@@ -4,7 +4,7 @@
  * @returns {number}
  */
 export function getDaysSince(from, to = undefined) {
-  to = to || new Date()
+    to = to || new Date()
 
-  return Math.ceil((to.getTime() - from.getTime()) / (1000 * 3600 * 24))
+    return Math.ceil((to.getTime() - from.getTime()) / (1000 * 3600 * 24))
 }

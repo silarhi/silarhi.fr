@@ -1,6 +1,3 @@
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 
-export const ChildrenPropTypes = PropTypes.oneOfType([
-  PropTypes.arrayOf(PropTypes.node),
-  PropTypes.node
-])
+export const ChildrenPropTypes = PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
