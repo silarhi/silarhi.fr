@@ -1,15 +1,14 @@
+import Hero from 'components/HeroTitle'
+import { Download } from 'components/Icons'
 import Section from 'components/Section'
-import Head from 'next/head'
 
-import Hero from '../components/HeroTitle'
-import { Download } from '../components/Icons'
+export const metadata = {
+    title: `Conditions Générales de Vente - SILARHI`,
+}
 
-export default function CGV() {
+export default function Page() {
     return (
         <>
-            <Head>
-                <title>Conditions générales de vente</title>
-            </Head>
             <Hero title="Conditions générales de vente" />
             <Section>
                 <p>

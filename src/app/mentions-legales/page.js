@@ -1,13 +1,13 @@
 import Hero from 'components/HeroTitle'
 import Section from 'components/Section'
-import Head from 'next/head'
 
-export default function LegalMentions() {
+export const metadata = {
+    title: `Mentions légales - SILARHI`,
+}
+
+export default function Page() {
     return (
         <>
-            <Head>
-                <title>Mentions légales</title>
-            </Head>
             <Hero title="Mentions Légales" />
             <Section>
                 <h2>1. Présentation du site.</h2>
