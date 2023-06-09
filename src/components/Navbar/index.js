@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname, useRouter } from 'next/navigation'
 import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 import { Offcanvas } from 'react-bootstrap'
@@ -18,6 +18,8 @@ export default function Navbar({ initialClass = 'navbar-dark', floatingClass = '
     const [floating, setFloating] = useState(false)
     const [floatingStyle, setFloatingStyle] = useState({})
     const [navbarHeight, setNavbarHeight] = useState(56)
+
+    const pathname = usePathname()
 
     useEffect(() => {
         setNavbarHeight(ref.current.clientHeight)
@@ -67,7 +69,7 @@ export default function Navbar({ initialClass = 'navbar-dark', floatingClass = '
         },
     ]
 
-    const isMainPage = router.asPath === '/' || router.asPath.startsWith('/#')
+    const isMainPage = pathname === '/' || pathname.startsWith('/#')
 
     return (
         <BsNavbar

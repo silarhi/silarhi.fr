@@ -1,3 +1,4 @@
+'use client'
 import CallToAction from 'components/CallToAction'
 import { Check, Clock, CloudBolt, Code, Enveloppe, FileContract, LightBulb, Map, Phone, XMark } from 'components/Icons'
 import IconWrapper from 'components/IconWrapper'
@@ -176,7 +177,7 @@ const NUMBERS = [
     },
 ]
 
-export default function Home() {
+export default function Page() {
     const {
         value: isFormSubmitted,
         updateValue: forceIsFormSubmitted,
