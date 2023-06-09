@@ -1,3 +1,5 @@
+import ActiveLink from 'components/ActiveLink'
+import CallToActionButton from 'components/CallToActionButton'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -7,8 +9,6 @@ import { Offcanvas } from 'react-bootstrap'
 import BsNavbar from 'react-bootstrap/Navbar'
 
 import logo from '../../../public/images/logo-4096.png'
-import ActiveLink from '../ActiveLink'
-import CallToActionButton from '../CallToActionButton'
 import styles from './index.module.scss'
 
 export default function Navbar({ initialClass = 'navbar-dark', floatingClass = 'navbar-dark bg-primary-dark' }) {
