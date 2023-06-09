@@ -6,10 +6,10 @@ import PropTypes from 'prop-types'
 
 import styles from './index.module.scss'
 
-export default function DefaultLayout({ children, navbarInitialClass, navbarFloatingClass }) {
+export default function DefaultLayout({ children }) {
     return (
         <div className={styles.layout}>
-            <Navbar floatingClass={navbarFloatingClass} initialClass={navbarInitialClass} />
+            <Navbar />
             <main>{children}</main>
             <Footer />
         </div>
@@ -18,6 +18,4 @@ export default function DefaultLayout({ children, navbarInitialClass, navbarFloa
 
 DefaultLayout.propTypes = {
     children: PropTypes.element,
-    navbarInitialClass: PropTypes.string,
-    navbarFloatingClass: PropTypes.string,
 }
