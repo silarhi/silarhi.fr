@@ -20,7 +20,7 @@ export default function Footer() {
                         <Link href={'/conditions-generales-de-vente'}>CGV</Link>
                     </div>
                     <div>
-                        Site développé par un
+                        {'Site développé par un '}
                         <a href="https://sainthillier.fr">développeur Web freelance à Toulouse</a>
                     </div>
                 </div>
