@@ -1,0 +1,56 @@
+.input-icon {
+  position: relative;
+
+  .form-control:not(:first-child),
+  .form-select:not(:first-child),
+  .twitter-typeahead:not(:first-child) .form-control,
+  .twitter-typeahead:not(:first-child) .form-select,
+  .form-control:not(:first-child):invalid,
+  .form-select:not(:first-child):invalid,
+  .form-control.is-invalid:not(:first-child),
+  .form-select.is-invalid:not(:first-child),
+  .form-select:not(:first-child) ~ .select2 .select2-selection__rendered {
+    padding-left: 2.5rem;
+  }
+
+  .form-control:not(:last-child),
+  .form-select:not(:last-child),
+  .twitter-typeahead:not(:last-child) .form-control,
+  .twitter-typeahead:not(:last-child) .form-select,
+  .select2:not(:last-child) .select2-selection__rendered {
+    padding-right: 2.5rem;
+  }
+
+  .form-select,
+  .twitter-typeahead .form-control.is-invalid:last-of-type,
+  .twitter-typeahead .form-control:invalid:last-of-type {
+    background-image: none;
+  }
+}
+
+
+.input-icon-addon {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  color: $input-icon-color;
+  opacity: 0.8;
+  pointer-events: none;
+  font-size: 1.125em;
+
+  &:last-child {
+    right: 0;
+    left: auto;
+  }
+
+  a,
+  .btn {
+    pointer-events: auto;
+  }
+}

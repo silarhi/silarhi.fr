@@ -1,0 +1,22 @@
+@import "core";
+
+//Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+//Components
+@import "components/button";
+@import "components/card";
+@import "components/containers";
+@import "components/navbar";
+@import "components/input-icon";
+@import "components/list-group";
+@import "components/offcanvas";
+
+//Layouts
+html, body {
+  height: 100%;
+}
+
+body{
+  background-color: #F8F9FA;
+}
