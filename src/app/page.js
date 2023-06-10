@@ -18,6 +18,7 @@ import { getDaysSince } from 'utils/dates'
 import { getTotalEmployeeCoffees, getTotalEmployeeHours } from 'utils/employees'
 
 import home from '../../public/images/home.jpg'
+import { lato } from './fonts'
 import styles from './index.module.scss'
 
 const FEATURES = [
@@ -319,7 +320,9 @@ export default function Page() {
                 <Row className="g-lg-5">
                     {NUMBERS.map((number, key) => (
                         <Col md={6} lg={3} key={key} className={'text-center'}>
-                            <div className={'text-sub-primary display-1 fw-bold mb-3'}>{number.value}</div>
+                            <div className={`${lato.className} text-sub-primary display-1 fw-bold mb-3`}>
+                                {number.value}
+                            </div>
                             <h4 className="text-primary fw-light mb-3">{number.unit}</h4>
                             <hr style={{ width: '40%' }} className={'mx-auto'} />
                             <p className="text-muted">{number.text}</p>

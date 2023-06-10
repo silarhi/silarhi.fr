@@ -3,7 +3,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import DefaultLayout from 'components/Layout/DefaultLayout'
-import { Montserrat } from 'next/font/google'
+
+import { montserrat } from './fonts'
 
 config.autoAddCss = false
 
@@ -20,12 +21,6 @@ export const metadata = {
         },
     },
 }
-
-const montserrat = Montserrat({
-    weight: ['300', '700'],
-    subsets: ['latin'],
-    variable: '--body-font',
-})
 
 export default function RootLayout({ children }) {
     return (
