@@ -6,13 +6,13 @@ import IconWrapper from 'components/IconWrapper'
 import Section from 'components/Section'
 import SectionHeader from 'components/SectionHeader'
 import useForceReducer from 'hooks/reducer'
-import Markdown from 'marked-react'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useCallback, useState } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import ReactMarkdown from 'react-markdown'
 import { chunk } from 'utils/array'
 import { getDaysSince } from 'utils/dates'
 import { getTotalEmployeeCoffees, getTotalEmployeeHours } from 'utils/employees'
@@ -263,7 +263,13 @@ export default function Page() {
                                             <Check className="fa-2x text-sub-primary" />
                                         </div>
                                         <div className={'text-muted'}>
-                                            <Markdown isInline>{service.text}</Markdown>
+                                            <ReactMarkdown
+                                                components={{
+                                                    p: Fragment,
+                                                }}
+                                            >
+                                                {service.text}
+                                            </ReactMarkdown>
                                         </div>
                                     </li>
                                 ))}
@@ -288,7 +294,13 @@ export default function Page() {
                                             <XMark className="fa-2x text-sub-primary" />
                                         </div>
                                         <div className={'text-muted'}>
-                                            <Markdown isInline>{service.text}</Markdown>
+                                            <ReactMarkdown
+                                                components={{
+                                                    p: Fragment,
+                                                }}
+                                            >
+                                                {service.text}
+                                            </ReactMarkdown>
                                         </div>
                                     </li>
                                 ))}
