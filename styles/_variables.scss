@@ -1,6 +1,6 @@
 $enable-rfs: true;
 
-$body-bg: #F8F9FA;
+$body-bg: white;
 
 //Colors
 $primary: #2556cf;
@@ -27,6 +27,7 @@ $navbar-dark-color: white;
 $navbar-dark-hover-color: $sub-primary;
 $navbar-dark-brand-color: white;
 $navbar-dark-brand-hover-color: $sub-primary;
+$navbar-nav-link-padding-x: 1.25rem;
 
 //Shadow
 $input-icon-color: $primary;
