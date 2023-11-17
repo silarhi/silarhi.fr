@@ -3,6 +3,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import DefaultLayout from 'components/Layout/DefaultLayout'
+import Script from 'next/script'
 
 import { montserrat } from './fonts'
 
@@ -30,6 +31,16 @@ export default function RootLayout({ children }) {
             <meta name="theme-color" content="#ffffff" />
             <link rel="manifest" href="/site.webmanifest" />
             <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-PDTD5T600H" />
+            <Script id="google-analytics">
+                {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+     
+              gtag('config', 'G-PDTD5T600H');
+            `}
+            </Script>
             <body className={`${montserrat.className} ${montserrat.variable}`}>
                 <DefaultLayout>{children}</DefaultLayout>
             </body>
