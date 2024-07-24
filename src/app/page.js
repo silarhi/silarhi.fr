@@ -131,25 +131,28 @@ const EMPLOYEES = [
     {
         name: 'Florian',
         from: new Date('2020-09-01'),
+        to: new Date('2023-09-15'),
         coffeesPerDay: 0,
         hoursPerDay: 7,
     },
     {
         name: 'Rémy',
         from: new Date('2022-01-01'),
+        to: new Date('2024-03-15'),
         coffeesPerDay: 4,
         hoursPerDay: 8,
     },
     {
         name: 'Maxime',
         from: new Date('2022-11-02'),
+        to: new Date('2024-04-01'),
         coffeesPerDay: 3,
         hoursPerDay: 8,
     },
 ]
 
-const NB_CLIENTS = 10
-const NB_PROJECTS = 83
+const NB_CLIENTS = 11
+const NB_PROJECTS = 109
 
 const NUMBERS = [
     {

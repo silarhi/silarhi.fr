@@ -6,6 +6,6 @@ export default function useForceReducer() {
     return {
         value,
         updateValue: () => setValue((value) => value + 1),
-        resetValue: () => setValue((value) => 0),
+        resetValue: () => setValue(() => 0),
     }
 }
