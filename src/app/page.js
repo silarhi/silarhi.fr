@@ -151,8 +151,8 @@ const EMPLOYEES = [
     },
 ]
 
-const NB_CLIENTS = 10
-const NB_PROJECTS = 83
+const NB_CLIENTS = 11
+const NB_PROJECTS = 109
 
 const NUMBERS = [
     {
