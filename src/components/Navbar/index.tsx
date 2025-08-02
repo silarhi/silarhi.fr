@@ -1,28 +1,44 @@
-import ActiveLink from 'components/ActiveLink'
-import CallToActionButton from 'components/CallToActionButton'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import PropTypes from 'prop-types'
-import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
 import { Offcanvas } from 'react-bootstrap'
 import BsNavbar from 'react-bootstrap/Navbar'
+
+import ActiveLink from '@/components/ActiveLink'
+import CallToActionButton from '@/components/CallToActionButton'
 
 import logo from '../../../public/images/logo-4096.png'
 import styles from './index.module.scss'
 
-export default function Navbar({ initialClass = 'navbar-dark', floatingClass = 'navbar-dark bg-primary-dark' }) {
-    const router = useRouter()
-    const ref = useRef(null)
+interface MenuItem {
+    path: string
+    indexPath?: string
+    label: string
+    target?: string
+}
 
-    const [floating, setFloating] = useState(false)
-    const [floatingStyle, setFloatingStyle] = useState({})
-    const [navbarHeight, setNavbarHeight] = useState(56)
+interface NavbarProps {
+    initialClass?: string
+    floatingClass?: string
+}
+
+export default function Navbar({
+    initialClass = 'navbar-dark',
+    floatingClass = 'navbar-dark bg-primary-dark',
+}: NavbarProps) {
+    const ref = useRef<HTMLElement>(null)
+
+    const [floating, setFloating] = useState<boolean>(false)
+    const [floatingStyle, setFloatingStyle] = useState<CSSProperties>({})
+    const [navbarHeight, setNavbarHeight] = useState<number>(56)
 
     const pathname = usePathname()
 
     useEffect(() => {
-        setNavbarHeight(ref.current.clientHeight)
+        if (ref.current) {
+            setNavbarHeight(ref.current.clientHeight)
+        }
     }, [])
 
     useEffect(() => {
@@ -46,7 +62,7 @@ export default function Navbar({ initialClass = 'navbar-dark', floatingClass = '
         }
     }, [navbarHeight, setFloating, setFloatingStyle])
 
-    const menuItems = [
+    const menuItems: MenuItem[] = [
         {
             path: '/#about',
             indexPath: '#about',
@@ -107,7 +123,7 @@ export default function Navbar({ initialClass = 'navbar-dark', floatingClass = '
                                     )}
                                     {isMainPage && (
                                         <ActiveLink
-                                            href={item.indexPath || item.path}
+                                            href={item.indexPath ?? item.path}
                                             className="nav-link"
                                             target={item.target}
                                             activeClassName={'active'}
@@ -127,9 +143,4 @@ export default function Navbar({ initialClass = 'navbar-dark', floatingClass = '
             </div>
         </BsNavbar>
     )
-}
-
-Navbar.propTypes = {
-    floatingClass: PropTypes.string,
-    initialClass: PropTypes.string,
 }

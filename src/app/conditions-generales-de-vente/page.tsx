@@ -1,8 +1,10 @@
-import Hero from 'components/HeroTitle'
-import { Download } from 'components/Icons'
-import Section from 'components/Section'
+import { Metadata } from 'next'
 
-export const metadata = {
+import Hero from '@/components/HeroTitle'
+import { Download } from '@/components/Icons'
+import Section from '@/components/Section'
+
+export const metadata: Metadata = {
     title: `Conditions Générales de Vente - SILARHI`,
 }
 

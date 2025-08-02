@@ -1,7 +1,9 @@
-import Hero from 'components/HeroTitle'
-import Section from 'components/Section'
+import { Metadata } from 'next'
 
-export const metadata = {
+import Hero from '@/components/HeroTitle'
+import Section from '@/components/Section'
+
+export const metadata: Metadata = {
     title: `Mentions légales - SILARHI`,
 }
 

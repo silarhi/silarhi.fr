@@ -1,30 +1,44 @@
 import axios from 'axios'
-import Group from 'components/Form/Group'
-import Help from 'components/Form/Help'
-import Input from 'components/Form/Input'
-import Textarea from 'components/Form/Textarea'
-import { Enveloppe, Person, Phone } from 'components/Icons'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function ContactForm({ isSubmitted = false, onFinish, onPending }) {
-    const [pending, setPending] = useState(false)
-    const [success, setSuccess] = useState(false)
-    const [error, setError] = useState(false)
+import Group from '@/components/Form/Group'
+import Help from '@/components/Form/Help'
+import Input from '@/components/Form/Input'
+import Textarea from '@/components/Form/Textarea'
+import { Enveloppe, Person, Phone } from '@/components/Icons'
+
+interface ContactFormData {
+    name: string
+    email: string
+    phone: string
+    message: string
+}
+
+interface ContactFormProps {
+    isSubmitted?: boolean
+    onFinish?: (data: ContactFormData) => void
+    onPending?: () => void
+}
+
+export default function ContactForm({ isSubmitted = false, onFinish, onPending }: ContactFormProps) {
+    const [pending, setPending] = useState<boolean>(false)
+    const [success, setSuccess] = useState<boolean>(false)
+    const [error, setError] = useState<boolean>(false)
 
     const {
         register,
         handleSubmit,
         reset,
         formState: { touchedFields, errors },
-    } = useForm({
+    } = useForm<ContactFormData>({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
         criteriaMode: 'all',
     })
 
     const onSubmit = useCallback(
-        async (data) => {
+        async (data: ContactFormData) => {
             setPending(true)
             if (onPending) {
                 onPending()
@@ -64,9 +78,9 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
         }
     }, [isSubmitted, handleSubmit, onSubmit])
 
-    const isFilled = (fieldName) => !!touchedFields[fieldName]
-    const isValid = (fieldName) => isFilled(fieldName) && !errors[fieldName]
-    const isInvalid = (fieldName) => !!errors[fieldName]
+    const isFilled = (fieldName: keyof ContactFormData): boolean => !!touchedFields[fieldName]
+    const isValid = (fieldName: keyof ContactFormData): boolean => isFilled(fieldName) && !errors[fieldName]
+    const isInvalid = (fieldName: keyof ContactFormData): boolean => !!errors[fieldName]
 
     if (success) {
         return (
@@ -88,9 +102,8 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                         <Input
                             id="name"
                             type="text"
-                            name="name"
                             autoComplete="name"
-                            size="40"
+                            htmlSize={40}
                             placeholder="Nom"
                             disabled={pending}
                             iconPrepend={<Person />}
@@ -104,7 +117,7 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                                 },
                             })}
                         />
-                        {isInvalid('name') && <Help type={'invalid'}>{errors.name.message}</Help>}
+                        {isInvalid('name') && <Help type={'invalid'}>{errors.name?.message}</Help>}
                     </Group>
                 </div>
                 <div className={'col-12 col-md-6'}>
@@ -114,7 +127,6 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                             type="email"
                             autoComplete="email"
                             inputMode="email"
-                            name="email"
                             placeholder="Email"
                             disabled={pending}
                             iconPrepend={<Enveloppe />}
@@ -129,7 +141,7 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                                 },
                             })}
                         />
-                        {isInvalid('email') && <Help type={'invalid'}>{errors.email.message}</Help>}
+                        {isInvalid('email') && <Help type={'invalid'}>{errors.email?.message}</Help>}
                     </Group>
                 </div>
                 <div className={'col-12'}>
@@ -139,7 +151,6 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                             type="text"
                             autoComplete="tel"
                             inputMode="tel"
-                            name="phone"
                             placeholder="Téléphone"
                             disabled={pending}
                             iconPrepend={<Phone />}
@@ -150,7 +161,7 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                                 required: 'Veuillez fournir votre numéro de téléphone afin que je puisse vous rappeler',
                             })}
                         />
-                        {isInvalid('phone') && <Help type={'invalid'}>{errors.phone.message}</Help>}
+                        {isInvalid('phone') && <Help type={'invalid'}>{errors.phone?.message}</Help>}
                     </Group>
                 </div>
                 <div className={'col-12'}>
@@ -158,7 +169,6 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                         <Textarea
                             id="message"
                             type="email"
-                            name="message"
                             rows={7}
                             placeholder="Message"
                             disabled={pending}
@@ -169,7 +179,7 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                                 required: 'Veuillez écrire votre message',
                             })}
                         />
-                        {isInvalid('message') && <Help type={'invalid'}>{errors.message.message}</Help>}
+                        {isInvalid('message') && <Help type={'invalid'}>{errors.message?.message}</Help>}
                     </Group>
                 </div>
             </div>
