@@ -147,7 +147,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
 
                         <div className="mt-5 pt-4 border-top">
                             <Link href="/projets" className="btn btn-outline-primary">
-                                ← Retour aux cas d&apos;étude
+                                ← Retour aux projets
                             </Link>
                         </div>
                     </div>
