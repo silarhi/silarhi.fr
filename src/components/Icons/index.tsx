@@ -1,3 +1,4 @@
+import { faCalendar } from '@fortawesome/free-solid-svg-icons/faCalendar'
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
 import { faClock } from '@fortawesome/free-solid-svg-icons/faClock'
 import { faCloudBolt } from '@fortawesome/free-solid-svg-icons/faCloudBolt'
@@ -22,11 +23,13 @@ export function BaseIcon({ className, ...props }: BaseIconProps) {
     return <FontAwesomeIcon className={cn('icon', className)} {...props} />
 }
 
+export const Calendar = (props: IconProps) => <BaseIcon icon={faCalendar} {...props} />
 export const Download = (props: IconProps) => <BaseIcon icon={faDownload} {...props} />
 export const Map = (props: IconProps) => <BaseIcon icon={faMapMarkerAlt} {...props} />
 export const Clock = (props: IconProps) => <BaseIcon icon={faClock} {...props} />
 export const Phone = (props: IconProps) => <BaseIcon icon={faPhone} {...props} />
 export const Person = (props: IconProps) => <BaseIcon icon={faUser} {...props} />
+export const User = (props: IconProps) => <BaseIcon icon={faUser} {...props} />
 export const Enveloppe = (props: IconProps) => <BaseIcon icon={faEnvelope} {...props} />
 export const Check = (props: IconProps) => <BaseIcon icon={faCheck} {...props} />
 export const CloudBolt = (props: IconProps) => <BaseIcon icon={faCloudBolt} {...props} />
