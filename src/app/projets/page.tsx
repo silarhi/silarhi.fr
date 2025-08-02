@@ -27,11 +27,11 @@ export default async function ProjectPage() {
                         <div className="d-flex flex-wrap gap-2">
                             {tags.map((tag) => (
                                 <Link
-                                    key={tag}
-                                    href={`/projets/tag/${tag.toLowerCase()}`}
+                                    key={tag.slug}
+                                    href={`/projets/tag/${tag.slug}`}
                                     className="btn btn-outline-primary btn-sm"
                                 >
-                                    {tag}
+                                    {tag.name}
                                 </Link>
                             ))}
                         </div>

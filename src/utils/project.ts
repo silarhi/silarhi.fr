@@ -2,6 +2,8 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 
+import { getTagBySlug, type TagMetadata } from './tags'
+
 const projectsDirectory = path.join(process.cwd(), 'src/content/projects')
 
 export interface ProjectProject {
@@ -11,7 +13,7 @@ export interface ProjectProject {
     updateDate?: string
     excerpt?: string
     author: string
-    tags: string[]
+    tags: TagMetadata[]
     published: boolean
     content: string
     readingTime: string
@@ -74,11 +76,15 @@ export async function getProjectBySlug(slug: string): Promise<ProjectProject | n
 
     const readingTime = calculateReadingTime(content)
 
+    // Lookup tag metadata for each tag
+    const tagSlugs = frontMatter.tags ?? []
+    const tags = await Promise.all(tagSlugs.map(async (tagSlug) => await getTagBySlug(tagSlug)))
+
     return {
         slug,
         ...frontMatter,
         author: frontMatter.author ?? 'SILARHI',
-        tags: frontMatter.tags ?? [],
+        tags,
         published: frontMatter.published ?? false,
         content,
         readingTime,
@@ -99,18 +105,18 @@ export async function getAllProjects(): Promise<ProjectProject[]> {
 export async function getProjectsByTag(tag: string): Promise<ProjectProject[]> {
     const allProjects = await getAllProjects()
     return allProjects.filter((project) =>
-        project.tags.some((projectTag) => projectTag.toLowerCase() === tag.toLowerCase())
+        project.tags.some((projectTag) => projectTag.slug.toLowerCase() === tag.toLowerCase())
     )
 }
 
 // Get all unique tags
-export async function getAllProjectTags(): Promise<string[]> {
+export async function getAllProjectTags(): Promise<TagMetadata[]> {
     const allProjects = await getAllProjects()
-    const tags = new Set<string>()
+    const tagSlugs = {} as Record<string, TagMetadata>
 
     allProjects.forEach((project) => {
-        project.tags.forEach((tag) => tags.add(tag))
+        project.tags.forEach((tag) => (tagSlugs[tag.slug] = tag))
     })
 
-    return Array.from(tags).sort()
+    return Object.values(tagSlugs).sort((a, b) => a.slug.localeCompare(b.slug))
 }
