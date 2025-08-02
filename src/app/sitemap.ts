@@ -2,11 +2,20 @@ import { MetadataRoute } from 'next'
 
 import { getAllProjects, getAllProjectTags } from '@/utils/project'
 
+const getBaseUrl = () => {
+    if (process.env.NEXT_PUBLIC_SITE_URL) {
+        return process.env.NEXT_PUBLIC_SITE_URL
+    }
+
+    if (process.env.VERCEL_URL) {
+        return `https://${process.env.VERCEL_URL}`
+    }
+
+    return 'http://localhost:3000'
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl =
-        process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : 'http://localhost:3000'
+    const baseUrl = getBaseUrl()
 
     // Static pages
     const staticPages = [
