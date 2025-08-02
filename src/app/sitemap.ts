@@ -53,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         // Get all project tags
         const projectTags = await getAllProjectTags()
         const projectTagPages = projectTags.map((tag) => ({
-            url: `${baseUrl}/projets/tag/${tag.toLowerCase()}`,
+            url: `${baseUrl}/projets/tag/${tag.slug}`,
             lastModified: new Date(),
             changeFrequency: 'monthly' as const,
             priority: 0.4,

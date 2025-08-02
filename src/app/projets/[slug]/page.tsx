@@ -121,11 +121,11 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                 <div className="mb-3">
                                     {project.tags.map((tag) => (
                                         <Link
-                                            key={tag}
-                                            href={`/projets/tag/${tag.toLowerCase()}`}
+                                            key={tag.slug}
+                                            href={`/projets/tag/${tag.slug}`}
                                             className="badge bg-primary me-1 text-decoration-none"
                                         >
-                                            {tag}
+                                            {tag.name}
                                         </Link>
                                     ))}
                                 </div>

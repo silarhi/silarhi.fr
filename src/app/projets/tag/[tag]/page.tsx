@@ -8,6 +8,7 @@ import ProjectCard from '@/components/ProjectCard'
 import Section from '@/components/Section'
 import SectionHeader from '@/components/SectionHeader'
 import { getAllProjectTags, getProjectsByTag } from '@/utils/project'
+import { getTagBySlug } from '@/utils/tags'
 
 interface TagPageProps {
     params: Promise<{
@@ -18,24 +19,24 @@ interface TagPageProps {
 export async function generateStaticParams() {
     const tags = await getAllProjectTags()
     return tags.map((tag) => ({
-        tag: tag.toLowerCase(),
+        tag: tag.slug,
     }))
 }
 
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
     const { tag: tagParam } = await params
-    const tag = decodeURIComponent(tagParam)
+    const tag = await getTagBySlug(decodeURIComponent(tagParam))
 
     return {
-        title: `Projets Web avec le tag "${tag}" - SILARHI`,
-        description: `Découvrez tous nos projets Web sur le thème "${tag}".`,
+        title: `Projets Web ${tag.name} - SILARHI`,
+        description: `Découvrez tous nos projets Web sur le thème "${tag.name}".`,
     }
 }
 
 export default async function TagPage({ params }: TagPageProps) {
     const { tag: tagParam } = await params
-    const tag = decodeURIComponent(tagParam)
-    const projects = await getProjectsByTag(tag)
+    const tag = await getTagBySlug(decodeURIComponent(tagParam))
+    const projects = await getProjectsByTag(tag.slug)
     const allTags = await getAllProjectTags()
 
     if (projects.length === 0) {
@@ -44,9 +45,21 @@ export default async function TagPage({ params }: TagPageProps) {
 
     return (
         <>
-            <HeroTitle title={`Projet ${tag}`} subtitle={`Tous nos projets sur le thème ${tag}`} />
+            <HeroTitle title={`Projet ${tag.name}`} subtitle={`Tous nos projets sur le thème ${tag.name}`} />
 
             <Section>
+                {tag.description && (
+                    <div className="row justify-content-center mb-5">
+                        <div className="col-lg-8">
+                            <div
+                                className="alert alert-info border-0"
+                                style={{ backgroundColor: tag.color ? `${tag.color}15` : undefined }}
+                            >
+                                <p className="mb-0 text-center">{tag.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <SectionHeader
                     title={`${projects.length} projet${projects.length > 1 ? 's' : ''} trouvé${projects.length > 1 ? 's' : ''}`}
                 />
@@ -66,14 +79,14 @@ export default async function TagPage({ params }: TagPageProps) {
                             Tous les projets
                         </Link>
                         {allTags
-                            .filter((t) => t.toLowerCase() !== tag.toLowerCase())
+                            .filter((t) => t.slug !== tag.slug)
                             .map((otherTag) => (
                                 <Link
-                                    key={otherTag}
-                                    href={`/projets/tag/${otherTag.toLowerCase()}`}
+                                    key={otherTag.slug}
+                                    href={`/projets/tag/${otherTag.slug}`}
                                     className="btn btn-outline-primary btn-sm"
                                 >
-                                    {otherTag}
+                                    {otherTag.name}
                                 </Link>
                             ))}
                     </div>

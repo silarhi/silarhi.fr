@@ -26,11 +26,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                         <div className="mb-2">
                             {project.tags.map((tag) => (
                                 <Link
-                                    key={tag}
-                                    href={`/projets/tag/${tag.toLowerCase()}`}
+                                    key={tag.slug}
+                                    href={`/projets/tag/${tag.slug.toLowerCase()}`}
                                     className="badge bg-primary me-1 text-decoration-none"
                                 >
-                                    {tag}
+                                    {tag.name}
                                 </Link>
                             ))}
                         </div>
