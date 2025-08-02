@@ -79,6 +79,10 @@ export default function Navbar({
             label: 'Chiffres',
         },
         {
+            path: '/projets',
+            label: 'Projets',
+        },
+        {
             path: 'https://blog.silarhi.fr',
             label: 'Blog',
             target: '_blank',
