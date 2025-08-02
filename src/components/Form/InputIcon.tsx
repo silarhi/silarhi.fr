@@ -1,6 +1,12 @@
-import PropTypes from 'prop-types'
+import { ReactNode } from 'react'
 
-export default function InputIcon({ iconPrepend, iconAppend, children }) {
+interface InputIconProps {
+    iconPrepend?: ReactNode
+    iconAppend?: ReactNode
+    children: ReactNode
+}
+
+export default function InputIcon({ iconPrepend, iconAppend, children }: InputIconProps) {
     return (
         <div className="input-icon">
             {iconPrepend && <div className="input-icon-addon">{iconPrepend}</div>}
@@ -8,9 +14,4 @@ export default function InputIcon({ iconPrepend, iconAppend, children }) {
             {iconAppend && <div className="input-icon-addon">{iconAppend}</div>}
         </div>
     )
-}
-
-InputIcon.propTypes = {
-    iconPrepend: PropTypes.element,
-    iconAppend: PropTypes.element,
 }

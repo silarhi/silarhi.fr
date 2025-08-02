@@ -1,17 +1,20 @@
-import ContactForm from 'components/ContactForm'
-import useForceReducer from 'hooks/reducer'
 import { useCallback, useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
+import Button, { ButtonProps } from 'react-bootstrap/Button'
+import Modal, { ModalProps } from 'react-bootstrap/Modal'
 
-function MyVerticallyCenteredModal({ onHide, ...props }) {
-    const {
-        value: isFormSubmitted,
-        updateValue: forceIsFormSubmitted,
-        resetValue: resetFormSubmitted,
-    } = useForceReducer()
-    const [showSendButton, setShowSendButton] = useState(true)
-    const [isFormPending, setIsFormPending] = useState(false)
+import ContactForm from '@/components/ContactForm'
+import useForceReducer from '@/hooks/reducer'
+
+interface MyVerticallyCenteredModalProps extends ModalProps {
+    onHide: () => void
+}
+
+type CallToActionButtonProps = Omit<ButtonProps, 'onClick'>
+
+function MyVerticallyCenteredModal({ onHide, ...props }: MyVerticallyCenteredModalProps) {
+    const { value: formIdValue, updateValue: forceIsFormSubmitted, resetValue: resetFormSubmitted } = useForceReducer()
+    const [showSendButton, setShowSendButton] = useState<boolean>(true)
+    const [isFormPending, setIsFormPending] = useState<boolean>(false)
 
     const onPending = useCallback(() => {
         setIsFormPending(true)
@@ -34,7 +37,7 @@ function MyVerticallyCenteredModal({ onHide, ...props }) {
                 <Modal.Title>Contact / Demande de devis</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <ContactForm isSubmitted={isFormSubmitted} onFinish={onFinish} onPending={onPending}></ContactForm>
+                <ContactForm isSubmitted={formIdValue > 0} onFinish={onFinish} onPending={onPending}></ContactForm>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={hideAndHandleFormSubmit} variant={'secondary'}>
@@ -50,10 +53,10 @@ function MyVerticallyCenteredModal({ onHide, ...props }) {
     )
 }
 
-export default function CallToActionButton({ children, ...props }) {
-    const [modalShow, setModalShow] = useState(false)
+export default function CallToActionButton({ children, ...props }: CallToActionButtonProps) {
+    const [modalShow, setModalShow] = useState<boolean>(false)
 
-    const renderModal = useCallback((e) => {
+    const renderModal = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         setModalShow(true)
     }, [])

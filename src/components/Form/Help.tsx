@@ -1,6 +1,12 @@
+import { ReactNode } from 'react'
 import Form from 'react-bootstrap/Form'
 
-export default function Help({ type, children }) {
+interface HelpProps {
+    type?: 'help' | 'invalid' | 'valid'
+    children: ReactNode
+}
+
+export default function Help({ type, children }: HelpProps) {
     if (type === 'help') {
         return <Form.Text muted>{children}</Form.Text>
     }

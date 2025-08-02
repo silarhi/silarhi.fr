@@ -1,4 +1,4 @@
-import CallToActionButton from 'components/CallToActionButton'
+import CallToActionButton from '@/components/CallToActionButton'
 
 import styles from './index.module.scss'
 

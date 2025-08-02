@@ -1,27 +1,64 @@
 'use client'
-import CallToAction from 'components/CallToAction'
-import ContactForm from 'components/ContactForm'
-import { Check, Clock, CloudBolt, Code, Enveloppe, FileContract, LightBulb, Map, Phone, XMark } from 'components/Icons'
-import IconWrapper from 'components/IconWrapper'
-import Section from 'components/Section'
-import SectionHeader from 'components/SectionHeader'
-import useForceReducer from 'hooks/reducer'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Fragment, useCallback, useState } from 'react'
+import { Fragment, ReactNode, useCallback, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import ReactMarkdown from 'react-markdown'
-import { chunk } from 'utils/array'
-import { getDaysSince } from 'utils/dates'
-import { getTotalEmployeeCoffees, getTotalEmployeeHours } from 'utils/employees'
+
+import CallToAction from '@/components/CallToAction'
+import ContactForm from '@/components/ContactForm'
+import {
+    Check,
+    Clock,
+    CloudBolt,
+    Code,
+    Enveloppe,
+    FileContract,
+    LightBulb,
+    Map,
+    Phone,
+    XMark,
+} from '@/components/Icons'
+import IconWrapper from '@/components/IconWrapper'
+import Section from '@/components/Section'
+import SectionHeader from '@/components/SectionHeader'
+import useForceReducer from '@/hooks/reducer'
+import { chunk } from '@/utils/array'
+import { getDaysSince } from '@/utils/dates'
+import { getTotalEmployeeCoffees, getTotalEmployeeHours } from '@/utils/employees'
 
 import home from '../../public/images/home.jpg'
 import { lato } from './fonts'
 import styles from './index.module.scss'
 
-const FEATURES = [
+interface Feature {
+    icon: () => ReactNode
+    title: string
+    description: string
+}
+
+interface Service {
+    text: string
+    supported: boolean
+}
+
+interface Employee {
+    name: string
+    from: Date
+    to?: Date
+    coffeesPerDay: number
+    hoursPerDay: number
+}
+
+interface NumberData {
+    value: number
+    unit: string
+    text: string
+}
+
+const FEATURES: Feature[] = [
     {
         icon: () => <FileContract />,
         title: 'Analyse',
@@ -47,7 +84,7 @@ const FEATURES = [
     },
 ]
 
-const SERVICES = [
+const SERVICES: Service[] = [
     {
         text: `**Développement d'applications Web** type gestion, CRM, ERP, ...`,
         supported: true,
@@ -121,7 +158,7 @@ const SERVICES = [
 const COMPANY_START_DATE = new Date('2018-08-01')
 const DAYS_SINCE_COMPANY_START_DATE = getDaysSince(COMPANY_START_DATE)
 
-const EMPLOYEES = [
+const EMPLOYEES: Employee[] = [
     {
         name: 'Guillaume',
         from: new Date(COMPANY_START_DATE),
@@ -154,7 +191,7 @@ const EMPLOYEES = [
 const NB_CLIENTS = 11
 const NB_PROJECTS = 109
 
-const NUMBERS = [
+const NUMBERS: NumberData[] = [
     {
         value: getTotalEmployeeHours(EMPLOYEES),
         unit: 'Heures',
@@ -182,13 +219,9 @@ const NUMBERS = [
 ]
 
 export default function Page() {
-    const {
-        value: isFormSubmitted,
-        updateValue: forceIsFormSubmitted,
-        resetValue: resetFormSubmitted,
-    } = useForceReducer()
-    const [showSendButton, setShowSendButton] = useState(true)
-    const [isFormPending, setIsFormPending] = useState(false)
+    const { value: formIdValue, updateValue: forceIsFormSubmitted, resetValue: resetFormSubmitted } = useForceReducer()
+    const [showSendButton, setShowSendButton] = useState<boolean>(true)
+    const [isFormPending, setIsFormPending] = useState<boolean>(false)
 
     const onPending = useCallback(() => {
         setIsFormPending(true)
@@ -269,7 +302,7 @@ export default function Page() {
                                         <div className={'text-muted'}>
                                             <ReactMarkdown
                                                 components={{
-                                                    p: Fragment,
+                                                    p: ({ children }) => <>{children}</>,
                                                 }}
                                             >
                                                 {service.text}
@@ -300,7 +333,7 @@ export default function Page() {
                                         <div className={'text-muted'}>
                                             <ReactMarkdown
                                                 components={{
-                                                    p: Fragment,
+                                                    p: ({ children }) => <>{children}</>,
                                                 }}
                                             >
                                                 {service.text}
@@ -343,7 +376,7 @@ export default function Page() {
                             <p className={'text-muted'}>
                                 Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
                             </p>
-                            <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={isFormSubmitted} />
+                            <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={formIdValue > 0} />
                             {showSendButton && (
                                 <Button
                                     variant={'primary'}
