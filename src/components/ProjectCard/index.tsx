@@ -27,7 +27,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                             {project.tags.map((tag) => (
                                 <Link
                                     key={tag}
-                                    href={`/project/tag/${tag.toLowerCase()}`}
+                                    href={`/projets/tag/${tag.toLowerCase()}`}
                                     className="badge bg-primary me-1 text-decoration-none"
                                 >
                                     {tag}
