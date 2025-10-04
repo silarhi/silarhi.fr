@@ -74,7 +74,10 @@ export default async function TagPage({ params }: TagPageProps) {
                 <div className="mt-4">
                     <h3 className="text-sm font-medium mb-3">Nos autres thèmes de projet</h3>
                     <div className="flex flex-wrap gap-2">
-                        <Link href="/projets" className="px-4 py-2 border border-gray-400 text-gray-600 rounded text-sm hover:bg-gray-100 transition-colors">
+                        <Link
+                            href="/projets"
+                            className="px-4 py-2 border border-gray-400 text-gray-600 rounded text-sm hover:bg-gray-100 transition-colors"
+                        >
                             Tous les projets
                         </Link>
                         {allTags

@@ -146,7 +146,10 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                         </article>
 
                         <div className="mt-5 pt-4 border-t">
-                            <Link href="/projets" className="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition-colors">
+                            <Link
+                                href="/projets"
+                                className="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition-colors"
+                            >
                                 ← Retour aux projets
                             </Link>
                         </div>

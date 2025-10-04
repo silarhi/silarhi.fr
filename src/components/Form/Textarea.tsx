@@ -16,21 +16,23 @@ interface TextareaProps extends BaseWidgetProps {
     iconAppend?: ReactNode
 }
 
-const BaseWidget = forwardRef<HTMLTextAreaElement, BaseWidgetProps>(({ value, isValid, isInvalid, className, ...props }, ref) => {
-    const baseClasses = 'w-full px-3 py-2 border rounded focus:outline-none focus:ring-2'
-    const validClasses = isValid ? 'border-green-500 focus:ring-green-500' : ''
-    const invalidClasses = isInvalid ? 'border-red-500 focus:ring-red-500' : ''
-    const defaultClasses = !isValid && !isInvalid ? 'border-gray-300 focus:ring-primary' : ''
-    
-    return (
-        <textarea
-            ref={ref}
-            defaultValue={value}
-            className={cn(baseClasses, validClasses, invalidClasses, defaultClasses, className)}
-            {...props}
-        />
-    )
-})
+const BaseWidget = forwardRef<HTMLTextAreaElement, BaseWidgetProps>(
+    ({ value, isValid, isInvalid, className, ...props }, ref) => {
+        const baseClasses = 'w-full px-3 py-2 border rounded focus:outline-none focus:ring-2'
+        const validClasses = isValid ? 'border-green-500 focus:ring-green-500' : ''
+        const invalidClasses = isInvalid ? 'border-red-500 focus:ring-red-500' : ''
+        const defaultClasses = !isValid && !isInvalid ? 'border-gray-300 focus:ring-primary' : ''
+
+        return (
+            <textarea
+                ref={ref}
+                defaultValue={value}
+                className={cn(baseClasses, validClasses, invalidClasses, defaultClasses, className)}
+                {...props}
+            />
+        )
+    }
+)
 
 BaseWidget.displayName = 'BaseWidget'
 

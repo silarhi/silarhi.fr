@@ -13,7 +13,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <div className="p-6 flex flex-col h-full">
                 <div className="mb-3">
                     <h3 className="text-xl font-medium">
-                        <Link href={`/projets/${project.slug}`} className="no-underline text-gray-900 hover:text-primary">
+                        <Link
+                            href={`/projets/${project.slug}`}
+                            className="no-underline text-gray-900 hover:text-primary"
+                        >
                             {project.title}
                         </Link>
                     </h3>

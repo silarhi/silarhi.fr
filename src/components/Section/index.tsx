@@ -23,7 +23,7 @@ export default function Section({
     ...props
 }: SectionProps) {
     const containerClass = fluid ? 'w-full px-4' : 'container mx-auto px-4'
-    
+
     return (
         <section
             className={cn(className, {
@@ -34,11 +34,7 @@ export default function Section({
             {...props}
         >
             <>
-                {container && (
-                    <div className={cn(containerClass, { 'px-0': paddingX })}>
-                        {children}
-                    </div>
-                )}
+                {container && <div className={cn(containerClass, { 'px-0': paddingX })}>{children}</div>}
                 {!container && children}
             </>
         </section>

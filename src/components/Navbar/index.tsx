@@ -106,7 +106,10 @@ export default function Navbar({
             >
                 <div className="container mx-auto px-4">
                     <div className="flex items-center justify-between py-3">
-                        <Link href="/" className="flex items-center space-x-2 text-inherit hover:text-sub-primary transition-colors">
+                        <Link
+                            href="/"
+                            className="flex items-center space-x-2 text-inherit hover:text-sub-primary transition-colors"
+                        >
                             <Image src={logo} alt="SILARHI" height={60} className="h-12 w-auto" />
                             <span className="font-bold text-xl">SILARHI</span>
                         </Link>
@@ -177,7 +180,12 @@ export default function Navbar({
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
                                     </svg>
                                 </button>
                             </div>

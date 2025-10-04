@@ -111,7 +111,9 @@ export default function Modal({ show, onHide, size = 'md', centered = false, bac
             className={`fixed inset-0 z-50 flex ${centered ? 'items-center' : 'items-start pt-20'} justify-center bg-black bg-opacity-50`}
             onClick={handleBackdropClick}
         >
-            <div className={`bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} mx-4 max-h-[90vh] overflow-y-auto`}>
+            <div
+                className={`bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} mx-4 max-h-[90vh] overflow-y-auto`}
+            >
                 {children}
             </div>
         </div>
