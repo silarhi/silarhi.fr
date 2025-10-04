@@ -1,17 +1,13 @@
 import { useCallback, useState } from 'react'
-import Button, { ButtonProps } from 'react-bootstrap/Button'
-import Modal, { ModalProps } from 'react-bootstrap/Modal'
 
+import Button, { ButtonProps } from '@/components/Button'
 import ContactForm from '@/components/ContactForm'
+import Modal from '@/components/Modal'
 import useForceReducer from '@/hooks/reducer'
-
-interface MyVerticallyCenteredModalProps extends ModalProps {
-    onHide: () => void
-}
 
 type CallToActionButtonProps = Omit<ButtonProps, 'onClick'>
 
-function MyVerticallyCenteredModal({ onHide, ...props }: MyVerticallyCenteredModalProps) {
+function MyVerticallyCenteredModal({ onHide, show }: { onHide: () => void; show: boolean }) {
     const { value: formIdValue, updateValue: forceIsFormSubmitted, resetValue: resetFormSubmitted } = useForceReducer()
     const [showSendButton, setShowSendButton] = useState<boolean>(true)
     const [isFormPending, setIsFormPending] = useState<boolean>(false)
@@ -32,7 +28,7 @@ function MyVerticallyCenteredModal({ onHide, ...props }: MyVerticallyCenteredMod
     }, [onHide, resetFormSubmitted, setShowSendButton])
 
     return (
-        <Modal backdrop={'static'} onHide={hideAndHandleFormSubmit} {...props} size="lg" centered>
+        <Modal backdrop="static" onHide={hideAndHandleFormSubmit} show={show} size="lg" centered>
             <Modal.Header closeButton>
                 <Modal.Title>Contact / Demande de devis</Modal.Title>
             </Modal.Header>
@@ -40,7 +36,7 @@ function MyVerticallyCenteredModal({ onHide, ...props }: MyVerticallyCenteredMod
                 <ContactForm isSubmitted={formIdValue > 0} onFinish={onFinish} onPending={onPending}></ContactForm>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={hideAndHandleFormSubmit} variant={'secondary'}>
+                <Button onClick={hideAndHandleFormSubmit} variant="secondary">
                     Fermer
                 </Button>
                 {showSendButton && (

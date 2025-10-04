@@ -1,15 +1,15 @@
-import Form from 'react-bootstrap/Form'
-import { FormLabelOwnProps } from 'react-bootstrap/FormLabel'
+import { LabelHTMLAttributes, ReactNode } from 'react'
 
-interface LabelProps extends FormLabelOwnProps {
+interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
     label?: string
+    children?: ReactNode
 }
 
-export default function Label({ label, htmlFor, children, ...props }: LabelProps) {
+export default function Label({ label, htmlFor, children, className, ...props }: LabelProps) {
     return (
-        <Form.Label htmlFor={htmlFor} {...props}>
+        <label htmlFor={htmlFor} className={`block text-sm font-medium mb-2 ${className || ''}`} {...props}>
             {label}
             {children}
-        </Form.Label>
+        </label>
     )
 }

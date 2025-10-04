@@ -1,7 +1,5 @@
 'use client'
 
-import Container from 'react-bootstrap/Container'
-
 import { cn } from '@/utils/lib'
 
 import styles from './index.module.scss'
@@ -24,6 +22,8 @@ export default function Section({
     paddingY = true,
     ...props
 }: SectionProps) {
+    const containerClass = fluid ? 'w-full px-4' : 'container mx-auto px-4'
+    
     return (
         <section
             className={cn(className, {
@@ -35,9 +35,9 @@ export default function Section({
         >
             <>
                 {container && (
-                    <Container fluid={fluid} className={cn({ 'px-0': paddingX })}>
+                    <div className={cn(containerClass, { 'px-0': paddingX })}>
                         {children}
-                    </Container>
+                    </div>
                 )}
                 {!container && children}
             </>

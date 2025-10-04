@@ -1,10 +1,10 @@
-import { forwardRef, ReactNode } from 'react'
-import { FormControlProps } from 'react-bootstrap'
-import Form from 'react-bootstrap/Form'
+import { forwardRef, InputHTMLAttributes, ReactNode } from 'react'
+
+import { cn } from '@/utils/lib'
 
 import InputIcon from './InputIcon'
 
-interface BaseWidgetProps extends FormControlProps {
+interface BaseWidgetProps extends InputHTMLAttributes<HTMLInputElement> {
     value?: string | number
     isValid?: boolean
     isInvalid?: boolean
@@ -15,8 +15,20 @@ interface InputProps extends BaseWidgetProps {
     iconAppend?: ReactNode
 }
 
-const BaseWidget = forwardRef<HTMLInputElement, BaseWidgetProps>(({ value, isValid, isInvalid, ...props }, ref) => {
-    return <Form.Control ref={ref} isValid={isValid} isInvalid={isInvalid} defaultValue={value} {...props} />
+const BaseWidget = forwardRef<HTMLInputElement, BaseWidgetProps>(({ value, isValid, isInvalid, className, ...props }, ref) => {
+    const baseClasses = 'w-full px-3 py-2 border rounded focus:outline-none focus:ring-2'
+    const validClasses = isValid ? 'border-green-500 focus:ring-green-500' : ''
+    const invalidClasses = isInvalid ? 'border-red-500 focus:ring-red-500' : ''
+    const defaultClasses = !isValid && !isInvalid ? 'border-gray-300 focus:ring-primary' : ''
+    
+    return (
+        <input 
+            ref={ref} 
+            defaultValue={value} 
+            className={cn(baseClasses, validClasses, invalidClasses, defaultClasses, className)}
+            {...props} 
+        />
+    )
 })
 
 BaseWidget.displayName = 'BaseWidget'
