@@ -29,7 +29,6 @@ import { getTotalEmployeeCoffees, getTotalEmployeeHours } from '@/utils/employee
 
 import home from '../../public/images/home.jpg'
 import { lato } from './fonts'
-import styles from './index.module.scss'
 
 interface Feature {
     icon: () => ReactNode
@@ -239,17 +238,19 @@ export default function Page() {
                 <title>{title}</title>
             </Head>
             {/* Header */}
-            <div className={styles.bgWrap}>
-                <div className={styles.backdrop}></div>
+            <div className="relative h-screen w-full overflow-hidden">
+                <div className="absolute top-0 left-0 z-[1] w-full h-full opacity-33 bg-black"></div>
                 <Image src={home} sizes="100vw" fill style={{ objectFit: 'cover' }} priority alt="" />
-                <div className={styles.contentWrapper}>
+                <div className="absolute z-[2] w-full h-full flex flex-col items-center justify-center text-white">
                     <Section>
                         <div style={{ maxWidth: '55em' }} className={'mx-auto'}>
-                            <h1>
+                            <h1 className="text-[clamp(2.5rem,5vw,5rem)] leading-none font-bold">
                                 Développement d{"'"}applications Web
-                                <span>À Toulouse & en France</span>
+                                <span className="mt-3 text-[clamp(1.5rem,3vw,2.5rem)] block uppercase leading-tight">
+                                    À Toulouse & en France
+                                </span>
                             </h1>
-                            <h2 className="uppercase font-light">Donnez vie à vos idées</h2>
+                            <h2 className="uppercase font-light text-3xl">Donnez vie à vos idées</h2>
                             <Button as="a" size="lg" href="#about" className="mt-4">
                                 En savoir plus
                             </Button>
@@ -266,7 +267,7 @@ export default function Page() {
                             <div className="bg-white shadow rounded-lg mb-4 text-center p-6">
                                 <div>
                                     <IconWrapper>{feature.icon()}</IconWrapper>
-                                    <h3 className="text-xl font-bold my-3">{feature.title}</h3>
+                                    <h3 className="text-2xl font-bold my-3">{feature.title}</h3>
                                     <p className="text-gray-600">{feature.description}</p>
                                 </div>
                             </div>
@@ -281,7 +282,7 @@ export default function Page() {
                     title="Nos services"
                     subtitle="Vérifiez que votre besoin colle avec notre savoir faire."
                 />
-                <h3 className="text-xl text-primary font-light">Notre savoir faire</h3>
+                <h3 className="text-2xl text-primary font-light">Notre savoir faire</h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
                     {chunk(
                         SERVICES.filter((service) => service.supported),
@@ -312,7 +313,7 @@ export default function Page() {
                         </div>
                     ))}
                 </div>
-                <h3 className="text-xl text-primary font-light">Ce qu{"'"}on ne fait PAS</h3>
+                <h3 className="text-2xl text-primary font-light">Ce qu{"'"}on ne fait PAS</h3>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
                     {chunk(
                         SERVICES.filter((service) => !service.supported),
@@ -357,7 +358,7 @@ export default function Page() {
                             <div className={`${lato.className} text-sub-primary text-6xl font-bold mb-3`}>
                                 {number.value}
                             </div>
-                            <h4 className="text-primary font-light mb-3">{number.unit}</h4>
+                            <h4 className="text-2xl text-primary font-light mb-3">{number.unit}</h4>
                             <hr style={{ width: '40%' }} className="mx-auto" />
                             <p className="text-gray-600">{number.text}</p>
                         </div>
@@ -370,7 +371,7 @@ export default function Page() {
                 <div className="bg-white">
                     <Section id="contact" className="md:pr-3 lg:pr-4 xl:pr-5" paddingX={false} container={false}>
                         <div className="container container-half-md md:mr-0">
-                            <h2>Contact</h2>
+                            <h2 className="text-3xl">Contact</h2>
                             <p className="text-gray-600">
                                 Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
                             </p>
@@ -390,10 +391,10 @@ export default function Page() {
                     </Section>
                 </div>
                 {/* SILARHI */}
-                <div className={styles.bgLight2}>
+                <div className="bg-[#f4f6fd]">
                     <Section id="silarhi" className="md:pl-3 lg:pl-4 xl:pl-5" paddingX={false} container={false}>
                         <div className="container container-half-md md:ml-0">
-                            <h2>SILARHI</h2>
+                            <h2 className="text-3xl">SILARHI</h2>
                             <p className="text-gray-600">Les infos pratiques, c{"'"}est ici.</p>
                             <ul className="space-y-0">
                                 <li className="flex flex-nowrap py-3 border-b border-gray-200">

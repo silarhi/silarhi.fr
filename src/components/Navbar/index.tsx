@@ -10,7 +10,6 @@ import CallToActionButton from '@/components/CallToActionButton'
 import { cn } from '@/utils/lib'
 
 import logo from '../../../public/images/logo-4096.png'
-import styles from './index.module.scss'
 
 interface MenuItem {
     path: string
@@ -97,9 +96,9 @@ export default function Navbar({
             <nav
                 id="app-navbar"
                 className={cn(
-                    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                    styles.navbar,
-                    floating ? cn(styles.floating, floatingClass) : initialClass
+                    'absolute top-0 left-0 right-0 z-50 transition-all duration-300',
+                    floating && 'fixed opacity-100 [&_img]:max-h-10 [&_img]:w-auto',
+                    floating ? floatingClass : initialClass
                 )}
                 style={floatingStyle}
                 ref={ref}

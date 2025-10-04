@@ -52,15 +52,15 @@ export function ModalHeader({ closeButton, children }: ModalHeaderProps) {
 }
 
 export function ModalTitle({ children }: ModalTitleProps) {
-    return <h2 className="text-xl font-bold">{children}</h2>
+    return <h2 className="text-xl font-bold text-gray-900">{children}</h2>
 }
 
 export function ModalBody({ children }: ModalBodyProps) {
-    return <div className="p-4">{children}</div>
+    return <div className="p-4 text-gray-900">{children}</div>
 }
 
 export function ModalFooter({ children }: ModalFooterProps) {
-    return <div className="flex items-center justify-end gap-2 p-4 border-t">{children}</div>
+    return <div className="flex items-center justify-end gap-2 p-4 border-t text-gray-900">{children}</div>
 }
 
 export default function Modal({ show, onHide, size = 'md', centered = false, backdrop = true, children }: ModalProps) {
