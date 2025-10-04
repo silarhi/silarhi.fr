@@ -14,9 +14,13 @@ export default function Page() {
             <Hero title="Conditions générales de vente" />
             <Section>
                 <p>
-                    <em className={'text-muted d-inline-block me-2'}>Mis à jour le 29/03/2019</em>
-                    <a href="/pdf/CGV.pdf" className={'btn btn-sm btn-secondary'} download>
-                        <Download className={'me-1'} />
+                    <em className="text-gray-600 inline-block mr-2">Mis à jour le 29/03/2019</em>
+                    <a
+                        href="/pdf/CGV.pdf"
+                        className="inline-block px-3 py-1.5 text-sm bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
+                        download
+                    >
+                        <Download className="mr-1 inline" />
                         Télécharger au format PDF
                     </a>
                 </p>

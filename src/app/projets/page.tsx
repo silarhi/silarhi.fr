@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { Col, Row } from 'react-bootstrap'
 
 import HeroTitle from '@/components/HeroTitle'
 import ProjectCard from '@/components/ProjectCard'
@@ -23,13 +22,13 @@ export default async function ProjectPage() {
             <Section>
                 {tags.length > 0 && (
                     <div className="mb-5">
-                        <h3 className="h5 mb-3">Tous les thèmes</h3>
-                        <div className="d-flex flex-wrap gap-2">
+                        <h3 className="text-lg mb-3">Tous les thèmes</h3>
+                        <div className="flex flex-wrap gap-2">
                             {tags.map((tag) => (
                                 <Link
                                     key={tag.slug}
                                     href={`/projets/tag/${tag.slug}`}
-                                    className="btn btn-outline-primary btn-sm"
+                                    className="px-4 py-2 border border-primary text-primary rounded text-sm hover:bg-primary hover:text-white transition-colors"
                                 >
                                     {tag.name}
                                 </Link>
@@ -40,16 +39,16 @@ export default async function ProjectPage() {
 
                 {projects.length === 0 ? (
                     <div className="text-center py-5">
-                        <p className="text-muted">Aucun projet publié pour le moment.</p>
+                        <p className="text-gray-600">Aucun projet publié pour le moment.</p>
                     </div>
                 ) : (
-                    <Row className="g-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {projects.map((project) => (
-                            <Col key={project.slug} md={6} lg={4}>
+                            <div key={project.slug}>
                                 <ProjectCard project={project} />
-                            </Col>
+                            </div>
                         ))}
-                    </Row>
+                    </div>
                 )}
             </Section>
         </>

@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2556cf;
+  --color-primary-light: #5585fb;
+  --color-primary-dark: #172e59;
+  --color-sub-primary: #ffaf30;
+  
+  --font-family-body: var(--body-font), sans-serif;
+  
+  --breakpoint-sm: 540px;
+  --breakpoint-md: 720px;
+  --breakpoint-lg: 960px;
+  --breakpoint-xl: 1140px;
+  --breakpoint-2xl: 1320px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: #f8f9fa;
+}

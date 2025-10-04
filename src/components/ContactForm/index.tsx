@@ -84,8 +84,8 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
 
     if (success) {
         return (
-            <div className={'alert alert-success mb-0'} role="alert">
-                <h4 className="alert-heading">Merci !</h4>
+            <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded mb-0" role="alert">
+                <h4 className="font-bold mb-2">Merci !</h4>
                 <p>Votre message a bien été envoyé, je vous répondrai dans les plus brefs délais.</p>
             </div>
         )
@@ -94,16 +94,17 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {error && (
-                <div className={'alert alert-danger'}>Une erreur est survenue pendant l{"'"}envoi du formulaire.</div>
+                <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded mb-4">
+                    Une erreur est survenue pendant l{"'"}envoi du formulaire.
+                </div>
             )}
-            <div className={'row'}>
-                <div className={'col-12 col-md-6'}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="col-span-1">
                     <Group valid={isValid('name')}>
                         <Input
                             id="name"
                             type="text"
                             autoComplete="name"
-                            htmlSize={40}
                             placeholder="Nom"
                             disabled={pending}
                             iconPrepend={<Person />}
@@ -120,13 +121,12 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                         {isInvalid('name') && <Help type={'invalid'}>{errors.name?.message}</Help>}
                     </Group>
                 </div>
-                <div className={'col-12 col-md-6'}>
+                <div className="col-span-1">
                     <Group valid={isValid('email')}>
                         <Input
                             id="email"
                             type="email"
                             autoComplete="email"
-                            inputMode="email"
                             placeholder="Email"
                             disabled={pending}
                             iconPrepend={<Enveloppe />}
@@ -144,13 +144,12 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                         {isInvalid('email') && <Help type={'invalid'}>{errors.email?.message}</Help>}
                     </Group>
                 </div>
-                <div className={'col-12'}>
+                <div className="col-span-1 md:col-span-2">
                     <Group valid={isValid('phone')}>
                         <Input
                             id="phone"
                             type="text"
                             autoComplete="tel"
-                            inputMode="tel"
                             placeholder="Téléphone"
                             disabled={pending}
                             iconPrepend={<Phone />}
@@ -164,11 +163,10 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                         {isInvalid('phone') && <Help type={'invalid'}>{errors.phone?.message}</Help>}
                     </Group>
                 </div>
-                <div className={'col-12'}>
+                <div className="col-span-1 md:col-span-2">
                     <Group groupClassName={'mb-0'} valid={isValid('message')}>
                         <Textarea
                             id="message"
-                            type="email"
                             rows={7}
                             placeholder="Message"
                             disabled={pending}
@@ -184,7 +182,7 @@ export default function ContactForm({ isSubmitted = false, onFinish, onPending }
                 </div>
             </div>
             {/* We use hidden input submit to submit form with "Enter" keystroke */}
-            <input type={'submit'} className={'d-none'} />
+            <input type={'submit'} className="hidden" />
         </form>
     )
 }

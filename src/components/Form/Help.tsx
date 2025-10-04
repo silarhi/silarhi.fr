@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import Form from 'react-bootstrap/Form'
 
 interface HelpProps {
     type?: 'help' | 'invalid' | 'valid'
@@ -8,12 +7,12 @@ interface HelpProps {
 
 export default function Help({ type, children }: HelpProps) {
     if (type === 'help') {
-        return <Form.Text muted>{children}</Form.Text>
+        return <div className="text-sm text-gray-500 mt-1">{children}</div>
     }
 
-    return (
-        <Form.Control.Feedback type={type} className={'d-block'}>
-            {children}
-        </Form.Control.Feedback>
-    )
+    if (type === 'invalid') {
+        return <div className="text-sm text-red-600 mt-1 block">{children}</div>
+    }
+
+    return <div className="text-sm text-green-600 mt-1 block">{children}</div>
 }

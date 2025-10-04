@@ -2,11 +2,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment, ReactNode, useCallback, useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import ReactMarkdown from 'react-markdown'
 
+import Button from '@/components/Button'
 import CallToAction from '@/components/CallToAction'
 import ContactForm from '@/components/ContactForm'
 import {
@@ -31,7 +29,6 @@ import { getTotalEmployeeCoffees, getTotalEmployeeHours } from '@/utils/employee
 
 import home from '../../public/images/home.jpg'
 import { lato } from './fonts'
-import styles from './index.module.scss'
 
 interface Feature {
     icon: () => ReactNode
@@ -241,18 +238,20 @@ export default function Page() {
                 <title>{title}</title>
             </Head>
             {/* Header */}
-            <div className={styles.bgWrap}>
-                <div className={styles.backdrop}></div>
+            <div className="relative h-screen w-full overflow-hidden">
+                <div className="absolute top-0 left-0 z-[1] w-full h-full opacity-33 bg-black"></div>
                 <Image src={home} sizes="100vw" fill style={{ objectFit: 'cover' }} priority alt="" />
-                <div className={styles.contentWrapper}>
+                <div className="absolute z-[2] w-full h-full flex flex-col items-center justify-center text-white">
                     <Section>
                         <div style={{ maxWidth: '55em' }} className={'mx-auto'}>
-                            <h1>
+                            <h1 className="text-[clamp(2.5rem,5vw,5rem)] leading-none font-bold">
                                 Développement d{"'"}applications Web
-                                <span>À Toulouse & en France</span>
+                                <span className="mt-3 text-[clamp(1.5rem,3vw,2.5rem)] block uppercase leading-tight">
+                                    À Toulouse & en France
+                                </span>
                             </h1>
-                            <h2 className={'text-uppercase fw-light'}>Donnez vie à vos idées</h2>
-                            <Button as={'a'} size={'lg'} href={'#about'} className={'mt-4'}>
+                            <h2 className="uppercase font-light text-3xl">Donnez vie à vos idées</h2>
+                            <Button as="a" size="lg" href="#about" className="mt-4">
                                 En savoir plus
                             </Button>
                         </div>
@@ -262,19 +261,19 @@ export default function Page() {
             {/* About */}
             <Section id={'about'}>
                 <SectionHeader title="On développe des applications Web" subtitle="Et ça se passe comme ça." />
-                <Row className={'gx-5 row-cards row-deck'}>
+                <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-4 gap-5">
                     {FEATURES.map((feature, key) => (
-                        <Col xs={12} lg={4} xl={3} key={key}>
-                            <div className={`card shadow mb-4 text-center rounded-4`}>
-                                <div className={'card-body'}>
+                        <div key={key} className="w-full">
+                            <div className="bg-white shadow rounded-lg mb-4 text-center p-6">
+                                <div>
                                     <IconWrapper>{feature.icon()}</IconWrapper>
-                                    <h3 className={'card-title h4 fw-bold my-3'}>{feature.title}</h3>
-                                    <p className={'card-text text-muted'}>{feature.description}</p>
+                                    <h3 className="text-2xl font-bold my-3">{feature.title}</h3>
+                                    <p className="text-gray-600">{feature.description}</p>
                                 </div>
                             </div>
-                        </Col>
+                        </div>
                     ))}
-                </Row>
+                </div>
                 <CallToAction />
             </Section>
             {/* Services */}
@@ -283,23 +282,23 @@ export default function Page() {
                     title="Nos services"
                     subtitle="Vérifiez que votre besoin colle avec notre savoir faire."
                 />
-                <h3 className={'h4 text-primary fw-light'}>Notre savoir faire</h3>
-                <Row className="g-lg-5 mb-5">
+                <h3 className="text-2xl text-primary font-light">Notre savoir faire</h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
                     {chunk(
                         SERVICES.filter((service) => service.supported),
                         2
                     ).map((services, chunkKey) => (
-                        <Col lg={6} key={chunkKey}>
-                            <ul className="list-group list-group-flush">
+                        <div key={chunkKey}>
+                            <ul className="space-y-0">
                                 {services.map((service, key) => (
                                     <li
                                         key={`${chunkKey}-${key}`}
-                                        className="list-group-item d-flex align-items-center"
+                                        className="flex items-center py-3 border-b border-gray-200"
                                     >
-                                        <div className="me-4">
-                                            <Check className="fa-2x text-sub-primary" />
+                                        <div className="mr-4">
+                                            <Check className="text-2xl text-sub-primary" />
                                         </div>
-                                        <div className={'text-muted'}>
+                                        <div className="text-gray-600">
                                             <ReactMarkdown
                                                 components={{
                                                     p: ({ children }) => <>{children}</>,
@@ -311,26 +310,26 @@ export default function Page() {
                                     </li>
                                 ))}
                             </ul>
-                        </Col>
+                        </div>
                     ))}
-                </Row>
-                <h3 className={'h4 text-primary fw-light'}>Ce qu{"'"}on ne fait PAS</h3>
-                <Row className="g-lg-5 mb-5">
+                </div>
+                <h3 className="text-2xl text-primary font-light">Ce qu{"'"}on ne fait PAS</h3>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
                     {chunk(
                         SERVICES.filter((service) => !service.supported),
                         2
                     ).map((services, chunkKey) => (
-                        <Col lg={6} key={chunkKey}>
-                            <ul className="list-group list-group-flush">
+                        <div key={chunkKey}>
+                            <ul className="space-y-0">
                                 {services.map((service, key) => (
                                     <li
                                         key={`${chunkKey}-${key}`}
-                                        className="list-group-item d-flex align-items-center"
+                                        className="flex items-center py-3 border-b border-gray-200"
                                     >
-                                        <div className="me-4">
-                                            <XMark className="fa-2x text-sub-primary" />
+                                        <div className="mr-4">
+                                            <XMark className="text-2xl text-sub-primary" />
                                         </div>
-                                        <div className={'text-muted'}>
+                                        <div className="text-gray-600">
                                             <ReactMarkdown
                                                 components={{
                                                     p: ({ children }) => <>{children}</>,
@@ -342,9 +341,9 @@ export default function Page() {
                                     </li>
                                 ))}
                             </ul>
-                        </Col>
+                        </div>
                     ))}
-                </Row>
+                </div>
                 <CallToAction />
             </Section>
             {/* Chiffres */}
@@ -353,35 +352,35 @@ export default function Page() {
                     title="Les chiffres"
                     subtitle="Quelques chiffres de cette jeune entreprise fondée en 2018."
                 />
-                <Row className="g-lg-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                     {NUMBERS.map((number, key) => (
-                        <Col md={6} lg={3} key={key} className={'text-center'}>
-                            <div className={`${lato.className} text-sub-primary display-1 fw-bold mb-3`}>
+                        <div key={key} className="text-center">
+                            <div className={`${lato.className} text-sub-primary text-6xl font-bold mb-3`}>
                                 {number.value}
                             </div>
-                            <h4 className="text-primary fw-light mb-3">{number.unit}</h4>
-                            <hr style={{ width: '40%' }} className={'mx-auto'} />
-                            <p className="text-muted">{number.text}</p>
-                        </Col>
+                            <h4 className="text-2xl text-primary font-light mb-3">{number.unit}</h4>
+                            <hr style={{ width: '40%' }} className="mx-auto" />
+                            <p className="text-gray-600">{number.text}</p>
+                        </div>
                     ))}
-                </Row>
+                </div>
                 <CallToAction />
             </Section>
-            <Row className="g-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                 {/* Contact */}
-                <Col md={6} className={'bg-white'}>
-                    <Section id={'contact'} className={'pe-md-3 pe-lg-4 pe-xl-5'} paddingX={false} container={false}>
-                        <div className={'container container-half-md me-md-0'}>
-                            <h2>Contact</h2>
-                            <p className={'text-muted'}>
+                <div className="bg-white">
+                    <Section id="contact" className="md:pr-3 lg:pr-4 xl:pr-5" paddingX={false} container={false}>
+                        <div className="container container-half-md md:mr-0">
+                            <h2 className="text-3xl mb-3">Contact</h2>
+                            <p className="text-gray-600">
                                 Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
                             </p>
                             <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={formIdValue > 0} />
                             {showSendButton && (
                                 <Button
-                                    variant={'primary'}
-                                    size={'lg'}
-                                    className={'mt-4 btn-block'}
+                                    variant="primary"
+                                    size="lg"
+                                    className="mt-4 w-full"
                                     onClick={() => forceIsFormSubmitted()}
                                     disabled={isFormPending}
                                 >
@@ -390,19 +389,19 @@ export default function Page() {
                             )}
                         </div>
                     </Section>
-                </Col>
+                </div>
                 {/* SILARHI */}
-                <Col md={6} className={styles.bgLight2}>
-                    <Section id={'silarhi'} className={'ps-md-3 ps-lg-4 ps-xl-5'} paddingX={false} container={false}>
-                        <div className={'container container-half-md ms-md-0'}>
-                            <h2>SILARHI</h2>
-                            <p className={'text-muted'}>Les infos pratiques, c{"'"}est ici.</p>
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
+                <div className="bg-[#f4f6fd]">
+                    <Section id="silarhi" className="md:pl-3 lg:pl-4 xl:pl-5" paddingX={false} container={false}>
+                        <div className="container container-half-md md:ml-0">
+                            <h2 className="text-3xl mb-3">SILARHI</h2>
+                            <p className="text-gray-600">Les infos pratiques, c{"'"}est ici.</p>
+                            <ul className="space-y-0">
+                                <li className="flex flex-nowrap py-3 border-b border-gray-200">
+                                    <span className="mr-1 md:mr-2 lg:mr-3 text-primary">
                                         <Map />
                                     </span>
-                                    <span className={'text-muted'}>
+                                    <span className="text-gray-600">
                                         116 Route d{"'"}Espagne
                                         <br />
                                         HELIOPOLIS 4<br />
@@ -411,37 +410,37 @@ export default function Page() {
                                         31100 Toulouse
                                     </span>
                                 </li>
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
+                                <li className="flex flex-nowrap py-3 border-b border-gray-200">
+                                    <span className="mr-1 md:mr-2 lg:mr-3 text-primary">
                                         <Clock />
                                     </span>
-                                    <span className={'text-muted'}>
+                                    <span className="text-gray-600">
                                         Du lundi au vendredi
                                         <br />
                                         De 9h à 18h
                                     </span>
                                 </li>
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
+                                <li className="flex flex-nowrap py-3 border-b border-gray-200">
+                                    <span className="mr-1 md:mr-2 lg:mr-3 text-primary">
                                         <Phone />
                                     </span>
-                                    <span className={'text-muted'}>
+                                    <span className="text-gray-600">
                                         <a href="tel:+33607275826">0 607.275.826</a>
                                     </span>
                                 </li>
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
+                                <li className="flex flex-nowrap py-3 border-b border-gray-200">
+                                    <span className="mr-1 md:mr-2 lg:mr-3 text-primary">
                                         <Enveloppe />
                                     </span>
-                                    <span className={'text-muted'}>
+                                    <span className="text-gray-600">
                                         <a href="mailto:%68ell%6F@si%6Ca%72hi.fr">hello@silarhi.fr</a>
                                     </span>
                                 </li>
                             </ul>
                         </div>
                     </Section>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </>
     )
 }
