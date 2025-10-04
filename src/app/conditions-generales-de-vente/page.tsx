@@ -15,7 +15,11 @@ export default function Page() {
             <Section>
                 <p>
                     <em className="text-gray-600 inline-block mr-2">Mis à jour le 29/03/2019</em>
-                    <a href="/pdf/CGV.pdf" className={'btn btn-sm btn-secondary'} download>
+                    <a
+                        href="/pdf/CGV.pdf"
+                        className="inline-block px-3 py-1.5 text-sm bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
+                        download
+                    >
                         <Download className="mr-1 inline" />
                         Télécharger au format PDF
                     </a>
