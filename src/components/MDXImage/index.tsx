@@ -19,16 +19,16 @@ export function MDXImage({ src, alt = '', width = 800, height = 600, caption, cl
     }
 
     return (
-        <figure className="my-4 d-block">
+        <figure className="my-4 block">
             <Image
                 src={imageSrc}
                 alt={alt}
                 width={width}
                 height={height}
-                className={cn(className, `img-fluid d-block rounded`)}
+                className={cn(className, 'w-full block rounded')}
                 {...props}
             />
-            {caption && <figcaption className="text-center text-muted mt-2 small">{caption}</figcaption>}
+            {caption && <figcaption className="text-center text-gray-600 mt-2 text-sm">{caption}</figcaption>}
         </figure>
     )
 }

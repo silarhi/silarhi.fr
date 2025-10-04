@@ -8,9 +8,9 @@ interface HeroTitleProps {
 
 export default function HeroTitle({ title, subtitle }: HeroTitleProps) {
     return (
-        <Section className="text-bg-primary d-flex align-items-center justify-content-center" size={'xl'} fluid>
+        <Section className="bg-primary text-white flex items-center justify-center" size={'xl'} fluid>
             <Title>{title}</Title>
-            {subtitle && <p className="lead text-center mt-3">{subtitle}</p>}
+            {subtitle && <p className="text-lg text-center mt-3">{subtitle}</p>}
         </Section>
     )
 }
