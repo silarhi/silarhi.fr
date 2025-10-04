@@ -1,29 +1,82 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2556cf;
-  --color-primary-light: #5585fb;
-  --color-primary-dark: #172e59;
-  --color-sub-primary: #ffaf30;
-  
-  --font-family-body: var(--body-font), sans-serif;
-  
-  --breakpoint-sm: 540px;
-  --breakpoint-md: 720px;
-  --breakpoint-lg: 960px;
-  --breakpoint-xl: 1140px;
-  --breakpoint-2xl: 1320px;
+    /* 🎨 PRIMARY — Digital Confidence (Trust, Professionalism, Clarity) */
+    --color-primary: #2556cf;           /* Main brand blue — strong, confident, and modern */
+    --color-primary-light: #3B82F6;     /* Hover states, accents, icons */
+    --color-primary-dark: #1E40AF;      /* Deep blue for headers, hero sections, or dark modes */
+
+    /* 🟨 SECONDARY — Creative Energy (Optimism, Innovation, Dynamism) */
+    --color-secondary: #f7d325;         /* Bright yellow — warm accent for highlights and CTAs */
+    --color-secondary-light: #FDE68A;   /* Soft highlight backgrounds and subtle accents */
+    --color-secondary-dark: #CA8A04;    /* Rich golden tone for contrast or hover states */
+
+    /* ⚪ NEUTRALS — Elegant Foundations (Clean, Readable, Modern) */
+    --color-background: #f8f9fa;        /* Global background — bright and neutral */
+    --color-light: #f8f9fa;             /* Alternative light background (identical for consistency) */
+    --color-dark: #2b2b2a;              /* Dark gray for footers, headers, or dark mode */
+    --color-surface: #ffffff;           /* Surface color for cards, modals, and elevated sections */
+
+    /* 🖋️ TEXT — Hierarchy & Readability */
+    --color-text-primary: #111827;      /* Primary text — high contrast, used for titles and main content */
+    --color-muted: #6B7280;              /* Secondary text — medium contrast for subtitles and less prominent info */
+
+    /* 📏 STRUCTURE — Subtle Separators */
+    --color-border: #E5E7EB;            /* Light gray for borders, dividers, and input outlines */
+
+    /* 🧩 STATUS — Feedback Colors */
+    --color-error: #DC2626;             /* Errors, invalid states, destructive actions */
+    --color-success: #16A34A;           /* Success messages, confirmations, positive states */
+    --color-warning: #F59E0B;           /* Warnings, non-critical alerts, attention cues */
+
+
+    --font-family-body: var(--body-font), sans-serif;
+
+    --breakpoint-sm: 540px;
+    --breakpoint-md: 720px;
+    --breakpoint-lg: 960px;
+    --breakpoint-xl: 1140px;
+    --breakpoint-2xl: 1320px;
+
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    --spacing-3xl: 6rem;
+    --spacing-4xl: 8rem;
+    --spacing-5xl: 10rem;
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
-html,
-body {
-    height: 100%;
-}
+@layer base {
+    h1 {
+        font-size: var(--text-4xl);
+    }
+    h2 {
+        font-size: var(--text-3xl);
+    }
+    h3 {
+        font-size: var(--text-2xl);
+    }
+    h4 {
+        font-size: var(--text-xl);
+    }
+    h5 {
+        font-size: var(--text-lg);
+    }
+    h6 {
+        font-size: var(--text-base);
+    }
+    p {
+        margin-bottom: 1rem;
+    }
 
-body {
-    background-color: #f8f9fa;
+    a {
+        color: var(--color-primary);
+        text-decoration-line: none;
+    }
+
+    a:hover {
+        color: var(--color-primary-light);
+        text-decoration-line: underline;
+    }
 }

@@ -10,12 +10,24 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-    ...compat.extends('next/core-web-vitals', "next/typescript", 'plugin:prettier/recommended'),
+    {
+        ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+    },
+    ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'),
     ...compat.plugins('simple-import-sort'),
     {
         rules: {
             'simple-import-sort/imports': 'error',
             'simple-import-sort/exports': 'error',
+            'react/jsx-curly-brace-presence': 'error',
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                {
+                    argsIgnorePattern: '^_',
+                    varsIgnorePattern: '^_',
+                    caughtErrorsIgnorePattern: '^_',
+                },
+            ],
         },
     },
 ]

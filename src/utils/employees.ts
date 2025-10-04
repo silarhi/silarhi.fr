@@ -12,8 +12,8 @@ interface Employee {
 function getEmployeeWorkingDays(employee: Employee): number {
     const endDate = employee.to || new Date()
     const diffTime = Math.abs(endDate.getTime() - employee.from.getTime())
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-    return diffDays
+
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 }
 
 /**

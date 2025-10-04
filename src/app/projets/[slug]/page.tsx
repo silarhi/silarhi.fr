@@ -8,10 +8,11 @@ import rehypeSlug from 'rehype-slug'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import remarkGfm from 'remark-gfm'
 
-import HeroTitle from '@/components/HeroTitle'
-import { Calendar, Clock, User } from '@/components/Icons'
-import { MDXImage } from '@/components/MDXImage'
-import Section from '@/components/Section'
+import Button from '@/components/button'
+import HeroTitle from '@/components/hero-title'
+import { Calendar, Clock, User } from '@/components/icons'
+import { MDXImage } from '@/components/mdx-image'
+import Section from '@/components/section'
 import { getAllProjectSlugs, getProjectBySlug } from '@/utils/project'
 
 interface ProjectProjectPageProps {
@@ -26,11 +27,11 @@ const mdxComponents = {
     h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className="mt-5 mb-3" {...props} />,
     h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className="mt-4 mb-3" {...props} />,
     blockquote: (props: React.HTMLAttributes<HTMLElement>) => (
-        <blockquote className="border-l-4 border-primary pl-3 my-4 italic" {...props} />
+        <blockquote className="border-primary my-4 border-l-4 pl-3 italic" {...props} />
     ),
-    code: (props: React.HTMLAttributes<HTMLElement>) => <code className="bg-gray-100 px-1 rounded" {...props} />,
+    code: (props: React.HTMLAttributes<HTMLElement>) => <code className="rounded bg-gray-100 px-1" {...props} />,
     pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-        <pre className="bg-gray-900 text-white p-3 rounded overflow-auto my-3" {...props} />
+        <pre className="text-surface my-3 overflow-auto rounded bg-gray-900 p-3" {...props} />
     ),
     a: CustomLink,
     img: MDXImage,
@@ -87,7 +88,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                 <div className="flex justify-center">
                     <div className="w-full lg:w-5/6">
                         <div className="mb-4">
-                            <div className="flex items-center text-gray-600 mb-3">
+                            <div className="text-muted mb-3 flex items-center">
                                 <span className="mr-3">
                                     <User className="mr-1 inline" />
                                     {project.author}
@@ -104,7 +105,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                         day: 'numeric',
                                     })}
                                     {project.updateDate && (
-                                        <span className="text-gray-600 ml-2">
+                                        <span className="text-muted ml-2">
                                             (mis à jour le{' '}
                                             {new Date(project.updateDate).toLocaleDateString('fr-FR', {
                                                 year: 'numeric',
@@ -118,15 +119,11 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                             </div>
 
                             {project.tags.length > 0 && (
-                                <div className="mb-3">
+                                <div className="mb-3 flex flex-wrap gap-1">
                                     {project.tags.map((tag) => (
-                                        <Link
-                                            key={tag.slug}
-                                            href={`/projets/tag/${tag.slug}`}
-                                            className="inline-block bg-primary text-white px-2 py-1 rounded mr-1 no-underline text-xs"
-                                        >
+                                        <Button as="a" key={tag.slug} href={`/projets/tag/${tag.slug}`} size="sm">
                                             {tag.name}
-                                        </Link>
+                                        </Button>
                                     ))}
                                 </div>
                             )}
@@ -145,13 +142,10 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                             />
                         </article>
 
-                        <div className="mt-5 pt-4 border-t">
-                            <Link
-                                href="/projets"
-                                className="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition-colors"
-                            >
+                        <div className="mt-5 border-t pt-4">
+                            <Button as="a" href="/projets" variant="outline-primary">
                                 ← Retour aux projets
-                            </Link>
+                            </Button>
                         </div>
                     </div>
                 </div>

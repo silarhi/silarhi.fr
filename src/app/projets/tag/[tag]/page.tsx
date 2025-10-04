@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import HeroTitle from '@/components/HeroTitle'
-import ProjectCard from '@/components/ProjectCard'
-import Section from '@/components/Section'
-import SectionHeader from '@/components/SectionHeader'
+import Button from '@/components/button'
+import HeroTitle from '@/components/hero-title'
+import ProjectCard from '@/components/project-card'
+import Section from '@/components/section'
+import SectionHeader from '@/components/section-header'
 import { getAllProjectTags, getProjectsByTag } from '@/utils/project'
 import { getTagBySlug } from '@/utils/tags'
 
@@ -48,10 +48,10 @@ export default async function TagPage({ params }: TagPageProps) {
 
             <Section>
                 {tag.description && (
-                    <div className="flex justify-center mb-5">
+                    <div className="mb-5 flex justify-center">
                         <div className="w-full lg:w-2/3">
                             <div
-                                className="bg-blue-50 border-0 px-4 py-3 rounded"
+                                className="border-border rounded border bg-blue-50 px-4 py-3"
                                 style={{ backgroundColor: tag.color ? `${tag.color}15` : undefined }}
                             >
                                 <p className="mb-0 text-center">{tag.description}</p>
@@ -63,7 +63,7 @@ export default async function TagPage({ params }: TagPageProps) {
                     title={`${projects.length} projet${projects.length > 1 ? 's' : ''} trouvé${projects.length > 1 ? 's' : ''}`}
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {projects.map((project) => (
                         <div key={project.slug}>
                             <ProjectCard project={project} />
@@ -72,24 +72,23 @@ export default async function TagPage({ params }: TagPageProps) {
                 </div>
 
                 <div className="mt-4">
-                    <h3 className="text-sm font-medium mb-3">Nos autres thèmes de projet</h3>
+                    <h3 className="mb-3 text-sm font-medium">Nos autres thèmes de projet</h3>
                     <div className="flex flex-wrap gap-2">
-                        <Link
-                            href="/projets"
-                            className="px-4 py-2 border border-gray-400 text-gray-600 rounded text-sm hover:bg-gray-100 transition-colors"
-                        >
+                        <Button as="a" href="/projets" variant="outline-dark" size="sm">
                             Tous les projets
-                        </Link>
+                        </Button>
                         {allTags
                             .filter((t) => t.slug !== tag.slug)
                             .map((otherTag) => (
-                                <Link
+                                <Button
+                                    as="a"
                                     key={otherTag.slug}
                                     href={`/projets/tag/${otherTag.slug}`}
-                                    className="px-4 py-2 border border-primary text-primary rounded text-sm hover:bg-primary hover:text-white transition-colors"
+                                    size="sm"
+                                    variant="outline-primary"
                                 >
                                     {otherTag.name}
-                                </Link>
+                                </Button>
                             ))}
                     </div>
                 </div>
