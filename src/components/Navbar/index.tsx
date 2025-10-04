@@ -170,7 +170,7 @@ export default function Navbar({
                     <div className="fixed left-0 top-0 bottom-0 w-80 bg-white shadow-xl overflow-y-auto">
                         <div className="p-4">
                             <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center space-x-2">
+                                <div className="flex items-center space-x-2 text-gray-900">
                                     <Image src={logo} alt="SILARHI" height={60} className="h-12 w-auto" />
                                     <span className="font-bold text-2xl">SILARHI</span>
                                 </div>

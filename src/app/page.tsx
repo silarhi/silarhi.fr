@@ -371,7 +371,7 @@ export default function Page() {
                 <div className="bg-white">
                     <Section id="contact" className="md:pr-3 lg:pr-4 xl:pr-5" paddingX={false} container={false}>
                         <div className="container container-half-md md:mr-0">
-                            <h2 className="text-3xl">Contact</h2>
+                            <h2 className="text-3xl mb-3">Contact</h2>
                             <p className="text-gray-600">
                                 Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
                             </p>
@@ -394,7 +394,7 @@ export default function Page() {
                 <div className="bg-[#f4f6fd]">
                     <Section id="silarhi" className="md:pl-3 lg:pl-4 xl:pl-5" paddingX={false} container={false}>
                         <div className="container container-half-md md:ml-0">
-                            <h2 className="text-3xl">SILARHI</h2>
+                            <h2 className="text-3xl mb-3">SILARHI</h2>
                             <p className="text-gray-600">Les infos pratiques, c{"'"}est ici.</p>
                             <ul className="space-y-0">
                                 <li className="flex flex-nowrap py-3 border-b border-gray-200">
