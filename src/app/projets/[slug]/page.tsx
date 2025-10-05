@@ -8,10 +8,11 @@ import rehypeSlug from 'rehype-slug'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import remarkGfm from 'remark-gfm'
 
-import HeroTitle from '@/components/HeroTitle'
-import { Calendar, Clock, User } from '@/components/Icons'
-import { MDXImage } from '@/components/MDXImage'
-import Section from '@/components/Section'
+import Button from '@/components/button'
+import HeroTitle from '@/components/hero-title'
+import { Calendar, Clock, User } from '@/components/icons'
+import { MDXImage } from '@/components/mdx-image'
+import Section from '@/components/section'
 import { getAllProjectSlugs, getProjectBySlug } from '@/utils/project'
 
 interface ProjectProjectPageProps {
@@ -26,11 +27,11 @@ const mdxComponents = {
     h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className="mt-5 mb-3" {...props} />,
     h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className="mt-4 mb-3" {...props} />,
     blockquote: (props: React.HTMLAttributes<HTMLElement>) => (
-        <blockquote className="blockquote border-start border-primary border-4 ps-3 my-4" {...props} />
+        <blockquote className="border-primary my-4 border-l-4 pl-3 italic" {...props} />
     ),
-    code: (props: React.HTMLAttributes<HTMLElement>) => <code className="bg-light px-1 rounded" {...props} />,
+    code: (props: React.HTMLAttributes<HTMLElement>) => <code className="rounded bg-gray-100 px-1" {...props} />,
     pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-        <pre className="bg-dark text-light p-3 rounded overflow-auto my-3" {...props} />
+        <pre className="text-surface my-3 overflow-auto rounded bg-gray-900 p-3" {...props} />
     ),
     a: CustomLink,
     img: MDXImage,
@@ -84,27 +85,27 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
         <>
             <HeroTitle title={project.title} subtitle={project.excerpt} />
             <Section>
-                <div className="row justify-content-center">
-                    <div className="col-lg-10">
+                <div className="flex justify-center">
+                    <div className="w-full lg:w-5/6">
                         <div className="mb-4">
-                            <div className="d-flex align-items-center text-muted mb-3">
-                                <span className="me-3">
-                                    <User className="me-1" />
+                            <div className="text-muted mb-3 flex items-center">
+                                <span className="mr-3">
+                                    <User className="mr-1 inline" />
                                     {project.author}
                                 </span>
-                                <span className="me-3">
-                                    <Clock className="me-1" />
+                                <span className="mr-3">
+                                    <Clock className="mr-1 inline" />
                                     {project.readingTime}
                                 </span>
                                 <time dateTime={project.date}>
-                                    <Calendar className="me-1" />
+                                    <Calendar className="mr-1 inline" />
                                     {new Date(project.date).toLocaleDateString('fr-FR', {
                                         year: 'numeric',
                                         month: 'long',
                                         day: 'numeric',
                                     })}
                                     {project.updateDate && (
-                                        <span className="text-muted ms-2">
+                                        <span className="text-muted ml-2">
                                             (mis à jour le{' '}
                                             {new Date(project.updateDate).toLocaleDateString('fr-FR', {
                                                 year: 'numeric',
@@ -118,21 +119,17 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                             </div>
 
                             {project.tags.length > 0 && (
-                                <div className="mb-3">
+                                <div className="mb-3 flex flex-wrap gap-1">
                                     {project.tags.map((tag) => (
-                                        <Link
-                                            key={tag.slug}
-                                            href={`/projets/tag/${tag.slug}`}
-                                            className="badge bg-primary me-1 text-decoration-none"
-                                        >
+                                        <Button as="a" key={tag.slug} href={`/projets/tag/${tag.slug}`} size="sm">
                                             {tag.name}
-                                        </Link>
+                                        </Button>
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        <article className="prose">
+                        <article className="prose max-w-none">
                             <MDXRemote
                                 source={project.content}
                                 components={mdxComponents}
@@ -145,10 +142,10 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                             />
                         </article>
 
-                        <div className="mt-5 pt-4 border-top">
-                            <Link href="/projets" className="btn btn-outline-primary">
+                        <div className="mt-5 border-t pt-4">
+                            <Button as="a" href="/projets" variant="outline-primary">
                                 ← Retour aux projets
-                            </Link>
+                            </Button>
                         </div>
                     </div>
                 </div>

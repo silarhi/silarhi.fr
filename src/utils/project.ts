@@ -19,7 +19,7 @@ export interface ProjectProject {
     readingTime: string
 }
 
-export interface ProjectFrontMatter {
+interface ProjectFrontMatter {
     title: string
     date: string
     updateDate?: string
@@ -30,7 +30,7 @@ export interface ProjectFrontMatter {
 }
 
 // Ensure project directory exists
-export function ensureProjectDirectory() {
+function ensureProjectDirectory() {
     if (!fs.existsSync(projectsDirectory)) {
         fs.mkdirSync(projectsDirectory, { recursive: true })
     }

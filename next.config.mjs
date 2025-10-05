@@ -50,18 +50,17 @@ const nextConfig = {
                     permanent: true,
                 }
             }),
-            ...[
-                '/wp-content/uploads/2019/07/full_logo.png',
-                '/wp-content/uploads/2019/07/full_logo.jpg',
-            ].map(function (old) {
-                return {
-                    source: old,
-                    destination: '/images/logo-vertical-light-4096.png',
-                    permanent: true,
+            ...['/wp-content/uploads/2019/07/full_logo.png', '/wp-content/uploads/2019/07/full_logo.jpg'].map(
+                function (old) {
+                    return {
+                        source: old,
+                        destination: '/images/logo-vertical-light-4096.png',
+                        permanent: true,
+                    }
                 }
-            }),
+            ),
         ]
-    }
+    },
 }
 
-export default nextConfig;
+export default nextConfig

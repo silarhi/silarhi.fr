@@ -12,7 +12,7 @@ export interface TagMetadata {
     icon?: string
 }
 
-export interface TagFrontMatter {
+interface TagFrontMatter {
     name: string
     description?: string
     color?: string
@@ -20,7 +20,7 @@ export interface TagFrontMatter {
 }
 
 // Ensure tags directory exists
-export function ensureTagsDirectory() {
+function ensureTagsDirectory() {
     if (!fs.existsSync(tagsDirectory)) {
         fs.mkdirSync(tagsDirectory, { recursive: true })
     }

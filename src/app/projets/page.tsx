@@ -1,10 +1,9 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
-import { Col, Row } from 'react-bootstrap'
 
-import HeroTitle from '@/components/HeroTitle'
-import ProjectCard from '@/components/ProjectCard'
-import Section from '@/components/Section'
+import Button from '@/components/button'
+import HeroTitle from '@/components/hero-title'
+import ProjectCard from '@/components/project-card'
+import Section from '@/components/section'
 import { getAllProjects, getAllProjectTags } from '@/utils/project'
 
 export const metadata: Metadata = {
@@ -23,33 +22,34 @@ export default async function ProjectPage() {
             <Section>
                 {tags.length > 0 && (
                     <div className="mb-5">
-                        <h3 className="h5 mb-3">Tous les thèmes</h3>
-                        <div className="d-flex flex-wrap gap-2">
+                        <h3 className="mb-3 text-lg">Tous les thèmes</h3>
+                        <div className="flex flex-wrap gap-2">
                             {tags.map((tag) => (
-                                <Link
+                                <Button
+                                    as="a"
                                     key={tag.slug}
                                     href={`/projets/tag/${tag.slug}`}
-                                    className="btn btn-outline-primary btn-sm"
+                                    variant="outline-primary"
                                 >
                                     {tag.name}
-                                </Link>
+                                </Button>
                             ))}
                         </div>
                     </div>
                 )}
 
                 {projects.length === 0 ? (
-                    <div className="text-center py-5">
+                    <div className="py-5 text-center">
                         <p className="text-muted">Aucun projet publié pour le moment.</p>
                     </div>
                 ) : (
-                    <Row className="g-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                         {projects.map((project) => (
-                            <Col key={project.slug} md={6} lg={4}>
+                            <div key={project.slug}>
                                 <ProjectCard project={project} />
-                            </Col>
+                            </div>
                         ))}
-                    </Row>
+                    </div>
                 )}
             </Section>
         </>

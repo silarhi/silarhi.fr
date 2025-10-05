@@ -1,16 +1,13 @@
-import '../../styles/app.scss'
-import '@fortawesome/fontawesome-svg-core/styles.css'
+import './globals.css'
 
-import { config } from '@fortawesome/fontawesome-svg-core'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { ReactNode } from 'react'
 
-import DefaultLayout from '@/components/Layout/DefaultLayout'
+import DefaultLayout from '@/components/layouts/default'
+import { cn } from '@/utils/lib'
 
 import { montserrat } from './fonts'
-
-config.autoAddCss = false
 
 export const metadata: Metadata = {
     title: `Agence de développement Web PHP à Toulouse - SILARHI`,
@@ -32,7 +29,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
-        <html lang="en" data-scroll-behavior="smooth">
+        <html lang="en" className="h-full scroll-smooth">
             <head>
                 <meta name="msapplication-TileColor" content="#2b5797" />
                 <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
@@ -50,7 +47,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 `}
                 </Script>
             </head>
-            <body className={`${montserrat.className} ${montserrat.variable}`}>
+            <body className={cn(montserrat.className, montserrat.variable, 'h-full bg-gray-50')}>
                 <DefaultLayout>{children}</DefaultLayout>
             </body>
         </html>

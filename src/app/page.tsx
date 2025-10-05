@@ -1,40 +1,27 @@
-'use client'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Fragment, ReactNode, useCallback, useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
+import { Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 
-import CallToAction from '@/components/CallToAction'
-import ContactForm from '@/components/ContactForm'
-import {
-    Check,
-    Clock,
-    CloudBolt,
-    Code,
-    Enveloppe,
-    FileContract,
-    LightBulb,
-    Map,
-    Phone,
-    XMark,
-} from '@/components/Icons'
-import IconWrapper from '@/components/IconWrapper'
-import Section from '@/components/Section'
-import SectionHeader from '@/components/SectionHeader'
-import useForceReducer from '@/hooks/reducer'
-import { chunk } from '@/utils/array'
+import Button from '@/components/button'
+import CallToAction from '@/components/call-to-action'
+import { Check, XMark } from '@/components/icons'
+import Section from '@/components/section'
+import SectionHeader from '@/components/section-header'
+import iconProgramming from '@/icons/dev-productivity_5wps.svg'
+import coding from '@/icons/floating-cogs.svg'
+import iconIdeas from '@/icons/ideas_vn7a.svg'
+import iconCloud from '@/icons/maintenance_4unj.svg'
+import iconMeeting from '@/icons/meeting_dunc.svg'
+import home from '@/public/images/home.jpg'
 import { getDaysSince } from '@/utils/dates'
 import { getTotalEmployeeCoffees, getTotalEmployeeHours } from '@/utils/employees'
+import { cn } from '@/utils/lib'
 
-import home from '../../public/images/home.jpg'
 import { lato } from './fonts'
-import styles from './index.module.scss'
 
 interface Feature {
-    icon: () => ReactNode
+    icon: string
     title: string
     description: string
 }
@@ -60,24 +47,24 @@ interface NumberData {
 
 const FEATURES: Feature[] = [
     {
-        icon: () => <FileContract />,
+        icon: iconMeeting,
         title: 'Analyse',
         description:
             "On vous aide à spécifier votre projet si vous en avez besoin. On peut également vous guider dans l'étude de la faisabilité technique.",
     },
     {
-        icon: () => <LightBulb />,
+        icon: iconIdeas,
         title: 'Conception',
         description: 'On vous présente la façon de mener à bien votre projet !',
     },
     {
-        icon: () => <Code />,
+        icon: iconProgramming,
         title: 'Développement',
         description:
             'On donne vie à votre idée. Vous intervenez à chaque étape majeure du développement pour confirmer la trajectoire du projet.',
     },
     {
-        icon: () => <CloudBolt />,
+        icon: iconCloud,
         title: 'Déploiement',
         description:
             "L'application est hébergée sur l'infrastructure de votre choix. Intranet, OVH, AWS, GCP, on s'adapte, et si tous ces sigles ne vous disent rien, laissez-vous guider !",
@@ -90,15 +77,15 @@ const SERVICES: Service[] = [
         supported: true,
     },
     {
-        text: `**Développement d'applications mobiles** / responsives`,
+        text: `**Développement d'applications responsives** (adaptées aux mobiles et tablettes)`,
         supported: true,
+    },
+    {
+        text: `Développement d'applications mobiles natives (iOS, Android)`,
+        supported: false,
     },
     {
         text: `Développement spécifique d'API`,
-        supported: true,
-    },
-    {
-        text: `Pont de communication entre applications existantes`,
         supported: true,
     },
     {
@@ -110,7 +97,7 @@ const SERVICES: Service[] = [
         supported: false,
     },
     {
-        text: `Upgrade de version Symfony`,
+        text: `Migration de version Symfony`,
         supported: true,
     },
     {
@@ -130,7 +117,7 @@ const SERVICES: Service[] = [
         supported: true,
     },
     {
-        text: `Intégration de maquette`,
+        text: `Intégration de maquette UI / UX`,
         supported: true,
     },
     {
@@ -218,230 +205,211 @@ const NUMBERS: NumberData[] = [
     },
 ]
 
+function HeroSection() {
+    return (
+        <div className="relative h-screen w-full overflow-hidden">
+            <div className="absolute top-0 left-0 z-[1] h-full w-full bg-black opacity-45"></div>
+            <Image
+                src={home}
+                sizes="100vw"
+                fill
+                style={{ objectFit: 'cover' }}
+                priority
+                alt="SILARHI, Agence de développement Web Toulouse"
+            />
+            <div className="text-surface absolute z-[2] flex h-full w-full flex-col items-center justify-center">
+                <Section>
+                    <div style={{ maxWidth: '55em' }} className="mx-auto">
+                        <h1 className="text-5xl leading-none font-bold xl:text-7xl">
+                            Développement d&apos;applications Web
+                            <span className="mt-3 block text-3xl uppercase lg:text-5xl">À Toulouse & en France</span>
+                        </h1>
+                        <h2 className="mt-4 text-3xl font-light uppercase">Donnez vie à vos idées</h2>
+                        <Button as="a" size="lg" href="#about" className="mt-4 lg:mt-6">
+                            En savoir plus
+                        </Button>
+                    </div>
+                </Section>
+            </div>
+        </div>
+    )
+}
+
+function Arrow() {
+    return (
+        <div className="ml-[50%]">
+            <div className="relative h-6 w-0.5 bg-slate-300 md:h-10">
+                <div className="absolute bottom-0 left-1/2 h-0 w-0 -translate-x-1/2 border-t-8 border-r-4 border-l-4 border-t-slate-300 border-r-transparent border-l-transparent"></div>
+            </div>
+        </div>
+    )
+}
+
+function MethodologySection() {
+    return (
+        <Section id="methodologie" className="bg-surface">
+            <SectionHeader
+                title="On développe des applications Web pour donner vie à vos projets"
+                subtitle="Et ça se passe comme ça."
+            />
+
+            <div className="mx-auto my-12 max-w-[40rem] space-y-1">
+                <div className="text-center">
+                    <span className="bg-primary-light/10 border-primary/10 inline-block rounded-lg border-2 p-3 md:p-4">
+                        <h3 className="text-base font-bold md:text-lg">Prise de contact / devis</h3>
+                    </span>
+                </div>
+
+                <Arrow />
+
+                {/* Main stages */}
+                {FEATURES.map((stage, index) => (
+                    <Fragment key={index}>
+                        {/* Stage with number outside */}
+                        <div className={cn('flex items-start gap-3 md:gap-4')}>
+                            <div className="bg-surface border-border flex-1 overflow-hidden rounded-lg border shadow-xl transition-transform hover:scale-[1.05]">
+                                <div className="p-4 md:p-6">
+                                    <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
+                                        <div className="flex h-32 w-full flex-shrink-0 items-center justify-center md:w-32">
+                                            <Image src={stage.icon} sizes="100vw" height={128} alt={stage.title} />
+                                        </div>
+
+                                        <div className="flex-1">
+                                            <h2 className="mb-2 text-lg font-bold md:text-xl">{stage.title}</h2>
+                                            <p className="text-muted">{stage.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {index < FEATURES.length - 1 && <Arrow />}
+                    </Fragment>
+                ))}
+
+                <Arrow />
+
+                {/* Success block - small, only title */}
+                <div className="text-center">
+                    <span className="bg-success/10 border-success/10 inline-block rounded-lg border-2 p-3 md:p-4">
+                        <h3 className="text-base font-bold md:text-lg">
+                            Client satisfait
+                            <Check className="ml-2 inline-block" />
+                        </h3>
+                    </span>
+                </div>
+            </div>
+            <CallToAction />
+        </Section>
+    )
+}
+
+function ServiceList({ services, supported }: { services: Service[]; supported: boolean }) {
+    return (
+        <div className="bg-surface border-border mb-12 rounded-lg border shadow-lg">
+            <ul className="">
+                {services.map((service, key) => (
+                    <li
+                        key={`${key}`}
+                        className="border-border flex items-center gap-x-4 border-b px-4 py-3 last:border-0"
+                    >
+                        <div
+                            className={cn('flex size-5 shrink-0 items-center justify-center rounded-full', {
+                                'bg-success/25 text-success': supported,
+                                'bg-error/25 text-error': !supported,
+                            })}
+                        >
+                            {supported ? <Check className="text-xs" /> : <XMark className="text-xs" />}
+                        </div>
+                        <div className="text-muted">
+                            <ReactMarkdown
+                                components={{
+                                    p: ({ children }) => <>{children}</>,
+                                }}
+                            >
+                                {service.text}
+                            </ReactMarkdown>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )
+}
+
+function PresentationSection() {
+    return (
+        <Section id="presentation" className="bg-primary-dark relative z-[2]">
+            <Image
+                src={coding}
+                alt="Coding"
+                className="absolute top-0 left-0 -z-1 h-full w-full object-cover opacity-5"
+                height={160}
+                sizes="100vw"
+            />
+            <div className="text-surface mx-auto max-w-[55rem] text-center">
+                <h3 className="mb-4 text-3xl">
+                    SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web sur
+                    mesure.
+                </h3>
+                <p className="text-lg">
+                    Spécialistes de l&apos;écosystème PHP, nous développons vos projets en Symfony, du prototype à la
+                    mise en ligne.
+                </p>
+            </div>
+        </Section>
+    )
+}
+
+function ServicesSection() {
+    const supportedServices = SERVICES.filter((service) => service.supported)
+    const unsupportedServices = SERVICES.filter((service) => !service.supported)
+
+    return (
+        <Section id="services">
+            <SectionHeader title="Nos services" subtitle="Vérifiez que votre besoin colle avec notre savoir faire." />
+            <div className="mx-auto max-w-[55rem]">
+                <h3 className="text-primary-dark text-2xl font-light">Notre savoir faire</h3>
+                <ServiceList services={supportedServices} supported={true} />
+                <h3 className="text-primary-dark text-2xl font-light">Ce qu&apos;on ne fait PAS</h3>
+                <ServiceList services={unsupportedServices} supported={false} />
+                <CallToAction />
+            </div>
+        </Section>
+    )
+}
+
+function NumbersSection() {
+    return (
+        <Section id="chiffres">
+            <SectionHeader title="Les chiffres" subtitle="Quelques chiffres de cette agence fondée en 2018." />
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+                {NUMBERS.map((number, key) => (
+                    <div key={key} className="text-center">
+                        <div className={cn(lato.className, 'text-secondary mb-3 text-6xl font-bold')}>
+                            {number.value}
+                        </div>
+                        <h4 className="mb-0 text-2xl font-light lg:mb-3">{number.unit}</h4>
+                        <p className="text-muted">{number.text}</p>
+                    </div>
+                ))}
+            </div>
+            <CallToAction />
+        </Section>
+    )
+}
+
 export default function Page() {
-    const { value: formIdValue, updateValue: forceIsFormSubmitted, resetValue: resetFormSubmitted } = useForceReducer()
-    const [showSendButton, setShowSendButton] = useState<boolean>(true)
-    const [isFormPending, setIsFormPending] = useState<boolean>(false)
-
-    const onPending = useCallback(() => {
-        setIsFormPending(true)
-    }, [setIsFormPending])
-
-    const onFinish = useCallback(() => {
-        setShowSendButton(false)
-        resetFormSubmitted()
-    }, [setShowSendButton, resetFormSubmitted])
-
-    // We store title in variable because of ' special chars which render multiple children
-    const title = `Développement d'applications Web & PHP à Toulouse - SILARHI`
-
     return (
         <>
             <Head>
-                <title>{title}</title>
+                <title>{`Développement d'applications Web & PHP à Toulouse - SILARHI`}</title>
             </Head>
-            {/* Header */}
-            <div className={styles.bgWrap}>
-                <div className={styles.backdrop}></div>
-                <Image src={home} sizes="100vw" fill style={{ objectFit: 'cover' }} priority alt="" />
-                <div className={styles.contentWrapper}>
-                    <Section>
-                        <div style={{ maxWidth: '55em' }} className={'mx-auto'}>
-                            <h1>
-                                Développement d{"'"}applications Web
-                                <span>À Toulouse & en France</span>
-                            </h1>
-                            <h2 className={'text-uppercase fw-light'}>Donnez vie à vos idées</h2>
-                            <Button as={'a'} size={'lg'} href={'#about'} className={'mt-4'}>
-                                En savoir plus
-                            </Button>
-                        </div>
-                    </Section>
-                </div>
-            </div>
-            {/* About */}
-            <Section id={'about'}>
-                <SectionHeader title="On développe des applications Web" subtitle="Et ça se passe comme ça." />
-                <Row className={'gx-5 row-cards row-deck'}>
-                    {FEATURES.map((feature, key) => (
-                        <Col xs={12} lg={4} xl={3} key={key}>
-                            <div className={`card shadow mb-4 text-center rounded-4`}>
-                                <div className={'card-body'}>
-                                    <IconWrapper>{feature.icon()}</IconWrapper>
-                                    <h3 className={'card-title h4 fw-bold my-3'}>{feature.title}</h3>
-                                    <p className={'card-text text-muted'}>{feature.description}</p>
-                                </div>
-                            </div>
-                        </Col>
-                    ))}
-                </Row>
-                <CallToAction />
-            </Section>
-            {/* Services */}
-            <Section id={'services'} className={'bg-white'}>
-                <SectionHeader
-                    title="Nos services"
-                    subtitle="Vérifiez que votre besoin colle avec notre savoir faire."
-                />
-                <h3 className={'h4 text-primary fw-light'}>Notre savoir faire</h3>
-                <Row className="g-lg-5 mb-5">
-                    {chunk(
-                        SERVICES.filter((service) => service.supported),
-                        2
-                    ).map((services, chunkKey) => (
-                        <Col lg={6} key={chunkKey}>
-                            <ul className="list-group list-group-flush">
-                                {services.map((service, key) => (
-                                    <li
-                                        key={`${chunkKey}-${key}`}
-                                        className="list-group-item d-flex align-items-center"
-                                    >
-                                        <div className="me-4">
-                                            <Check className="fa-2x text-sub-primary" />
-                                        </div>
-                                        <div className={'text-muted'}>
-                                            <ReactMarkdown
-                                                components={{
-                                                    p: ({ children }) => <>{children}</>,
-                                                }}
-                                            >
-                                                {service.text}
-                                            </ReactMarkdown>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </Col>
-                    ))}
-                </Row>
-                <h3 className={'h4 text-primary fw-light'}>Ce qu{"'"}on ne fait PAS</h3>
-                <Row className="g-lg-5 mb-5">
-                    {chunk(
-                        SERVICES.filter((service) => !service.supported),
-                        2
-                    ).map((services, chunkKey) => (
-                        <Col lg={6} key={chunkKey}>
-                            <ul className="list-group list-group-flush">
-                                {services.map((service, key) => (
-                                    <li
-                                        key={`${chunkKey}-${key}`}
-                                        className="list-group-item d-flex align-items-center"
-                                    >
-                                        <div className="me-4">
-                                            <XMark className="fa-2x text-sub-primary" />
-                                        </div>
-                                        <div className={'text-muted'}>
-                                            <ReactMarkdown
-                                                components={{
-                                                    p: ({ children }) => <>{children}</>,
-                                                }}
-                                            >
-                                                {service.text}
-                                            </ReactMarkdown>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </Col>
-                    ))}
-                </Row>
-                <CallToAction />
-            </Section>
-            {/* Chiffres */}
-            <Section id={'chiffres'}>
-                <SectionHeader
-                    title="Les chiffres"
-                    subtitle="Quelques chiffres de cette jeune entreprise fondée en 2018."
-                />
-                <Row className="g-lg-5">
-                    {NUMBERS.map((number, key) => (
-                        <Col md={6} lg={3} key={key} className={'text-center'}>
-                            <div className={`${lato.className} text-sub-primary display-1 fw-bold mb-3`}>
-                                {number.value}
-                            </div>
-                            <h4 className="text-primary fw-light mb-3">{number.unit}</h4>
-                            <hr style={{ width: '40%' }} className={'mx-auto'} />
-                            <p className="text-muted">{number.text}</p>
-                        </Col>
-                    ))}
-                </Row>
-                <CallToAction />
-            </Section>
-            <Row className="g-0">
-                {/* Contact */}
-                <Col md={6} className={'bg-white'}>
-                    <Section id={'contact'} className={'pe-md-3 pe-lg-4 pe-xl-5'} paddingX={false} container={false}>
-                        <div className={'container container-half-md me-md-0'}>
-                            <h2>Contact</h2>
-                            <p className={'text-muted'}>
-                                Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
-                            </p>
-                            <ContactForm onFinish={onFinish} onPending={onPending} isSubmitted={formIdValue > 0} />
-                            {showSendButton && (
-                                <Button
-                                    variant={'primary'}
-                                    size={'lg'}
-                                    className={'mt-4 btn-block'}
-                                    onClick={() => forceIsFormSubmitted()}
-                                    disabled={isFormPending}
-                                >
-                                    Envoyer
-                                </Button>
-                            )}
-                        </div>
-                    </Section>
-                </Col>
-                {/* SILARHI */}
-                <Col md={6} className={styles.bgLight2}>
-                    <Section id={'silarhi'} className={'ps-md-3 ps-lg-4 ps-xl-5'} paddingX={false} container={false}>
-                        <div className={'container container-half-md ms-md-0'}>
-                            <h2>SILARHI</h2>
-                            <p className={'text-muted'}>Les infos pratiques, c{"'"}est ici.</p>
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
-                                        <Map />
-                                    </span>
-                                    <span className={'text-muted'}>
-                                        116 Route d{"'"}Espagne
-                                        <br />
-                                        HELIOPOLIS 4<br />
-                                        BAT 113
-                                        <br />
-                                        31100 Toulouse
-                                    </span>
-                                </li>
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
-                                        <Clock />
-                                    </span>
-                                    <span className={'text-muted'}>
-                                        Du lundi au vendredi
-                                        <br />
-                                        De 9h à 18h
-                                    </span>
-                                </li>
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
-                                        <Phone />
-                                    </span>
-                                    <span className={'text-muted'}>
-                                        <a href="tel:+33607275826">0 607.275.826</a>
-                                    </span>
-                                </li>
-                                <li className="list-group-item d-flex flex-nowrap">
-                                    <span className={'me-1 me-md-2 me-lg-3 text-primary'}>
-                                        <Enveloppe />
-                                    </span>
-                                    <span className={'text-muted'}>
-                                        <a href="mailto:%68ell%6F@si%6Ca%72hi.fr">hello@silarhi.fr</a>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </Section>
-                </Col>
-            </Row>
+            <HeroSection />
+            <PresentationSection />
+            <ServicesSection />
+            <MethodologySection />
+            <NumbersSection />
         </>
     )
 }
