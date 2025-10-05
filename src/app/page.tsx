@@ -225,7 +225,7 @@ function HeroSection() {
                             <span className="mt-3 block text-3xl uppercase lg:text-5xl">À Toulouse & en France</span>
                         </h1>
                         <h2 className="mt-4 text-3xl font-light uppercase">Donnez vie à vos idées</h2>
-                        <Button as="a" size="lg" href="#about" className="mt-4 lg:mt-6">
+                        <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
                             En savoir plus
                         </Button>
                     </div>
