@@ -10,8 +10,8 @@ import remarkGfm from 'remark-gfm'
 
 import Button from '@/components/button'
 import HeroTitle from '@/components/hero-title'
-import { Calendar, Clock, User } from '@/components/icons'
 import { MDXImage } from '@/components/mdx-image'
+import ProjectMetadata from '@/components/project-metadata'
 import Section from '@/components/section'
 import { getAllProjectSlugs, getProjectBySlug } from '@/utils/project'
 
@@ -88,35 +88,13 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                 <div className="flex justify-center">
                     <div className="w-full lg:w-5/6">
                         <div className="mb-4">
-                            <div className="text-muted mb-3 flex items-center">
-                                <span className="mr-3">
-                                    <User className="mr-1 inline" />
-                                    {project.author}
-                                </span>
-                                <span className="mr-3">
-                                    <Clock className="mr-1 inline" />
-                                    {project.readingTime}
-                                </span>
-                                <time dateTime={project.date}>
-                                    <Calendar className="mr-1 inline" />
-                                    {new Date(project.date).toLocaleDateString('fr-FR', {
-                                        year: 'numeric',
-                                        month: 'long',
-                                        day: 'numeric',
-                                    })}
-                                    {project.updateDate && (
-                                        <span className="text-muted ml-2">
-                                            (mis à jour le{' '}
-                                            {new Date(project.updateDate).toLocaleDateString('fr-FR', {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric',
-                                            })}
-                                            )
-                                        </span>
-                                    )}
-                                </time>
-                            </div>
+                            <ProjectMetadata
+                                author={project.author}
+                                readingTime={project.readingTime}
+                                date={project.date}
+                                updateDate={project.updateDate}
+                                className="mb-3"
+                            />
 
                             {project.tags.length > 0 && (
                                 <div className="mb-3 flex flex-wrap gap-1">

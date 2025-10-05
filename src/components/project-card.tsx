@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import Button from '@/components/button'
-import { Calendar, Clock, User } from '@/components/icons'
+import ProjectMetadata from '@/components/project-metadata'
 import { ProjectProject } from '@/utils/project'
 
 interface ProjectCardProps {
@@ -35,24 +35,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                             ))}
                         </div>
                     )}
-                    <div className="text-muted flex flex-wrap items-center">
-                        <span className="mr-3">
-                            <User className="mr-1 inline" />
-                            {project.author}
-                        </span>
-                        <span className="mr-3">
-                            <Clock className="mr-1 inline" />
-                            {project.readingTime}
-                        </span>
-                        <time dateTime={project.date}>
-                            <Calendar className="mr-1 inline" />
-                            {new Date(project.date).toLocaleDateString('fr-FR', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric',
-                            })}
-                        </time>
-                    </div>
+                    <ProjectMetadata author={project.author} readingTime={project.readingTime} date={project.date} />
                 </div>
             </div>
         </article>
