@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 
 import Button from '@/components/button'
 import CallToAction from '@/components/call-to-action'
+import FadeInWhenVisible from '@/components/fade-in-when-visible'
 import { Check, XMark } from '@/components/icons'
 import Section from '@/components/section'
 import SectionHeader from '@/components/section-header'
@@ -220,14 +221,22 @@ function HeroSection() {
             <div className="text-surface absolute z-[2] flex h-full w-full flex-col items-center justify-center">
                 <Section>
                     <div style={{ maxWidth: '55em' }} className="mx-auto">
-                        <h1 className="text-5xl leading-none font-bold xl:text-7xl">
-                            Développement d&apos;applications Web
-                            <span className="mt-3 block text-3xl uppercase lg:text-5xl">À Toulouse & en France</span>
-                        </h1>
-                        <h2 className="mt-4 text-3xl font-light uppercase">Donnez vie à vos idées</h2>
-                        <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
-                            En savoir plus
-                        </Button>
+                        <FadeInWhenVisible duration={0.8} yOffset={30}>
+                            <h1 className="text-5xl leading-none font-bold xl:text-7xl">
+                                Développement d&apos;applications Web
+                                <span className="mt-3 block text-3xl uppercase lg:text-5xl">
+                                    À Toulouse & en France
+                                </span>
+                            </h1>
+                        </FadeInWhenVisible>
+                        <FadeInWhenVisible delay={0.3} duration={0.8} yOffset={30}>
+                            <h2 className="mt-4 text-3xl font-light uppercase">Donnez vie à vos idées</h2>
+                        </FadeInWhenVisible>
+                        <FadeInWhenVisible delay={0.5} duration={0.8} yOffset={30}>
+                            <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
+                                En savoir plus
+                            </Button>
+                        </FadeInWhenVisible>
                     </div>
                 </Section>
             </div>
@@ -254,11 +263,13 @@ function MethodologySection() {
             />
 
             <div className="mx-auto my-12 max-w-[40rem] space-y-1">
-                <div className="text-center">
-                    <span className="bg-primary-light/10 border-primary/10 inline-block rounded-lg border-2 p-3 md:p-4">
-                        <h3 className="text-base font-bold md:text-lg">Prise de contact / devis</h3>
-                    </span>
-                </div>
+                <FadeInWhenVisible delay={0.1}>
+                    <div className="text-center">
+                        <span className="bg-primary-light/10 border-primary/10 inline-block rounded-lg border-2 p-3 md:p-4">
+                            <h3 className="text-base font-bold md:text-lg">Prise de contact / devis</h3>
+                        </span>
+                    </div>
+                </FadeInWhenVisible>
 
                 <Arrow />
 
@@ -266,22 +277,24 @@ function MethodologySection() {
                 {FEATURES.map((stage, index) => (
                     <Fragment key={index}>
                         {/* Stage with number outside */}
-                        <div className={cn('flex items-start gap-3 md:gap-4')}>
-                            <div className="bg-surface border-border flex-1 overflow-hidden rounded-lg border shadow-xl transition-transform hover:scale-[1.05]">
-                                <div className="p-4 md:p-6">
-                                    <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
-                                        <div className="flex h-32 w-full flex-shrink-0 items-center justify-center md:w-32">
-                                            <Image src={stage.icon} sizes="100vw" height={128} alt={stage.title} />
-                                        </div>
+                        <FadeInWhenVisible delay={0.2 + index * 0.15}>
+                            <div className={cn('flex items-start gap-3 md:gap-4')}>
+                                <div className="bg-surface border-border flex-1 overflow-hidden rounded-lg border shadow-xl transition-transform hover:scale-[1.05]">
+                                    <div className="p-4 md:p-6">
+                                        <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
+                                            <div className="flex h-32 w-full flex-shrink-0 items-center justify-center md:w-32">
+                                                <Image src={stage.icon} sizes="100vw" height={128} alt={stage.title} />
+                                            </div>
 
-                                        <div className="flex-1">
-                                            <h2 className="mb-2 text-lg font-bold md:text-xl">{stage.title}</h2>
-                                            <p className="text-muted">{stage.description}</p>
+                                            <div className="flex-1">
+                                                <h2 className="mb-2 text-lg font-bold md:text-xl">{stage.title}</h2>
+                                                <p className="text-muted">{stage.description}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </FadeInWhenVisible>
 
                         {index < FEATURES.length - 1 && <Arrow />}
                     </Fragment>
@@ -290,14 +303,16 @@ function MethodologySection() {
                 <Arrow />
 
                 {/* Success block - small, only title */}
-                <div className="text-center">
-                    <span className="bg-success/10 border-success/10 inline-block rounded-lg border-2 p-3 md:p-4">
-                        <h3 className="text-base font-bold md:text-lg">
-                            Client satisfait
-                            <Check className="ml-2 inline-block" />
-                        </h3>
-                    </span>
-                </div>
+                <FadeInWhenVisible delay={0.2 + FEATURES.length * 0.15}>
+                    <div className="text-center">
+                        <span className="bg-success/10 border-success/10 inline-block rounded-lg border-2 p-3 md:p-4">
+                            <h3 className="text-base font-bold md:text-lg">
+                                Client satisfait
+                                <Check className="ml-2 inline-block" />
+                            </h3>
+                        </span>
+                    </div>
+                </FadeInWhenVisible>
             </div>
             <CallToAction />
         </Section>
@@ -347,16 +362,18 @@ function PresentationSection() {
                 height={160}
                 sizes="100vw"
             />
-            <div className="text-surface mx-auto max-w-[55rem] text-center">
-                <h3 className="mb-4 text-3xl">
-                    SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web sur
-                    mesure.
-                </h3>
-                <p className="text-lg">
-                    Spécialistes de l&apos;écosystème PHP, nous développons vos projets en Symfony, du prototype à la
-                    mise en ligne.
-                </p>
-            </div>
+            <FadeInWhenVisible>
+                <div className="text-surface mx-auto max-w-[55rem] text-center">
+                    <h3 className="mb-4 text-3xl">
+                        SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
+                        sur mesure.
+                    </h3>
+                    <p className="text-lg">
+                        Spécialistes de l&apos;écosystème PHP, nous développons vos projets en Symfony, du prototype à
+                        la mise en ligne.
+                    </p>
+                </div>
+            </FadeInWhenVisible>
         </Section>
     )
 }
@@ -369,10 +386,18 @@ function ServicesSection() {
         <Section id="services">
             <SectionHeader title="Nos services" subtitle="Vérifiez que votre besoin colle avec notre savoir faire." />
             <div className="mx-auto max-w-[55rem]">
-                <h3 className="text-primary-dark text-2xl font-light">Notre savoir faire</h3>
-                <ServiceList services={supportedServices} supported={true} />
-                <h3 className="text-primary-dark text-2xl font-light">Ce qu&apos;on ne fait PAS</h3>
-                <ServiceList services={unsupportedServices} supported={false} />
+                <FadeInWhenVisible delay={0.1}>
+                    <h3 className="text-primary-dark text-2xl font-light">Notre savoir faire</h3>
+                </FadeInWhenVisible>
+                <FadeInWhenVisible delay={0.2}>
+                    <ServiceList services={supportedServices} supported={true} />
+                </FadeInWhenVisible>
+                <FadeInWhenVisible delay={0.3}>
+                    <h3 className="text-primary-dark text-2xl font-light">Ce qu&apos;on ne fait PAS</h3>
+                </FadeInWhenVisible>
+                <FadeInWhenVisible delay={0.4}>
+                    <ServiceList services={unsupportedServices} supported={false} />
+                </FadeInWhenVisible>
                 <CallToAction />
             </div>
         </Section>
@@ -385,13 +410,15 @@ function NumbersSection() {
             <SectionHeader title="Les chiffres" subtitle="Quelques chiffres de cette agence fondée en 2018." />
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
                 {NUMBERS.map((number, key) => (
-                    <div key={key} className="text-center">
-                        <div className={cn(lato.className, 'text-secondary mb-3 text-6xl font-bold')}>
-                            {number.value}
+                    <FadeInWhenVisible key={key} delay={key * 0.1}>
+                        <div className="text-center">
+                            <div className={cn(lato.className, 'text-secondary mb-3 text-6xl font-bold')}>
+                                {number.value}
+                            </div>
+                            <h4 className="mb-0 text-2xl font-light lg:mb-3">{number.unit}</h4>
+                            <p className="text-muted">{number.text}</p>
                         </div>
-                        <h4 className="mb-0 text-2xl font-light lg:mb-3">{number.unit}</h4>
-                        <p className="text-muted">{number.text}</p>
-                    </div>
+                    </FadeInWhenVisible>
                 ))}
             </div>
             <CallToAction />
