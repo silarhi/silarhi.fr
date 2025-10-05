@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 
 import Button from '@/components/button'
 import HeroTitle from '@/components/hero-title'
-import ProjectCard from '@/components/project-card'
+import ProjectGrid from '@/components/project-grid'
 import Section from '@/components/section'
 import SectionHeader from '@/components/section-header'
 import { getAllProjectTags, getProjectsByTag } from '@/utils/project'
@@ -63,13 +63,7 @@ export default async function TagPage({ params }: TagPageProps) {
                     title={`${projects.length} projet${projects.length > 1 ? 's' : ''} trouvé${projects.length > 1 ? 's' : ''}`}
                 />
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {projects.map((project) => (
-                        <div key={project.slug}>
-                            <ProjectCard project={project} />
-                        </div>
-                    ))}
-                </div>
+                <ProjectGrid projects={projects} />
 
                 <div className="mt-4">
                     <h3 className="mb-3 text-sm font-medium">Nos autres thèmes de projet</h3>
