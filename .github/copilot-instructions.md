@@ -12,11 +12,11 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 ## 🧰 Tech Stack
 
 - **Frontend:** Next.js (React + TypeScript)
-- **Styling:** Tailwind CSS + shadcn/ui
+- **Styling:** Tailwind CSS
 - **Content:** Markdown / MDX files for blog and portfolio entries
-- **Hosting:** Cloudflare Pages (static export)
+- **Hosting:** Vercel
 - **Analytics:** Plausible
-- **CI/CD:** GitHub Actions → Cloudflare Pages
+- **CI/CD:** GitHub Actions
 
 ---
 
@@ -36,7 +36,7 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 
 ### Styling
 - Use **Tailwind CSS** utility classes.
-- For complex compositions, use **class-variance-authority (cva)** or component-level style objects.
+- For complex compositions, use custom components or component-level style objects.
 - Follow **SILARHI design system** (rounded corners, soft shadows, generous spacing).
 
 ### Accessibility & SEO
