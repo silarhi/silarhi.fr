@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="./public/images/logo-vertical-light-4096.png" alt="SILARHI Logo Vertical" width="180" />
+</p>
 
-## Getting Started
+<h1 align="center">SILARHI</h1>
 
-First, run the development server:
+<p align="center">
+  <b>Web agency in Toulouse — From design to maintenance</b>
+</p>
+
+## 🚀 Overview
+
+[SILARHI.fr](https://silarhi.fr) is the official website of <b>SILARHI</b>, a web agency based in Toulouse, France, specialized in PHP / Symfony websites development.
+
+## 🧰 Tech Stack
+
+- **Frontend**: Next.js (React + TypeScript)
+- **Styling**: Tailwind CSS
+- **Content**: Markdown / MDX
+- **CI/CD**: GitHub Actions
+- **Hosting**: Vercel
+
+## ✨ Main Features
+
+- Agency and team presentation
+- Portfolio of recent projects
+- Business blog (MDX)
+- Optimized SEO & accessibility
+
+## 📦 Local Installation
 
 ```bash
-npm run dev
-# or
+yarn install
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🧑‍💻 Contributing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Fork the repository
+- Create a branch `feature/…` or `fix/…`
+- Follow the code conventions (see `.github/copilot-instructions.md`)
+- Open a descriptive Pull Request
 
-## Learn More
+## 📄 License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License.
