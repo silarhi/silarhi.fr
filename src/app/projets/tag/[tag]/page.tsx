@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import Button from '@/components/button'
+import FadeInWhenVisible from '@/components/fade-in-when-visible'
 import HeroTitle from '@/components/hero-title'
 import ProjectGrid from '@/components/project-grid'
 import Section from '@/components/section'
@@ -48,16 +49,18 @@ export default async function TagPage({ params }: TagPageProps) {
 
             <Section>
                 {tag.description && (
-                    <div className="mb-5 flex justify-center">
-                        <div className="w-full lg:w-2/3">
-                            <div
-                                className="border-border rounded border bg-blue-50 px-4 py-3"
-                                style={{ backgroundColor: tag.color ? `${tag.color}15` : undefined }}
-                            >
-                                <p className="mb-0 text-center">{tag.description}</p>
+                    <FadeInWhenVisible delay={0.1}>
+                        <div className="mb-5 flex justify-center">
+                            <div className="w-full lg:w-2/3">
+                                <div
+                                    className="border-border rounded border bg-blue-50 px-4 py-3"
+                                    style={{ backgroundColor: tag.color ? `${tag.color}15` : undefined }}
+                                >
+                                    <p className="mb-0 text-center">{tag.description}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </FadeInWhenVisible>
                 )}
                 <SectionHeader
                     title={`${projects.length} projet${projects.length > 1 ? 's' : ''} trouvé${projects.length > 1 ? 's' : ''}`}
@@ -65,27 +68,29 @@ export default async function TagPage({ params }: TagPageProps) {
 
                 <ProjectGrid projects={projects} />
 
-                <div className="mt-4">
-                    <h3 className="mb-3 text-sm font-medium">Nos autres thèmes de projet</h3>
-                    <div className="flex flex-wrap gap-2">
-                        <Button as="a" href="/projets" variant="outline-dark" size="sm">
-                            Tous les projets
-                        </Button>
-                        {allTags
-                            .filter((t) => t.slug !== tag.slug)
-                            .map((otherTag) => (
-                                <Button
-                                    as="a"
-                                    key={otherTag.slug}
-                                    href={`/projets/tag/${otherTag.slug}`}
-                                    size="sm"
-                                    variant="outline-primary"
-                                >
-                                    {otherTag.name}
-                                </Button>
-                            ))}
+                <FadeInWhenVisible delay={0.2}>
+                    <div className="mt-4">
+                        <h3 className="mb-3 text-sm font-medium">Nos autres thèmes de projet</h3>
+                        <div className="flex flex-wrap gap-2">
+                            <Button as="a" href="/projets" variant="outline-dark" size="sm">
+                                Tous les projets
+                            </Button>
+                            {allTags
+                                .filter((t) => t.slug !== tag.slug)
+                                .map((otherTag) => (
+                                    <Button
+                                        as="a"
+                                        key={otherTag.slug}
+                                        href={`/projets/tag/${otherTag.slug}`}
+                                        size="sm"
+                                        variant="outline-primary"
+                                    >
+                                        {otherTag.name}
+                                    </Button>
+                                ))}
+                        </div>
                     </div>
-                </div>
+                </FadeInWhenVisible>
             </Section>
         </>
     )

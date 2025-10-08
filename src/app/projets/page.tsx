@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 
+import FadeInWhenVisible from '@/components/fade-in-when-visible'
 import HeroTitle from '@/components/hero-title'
 import ProjectGrid from '@/components/project-grid'
 import Section from '@/components/section'
@@ -21,10 +22,12 @@ export default async function ProjectPage() {
 
             <Section>
                 {tags.length > 0 && (
-                    <div className="mb-5">
-                        <h3 className="mb-3 text-lg">Tous les thèmes</h3>
-                        <TagButtonList tags={tags} />
-                    </div>
+                    <FadeInWhenVisible delay={0.1}>
+                        <div className="mb-5">
+                            <h3 className="mb-3 text-lg">Tous les thèmes</h3>
+                            <TagButtonList tags={tags} />
+                        </div>
+                    </FadeInWhenVisible>
                 )}
 
                 {projects.length === 0 ? (
