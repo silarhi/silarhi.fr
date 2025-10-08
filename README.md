@@ -2,8 +2,6 @@
   <img src="./public/images/logo-vertical-light-4096.png" alt="SILARHI Logo Vertical" width="180" />
 </p>
 
-<h1 align="center">SILARHI</h1>
-
 <p align="center">
   <b>Web agency in Toulouse — From design to maintenance</b>
 </p>
