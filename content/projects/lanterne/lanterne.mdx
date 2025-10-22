@@ -1,0 +1,15 @@
+---
+title: "Lanterne"
+date: "2021-07-20"
+project: "lanterne"
+---
+
+Développement de l'outil :
+
+- Mise en place de workers PHP pour stocker les textes récupérés via un script python et déposés dans une queue RabbitMQ
+- Ingestion des articles et textes de lois dans elasticsearch
+- Module de veille personnalisée par mots\-clés : être alerté en cas de nouveaux articles sur tel ou tel sujet, mot\-clés, acteur, ...
+- Gestion de la pertinence : permettre l'administration via le back\-office des mots\-clés en fonction des thématiques afin d'accorder plus de poids à certains mots ou certains canaux de publication, selon que l'article provienne de Twitter ou de l'assemblée nationale par exemple.
+- Gestion de l'abonnement et facturation utilisateur via Stripe
+- Intégration des maquettes fournies par le client
+

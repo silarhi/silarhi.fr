@@ -1,0 +1,36 @@
+---
+title: "GUIDAP"
+date: '2021-01-14'
+projectDate: '2021-01-14'
+excerpt: "Guidap est un logiciel Web de gestion d'établissements de loisirs. L'outil permet la gestion de vos réservations, votre planning et votre comptabilité."
+author: 'Guillaume Sainthillier'
+tags: ['PHP', 'Symfony', 'AWS', 'SQS']
+published: true
+client: "GUIDAP"
+technologies: ["PHP", "symfony", "AWS"]
+realisations:
+  - title: "Création de Workers et Consumers"
+    date: "14/01/2021"
+    summary: "Développements techniques"
+---
+
+## Context
+
+[Guidap](https://guidap.com/) est un logiciel Web de gestion d'établissements de loisirs. L'outil permet la gestion de vos réservations, votre planning et votre comptabilité.
+
+## Realisations
+
+### Création de Workers et Consumers
+
+Date : 14/01/2021
+
+Développements techniques :
+
+- Utilisation de queue via AWS SQS
+- Gestion de la requeue avec exponential back\-off
+- Mise en place d'une "meta\-queue" pour le stockage des messages expirés après un certain temps
+- Module de dispatch de message en fonction du nombre de tentatives
+
+## Technologies
+
+PHP, symfony, AWS
