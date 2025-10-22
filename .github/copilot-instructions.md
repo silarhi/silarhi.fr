@@ -15,8 +15,17 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 - **Styling:** Tailwind CSS
 - **Content:** Markdown / MDX files for blog and portfolio entries
 - **Hosting:** Vercel
-- **Analytics:** Plausible
 - **CI/CD:** GitHub Actions
+
+## 🔍 Code Quality Checks
+
+Always ensure code quality by running:
+- `yarn lint` - ESLint checks
+- `yarn typecheck` - TypeScript compiler checks
+- `yarn knip` - Detect unused exports, dependencies, and files
+- `yarn lint-ci` - Run all checks together
+
+**Before completing any feature or fix**, verify all quality checks pass. Fix any issues reported by knip (unused code, dependencies, or exports).
 
 ---
 
@@ -44,6 +53,7 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 - Include alt text for images.
 - Optimize metadata via Next.js `metadata` API.
 - Use `aria-*` attributes when relevant.
+- Use `next/image` for optimized images.
 
 ### Git & Project Structure
 - Branch naming: `feature/…`, `fix/…`, `content/…`
