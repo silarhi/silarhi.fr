@@ -6,7 +6,7 @@ import { cn } from '@/utils/lib'
 
 import FormField from './form-field'
 
-export type TextareaFieldProps<TFieldValues extends FieldValues = FieldValues> = FormFieldProps<TFieldValues> &
+type TextareaFieldProps<TFieldValues extends FieldValues = FieldValues> = FormFieldProps<TFieldValues> &
     React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
 const BaseTextareaWidget = forwardRef<

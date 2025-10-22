@@ -5,7 +5,7 @@ import { cn } from '@/utils/lib'
 
 import Label from './label'
 
-export interface GroupProps {
+interface GroupProps {
     label?: ReactNode
     groupClassName?: string
     id?: string

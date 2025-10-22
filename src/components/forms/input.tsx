@@ -6,7 +6,7 @@ import { cn } from '@/utils/lib'
 
 import FormField from './form-field'
 
-export type InputFieldProps<TFieldValues extends FieldValues = FieldValues> = FormFieldProps<TFieldValues> &
+type InputFieldProps<TFieldValues extends FieldValues = FieldValues> = FormFieldProps<TFieldValues> &
     React.InputHTMLAttributes<HTMLInputElement>
 
 const BaseInputWidget = forwardRef<
