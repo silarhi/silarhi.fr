@@ -11,8 +11,16 @@ export default function Help({ type, children }: HelpProps) {
     }
 
     if (type === 'invalid') {
-        return <div className="text-error mt-1.5 block text-sm font-medium animate-in fade-in slide-in-from-top-1 duration-200">{children}</div>
+        return (
+            <div className="text-error animate-in fade-in slide-in-from-top-1 mt-1.5 block text-sm font-medium duration-200">
+                {children}
+            </div>
+        )
     }
 
-    return <div className="text-success mt-1.5 block text-sm font-medium animate-in fade-in slide-in-from-top-1 duration-200">{children}</div>
+    return (
+        <div className="text-success animate-in fade-in slide-in-from-top-1 mt-1.5 block text-sm font-medium duration-200">
+            {children}
+        </div>
+    )
 }
