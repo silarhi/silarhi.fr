@@ -1,54 +1,77 @@
-import { forwardRef, InputHTMLAttributes, ReactNode } from 'react'
+import { forwardRef } from 'react'
+import { FieldValues } from 'react-hook-form'
 
+import { FormFieldProps } from '@/types/forms'
 import { cn } from '@/utils/lib'
 
-import InputIcon from './input-icon'
+import FormField from './form-field'
 
-interface BaseInputWidgetProps extends InputHTMLAttributes<HTMLInputElement> {
-    value?: string | number
-    isValid?: boolean
-    isInvalid?: boolean
-}
+export type InputFieldProps<TFieldValues extends FieldValues = FieldValues> = FormFieldProps<TFieldValues> &
+    React.InputHTMLAttributes<HTMLInputElement>
 
-interface InputProps extends BaseInputWidgetProps {
-    iconPrepend?: ReactNode
-    iconAppend?: ReactNode
-}
-
-const BaseInputWidget = forwardRef<HTMLInputElement, BaseInputWidgetProps>(
-    ({ value, isValid, isInvalid, className, ...props }, ref) => {
-        return (
-            <input
-                ref={ref}
-                defaultValue={value}
-                className={cn(
-                    'focus:ring-primary w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:outline-none',
-                    { 'border-success focus:ring-success': isValid },
-                    { 'border-error focus:ring-error': isInvalid },
-                    className
-                )}
-                {...props}
-            />
-        )
-    }
-)
+const BaseInputWidget = forwardRef<
+    HTMLInputElement,
+    React.InputHTMLAttributes<HTMLInputElement> & { isValid?: boolean; isInvalid?: boolean }
+>(({ isValid, isInvalid, className, ...props }, ref) => {
+    return (
+        <input
+            ref={ref}
+            className={cn(
+                'w-full rounded-lg border px-4 py-3 text-base transition-all duration-200 ease-in-out',
+                'placeholder:text-gray-400',
+                'focus:outline-none focus:ring-4',
+                'hover:border-gray-400',
+                'bg-white shadow-sm',
+                {
+                    'border-gray-300 focus:border-primary focus:ring-primary/20': !isValid && !isInvalid,
+                    'border-success focus:border-success focus:ring-success/20 bg-success/5': isValid,
+                    'border-error focus:border-error focus:ring-error/20 bg-error/5': isInvalid,
+                },
+                className
+            )}
+            {...props}
+        />
+    )
+})
 
 BaseInputWidget.displayName = 'BaseInputWidget'
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ value, isValid, isInvalid, iconPrepend, iconAppend, ...props }, ref) => {
-        if (iconPrepend || iconAppend) {
-            return (
-                <InputIcon iconPrepend={iconPrepend} iconAppend={iconAppend}>
-                    <BaseInputWidget ref={ref} isValid={isValid} isInvalid={isInvalid} value={value} {...props} />
-                </InputIcon>
-            )
-        }
+function Input<TFieldValues extends FieldValues = FieldValues>(
+    {
+        label,
+        groupClassName,
+        id,
+        iconPrepend,
+        iconAppend,
+        name,
+        formState,
+        getFieldState,
+        register,
+        registerOptions,
+        ...props
+    }: InputFieldProps<TFieldValues>,
+    ref: React.Ref<HTMLInputElement>
+) {
+    return (
+        <FormField
+            label={label}
+            groupClassName={groupClassName}
+            id={id}
+            iconPrepend={iconPrepend}
+            iconAppend={iconAppend}
+            name={name}
+            register={register}
+            registerOptions={registerOptions}
+            formState={formState}
+            getFieldState={getFieldState}
+        >
+            {({ isValid, isInvalid, registerProps }) => (
+                <BaseInputWidget ref={ref} isValid={isValid} isInvalid={isInvalid} {...registerProps} {...props} />
+            )}
+        </FormField>
+    )
+}
 
-        return <BaseInputWidget ref={ref} isValid={isValid} isInvalid={isInvalid} value={value} {...props} />
-    }
-)
-
-Input.displayName = 'Input'
-
-export default Input
+export default forwardRef(Input) as <TFieldValues extends FieldValues = FieldValues>(
+    props: InputFieldProps<TFieldValues> & { ref?: React.Ref<HTMLInputElement> }
+) => React.ReactElement

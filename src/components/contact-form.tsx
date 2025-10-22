@@ -3,8 +3,6 @@ import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Button from '@/components/button'
-import Group from '@/components/forms/group'
-import Help from '@/components/forms/help'
 import Input from '@/components/forms/input'
 import Textarea from '@/components/forms/textarea'
 import { Envelope, Person, Phone } from '@/components/icons'
@@ -21,16 +19,7 @@ export default function ContactForm() {
     const [success, setSuccess] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { touchedFields, errors },
-    } = useForm<ContactFormData>({
-        mode: 'onSubmit',
-        reValidateMode: 'onChange',
-        criteriaMode: 'all',
-    })
+    const { register, handleSubmit, reset, formState, getFieldState } = useForm<ContactFormData>()
 
     const onSubmit = useCallback(
         async (data: ContactFormData) => {
@@ -62,10 +51,6 @@ export default function ContactForm() {
         [reset]
     )
 
-    const isFilled = (fieldName: keyof ContactFormData): boolean => !!touchedFields[fieldName]
-    const isValid = (fieldName: keyof ContactFormData): boolean => isFilled(fieldName) && !errors[fieldName]
-    const isInvalid = (fieldName: keyof ContactFormData): boolean => !!errors[fieldName]
-
     if (success) {
         return (
             <div className="text-success border-success/20 bg-success/10 mb-0 rounded border p-4" role="alert">
@@ -84,85 +69,78 @@ export default function ContactForm() {
             )}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="col-span-1">
-                    <Group valid={isValid('name')}>
-                        <Input
-                            id="name"
-                            type="text"
-                            autoComplete="name"
-                            placeholder="Nom"
-                            disabled={pending}
-                            iconPrepend={<Person />}
-                            isValid={isValid('name')}
-                            isInvalid={isInvalid('name')}
-                            {...register('name', {
-                                required: 'Veuillez fournir votre nom',
-                                maxLength: {
-                                    value: 40,
-                                    message: 'Le nom est trop long (40 caractères max)',
-                                },
-                            })}
-                        />
-                        {isInvalid('name') && <Help type="invalid">{errors.name?.message}</Help>}
-                    </Group>
+                    <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        placeholder="Nom"
+                        disabled={pending}
+                        iconPrepend={<Person />}
+                        formState={formState}
+                        getFieldState={getFieldState}
+                        register={register}
+                        registerOptions={{
+                            required: 'Veuillez fournir votre nom',
+                            maxLength: {
+                                value: 40,
+                                message: 'Le nom est trop long (40 caractères max)',
+                            },
+                        }}
+                    />
                 </div>
                 <div className="col-span-1">
-                    <Group valid={isValid('email')}>
-                        <Input
-                            id="email"
-                            type="email"
-                            autoComplete="email"
-                            placeholder="Email"
-                            disabled={pending}
-                            iconPrepend={<Envelope />}
-                            isValid={isValid('email')}
-                            isInvalid={isInvalid('email')}
-                            required
-                            {...register('email', {
-                                required: 'Veuillez fournir votre email',
-                                pattern: {
-                                    value: /\S+@\S+\.\S+/,
-                                    message: "L'email n'est pas au bon format",
-                                },
-                            })}
-                        />
-                        {isInvalid('email') && <Help type="invalid">{errors.email?.message}</Help>}
-                    </Group>
+                    <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        placeholder="Email"
+                        disabled={pending}
+                        iconPrepend={<Envelope />}
+                        formState={formState}
+                        getFieldState={getFieldState}
+                        register={register}
+                        registerOptions={{
+                            required: 'Veuillez fournir votre email',
+                            pattern: {
+                                value: /\S+@\S+\.\S+/,
+                                message: "L'email n'est pas au bon format",
+                            },
+                        }}
+                    />
                 </div>
                 <div className="col-span-1 md:col-span-2">
-                    <Group valid={isValid('phone')}>
-                        <Input
-                            id="phone"
-                            type="text"
-                            autoComplete="tel"
-                            placeholder="Téléphone"
-                            disabled={pending}
-                            iconPrepend={<Phone />}
-                            isValid={isValid('phone')}
-                            isInvalid={isInvalid('phone')}
-                            required
-                            {...register('phone', {
-                                required: 'Veuillez fournir votre numéro de téléphone afin que je puisse vous rappeler',
-                            })}
-                        />
-                        {isInvalid('phone') && <Help type="invalid">{errors.phone?.message}</Help>}
-                    </Group>
+                    <Input
+                        id="phone"
+                        name="phone"
+                        type="text"
+                        autoComplete="tel"
+                        placeholder="Téléphone"
+                        disabled={pending}
+                        iconPrepend={<Phone />}
+                        formState={formState}
+                        getFieldState={getFieldState}
+                        register={register}
+                        registerOptions={{
+                            required: 'Veuillez fournir votre numéro de téléphone afin que je puisse vous rappeler',
+                        }}
+                    />
                 </div>
                 <div className="col-span-1 md:col-span-2">
-                    <Group groupClassName="mb-0" valid={isValid('message')}>
-                        <Textarea
-                            id="message"
-                            rows={7}
-                            placeholder="Message"
-                            disabled={pending}
-                            isValid={isValid('message')}
-                            isInvalid={isInvalid('message')}
-                            required
-                            {...register('message', {
-                                required: 'Veuillez écrire votre message',
-                            })}
-                        />
-                        {isInvalid('message') && <Help type="invalid">{errors.message?.message}</Help>}
-                    </Group>
+                    <Textarea
+                        id="message"
+                        name="message"
+                        rows={7}
+                        placeholder="Message"
+                        disabled={pending}
+                        formState={formState}
+                        getFieldState={getFieldState}
+                        register={register}
+                        registerOptions={{
+                            required: 'Veuillez écrire votre message',
+                        }}
+                    />
                 </div>
             </div>
 
