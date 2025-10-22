@@ -1,10 +1,1 @@
-{
-  "ignoreDependencies": [
-    "@typescript-eslint/eslint-plugin",
-    "@typescript-eslint/parser",
-    "eslint-config-next",
-    "eslint-config-prettier",
-    "eslint-plugin-prettier",
-    "eslint-plugin-simple-import-sort"
-  ]
-}
+{}

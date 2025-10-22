@@ -1,25 +1,28 @@
-import { FlatCompat } from '@eslint/eslintrc'
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettierConfig from 'eslint-config-prettier'
+import prettierPlugin from 'eslint-plugin-prettier'
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const eslintConfig = defineConfig([
+    ...nextVitals,
+    ...nextTs,
 
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-})
+    // Override default ignores of eslint-config-next
+    globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'my-app/**', '**/dist/**', '**/coverage/**']),
 
-const eslintConfig = [
+    // Custom configuration
     {
-        ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
-    },
-    ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'),
-    ...compat.plugins('simple-import-sort'),
-    {
+        plugins: {
+            'simple-import-sort': simpleImportSort,
+            prettier: prettierPlugin,
+        },
         rules: {
-            'simple-import-sort/imports': 'error',
-            'simple-import-sort/exports': 'error',
+            // Custom React rules
             'react/jsx-curly-brace-presence': 'error',
+
+            // TypeScript rules
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {
@@ -28,8 +31,16 @@ const eslintConfig = [
                     caughtErrorsIgnorePattern: '^_',
                 },
             ],
+
+            // Import sorting
+            'simple-import-sort/imports': 'error',
+            'simple-import-sort/exports': 'error',
+
+            // Prettier integration
+            ...prettierConfig.rules,
+            'prettier/prettier': 'error',
         },
     },
-]
+])
 
 export default eslintConfig

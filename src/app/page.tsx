@@ -271,7 +271,9 @@ function MethodologySection() {
                     </div>
                 </FadeInWhenVisible>
 
-                <Arrow />
+                <FadeInWhenVisible delay={0.15}>
+                    <Arrow />
+                </FadeInWhenVisible>
 
                 {/* Main stages */}
                 {FEATURES.map((stage, index) => (
@@ -296,11 +298,17 @@ function MethodologySection() {
                             </div>
                         </FadeInWhenVisible>
 
-                        {index < FEATURES.length - 1 && <Arrow />}
+                        {index < FEATURES.length - 1 && (
+                            <FadeInWhenVisible delay={0.2 + index * 0.15 + 0.075}>
+                                <Arrow />
+                            </FadeInWhenVisible>
+                        )}
                     </Fragment>
                 ))}
 
-                <Arrow />
+                <FadeInWhenVisible delay={0.2 + FEATURES.length * 0.15 - 0.075}>
+                    <Arrow />
+                </FadeInWhenVisible>
 
                 {/* Success block - small, only title */}
                 <FadeInWhenVisible delay={0.2 + FEATURES.length * 0.15}>
