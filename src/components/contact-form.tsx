@@ -81,10 +81,10 @@ export default function ContactForm() {
                         getFieldState={getFieldState}
                         register={register}
                         registerOptions={{
-                            required: 'Veuillez fournir votre nom',
+                            required: 'Merci de renseigner votre nom',
                             maxLength: {
                                 value: 40,
-                                message: 'Le nom est trop long (40 caractères max)',
+                                message: 'Votre nom doit contenir maximum 40 caractères',
                             },
                         }}
                     />
@@ -102,10 +102,10 @@ export default function ContactForm() {
                         getFieldState={getFieldState}
                         register={register}
                         registerOptions={{
-                            required: 'Veuillez fournir votre email',
+                            required: 'Merci de renseigner votre email',
                             pattern: {
                                 value: /\S+@\S+\.\S+/,
-                                message: "L'email n'est pas au bon format",
+                                message: 'Merci de saisir une adresse email valide (ex: nom@exemple.fr)',
                             },
                         }}
                     />
@@ -123,7 +123,7 @@ export default function ContactForm() {
                         getFieldState={getFieldState}
                         register={register}
                         registerOptions={{
-                            required: 'Veuillez fournir votre numéro de téléphone afin que je puisse vous rappeler',
+                            required: 'Merci de renseigner votre numéro de téléphone pour être recontacté',
                         }}
                     />
                 </div>
@@ -138,7 +138,7 @@ export default function ContactForm() {
                         getFieldState={getFieldState}
                         register={register}
                         registerOptions={{
-                            required: 'Veuillez écrire votre message',
+                            required: 'Merci de rédiger votre message',
                         }}
                     />
                 </div>
