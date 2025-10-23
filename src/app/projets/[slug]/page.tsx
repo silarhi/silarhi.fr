@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link, { LinkProps } from 'next/link'
@@ -168,178 +168,6 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                     </section>
                 )}
 
-                {/* Engagement & Project Details - Merged Section */}
-                {(project.engagement || project.tasks.length > 0) && (
-                    <section className="bg-muted/30 py-16 lg:py-20">
-                        <div className="container mx-auto px-4 lg:px-8">
-                            <div className="mx-auto max-w-5xl">
-                                {/* Engagement Header */}
-                                {project.engagement && (
-                                    <>
-                                        <div className="mb-6 flex items-center justify-center gap-3">
-                                            {project.projectType === 'one-shot' ? (
-                                                <Zap className="text-secondary h-6 w-6" />
-                                            ) : (
-                                                <Repeat className="text-primary h-6 w-6" />
-                                            )}
-                                            <h2 className="text-foreground text-3xl font-bold lg:text-4xl">
-                                                {project.engagement.type}
-                                            </h2>
-                                        </div>
-                                        <p className="text-foreground/80 mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed">
-                                            {project.engagement.description}
-                                        </p>
-                                    </>
-                                )}
-
-                                {/* Engagement Details (Deliverables or Phases) */}
-                                {project.engagement && (
-                                    <div className="mb-12">
-                                        {project.projectType === 'one-shot' && project.engagement.deliverables ? (
-                                            <div className="border-border bg-surface mx-auto max-w-3xl rounded-xl border p-6">
-                                                <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-                                                    <Calendar className="h-4 w-4" />
-                                                    Livrables du projet
-                                                </h3>
-                                                <ul className="grid gap-4 sm:grid-cols-2">
-                                                    {project.engagement.deliverables.map((deliverable, idx) => (
-                                                        <li key={idx} className="flex items-start gap-3">
-                                                            <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
-                                                            <span className="text-foreground">{deliverable}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        ) : (
-                                            <div className="space-y-6">
-                                                {project.engagement.phases && (
-                                                    <div className="border-border bg-surface mx-auto max-w-3xl rounded-xl border p-6">
-                                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-                                                            <Calendar className="h-4 w-4" />
-                                                            Phases du projet
-                                                        </h3>
-                                                        <div className="space-y-4">
-                                                            {project.engagement.phases.map((phase, idx) => (
-                                                                <div key={idx} className="flex gap-4">
-                                                                    <div className="flex flex-col items-center">
-                                                                        <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
-                                                                            {idx + 1}
-                                                                        </div>
-                                                                        {project.engagement?.phases &&
-                                                                            idx <
-                                                                                project.engagement.phases.length -
-                                                                                    1 && (
-                                                                                <div className="bg-border mt-2 h-full w-0.5" />
-                                                                            )}
-                                                                    </div>
-                                                                    <div className="pb-6">
-                                                                        <div className="text-foreground mb-1 font-semibold">
-                                                                            {phase.name}
-                                                                        </div>
-                                                                        <div className="text-muted mb-2 text-sm">
-                                                                            {phase.period}
-                                                                        </div>
-                                                                        <div className="text-foreground/80">
-                                                                            {phase.focus}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {project.engagement.ongoing && (
-                                                    <div className="border-border bg-surface mx-auto max-w-3xl rounded-xl border p-6">
-                                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-                                                            <Users className="h-4 w-4" />
-                                                            Services continus
-                                                        </h3>
-                                                        <ul className="grid gap-4 sm:grid-cols-2">
-                                                            {project.engagement.ongoing.map((service, idx) => (
-                                                                <li key={idx} className="flex items-start gap-3">
-                                                                    <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
-                                                                    <span className="text-foreground">{service}</span>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-
-                                {/* Detailed Task Content - Only if tasks exist */}
-                                {project.tasks.length > 0 && (
-                                    <>
-                                        <div className="mb-8 text-center">
-                                            <h3 className="text-foreground mb-3 text-2xl font-bold lg:text-3xl">
-                                                Détails Techniques
-                                            </h3>
-                                            <p className="text-muted mx-auto max-w-2xl text-base">
-                                                Explorez les fonctionnalités et développements réalisés
-                                            </p>
-                                        </div>
-
-                                        {/* Scrollable horizontal cards on mobile, grid on desktop */}
-                                        <div className="relative">
-                                            <div className="hide-scrollbar flex gap-6 overflow-x-auto pb-4 lg:grid lg:grid-cols-2 lg:overflow-x-visible">
-                                                {project.tasks.map((task, index) => (
-                                                    <div
-                                                        key={task.slug}
-                                                        className="border-border bg-surface min-w-[300px] flex-shrink-0 overflow-hidden rounded-2xl border shadow-sm transition-shadow hover:shadow-md lg:min-w-0"
-                                                    >
-                                                        {/* Task header */}
-                                                        <div className="bg-primary/5 border-border border-b px-6 py-4">
-                                                            <div className="mb-2 flex items-center gap-2">
-                                                                <div className="bg-primary flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white">
-                                                                    {index + 1}
-                                                                </div>
-                                                                <h4 className="text-foreground text-lg font-semibold">
-                                                                    {task.title}
-                                                                </h4>
-                                                            </div>
-                                                            <p className="text-muted text-sm">{task.date}</p>
-                                                        </div>
-
-                                                        {/* Task content - scrollable */}
-                                                        <div className="max-h-96 overflow-y-auto p-6">
-                                                            <article className="prose prose-sm max-w-none">
-                                                                <MDXRemote
-                                                                    source={task.content}
-                                                                    components={mdxComponents}
-                                                                    options={{
-                                                                        mdxOptions: {
-                                                                            remarkPlugins: [remarkGfm],
-                                                                            rehypePlugins: [
-                                                                                rehypeSlug,
-                                                                                rehypeAutolinkHeadings,
-                                                                                rehypeUnwrapImages,
-                                                                            ],
-                                                                        },
-                                                                    }}
-                                                                />
-                                                            </article>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                            {/* Scroll indicator for mobile */}
-                                            <div className="mt-4 flex justify-center gap-2 lg:hidden">
-                                                {project.tasks.map((_, index) => (
-                                                    <div key={index} className="bg-primary/30 h-2 w-2 rounded-full" />
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    </section>
-                )}
-
                 {/* Challenge */}
                 {project.challenge && project.challenge.description && (
                     <section className="py-16 lg:py-20">
@@ -402,6 +230,187 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                     <p className="text-foreground/80 text-lg leading-relaxed">
                                         {project.solution.description}
                                     </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {/* Timeline: Engagement & Detailed Implementation */}
+                {(project.engagement || project.tasks.length > 0) && (
+                    <section className="bg-muted/30 py-16 lg:py-20">
+                        <div className="container mx-auto px-4 lg:px-8">
+                            <div className="mx-auto max-w-4xl">
+                                {/* Section Header */}
+                                <div className="mb-12 text-center">
+                                    <div className="mb-6 flex items-center justify-center gap-3">
+                                        {project.projectType === 'one-shot' ? (
+                                            <Zap className="text-secondary h-6 w-6" />
+                                        ) : (
+                                            <Repeat className="text-primary h-6 w-6" />
+                                        )}
+                                        <h2 className="text-foreground text-3xl font-bold lg:text-4xl">
+                                            {project.engagement?.type || 'Réalisation du Projet'}
+                                        </h2>
+                                    </div>
+                                    {project.engagement?.description && (
+                                        <p className="text-foreground/80 mx-auto max-w-2xl text-lg leading-relaxed">
+                                            {project.engagement.description}
+                                        </p>
+                                    )}
+                                </div>
+
+                                {/* Temporal Timeline */}
+                                <div className="relative">
+                                    {/* Vertical timeline line */}
+                                    <div className="bg-border absolute top-0 bottom-0 left-8 w-0.5 lg:left-1/2" />
+
+                                    <div className="space-y-12">
+                                        {/* Engagement Phases */}
+                                        {project.engagement?.phases?.map((phase, idx) => (
+                                            <div key={`phase-${idx}`} className="relative flex gap-8 lg:gap-16">
+                                                {/* Timeline node */}
+                                                <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
+                                                    <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-lg">
+                                                        {idx + 1}
+                                                    </div>
+                                                </div>
+
+                                                {/* Content - alternating sides on desktop */}
+                                                <div
+                                                    className={`ml-24 lg:ml-0 lg:w-1/2 ${
+                                                        idx % 2 === 0 ? 'lg:pr-16' : 'lg:ml-auto lg:pl-16'
+                                                    }`}
+                                                >
+                                                    <div className="border-border bg-surface rounded-xl border p-6 shadow-sm">
+                                                        <div className="text-primary mb-2 text-sm font-semibold">
+                                                            {phase.period}
+                                                        </div>
+                                                        <h3 className="text-foreground mb-3 text-xl font-bold">
+                                                            {phase.name}
+                                                        </h3>
+                                                        <p className="text-foreground/80 leading-relaxed">
+                                                            {phase.focus}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+
+                                        {/* Deliverables (for one-shot projects) */}
+                                        {project.projectType === 'one-shot' &&
+                                            project.engagement?.deliverables?.map((deliverable, idx) => (
+                                                <div
+                                                    key={`deliverable-${idx}`}
+                                                    className="relative flex gap-8 lg:gap-16"
+                                                >
+                                                    <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
+                                                        <div className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full border-4 border-white shadow-lg">
+                                                            <CheckCircle2 className="h-6 w-6 text-white" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className={`ml-24 lg:ml-0 lg:w-1/2 ${
+                                                            (project.engagement?.phases?.length || 0 + idx) % 2 === 0
+                                                                ? 'lg:pr-16'
+                                                                : 'lg:ml-auto lg:pl-16'
+                                                        }`}
+                                                    >
+                                                        <div className="border-border bg-surface rounded-xl border p-6 shadow-sm">
+                                                            <div className="flex items-start gap-3">
+                                                                <CheckCircle2 className="text-success mt-1 h-5 w-5 flex-shrink-0" />
+                                                                <span className="text-foreground font-medium">
+                                                                    {deliverable}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+
+                                        {/* Detailed Tasks with Expandable Content */}
+                                        {project.tasks.map((task, idx) => {
+                                            const previousItemsCount =
+                                                (project.engagement?.phases?.length || 0) +
+                                                (project.engagement?.deliverables?.length || 0)
+                                            return (
+                                                <div key={task.slug} className="relative flex gap-8 lg:gap-16">
+                                                    <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
+                                                        <div className="bg-primary/80 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-lg">
+                                                            {previousItemsCount + idx + 1}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className={`ml-24 lg:ml-0 lg:w-1/2 ${
+                                                            (previousItemsCount + idx) % 2 === 0
+                                                                ? 'lg:pr-16'
+                                                                : 'lg:ml-auto lg:pl-16'
+                                                        }`}
+                                                    >
+                                                        <div className="border-border bg-surface overflow-hidden rounded-xl border shadow-sm">
+                                                            {/* Task header */}
+                                                            <div className="bg-primary/5 border-border border-b px-6 py-4">
+                                                                <h4 className="text-foreground mb-1 text-lg font-semibold">
+                                                                    {task.title}
+                                                                </h4>
+                                                                <p className="text-muted text-sm">{task.date}</p>
+                                                            </div>
+
+                                                            {/* Task content - scrollable */}
+                                                            <div className="max-h-96 overflow-y-auto p-6">
+                                                                <article className="prose prose-sm max-w-none">
+                                                                    <MDXRemote
+                                                                        source={task.content}
+                                                                        components={mdxComponents}
+                                                                        options={{
+                                                                            mdxOptions: {
+                                                                                remarkPlugins: [remarkGfm],
+                                                                                rehypePlugins: [
+                                                                                    rehypeSlug,
+                                                                                    rehypeAutolinkHeadings,
+                                                                                    rehypeUnwrapImages,
+                                                                                ],
+                                                                            },
+                                                                        }}
+                                                                    />
+                                                                </article>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+
+                                        {/* Ongoing Services (for recurring projects) */}
+                                        {project.engagement?.ongoing && (
+                                            <div className="relative flex gap-8 lg:gap-16">
+                                                <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
+                                                    <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full border-4 border-white shadow-lg">
+                                                        <Repeat className="h-6 w-6 text-white" />
+                                                    </div>
+                                                </div>
+
+                                                <div className="ml-24 lg:ml-0 lg:w-full">
+                                                    <div className="border-border bg-surface rounded-xl border p-6 shadow-sm">
+                                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
+                                                            <Users className="h-5 w-5" />
+                                                            Services Continus
+                                                        </h3>
+                                                        <ul className="grid gap-4 sm:grid-cols-2">
+                                                            {project.engagement.ongoing.map((service, idx) => (
+                                                                <li key={idx} className="flex items-start gap-3">
+                                                                    <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
+                                                                    <span className="text-foreground">{service}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
