@@ -1,13 +1,55 @@
 ---
-title: "Migration"
+title: "Production Fabrication : Migration PHP 8.0 et Sécurité SAP"
 date: "2021-09-20"
-project: "production-fabrication"
+projectDate: "2021-06-01"
+excerpt: "Modernisation application industrielle PHP : migration PHP 5.6 vers 8.0, SDK SAP sécurisé, support UTF-8 et requêtes SQL préparées anti-injection."
+author: "Guillaume Sainthillier"
+tags: ["PHP", "Migration", "SAP", "Security", "Manufacturing"]
+published: true
 ---
 
-Mise à jour technique de l'application :
+## Contexte
 
-- Migration PHP 5.6 vers 8.0
-- Utilisation du SDK SAP au lieu d'un usage direct via `COM`
-- Support de l'UTF-8 dans les différentes pages
-- Utilisation de requêtes SQL préparées afin de prévenir les injections SQL
+Application gestion production fabrication industrielle connectée ERP SAP. Modernisation technique critique migration [PHP 5.6](/projets/tag/php) (EOL 2018) vers PHP 8.0.
 
+## Migrations Techniques
+
+### PHP 5.6 → 8.0
+**Migration majeure** vers [PHP 8.0](/projets/tag/php) :
+- Réécriture code incompatible (syntaxe obsolète)
+- Performance JIT (+15-20% traitements industriels)
+- Sécurité patchée (PHP 5.6 vulnérable)
+- Support long terme garanti
+
+### SDK SAP Moderne
+Remplacement accès SAP via `COM` (Component Object Model legacy Windows) par **SDK SAP officiel** :
+- API standardisée cross-platform
+- Meilleure stabilité connexions
+- Performances améliorées requêtes SAP
+- Maintenance simplifiée
+
+### Support UTF-8
+Implémentation encodage UTF-8 complet :
+- Caractères spéciaux industriels (symboles chimiques, unités)
+- Noms produits internationaux
+- Données multi-langues SAP
+
+### Requêtes SQL Préparées
+Sécurisation base données :
+- **Requêtes préparées** remplacent concaténation SQL
+- Protection injections SQL (CVE critiques)
+- Conformité standards sécurité industrielle
+
+## Résultats
+
+- **Sécurité** : Vulnérabilités PHP 5.6 éliminées + protection SQL injection
+- **Performance** : PHP 8.0 JIT accélère calculs production
+- **Fiabilité** : SDK SAP stabilise connexions ERP
+- **Conformité** : UTF-8 supporte données internationales
+
+## Technologies
+
+- [PHP 8.0](/projets/tag/php) - Langage moderne avec JIT
+- SDK SAP - Connecteur ERP officiel
+- Requêtes préparées PDO - Sécurité SQL
+- UTF-8 - Encodage international

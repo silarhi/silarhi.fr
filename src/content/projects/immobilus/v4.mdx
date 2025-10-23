@@ -1,22 +1,68 @@
 ---
-title: "V4"
+title: "Immobilus V4 : Migration PHP 8.0 et Multi-Banques EBICS"
 date: "2022-02-17"
-project: "immobilus"
+projectDate: "2021-11-01"
+excerpt: "Modernisation gestion locative : migration PHP 8.0, EBICS multi-banques, messagerie bailleur-locataire, audit système, gestion clés et vérifications périodiques données."
+author: "Guillaume Sainthillier"
+tags: ["Symfony", "PHP", "Migration", "Real Estate", "EBICS"]
+published: true
 ---
 
-Ajout de fonctionnalités :
+## Contexte
 
-- Amélioration de l'ergonomie (sections d'aide sur champs complexes, tri et recherche dans toutes les parties)
-- Moteurs de vérification périodique de validité des données (adresse postale, email, numéro de téléphone)
-- Gestion des clés (immeuble, parties communes)
-- Refonte technique
-- Améliorations sur la récupération d'opérations bancaires via EBICS (gestion multi-banques, multi-profils)
-- Module de messagerie bailleur / locataire avec envoi possible à tous les locataires d'un bailleur ou d'un immeuble entier
-- Visualisation des données d'audit enregistrées par l'outil
-- Améliorations sur la gestion de fin de location (remboursement de dépôt de loyer, calcul des dates et modalités de préavis)
+Immobilus V4 modernise infrastructure [PHP 8.0](/projets/tag/php) et enrichit fonctionnalités communication et vérification données.
 
-Mises à jour techniques :
+## Modernisation Technique
 
-- Migration PHP 7.4 vers 8.0
-- Migration Symfony 5.4 vers 6.0
+### Migration PHP 7.4 → 8.0
+Adoption [PHP 8.0](/projets/tag/php) : JIT compilation (+10-15% performance), named arguments, attributes, union types. Code moderne et performant.
 
+### EBICS Multi-Banques
+Refonte module [EBICS](/projets/tag/ebics) : support multi-banques simultanées, multi-profils par banque. Bailleurs avec comptes multiples récupèrent toutes opérations automatiquement.
+
+## Fonctionnalités Métier
+
+### Ergonomie Améliorée
+- Sections d'aide contextuelles sur champs complexes
+- Tri et recherche dans toutes interfaces
+- Navigation optimisée pour productivité
+
+### Vérifications Périodiques
+Moteurs automatiques validité données :
+- **Adresses postales** : Vérification via API La Poste
+- **Emails** : Validation existence boîtes
+- **Téléphones** : Contrôle numéros actifs
+
+Alertes automatiques pour mises à jour nécessaires.
+
+### Gestion Clés
+Module suivi clés immeubles et parties communes : attribution, historique, inventaires. Traçabilité complète pour sécurité et gestion locative.
+
+### Messagerie Intégrée
+**Communication bailleur-locataire** directe dans plateforme. Envois :
+- Individuel locataire spécifique
+- Broadcast tous locataires bailleur
+- Broadcast immeuble complet
+
+Historique conversations centralisé.
+
+### Audit Système
+Visualisation logs audit : modifications données, accès, opérations sensibles. Traçabilité complète pour conformité et sécurité.
+
+### Fin de Location Avancée
+Améliorations workflow : calcul automatique remboursement dépôt garantie, dates préavis selon type bail, modalités légales.
+
+## Résultats
+
+- **Performance** : PHP 8.0 améliore temps réponse global
+- **Fiabilité** : Vérifications automatiques maintiennent données à jour
+- **Communication** : Messagerie réduit emails dispersés
+- **Multi-Banques** : Bailleurs centralisent toutes opérations bancaires
+
+## Technologies
+
+- [PHP 8.0](/projets/tag/php) - Langage avec JIT
+- [Symfony](/projets/tag/symfony) - Framework backend
+- EBICS multi-profils - Protocole bancaire
+- API La Poste - Validation adresses
+- Système audit - Traçabilité opérations

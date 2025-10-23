@@ -1,19 +1,58 @@
 ---
-title: "IRIS API"
+title: "IRIS API : Migration Symfony 6.2 pour Scanner Dentaire"
 date: "2023-10-16"
-project: "iris"
+projectDate: "2023-10-16"
+excerpt: "Modernisation d'une API Symfony existante : migration vers Symfony 6.2, architecture modulaire multi-bases, authentification SSO et tests optimisés pour Scan4All."
+author: "Guillaume Sainthillier"
+tags: ['Symfony', 'API', 'PHP', 'Migration', 'Healthcare']
+published: true
 ---
 
-Évolutions apportées :
+## Contexte
 
-- Intégration d'API tierces privées
-- Création d'endpoints API dédiés aux partenaires
-- Refonte des différents supports d'authentification (SSO, Keycloak, Bearer, Header)
-- Séparation des données vers plusieurs bases
+IRIS est un scanner intra-oral dentaire de haute précision développé par Scan4All. L'[API](/projets/tag/api) IRIS constitue le cœur de l'écosystème logiciel, gérant communication entre scanner, applications web et systèmes partenaires. Migration [Symfony](/projets/tag/symfony) 6.2 nécessaire pour moderniser la plateforme initialement en 4.4.
 
-Développements techniques :
+## Défis Techniques
 
-- Migration Symfony 4.4 vers 6.2
-- Mise en place de CI
-- Temps de tests réduits de 15 min à 1 min 30
+L'API existante rencontrait plusieurs limites : authentification unique insuffisante pour l'écosystème croissant, bases de données monolithiques ralentissant les performances avec volumétrie croissante, et suite de tests exécutée en 15 minutes freinant déploiements.
 
+## Solution Mise en Œuvre
+
+### Migration [Symfony](/projets/tag/symfony) 4.4 → 6.2
+Montée de version progressive vers Symfony 6.2 avec [PHP](/projets/tag/php) 8.1, bénéficiant du JIT compiler et optimisations framework. Support long terme garanti jusqu'en 2025.
+
+### Architecture Multi-Bases de Données
+Séparation des données selon nature : base patients (données sensibles), base scans (métadonnées volumineuses), base utilisation (analytique). Isolation permettant optimisation spécifique de chaque domaine et sauvegardes ciblées.
+
+### Authentification Modulaire
+Refonte architecture supportant 4 méthodes d'authentification sélectionnables dynamiquement :
+- **SSO d'entreprise** : intégration systèmes cabinets dentaires
+- **Keycloak** : gestion centralisée identités
+- **Bearer tokens** : applications mobiles et web
+- **Headers personnalisés** : systèmes legacy
+
+Cette flexibilité permet intégration naturelle dans infrastructures variées (cabinets, cliniques, laboratoires).
+
+### API Partenaires Privées
+Exposition endpoints [API](/projets/tag/api) sécurisés pour laboratoires dentaires avec documentation OpenAPI complète. Couche d'abstraction facilitant onboarding partenaires.
+
+### Optimisation Tests CI/CD
+Parallélisation et optimisation suite de tests : réduction de 15 minutes à 1 min 30 (90% gain). Accélération cycles développement et déploiements.
+
+## Résultats
+
+- **Tests** : 90% temps réduit (15 min → 1 min 30)
+- **Architecture** : Multi-bases pour performances et sécurité
+- **Authentification** : 4 méthodes supportées simultanément
+- **Écosystème** : API partenaires opérationnelle pour laboratoires
+- **Maintenance** : Support LTS Symfony 6.2 jusqu'en 2025
+
+## Technologies Utilisées
+
+- **[Symfony 6.2](/projets/tag/symfony)** - Framework PHP moderne pour l'architecture API REST
+- **[PHP 8.1](/projets/tag/php)** - Langage backend avec JIT compiler pour les performances
+- **Keycloak** - Gestion centralisée des identités et authentification SSO
+- **[MySQL](/projets/tag/mysql)** - Bases de données relationnelles multiples pour la séparation des données
+- **PHPUnit** - Tests unitaires et fonctionnels optimisés
+- **GitLab CI** - Pipeline d'intégration continue et déploiement automatisé
+- **Docker** - Conteneurisation pour environnements de développement et production

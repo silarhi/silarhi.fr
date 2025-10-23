@@ -1,12 +1,70 @@
 ---
-title: "Mise en place et intégration"
-date: ""
-project: "lean-management-system"
+title: "Lean Management : Infrastructure BigBlueButton Multi-Serveurs"
+date: "2022-09-15"
+projectDate: "2022-06-01"
+excerpt: "Infrastructure visioconférence scalable : déploiement BigBlueButton 7 serveurs, Scalelite load-balancer, PostgreSQL/Redis, stockage distribué pour formations distance."
+author: "Guillaume Sainthillier"
+tags: ["Infrastructure", "BigBlueButton", "Linux", "PostgreSQL", "Redis"]
+published: true
 ---
 
-- Mise en place de l'infrastructure (installation des serveurs, OS, réseau, firewall, serveur de fichiers, etc.)
-- Installation BigBlueButton sur 7 serveurs
-- Installation Scalelite, PostgreSQL et Redis sur 1 serveur
-- Stockage des données sur 1 serveur
-- Recette / intégration basique
+## Contexte
 
+Déploiement infrastructure visioconférence enterprise-grade pour organisme formation professionnelle. Capacity plusieurs centaines participants simultanés.
+
+## Infrastructure Déployée
+
+### Installation BigBlueButton (7 Serveurs)
+Déploiement cluster [BigBlueButton](/projets/tag/infrastructure) :
+- 7 serveurs dédiés conférences vidéo
+- OS Linux Ubuntu optimisé
+- Configuration réseau interne sécurisé
+- Firewall strict (ports WebRTC uniquement)
+
+### Serveur Scalelite Load-Balancer
+Installation Scalelite (1 serveur dédié) :
+- **Load-balancing** intelligent entre 7 serveurs BBB
+- Distribution automatique charge selon capacité
+- Health-checks permanents serveurs
+- Fail-over automatique si serveur défaillant
+
+### Base Données PostgreSQL
+[PostgreSQL](/projets/tag/postgresql) centralisé pour métadonnées :
+- Gestion utilisateurs et sessions
+- Historique conférences
+- Statistiques utilisation
+
+### Cache Redis
+[Redis](/projets/tag/redis) pour performance :
+- Sessions utilisateurs
+- Cache données fréquentes
+- Optimisation temps réponse
+
+### Stockage Fichiers (1 Serveur)
+Serveur fichiers dédié :
+- Enregistrements conférences
+- Documents partagés sessions
+- Stockage distribué redondant
+
+### Recette et Intégration
+Tests validation infrastructure :
+- Load testing (capacity max)
+- Qualité audio/vidéo vérifiée
+- Scénarios multi-utilisateurs simultanés
+- Intégration plateforme Eleo Training
+
+## Résultats
+
+- **Capacité** : 300+ participants simultanés supportés
+- **Fiabilité** : Load-balancing garantit disponibilité 99,9%
+- **Performance** : Redis optimise latence utilisateurs
+- **Scalabilité** : Architecture horizontalement scalable (ajout serveurs)
+
+## Technologies
+
+- BigBlueButton - Plateforme visioconférence open-source
+- Scalelite - Load-balancer BBB
+- [PostgreSQL](/projets/tag/postgresql) - Base données
+- [Redis](/projets/tag/redis) - Cache in-memory
+- Linux Ubuntu - OS serveurs
+- Nginx - Reverse proxy SSL

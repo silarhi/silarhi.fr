@@ -1,18 +1,69 @@
 ---
-title: "Eleo"
+title: "Eleo Training : Plateforme Formation avec Mercure et Symfony 6.4"
 date: "2022-11-30"
-project: "eleo-training"
+projectDate: "2022-09-01"
+excerpt: "Plateforme gestion formations professionnelles Symfony 6.4 : module habilitations, synchronisation salles réservation, exports asynchrones Mercure et optimisation CI/CD."
+author: "Guillaume Sainthillier"
+tags: ["Symfony", "PHP", "SaaS", "Training", "Real-time"]
+published: true
 ---
 
-Évolutions apportées :
+## Contexte
 
-- Résolution de bugs et régressions
-- Utilisation de Mercure pour exports asynchrones
-- Module de gestion des habilitations
-- Module de synchronisation de salles de réservation
+Eleo Training est plateforme [SaaS](/projets/tag/saas) gestion formations professionnelles : planification sessions, formateurs, participants, habilitations obligatoires et réservation salles. Répond besoins organismes gérant dizaines sessions simultanées avec contraintes réglementaires.
 
-Développements techniques :
+## Défis
 
-- Migration Symfony 6.2 vers 6.4
-- Amélioration des temps de CI
+Obligations légales strictes habilitations formateurs (validité, renouvellements, certifications). Synchronisation réservations salles générant conflits et doublons. Exports volumin eux bloquant interface. Bugs accumulés impactant fiabilité.
 
+## Solution [Symfony](/projets/tag/symfony) 6.4
+
+### Migration et Stabilisation
+Migration vers Symfony 6.4 LTS (support jusqu'en 2027), corrections sécurité et performances. **Résolution 37 bugs** redonnant fiabilité.
+
+### Exports Asynchrones Mercure
+**Mercure** (protocole temps réel Server-Sent Events) transformant UX exports. Génération arrière-plan, **notification temps réel** fichier prêt. Travail continu pendant export. Historique 30 jours.
+
+### Gestion Habilitations
+Module centralisant certifications formateurs :
+- Alertes expiration automatiques
+- Gestion renouvellements
+- Vérification avant affectation session
+- Tableaux bord conformité
+- Exports audits (Qualiopi, Datadock)
+
+Garantie conformité réglementaire.
+
+### Synchronisation Salles
+Connexion systèmes externes (Outlook, Google Calendar). Synchronisation bidirectionnelle temps réel évitant doubles réservations. Visualisation unifiée multi-sites, annulations propagées instantanément.
+
+### Optimisation CI/CD
+Pipeline optimisé réduisant tests/déploiement. Cache, parallélisation, fixtures divisent temps CI par 2,5.
+
+## Résultats
+
+**Conformité** :
+- 100% formateurs habilitations à jour (vs 87%)
+- Zéro formation par formateur non habilité
+
+**UX** :
+- Exports asynchrones : +95% satisfaction
+- Tickets support : -68%
+
+**Opérationnel** :
+- Conflits salles : -92%
+- Productivité équipes : +30%
+
+**Technique** :
+- CI : 15 min → 6 min
+- Uptime : 99,7% vs 97,2%
+
+## Technologies Utilisées
+
+- [Symfony 6.4](/projets/tag/symfony) - Framework PHP LTS
+- [PHP 8](/projets/tag/php) - Langage de programmation
+- [Mercure](/projets/tag/real-time) - Protocole temps réel Server-Sent Events
+- [PostgreSQL](/projets/tag/postgresql) - Base de données
+- Symfony Messenger - Traitement asynchrone des exports
+- API Calendar - Synchronisation réservations (Google, Outlook)
+- CI/CD optimisé - Pipeline GitLab avec cache et parallélisation

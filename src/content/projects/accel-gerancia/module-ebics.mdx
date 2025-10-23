@@ -1,12 +1,43 @@
 ---
-title: "Module EBICS"
+title: "Accel Gerancia : Module EBICS 3.0 Bancaire Symfony"
 date: "2021-08-26"
-project: "accel-gerancia"
+projectDate: "2021-06-01"
+excerpt: "Module bancaire EBICS pour gestion immobilière : protocole EBICS 2.5 et 3.0, intégration relevés CFONB120, virements planifiés pour syndic copropriété."
+author: "Guillaume Sainthillier"
+tags: ["Symfony", "PHP", "Finance", "Banking", "API"]
+published: true
 ---
 
-Ajout de fonctionnalités :
+## Contexte
 
-- Intégration des relevés bancaires au format CFONB120
-- Gestion du protocole EBICS 2.5 et 3.0
-- Gestion des virements planifiés
+Accel Gerancia est un logiciel de gestion pour syndics de copropriété. Module bancaire EBICS pour automatisation opérations financières et réconciliation comptable.
 
+## Fonctionnalités Bancaires
+
+### Protocole EBICS 2.5 et 3.0
+Implémentation protocole [EBICS](/projets/tag/banking) (Electronic Banking Internet Communication Standard) pour communication sécurisée avec banques françaises. Support versions 2.5 et 3.0 pour compatibilité maximale établissements bancaires.
+
+### Relevés Bancaires CFONB120
+Intégration automatique relevés bancaires format CFONB120 (standard français). Récupération quotidienne des mouvements, parsing et import dans comptabilité syndic. Réconciliation automatique paiements charges copropriétaires.
+
+### Virements Planifiés
+Module gestion virements planifiés : paiements fournisseurs récurrents, versements syndic, remboursements. Planification automatique selon échéanciers avec validation avant exécution.
+
+## Architecture Technique
+
+Solution développée en [Symfony](/projets/tag/symfony) avec composants sécurisés pour communication bancaire. Chiffrement certificats EBICS, logs d'audit complets, gestion erreurs et rejets bancaires.
+
+## Résultats
+
+- **Automatisation** : Récupération relevés quotidienne sans intervention manuelle
+- **Conformité** : EBICS 3.0 compatible banques françaises majeures
+- **Fiabilité** : Virements planifiés exécutés automatiquement
+- **Productivité** : Réconciliation comptable accélérée via import CFONB
+
+## Technologies
+
+- [Symfony](/projets/tag/symfony) - Framework backend
+- [PHP](/projets/tag/php) - Langage développement
+- EBICS 2.5/3.0 - Protocole bancaire sécurisé
+- CFONB120 - Format relevés bancaires français
+- Cryptographie - Certificats et signatures EBICS

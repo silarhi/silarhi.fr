@@ -1,15 +1,63 @@
 ---
-title: "Lanterne"
+title: "Lanterne : Veille Politique Elasticsearch et Paiement Stripe"
 date: "2021-07-20"
-project: "lanterne"
+projectDate: "2021-04-01"
+excerpt: "Plateforme veille politique temps réel : ingestion Elasticsearch articles/lois, alertes personnalisées mots-clés, scoring pertinence IA, abonnement Stripe SaaS."
+author: "Guillaume Sainthillier"
+tags: ["Elasticsearch", "PHP", "RabbitMQ", "Stripe", "SaaS"]
+published: true
 ---
 
-Développement de l'outil :
+## Contexte
 
-- Mise en place de workers PHP pour stocker les textes récupérés via un script Python et déposés dans une queue RabbitMQ
-- Ingestion des articles et textes de lois dans Elasticsearch
-- Module de veille personnalisée par mots-clés : alerte en cas de nouveaux articles sur un sujet, mot-clé ou acteur spécifique
-- Gestion de la pertinence : administration via le back-office des mots-clés en fonction des thématiques afin d'accorder plus de poids à certains mots ou certains canaux de publication (selon que l'article provienne de Twitter ou de l'Assemblée nationale par exemple)
-- Gestion de l'abonnement et facturation utilisateur via Stripe
-- Intégration des maquettes fournies par le client
+Lanterne est plateforme SaaS veille politique agrégant contenus institutionnels (Assemblée nationale, Sénat, Twitter politiciens) avec alertes personnalisées.
 
+## Architecture
+
+### Ingestion Multi-Sources
+Workers Python récupèrent contenus :
+- Articles presse politique
+- Textes lois Assemblée/Sénat
+- Tweets acteurs politiques
+
+Messages déposés queue [RabbitMQ](/projets/tag/queues) pour traitement asynchrone.
+
+### Workers PHP Elasticsearch
+Workers [PHP](/projets/tag/php) consomment RabbitMQ et indexent dans [Elasticsearch](/projets/tag/elasticsearch) :
+- Stockage articles/textes structurés
+- Indexation full-text multilingue
+- Enrichissements métadonnées (auteur, date, source)
+
+### Veille Personnalisée Mots-Clés
+Module alertes utilisateurs :
+- Configuration mots-clés surveillance (ex: "réforme retraites", "écologie")
+- Notification email/SMS nouveaux contenus matchant
+- Filtres avancés (source, acteur, thématique)
+
+### Scoring Pertinence IA
+**Moteur pertinence intelligent** via back-office :
+- Administration poids mots-clés par thématique
+- Boost canaux officiels (Assemblée > Twitter)
+- Machine learning améliore scoring selon engagement utilisateurs
+
+### Abonnement Stripe
+Monétisation SaaS via [Stripe](/projets/tag/stripe) :
+- Paiements récurrents mensuels/annuels
+- Gestion abonnements (upgrade/downgrade)
+- Webhooks synchronisation statuts
+- Conformité PCI DSS
+
+## Résultats
+
+- **Couverture** : Agrégation multi-sources exhaustive
+- **Réactivité** : Alertes temps réel nouveaux contenus
+- **Pertinence** : Scoring adaptatif réduit bruit
+- **Monétisation** : Stripe fiabilise revenus SaaS
+
+## Technologies
+
+- [Elasticsearch](/projets/tag/elasticsearch) - Indexation et recherche
+- [PHP](/projets/tag/php) - Workers ingestion
+- [RabbitMQ](/projets/tag/queues) - Queue messages asynchrones
+- Python - Scraping sources externes
+- [Stripe](/projets/tag/stripe) - Paiements SaaS

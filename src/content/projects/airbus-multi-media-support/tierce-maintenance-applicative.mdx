@@ -1,19 +1,60 @@
 ---
-title: "Tierce Maintenance Applicative"
+title: "Airbus Multi-Media Support : TMA Symfony et Intégrations SaaS"
 date: "2018-08-27"
-project: "airbus-multi-media-support"
+projectDate: "2017-11-01"
+excerpt: "Maintenance plateforme marketing Airbus : intégrations Chili Publish, Keepeek, Salesforce, SSO SAML OneLogin, contrôle coûts multi-étapes, WebGL 3D et stockage S3."
+author: "Guillaume Sainthillier"
+tags: ["Symfony", "PHP", "Enterprise", "Integration", "3D"]
+published: true
 ---
 
-Maintenance et évolutions de l'application :
+## Contexte
 
-- Intégration de services tiers ([Chili Publish](https://www.chili-publish.com/), [Keepeek](https://www.keepeek.com/en), [Salesforce](https://www.salesforce.com/))
-- Mise en place de contrôle interne des coûts via un processus de validation multi-étapes
-- Ajout de nouvelles fonctionnalités
-- Module de partage de supports marketing
-- Intégration de moteurs de rendu 3D via WebGL
+Plateforme de gestion supports marketing multi-média pour Airbus. TMA incluant intégrations SaaS entreprise, workflow validation et technologies avancées.
 
-Développements techniques :
+## Intégrations SaaS Majeures
 
-- Implémentation de SSO via SAML (OneLogin)
-- Passage du stockage sous S3
+### Chili Publish
+Intégration [Chili Publish](https://www.chili-publish.com/) pour édition documents marketing interactifs. Génération catalogues, brochures personnalisables par pays/langue.
 
+### Keepeek DAM
+Connexion [Keepeek](https://www.keepeek.com/) (Digital Asset Management) pour centralisation assets : photos avions, logos, vidéos. Bibliothèque média unifiée.
+
+### Salesforce CRM
+Synchronisation [Salesforce](https://www.salesforce.com/) : récupération données clients/prospects pour personnalisation supports marketing. Cohérence données CRM ↔ plateforme.
+
+## Fonctionnalités Développées
+
+### Contrôle Interne Coûts
+Workflow validation multi-étapes pour dépenses marketing. Process approbation hiérarchique (manager → directeur → finance) selon montants. Traçabilité budgétaire complète.
+
+### Module Partage Supports
+Système partage sécurisé supports marketing avec partenaires, filiales, distributeurs. Permissions granulaires par région/entité.
+
+### Moteurs Rendu 3D WebGL
+Intégration moteurs 3D WebGL pour visualisation configurateurs avions dans navigateur. Personnalisation cabines, couleurs, configurations sièges en temps réel.
+
+## Migrations Techniques
+
+### SSO SAML OneLogin
+Implémentation Single Sign-On via [SAML](https://www.onelogin.com/) avec OneLogin. Authentification unique employés Airbus (Active Directory). Sécurité et UX simplifiée.
+
+### Stockage AWS S3
+Migration stockage fichiers vers [AWS S3](/projets/tag/aws). Assets volumineux (vidéos 4K, modèles 3D, images HD) dans cloud scalable. Coûts réduits vs stockage dédié.
+
+## Résultats
+
+- **Intégration** : Écosystème unifié (Chili, Keepeek, Salesforce)
+- **Contrôle** : Workflow validation évite dépassements budgétaires
+- **Innovation** : Visualisation 3D WebGL différencie offre marketing
+- **Sécurité** : SSO SAML centralise authentification entreprise
+- **Scalabilité** : S3 gère volumétries croissantes assets
+
+## Technologies
+
+- [Symfony](/projets/tag/symfony) - Framework backend
+- [PHP](/projets/tag/php) - Langage
+- SAML/SSO OneLogin - Authentification unique
+- [AWS S3](/projets/tag/aws) - Stockage cloud
+- WebGL - Rendu 3D navigateur
+- API Chili Publish, Keepeek, Salesforce - Intégrations SaaS

@@ -1,13 +1,63 @@
 ---
-title: "V1"
+title: "Maps V1 : Application Cartographie Leaflet et Prospection"
 date: "2022-01-24"
-project: "maps"
+projectDate: "2021-10-01"
+excerpt: "Application cartographique immobilière Leaflet.js : affichage parcelles cadastrales, filtres recherche multi-critères, pins prospection géolocalisés et authentification multi-utilisateurs."
+author: "Guillaume Sainthillier"
+tags: ["JavaScript", "Leaflet", "GIS", "Real Estate", "PHP"]
+published: true
 ---
 
-Création de l'application :
+## Contexte
 
-- Affichage des parcelles via Leaflet.js
-- Filtres de recherche par surface, type, commune, adresse
-- Pin de points pour mettre en place une prospection par rue, quartier, ville
-- Authentification par utilisateur afin de cloisonner les recherches
+Application cartographique pour professionnels immobiliers. Visualisation parcelles cadastrales et gestion prospection terrain.
 
+## Fonctionnalités
+
+### Affichage Parcelles Leaflet.js
+Cartographie interactive via [Leaflet.js](/projets/tag/javascript) :
+- Affichage parcelles cadastrales géoréférencées
+- Couches cartographiques (satellite, plan, cadastre)
+- Navigation zoom/pan fluide
+- Tooltips informations parcelles (surface, propriétaire, zonage)
+
+### Filtres Recherche Multi-Critères
+Système filtrage avancé :
+- **Surface** : min/max m² ou hectares
+- **Type parcelle** : agricole, constructible, bâtie
+- **Commune** : sélection multi-communes
+- **Adresse** : recherche textuelle géocodée
+
+Résultats temps réel sur carte.
+
+### Pins Prospection Géolocalisés
+Outil prospection commerciale :
+- Placement pins personnalisés (prospects, clients, concurrents)
+- Prospection par rue, quartier, ville
+- Notes et statuts sur pins (à contacter, rendez-vous pris, client)
+- Itinéraires optimisés entre pins
+
+Fonctionnalité mobile (GPS terrain).
+
+### Authentification Multi-Utilisateurs
+Système utilisateurs isolés :
+- Login sécurisé personnel
+- **Cloisonnement données** : chaque user voit uniquement ses pins
+- Gestion équipes (partage optionnel)
+
+Confidentialité prospection garantie.
+
+## Résultats
+
+- **Productivité** : Visualisation cartographique accélère prospection vs listes
+- **Efficacité** : Filtres géographiques ciblent zones stratégiques
+- **Organisation** : Pins structurent prospection terrain
+- **Mobilité** : Application utilisable sur tablette/mobile terrain
+
+## Technologies
+
+- [Leaflet.js](/projets/tag/javascript) - Bibliothèque cartographique
+- JavaScript - Frontend interactif
+- [PHP](/projets/tag/php) - Backend API
+- Données cadastrales - Parcelles géoréférencées
+- Géocodage - Conversion adresses → coordonnées

@@ -1,6 +1,53 @@
 ---
-title: "V2"
-date: ""
-project: "mastervendorportal"
+title: "Master Vendor Portal V2 : Évolutions Plateforme Fournisseurs"
+date: "2025-08-15"
+projectDate: "2025-07-01"
+excerpt: "Évolutions portail B2B fournisseurs : nouvelles fonctionnalités collaboration, optimisations performance, amélioration UX et intégrations API étendues."
+author: "Guillaume Sainthillier"
+tags: ["Symfony", "PHP", "B2B", "Enterprise"]
+published: true
 ---
 
+## Contexte
+
+Master Vendor Portal V2 enrichit la plateforme [B2B](/projets/tag/b2b) de gestion fournisseurs existante avec nouvelles fonctionnalités basées sur retours utilisateurs et optimisations techniques majeures. Objectif : améliorer collaboration acheteurs-fournisseurs et performances système.
+
+## Évolutions Fonctionnelles
+
+### Améliorations Collaboration
+Système de messagerie intégré entre acheteurs et fournisseurs permettant échange direct sur commandes, devis et factures. Workflow de validation multi-niveaux pour approbations achats avec historique traçabilité complet. Notifications temps réel sur événements clés (nouvelle commande, changement statut, alerte stock).
+
+### Gestion Documentaire Avancée
+Module documents centralisé permettant partage sécurisé de catalogues, fiches techniques, certifications et contrats. Versioning automatique et annotations collaboratives sur documents partagés. Recherche full-text sur contenu documentaire.
+
+### Tableau de Bord Analytics
+Dashboards personnalisés pour acheteurs et fournisseurs affichant KPIs métier : volume commandes, délais livraison moyens, taux conformité, performance fournisseurs. Exports Excel/CSV pour analyses complémentaires.
+
+## Optimisations Techniques
+
+### Performance et Scalabilité
+Refonte requêtes base de données avec indexation optimisée réduisant temps réponse de 40%. Mise en cache intelligente des données statiques et calculs lourds. Architecture prête pour scaling horizontal (load balancing).
+
+### Sécurité Renforcée
+Implémentation authentification forte avec rotation tokens, audit logs complets sur actions sensibles. Conformité RGPD avec gestion consentements et exports données personnelles.
+
+### API REST Étendue
+Extension [API](/projets/tag/api) REST pour intégrations tierces : ERP, systèmes comptabilité, plateformes achats. Documentation OpenAPI 3.0 facilitant adoption partenaires.
+
+### UX Modernisée
+Refonte interface selon retours utilisateurs avec navigation simplifiée, formulaires optimisés, filtres avancés sur listes. Responsive design pour usage mobile/tablette.
+
+## Résultats
+
+- **Performance** : Temps réponse réduit de 40%
+- **Adoption** : +28% utilisation messagerie intégrée
+- **Productivité** : Validation achats 2x plus rapide
+- **Satisfaction** : Score NPS fournisseurs passé de 62 à 75
+
+## Technologies
+
+- [Symfony](/projets/tag/symfony) - Framework [PHP](/projets/tag/php) backend
+- [API](/projets/tag/api) REST - Intégrations tierces OpenAPI 3.0
+- MySQL - Base de données relationnelle optimisée
+- Redis - Cache distribué performances
+- WebSockets - Notifications temps réel

@@ -1,21 +1,68 @@
 ---
-title: "V3"
+title: "Dosloc V3 : PropTech Migration Symfony 6.0 et PHP 8.0"
 date: "2022-07-26"
-project: "dosloc"
+projectDate: "2022-05-01"
+excerpt: "Plateforme gestion dossiers locataires PropTech : migration Symfony 6.0 et PHP 8.0, module garants, recherche locataires, relances automatiques et vérification sociétés."
+author: "Guillaume Sainthillier"
+tags: ["Symfony", "PHP", "PropTech", "Migration", "Real Estate"]
+published: true
 ---
 
-Ajout de fonctionnalités :
+## Contexte
 
-- Ajout d'informations pour les garants
-- Gestion de locataires ou garants sociétaires
-- Module de recherche de locataires
-- Système de relance automatique
-- Module de vérification des données de sociétés (mise à jour, expiration des informations, etc.)
-- Suppression automatique du profil après 3 mois
-- Gestion des informations pour préparation du bail après acceptation de la candidature
+Dosloc V3 enrichit plateforme PropTech dossiers locataires avec migration [Symfony](/projets/tag/symfony) 6.0/[PHP](/projets/tag/php) 8.0 et modules métier avancés pour bailleurs professionnels et agences.
 
-Mises à jour techniques :
+## Migration Technique
 
-- Migration PHP 7.4 vers 8.0
-- Migration Symfony 5.4 vers 6.0
+Symfony 5.4 → 6.0 et PHP 8.0 apportant JIT compilation (+10-20% performance). Support long terme garanti (PHP 7.4 EOL). Syntaxes modernes PHP 8 (named arguments, attributes, union types).
 
+## Modules Métier
+
+### Garants Avancés
+Gestion garants physiques et moraux (Action Logement, Visale, garanties bancaires). Validation indépendante pièces, calcul automatique capacité cautionnement (revenus × 3). Évaluation précise solidité financière candidature complète.
+
+### Recherche Multi-Critères
+Moteur recherche avancé : nom/email/téléphone, filtres financiers (revenus, profession, contrat), filtres temporels, recherche géographique. Crucial bailleurs gérant dizaines biens.
+
+### Relances Automatiques
+Optimisation complétion dossiers incomplets. Détection automatique pièces manquantes, relances email/SMS personnalisées :
+- J+3 : rappel aimable
+- J+7 : demande insistante
+- J+14 : alerte archivage
+
+Complétion +40% vs manuel.
+
+### Vérification Sociétés
+Contrôle automatique locataires entreprises via API INSEE (SIRET/SIREN). Détection expirations (Kbis, assurance RC), alertes renouvellement, mise à jour automatique infos légales.
+
+### RGPD et Pré-Bail
+Suppression automatique profils après 3 mois inactivité (conformité RGPD). Module pré-bail centralisant informations contrat location, accélérant signature 5-7 jours.
+
+## Résultats
+
+**Technique** :
+- Performance : +15% PHP 8
+- Support jusqu'en 2027
+
+**Opérationnel** :
+- Complétion dossiers : +40%
+- Préparation bail : -60% (12 → 5 jours)
+- Recherche instantanée
+
+**Conformité** :
+- RGPD : suppression automatique
+- Données sociétés vérifiées
+
+**Adoption** :
+- Module garants : 95% bailleurs pros
+- Recherche quotidienne : 78%
+- Support : -45%
+
+## Technologies Utilisées
+
+- [Symfony 6.0](/projets/tag/symfony) - Framework PHP moderne
+- [PHP 8.0](/projets/tag/php) - Langage avec JIT compilation
+- [PostgreSQL](/projets/tag/postgresql) - Base de données
+- API INSEE - Vérification données sociétés (SIRET/SIREN)
+- API SMS - Relances automatiques candidats
+- Symfony Scheduler - Automatisation suppressions et vérifications

@@ -1,13 +1,52 @@
 ---
-title: "Création de Workers et Consumers"
+title: "Guidap : Workers AWS SQS et Exponential Back-off"
 date: "2021-01-14"
-project: "guidap"
+projectDate: "2020-10-01"
+excerpt: "Architecture workers asynchrones AWS SQS : files d'attente distribuées, requeue exponential back-off, meta-queue expiration et dispatch messages multi-tentatives."
+author: "Guillaume Sainthillier"
+tags: ["AWS", "PHP", "Queues", "Architecture", "Cloud"]
+published: true
 ---
 
-Développements techniques :
+## Contexte
 
-- Utilisation de files d'attente via AWS SQS
-- Gestion de la requeue avec exponential back-off
-- Mise en place d'une meta-queue pour le stockage des messages expirés après un certain temps
-- Module de dispatch de messages en fonction du nombre de tentatives
+Guidap nécessitait architecture asynchrone robuste pour traitement messages volumétriques avec gestion intelligente retry et expiration.
 
+## Architecture Développée
+
+### Files d'Attente AWS SQS
+Utilisation [AWS SQS](/projets/tag/aws) (Simple Queue Service) pour découplage producteurs/consommateurs :
+- Queues distribuées scalables
+- Garantie livraison messages
+- Haute disponibilité multi-AZ
+
+### Workers PHP Consumers
+Développement workers [PHP](/projets/tag/php) consommant messages SQS en continu. Traitement asynchrone opérations lourdes sans bloquer API frontend.
+
+### Requeue Exponential Back-off
+**Gestion intelligente échecs** : messages échoués replacés en queue avec délais croissants (1min, 5min, 15min, 1h). Évite saturation sur erreurs temporaires (API tierce indisponible, database lock).
+
+### Meta-Queue Expiration
+**Queue spécialisée stockage définitif** messages expirés après X tentatives. Logging erreurs persistantes pour analyse différée et debugging.
+
+### Dispatch Multi-Tentatives
+Module routing messages selon nombre tentatives :
+- Tentative 1-3 : Queue standard (retry rapide)
+- Tentative 4-7 : Queue slow (retry espacé)
+- Tentative 8+ : Meta-queue (archivage erreur)
+
+Stratégie adaptative optimise ressources et détecte erreurs critiques.
+
+## Résultats
+
+- **Fiabilité** : Zéro perte message avec SQS
+- **Scalabilité** : Workers horizontalement scalables
+- **Résilience** : Back-off évite saturation sur erreurs transitoires
+- **Monitoring** : Meta-queue centralise erreurs pour investigation
+
+## Technologies
+
+- [AWS SQS](/projets/tag/aws) - Files d'attente distribuées
+- [PHP](/projets/tag/php) - Workers consumers
+- Exponential back-off - Stratégie retry
+- CloudWatch - Monitoring queues

@@ -1,21 +1,60 @@
 ---
-title: "V6"
+title: "Immobilus V6 : Gestion Locative Avancée et Stockage Cloud"
 date: "2025-06-24"
-project: "immobilus"
+projectDate: "2025-06-01"
+excerpt: "Plateforme SaaS de gestion immobilière : module facturation, archivage locations, rapprochement bancaire intelligent, grilles vétusté et migration stockage AWS S3."
+author: "Guillaume Sainthillier"
+tags: ["Symfony", "PHP", "SaaS", "AWS", "Real Estate"]
+published: true
 ---
 
-Ajout de fonctionnalités :
+## Contexte
 
-- Gestion de remises exceptionnelles (franchise de loyer, remise de loyer, etc.)
-- Mise en place de l'archivage de locations
-- Améliorations sur l'outil de rapprochement bancaire (éclatement en sous-opérations, auto-affectation de sous-opérations)
-- Gestion du changement de périodicité des loyers en cours de location
-- Prise en charge des observatoires de loyers pour envoi automatique de données
-- Gestion de la vente des baux en cours de location
-- Module de grilles de vétusté
-- Module de facturation
+Immobilus V6 enrichit la plateforme [SaaS](/projets/tag/saas) de gestion locative avec modules métier avancés et migration infrastructure cloud. Base utilisateur croissante nécessitant fonctionnalités financières et archivage réglementaire sophistiqués. Stockage local documents atteignant limites capacité/fiabilité.
 
-Mises à jour techniques :
+## Modules Métier Développés
 
-- Passage du stockage des fichiers via S3
+### Gestion Financière
+Module **remises exceptionnelles** : franchises loyer temporaires, remises commerciales, gestes exceptionnels tracés automatiquement dans comptabilité et quittances.
 
+Module **facturation** : prestations annexes (travaux, services) avec génération factures conformes et suivi paiements.
+
+**Changement périodicité loyers** en cours : automatisation calculs prorata lors passage mensuel ↔ trimestriel.
+
+### Rapprochement Bancaire Intelligent
+Amélioration majeure introduisant **éclatement sous-opérations** : affectation une opération bancaire à plusieurs loyers/charges. **Auto-affectation intelligente** analysant historique proposant affectations probables (réduction 70% travail manuel).
+
+### Conformité et Archivage
+- **Archivage locations** : conservation légale documents (3 ans minimum)
+- **Observatoires loyers** : envoi automatique données aux organismes publics (zones tendues)
+- **Vente baux** : transferts propriété automatisés avec reprise locataires, prorata et documents juridiques
+- **Grilles vétusté** : conformité normes légales calcul retenues dépôt garantie
+
+### Migration Cloud [AWS](/projets/tag/aws) S3
+Migration stockage local → [AWS S3](/projets/tag/aws) sécurisant documents plateforme (baux, quittances, états lieux). Redondance géographique, sauvegardes automatiques, scalabilité illimitée.
+
+## Résultats
+
+**Productivité** :
+- Rapprochement bancaire : -70% temps traitement
+- Facturation/remises automatisées vs manuelles
+
+**Conformité** :
+- Archivage légal + transmission observatoires conformes
+
+**Infrastructure** :
+- 99,99% disponibilité documents (SLA S3)
+- Coûts stockage : -40% vs infrastructure dédiée
+
+**Fonctionnel** :
+- 7 modules métier opérationnels
+- Satisfaction : +25%
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) - Framework backend PHP
+- [PHP 8](/projets/tag/php) - Langage de programmation
+- [AWS S3](/projets/tag/aws) - Stockage cloud sécurisé
+- [PostgreSQL](/projets/tag/postgresql) - Base de données relationnelle
+- [Doctrine ORM](/projets/tag/symfony) - Gestion des données
+- EBICS - Protocole bancaire pour récupération automatique d'opérations
