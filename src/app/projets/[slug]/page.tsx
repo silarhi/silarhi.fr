@@ -86,12 +86,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
     }
 
     // Check if project has enhanced metadata
-    const hasEnhancedMetadata = !!(
-        project.overview ||
-        project.challenge ||
-        project.solution ||
-        project.engagement
-    )
+    const hasEnhancedMetadata = !!(project.overview || project.challenge || project.solution || project.engagement)
 
     // If project has enhanced metadata, show new design
     if (hasEnhancedMetadata) {
