@@ -260,8 +260,8 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                     )}
                                 </div>
 
-                                {/* Temporal Timeline */}
-                                <div className="relative">
+                                {/* Temporal Timeline - Scrollable Area */}
+                                <div className="hide-scrollbar relative max-h-[500px] overflow-y-auto">
                                     {/* Vertical timeline line */}
                                     <div className="bg-border absolute top-0 bottom-0 left-8 w-0.5 lg:left-1/2" />
 
@@ -641,7 +641,12 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                         className="animate-in fade-in zoom-in"
                                         style={{ animationDelay: `${index * 50}ms` }}
                                     >
-                                        <Button as="a" href={`/projets/tag/${tag.slug}`} size="sm">
+                                        <Button
+                                            as="a"
+                                            href={`/projets/tag/${tag.slug}`}
+                                            size="sm"
+                                            variant="outline-primary"
+                                        >
                                             {tag.name}
                                         </Button>
                                     </div>
