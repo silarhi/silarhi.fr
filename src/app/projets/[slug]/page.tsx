@@ -90,7 +90,6 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
         project.overview ||
         project.challenge ||
         project.solution ||
-        project.results ||
         project.engagement
     )
 
@@ -328,53 +327,6 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                     <p className="text-foreground/80 text-lg leading-relaxed">
                                         {project.solution.description}
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                )}
-
-                {/* Results */}
-                {project.results && project.results.metrics && (
-                    <section className="bg-primary py-16 text-white lg:py-20">
-                        <div className="container mx-auto px-4 lg:px-8">
-                            <div className="mx-auto max-w-4xl">
-                                <h2 className="mb-4 text-center text-3xl font-bold lg:text-4xl">
-                                    {project.results.title || 'Résultats & Impact'}
-                                </h2>
-                                {project.results.description && (
-                                    <p className="mx-auto mb-12 max-w-2xl text-center text-lg leading-relaxed text-white/90 lg:text-xl">
-                                        {project.results.description}
-                                    </p>
-                                )}
-
-                                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                                    {project.results.metrics.map((metric, idx) => (
-                                        <div key={idx} className="text-center">
-                                            <div className="text-secondary mb-2 text-4xl font-bold lg:text-5xl">
-                                                {metric.value}
-                                            </div>
-                                            <div className="text-sm text-white/80">{metric.label}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                )}
-
-                {/* Testimonial */}
-                {project.testimonial && (
-                    <section className="py-16 lg:py-20">
-                        <div className="container mx-auto px-4 lg:px-8">
-                            <div className="mx-auto max-w-3xl text-center">
-                                <div className="text-secondary mb-6 text-6xl">&quot;</div>
-                                <blockquote className="text-foreground mb-8 text-2xl leading-relaxed font-medium lg:text-3xl">
-                                    {project.testimonial.quote}
-                                </blockquote>
-                                <div className="text-muted">
-                                    <div className="text-foreground font-semibold">{project.testimonial.author}</div>
-                                    <div className="text-sm">{project.testimonial.company}</div>
                                 </div>
                             </div>
                         </div>
