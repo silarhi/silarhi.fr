@@ -41,48 +41,122 @@ export default function Footer() {
                     </div>
                 </div>
             )}
-            <div className="border-dark/10 border-t pt-6 pb-4">
+            <div className="border-dark/10 border-t py-12">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 items-end gap-8 md:grid-cols-3">
-                        <div>
+                    <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+                        <div className="lg:col-span-4">
                             <Link
                                 href="/"
-                                className="hover:text-secondary flex items-center space-x-2 text-inherit transition-colors"
+                                className="hover:text-secondary mb-6 flex items-center space-x-2 text-inherit transition-colors"
                             >
                                 <Image src={logo} alt="SILARHI" height={60} className={cn('h-14 w-auto')} />
                                 <span className="text-xl">SILARHI</span>
                             </Link>
-                            <p className="mb-0">
-                                116 route d&#39;Espagne
-                                <br />
-                                BAL 411
-                                <br />
-                                31100 Toulouse
+                            <p className="text-surface/80 mb-4 leading-relaxed">
+                                Agence web basée à Toulouse, spécialisée dans le développement d&#39;applications sur
+                                mesure avec Symfony, React et les technologies modernes.
                             </p>
+                            <div className="space-y-1">
+                                <p className="mb-0 font-semibold">Notre adresse</p>
+                                <p className="text-surface/80 mb-0">
+                                    116 route d&#39;Espagne
+                                    <br />
+                                    BAL 411
+                                    <br />
+                                    31100 Toulouse
+                                </p>
+                            </div>
                         </div>
-                        <div className="mt-4">
-                            <h6 className="text-base font-bold">Navigation</h6>
-                            <Link href="/contact" className={cn(linkClasses, 'block')}>
-                                Contact
-                            </Link>
-                            <Link href="/mentions-legales" className={cn(linkClasses, 'block')}>
-                                Mentions légales
-                            </Link>
-                            <Link href="/conditions-generales-de-vente" className={cn(linkClasses, 'block')}>
-                                CGV
-                            </Link>
-                        </div>
-                        <div className="mt-4">
-                            <h6 className="text-base font-bold">Nos expertises techniques</h6>
-                            <Link href="/projets/tag/symfony" className={cn(linkClasses, 'block')}>
-                                Symfony
-                            </Link>
-                            <Link href="/projets/tag/apiplatform" className={cn(linkClasses, 'block')}>
-                                Api Platform
-                            </Link>
-                            <Link href="/projets/tag/react" className={cn(linkClasses, 'block')}>
-                                React
-                            </Link>
+                        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4">
+                            <div>
+                                <h6 className="mb-4 text-base font-bold">Navigation</h6>
+                                <div className="space-y-2">
+                                    <Link href="/" className={cn(linkClasses, 'text-surface/80 block')}>
+                                        Accueil
+                                    </Link>
+                                    <Link href="/projets" className={cn(linkClasses, 'text-surface/80 block')}>
+                                        Projets
+                                    </Link>
+                                    <Link href="/technologies" className={cn(linkClasses, 'text-surface/80 block')}>
+                                        Technologies
+                                    </Link>
+                                    <Link href="/clients" className={cn(linkClasses, 'text-surface/80 block')}>
+                                        Clients
+                                    </Link>
+                                    <Link href="/contact" className={cn(linkClasses, 'text-surface/80 block')}>
+                                        Contact
+                                    </Link>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 className="mb-4 text-base font-bold">Expertises Backend</h6>
+                                <div className="space-y-2">
+                                    <Link
+                                        href="/projets/tag/symfony"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        Symfony
+                                    </Link>
+                                    <Link
+                                        href="/projets/tag/apiplatform"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        API Platform
+                                    </Link>
+                                    <Link href="/projets/tag/php" className={cn(linkClasses, 'text-surface/80 block')}>
+                                        PHP
+                                    </Link>
+                                    <Link
+                                        href="/projets/tag/doctrine"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        Doctrine
+                                    </Link>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 className="mb-4 text-base font-bold">Expertises Frontend</h6>
+                                <div className="space-y-2">
+                                    <Link
+                                        href="/projets/tag/react"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        React
+                                    </Link>
+                                    <Link
+                                        href="/projets/tag/nextjs"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        Next.js
+                                    </Link>
+                                    <Link
+                                        href="/projets/tag/typescript"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        TypeScript
+                                    </Link>
+                                    <Link
+                                        href="/projets/tag/tailwind"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        Tailwind CSS
+                                    </Link>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 className="mb-4 text-base font-bold">Informations</h6>
+                                <div className="space-y-2">
+                                    <Link href="/mentions-legales" className={cn(linkClasses, 'text-surface/80 block')}>
+                                        Mentions légales
+                                    </Link>
+                                    <Link
+                                        href="/conditions-generales-de-vente"
+                                        className={cn(linkClasses, 'text-surface/80 block')}
+                                    >
+                                        CGV
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
