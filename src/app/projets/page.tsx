@@ -1,8 +1,8 @@
-import { ArrowRight, Repeat, Zap } from 'lucide-react'
 import Fuse from 'fuse.js'
+import { ArrowRight, Repeat, Zap } from 'lucide-react'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Metadata } from 'next'
 
 import Button from '@/components/button'
 import PaginationServer from '@/components/pagination-server'
@@ -86,7 +86,8 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                                             {searchQuery && (
                                                 <>
                                                     {' '}
-                                                    pour <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
+                                                    pour{' '}
+                                                    <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
                                                 </>
                                             )}
                                         </>
@@ -256,8 +257,8 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 
                                             <Link href={`/projets/${project.slug}`}>
                                                 <Button
-                                                    variant="outline"
-                                                    className="border-primary text-primary hover:bg-primary hover:text-white group bg-transparent"
+                                                    variant="outline-primary"
+                                                    className="group hover:bg-primary bg-transparent hover:text-white"
                                                 >
                                                     Voir le cas client
                                                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -308,8 +309,8 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                             <Link href="/#services">
                                 <Button
                                     size="lg"
-                                    variant="outline"
-                                    className="border-white bg-transparent text-white hover:bg-white hover:text-primary font-semibold"
+                                    variant="outline-primary"
+                                    className="hover:text-primary border-white bg-transparent font-semibold text-white hover:bg-white"
                                 >
                                     Découvrir nos services
                                 </Button>
