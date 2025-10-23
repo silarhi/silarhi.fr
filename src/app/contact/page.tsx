@@ -42,11 +42,7 @@ function ContactSection() {
 
 function InfoSection() {
     return (
-        <Section
-            id="silarhi"
-            className="xl:pr-4xl md:pl-lg lg:pl-xl xl:pl-2xl bg-[#f4f6fd] px-4"
-            container={false}
-        >
+        <Section id="silarhi" className="xl:pr-4xl md:pl-lg lg:pl-xl xl:pl-2xl bg-[#f4f6fd] px-4" container={false}>
             <div className="container-half-md container md:ml-0">
                 <FadeInWhenVisible delay={0.1}>
                     <h2 className="mb-3 text-3xl">SILARHI</h2>
