@@ -10,7 +10,8 @@
       "Bash(yarn lint:*)",
       "Bash(yarn add:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx tailwindcss:*)"
     ],
     "deny": [],
     "ask": []

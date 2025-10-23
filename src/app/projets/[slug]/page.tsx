@@ -328,6 +328,77 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                     </section>
                 )}
 
+                {/* Project Phases / Tasks Content */}
+                {project.tasks.length > 0 && (
+                    <section className="py-16 lg:py-20">
+                        <div className="container mx-auto px-4 lg:px-8">
+                            <div className="mx-auto max-w-5xl">
+                                <h2 className="text-foreground mb-8 text-center text-3xl font-bold lg:text-4xl">
+                                    Détails du Projet
+                                </h2>
+                                <p className="text-muted mx-auto mb-12 max-w-2xl text-center text-lg">
+                                    Découvrez les différentes phases et fonctionnalités développées pour ce projet
+                                </p>
+
+                                {/* Scrollable horizontal cards on mobile, grid on desktop */}
+                                <div className="relative">
+                                    <div className="hide-scrollbar flex gap-6 overflow-x-auto pb-4 lg:grid lg:grid-cols-2 lg:overflow-x-visible">
+                                        {project.tasks.map((task, index) => (
+                                            <div
+                                                key={task.slug}
+                                                className="border-border bg-surface min-w-[300px] flex-shrink-0 overflow-hidden rounded-2xl border shadow-sm transition-shadow hover:shadow-md lg:min-w-0"
+                                            >
+                                                {/* Task header */}
+                                                <div className="bg-primary/5 border-border border-b px-6 py-4">
+                                                    <div className="mb-2 flex items-center gap-2">
+                                                        <div className="bg-primary flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white">
+                                                            {index + 1}
+                                                        </div>
+                                                        <h3 className="text-foreground text-lg font-semibold">
+                                                            {task.title}
+                                                        </h3>
+                                                    </div>
+                                                    <p className="text-muted text-sm">{task.date}</p>
+                                                </div>
+
+                                                {/* Task content - scrollable */}
+                                                <div className="max-h-96 overflow-y-auto p-6">
+                                                    <article className="prose prose-sm max-w-none">
+                                                        <MDXRemote
+                                                            source={task.content}
+                                                            components={mdxComponents}
+                                                            options={{
+                                                                mdxOptions: {
+                                                                    remarkPlugins: [remarkGfm],
+                                                                    rehypePlugins: [
+                                                                        rehypeSlug,
+                                                                        rehypeAutolinkHeadings,
+                                                                        rehypeUnwrapImages,
+                                                                    ],
+                                                                },
+                                                            }}
+                                                        />
+                                                    </article>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Scroll indicator for mobile */}
+                                    <div className="mt-4 flex justify-center gap-2 lg:hidden">
+                                        {project.tasks.map((_, index) => (
+                                            <div
+                                                key={index}
+                                                className="bg-primary/30 h-2 w-2 rounded-full"
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
                 {/* Technologies */}
                 {project.technologies.length > 0 && (
                     <section className="border-border bg-muted/30 border-t py-16 lg:py-20">
