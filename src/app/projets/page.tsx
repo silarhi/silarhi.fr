@@ -1,12 +1,10 @@
 import Fuse from 'fuse.js'
-import { ArrowRight } from 'lucide-react'
 import { Metadata } from 'next'
-import Link from 'next/link'
 
-import Button from '@/components/button'
 import PaginationServer from '@/components/pagination-server'
 import ProjectList from '@/components/project-list'
-import SearchForm from '@/components/search-form'
+import ProjectsCTA from '@/components/projects-cta'
+import ProjectsHero from '@/components/projects-hero'
 import { getAllProjects } from '@/utils/project'
 
 export const metadata: Metadata = {
@@ -55,51 +53,32 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 
     return (
         <main className="bg-background min-h-screen">
-            {/* Hero Section */}
-            <section className="from-primary/5 to-background bg-gradient-to-b pt-32 pb-16 lg:pt-40 lg:pb-24">
-                <div className="container mx-auto px-4 lg:px-8">
-                    <div className="max-w-3xl">
-                        <div className="bg-secondary/10 text-secondary-dark mb-6 inline-block rounded-full px-4 py-1.5 text-sm font-medium">
-                            Nos Réalisations
-                        </div>
-                        <h1 className="text-foreground mb-6 text-4xl font-bold text-balance lg:text-6xl">
-                            Des projets qui transforment les entreprises
-                        </h1>
-                        <p className="text-muted text-lg leading-relaxed lg:text-xl">
-                            Découvrez comment nous accompagnons nos clients dans leur transformation digitale avec des
-                            solutions sur mesure qui génèrent des résultats concrets.
-                        </p>
-
-                        {/* Search bar */}
-                        <div className="mt-8">
-                            <SearchForm baseUrl="/projets" />
-                        </div>
-
-                        {/* Results info */}
-                        {searchQuery && (
-                            <div className="mt-4">
-                                <p className="text-muted text-sm">
-                                    {filteredProjects.length > 0 ? (
-                                        <>
-                                            <span className="font-semibold">{filteredProjects.length}</span>{' '}
-                                            {filteredProjects.length === 1 ? 'projet trouvé' : 'projets trouvés'}
-                                            {searchQuery && (
-                                                <>
-                                                    {' '}
-                                                    pour{' '}
-                                                    <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
-                                                </>
-                                            )}
-                                        </>
-                                    ) : (
-                                        <>Aucun projet trouvé pour &ldquo;{searchQuery}&rdquo;</>
-                                    )}
-                                </p>
-                            </div>
-                        )}
+            <ProjectsHero
+                badge={
+                    <div className="bg-secondary/10 text-secondary-dark inline-block rounded-full px-4 py-1.5 text-sm font-medium">
+                        Nos Réalisations
                     </div>
-                </div>
-            </section>
+                }
+                title="Des projets qui transforment les entreprises"
+                description="Découvrez comment nous accompagnons nos clients dans leur transformation digitale avec des solutions sur mesure qui génèrent des résultats concrets."
+                showSearch
+            >
+                {searchQuery && (
+                    <div className="mt-4">
+                        <p className="text-muted text-sm">
+                            {filteredProjects.length > 0 ? (
+                                <>
+                                    <span className="font-semibold">{filteredProjects.length}</span>{' '}
+                                    {filteredProjects.length === 1 ? 'projet trouvé' : 'projets trouvés'} pour{' '}
+                                    <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
+                                </>
+                            ) : (
+                                <>Aucun projet trouvé pour &ldquo;{searchQuery}&rdquo;</>
+                            )}
+                        </p>
+                    </div>
+                )}
+            </ProjectsHero>
 
             {/* Projects Grid */}
             <section className="py-16 lg:py-24">
@@ -146,40 +125,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="bg-primary py-16 text-white lg:py-24">
-                <div className="container mx-auto px-4 lg:px-8">
-                    <div className="mx-auto max-w-3xl text-center">
-                        <h2 className="mb-6 text-3xl font-bold text-balance lg:text-5xl">
-                            Prêt à lancer votre projet ?
-                        </h2>
-                        <p className="mb-8 text-lg leading-relaxed text-white/90 lg:text-xl">
-                            Discutons de vos objectifs et découvrez comment nous pouvons vous accompagner dans votre
-                            transformation digitale.
-                        </p>
-                        <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                            <Link href="/#contact">
-                                <Button
-                                    size="lg"
-                                    className="bg-secondary text-secondary-foreground hover:bg-secondary-dark font-semibold"
-                                >
-                                    Démarrer un projet
-                                    <ArrowRight className="ml-2 h-5 w-5" />
-                                </Button>
-                            </Link>
-                            <Link href="/#services">
-                                <Button
-                                    size="lg"
-                                    variant="outline-primary"
-                                    className="hover:text-primary border-white bg-transparent font-semibold text-white hover:bg-white"
-                                >
-                                    Découvrir nos services
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <ProjectsCTA />
         </main>
     )
 }
