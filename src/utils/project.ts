@@ -16,6 +16,45 @@ interface ProjectTask {
     content: string
 }
 
+export interface ProjectEngagement {
+    type: string
+    description: string
+    deliverables?: string[]
+    phases?: Array<{
+        name: string
+        period: string
+        focus: string
+    }>
+    ongoing?: string[]
+}
+
+export interface ProjectChallenge {
+    title?: string
+    description?: string
+    points?: string[]
+}
+
+export interface ProjectSolution {
+    title?: string
+    description?: string
+    points?: string[]
+}
+
+export interface ProjectResults {
+    title?: string
+    description?: string
+    metrics?: Array<{
+        label: string
+        value: string
+    }>
+}
+
+export interface ProjectTestimonial {
+    quote: string
+    author: string
+    company: string
+}
+
 export interface ProjectProject {
     slug: string
     title: string
@@ -31,6 +70,18 @@ export interface ProjectProject {
     content: string
     readingTime: string
     tasks: ProjectTask[]
+    // New fields for enhanced project display
+    projectType?: 'one-shot' | 'recurring'
+    category?: string
+    year?: string
+    duration?: string
+    engagement?: ProjectEngagement
+    image?: string
+    overview?: string
+    challenge?: ProjectChallenge
+    solution?: ProjectSolution
+    results?: ProjectResults
+    testimonial?: ProjectTestimonial
 }
 
 interface ProjectFrontMatter {
@@ -44,6 +95,18 @@ interface ProjectFrontMatter {
     technologies?: string[]
     tags?: string[]
     published?: boolean
+    // New optional fields
+    projectType?: 'one-shot' | 'recurring'
+    category?: string
+    year?: string
+    duration?: string
+    engagement?: ProjectEngagement
+    image?: string
+    overview?: string
+    challenge?: ProjectChallenge
+    solution?: ProjectSolution
+    results?: ProjectResults
+    testimonial?: ProjectTestimonial
 }
 
 interface TaskFrontMatter {
