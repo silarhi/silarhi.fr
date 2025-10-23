@@ -24,7 +24,7 @@ export default function ContactPage() {
 
 function ContactSection() {
     return (
-        <Section id="contact" className="xl:pl-4xl md:pr-lg lg:pr-xl xl:pr-2xl px-4" paddingX={false} container={false}>
+        <Section id="contact" className="xl:pl-4xl md:pr-lg lg:pr-xl xl:pr-2xl px-4" container={false}>
             <div className="container md:mr-0">
                 <FadeInWhenVisible delay={0.1}>
                     <h2 className="mb-3 text-3xl">Contact</h2>
@@ -45,7 +45,6 @@ function InfoSection() {
         <Section
             id="silarhi"
             className="xl:pr-4xl md:pl-lg lg:pl-xl xl:pl-2xl bg-[#f4f6fd] px-4"
-            paddingX={false}
             container={false}
         >
             <div className="container-half-md container md:ml-0">

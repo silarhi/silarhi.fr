@@ -11,8 +11,8 @@ export default function HeroTitle({ title, subtitle }: HeroTitleProps) {
     return (
         <Section
             className="from-primary relative overflow-hidden bg-gradient-to-br via-blue-700 to-cyan-600"
-            size="xl"
             fluid
+            paddingY={false}
         >
             {/* Modern gradient orbs background */}
             <div className="pointer-events-none absolute inset-0">
