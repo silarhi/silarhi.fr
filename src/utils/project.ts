@@ -20,11 +20,6 @@ export interface ProjectEngagement {
     type: string
     description: string
     deliverables?: string[]
-    phases?: Array<{
-        name: string
-        period: string
-        focus: string
-    }>
     ongoing?: string[]
 }
 

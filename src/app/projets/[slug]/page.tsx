@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link, { LinkProps } from 'next/link'
@@ -260,106 +260,31 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                     )}
                                 </div>
 
-                                {/* Temporal Timeline - Scrollable Area */}
-                                <div className="hide-scrollbar relative max-h-[500px] overflow-y-auto">
-                                    {/* Vertical timeline line */}
-                                    <div className="bg-border absolute top-0 bottom-0 left-8 w-0.5 lg:left-1/2" />
-
-                                    <div className="space-y-12">
-                                        {/* Engagement Phases */}
-                                        {project.engagement?.phases?.map((phase, idx) => (
-                                            <div key={`phase-${idx}`} className="relative flex gap-8 lg:gap-16">
-                                                {/* Timeline node */}
-                                                <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
-                                                    <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-lg">
-                                                        {idx + 1}
-                                                    </div>
-                                                </div>
-
-                                                {/* Content - alternating sides on desktop */}
-                                                <div
-                                                    className={`ml-24 lg:ml-0 lg:w-1/2 ${
-                                                        idx % 2 === 0 ? 'lg:pr-16' : 'lg:ml-auto lg:pl-16'
-                                                    }`}
-                                                >
-                                                    <div className="border-border bg-surface rounded-xl border p-6 shadow-sm">
-                                                        <div className="text-primary mb-2 text-sm font-semibold">
-                                                            {phase.period}
-                                                        </div>
-                                                        <h3 className="text-foreground mb-3 text-xl font-bold">
-                                                            {phase.name}
-                                                        </h3>
-                                                        <p className="text-foreground/80 leading-relaxed">
-                                                            {phase.focus}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-
-                                        {/* Deliverables (for one-shot projects) */}
-                                        {project.projectType === 'one-shot' &&
-                                            project.engagement?.deliverables?.map((deliverable, idx) => (
-                                                <div
-                                                    key={`deliverable-${idx}`}
-                                                    className="relative flex gap-8 lg:gap-16"
-                                                >
-                                                    <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
-                                                        <div className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full border-4 border-white shadow-lg">
-                                                            <CheckCircle2 className="h-6 w-6 text-white" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div
-                                                        className={`ml-24 lg:ml-0 lg:w-1/2 ${
-                                                            (project.engagement?.phases?.length || 0 + idx) % 2 === 0
-                                                                ? 'lg:pr-16'
-                                                                : 'lg:ml-auto lg:pl-16'
-                                                        }`}
-                                                    >
-                                                        <div className="border-border bg-surface rounded-xl border p-6 shadow-sm">
-                                                            <div className="flex items-start gap-3">
-                                                                <CheckCircle2 className="text-success mt-1 h-5 w-5 flex-shrink-0" />
-                                                                <span className="text-foreground font-medium">
-                                                                    {deliverable}
-                                                                </span>
+                                <div className="space-y-6">
+                                    {/* Tasks Section */}
+                                    {project.tasks.length > 0 && (
+                                        <div className="border-border bg-surface rounded-xl border p-6">
+                                            <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                                                <Calendar className="h-4 w-4" />
+                                                Phases du projet
+                                            </h3>
+                                            <div className="space-y-4">
+                                                {project.tasks.map((task, idx) => (
+                                                    <div key={task.slug} className="flex gap-4">
+                                                        <div className="flex flex-col items-center">
+                                                            <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
+                                                                {idx + 1}
                                                             </div>
+                                                            {idx < project.tasks.length - 1 && (
+                                                                <div className="bg-border mt-2 h-full w-0.5" />
+                                                            )}
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-
-                                        {/* Detailed Tasks with Expandable Content */}
-                                        {project.tasks.map((task, idx) => {
-                                            const previousItemsCount =
-                                                (project.engagement?.phases?.length || 0) +
-                                                (project.engagement?.deliverables?.length || 0)
-                                            return (
-                                                <div key={task.slug} className="relative flex gap-8 lg:gap-16">
-                                                    <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
-                                                        <div className="bg-primary/80 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white text-sm font-bold text-white shadow-lg">
-                                                            {previousItemsCount + idx + 1}
-                                                        </div>
-                                                    </div>
-
-                                                    <div
-                                                        className={`ml-24 lg:ml-0 lg:w-1/2 ${
-                                                            (previousItemsCount + idx) % 2 === 0
-                                                                ? 'lg:pr-16'
-                                                                : 'lg:ml-auto lg:pl-16'
-                                                        }`}
-                                                    >
-                                                        <div className="border-border bg-surface overflow-hidden rounded-xl border shadow-sm">
-                                                            {/* Task header */}
-                                                            <div className="bg-primary/5 border-border border-b px-6 py-4">
-                                                                <h4 className="text-foreground mb-1 text-lg font-semibold">
-                                                                    {task.title}
-                                                                </h4>
-                                                                <p className="text-muted text-sm">{task.date}</p>
+                                                        <div className="pb-6">
+                                                            <div className="text-foreground mb-1 font-semibold">
+                                                                {task.title}
                                                             </div>
-
-                                                            {/* Task content - scrollable */}
-                                                            <div className="max-h-96 overflow-y-auto p-6">
+                                                            <div className="text-muted mb-2 text-sm">{task.date}</div>
+                                                            <div className="text-foreground/80">
                                                                 <article className="prose prose-sm max-w-none">
                                                                     <MDXRemote
                                                                         source={task.content}
@@ -379,38 +304,46 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )
-                                        })}
-
-                                        {/* Ongoing Services (for recurring projects) */}
-                                        {project.engagement?.ongoing && (
-                                            <div className="relative flex gap-8 lg:gap-16">
-                                                <div className="absolute left-8 flex items-center lg:left-1/2 lg:-translate-x-1/2">
-                                                    <div className="bg-primary flex h-12 w-12 items-center justify-center rounded-full border-4 border-white shadow-lg">
-                                                        <Repeat className="h-6 w-6 text-white" />
-                                                    </div>
-                                                </div>
-
-                                                <div className="ml-24 lg:ml-0 lg:w-full">
-                                                    <div className="border-border bg-surface rounded-xl border p-6 shadow-sm">
-                                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
-                                                            <Users className="h-5 w-5" />
-                                                            Services Continus
-                                                        </h3>
-                                                        <ul className="grid gap-4 sm:grid-cols-2">
-                                                            {project.engagement.ongoing.map((service, idx) => (
-                                                                <li key={idx} className="flex items-start gap-3">
-                                                                    <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
-                                                                    <span className="text-foreground">{service}</span>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                ))}
                                             </div>
-                                        )}
-                                    </div>
+                                        </div>
+                                    )}
+
+                                    {/* Deliverables (for one-shot projects) */}
+                                    {project.projectType === 'one-shot' && project.engagement?.deliverables && (
+                                        <div className="border-border bg-surface rounded-xl border p-6">
+                                            <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                                                <CheckCircle2 className="h-4 w-4" />
+                                                Livrables
+                                            </h3>
+                                            <ul className="grid gap-4 sm:grid-cols-2">
+                                                {project.engagement.deliverables.map((deliverable, idx) => (
+                                                    <li key={idx} className="flex items-start gap-3">
+                                                        <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
+                                                        <span className="text-foreground">{deliverable}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+
+                                    {/* Ongoing Services (for recurring projects) */}
+                                    {project.engagement?.ongoing && (
+                                        <div className="border-border bg-surface rounded-xl border p-6">
+                                            <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                                                <Users className="h-4 w-4" />
+                                                Services continus
+                                            </h3>
+                                            <ul className="grid gap-4 sm:grid-cols-2">
+                                                {project.engagement.ongoing.map((service, idx) => (
+                                                    <li key={idx} className="flex items-start gap-3">
+                                                        <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
+                                                        <span className="text-foreground">{service}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -419,7 +352,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
 
                 {/* Technologies */}
                 {project.technologies.length > 0 && (
-                    <section className="border-border bg-muted/30 border-t py-16 lg:py-20">
+                    <section className="border-border border-b py-16 lg:py-20">
                         <div className="container mx-auto px-4 lg:px-8">
                             <div className="mx-auto max-w-3xl">
                                 <h2 className="text-foreground mb-6 text-center text-sm font-semibold tracking-wide uppercase">

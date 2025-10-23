@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react'
 
 import { cn } from '@/utils/lib'
@@ -44,9 +45,9 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
         if (as === 'a' && href) {
             return (
-                <a ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={classes}>
+                <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={classes}>
                     {children}
-                </a>
+                </Link>
             )
         }
 
