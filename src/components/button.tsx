@@ -28,7 +28,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
         const sizeClasses = {
             xs: 'px-2 py-1 text-xs leading-none',
-            sm: 'px-3 py-1.5 text-sm leading-none',
+            sm: 'px-4 py-2 text-sm leading-none',
             md: 'px-5 py-2.5 text-base',
             lg: 'px-6 py-3 text-lg',
         }

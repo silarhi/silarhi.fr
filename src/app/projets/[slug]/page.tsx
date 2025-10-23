@@ -360,13 +360,16 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                 </h2>
                                 <div className="flex flex-wrap justify-center gap-3">
                                     {project.technologies.map((tech) => (
-                                        <Link
+                                        <Button
+                                            as="a"
                                             key={tech.slug}
+                                            size="sm"
                                             href={`/technologies/${tech.slug}`}
-                                            className="border-border bg-surface hover:bg-muted text-foreground rounded-full border px-4 py-2 text-sm font-medium transition-colors"
+                                            variant="outline-primary"
+                                            className="rounded-full"
                                         >
                                             {tech.name}
-                                        </Link>
+                                        </Button>
                                     ))}
                                 </div>
                             </div>
