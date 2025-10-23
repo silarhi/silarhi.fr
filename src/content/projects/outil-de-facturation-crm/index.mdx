@@ -8,6 +8,52 @@ author: 'SILARHI'
 client: "one-online"
 technologies: ["php","symfony","docker"]
 published: true
+projectType: "one-shot"
+category: "Intégration & API"
+year: "2023"
+duration: "2 mois"
+image: "/images/projects/outil-facturation-crm-hero.jpg"
+overview: "Nous avons développé un outil de synchronisation automatique entre HubSpot et Zoho Invoice. Concrètement, les deals du CRM HubSpot sont automatiquement convertis en factures dans l'outil Zoho Invoice via une architecture Symfony dockerisée avec traitement asynchrone."
+engagement:
+  type: "Mission ponctuelle"
+  description: "Développement d'un connecteur automatique entre HubSpot et Zoho Invoice pour synchronisation deals vers factures"
+  phases:
+    - name: "Analyse & Architecture"
+      period: "Semaines 1-2"
+      focus: "Analyse APIs HubSpot/Zoho, conception mapping données, architecture asynchrone"
+    - name: "Développement Connecteur"
+      period: "Semaines 3-6"
+      focus: "Workers Symfony, intégrations APIs, workflow synchronisation, gestion erreurs"
+    - name: "Tests & Déploiement"
+      period: "Semaines 7-8"
+      focus: "Tests intégration, containerisation Docker, monitoring, mise en production"
+  deliverables:
+    - "Connecteur Symfony opérationnel et dockerisé"
+    - "Synchronisation automatique HubSpot → Zoho Invoice"
+    - "Workflow avec webhooks temps réel"
+    - "Système de retry et gestion erreurs"
+    - "Monitoring et logging complet"
+    - "Documentation technique"
+challenge:
+  title: "Le Défi"
+  description: "L'intégration entre HubSpot et Zoho nécessitait de gérer des modèles de données hétérogènes, assurer une synchronisation bidirectionnelle fiable sans perte de données, et traiter des volumes importants de deals quotidiens avec réconciliation automatique."
+  points:
+    - "Mapping entre structures CRM et facturation différentes"
+    - "Synchronisation bidirectionnelle fiable"
+    - "Fiabilité absolue : aucune perte de données"
+    - "Performance sur volumes importants quotidiens"
+    - "Réconciliation automatique et gestion doublons"
+    - "Monitoring et visibilité sur synchronisations"
+solution:
+  title: "Notre Solution"
+  description: "Nous avons développé un connecteur Symfony dockerisé avec workers asynchrones, webhooks temps réel, mapping intelligent des données et système robuste de retry pour garantir la fiabilité des synchronisations."
+  points:
+    - "Workers asynchrones pour traitement deals"
+    - "Webhooks HubSpot pour déclenchement temps réel"
+    - "Mapping intelligent HubSpot → Zoho Invoice"
+    - "File de messages avec retry automatique"
+    - "Intégrations APIs HubSpot et Zoho complètes"
+    - "Containerisation Docker pour déploiement"
 ---
 
 ## Contexte
@@ -100,4 +146,3 @@ Le connecteur est devenu essentiel au workflow sales-to-cash.
 - Zoho Invoice API - Facturation
 - RabbitMQ - File de messages
 - MySQL - Base de données synchronisation
-

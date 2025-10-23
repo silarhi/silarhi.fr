@@ -8,6 +8,52 @@ author: 'SILARHI'
 client: "guidap"
 technologies: ["php","symfony","aws"]
 published: true
+projectType: "one-shot"
+category: "Infrastructure & Performance"
+year: "2024"
+duration: "2 mois"
+image: "/images/projects/guidap-hero.jpg"
+overview: "GUIDAP est un logiciel SaaS de gestion d'établissements de loisirs : centres aérés, colonies de vacances et structures d'accueil jeunesse. Nous sommes intervenus pour développer une architecture asynchrone robuste capable de gérer les pics de charge saisonniers."
+engagement:
+  type: "Mission ponctuelle"
+  description: "Développement d'une architecture asynchrone AWS pour gérer les pics de charge saisonniers et garantir la fiabilité des traitements"
+  phases:
+    - name: "Architecture & Conception"
+      period: "Semaines 1-2"
+      focus: "Conception architecture asynchrone AWS SQS, workers et consumers Symfony"
+    - name: "Développement & Intégration"
+      period: "Semaines 3-6"
+      focus: "Implémentation workers, gestion erreurs, meta-queue, intégration Symfony"
+    - name: "Tests & Déploiement"
+      period: "Semaines 7-8"
+      focus: "Tests charge, monitoring, déploiement production, documentation"
+  deliverables:
+    - "Architecture asynchrone AWS SQS opérationnelle"
+    - "Workers et consumers Symfony performants"
+    - "Système de gestion d'erreurs avec meta-queue"
+    - "Auto-scaling configuré selon charge"
+    - "Monitoring et alertes en place"
+    - "Documentation technique complète"
+challenge:
+  title: "Le Défi"
+  description: "L'infrastructure devait gérer les pics saisonniers massifs lors des périodes de vacances scolaires, avec traitements asynchrones lourds (emails massifs, génération documents), tout en garantissant qu'aucun message ne soit perdu et permettant le monitoring des files d'attente."
+  points:
+    - "Pics de charge saisonniers lors des vacances scolaires"
+    - "Traitements asynchrones : emails massifs, exports, factures"
+    - "Fiabilité critique : aucun message perdu"
+    - "Monitoring et visibilité sur files d'attente"
+    - "Capacité à rejouer messages en échec"
+    - "Scalabilité automatique selon charge"
+solution:
+  title: "Notre Solution"
+  description: "Nous avons développé un système de workers et consumers basé sur AWS SQS et intégré à Symfony, avec gestion intelligente des erreurs via exponential back-off et meta-queue pour garantir la fiabilité."
+  points:
+    - "Files d'attente AWS SQS dédiées par type de traitement"
+    - "Workers et consumers Symfony avec scalabilité automatique"
+    - "Exponential back-off pour tentatives de retraitement"
+    - "Meta-queue pour messages en échec multiples"
+    - "Module de dispatch intelligent selon erreurs"
+    - "Monitoring détaillé et logs structurés"
 ---
 
 ## Contexte
@@ -76,4 +122,3 @@ Le système continue de fonctionner de manière autonome et a permis à GUIDAP d
 - [AWS](/projets/tag/aws) SQS - Service de files d'attente managées
 - AWS CloudWatch - Monitoring et logs
 - Docker - Conteneurisation des workers
-

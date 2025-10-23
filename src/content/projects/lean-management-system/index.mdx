@@ -8,6 +8,52 @@ author: 'SILARHI'
 client: "stillgeek"
 technologies: ["docker"]
 published: true
+projectType: "one-shot"
+category: "Infrastructure & DevOps"
+year: "2021"
+duration: "1 mois"
+image: "/images/projects/lean-management-system-hero.jpg"
+overview: "Nous avons réalisé la mise en place et l'intégration d'une infrastructure BigBlueButton pour un système de visioconférence dédié à la formation à distance, avec déploiement conteneurisé Docker et intégration complète au LMS existant."
+engagement:
+  type: "Mission ponctuelle"
+  description: "Déploiement complet d'une infrastructure de visioconférence BigBlueButton scalable et conteneurisée"
+  phases:
+    - name: "Architecture & Planification"
+      period: "Semaine 1"
+      focus: "Conception architecture, dimensionnement serveurs, planification intégration LMS"
+    - name: "Déploiement & Configuration"
+      period: "Semaines 2-3"
+      focus: "Installation BigBlueButton, conteneurisation Docker, load balancing, enregistrements"
+    - name: "Intégration & Tests"
+      period: "Semaine 4"
+      focus: "Intégration LMS, tests charge, documentation et formation équipe"
+  deliverables:
+    - "Infrastructure BigBlueButton complète et opérationnelle"
+    - "Conteneurisation Docker des services"
+    - "Load balancing multi-serveurs configuré"
+    - "Intégration LMS avec SSO"
+    - "Système d'enregistrement et transcoding vidéo"
+    - "Documentation technique et d'exploitation"
+challenge:
+  title: "Le Défi"
+  description: "Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques : supporter de nombreuses sessions simultanées avec qualité stable, intégrer avec le LMS existant, garantir la sécurité des sessions, et assurer une disponibilité élevée pour formations critiques."
+  points:
+    - "Scalabilité pour nombreuses sessions simultanées"
+    - "Performance vidéo/audio stable multi-participants"
+    - "Intégration avec LMS existant"
+    - "Sécurité et isolation des sessions"
+    - "Disponibilité élevée pour formations critiques"
+    - "Containerisation Docker pour reproductibilité"
+solution:
+  title: "Notre Solution"
+  description: "Nous avons déployé une infrastructure de visioconférence conteneurisée avec BigBlueButton, load balancing multi-serveurs, système d'enregistrement et intégration complète au LMS via SSO et API."
+  points:
+    - "Serveurs BigBlueButton avec load balancing"
+    - "Conteneurisation Docker complète"
+    - "Système d'enregistrement et transcoding"
+    - "Intégration LMS avec API et SSO"
+    - "Scalabilité horizontale selon charge"
+    - "Infrastructure résiliente et haute disponibilité"
 ---
 
 ## Contexte
@@ -88,4 +134,3 @@ Le système est opérationnel et permet formations à distance de qualité.
 - Nginx - Reverse proxy et load balancing
 - Ubuntu Server - Système d'exploitation serveurs
 - FFmpeg - Transcoding vidéos enregistrements
-

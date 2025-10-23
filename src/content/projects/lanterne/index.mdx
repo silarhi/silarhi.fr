@@ -8,6 +8,55 @@ author: 'SILARHI'
 client: "glucoz"
 technologies: ["symfony","php","elasticsearch","mysql","rabbitmq"]
 published: true
+projectType: "one-shot"
+category: "Data & Analytics"
+year: "2022"
+duration: "5 mois"
+image: "/images/projects/lanterne-hero.jpg"
+overview: "Lanterne est un outil de veille politique que nous avons développé, basé sur l'agrégation des textes publiés par l'Assemblée nationale, le Sénat ainsi que sur les comptes Twitter des personnalités politiques françaises. La plateforme permet de consulter les dernières publications par thématiques et d'analyser les positions des acteurs politiques."
+engagement:
+  type: "Mission ponctuelle"
+  description: "Développement complet d'une plateforme de veille politique avec agrégation multi-sources et recherche avancée"
+  phases:
+    - name: "Architecture & Conception"
+      period: "Mois 1"
+      focus: "Conception architecture, analyse APIs parlementaires, design système d'agrégation"
+    - name: "Développement Core"
+      period: "Mois 2-3"
+      focus: "Connecteurs APIs, système d'agrégation, workers RabbitMQ, intégration Elasticsearch"
+    - name: "Classification & Interface"
+      period: "Mois 4"
+      focus: "Classification automatique thématiques, interface de recherche, visualisations"
+    - name: "Optimisations & Livraison"
+      period: "Mois 5"
+      focus: "Optimisations performance, tests charge, documentation et mise en production"
+  deliverables:
+    - "Plateforme Symfony complète et opérationnelle"
+    - "Connecteurs Assemblée nationale et Sénat"
+    - "Monitoring Twitter personnalités politiques"
+    - "Moteur de recherche Elasticsearch configuré"
+    - "Système de classification automatique"
+    - "Workers RabbitMQ pour traitement asynchrone"
+challenge:
+  title: "Le Défi"
+  description: "Le développement de Lanterne présentait des défis techniques complexes : agréger et normaliser des données depuis sources hétérogènes (APIs parlementaires et réseaux sociaux), traiter des milliers de documents quotidiennement, et permettre des recherches performantes sur un corpus massif avec classification automatique."
+  points:
+    - "Agrégation multi-sources hétérogènes (parlementaires + Twitter)"
+    - "Traitement quotidien de milliers de documents"
+    - "Recherche full-text performante sur corpus massif"
+    - "Classification automatique par thématiques"
+    - "Analyse sémantique des positions politiques"
+    - "Mise à jour continue en temps réel"
+solution:
+  title: "Notre Solution"
+  description: "Nous avons conçu une architecture robuste combinant Symfony pour l'orchestration, RabbitMQ pour le traitement asynchrone et Elasticsearch pour la recherche performante avec agrégation automatique des sources politiques françaises."
+  points:
+    - "Connecteurs APIs Assemblée nationale et Sénat"
+    - "Monitoring Twitter de centaines de personnalités"
+    - "Workers RabbitMQ pour traitement distribué"
+    - "Elasticsearch pour recherche full-text et facettes"
+    - "Classification automatique par thématiques"
+    - "Interface de recherche avancée et analytics"
 ---
 
 ## Contexte
@@ -99,4 +148,3 @@ La plateforme est devenue un outil de référence pour l'analyse de l'activité 
 - [RabbitMQ](/projets/tag/rabbitmq) - File de messages asynchrone
 - MySQL - Base de données relationnelle
 - Docker - Conteneurisation des services
-
