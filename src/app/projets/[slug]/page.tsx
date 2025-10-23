@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link, { LinkProps } from 'next/link'
@@ -8,7 +9,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import remarkGfm from 'remark-gfm'
-import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
 
 import Button from '@/components/button'
 import ClientInfoBox from '@/components/client-info-box'
@@ -18,7 +18,6 @@ import { MDXImage } from '@/components/mdx-image'
 import ProjectMetadata from '@/components/project-metadata'
 import Section from '@/components/section'
 import { getAllProjectSlugs, getProjectBySlug } from '@/utils/project'
-import { cn } from '@/utils/lib'
 
 interface ProjectProjectPageProps {
     params: Promise<{
@@ -98,13 +97,13 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
     // If project has enhanced metadata, show new design
     if (hasEnhancedMetadata) {
         return (
-            <main className="min-h-screen bg-surface">
+            <main className="bg-surface min-h-screen">
                 {/* Hero Section */}
-                <section className="bg-gradient-to-b from-primary/5 to-surface pb-16 pt-32 lg:pb-20 lg:pt-40">
+                <section className="from-primary/5 to-surface bg-gradient-to-b pt-32 pb-16 lg:pt-40 lg:pb-20">
                     <div className="container mx-auto px-4 lg:px-8">
                         <Link
                             href="/projets"
-                            className="mb-8 inline-flex items-center text-sm text-muted transition-colors hover:text-primary"
+                            className="text-muted hover:text-primary mb-8 inline-flex items-center text-sm transition-colors"
                         >
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Retour aux projets
@@ -130,21 +129,21 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                         </div>
                                     ) : null}
                                 </div>
-                                <h1 className="text-balance mb-6 text-4xl font-bold text-foreground lg:text-6xl">
+                                <h1 className="text-foreground mb-6 text-4xl font-bold text-balance lg:text-6xl">
                                     {project.title}
                                 </h1>
-                                {project.client && <p className="mb-8 text-xl text-muted">{project.client.name}</p>}
+                                {project.client && <p className="text-muted mb-8 text-xl">{project.client.name}</p>}
                                 <div className="flex gap-8 text-sm">
                                     {project.year && (
                                         <div>
-                                            <div className="mb-1 text-muted">Année</div>
-                                            <div className="font-semibold text-foreground">{project.year}</div>
+                                            <div className="text-muted mb-1">Année</div>
+                                            <div className="text-foreground font-semibold">{project.year}</div>
                                         </div>
                                     )}
                                     {project.duration && (
                                         <div>
-                                            <div className="mb-1 text-muted">Durée</div>
-                                            <div className="font-semibold text-foreground">{project.duration}</div>
+                                            <div className="text-muted mb-1">Durée</div>
+                                            <div className="text-foreground font-semibold">{project.duration}</div>
                                         </div>
                                     )}
                                 </div>
@@ -164,10 +163,10 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                     <section className="border-border border-b py-16 lg:py-20">
                         <div className="container mx-auto px-4 lg:px-8">
                             <div className="max-w-3xl">
-                                <h2 className="text-primary mb-4 text-sm font-semibold uppercase tracking-wide">
+                                <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
                                     Vue d&apos;ensemble
                                 </h2>
-                                <p className="text-xl leading-relaxed text-foreground lg:text-2xl">
+                                <p className="text-foreground text-xl leading-relaxed lg:text-2xl">
                                     {project.overview}
                                 </p>
                             </div>
@@ -186,17 +185,17 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                     ) : (
                                         <Repeat className="text-primary h-6 w-6" />
                                     )}
-                                    <h2 className="text-3xl font-bold text-foreground lg:text-4xl">
+                                    <h2 className="text-foreground text-3xl font-bold lg:text-4xl">
                                         {project.engagement.type}
                                     </h2>
                                 </div>
-                                <p className="mb-8 text-lg leading-relaxed text-foreground/80">
+                                <p className="text-foreground/80 mb-8 text-lg leading-relaxed">
                                     {project.engagement.description}
                                 </p>
 
                                 {project.projectType === 'one-shot' && project.engagement.deliverables ? (
                                     <div className="border-border bg-surface rounded-xl border p-6">
-                                        <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground">
+                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
                                             <Calendar className="h-4 w-4" />
                                             Livrables du projet
                                         </h3>
@@ -213,7 +212,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                     <div className="space-y-6">
                                         {project.engagement.phases && (
                                             <div className="border-border bg-surface rounded-xl border p-6">
-                                                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground">
+                                                <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
                                                     <Calendar className="h-4 w-4" />
                                                     Phases du projet
                                                 </h3>
@@ -224,15 +223,16 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                                                 <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
                                                                     {idx + 1}
                                                                 </div>
-                                                                {idx < project.engagement.phases!.length - 1 && (
-                                                                    <div className="bg-border mt-2 h-full w-0.5" />
-                                                                )}
+                                                                {project.engagement?.phases &&
+                                                                    idx < project.engagement.phases.length - 1 && (
+                                                                        <div className="bg-border mt-2 h-full w-0.5" />
+                                                                    )}
                                                             </div>
                                                             <div className="pb-6">
-                                                                <div className="mb-1 font-semibold text-foreground">
+                                                                <div className="text-foreground mb-1 font-semibold">
                                                                     {phase.name}
                                                                 </div>
-                                                                <div className="mb-2 text-sm text-muted">
+                                                                <div className="text-muted mb-2 text-sm">
                                                                     {phase.period}
                                                                 </div>
                                                                 <div className="text-foreground/80">{phase.focus}</div>
@@ -245,7 +245,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
 
                                         {project.engagement.ongoing && (
                                             <div className="border-border bg-surface rounded-xl border p-6">
-                                                <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground">
+                                                <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
                                                     <Users className="h-4 w-4" />
                                                     Services continus
                                                 </h3>
@@ -272,16 +272,16 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                         <div className="container mx-auto px-4 lg:px-8">
                             <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                                 <div>
-                                    <h2 className="mb-6 text-3xl font-bold text-foreground lg:text-4xl">
+                                    <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">
                                         {project.challenge.title || 'Le Défi'}
                                     </h2>
-                                    <p className="text-lg leading-relaxed text-foreground/80">
+                                    <p className="text-foreground/80 text-lg leading-relaxed">
                                         {project.challenge.description}
                                     </p>
                                 </div>
                                 {project.challenge.points && (
                                     <div>
-                                        <h3 className="mb-6 text-sm font-semibold uppercase tracking-wide text-foreground">
+                                        <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
                                             Points Clés du Défi
                                         </h3>
                                         <ul className="space-y-4">
@@ -308,7 +308,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                             <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                                 {project.solution.points && (
                                     <div className="order-2 lg:order-1">
-                                        <h3 className="mb-6 text-sm font-semibold uppercase tracking-wide text-foreground">
+                                        <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
                                             Fonctionnalités Clés
                                         </h3>
                                         <ul className="space-y-4">
@@ -322,10 +322,10 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                     </div>
                                 )}
                                 <div className="order-1 lg:order-2">
-                                    <h2 className="mb-6 text-3xl font-bold text-foreground lg:text-4xl">
+                                    <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">
                                         {project.solution.title || 'Notre Solution'}
                                     </h2>
-                                    <p className="text-lg leading-relaxed text-foreground/80">
+                                    <p className="text-foreground/80 text-lg leading-relaxed">
                                         {project.solution.description}
                                     </p>
                                 </div>
@@ -369,11 +369,11 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                         <div className="container mx-auto px-4 lg:px-8">
                             <div className="mx-auto max-w-3xl text-center">
                                 <div className="text-secondary mb-6 text-6xl">&quot;</div>
-                                <blockquote className="mb-8 text-2xl font-medium leading-relaxed text-foreground lg:text-3xl">
+                                <blockquote className="text-foreground mb-8 text-2xl leading-relaxed font-medium lg:text-3xl">
                                     {project.testimonial.quote}
                                 </blockquote>
                                 <div className="text-muted">
-                                    <div className="font-semibold text-foreground">{project.testimonial.author}</div>
+                                    <div className="text-foreground font-semibold">{project.testimonial.author}</div>
                                     <div className="text-sm">{project.testimonial.company}</div>
                                 </div>
                             </div>
@@ -386,7 +386,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                     <section className="border-border bg-muted/30 border-t py-16 lg:py-20">
                         <div className="container mx-auto px-4 lg:px-8">
                             <div className="mx-auto max-w-3xl">
-                                <h2 className="mb-6 text-center text-sm font-semibold uppercase tracking-wide text-foreground">
+                                <h2 className="text-foreground mb-6 text-center text-sm font-semibold tracking-wide uppercase">
                                     Technologies Utilisées
                                 </h2>
                                 <div className="flex flex-wrap justify-center gap-3">
@@ -394,7 +394,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                         <Link
                                             key={tech.slug}
                                             href={`/technologies/${tech.slug}`}
-                                            className="border-border bg-surface hover:bg-muted rounded-full border px-4 py-2 text-sm font-medium text-foreground transition-colors"
+                                            className="border-border bg-surface hover:bg-muted text-foreground rounded-full border px-4 py-2 text-sm font-medium transition-colors"
                                         >
                                             {tech.name}
                                         </Link>
@@ -409,10 +409,10 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                 <section className="py-16 lg:py-24">
                     <div className="container mx-auto px-4 lg:px-8">
                         <div className="mx-auto max-w-3xl text-center">
-                            <h2 className="text-balance mb-6 text-3xl font-bold text-foreground lg:text-5xl">
+                            <h2 className="text-foreground mb-6 text-3xl font-bold text-balance lg:text-5xl">
                                 Un projet similaire en tête ?
                             </h2>
-                            <p className="mb-8 text-lg leading-relaxed text-muted lg:text-xl">
+                            <p className="text-muted mb-8 text-lg leading-relaxed lg:text-xl">
                                 Discutons de vos objectifs et découvrez comment nous pouvons créer une solution sur
                                 mesure pour votre entreprise.
                             </p>
@@ -729,7 +729,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                         <span className="text-sm font-semibold">Projet réalisé par SILARHI</span>
                                     </div>
 
-                                    <h2 className="mb-3 text-3xl font-bold leading-tight md:text-4xl">
+                                    <h2 className="mb-3 text-3xl leading-tight font-bold md:text-4xl">
                                         Une solution sur mesure pour des résultats concrets
                                     </h2>
                                     <p className="max-w-3xl text-lg leading-relaxed text-cyan-50">
