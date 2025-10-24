@@ -12,6 +12,8 @@ import remarkGfm from 'remark-gfm'
 
 import Button from '@/components/button'
 import { MDXImage } from '@/components/mdx-image'
+import rehypeAutoLinkTechnologies from '@/lib/rehype-auto-link-technologies'
+import { cn } from '@/utils/lib'
 import { getAllProjectSlugs, getProjectBySlug } from '@/utils/project'
 interface ProjectProjectPageProps {
     params: Promise<{
@@ -36,16 +38,22 @@ const mdxComponents = {
     Image: MDXImage,
 }
 
-function CustomLink({ href, ...props }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+function CustomLink({ href, className, ...props }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+    // Special styling for auto-linked technology keywords
+    const isTechLink = className?.includes('tech-link')
+    const linkClasses = isTechLink
+        ? 'text-primary hover:text-primary-dark font-medium underline decoration-primary/30 hover:decoration-primary transition-colors'
+        : ''
+
     if (href.startsWith('/')) {
-        return <Link href={href} {...props} />
+        return <Link href={href} className={linkClasses} {...props} />
     }
 
     if (href.startsWith('#')) {
-        return <a {...props} />
+        return <a className={linkClasses} {...props} />
     }
 
-    return <a target="_blank" rel="noopener noreferrer" {...props} />
+    return <a target="_blank" rel="noopener noreferrer" className={linkClasses} {...props} />
 }
 
 export async function generateStaticParams() {
@@ -100,13 +108,18 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                         {project.category}
                                     </div>
                                 )}
+                                {project.client?.sector && (
+                                    <div className="bg-primary/10 text-primary inline-block rounded-full px-4 py-1.5 text-sm font-medium">
+                                        {project.client.sector}
+                                    </div>
+                                )}
                                 {project.projectType === 'one-shot' ? (
                                     <div className="bg-secondary/10 text-secondary-dark flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium">
                                         <Zap className="h-4 w-4" />
                                         Mission ponctuelle
                                     </div>
                                 ) : project.projectType === 'recurring' ? (
-                                    <div className="bg-primary/10 text-primary flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium">
+                                    <div className="bg-secondary/10 text-secondary-dark flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium">
                                         <Repeat className="h-4 w-4" />
                                         Partenariat continu
                                     </div>
@@ -157,7 +170,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
 
             {/* About Client */}
             {project.client && (project.client.sector || project.client.description || project.client.challenges) && (
-                <section className="bg-muted/30 py-16 lg:py-20">
+                <section className="bg-light py-16 lg:py-20">
                     <div className="container mx-auto px-4 lg:px-8">
                         <div className="max-w-3xl">
                             <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
@@ -214,7 +227,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
 
             {/* Challenge */}
             {project.challenge && project.challenge.description && (
-                <section className="py-16 lg:py-20">
+                <section className="border-border border-t py-16 lg:py-20">
                     <div className="container mx-auto px-4 lg:px-8">
                         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                             <div>
@@ -278,7 +291,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
 
             {/* Timeline: Engagement & Detailed Implementation */}
             {(project.engagement || project.tasks.length > 0) && (
-                <section className="bg-muted/30 py-16 lg:py-20">
+                <section className="bg-light border-border border-t py-16 lg:py-20">
                     <div className="container mx-auto px-4 lg:px-8">
                         <div className="mx-auto max-w-4xl">
                             {/* Section Header */}
@@ -311,15 +324,17 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                         <div className="space-y-4">
                                             {project.tasks.map((task, idx) => (
                                                 <div key={task.slug} className="flex gap-4">
-                                                    <div className="flex flex-col items-center">
-                                                        <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
-                                                            {idx + 1}
+                                                    {project.tasks.length > 1 && (
+                                                        <div className="flex flex-col items-center">
+                                                            <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
+                                                                {idx + 1}
+                                                            </div>
+                                                            {idx < project.tasks.length - 1 && (
+                                                                <div className="bg-border mt-2 h-full w-0.5" />
+                                                            )}
                                                         </div>
-                                                        {idx < project.tasks.length - 1 && (
-                                                            <div className="bg-border mt-2 h-full w-0.5" />
-                                                        )}
-                                                    </div>
-                                                    <div className="pb-6">
+                                                    )}
+                                                    <div className={cn({ 'pb-6': idx < project.tasks.length - 1 })}>
                                                         <div className="text-foreground mb-1 font-semibold">
                                                             {task.title}
                                                         </div>
@@ -336,6 +351,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                                                                 rehypeSlug,
                                                                                 rehypeAutolinkHeadings,
                                                                                 rehypeUnwrapImages,
+                                                                                rehypeAutoLinkTechnologies,
                                                                             ],
                                                                         },
                                                                     }}
@@ -392,7 +408,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
 
             {/* Technologies */}
             {project.technologies.length > 0 && (
-                <section className="border-border border-b py-16 lg:py-20">
+                <section className="border-border border-t py-16 lg:py-20">
                     <div className="container mx-auto px-4 lg:px-8">
                         <div className="mx-auto max-w-3xl">
                             <h2 className="text-foreground mb-6 text-center text-sm font-semibold tracking-wide uppercase">
@@ -418,7 +434,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
             )}
 
             {/* CTA */}
-            <section className="py-16 lg:py-24">
+            <section className="border-border border-t py-16 lg:py-24">
                 <div className="container mx-auto px-4 lg:px-8">
                     <div className="mx-auto max-w-3xl text-center">
                         <h2 className="text-foreground mb-6 text-3xl font-bold text-balance lg:text-5xl">
