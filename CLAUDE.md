@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-SILARHI.fr is the official website for SILARHI, a web development agency based in Toulouse, France. The site is built with Next.js 15 (App Router), TypeScript, and Tailwind CSS, serving as both a marketing showcase and a demonstration of technical quality.
+SILARHI.fr is the official website for SILARHI, a web development agency based in Toulouse, France. The site is built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4, serving as both a marketing showcase and a demonstration of technical quality.
 
 ## Development Commands
 
@@ -35,7 +35,7 @@ Fix any issues reported by knip before considering the code quality checks compl
 ## Architecture & Structure
 
 ### Routing (Next.js App Router)
-This project uses **Next.js 15 App Router** (not Pages Router):
+This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/page.tsx` - Home page
 - `src/app/projets/page.tsx` - Projects listing
 - `src/app/projets/[slug]/page.tsx` - Dynamic project pages
