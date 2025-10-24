@@ -116,8 +116,8 @@ Forms use **react-hook-form** with a custom hook pattern:
 ### Adding a New Project
 1. Create `src/content/projects/[slug].mdx` with required frontmatter
 2. Include required fields: title, date, excerpt, author, tags, published, readingTime
-3. Run `yarn build` to generate static page
-4. Project automatically appears on `/projets` page if `published: true`
+3. Project automatically appears on `/projets` page if `published: true`
+4. Use `yarn dev` to preview changes locally (no build needed for development)
 
 ### Adding a New Page
 1. Create page in `src/app/[route]/page.tsx`
