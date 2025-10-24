@@ -8,6 +8,7 @@ export interface ClientMetadata {
     slug: string
     name: string
     logo?: string
+    logoClassName?: string
     sector?: string
     description?: string
     challenges?: string
