@@ -3,14 +3,8 @@ title: "Guidap : Workers AWS SQS et Exponential Back-off"
 date: "2021-01-14"
 projectDate: "2020-10-01"
 excerpt: "Architecture workers asynchrones AWS SQS : files d'attente distribuées, requeue exponential back-off, meta-queue expiration et dispatch messages multi-tentatives."
-author: "Guillaume Sainthillier"
-tags: ["AWS", "PHP", "Queues", "Architecture", "Cloud"]
 published: true
 ---
-
-## Contexte
-
-Guidap nécessitait architecture asynchrone robuste pour traitement messages volumétriques avec gestion intelligente retry et expiration.
 
 ## Architecture Développée
 
@@ -36,17 +30,3 @@ Module routing messages selon nombre tentatives :
 - Tentative 8+ : Meta-queue (archivage erreur)
 
 Stratégie adaptative optimise ressources et détecte erreurs critiques.
-
-## Résultats
-
-- **Fiabilité** : Zéro perte message avec SQS
-- **Scalabilité** : Workers horizontalement scalables
-- **Résilience** : Back-off évite saturation sur erreurs transitoires
-- **Monitoring** : Meta-queue centralise erreurs pour investigation
-
-## Technologies
-
-- [AWS SQS](/projets/tag/aws) - Files d'attente distribuées
-- [PHP](/projets/tag/php) - Workers consumers
-- Exponential back-off - Stratégie retry
-- CloudWatch - Monitoring queues

@@ -3,14 +3,8 @@ title: "Eleo Training : Plateforme Formation avec Mercure et Symfony 6.4"
 date: "2022-11-30"
 projectDate: "2022-09-01"
 excerpt: "Plateforme gestion formations professionnelles Symfony 6.4 : module habilitations, synchronisation salles réservation, exports asynchrones Mercure et optimisation CI/CD."
-author: "Guillaume Sainthillier"
-tags: ["Symfony", "PHP", "SaaS", "Training", "Real-time"]
 published: true
 ---
-
-## Contexte
-
-Eleo Training est plateforme [SaaS](/projets/tag/saas) gestion formations professionnelles : planification sessions, formateurs, participants, habilitations obligatoires et réservation salles. Répond besoins organismes gérant dizaines sessions simultanées avec contraintes réglementaires.
 
 ## Défis
 
@@ -39,31 +33,3 @@ Connexion systèmes externes (Outlook, Google Calendar). Synchronisation bidirec
 
 ### Optimisation CI/CD
 Pipeline optimisé réduisant tests/déploiement. Cache, parallélisation, fixtures divisent temps CI par 2,5.
-
-## Résultats
-
-**Conformité** :
-- 100% formateurs habilitations à jour (vs 87%)
-- Zéro formation par formateur non habilité
-
-**UX** :
-- Exports asynchrones : +95% satisfaction
-- Tickets support : -68%
-
-**Opérationnel** :
-- Conflits salles : -92%
-- Productivité équipes : +30%
-
-**Technique** :
-- CI : 15 min → 6 min
-- Uptime : 99,7% vs 97,2%
-
-## Technologies Utilisées
-
-- [Symfony 6.4](/projets/tag/symfony) - Framework PHP LTS
-- [PHP 8](/projets/tag/php) - Langage de programmation
-- [Mercure](/projets/tag/real-time) - Protocole temps réel Server-Sent Events
-- [PostgreSQL](/projets/tag/postgresql) - Base de données
-- Symfony Messenger - Traitement asynchrone des exports
-- API Calendar - Synchronisation réservations (Google, Outlook)
-- CI/CD optimisé - Pipeline GitLab avec cache et parallélisation

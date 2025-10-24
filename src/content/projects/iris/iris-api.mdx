@@ -3,14 +3,8 @@ title: "IRIS API : Migration Symfony 6.2 pour Scanner Dentaire"
 date: "2023-10-16"
 projectDate: "2023-10-16"
 excerpt: "Modernisation d'une API Symfony existante : migration vers Symfony 6.2, architecture modulaire multi-bases, authentification SSO et tests optimisés pour Scan4All."
-author: "Guillaume Sainthillier"
-tags: ['Symfony', 'API', 'PHP', 'Migration', 'Healthcare']
 published: true
 ---
-
-## Contexte
-
-IRIS est un scanner intra-oral dentaire de haute précision développé par Scan4All. L'[API](/projets/tag/api) IRIS constitue le cœur de l'écosystème logiciel, gérant communication entre scanner, applications web et systèmes partenaires. Migration [Symfony](/projets/tag/symfony) 6.2 nécessaire pour moderniser la plateforme initialement en 4.4.
 
 ## Défis Techniques
 
@@ -38,21 +32,3 @@ Exposition endpoints [API](/projets/tag/api) sécurisés pour laboratoires denta
 
 ### Optimisation Tests CI/CD
 Parallélisation et optimisation suite de tests : réduction de 15 minutes à 1 min 30 (90% gain). Accélération cycles développement et déploiements.
-
-## Résultats
-
-- **Tests** : 90% temps réduit (15 min → 1 min 30)
-- **Architecture** : Multi-bases pour performances et sécurité
-- **Authentification** : 4 méthodes supportées simultanément
-- **Écosystème** : API partenaires opérationnelle pour laboratoires
-- **Maintenance** : Support LTS Symfony 6.2 jusqu'en 2025
-
-## Technologies Utilisées
-
-- **[Symfony 6.2](/projets/tag/symfony)** - Framework PHP moderne pour l'architecture API REST
-- **[PHP 8.1](/projets/tag/php)** - Langage backend avec JIT compiler pour les performances
-- **Keycloak** - Gestion centralisée des identités et authentification SSO
-- **[MySQL](/projets/tag/mysql)** - Bases de données relationnelles multiples pour la séparation des données
-- **PHPUnit** - Tests unitaires et fonctionnels optimisés
-- **GitLab CI** - Pipeline d'intégration continue et déploiement automatisé
-- **Docker** - Conteneurisation pour environnements de développement et production

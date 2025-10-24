@@ -3,14 +3,8 @@ title: "Lean Management : Infrastructure BigBlueButton Multi-Serveurs"
 date: "2022-09-15"
 projectDate: "2022-06-01"
 excerpt: "Infrastructure visioconférence scalable : déploiement BigBlueButton 7 serveurs, Scalelite load-balancer, PostgreSQL/Redis, stockage distribué pour formations distance."
-author: "Guillaume Sainthillier"
-tags: ["Infrastructure", "BigBlueButton", "Linux", "PostgreSQL", "Redis"]
 published: true
 ---
-
-## Contexte
-
-Déploiement infrastructure visioconférence enterprise-grade pour organisme formation professionnelle. Capacity plusieurs centaines participants simultanés.
 
 ## Infrastructure Déployée
 
@@ -52,19 +46,3 @@ Tests validation infrastructure :
 - Qualité audio/vidéo vérifiée
 - Scénarios multi-utilisateurs simultanés
 - Intégration plateforme Eleo Training
-
-## Résultats
-
-- **Capacité** : 300+ participants simultanés supportés
-- **Fiabilité** : Load-balancing garantit disponibilité 99,9%
-- **Performance** : Redis optimise latence utilisateurs
-- **Scalabilité** : Architecture horizontalement scalable (ajout serveurs)
-
-## Technologies
-
-- BigBlueButton - Plateforme visioconférence open-source
-- Scalelite - Load-balancer BBB
-- [PostgreSQL](/projets/tag/postgresql) - Base données
-- [Redis](/projets/tag/redis) - Cache in-memory
-- Linux Ubuntu - OS serveurs
-- Nginx - Reverse proxy SSL

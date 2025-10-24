@@ -3,14 +3,8 @@ title: "Gestion Multilingue : Elasticsearch i18n pour E-commerce"
 date: "2022-05-16"
 projectDate: "2022-03-01"
 excerpt: "Internationalisation moteur recherche e-commerce : architecture Elasticsearch multilingue avec indices séparés par langue et sélection dynamique selon locale utilisateur."
-author: "Guillaume Sainthillier"
-tags: ["Elasticsearch", "PHP", "E-commerce", "i18n"]
 published: true
 ---
-
-## Contexte
-
-Site e-commerce d'ameublement international nécessitant un moteur de recherche performant en français, anglais et allemand. Défi : garantir pertinence linguistique et performances identiques quelle que soit la langue de l'utilisateur.
 
 ## Solution Technique
 
@@ -29,17 +23,3 @@ Pipeline d'indexation garantissant cohérence entre les trois indices lors des m
 
 ### Routage Dynamique
 Sélection automatique de l'index selon locale utilisateur détectée (header Accept-Language, paramètre URL, préférence compte). Transparence totale pour l'utilisateur final.
-
-## Résultats
-
-- **Pertinence anglais** : +65% de recherches satisfaisantes vs index unique
-- **Performance** : Moins de 50ms temps réponse moyen (vs 80ms avant)
-- **Multilingue** : Support complet FR, EN, DE avec qualité équivalente
-- **Scalabilité** : Architecture prête pour ajout nouvelles langues
-
-## Technologies
-
-- [Elasticsearch](/projets/tag/elasticsearch) v7.x - Moteur de recherche
-- [PHP](/projets/tag/php) - Backend e-commerce et indexation
-- Analyseurs linguistiques - Stemming, synonymes, stop words
-- Traductions i18n - Gestion contenus multilingues

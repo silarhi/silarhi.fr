@@ -3,14 +3,8 @@ title: "Lanterne : Veille Politique Elasticsearch et Paiement Stripe"
 date: "2021-07-20"
 projectDate: "2021-04-01"
 excerpt: "Plateforme veille politique temps réel : ingestion Elasticsearch articles/lois, alertes personnalisées mots-clés, scoring pertinence IA, abonnement Stripe SaaS."
-author: "Guillaume Sainthillier"
-tags: ["Elasticsearch", "PHP", "RabbitMQ", "Stripe", "SaaS"]
 published: true
 ---
-
-## Contexte
-
-Lanterne est plateforme SaaS veille politique agrégant contenus institutionnels (Assemblée nationale, Sénat, Twitter politiciens) avec alertes personnalisées.
 
 ## Architecture
 
@@ -46,18 +40,3 @@ Monétisation SaaS via [Stripe](/projets/tag/stripe) :
 - Gestion abonnements (upgrade/downgrade)
 - Webhooks synchronisation statuts
 - Conformité PCI DSS
-
-## Résultats
-
-- **Couverture** : Agrégation multi-sources exhaustive
-- **Réactivité** : Alertes temps réel nouveaux contenus
-- **Pertinence** : Scoring adaptatif réduit bruit
-- **Monétisation** : Stripe fiabilise revenus SaaS
-
-## Technologies
-
-- [Elasticsearch](/projets/tag/elasticsearch) - Indexation et recherche
-- [PHP](/projets/tag/php) - Workers ingestion
-- [RabbitMQ](/projets/tag/queues) - Queue messages asynchrones
-- Python - Scraping sources externes
-- [Stripe](/projets/tag/stripe) - Paiements SaaS
