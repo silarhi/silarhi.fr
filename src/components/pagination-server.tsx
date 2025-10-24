@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import React from 'react'
 
+import PaginationLink from '@/components/pagination-link'
 import { cn } from '@/utils/lib'
 
 interface PaginationServerProps {

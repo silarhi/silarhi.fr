@@ -1,11 +1,13 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 
 import Button from '@/components/button'
-import ProjectList from '@/components/project-list'
+import ProjectListSkeleton from '@/components/project-list-skeleton'
 import ProjectsCTA from '@/components/projects-cta'
 import ProjectsHero from '@/components/projects-hero'
+import TagProjectsContent from '@/components/tag-projects-content'
 import { getAllProjectTags, getProjectsByTag } from '@/utils/project'
 import { getTagBySlug } from '@/utils/tags'
 
@@ -13,7 +15,10 @@ interface TagPageProps {
     params: Promise<{
         tag: string
     }>
+    searchParams: Promise<{ page?: string }>
 }
+
+const ITEMS_PER_PAGE = 9
 
 export async function generateStaticParams() {
     const tags = await getAllProjectTags()
@@ -32,8 +37,11 @@ export async function generateMetadata({ params }: TagPageProps): Promise<Metada
     }
 }
 
-export default async function TagPage({ params }: TagPageProps) {
+export default async function TagPage({ params, searchParams }: TagPageProps) {
     const { tag: tagParam } = await params
+    const searchParamsData = await searchParams
+    const currentPage = Number(searchParamsData.page) || 1
+
     const tag = await getTagBySlug(decodeURIComponent(tagParam))
     const projects = await getProjectsByTag(tag.slug)
     const allTags = await getAllProjectTags()
@@ -58,17 +66,18 @@ export default async function TagPage({ params }: TagPageProps) {
                 }
                 title={`Projets ${tag.name}`}
                 description={tag.description}
-            >
-                <p className="text-muted mt-4 text-sm">
-                    <span className="font-semibold">{projects.length}</span>{' '}
-                    {projects.length === 1 ? 'projet trouvé' : 'projets trouvés'}
-                </p>
-            </ProjectsHero>
+            />
 
-            {/* Projects List */}
+            {/* Projects List with Suspense */}
             <section className="py-16 lg:py-24">
                 <div className="container mx-auto px-4 lg:px-8">
-                    <ProjectList projects={projects} />
+                    <Suspense key={currentPage} fallback={<ProjectListSkeleton count={ITEMS_PER_PAGE} />}>
+                        <TagProjectsContent
+                            tagSlug={tag.slug}
+                            currentPage={currentPage}
+                            itemsPerPage={ITEMS_PER_PAGE}
+                        />
+                    </Suspense>
 
                     {/* Other tags */}
                     <div className="mt-16">

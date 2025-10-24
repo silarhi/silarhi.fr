@@ -13,7 +13,7 @@ interface SearchFormProps {
 export default function SearchForm({ baseUrl, className }: SearchFormProps) {
     const router = useRouter()
     const searchParams = useSearchParams()
-    const [, startTransition] = useTransition()
+    const [isPending, startTransition] = useTransition()
     const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
 
     const handleSearchChange = (value: string) => {
@@ -32,5 +32,5 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
         })
     }
 
-    return <SearchInput value={searchQuery} onChange={handleSearchChange} className={className} />
+    return <SearchInput value={searchQuery} onChange={handleSearchChange} className={className} isLoading={isPending} />
 }
