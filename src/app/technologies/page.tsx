@@ -1,82 +1,209 @@
-import { Metadata } from 'next'
+'use client'
+
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 import Button from '@/components/button'
-import FadeInWhenVisible from '@/components/fade-in-when-visible'
-import HeroTitle from '@/components/hero-title'
-import Section from '@/components/section'
-import SectionHeader from '@/components/section-header'
-import { getProjectsByTechnology } from '@/utils/project'
-import { getAllTechnologies } from '@/utils/technology'
+import ProjectCard from '@/components/project-card'
+import { cn } from '@/utils/lib'
+import { ProjectProject } from '@/utils/project'
 
-export const metadata: Metadata = {
-    title: 'Nos Technologies - SILARHI',
-    description: 'Découvrez les technologies que nous maîtrisons pour vos projets web.',
+interface Technology {
+    slug: string
+    name: string
+    projectCount: number
 }
 
-export default async function TechnologiesPage() {
-    const technologies = await getAllTechnologies()
+interface Tag {
+    slug: string
+    name: string
+    projectCount: number
+}
 
-    // Get project counts for each technology
-    const technologiesWithProjects = await Promise.all(
-        technologies.map(async (technology) => {
-            const projects = await getProjectsByTechnology(technology.slug)
-            return {
-                ...technology,
-                projectCount: projects.length,
-            }
-        })
-    )
+interface TechnologiesPageData {
+    technologies: Technology[]
+    tags: Tag[]
+    projects: ProjectProject[]
+}
 
-    // Filter technologies with at least one project
-    const activeTechnologies = technologiesWithProjects.filter((tech) => tech.projectCount > 0)
+export default function TechnologiesPage() {
+    const [data, setData] = useState<TechnologiesPageData | null>(null)
+    const [selectedFilter, setSelectedFilter] = useState<string | null>(null)
+    const [activeSection, setActiveSection] = useState<'technologies' | 'categories'>('technologies')
+    const [isLoading, setIsLoading] = useState(true)
+
+    // Fetch data on mount
+    useEffect(() => {
+        fetch('/api/technologies')
+            .then((res) => res.json())
+            .then((data) => {
+                setData(data)
+                setIsLoading(false)
+            })
+            .catch(() => setIsLoading(false))
+    }, [])
+
+    if (isLoading || !data) {
+        return (
+            <main className="bg-background min-h-screen">
+                <section className="from-primary/5 to-background bg-gradient-to-b pt-32 pb-16 lg:pt-40 lg:pb-20">
+                    <div className="container mx-auto px-4 lg:px-8">
+                        <div className="mx-auto max-w-4xl text-center">
+                            <h1 className="text-foreground mb-6 text-4xl font-bold text-balance lg:text-6xl">
+                                Chargement...
+                            </h1>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        )
+    }
+
+    const currentFilters = activeSection === 'technologies' ? data.technologies : data.tags
+
+    const filteredProjects = selectedFilter
+        ? data.projects.filter((project) => {
+              if (activeSection === 'technologies') {
+                  return project.technologies.some((tech) => tech.slug === selectedFilter)
+              }
+              return project.tags.some((tag) => tag.slug === selectedFilter)
+          })
+        : data.projects
 
     return (
-        <>
-            <HeroTitle
-                title="Nos Technologies"
-                subtitle="Découvrez les technologies que nous maîtrisons pour vos projets web"
-            />
-
-            <Section>
-                <SectionHeader
-                    title={`${activeTechnologies.length} technologie${activeTechnologies.length > 1 ? 's' : ''}`}
-                    subtitle="Nous utilisons des technologies modernes et éprouvées pour garantir la qualité de nos solutions"
-                />
-
-                <FadeInWhenVisible>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        {activeTechnologies.map((technology) => (
-                            <div
-                                key={technology.slug}
-                                className="border-border flex flex-col rounded-lg border bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
-                            >
-                                <h3 className="mb-2 text-xl font-semibold">{technology.name}</h3>
-                                <p className="text-muted mb-3 text-sm">
-                                    {technology.projectCount} projet{technology.projectCount > 1 ? 's' : ''}
-                                </p>
-                                <div className="mt-auto">
-                                    <Button
-                                        as="a"
-                                        href={`/technologies/${technology.slug}`}
-                                        variant="outline-primary"
-                                        size="sm"
-                                    >
-                                        Voir les projets
-                                    </Button>
-                                </div>
-                            </div>
-                        ))}
+        <main className="bg-background min-h-screen">
+            {/* Hero Section */}
+            <section className="from-primary/5 to-background bg-gradient-to-b pt-32 pb-16 lg:pt-40 lg:pb-20">
+                <div className="container mx-auto px-4 lg:px-8">
+                    <div className="mx-auto max-w-4xl text-center">
+                        <h1 className="text-foreground mb-6 text-4xl font-bold text-balance lg:text-6xl">
+                            Explorer par <span className="text-primary">expertise</span>
+                        </h1>
+                        <p className="text-muted text-xl leading-relaxed lg:text-2xl">
+                            Découvrez nos projets classés par technologies et catégories.
+                        </p>
                     </div>
-                </FadeInWhenVisible>
+                </div>
+            </section>
 
-                <FadeInWhenVisible delay={0.2}>
-                    <div className="mt-5 text-center">
-                        <Button as="a" href="/projets" variant="outline-dark">
-                            Voir tous les projets
+            {/* Filter Sections */}
+            <section className="border-border border-b py-16 lg:py-20">
+                <div className="container mx-auto px-4 lg:px-8">
+                    {/* Section Tabs */}
+                    <div className="mb-12 flex flex-wrap justify-center gap-4">
+                        <Button
+                            variant={activeSection === 'technologies' ? 'primary' : 'outline-dark'}
+                            onClick={() => {
+                                setActiveSection('technologies')
+                                setSelectedFilter(null)
+                            }}
+                        >
+                            Technologies
+                        </Button>
+                        <Button
+                            variant={activeSection === 'categories' ? 'primary' : 'outline-dark'}
+                            onClick={() => {
+                                setActiveSection('categories')
+                                setSelectedFilter(null)
+                            }}
+                        >
+                            Catégories
                         </Button>
                     </div>
-                </FadeInWhenVisible>
-            </Section>
-        </>
+
+                    {/* Filters Display */}
+                    <div className="mx-auto max-w-5xl">
+                        <div className="flex flex-wrap justify-center gap-3">
+                            {currentFilters.map((filter) => (
+                                <button
+                                    key={filter.slug}
+                                    onClick={() =>
+                                        setSelectedFilter(selectedFilter === filter.slug ? null : filter.slug)
+                                    }
+                                    className={cn(
+                                        'rounded-full px-5 py-2.5 text-sm font-medium transition-all',
+                                        selectedFilter === filter.slug
+                                            ? 'bg-primary scale-105 text-white shadow-md'
+                                            : 'border-border bg-surface text-foreground hover:border-primary/50 border hover:shadow-sm'
+                                    )}
+                                >
+                                    {filter.name}
+                                    <span className="ml-2 text-xs opacity-70">({filter.projectCount})</span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {selectedFilter && (
+                            <div className="mt-8 text-center">
+                                <Button variant="outline-dark" onClick={() => setSelectedFilter(null)} size="sm">
+                                    Réinitialiser le filtre
+                                </Button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </section>
+
+            {/* Filtered Projects */}
+            <section className="py-16 lg:py-24">
+                <div className="container mx-auto px-4 lg:px-8">
+                    <div className="mb-12">
+                        <h2 className="text-foreground text-center text-2xl font-bold lg:text-3xl">
+                            {selectedFilter
+                                ? `Projets utilisant "${currentFilters.find((f) => f.slug === selectedFilter)?.name}"`
+                                : 'Tous nos projets'}
+                            <span className="text-muted ml-2">({filteredProjects.length})</span>
+                        </h2>
+                    </div>
+
+                    {filteredProjects.length === 0 ? (
+                        <div className="py-12 text-center">
+                            <svg
+                                className="text-muted mx-auto mb-4 h-16 w-16"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={1.5}
+                                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                            <p className="text-muted">Aucun projet ne correspond à votre sélection.</p>
+                        </div>
+                    ) : (
+                        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
+                            {filteredProjects.map((project) => (
+                                <ProjectCard key={project.slug} project={project} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            {/* CTA */}
+            <section className="bg-muted/30 py-16 lg:py-24">
+                <div className="container mx-auto px-4 lg:px-8">
+                    <div className="mx-auto max-w-3xl text-center">
+                        <h2 className="text-foreground mb-6 text-3xl font-bold text-balance lg:text-5xl">
+                            Besoin d&apos;une expertise spécifique ?
+                        </h2>
+                        <p className="text-muted mb-8 text-lg leading-relaxed lg:text-xl">
+                            Discutons de votre projet et de vos besoins technologiques.
+                        </p>
+                        <Link href="/contact">
+                            <Button size="lg">
+                                Contactez-nous
+                                <ArrowRight className="ml-2 h-5 w-5" />
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+        </main>
     )
 }
