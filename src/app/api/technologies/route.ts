@@ -15,31 +15,47 @@ export async function GET() {
                 .length,
         }))
 
-        // Get all unique tags with counts
-        const tagMap = new Map<
-            string,
-            {
-                slug: string
-                name: string
-                projectCount: number
-            }
-        >()
+        // Get all unique categories with counts
+        const categoryMap = new Map<string, { slug: string; name: string; projectCount: number }>()
 
         allProjects.forEach((project) => {
-            project.tags.forEach((tag) => {
-                if (tagMap.has(tag.slug)) {
-                    tagMap.get(tag.slug)!.projectCount++
+            if (project.category) {
+                const slug = project.category.toLowerCase().replace(/\s+/g, '-')
+                if (categoryMap.has(slug)) {
+                    categoryMap.get(slug)!.projectCount++
                 } else {
-                    tagMap.set(tag.slug, {
-                        slug: tag.slug,
-                        name: tag.name,
+                    categoryMap.set(slug, {
+                        slug,
+                        name: project.category,
                         projectCount: 1,
                     })
                 }
-            })
+            }
         })
 
-        const tags = Array.from(tagMap.values()).sort((a, b) => a.name.localeCompare(b.name))
+        const categories = Array.from(categoryMap.values()).sort((a, b) => a.name.localeCompare(b.name))
+
+        // Get all unique industries/sectors with counts
+        const industryMap = new Map<string, { slug: string; name: string; projectCount: number }>()
+
+        allProjects.forEach((project) => {
+            // Check both project.industry and project.client.sector
+            const industry = project.industry || project.client?.sector
+            if (industry) {
+                const slug = industry.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
+                if (industryMap.has(slug)) {
+                    industryMap.get(slug)!.projectCount++
+                } else {
+                    industryMap.set(slug, {
+                        slug,
+                        name: industry,
+                        projectCount: 1,
+                    })
+                }
+            }
+        })
+
+        const industries = Array.from(industryMap.values()).sort((a, b) => a.name.localeCompare(b.name))
 
         // Filter to only include items with projects
         const technologies = technologiesWithCounts.filter((tech) => tech.projectCount > 0)
@@ -49,7 +65,8 @@ export async function GET() {
 
         return NextResponse.json({
             technologies,
-            tags,
+            categories,
+            industries,
             projects,
         })
     } catch (error) {

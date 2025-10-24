@@ -15,7 +15,13 @@ interface Technology {
     projectCount: number
 }
 
-interface Tag {
+interface Category {
+    slug: string
+    name: string
+    projectCount: number
+}
+
+interface Industry {
     slug: string
     name: string
     projectCount: number
@@ -23,14 +29,15 @@ interface Tag {
 
 interface TechnologiesPageData {
     technologies: Technology[]
-    tags: Tag[]
+    categories: Category[]
+    industries: Industry[]
     projects: ProjectProject[]
 }
 
 export default function TechnologiesPage() {
     const [data, setData] = useState<TechnologiesPageData | null>(null)
     const [selectedFilter, setSelectedFilter] = useState<string | null>(null)
-    const [activeSection, setActiveSection] = useState<'technologies' | 'categories'>('technologies')
+    const [activeSection, setActiveSection] = useState<'technologies' | 'categories' | 'industries'>('technologies')
     const [isLoading, setIsLoading] = useState(true)
 
     // Fetch data on mount
@@ -60,14 +67,24 @@ export default function TechnologiesPage() {
         )
     }
 
-    const currentFilters = activeSection === 'technologies' ? data.technologies : data.tags
+    const currentFilters =
+        activeSection === 'technologies'
+            ? data.technologies
+            : activeSection === 'categories'
+              ? data.categories
+              : data.industries
 
     const filteredProjects = selectedFilter
         ? data.projects.filter((project) => {
               if (activeSection === 'technologies') {
                   return project.technologies.some((tech) => tech.slug === selectedFilter)
               }
-              return project.tags.some((tag) => tag.slug === selectedFilter)
+              if (activeSection === 'categories') {
+                  return project.category?.toLowerCase().replace(/\s+/g, '-') === selectedFilter
+              }
+              // industries
+              const industry = project.industry || project.client?.sector
+              return industry?.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and') === selectedFilter
           })
         : data.projects
 
@@ -81,7 +98,7 @@ export default function TechnologiesPage() {
                             Explorer par <span className="text-primary">expertise</span>
                         </h1>
                         <p className="text-muted text-xl leading-relaxed lg:text-2xl">
-                            Découvrez nos projets classés par technologies et catégories.
+                            Découvrez nos projets classés par technologies, catégories et secteurs d&apos;activité.
                         </p>
                     </div>
                 </div>
@@ -109,6 +126,15 @@ export default function TechnologiesPage() {
                             }}
                         >
                             Catégories
+                        </Button>
+                        <Button
+                            variant={activeSection === 'industries' ? 'primary' : 'outline-dark'}
+                            onClick={() => {
+                                setActiveSection('industries')
+                                setSelectedFilter(null)
+                            }}
+                        >
+                            Secteurs
                         </Button>
                     </div>
 

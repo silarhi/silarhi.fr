@@ -68,6 +68,7 @@ export interface ProjectProject {
     // New fields for enhanced project display
     projectType?: 'one-shot' | 'recurring'
     category?: string
+    industry?: string
     year?: string
     duration?: string
     engagement?: ProjectEngagement
@@ -93,6 +94,7 @@ interface ProjectFrontMatter {
     // New optional fields
     projectType?: 'one-shot' | 'recurring'
     category?: string
+    industry?: string
     year?: string
     duration?: string
     engagement?: ProjectEngagement
