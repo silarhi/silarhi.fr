@@ -1,13 +1,16 @@
 import fs from 'fs'
 import matter from 'gray-matter'
+import { StaticImageData } from 'next/image'
 import path from 'path'
+
+import { getOptimizedImage } from '@/lib/images'
 
 const clientsDirectory = path.join(process.cwd(), 'src/content/clients')
 
 export interface ClientMetadata {
     slug: string
     name: string
-    logo?: string
+    logo?: string | StaticImageData
     logoClassName?: string
     sector?: string
     description?: string
@@ -59,7 +62,7 @@ export async function getClientBySlug(slug: string): Promise<ClientMetadata | nu
     return {
         slug,
         name: frontMatter.name,
-        logo: frontMatter.logo,
+        logo: await getOptimizedImage(frontMatter.logo),
         sector: frontMatter.sector,
         description: frontMatter.description,
         challenges: frontMatter.challenges,

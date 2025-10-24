@@ -1,6 +1,9 @@
 import fs from 'fs'
 import matter from 'gray-matter'
+import { StaticImageData } from 'next/image'
 import path from 'path'
+
+import { getOptimizedImage } from '@/lib/images'
 
 import { type ClientMetadata, getClientBySlug } from './client'
 import { getTagBySlug, type TagMetadata } from './tags'
@@ -72,7 +75,7 @@ export interface ProjectProject {
     year?: string
     duration?: string
     engagement?: ProjectEngagement
-    image?: string
+    image?: string | StaticImageData
     overview?: string
     challenge?: ProjectChallenge
     solution?: ProjectSolution
@@ -219,6 +222,7 @@ export async function getProjectBySlug(slug: string): Promise<ProjectProject | n
         content,
         readingTime,
         tasks,
+        image: await getOptimizedImage(frontMatter.image),
     }
 }
 
