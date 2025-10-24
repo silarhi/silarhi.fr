@@ -1,7 +1,8 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useState, useTransition } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
+import { useDebounce } from 'use-debounce'
 
 import SearchInput from './search-input'
 
@@ -15,21 +16,24 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
     const searchParams = useSearchParams()
     const [isPending, startTransition] = useTransition()
     const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
+    const [debouncedSearchQuery] = useDebounce(searchQuery, 300)
 
-    const handleSearchChange = (value: string) => {
-        setSearchQuery(value)
-
+    useEffect(() => {
         startTransition(() => {
             const params = new URLSearchParams()
-            if (value) {
-                params.set('search', value)
+            if (debouncedSearchQuery) {
+                params.set('search', debouncedSearchQuery)
             }
             // Reset to page 1 when searching
             params.set('page', '1')
 
-            const newUrl = value ? `${baseUrl}?${params.toString()}` : baseUrl
+            const newUrl = debouncedSearchQuery ? `${baseUrl}?${params.toString()}` : baseUrl
             router.push(newUrl)
         })
+    }, [debouncedSearchQuery, baseUrl, router])
+
+    const handleSearchChange = (value: string) => {
+        setSearchQuery(value)
     }
 
     return <SearchInput value={searchQuery} onChange={handleSearchChange} className={className} isLoading={isPending} />
