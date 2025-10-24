@@ -8,6 +8,9 @@ export interface ClientMetadata {
     slug: string
     name: string
     logo?: string
+    sector?: string
+    description?: string
+    challenges?: string
     content: string
 }
 
@@ -15,6 +18,9 @@ interface ClientFrontMatter {
     name: string
     slug: string
     logo?: string
+    sector?: string
+    description?: string
+    challenges?: string
 }
 
 // Ensure client directory exists
@@ -53,6 +59,9 @@ export async function getClientBySlug(slug: string): Promise<ClientMetadata | nu
         slug,
         name: frontMatter.name,
         logo: frontMatter.logo,
+        sector: frontMatter.sector,
+        description: frontMatter.description,
+        challenges: frontMatter.challenges,
         content,
     }
 }

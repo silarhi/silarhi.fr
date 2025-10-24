@@ -155,6 +155,63 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                 </section>
             )}
 
+            {/* About Client */}
+            {project.client && (project.client.sector || project.client.description || project.client.challenges) && (
+                <section className="bg-muted/30 py-16 lg:py-20">
+                    <div className="container mx-auto px-4 lg:px-8">
+                        <div className="max-w-3xl">
+                            <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
+                                À propos du client
+                            </h2>
+                            <div className="border-border bg-surface rounded-xl border p-8">
+                                <div className="mb-6 flex items-center gap-4">
+                                    {project.client.logo && (
+                                        <div className="relative h-16 w-16 flex-shrink-0">
+                                            <Image
+                                                src={project.client.logo}
+                                                alt={`Logo ${project.client.name}`}
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+                                    )}
+                                    <h3 className="text-foreground text-2xl font-bold">{project.client.name}</h3>
+                                </div>
+                                <div className="text-foreground/80 space-y-4">
+                                    {project.client.sector && (
+                                        <div className="flex items-start gap-3">
+                                            <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                                            <div>
+                                                <span className="text-foreground font-semibold">Secteur : </span>
+                                                {project.client.sector}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {project.client.description && (
+                                        <div className="flex items-start gap-3">
+                                            <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                                            <div>
+                                                <span className="text-foreground font-semibold">Contexte : </span>
+                                                {project.client.description}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {project.client.challenges && (
+                                        <div className="flex items-start gap-3">
+                                            <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                                            <div>
+                                                <span className="text-foreground font-semibold">Enjeux : </span>
+                                                {project.client.challenges}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* Challenge */}
             {project.challenge && project.challenge.description && (
                 <section className="py-16 lg:py-20">
