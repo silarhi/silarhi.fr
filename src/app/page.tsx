@@ -209,7 +209,7 @@ const NUMBERS: NumberData[] = [
 function HeroSection() {
     return (
         <div className="relative h-screen w-full overflow-hidden">
-            <div className="absolute top-0 left-0 z-[1] h-full w-full bg-black opacity-45"></div>
+            <div className="absolute top-0 left-0 z-[1] h-full w-full bg-black opacity-60"></div>
             <Image
                 src={home}
                 sizes="100vw"
@@ -230,7 +230,9 @@ function HeroSection() {
                             </h1>
                         </FadeInWhenVisible>
                         <FadeInWhenVisible delay={0.3} duration={0.8} yOffset={30}>
-                            <h2 className="mt-4 text-3xl font-light uppercase">Donnez vie à vos idées</h2>
+                            <h2 className="mt-4 text-3xl font-light uppercase">
+                                Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
+                            </h2>
                         </FadeInWhenVisible>
                         <FadeInWhenVisible delay={0.5} duration={0.8} yOffset={30}>
                             <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">

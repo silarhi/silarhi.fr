@@ -92,7 +92,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                         Retour aux projets
                     </Link>
 
-                    <div className="grid items-center gap-12 lg:grid-cols-2">
+                    <div className={project.image ? 'grid items-center gap-12 lg:grid-cols-2' : 'max-w-4xl'}>
                         <div>
                             <div className="mb-6 flex items-center gap-3">
                                 {project.category && (
