@@ -11,8 +11,8 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 
 ## 🧰 Tech Stack
 
-- **Frontend:** Next.js (React + TypeScript)
-- **Styling:** Tailwind CSS
+- **Frontend:** Next.js 16 (React 19 + TypeScript)
+- **Styling:** Tailwind CSS v4
 - **Content:** Markdown / MDX files for blog and portfolio entries
 - **Hosting:** Vercel
 - **CI/CD:** GitHub Actions
