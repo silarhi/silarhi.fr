@@ -8,11 +8,7 @@ interface TagProjectsContentProps {
     itemsPerPage?: number
 }
 
-export default async function TagProjectsContent({
-    tagSlug,
-    currentPage,
-    itemsPerPage = 9,
-}: TagProjectsContentProps) {
+export default async function TagProjectsContent({ tagSlug, currentPage, itemsPerPage = 9 }: TagProjectsContentProps) {
     const allProjects = await getProjectsByTag(tagSlug)
 
     // Calculate pagination

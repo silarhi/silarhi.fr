@@ -87,7 +87,7 @@ export default function PaginationServer({
                     </svg>
                 </span>
             ) : (
-                <Link
+                <PaginationLink
                     href={buildUrl(currentPage - 1)}
                     className="hover:border-primary hover:bg-primary/5 hover:text-primary flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-700 transition-colors"
                     aria-label="Page précédente"
@@ -99,7 +99,7 @@ export default function PaginationServer({
                             clipRule="evenodd"
                         />
                     </svg>
-                </Link>
+                </PaginationLink>
             )}
 
             {/* Page numbers */}
@@ -115,14 +115,14 @@ export default function PaginationServer({
                             {page}
                         </span>
                     ) : (
-                        <Link
+                        <PaginationLink
                             key={index}
                             href={buildUrl(page)}
                             className="hover:border-primary hover:bg-primary/5 hover:text-primary flex h-10 min-w-[2.5rem] items-center justify-center rounded-lg border border-gray-300 bg-white px-3 text-sm font-medium text-gray-700 transition-colors"
                             aria-label={`Page ${page}`}
                         >
                             {page}
-                        </Link>
+                        </PaginationLink>
                     )
                 ) : (
                     <span key={index} className="flex h-10 items-center px-2 text-gray-400">
@@ -147,7 +147,7 @@ export default function PaginationServer({
                     </svg>
                 </span>
             ) : (
-                <Link
+                <PaginationLink
                     href={buildUrl(currentPage + 1)}
                     className="hover:border-primary hover:bg-primary/5 hover:text-primary flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-700 transition-colors"
                     aria-label="Page suivante"
@@ -159,7 +159,7 @@ export default function PaginationServer({
                             clipRule="evenodd"
                         />
                     </svg>
-                </Link>
+                </PaginationLink>
             )}
         </div>
     )

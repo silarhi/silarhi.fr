@@ -10,11 +10,7 @@ interface ProjectsContentProps {
     itemsPerPage?: number
 }
 
-export default async function ProjectsContent({
-    currentPage,
-    searchQuery,
-    itemsPerPage = 9,
-}: ProjectsContentProps) {
+export default async function ProjectsContent({ currentPage, searchQuery, itemsPerPage = 9 }: ProjectsContentProps) {
     const allProjects = await getAllProjects()
 
     // Filter projects based on search query using Fuse.js
