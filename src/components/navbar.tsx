@@ -101,7 +101,9 @@ export default function Navbar({
                 id="app-navbar"
                 className={cn(
                     'absolute top-0 right-0 left-0 z-50 transition-opacity',
-                    floating && 'fixed',
+                    {
+                        fixed: floating,
+                    },
                     floating ? floatingClass : initialClass
                 )}
                 style={floatingStyle}

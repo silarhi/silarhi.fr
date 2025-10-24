@@ -4,7 +4,11 @@
       "Bash(npm run dev:*)",
       "Bash(yarn remove:*)",
       "Bash(yarn typecheck:*)",
-      "Bash(yarn lint-ci:*)"
+      "Bash(yarn lint-ci:*)",
+      "Bash(yarn knip:*)",
+      "Bash(yarn build:*)",
+      "Bash(yarn lint:*)",
+      "Bash(yarn add:*)"
     ],
     "deny": [],
     "ask": []

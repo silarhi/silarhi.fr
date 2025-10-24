@@ -13,7 +13,7 @@ interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function Section({
     container = true,
     fluid = false,
-    size = 'default',
+    size: _size = 'default',
     children,
     className,
     paddingX = true,
@@ -22,12 +22,7 @@ export default function Section({
 }: SectionProps) {
     const containerClass = fluid ? 'w-full px-4' : 'container mx-auto px-4'
 
-    const sectionClasses = cn(
-        paddingX && 'px-4 lg:px-8 xl:px-16',
-        paddingY && 'py-4 lg:py-8 xl:py-16',
-        size === 'xl' && 'h-screen sm:h-[75vh] md:h-[56.25vh] lg:h-[42.86vh]',
-        className
-    )
+    const sectionClasses = cn(paddingX && 'px-4 lg:px-8 xl:px-16', paddingY && 'py-4 lg:py-8 xl:py-16', className)
 
     return (
         <section className={sectionClasses} {...props}>
