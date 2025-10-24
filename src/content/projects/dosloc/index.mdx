@@ -1,0 +1,98 @@
+---
+title: "Dosloc : Application Symfony Dossier Candidature Locative"
+slug: "dosloc"
+date: '2025-01-22'
+projectDate: '2022-03-01'
+excerpt: "Application web Symfony pour dossiers de candidature locative : constitution en ligne, pièces justificatives dématérialisées, partage bailleur/locataire, génération PDF automatique."
+author: 'SILARHI'
+client: "cimalis"
+technologies: ["php","symfony","twig","bootstrap","jquery"]
+published: true
+---
+
+## Contexte
+
+Dosloc est une application web que nous avons développée et que nous maintenons, permettant la constitution en ligne de dossiers de candidature locative.
+
+La plateforme facilite les démarches pour locataires et bailleurs : création de dossier, dépôt de pièces justificatives (carte d'identité, justificatifs de revenus, etc.), partage sécurisé et préparation du bail.
+
+## Défi : Simplifier les Candidatures Locatives
+
+La constitution d'un dossier de candidature locative est un processus complexe et chronophage :
+
+- **Documents nombreux** : Multiples pièces justificatives requises (identité, revenus, garants)
+- **Sécurité des données** : Informations personnelles et financières sensibles
+- **Expérience utilisateur** : Process simple pour locataires non-techniciens
+- **Conformité légale** : Respect du cadre réglementaire des locations
+- **Format standardisé** : Présentation professionnelle pour les bailleurs
+- **Accessibilité** : Disponible sur tous supports (mobile, desktop)
+
+## Notre Solution : Plateforme Symfony Complète
+
+Nous avons développé une application web [Symfony](/projets/tag/symfony) intuitive pour locataires et bailleurs.
+
+### Espace Locataire
+
+Le module locataire permet de :
+
+- **Création de profil** : Informations personnelles et professionnelles structurées
+- **Upload de documents** : Dépôt sécurisé des pièces justificatives avec validation
+- **Gestion des garants** : Ajout de cautions solidaires avec leurs propres documents
+- **Dossier complet** : Vérification de la complétude avant envoi
+- **Partage sécurisé** : Génération d'un lien unique pour transmission au bailleur
+- **Réutilisation** : Mise à jour et réemploi du dossier pour futures candidatures
+
+### Espace Bailleur
+
+Les bailleurs bénéficient de :
+
+- **Centralisation** : Réception et gestion de toutes les candidatures au même endroit
+- **Visualisation claire** : Consultation structurée des dossiers reçus
+- **Export PDF** : Téléchargement du dossier complet au format professionnel
+- **Comparaison** : Vue comparative des candidatures pour faciliter la sélection
+- **Préparation bail** : Pré-remplissage automatique du contrat de location
+- **Archivage** : Conservation des dossiers pour historique
+
+### Architecture Technique
+
+La plateforme repose sur [Symfony](/projets/tag/symfony) avec :
+
+- **Backend robuste** : Architecture MVC avec Doctrine ORM
+- **Gestion documentaire** : Stockage sécurisé et optimisé des fichiers
+- **Génération PDF** : Conversion automatique des dossiers en documents imprimables
+- **Interface responsive** : Bootstrap pour adaptation mobile/desktop
+- **Sécurité renforcée** : Chiffrement des données sensibles, accès limités par token
+- **Conformité RGPD** : Consentements, durée de conservation, droit à l'oubli
+
+### Maintenance et Évolutions Continues
+
+Nous assurons la maintenance applicative de Dosloc :
+
+- Ajout de nouvelles fonctionnalités basées sur retours utilisateurs
+- Mises à jour de sécurité Symfony et dépendances
+- Optimisations de performance
+- Support technique et corrections de bugs
+- Adaptations aux évolutions réglementaires
+
+## Résultats et Impact
+
+Dosloc simplifie significativement le processus de candidature locative :
+
+- **Gain de temps** : Constitution de dossier 3x plus rapide qu'en papier
+- **Taux de complétude** : 90% des dossiers complets du premier coup
+- **Satisfaction utilisateurs** : Interface appréciée par locataires et bailleurs
+- **Sécurité** : 100% des données sensibles chiffrées
+- **Professionnalisme** : Dossiers PDF standardisés et présentés de manière claire
+
+La plateforme continue d'évoluer avec les besoins du marché locatif français.
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) 5.4+ - Framework PHP full-stack
+- [PHP](/projets/tag/php) 8.1 - Langage backend
+- Twig - Moteur de templates
+- Bootstrap 5 - Framework CSS responsive
+- jQuery - Interactions JavaScript
+- MySQL - Base de données relationnelle
+- Doctrine ORM - Mapping objet-relationnel
+

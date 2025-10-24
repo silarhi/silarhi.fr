@@ -1,0 +1,85 @@
+---
+title: "Accel Gerancia : TMA Laravel & Module EBICS Bancaire"
+slug: "accel-gerancia"
+date: '2025-01-22'
+projectDate: '2023-05-01'
+excerpt: "Maintenance applicative et développement module EBICS pour plateforme de gestion de tutelle : intégration bancaire sécurisée, Laravel, MongoDB, synchronisation automatique comptes."
+author: 'SILARHI'
+client: "accel-gerancia"
+technologies: ["php","laravel","mongodb","vuejs","ebics"]
+published: true
+---
+
+## Contexte
+
+Accel Gerancia est une application web de gestion de tutelle permettant aux mandataires judiciaires à la protection des majeurs de gérer leurs protégés et de centraliser l'accès à leurs comptes bancaires et comptables dans un outil simple et intuitif.
+
+Nous sommes intervenus sur cette plateforme pour développer un module d'intégration bancaire EBICS et assurer la maintenance applicative durant la mission.
+
+## Défis : Sécurité et Conformité Bancaire
+
+Le développement du module EBICS présentait des défis spécifiques au secteur judiciaire et financier :
+
+- **Sécurité des données sensibles** : Gestion de comptes bancaires de personnes protégées nécessitant une confidentialité absolue
+- **Conformité réglementaire** : Respect des normes juridiques et bancaires (EBICS, RGPD)
+- **Intégration bancaire** : Connexion sécurisée avec multiples établissements bancaires
+- **Fiabilité** : Zéro erreur tolérée sur les transactions et données financières
+- **Performance** : Traitement de volumes importants de relevés et transactions
+
+## Notre Intervention : Développement Module EBICS
+
+Nous avons développé l'intégration bancaire EBICS sur la plateforme [Laravel](/projets/tag/laravel) existante.
+
+### Module d'Intégration Bancaire EBICS
+
+Nous avons développé l'intégration du protocole [EBICS](/projets/tag/ebics) :
+
+- **Connexion multi-banques** : Support de plusieurs établissements bancaires français
+- **Synchronisation automatique** : Récupération quotidienne des relevés de comptes
+- **Import de transactions** : Parsing et classification automatique des opérations bancaires
+- **Gestion des certificats** : Stockage sécurisé et renouvellement des certificats EBICS
+- **Reconciliation comptable** : Matching automatique entre transactions et écritures comptables
+
+Le protocole EBICS est la norme bancaire française pour les échanges dématérialisés sécurisés entre entreprises et banques.
+
+### Architecture Technique Laravel
+
+La plateforme repose sur [Laravel](/projets/tag/laravel) avec une architecture adaptée aux contraintes métier :
+
+- **Backend robuste** : Laravel pour la logique métier et l'orchestration
+- **Base NoSQL** : [MongoDB](/projets/tag/mongodb) pour la flexibilité des structures de données
+- **Interface réactive** : [Vue.js](/projets/tag/vuejs) pour l'expérience utilisateur fluide
+- **Jobs asynchrones** : Queue Laravel pour les traitements bancaires lourds
+- **Chiffrement** : Données sensibles chiffrées au repos et en transit
+
+### Maintenance Durant la Mission
+
+Durant notre intervention, nous avons également assuré :
+
+- Correction de bugs liés à l'intégration EBICS
+- Optimisations de performance sur les requêtes MongoDB
+- Tests exhaustifs des flux bancaires
+- Support technique pour la mise en production
+- Documentation complète du module
+
+## Résultats et Impact
+
+Le module EBICS développé a apporté une valeur significative :
+
+- **Automatisation bancaire** : Synchronisation automatique des comptes via EBICS opérationnelle
+- **Gain de temps** : 80% de réduction du temps de saisie manuelle des transactions bancaires
+- **Support multi-formats** : Compatibilité EBICS 2.5, 3.0 et format CFONB120
+- **Sécurité** : Conformité totale aux normes bancaires et RGPD
+- **Virements planifiés** : Gestion complète des virements sortants via EBICS
+
+Le module EBICS est devenu une fonctionnalité clé différenciante de la plateforme Accel Gerancia.
+
+## Technologies Utilisées
+
+- [Laravel](/projets/tag/laravel) - Framework PHP pour l'application web
+- [PHP](/projets/tag/php) 8.1+ - Langage backend
+- [MongoDB](/projets/tag/mongodb) - Base de données NoSQL
+- [Vue.js](/projets/tag/vuejs) - Framework JavaScript frontend
+- [EBICS](/projets/tag/ebics) - Protocole d'échange bancaire sécurisé
+- Redis - Cache et queue pour jobs asynchrones
+

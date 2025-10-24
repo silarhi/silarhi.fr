@@ -1,0 +1,99 @@
+---
+title: "CFONB Reader : Outil Open-Source Symfony Fichiers Bancaires"
+slug: "cfonb-reader"
+date: '2025-01-22'
+projectDate: '2021-03-01'
+excerpt: "Outil open-source Symfony consultation fichiers bancaires : parsing CFONB120/CFONB240, visualisation transactions, export formats standards, code source disponible GitHub."
+author: 'SILARHI'
+client: "noous"
+technologies: ["php","symfony","bootstrap","ebics"]
+published: true
+---
+
+## Contexte
+
+[CFONB Reader](https://cfonb.adebiaye.tech/) est un outil de consultation de fichiers bancaires que nous avons développé, supportant les formats CFONB120 et CFONB240. Le code source de ce projet est disponible en [open-source sur GitHub](https://github.com/silarhi/cfonb-reader).
+
+## Défi : Décoder des Formats Bancaires Complexes
+
+Le développement d'un lecteur de fichiers CFONB présentait des défis techniques :
+
+- **Formats propriétaires** : CFONB120/240 sont des formats texte bancaires français complexes
+- **Parsing robuste** : Gérer les variations de format selon les banques
+- **Visualisation claire** : Rendre lisibles des données encodées techniques
+- **Export multi-formats** : Conversion vers formats exploitables (CSV, Excel)
+- **Open-source** : Code réutilisable par la communauté bancaire/fintech
+- **Documentation** : Outil accessible aux développeurs et comptables
+
+## Notre Solution : Application Web Symfony Open-Source
+
+Nous avons développé un outil web en [Symfony](/projets/tag/symfony) pour parser et visualiser les fichiers CFONB.
+
+### Parsing des Formats CFONB
+
+Le parseur supporte :
+
+- **CFONB120** : Format relevés de compte (mouvements bancaires, soldes)
+- **CFONB240** : Format virements (ordres de paiement SEPA)
+- **Validation format** : Détection et gestion des erreurs de format
+- **Multi-banques** : Compatible avec variations des différents établissements
+- **Encodages** : Support des différents encodages de caractères
+
+### Visualisation des Transactions
+
+L'interface propose :
+
+- **Tableau synthétique** : Affichage clair de toutes les transactions
+- **Détails opérations** : Informations complètes par mouvement
+- **Filtrage** : Recherche et tri par date, montant, libellé
+- **Soldes** : Calcul et affichage des soldes initial/final
+- **Statistiques** : Agrégations (total crédit/débit, nombre opérations)
+
+### Export et Conversion
+
+Les fonctionnalités d'export incluent :
+
+- **CSV** : Export standard pour import dans outils comptables
+- **Excel** : Format tableur avec mise en forme
+- **JSON** : Format structuré pour développeurs
+- **Impression** : Génération PDF pour archivage
+
+### Architecture Technique
+
+L'application [Symfony](/projets/tag/symfony) utilise :
+
+- **Parser CFONB** : Bibliothèque PHP propriétaire pour décoder les formats
+- **Upload sécurisé** : Gestion des fichiers avec validation
+- **Interface simple** : Bootstrap pour design épuré et fonctionnel
+- **Traitement serveur** : Parsing côté backend pour sécurité
+- **Open-source** : Code MIT License sur [GitHub](https://github.com/silarhi/cfonb-reader)
+
+### Contribution Open-Source
+
+Le projet open-source offre :
+
+- **Code réutilisable** : Librairie de parsing CFONB disponible
+- **Documentation** : Guide d'utilisation et exemples
+- **Contributions** : Accueil des PRs et issues communauté
+- **License MIT** : Utilisation libre y compris commerciale
+
+## Résultats et Impact
+
+CFONB Reader facilite le travail avec les fichiers bancaires français :
+
+- **Adoption** : Plusieurs centaines d'utilisations du service en ligne
+- **Open-source** : Stars GitHub et réutilisations par projets fintech
+- **Gain de temps** : Décryptage instantané vs analyse manuelle des fichiers
+- **Pédagogique** : Outil de référence pour comprendre formats CFONB
+- **Communauté** : Contributions et feedbacks d'utilisateurs
+
+L'outil est devenu une référence pour la manipulation de fichiers bancaires CFONB en France.
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) 5.4 - Framework PHP full-stack
+- [PHP](/projets/tag/php) 8.0 - Langage backend
+- Bootstrap 4 - Framework CSS responsive
+- Bibliothèque CFONB Parser - Parsing formats bancaires
+- GitHub - Hébergement open-source code
+

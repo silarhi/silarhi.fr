@@ -1,0 +1,112 @@
+---
+title: "Airbus MMS : Plateforme Symfony Gestion Médias Marketing Aéronautique"
+slug: "airbus-multi-media-support"
+date: '2025-01-22'
+projectDate: '2023-07-01'
+excerpt: "Application interne Airbus gestion supports marketing que nous avons développée et maintenons : médiathèque, assets multimédia, workflow validation, distribution contenu, Symfony enterprise."
+author: 'SILARHI'
+client: "stillgeek"
+technologies: ["php","jquery","bootstrap","symfony"]
+published: true
+---
+
+## Contexte
+
+[mms.airbus.com](https://mms.airbus.com) est une application interne à Airbus que nous avons développée et maintenons, dédiée à la gestion de supports marketing et médias multimédia pour les équipes communication du groupe aéronautique.
+
+## Défi : Centraliser les Assets Marketing d'un Groupe International
+
+Le développement d'une DAM (Digital Asset Management) pour Airbus présentait des enjeux majeurs :
+
+- **Volume important** : Gestion de milliers de fichiers multimédia (photos, vidéos, documents)
+- **Workflow validation** : Process approbation complexe pour contenus réglementés aéronautique
+- **Distribution mondiale** : Accès par équipes marketing internationales
+- **Recherche performante** : Retrouver rapidement assets dans bibliothèque massive
+- **Droits d'usage** : Gestion fine des permissions selon profiles utilisateurs
+- **Conformité** : Respect normes communication secteur aéronautique
+
+## Notre Solution : DAM Symfony Enterprise
+
+Nous avons développé une plateforme complète de gestion d'assets en [Symfony](/projets/tag/symfony) répondant aux exigences enterprise.
+
+### Médiathèque et Gestion de Fichiers
+
+Le système de gestion de médias permet :
+
+- **Upload massif** : Import par lots de fichiers multimédia
+- **Métadonnées riches** : Tagging, catégorisation, descriptions, droits
+- **Versionning** : Historique des versions pour chaque asset
+- **Aperçus** : Prévisualisation images/vidéos dans l'interface
+- **Organisation** : Arborescence de dossiers et collections thématiques
+
+### Workflow de Validation
+
+Le process d'approbation intègre :
+
+- **États documentés** : Brouillon, en validation, approuvé, rejeté
+- **Circuit de validation** : Règles selon type de contenu et destination
+- **Notifications** : Alertes email à chaque étape du workflow
+- **Commentaires** : Feedback des approbateurs intégré
+- **Traçabilité** : Historique complet des validations pour audit
+
+### Recherche et Filtrage
+
+Les fonctionnalités de recherche comprennent :
+
+- **Recherche full-text** : Sur titres, descriptions, métadonnées
+- **Filtres multicritères** : Par type, date, campagne, région, statut
+- **Recherche avancée** : Combinaison de critères complexes
+- **Résultats pertinents** : Scoring intelligent des assets
+- **Sauvegarde recherches** : Mémorisation de filtres fréquents
+
+### Distribution et Partage
+
+Le système offre :
+
+- **Téléchargements** : Export assets dans différents formats/résolutions
+- **Partage sécurisé** : Liens temporaires pour partenaires externes
+- **Collections** : Regroupement d'assets pour campagnes spécifiques
+- **Droits granulaires** : Permissions download selon profil utilisateur
+
+### Architecture Enterprise Symfony
+
+La plateforme [Symfony](/projets/tag/symfony) utilise :
+
+- **Stockage distribué** : Fichiers sur infrastructure cloud pour performance
+- **Base de données** : MySQL pour métadonnées et relations
+- **Cache** : Redis pour performances recherche et navigation
+- **Interface responsive** : Bootstrap adaptée desktop/tablette
+- **API REST** : Endpoints pour intégrations tierces
+- **Sécurité** : SSO Airbus et gestion droits RBAC
+
+### Maintenance Continue
+
+Nous assurons :
+
+- Évolutions fonctionnelles selon besoins marketing
+- Optimisations performance sur gros volumes
+- Support technique équipes utilisatrices
+- Mises à jour sécurité et migrations
+
+## Résultats et Impact
+
+La plateforme MMS facilite le travail des équipes marketing Airbus :
+
+- **Centralisation** : Hub unique pour tous les assets marketing groupe
+- **Gain de temps** : Recherche assets 10x plus rapide qu'en système fichiers
+- **Collaboration** : Équipes internationales travaillant sur mêmes contenus
+- **Conformité** : Workflow garantissant validation systématique
+- **Traçabilité** : Historique complet pour audits et conformité
+
+La plateforme est devenue l'outil de référence pour la gestion des médias marketing Airbus.
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) 6.x - Framework PHP enterprise
+- [PHP](/projets/tag/php) 8.2 - Langage backend
+- MySQL - Base de données métadonnées
+- Redis - Cache performance
+- jQuery - Interactions JavaScript
+- Bootstrap 5 - Framework CSS responsive
+- Stockage cloud - Assets multimédia
+

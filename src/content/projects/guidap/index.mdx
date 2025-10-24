@@ -1,0 +1,79 @@
+---
+title: "GUIDAP : Logiciel Symfony SaaS Gestion Loisirs sur AWS"
+slug: "guidap"
+date: '2025-01-22'
+projectDate: '2024-03-01'
+excerpt: "Solution SaaS complète en Symfony pour centres de loisirs : gestion réservations en ligne, planning dynamique, comptabilité automatisée, hébergement scalable AWS."
+author: 'SILARHI'
+client: "guidap"
+technologies: ["php","symfony","aws"]
+published: true
+---
+
+## Contexte
+
+[GUIDAP](https://guidap.com/) est un logiciel SaaS de gestion d'établissements de loisirs : centres aérés, colonies de vacances et structures d'accueil jeunesse. La plateforme centralise les processus administratifs : réservations en ligne, planning des activités, gestion des animateurs et comptabilité.
+
+Nous sommes intervenus sur ce projet pour développer une architecture asynchrone robuste capable de gérer les pics de charge saisonniers.
+
+## Défi : Gérer les Pics Saisonniers avec une Architecture Asynchrone
+
+L'infrastructure devait répondre aux défis techniques spécifiques de la saisonnalité :
+
+- **Pics de charge saisonniers** : Afflux massif de réservations lors des périodes de vacances scolaires
+- **Traitements asynchrones** : Envois d'emails massifs, génération de documents, exports comptables
+- **Fiabilité** : Garantir qu'aucun message ne soit perdu en cas d'erreur temporaire
+- **Monitoring** : Visibilité sur les files d'attente et capacité à rejouer les messages en échec
+
+L'architecture devait être scalable automatiquement tout en restant robuste face aux erreurs transitoires.
+
+## Notre Solution : Architecture Asynchrone AWS
+
+Nous avons développé un système de workers et consumers basé sur l'infrastructure [AWS](/projets/tag/aws) et intégré à la plateforme [Symfony](/projets/tag/symfony).
+
+### Système de Files d'Attente AWS SQS
+
+Nous avons mis en place une architecture de messages asynchrones :
+
+- **Workers et Consumers** : Processus dédiés consommant les messages depuis AWS SQS
+- **Files dédiées** : Séparation par type de traitement (emails, exports, factures)
+- **Scalabilité automatique** : Nombre de workers adapté à la charge en temps réel
+
+### Gestion Intelligente des Erreurs
+
+Pour garantir la fiabilité du système :
+
+- **Exponential back-off** : Délais croissants entre les tentatives de retraitement
+- **Meta-queue** : File dédiée pour les messages ayant dépassé le nombre maximal de tentatives
+- **Module de dispatch** : Routage automatique selon le nombre d'échecs et la nature de l'erreur
+- **Monitoring détaillé** : Visibilité complète sur l'état des files et les messages en erreur
+
+### Intégration Symfony
+
+L'architecture s'intègre naturellement dans l'écosystème [Symfony](/projets/tag/symfony) :
+
+- Commands Symfony pour lancer les consumers
+- Event-driven architecture pour publier les messages
+- Configuration flexible via fichiers YAML
+- Logs structurés pour le debugging
+
+## Résultats et Impact
+
+L'architecture asynchrone déployée a permis à GUIDAP de gérer efficacement sa croissance :
+
+- **Scalabilité** : Capacité à absorber les pics de charge saisonniers sans intervention manuelle
+- **Fiabilité** : 0 perte de message grâce au système de requeue avec exponential back-off
+- **Performance** : Temps de réponse utilisateur amélioré par déport des traitements lourds
+- **Observabilité** : Monitoring complet permettant une intervention rapide en cas d'anomalie
+- **Maintenance** : Architecture claire facilitant les évolutions futures
+
+Le système continue de fonctionner de manière autonome et a permis à GUIDAP de scaler sans contrainte technique majeure.
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) - Framework PHP pour les workers et consumers
+- [PHP](/projets/tag/php) - Langage backend
+- [AWS](/projets/tag/aws) SQS - Service de files d'attente managées
+- AWS CloudWatch - Monitoring et logs
+- Docker - Conteneurisation des workers
+

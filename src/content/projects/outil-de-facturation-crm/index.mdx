@@ -1,0 +1,103 @@
+---
+title: "Outil Facturation CRM : Symfony Sync HubSpot vers Zoho Invoice"
+slug: "outil-de-facturation-crm"
+date: '2025-01-22'
+projectDate: '2023-06-01'
+excerpt: "Outil synchronisation CRM développé en Symfony : conversion automatique deals HubSpot en factures Zoho Invoice, traitement asynchrone, réconciliation données, Docker, APIs tierces."
+author: 'SILARHI'
+client: "one-online"
+technologies: ["php","symfony","docker"]
+published: true
+---
+
+## Contexte
+
+Nous avons développé un outil de synchronisation entre les données de plusieurs CRM. Concrètement, les deals du CRM HubSpot sont automatiquement convertis en factures dans l'outil Zoho Invoice.
+
+## Défi : Synchroniser Deux Systèmes Hétérogènes
+
+L'intégration entre HubSpot et Zoho présente des défis techniques :
+
+- **Modèles de données différents** : Mapping entre structures CRM et facturation
+- **Synchronisation bidirectionnelle** : Mise à jour statuts dans les deux sens
+- **Fiabilité** : Aucune perte de données tolérée
+- **Performance** : Traitement volumes importants de deals quotidiens
+- **Réconciliation** : Gestion des doublons et incohérences
+- **Monitoring** : Visibilité sur succès/échecs synchronisation
+
+## Notre Solution : Connecteur Symfony Dockerisé
+
+Nous avons développé un outil [Symfony](/projets/tag/symfony) de synchronisation automatique entre les deux systèmes.
+
+### Architecture du Connecteur
+
+Le système comprend :
+
+- **Workers asynchrones** : Traitement deals en tâches de fond
+- **File de messages** : Queue pour gestion flux et retry
+- **Mapping données** : Conversion modèles HubSpot vers Zoho
+- **Validation** : Règles métier avant création factures
+- **Logging complet** : Traçabilité toutes opérations
+
+### Workflow de Synchronisation
+
+Le process automatisé :
+
+1. **Détection deals** : Webhook HubSpot sur changement statut deal
+2. **Validation** : Vérification complétude données requises
+3. **Transformation** : Conversion format HubSpot → Zoho Invoice
+4. **Création facture** : Appel API Zoho avec données transformées
+5. **Mise à jour HubSpot** : Lien facture ajouté au deal
+6. **Notification** : Alerte équipe en cas d'erreur
+
+### APIs et Intégrations
+
+L'outil utilise :
+
+- **HubSpot API** : Lecture deals, mise à jour propriétés
+- **Zoho Invoice API** : Création factures, clients, articles
+- **Webhooks** : Déclenchement temps réel depuis HubSpot
+- **Retry logic** : Gestion erreurs temporaires APIs
+- **Rate limiting** : Respect quotas APIs tierces
+
+### Réconciliation et Monitoring
+
+Le système assure :
+
+- **Détection doublons** : Évite création factures multiples
+- **Dashboard monitoring** : Vue synchronisations réussies/échouées
+- **Alertes** : Notifications Slack en cas de problème
+- **Logs détaillés** : Historique pour debugging
+- **Statistiques** : Métriques volumes traités
+
+### Déploiement Docker
+
+L'infrastructure [Docker](/projets/tag/docker) permet :
+
+- **Containers isolés** : Workers, base données, queue séparés
+- **Scalabilité** : Ajout workers selon charge
+- **Reproductibilité** : Environnement identique dev/prod
+- **Orchestration** : Docker Compose pour déploiement simple
+
+## Résultats et Impact
+
+L'outil automatise le workflow commercial-facturation :
+
+- **Automatisation** : 100% deals convertis automatiquement en factures
+- **Gain temps** : Élimination saisie manuelle (2h/jour économisées)
+- **Fiabilité** : 0 perte de données grâce retry et logging
+- **Rapidité** : Factures créées < 1min après clôture deal
+- **Traçabilité** : Lien deal-facture pour suivi complet
+
+Le connecteur est devenu essentiel au workflow sales-to-cash.
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) 6.x - Framework PHP backend
+- [PHP](/projets/tag/php) 8.2 - Langage
+- [Docker](/projets/tag/docker) - Conteneurisation
+- HubSpot API - CRM commercial
+- Zoho Invoice API - Facturation
+- RabbitMQ - File de messages
+- MySQL - Base de données synchronisation
+

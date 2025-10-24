@@ -1,0 +1,101 @@
+---
+title: "Maps : Outil Cartographique Cadastre & Prospection Immobilière"
+slug: "maps"
+date: '2025-01-22'
+projectDate: '2021-08-01'
+excerpt: "Application web cartographie cadastrale que nous développons et maintenons : carte interactive, recherche parcelles, prospection biens immobiliers, données géolocalisées temps réel."
+author: 'SILARHI'
+client: "cimalis"
+technologies: ["php","jquery","bootstrap"]
+published: true
+---
+
+## Contexte
+
+Maps est un outil d'affichage des données cadastrales que nous avons développé et maintenons, présentant les informations sous forme de carte interactive couplée à un système de recherche et de prospection de biens immobiliers.
+
+## Défi : Visualiser des Données Cadastrales Complexes
+
+Le développement d'un outil cartographique cadastral présente des défis spécifiques :
+
+- **Données géographiques** : Manipulation de volumes importants de données cadastrales géolocalisées
+- **Performance cartographique** : Affichage fluide de milliers de parcelles simultanément
+- **Recherche avancée** : Filtrage multicritère sur propriétés et caractéristiques
+- **Intégration APIs** : Connexion avec services cadastraux et données publiques
+- **Prospection** : Identification de biens selon critères métier spécifiques
+- **Interface intuitive** : Navigation carte simple pour utilisateurs non-techniques
+
+## Notre Solution : Application Cartographique Interactive
+
+Nous avons développé une plateforme web combinant cartographie et recherche de données cadastrales.
+
+### Carte Interactive
+
+Le module cartographique offre :
+
+- **Affichage parcelles** : Visualisation des délimitations cadastrales sur fond de carte
+- **Navigation fluide** : Zoom, déplacement, sélection de zones
+- **Informations détaillées** : Pop-ups affichant propriétés, surfaces, références cadastrales
+- **Layers multiples** : Superposition de couches d'information (zones urbaines, PLU, etc.)
+- **Export cartes** : Génération d'images et exports pour documentation
+
+### Système de Recherche
+
+La recherche multicritère permet de :
+
+- **Filtrage parcelles** : Recherche par référence cadastrale, adresse, propriétaire
+- **Critères métier** : Surface, zonage, statut constructible, etc.
+- **Résultats cartographiques** : Affichage instantané des résultats sur la carte
+- **Sauvegarde recherches** : Mémorisation des critères pour réutilisation
+- **Exports données** : Téléchargement des résultats en CSV/Excel
+
+### Module de Prospection
+
+L'outil de prospection intègre :
+
+- **Identification opportunités** : Détection automatique de biens répondant à critères
+- **Scoring parcelles** : Évaluation selon potentiel immobilier
+- **Historique prospection** : Suivi des biens déjà contactés
+- **Notes et annotations** : Mémorisation d'informations terrain
+- **Rapports prospection** : Synthèses pour équipes commerciales
+
+### Architecture Technique
+
+La plateforme utilise :
+
+- **Backend [PHP](/projets/tag/php)** : Traitement des données cadastrales et API
+- **API cartographique** : Intégration OpenStreetMap/Leaflet pour affichage
+- **Base de données** : Stockage optimisé des parcelles et métadonnées
+- **Interface responsive** : Bootstrap pour adaptation desktop/tablette
+- **JavaScript/jQuery** : Interactions carte et recherche temps réel
+
+### Maintenance Continue
+
+Nous assurons les évolutions de Maps :
+
+- Ajout de nouvelles sources de données cadastrales
+- Optimisations de performance cartographique
+- Nouvelles fonctionnalités de prospection
+- Support technique et corrections
+
+## Résultats et Impact
+
+Maps facilite significativement le travail de prospection immobilière :
+
+- **Gain de temps** : Recherche de biens 5x plus rapide qu'en méthodes traditionnelles
+- **Précision** : Données cadastrales exactes et mises à jour
+- **Visualisation** : Compréhension immédiate du contexte géographique
+- **Productivité** : Équipes commerciales équipées d'un outil professionnel
+- **ROI** : Augmentation du taux de conversion sur la prospection
+
+L'outil continue d'évoluer pour répondre aux besoins métier de la prospection immobilière.
+
+## Technologies Utilisées
+
+- [PHP](/projets/tag/php) 7.4+ - Langage backend
+- Leaflet/OpenStreetMap - Bibliothèque cartographique
+- jQuery - Interactions JavaScript
+- Bootstrap 4 - Framework CSS responsive
+- MySQL - Base de données géographiques
+- APIs cadastrales - Données publiques IGN
+

@@ -1,0 +1,90 @@
+---
+title: "Production Fabrication : Gestion Stock Industriel PHP & SAP"
+slug: "production-fabrication"
+date: '2025-01-22'
+projectDate: '2020-12-01'
+excerpt: "Outil interne gestion stock industriel développé en PHP : interface web, intégration SAP, suivi articles fabrication, inventaires, base MSSQL, mission ponctuelle."
+author: 'SILARHI'
+client: "arcos-technologies"
+technologies: ["php","jquery","bootstrap","mssql","sap"]
+published: true
+---
+
+## Contexte
+
+Nous avons développé Production Fabrication, un outil interne dédié à la gestion du stock des articles industriels.
+
+## Défi : Gérer des Stocks Industriels Complexes
+
+La gestion de stock industriel présente des défis spécifiques :
+
+- **Volumétrie** : Milliers de références articles à suivre
+- **Traçabilité** : Historique complet mouvements pour audit
+- **Intégration SAP** : Synchronisation avec ERP existant
+- **Inventaires** : Outils pour comptages physiques réguliers
+- **Multi-emplacements** : Gestion plusieurs sites de stockage
+- **Temps réel** : Visibilité instantanée niveaux de stock
+
+## Notre Solution : Application Web Intégrée SAP
+
+Nous avons développé un outil [PHP](/projets/tag/php) avec intégration [SAP](/projets/tag/sap).
+
+### Gestion du Stock
+
+Le système permet de :
+
+- **Catalogue articles** : Fiches complètes produits industriels
+- **Mouvements stock** : Entrées, sorties, transferts entre sites
+- **Niveaux stock** : Visualisation temps réel par article/emplacement
+- **Alertes seuils** : Notifications stock minimum atteint
+- **Réservations** : Blocage quantités pour production planifiée
+
+### Inventaires
+
+Le module inventaire offre :
+
+- **Campagnes inventaire** : Création sessions de comptage
+- **Saisie comptages** : Interface mobile pour équipes terrain
+- **Écarts** : Détection différences stock théorique/physique
+- **Ajustements** : Régularisations après validation
+- **Reporting** : Synthèses inventaires pour direction
+
+### Intégration SAP
+
+La connexion avec [SAP](/projets/tag/sap) inclut :
+
+- **Import articles** : Synchronisation catalogue depuis SAP
+- **Export mouvements** : Transmission mouvements vers ERP
+- **Réconciliation** : Vérification cohérence données
+- **APIs** : Webservices pour échanges temps réel
+
+### Architecture Technique
+
+L'application utilise :
+
+- **Backend [PHP](/projets/tag/php)** : Logique métier et API
+- **Base MSSQL** : Stockage données produits et mouvements
+- **Bootstrap** : Interface responsive
+- **jQuery** : Interactions et validations
+- **SAP RFC** : Protocole communication SAP
+
+## Résultats et Impact
+
+L'outil améliore la gestion des stocks :
+
+- **Visibilité** : Vue temps réel stocks tous sites
+- **Fiabilité** : Données stock alignées avec SAP
+- **Productivité** : Inventaires 50% plus rapides
+- **Traçabilité** : Historique complet mouvements
+- **Optimisation** : Meilleure gestion niveaux stocks
+
+L'application est devenue outil quotidien équipes logistique.
+
+## Technologies Utilisées
+
+- [PHP](/projets/tag/php) 7.4 - Langage backend
+- Microsoft SQL Server - Base de données
+- [SAP](/projets/tag/sap) - ERP intégré
+- Bootstrap 4 - Framework CSS
+- jQuery - JavaScript interactions
+

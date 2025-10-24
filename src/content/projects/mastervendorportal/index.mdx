@@ -1,0 +1,103 @@
+---
+title: "MasterVendorPortal : Plateforme Symfony API Platform Refacturation"
+slug: "mastervendorportal"
+date: '2025-01-22'
+projectDate: '2024-02-01'
+excerpt: "Application web refacturation bons de commande que nous développons et maintenons : API Platform Symfony, interface React moderne, gestion flux facturation, suivi temps réel."
+author: 'SILARHI'
+client: "noous"
+technologies: ["php","symfony","api-platform","react","tailwind","mercure","postgres"]
+published: true
+---
+
+## Contexte
+
+MasterVendorPortal est un logiciel de gestion de refacturation de bons de commande que nous avons développé et que nous maintenons, permettant aux entreprises de centraliser et automatiser leurs processus de facturation.
+
+## Défi : Automatiser la Refacturation B2B
+
+Le développement d'une plateforme de refacturation présente des enjeux spécifiques :
+
+- **Flux complexes** : Gestion des bons de commande, validations, approbations
+- **Facturation automatisée** : Génération documents conformes et personnalisés
+- **Traçabilité** : Historique complet des opérations pour audit
+- **Performance** : Traitement volumes importants de commandes
+- **Interface moderne** : Expérience utilisateur fluide pour équipes comptables
+- **Intégrations** : Connexion avec systèmes ERP et comptables tiers
+
+## Notre Solution : Architecture Moderne API Platform
+
+Nous avons développé une plateforme complète avec [API Platform](/projets/tag/api-platform) et [React](/projets/tag/react).
+
+### API REST avec API Platform
+
+Le backend [Symfony](/projets/tag/symfony) + [API Platform](/projets/tag/api-platform) expose :
+
+- **CRUD complet** : Gestion bons de commande, factures, fournisseurs, clients
+- **Documentation automatique** : Swagger/OpenAPI générée automatiquement
+- **Validation robuste** : Règles métier strictes sur données financières
+- **Pagination et filtres** : Recherche performante sur grands volumes
+- **Sécurité** : Authentification JWT et gestion des droits granulaires
+
+### Interface React Moderne
+
+Le frontend [React](/projets/tag/react) avec [Tailwind CSS](/projets/tag/tailwind) offre :
+
+- **Dashboard intuitif** : Vue d'ensemble activité refacturation
+- **Gestion commandes** : Interface fluide pour création et suivi
+- **Génération factures** : Prévisualisation et export PDF
+- **Recherche avancée** : Filtres multicritères et tri dynamique
+- **Responsive** : Adaptation desktop/tablette pour mobilité
+
+### Notifications Temps Réel
+
+[Mercure](/projets/tag/mercure) permet :
+
+- **Mises à jour live** : Changements statut visibles instantanément
+- **Alertes** : Notifications pour actions requises (validations, échéances)
+- **Collaboration** : Visibilité temps réel pour équipes distribuées
+
+### Architecture Technique
+
+La stack moderne repose sur :
+
+- **[Symfony](/projets/tag/symfony) 6+** : Framework backend robuste
+- **[API Platform](/projets/tag/api-platform)** : Framework API REST
+- **[React](/projets/tag/react) 18** : Bibliothèque frontend
+- **[Tailwind CSS](/projets/tag/tailwind)** : Framework CSS utility-first
+- **[PostgreSQL](/projets/tag/postgres)** : Base de données relationnelle
+- **[Mercure](/projets/tag/mercure)** : Hub temps réel SSE
+- **Docker** : Conteneurisation complète
+
+### Maintenance et Évolutions
+
+Nous assurons :
+
+- Ajout fonctionnalités selon retours utilisateurs
+- Optimisations performance backend/frontend
+- Mises à jour sécurité des dépendances
+- Support technique et formations
+
+## Résultats et Impact
+
+MasterVendorPortal transforme le processus de refacturation :
+
+- **Automatisation** : 80% de réduction temps traitement commandes
+- **Traçabilité** : Historique complet auditable pour conformité
+- **Performance** : Temps de réponse API < 100ms
+- **Temps réel** : Notifications instantanées améliorant réactivité
+- **Satisfaction** : Interface moderne appréciée des utilisateurs
+
+La plateforme continue d'évoluer pour répondre aux besoins métier de la refacturation.
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) 6+ - Framework PHP backend
+- [API Platform](/projets/tag/api-platform) - Framework API REST
+- [React](/projets/tag/react) 18 - Bibliothèque frontend
+- [Tailwind CSS](/projets/tag/tailwind) - Framework CSS
+- [PostgreSQL](/projets/tag/postgres) - Base de données
+- [Mercure](/projets/tag/mercure) - Notifications temps réel
+- [PHP](/projets/tag/php) 8.2 - Langage backend
+- Docker - Conteneurisation
+

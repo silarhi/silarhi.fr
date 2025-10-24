@@ -1,0 +1,103 @@
+---
+title: "L'Agence : Refonte Complète Plateforme Symfony Matrimoniale"
+slug: "lagence"
+date: '2025-01-22'
+projectDate: '2021-06-01'
+excerpt: "Refonte complète application agence matrimoniale en Symfony : gestion adhérents, matching intelligent, système recommandation profils, interface moderne Bootstrap responsive."
+author: 'SILARHI'
+client: "lagence"
+technologies: ["php","symfony","bootstrap","jquery","mysql"]
+published: true
+---
+
+## Contexte
+
+[L'agence](https://www.lagence.fr/) est un site de gestion pour agence matrimoniale permettant aux administrateurs de gérer les demandes d'inscription, d'assurer le suivi et de recommander des profils aux abonnés.
+
+Nous sommes intervenus pour une refonte complète de l'application existante, en modernisant la stack technique et en repensant l'expérience utilisateur.
+
+## Défi : Moderniser une Application Legacy
+
+La refonte de L'agence présentait des défis spécifiques au métier de l'agence matrimoniale :
+
+- **Migration technique** : Réécrire une application legacy vers une architecture moderne
+- **Préservation des données** : Migrer l'historique complet des adhérents sans perte
+- **Confidentialité** : Gestion sécurisée des données personnelles sensibles (RGPD)
+- **Matching intelligent** : Système de recommandation basé sur critères multiples
+- **Workflow métier complexe** : Gestion du parcours adhérent de l'inscription à la mise en relation
+- **Interface professionnelle** : Outil adapté au travail quotidien des conseillers
+
+## Notre Solution : Refonte Symfony Complète
+
+Nous avons réécrit l'application en [Symfony](/projets/tag/symfony) avec une approche métier centrée utilisateur.
+
+### Gestion des Adhérents
+
+Le module de gestion centralise toutes les informations :
+
+- **Fiches adhérents complètes** : Profils détaillés avec photos, critères de recherche, aspirations
+- **Historique de suivi** : Traçabilité complète des interactions et mises en relation
+- **États du parcours** : Workflow clair (candidat → adhérent → actif → en pause → succès)
+- **Documents** : Stockage sécurisé des justificatifs d'identité et contrats
+- **Notes privées** : Annotations des conseillers pour suivi personnalisé
+
+### Système de Recommandation
+
+L'algorithme de matching repose sur :
+
+- **Critères multiples** : Âge, localisation, situation professionnelle, centres d'intérêt
+- **Score de compatibilité** : Calcul automatique basé sur les préférences déclarées
+- **Suggestions intelligentes** : Recommandations proactives par les conseillers
+- **Historique des propositions** : Suivi des profils présentés et retours adhérents
+- **Gestion des refus** : Mémorisation des incompatibilités pour affiner les suggestions
+
+### Interface d'Administration
+
+L'outil de gestion offre aux conseillers :
+
+- **Dashboard personnalisé** : Vue d'ensemble de l'activité et tâches en attente
+- **Recherche multicritères** : Filtrage avancé pour trouver rapidement les profils compatibles
+- **Planning de suivi** : Rappels automatiques pour relance et entretiens
+- **Statistiques** : Reporting sur taux de succès, activité par conseiller, conversions
+- **Messagerie interne** : Communication sécurisée avec les adhérents
+
+### Architecture Technique
+
+La refonte repose sur [Symfony](/projets/tag/symfony) avec :
+
+- **Backend robuste** : Architecture MVC avec Doctrine ORM
+- **Base MySQL** : Modèle relationnel optimisé pour les recherches complexes
+- **Interface responsive** : Bootstrap pour adaptation desktop/tablette
+- **Sécurité renforcée** : Authentification, droits d'accès, chiffrement données sensibles
+- **Conformité RGPD** : Gestion consentements, export et suppression des données
+
+### Migration des Données
+
+La migration depuis l'ancien système a inclus :
+
+- Scripts de migration pour 10+ années d'historique
+- Validation et nettoyage des données legacy
+- Tests exhaustifs de cohérence post-migration
+- Formation des équipes sur la nouvelle plateforme
+
+## Résultats et Impact
+
+La refonte a transformé l'outil de travail de L'agence :
+
+- **Performance** : Application 5x plus rapide que la version legacy
+- **Productivité** : 40% de réduction du temps de traitement d'une mise en relation
+- **Expérience utilisateur** : Interface moderne appréciée par l'équipe de conseillers
+- **Fiabilité** : 100% des données historiques migrées avec succès
+- **Évolutivité** : Architecture permettant facilement l'ajout de nouvelles fonctionnalités
+
+L'agence dispose désormais d'un outil moderne et performant pour accompagner ses adhérents.
+
+## Technologies Utilisées
+
+- [Symfony](/projets/tag/symfony) 5.4 - Framework PHP full-stack
+- [PHP](/projets/tag/php) 8.0 - Langage backend
+- MySQL - Base de données relationnelle
+- Bootstrap 5 - Framework CSS responsive
+- jQuery - Interactions JavaScript
+- Doctrine ORM - Mapping objet-relationnel
+
