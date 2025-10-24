@@ -7,26 +7,14 @@ author: 'SILARHI'
 client: "guidap"
 technologies: ["php","symfony","aws"]
 published: true
-industry: "Loisirs & Divertissement"
 projectType: "one-shot"
 category: "Infrastructure & Performance"
-year: "2024"
 duration: "2 mois"
 image: "/images/projects/guidap-hero.jpg"
 overview: "GUIDAP est un logiciel SaaS de gestion d'établissements de loisirs : centres aérés, colonies de vacances et structures d'accueil jeunesse. Nous sommes intervenus pour développer une architecture asynchrone robuste capable de gérer les pics de charge saisonniers."
 engagement:
   type: "Mission ponctuelle"
   description: "Développement d'une architecture asynchrone AWS pour gérer les pics de charge saisonniers et garantir la fiabilité des traitements"
-  phases:
-    - name: "Architecture & Conception"
-      period: "Semaines 1-2"
-      focus: "Conception architecture asynchrone AWS SQS, workers et consumers Symfony"
-    - name: "Développement & Intégration"
-      period: "Semaines 3-6"
-      focus: "Implémentation workers, gestion erreurs, meta-queue, intégration Symfony"
-    - name: "Tests & Déploiement"
-      period: "Semaines 7-8"
-      focus: "Tests charge, monitoring, déploiement production, documentation"
   deliverables:
     - "Architecture asynchrone AWS SQS opérationnelle"
     - "Workers et consumers Symfony performants"
@@ -75,7 +63,7 @@ L'architecture devait être scalable automatiquement tout en restant robuste fac
 
 ## Notre Solution : Architecture Asynchrone AWS
 
-Nous avons développé un système de workers et consumers basé sur l'infrastructure [AWS](/projets/tag/aws) et intégré à la plateforme [Symfony](/projets/tag/symfony).
+Nous avons développé un système de workers et consumers basé sur l'infrastructure AWS et intégré à la plateforme Symfony.
 
 ### Système de Files d'Attente AWS SQS
 
@@ -96,7 +84,7 @@ Pour garantir la fiabilité du système :
 
 ### Intégration Symfony
 
-L'architecture s'intègre naturellement dans l'écosystème [Symfony](/projets/tag/symfony) :
+L'architecture s'intègre naturellement dans l'écosystème Symfony :
 
 - Commands Symfony pour lancer les consumers
 - Event-driven architecture pour publier les messages
@@ -117,8 +105,8 @@ Le système continue de fonctionner de manière autonome et a permis à GUIDAP d
 
 ## Technologies Utilisées
 
-- [Symfony](/projets/tag/symfony) - Framework PHP pour les workers et consumers
-- [PHP](/projets/tag/php) - Langage backend
-- [AWS](/projets/tag/aws) SQS - Service de files d'attente managées
+- Symfony - Framework PHP pour les workers et consumers
+- PHP - Langage backend
+- AWS SQS - Service de files d'attente managées
 - AWS CloudWatch - Monitoring et logs
 - Docker - Conteneurisation des workers

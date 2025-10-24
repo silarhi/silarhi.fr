@@ -8,13 +8,13 @@ published: true
 ## Architecture Développée
 
 ### Files d'Attente AWS SQS
-Utilisation [AWS SQS](/projets/tag/aws) (Simple Queue Service) pour découplage producteurs/consommateurs :
+Utilisation AWS SQS (Simple Queue Service) pour découplage producteurs/consommateurs :
 - Queues distribuées scalables
 - Garantie livraison messages
 - Haute disponibilité multi-AZ
 
 ### Workers PHP Consumers
-Développement workers [PHP](/projets/tag/php) consommant messages SQS en continu. Traitement asynchrone opérations lourdes sans bloquer API frontend.
+Développement workers PHP consommant messages SQS en continu. Traitement asynchrone opérations lourdes sans bloquer API frontend.
 
 ### Requeue Exponential Back-off
 **Gestion intelligente échecs** : messages échoués replacés en queue avec délais croissants (1min, 5min, 15min, 1h). Évite saturation sur erreurs temporaires (API tierce indisponible, database lock).

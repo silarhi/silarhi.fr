@@ -11,8 +11,8 @@ L'API existante rencontrait plusieurs limites : authentification unique insuffis
 
 ## Solution Mise en Œuvre
 
-### Migration [Symfony](/projets/tag/symfony) 4.4 → 6.2
-Montée de version progressive vers Symfony 6.2 avec [PHP](/projets/tag/php) 8.1, bénéficiant du JIT compiler et optimisations framework. Support long terme garanti jusqu'en 2025.
+### Migration Symfony 4.4 → 6.2
+Montée de version progressive vers Symfony 6.2 avec PHP 8.1, bénéficiant du JIT compiler et optimisations framework. Support long terme garanti jusqu'en 2025.
 
 ### Architecture Multi-Bases de Données
 Séparation des données selon nature : base patients (données sensibles), base scans (métadonnées volumineuses), base utilisation (analytique). Isolation permettant optimisation spécifique de chaque domaine et sauvegardes ciblées.
@@ -27,7 +27,7 @@ Refonte architecture supportant 4 méthodes d'authentification sélectionnables 
 Cette flexibilité permet intégration naturelle dans infrastructures variées (cabinets, cliniques, laboratoires).
 
 ### API Partenaires Privées
-Exposition endpoints [API](/projets/tag/api) sécurisés pour laboratoires dentaires avec documentation OpenAPI complète. Couche d'abstraction facilitant onboarding partenaires.
+Exposition endpoints API sécurisés pour laboratoires dentaires avec documentation OpenAPI complète. Couche d'abstraction facilitant onboarding partenaires.
 
 ### Optimisation Tests CI/CD
 Parallélisation et optimisation suite de tests : réduction de 15 minutes à 1 min 30 (90% gain). Accélération cycles développement et déploiements.
