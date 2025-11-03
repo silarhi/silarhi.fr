@@ -20,7 +20,7 @@ export default async function ProjectsContent({ currentPage, searchQuery, itemsP
         const fuse = new Fuse(allProjects, {
             keys: [
                 { name: 'title', weight: 2 },
-                { name: 'excerpt', weight: 1.5 },
+                { name: 'overview', weight: 1.5 },
                 { name: 'client.name', weight: 1.2 },
                 { name: 'technologies.name', weight: 1 },
                 { name: 'tags.name', weight: 0.8 },

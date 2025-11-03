@@ -60,15 +60,9 @@ export default function ProjectList({ projects }: ProjectListProps) {
                     {/* Content */}
                     <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
                         {/* Category badge */}
-                        {project.category ? (
-                            <div className="bg-primary/10 text-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
-                                {project.category}
-                            </div>
-                        ) : project.tags.length > 0 ? (
-                            <div className="bg-primary/10 text-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
-                                {project.tags[0].name}
-                            </div>
-                        ) : null}
+                        <div className="bg-primary/10 text-primary mb-4 inline-block rounded-full px-3 py-1 text-xs font-semibold">
+                            {project.category}
+                        </div>
 
                         <h2 className="text-foreground mb-3 text-3xl font-bold lg:text-4xl">{project.title}</h2>
 
