@@ -23,24 +23,18 @@ engagement:
     - "Documentation technique complète"
 challenge:
   title: "Le Défi"
-  description: "L'infrastructure devait gérer les pics saisonniers massifs lors des périodes de vacances scolaires, avec traitements asynchrones lourds (emails massifs, génération documents), tout en garantissant qu'aucun message ne soit perdu et permettant le monitoring des files d'attente."
+  description: "Le développement devait permettre la gestion de queue SQS et la gestion des réessais en cas d'erreurs temporaires"
   points:
-    - "Pics de charge saisonniers lors des vacances scolaires"
-    - "Traitements asynchrones : emails massifs, exports, factures"
     - "Fiabilité critique : aucun message perdu"
     - "Monitoring et visibilité sur files d'attente"
     - "Capacité à rejouer messages en échec"
-    - "Scalabilité automatique selon charge"
 solution:
   title: "Notre Solution"
   description: "Nous avons développé un système de workers et consumers basé sur AWS SQS et intégré à Symfony, avec gestion intelligente des erreurs via exponential back-off et meta-queue pour garantir la fiabilité."
   points:
     - "Files d'attente AWS SQS dédiées par type de traitement"
-    - "Workers et consumers Symfony avec scalabilité automatique"
     - "Exponential back-off pour tentatives de retraitement"
     - "Meta-queue pour messages en échec multiples"
-    - "Module de dispatch intelligent selon erreurs"
-    - "Monitoring détaillé et logs structurés"
 ---
 
 ## Contexte

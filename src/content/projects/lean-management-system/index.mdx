@@ -2,7 +2,6 @@
 title: "Mise en place d'infrastructure pour Lean Management System"
 slug: "lean-management-system"
 projectDate: '2021-11-01'
-excerpt: "Mission infrastructure visioconférence : déploiement BigBlueButton conteneurisé Docker, configuration serveurs, intégration LMS, scalabilité sessions simultanées, mission ponctuelle."
 client: "stillgeek"
 technologies: ["docker"]
 published: true
@@ -23,23 +22,19 @@ engagement:
     - "Documentation technique et d'exploitation"
 challenge:
   title: "Le Défi"
-  description: "Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques : supporter de nombreuses sessions simultanées avec qualité stable, intégrer avec le LMS existant, garantir la sécurité des sessions, et assurer une disponibilité élevée pour formations critiques."
+  description: "Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques : supporter de nombreuses sessions simultanées avec une qualité stable, intégrer avec le LMS existant, garantir la sécurité des sessions, et assurer une disponibilité élevée durant les pics de trafic."
   points:
     - "Scalabilité pour nombreuses sessions simultanées"
     - "Performance vidéo/audio stable multi-participants"
     - "Intégration avec LMS existant"
     - "Sécurité et isolation des sessions"
-    - "Disponibilité élevée pour formations critiques"
-    - "Containerisation Docker pour reproductibilité"
 solution:
   title: "Notre Solution"
-  description: "Nous avons déployé une infrastructure de visioconférence conteneurisée avec BigBlueButton, load balancing multi-serveurs, système d'enregistrement et intégration complète au LMS via SSO et API."
+  description: "Nous avons déployé une infrastructure de visioconférence conteneurisée avec BigBlueButton, load balancing multi-serveurs, système d'enregistrement et intégration complète au LMS."
   points:
     - "Serveurs BigBlueButton avec load balancing"
-    - "Conteneurisation Docker complète"
-    - "Système d'enregistrement et transcoding"
-    - "Intégration LMS avec API et SSO"
     - "Scalabilité horizontale selon charge"
+    - "Intégration LMS avec API et SSO"
     - "Infrastructure résiliente et haute disponibilité"
 ---
 

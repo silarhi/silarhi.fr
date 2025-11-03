@@ -2,7 +2,6 @@
 title: "Outil de synchronisation CRM vers Facturation"
 slug: "facturation-crm"
 projectDate: '2023-06-01'
-excerpt: "Outil synchronisation CRM développé en Symfony : conversion automatique deals HubSpot en factures Zoho Invoice, traitement asynchrone, réconciliation données, Docker, APIs tierces."
 client: "one-online"
 technologies: ["php","symfony","docker","mysql", "jquery", "bootstrap"]
 published: true
@@ -23,24 +22,20 @@ engagement:
     - "Documentation technique"
 challenge:
   title: "Le Défi"
-  description: "L'intégration entre HubSpot et Zoho nécessitait de gérer des modèles de données hétérogènes, assurer une synchronisation bidirectionnelle fiable sans perte de données, et traiter des volumes importants de deals quotidiens avec réconciliation automatique."
+  description: "L'intégration entre HubSpot et Zoho nécessitait de gérer des règles d'affectation complexes, tout en assurant une synchronisation bidirectionnelle fiable sans perte de données."
   points:
     - "Mapping entre structures CRM et facturation différentes"
     - "Synchronisation bidirectionnelle fiable"
-    - "Fiabilité absolue : aucune perte de données"
+    - "Fiabilité dans le calcul des montants et taxes"
     - "Performance sur volumes importants quotidiens"
-    - "Réconciliation automatique et gestion doublons"
-    - "Monitoring et visibilité sur synchronisations"
 solution:
   title: "Notre Solution"
-  description: "Nous avons développé un connecteur Symfony dockerisé avec workers asynchrones, webhooks temps réel, mapping intelligent des données et système robuste de retry pour garantir la fiabilité des synchronisations."
+  description: "Nous avons développé un connecteur Symfony avec workers asynchrones, intégration CRM et moteur de calcul des montants et taxes."
   points:
-    - "Workers asynchrones pour traitement deals"
     - "Webhooks HubSpot pour déclenchement temps réel"
-    - "Mapping intelligent HubSpot → Zoho Invoice"
-    - "File de messages avec retry automatique"
     - "Intégrations APIs HubSpot et Zoho complètes"
-    - "Containerisation Docker pour déploiement"
+    - "Tests unitaires et fonctionnels"
+    - "Pagination et dispatching asynchrone pour la performance"
 ---
 
 ## Contexte
