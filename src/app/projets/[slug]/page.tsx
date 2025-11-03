@@ -1,59 +1,18 @@
 import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
-import Link, { LinkProps } from 'next/link'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import React from 'react'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeSlug from 'rehype-slug'
-import rehypeUnwrapImages from 'rehype-unwrap-images'
-import remarkGfm from 'remark-gfm'
 
 import Button from '@/components/button'
-import { MDXImage } from '@/components/mdx-image'
-import rehypeAutoLinkTechnologies from '@/lib/rehype-auto-link-technologies'
+import Markdown from '@/components/markdown'
 import { cn } from '@/utils/lib'
 import { getAllProjectSlugs, getProjectBySlug } from '@/utils/project'
+
 interface ProjectProjectPageProps {
     params: Promise<{
         slug: string
     }>
-}
-
-// MDX Components with optimized images
-const mdxComponents = {
-    h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => <h1 className="mb-4" {...props} />,
-    h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => <h2 className="mt-5 mb-3" {...props} />,
-    h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => <h3 className="mt-4 mb-3" {...props} />,
-    blockquote: (props: React.HTMLAttributes<HTMLElement>) => (
-        <blockquote className="border-primary my-4 border-l-4 pl-3 italic" {...props} />
-    ),
-    code: (props: React.HTMLAttributes<HTMLElement>) => <code className="rounded bg-gray-100 px-1" {...props} />,
-    pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-        <pre className="text-surface my-3 overflow-auto rounded bg-gray-900 p-3" {...props} />
-    ),
-    a: CustomLink,
-    img: MDXImage,
-    Image: MDXImage,
-}
-
-function CustomLink({ href, className, ...props }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-    // Special styling for auto-linked technology keywords
-    const isTechLink = className?.includes('tech-link')
-    const linkClasses = isTechLink
-        ? 'text-primary hover:text-primary-dark font-medium underline decoration-primary/30 hover:decoration-primary transition-colors'
-        : ''
-
-    if (href.startsWith('/')) {
-        return <Link href={href} className={linkClasses} {...props} />
-    }
-
-    if (href.startsWith('#')) {
-        return <a className={linkClasses} {...props} />
-    }
-
-    return <a target="_blank" rel="noopener noreferrer" className={linkClasses} {...props} />
 }
 
 export async function generateStaticParams() {
@@ -233,7 +192,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                             <div>
                                 <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">Le Défi</h2>
                                 <p className="text-foreground/80 text-lg leading-relaxed">
-                                    {project.challenge.description}
+                                    <Markdown source={project.challenge.description} variant="inline" />
                                 </p>
                             </div>
                             {project.challenge.points && (
@@ -308,7 +267,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                 </div>
                                 {project.engagement?.description && (
                                     <p className="text-foreground/80 mx-auto max-w-2xl text-lg leading-relaxed">
-                                        {project.engagement.description}
+                                        <Markdown source={project.engagement.description} variant="inline" />
                                     </p>
                                 )}
                             </div>
@@ -341,21 +300,7 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
                                                         <div className="text-muted mb-2 text-sm">{task.date}</div>
                                                         <div className="text-foreground/80">
                                                             <article className="prose prose-sm max-w-none">
-                                                                <MDXRemote
-                                                                    source={task.content}
-                                                                    components={mdxComponents}
-                                                                    options={{
-                                                                        mdxOptions: {
-                                                                            remarkPlugins: [remarkGfm],
-                                                                            rehypePlugins: [
-                                                                                rehypeSlug,
-                                                                                rehypeAutolinkHeadings,
-                                                                                rehypeUnwrapImages,
-                                                                                rehypeAutoLinkTechnologies,
-                                                                            ],
-                                                                        },
-                                                                    }}
-                                                                />
+                                                                <Markdown source={task.content} />
                                                             </article>
                                                         </div>
                                                     </div>
