@@ -4,14 +4,31 @@ import path from 'path'
 
 const technologiesDirectory = path.join(process.cwd(), 'src/content/technologies')
 
+interface TechnologyReason {
+    title: string
+    description: string
+}
+
 export interface TechnologyMetadata {
     slug: string
     name: string
+    name_aliases?: string[]
+    title?: string
+    excerpt?: string
+    description: string
+    url?: string
+    reasons: TechnologyReason[]
     content: string
 }
 
 interface TechnologyFrontMatter {
     name: string
+    name_aliases?: string[]
+    title?: string
+    excerpt?: string
+    description: string
+    url?: string
+    reasons?: TechnologyReason[]
 }
 
 // Ensure technology directory exists
@@ -48,7 +65,13 @@ export async function getTechnologyBySlug(slug: string): Promise<TechnologyMetad
 
     return {
         slug,
-        name: frontMatter.name ?? slug,
+        name: frontMatter.name,
+        name_aliases: frontMatter.name_aliases,
+        title: frontMatter.title,
+        excerpt: frontMatter.excerpt,
+        description: frontMatter.description ?? '',
+        url: frontMatter.url,
+        reasons: frontMatter.reasons ?? [],
         content,
     }
 }

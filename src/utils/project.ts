@@ -3,132 +3,104 @@ import matter from 'gray-matter'
 import { StaticImageData } from 'next/image'
 import path from 'path'
 
-import { getOptimizedImage } from '@/lib/images'
-
 import { type ClientMetadata, getClientBySlug } from './client'
-import { getTagBySlug, type TagMetadata } from './tags'
 import { getTechnologyBySlug, type TechnologyMetadata } from './technology'
 
 const projectsDirectory = path.join(process.cwd(), 'src/content/projects')
 
-interface ProjectTask {
+export type ProjectScope =
+    | 'full_development'
+    | 'feature_integration'
+    | 'takeover_and_evolution'
+    | 'maintenance_and_support'
+type CodeOwnership = 'from_scratch' | 'shared_codebase' | 'inherited_codebase'
+type EngagementType = 'project_based' | 'continuous_support' | 'consulting'
+
+// Helper function to get engagement type label in French
+export function getEngagementTypeLabel(type: EngagementType): string {
+    const labels = {
+        project_based: 'Projet à périmètre défini',
+        continuous_support: 'Support continu',
+        consulting: 'Consulting',
+    }
+    return labels[type]
+}
+
+interface ProjectIteration {
     slug: string
     title: string
-    date: string
+    date: Date
     project: string
     content: string
 }
 
-export interface ProjectEngagement {
-    type: string
+interface ProjectEngagement {
+    type: EngagementType
     description: string
-    deliverables?: string[]
-    ongoing?: string[]
+    deliverables: string[]
 }
 
-export interface ProjectChallenge {
-    title?: string
-    description?: string
-    points?: string[]
+interface ProjectChallenge {
+    description: string
+    points: string[]
 }
 
-export interface ProjectSolution {
-    title?: string
-    description?: string
-    points?: string[]
+interface ProjectSolution {
+    description: string
+    points: string[]
 }
 
-export interface ProjectResults {
-    title?: string
-    description?: string
-    metrics?: Array<{
-        label: string
-        value: string
-    }>
-}
-
-export interface ProjectTestimonial {
-    quote: string
-    author: string
-    company: string
-}
-
-export interface ProjectProject {
+export interface Project {
     slug: string
     title: string
-    date: string
-    projectDate?: string
-    updateDate?: string
-    excerpt?: string
-    author: string
-    client?: ClientMetadata
+    date: Date
+    excerpt: string
+    client: ClientMetadata
     technologies: TechnologyMetadata[]
-    tags: TagMetadata[]
     published: boolean
     content: string
-    readingTime: string
-    tasks: ProjectTask[]
-    // New fields for enhanced project display
-    projectType?: 'one-shot' | 'recurring'
-    category?: string
-    industry?: string
-    year?: string
+    iterations: ProjectIteration[]
+    scope: ProjectScope
+    codeOwnership: CodeOwnership
+    category: string
+    url?: string
+    name?: string
     duration?: string
-    engagement?: ProjectEngagement
+    engagement: ProjectEngagement
     image?: string | StaticImageData
-    overview?: string
-    challenge?: ProjectChallenge
-    solution?: ProjectSolution
-    results?: ProjectResults
-    testimonial?: ProjectTestimonial
+    overview: string
+    challenge: ProjectChallenge
+    solution: ProjectSolution
 }
 
 interface ProjectFrontMatter {
     title: string
     date: string
-    projectDate?: string
-    updateDate?: string
-    excerpt?: string
-    author?: string
-    client?: string
-    technologies?: string[]
-    tags?: string[]
-    published?: boolean
-    // New optional fields
-    projectType?: 'one-shot' | 'recurring'
-    category?: string
-    industry?: string
-    year?: string
+    excerpt: string
+    client: string
+    technologies: string[]
+    published: boolean
+    scope: ProjectScope
+    codeOwnership: CodeOwnership
+    category: string
+    url?: string
+    name?: string
     duration?: string
-    engagement?: ProjectEngagement
+    engagement: ProjectEngagement
     image?: string
-    overview?: string
-    challenge?: ProjectChallenge
-    solution?: ProjectSolution
-    results?: ProjectResults
-    testimonial?: ProjectTestimonial
+    overview: string
+    challenge: ProjectChallenge
+    solution: ProjectSolution
 }
 
-interface TaskFrontMatter {
+interface IterationFrontMatter {
     title: string
     date: string
     project: string
 }
 
-// Ensure project directory exists
-function ensureProjectDirectory() {
-    if (!fs.existsSync(projectsDirectory)) {
-        fs.mkdirSync(projectsDirectory, { recursive: true })
-    }
-}
-
-// Get all project project slugs
+// Get all project slugs
 export function getAllProjectSlugs(): string[] {
-    ensureProjectDirectory()
-    if (!fs.existsSync(projectsDirectory)) {
-        return []
-    }
-
     const entries = fs.readdirSync(projectsDirectory, { withFileTypes: true })
     return entries
         .filter((entry) => entry.isDirectory())
@@ -136,8 +108,8 @@ export function getAllProjectSlugs(): string[] {
         .filter((dirName) => fs.existsSync(path.join(projectsDirectory, dirName, 'index.mdx')))
 }
 
-// Get all tasks for a project
-async function getProjectTasks(projectSlug: string): Promise<ProjectTask[]> {
+// Get all iterations for a project
+async function getProjectIterations(projectSlug: string): Promise<ProjectIteration[]> {
     const projectDir = path.join(projectsDirectory, projectSlug)
 
     if (!fs.existsSync(projectDir)) {
@@ -145,40 +117,31 @@ async function getProjectTasks(projectSlug: string): Promise<ProjectTask[]> {
     }
 
     const files = fs.readdirSync(projectDir)
-    const taskFiles = files.filter((file) => file.endsWith('.mdx') && file !== 'index.mdx')
+    const iterationFiles = files.filter((file) => file.endsWith('.mdx') && file !== 'index.mdx')
 
-    const tasks = await Promise.all(
-        taskFiles.map(async (file) => {
+    const iterations = await Promise.all(
+        iterationFiles.map(async (file) => {
             const fullPath = path.join(projectDir, file)
             const fileContents = fs.readFileSync(fullPath, 'utf8')
             const { data, content } = matter(fileContents)
-            const frontMatter = data as TaskFrontMatter
+            const frontMatter = data as IterationFrontMatter
 
             return {
                 slug: file.replace(/\.mdx$/, ''),
                 title: frontMatter.title,
-                date: frontMatter.date,
+                date: new Date(frontMatter.date),
                 project: frontMatter.project,
                 content,
             }
         })
     )
 
-    // Sort tasks by date (oldest first for chronological order)
-    return tasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    // Sort iterations by date (oldest first for chronological order)
+    return iterations.sort((a, b) => a.date.getTime() - b.date.getTime())
 }
 
-// Calculate reading time
-function calculateReadingTime(content: string): string {
-    const wordsPerMinute = 200
-    const words = content.split(/\s+/).length
-    const minutes = Math.ceil(words / wordsPerMinute)
-    return `${minutes} min de lecture`
-}
-
-// Get a single project project by slug
-export async function getProjectBySlug(slug: string): Promise<ProjectProject | null> {
-    ensureProjectDirectory()
+// Get a single project by slug
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
     const fullPath = path.join(projectsDirectory, slug, 'index.mdx')
 
     if (!fs.existsSync(fullPath)) {
@@ -191,79 +154,59 @@ export async function getProjectBySlug(slug: string): Promise<ProjectProject | n
     const frontMatter = data as ProjectFrontMatter
 
     // Only return published projects or if published is not defined
-    if (frontMatter.published === false) {
+    if (!frontMatter.published) {
         return null
     }
 
-    const readingTime = calculateReadingTime(content)
+    // Lookup client metadata
+    const client = await getClientBySlug(frontMatter.client)
 
-    // Lookup tag metadata for each tag
-    const tagSlugs = frontMatter.tags ?? []
-    const tags = await Promise.all(tagSlugs.map(async (tagSlug) => await getTagBySlug(tagSlug)))
-
-    // Lookup client metadata if specified
-    const client = frontMatter.client ? await getClientBySlug(frontMatter.client) : undefined
+    if (!client) {
+        return null
+    }
 
     // Lookup technology metadata for each technology
-    const technologySlugs = frontMatter.technologies ?? []
-    const technologies = await Promise.all(technologySlugs.map(async (techSlug) => await getTechnologyBySlug(techSlug)))
+    const technologies = await Promise.all(frontMatter.technologies.map((techSlug) => getTechnologyBySlug(techSlug)))
 
-    // Get all tasks for this project
-    const tasks = await getProjectTasks(slug)
+    // Get all iterations for this project
+    const iterations = await getProjectIterations(slug)
 
     return {
         slug,
-        ...frontMatter,
-        author: frontMatter.author ?? 'SILARHI',
-        client: client ?? undefined,
+        title: frontMatter.title,
+        date: new Date(frontMatter.date),
+        excerpt: frontMatter.excerpt,
+        client,
+        url: frontMatter.url,
         technologies: technologies.filter((tech): tech is TechnologyMetadata => tech !== null),
-        tags,
-        published: frontMatter.published ?? false,
+        published: frontMatter.published,
         content,
-        readingTime,
-        tasks,
-        image: await getOptimizedImage(frontMatter.image),
+        iterations,
+        scope: frontMatter.scope,
+        codeOwnership: frontMatter.codeOwnership,
+        category: frontMatter.category,
+        name: frontMatter.name,
+        duration: frontMatter.duration,
+        engagement: frontMatter.engagement,
+        image: frontMatter.image,
+        overview: frontMatter.overview,
+        challenge: frontMatter.challenge,
+        solution: frontMatter.solution,
     }
 }
 
 // Get all project projects
-export async function getAllProjects(): Promise<ProjectProject[]> {
+export async function getAllProjects(): Promise<Project[]> {
     const slugs = getAllProjectSlugs()
     const projects = await Promise.all(slugs.map((slug) => getProjectBySlug(slug)))
 
     return projects
-        .filter((project): project is ProjectProject => project !== null)
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-}
-
-// Get projects by tag
-export async function getProjectsByTag(tag: string): Promise<ProjectProject[]> {
-    const allProjects = await getAllProjects()
-    return allProjects.filter((project) =>
-        project.tags.some((projectTag) => projectTag.slug.toLowerCase() === tag.toLowerCase())
-    )
-}
-
-// Get all unique tags
-export async function getAllProjectTags(): Promise<TagMetadata[]> {
-    const allProjects = await getAllProjects()
-    const tagSlugs = {} as Record<string, TagMetadata>
-
-    allProjects.forEach((project) => {
-        project.tags.forEach((tag) => (tagSlugs[tag.slug] = tag))
-    })
-
-    return Object.values(tagSlugs).sort((a, b) => a.slug.localeCompare(b.slug))
-}
-
-// Get projects by client
-export async function getProjectsByClient(clientSlug: string): Promise<ProjectProject[]> {
-    const allProjects = await getAllProjects()
-    return allProjects.filter((project) => project.client?.slug === clientSlug)
+        .filter((project): project is Project => project !== null)
+        .sort((a, b) => b.date.getTime() - a.date.getTime())
 }
 
 // Get projects by technology
-export async function getProjectsByTechnology(technologySlug: string): Promise<ProjectProject[]> {
+export async function getProjectsByTechnology(technologySlug: string): Promise<Project[]> {
     const allProjects = await getAllProjects()
     return allProjects.filter((project) =>
         project.technologies.some((tech) => tech.slug.toLowerCase() === technologySlug.toLowerCase())

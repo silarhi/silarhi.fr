@@ -1,47 +1,15 @@
 ---
-title: "Lean Management : Infrastructure BigBlueButton Multi-Serveurs"
-projectDate: "2022-06-01"
-excerpt: "Infrastructure visioconférence scalable : déploiement BigBlueButton 7 serveurs, Scalelite load-balancer, PostgreSQL/Redis, stockage distribué pour formations distance."
+title: 'Mise en Place et Intégration'
+date: '2022-06-01'
 published: true
 ---
 
-## Infrastructure Déployée
+Mise en place de l'infrastructure BigBlueButton pour les visioconférences.
 
-### Installation BigBlueButton (7 Serveurs)
-Déploiement cluster BigBlueButton :
-- 7 serveurs dédiés conférences vidéo
-- OS Linux Ubuntu optimisé
-- Configuration réseau interne sécurisé
-- Firewall strict (ports WebRTC uniquement)
+Fonctionnalités déployées :
 
-### Serveur Scalelite Load-Balancer
-Installation Scalelite (1 serveur dédié) :
-- **Load-balancing** intelligent entre 7 serveurs BBB
-- Distribution automatique charge selon capacité
-- Health-checks permanents serveurs
-- Fail-over automatique si serveur défaillant
-
-### Base Données PostgreSQL
-PostgreSQL centralisé pour métadonnées :
-- Gestion utilisateurs et sessions
-- Historique conférences
-- Statistiques utilisation
-
-### Cache Redis
-Redis pour performance :
-- Sessions utilisateurs
-- Cache données fréquentes
-- Optimisation temps réponse
-
-### Stockage Fichiers (1 Serveur)
-Serveur fichiers dédié :
-- Enregistrements conférences
-- Documents partagés sessions
-- Stockage distribué redondant
-
-### Recette et Intégration
-Tests validation infrastructure :
-- Load testing (capacity max)
-- Qualité audio/vidéo vérifiée
-- Scénarios multi-utilisateurs simultanés
-- Intégration plateforme Eleo Training
+- Mise en place de l'infrastructure (installation des serveurs, OS, réseau, firewall, serveur de fichier)
+- Installation BigBlueButton sur 7 serveurs
+- Installation Scalelite, Postgres et Redis sur 1 serveur
+- Stockage des données sur 1 serveur
+- Recette / intégration basique

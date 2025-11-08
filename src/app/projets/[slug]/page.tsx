@@ -1,15 +1,22 @@
-import { ArrowLeft, ArrowRight, Calendar, CheckCircle2, Repeat, Users, Zap } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import Badge from '@/components/badge'
+import BadgeGroup from '@/components/badge-group'
 import Button from '@/components/button'
+import { ArrowLeft, ArrowRight, Calendar, FileText } from '@/components/icons'
 import Markdown from '@/components/markdown'
+import { LaptopMockup } from '@/components/mockup'
+import ProjectScopeBadge from '@/components/project-scope-badge'
+import ProjectsCTA from '@/components/projects-cta'
+import Section from '@/components/section'
+import SectionTitle from '@/components/section-title'
 import { cn } from '@/utils/lib'
-import { getAllProjectSlugs, getProjectBySlug } from '@/utils/project'
+import { getAllProjects, getAllProjectSlugs, getEngagementTypeLabel, getProjectBySlug } from '@/utils/project'
 
-interface ProjectProjectPageProps {
+interface ProjectPageProps {
     params: Promise<{
         slug: string
     }>
@@ -22,23 +29,21 @@ export async function generateStaticParams() {
     }))
 }
 
-export async function generateMetadata({ params }: ProjectProjectPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
     const { slug } = await params
     const project = await getProjectBySlug(slug)
 
     if (!project) {
-        return {
-            title: 'Projet non trouvé - SILARHI',
-        }
+        return {}
     }
 
     return {
         title: `${project.title} - SILARHI`,
-        description: project.excerpt ?? `Projet web réalisé par SILARHI`,
+        description: project.excerpt,
     }
 }
 
-export default async function ProjectProjectPage({ params }: ProjectProjectPageProps) {
+export default async function ProjectPage({ params }: ProjectPageProps) {
     const { slug } = await params
     const project = await getProjectBySlug(slug)
 
@@ -46,372 +51,324 @@ export default async function ProjectProjectPage({ params }: ProjectProjectPageP
         notFound()
     }
 
+    // Get all projects by this client to check if we should show a link
+    const allProjects = await getAllProjects()
+    const clientProjects = allProjects.filter((p) => p.client.slug === project.client.slug)
+    const hasMultipleProjects = clientProjects.length > 1
+
     return (
-        <main className="bg-surface min-h-screen">
+        <>
             {/* Hero Section */}
-            <section className="from-primary/5 to-surface bg-gradient-to-b pt-32 pb-16 lg:pt-40 lg:pb-20">
-                <div className="container mx-auto px-4 lg:px-8">
-                    <Link
-                        href="/projets"
-                        className="text-muted hover:text-primary mb-8 inline-flex items-center text-sm transition-colors"
-                    >
-                        <ArrowLeft className="mr-2 h-4 w-4" />
-                        Retour aux projets
-                    </Link>
+            <Section className="bg-surface pt-32 pb-16 lg:pt-40 lg:pb-24">
+                <Link
+                    href="/projets"
+                    className="group text-foreground/80 hover:text-primary mb-8 inline-flex items-center gap-2 text-sm transition-colors"
+                >
+                    <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                    Retour aux projets
+                </Link>
 
-                    <div className={project.image ? 'grid items-center gap-12 lg:grid-cols-2' : 'max-w-4xl'}>
-                        <div>
-                            <div className="mb-6 flex items-center gap-3">
-                                {project.category && (
-                                    <div className="bg-primary/10 text-primary inline-block rounded-full px-4 py-1.5 text-sm font-medium">
-                                        {project.category}
-                                    </div>
-                                )}
-                                {project.client?.sector && (
-                                    <div className="bg-primary/10 text-primary inline-block rounded-full px-4 py-1.5 text-sm font-medium">
-                                        {project.client.sector}
-                                    </div>
-                                )}
-                                {project.projectType === 'one-shot' ? (
-                                    <div className="bg-secondary/10 text-secondary-dark flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium">
-                                        <Zap className="h-4 w-4" />
-                                        Mission ponctuelle
-                                    </div>
-                                ) : project.projectType === 'recurring' ? (
-                                    <div className="bg-secondary/10 text-secondary-dark flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium">
-                                        <Repeat className="h-4 w-4" />
-                                        Partenariat continu
-                                    </div>
-                                ) : null}
+                <BadgeGroup gap="lg" className="mb-6">
+                    <Badge>{project.category}</Badge>
+                    <Badge>{project.client.sector}</Badge>
+                    <ProjectScopeBadge scope={project.scope} />
+                </BadgeGroup>
+                <div
+                    className={cn({
+                        'grid items-center gap-12 lg:grid-cols-2': project.image,
+                        'max-w-4xl': !project.image,
+                    })}
+                >
+                    <div>
+                        <SectionTitle level={1} className="mb-6 text-balance">
+                            {project.name && project.name + ' - '}
+                            {project.title}
+                        </SectionTitle>
+                        <p className="text-foreground/80 mb-8 text-xl uppercase">
+                            <Markdown source={project.client.name} variant="inline" />
+                        </p>
+                        <div className="flex gap-8 text-sm">
+                            <div>
+                                <div className="text-foreground/80 mb-1">Année</div>
+                                <div className="text-foreground font-semibold">{project.date.getFullYear()}</div>
                             </div>
-                            <h1 className="text-foreground mb-6 text-4xl font-bold text-balance lg:text-6xl">
-                                {project.title}
-                            </h1>
-                            {project.client && <p className="text-muted mb-8 text-xl">{project.client.name}</p>}
-                            <div className="flex gap-8 text-sm">
-                                {project.year && (
-                                    <div>
-                                        <div className="text-muted mb-1">Année</div>
-                                        <div className="text-foreground font-semibold">{project.year}</div>
-                                    </div>
-                                )}
-                                {project.duration && (
-                                    <div>
-                                        <div className="text-muted mb-1">Durée</div>
-                                        <div className="text-foreground font-semibold">{project.duration}</div>
-                                    </div>
-                                )}
-                            </div>
+                            {project.duration && (
+                                <div>
+                                    <div className="text-foreground/80 mb-1">Durée</div>
+                                    <div className="text-foreground font-semibold">{project.duration}</div>
+                                </div>
+                            )}
                         </div>
+                        {project.url && (
+                            <div className="mt-6">
+                                <Link
+                                    href={project.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary hover:text-primary-dark group inline-flex items-center gap-2 font-medium transition-colors"
+                                >
+                                    Voir le projet en ligne
+                                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                </Link>
+                            </div>
+                        )}
+                    </div>
 
-                        {project.image && (
-                            <div className="bg-muted relative aspect-[4/3] overflow-hidden rounded-2xl">
-                                <Image src={project.image} alt={project.title} fill className="object-cover" />
+                    {project.image && (
+                        <div className="transition-transform hover:scale-105">
+                            <LaptopMockup src={project.image} alt={project.title} />
+                        </div>
+                    )}
+                </div>
+            </Section>
+
+            {/* Overview */}
+            <Section className="border-border bg-surface border-b">
+                <div className="max-w-3xl">
+                    <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
+                        Vue d&apos;ensemble
+                    </h2>
+                    <div className="text-foreground text-xl leading-relaxed lg:text-2xl">
+                        <Markdown source={project.overview} variant="inline" />
+                    </div>
+                </div>
+            </Section>
+
+            {/* About Client */}
+            <Section className="bg-light">
+                <div className="max-w-3xl">
+                    <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
+                        À propos du client
+                    </h2>
+                    <div className="border-border bg-surface rounded-xl border p-8">
+                        <div className="mb-6 flex items-center gap-4">
+                            {project.client.logo && (
+                                <div className="relative h-8 w-16 flex-shrink-0">
+                                    <Image
+                                        src={project.client.logo}
+                                        alt={`Logo ${project.client.name}`}
+                                        fill
+                                        sizes="64px"
+                                        className="object-contain"
+                                    />
+                                </div>
+                            )}
+                            <h3 className="text-foreground text-2xl font-bold uppercase">{project.client.name}</h3>
+                        </div>
+                        <div className="text-foreground/80 space-y-4">
+                            <div className="flex items-start gap-3">
+                                <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                                <div>
+                                    <span className="text-foreground font-semibold">Secteur : </span>
+                                    <Markdown source={project.client.sector} variant="inline" />
+                                </div>
+                            </div>
+                            {project.client.description && (
+                                <div className="flex items-start gap-3">
+                                    <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                                    <div>
+                                        <span className="text-foreground font-semibold">Contexte : </span>
+                                        <Markdown source={project.client.description} variant="inline" />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        {hasMultipleProjects && (
+                            <div className="border-border mt-6 border-t pt-6">
+                                <Link
+                                    href={`/projets?client=${project.client.slug}`}
+                                    className="text-primary hover:text-primary-dark group inline-flex items-center gap-2 font-medium transition-colors"
+                                >
+                                    Voir les {clientProjects.length} projets {project.client.name}
+                                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                </Link>
                             </div>
                         )}
                     </div>
                 </div>
-            </section>
-
-            {/* Overview */}
-            {project.overview && (
-                <section className="border-border border-b py-16 lg:py-20">
-                    <div className="container mx-auto px-4 lg:px-8">
-                        <div className="max-w-3xl">
-                            <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
-                                Vue d&apos;ensemble
-                            </h2>
-                            <p className="text-foreground text-xl leading-relaxed lg:text-2xl">{project.overview}</p>
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* About Client */}
-            {project.client && (project.client.sector || project.client.description || project.client.challenges) && (
-                <section className="bg-light py-16 lg:py-20">
-                    <div className="container mx-auto px-4 lg:px-8">
-                        <div className="max-w-3xl">
-                            <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
-                                À propos du client
-                            </h2>
-                            <div className="border-border bg-surface rounded-xl border p-8">
-                                <div className="mb-6 flex items-center gap-4">
-                                    {project.client.logo && (
-                                        <div className="relative h-16 w-16 flex-shrink-0">
-                                            <Image
-                                                src={project.client.logo}
-                                                alt={`Logo ${project.client.name}`}
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                    )}
-                                    <h3 className="text-foreground text-2xl font-bold">{project.client.name}</h3>
-                                </div>
-                                <div className="text-foreground/80 space-y-4">
-                                    {project.client.sector && (
-                                        <div className="flex items-start gap-3">
-                                            <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                                            <div>
-                                                <span className="text-foreground font-semibold">Secteur : </span>
-                                                {project.client.sector}
-                                            </div>
-                                        </div>
-                                    )}
-                                    {project.client.description && (
-                                        <div className="flex items-start gap-3">
-                                            <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                                            <div>
-                                                <span className="text-foreground font-semibold">Contexte : </span>
-                                                {project.client.description}
-                                            </div>
-                                        </div>
-                                    )}
-                                    {project.client.challenges && (
-                                        <div className="flex items-start gap-3">
-                                            <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                                            <div>
-                                                <span className="text-foreground font-semibold">Enjeux : </span>
-                                                {project.client.challenges}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            )}
+            </Section>
 
             {/* Challenge */}
-            {project.challenge && project.challenge.description && (
-                <section className="border-border border-t py-16 lg:py-20">
-                    <div className="container mx-auto px-4 lg:px-8">
-                        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-                            <div>
-                                <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">Le Défi</h2>
-                                <p className="text-foreground/80 text-lg leading-relaxed">
-                                    <Markdown source={project.challenge.description} variant="inline" />
-                                </p>
-                            </div>
-                            {project.challenge.points && (
-                                <div>
-                                    <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
-                                        Points Clés du Défi
-                                    </h3>
-                                    <ul className="space-y-4">
-                                        {project.challenge.points.map((point, idx) => (
-                                            <li key={idx} className="flex items-start gap-3">
-                                                <div className="bg-primary/10 mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full">
-                                                    <div className="bg-primary h-2 w-2 rounded-full" />
-                                                </div>
-                                                <span className="text-foreground">{point}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </div>
+            <Section className="border-border bg-surface border-t">
+                <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+                    <div>
+                        <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">Le Défi</h2>
+                        <p className="text-foreground/80 text-lg leading-relaxed">
+                            <Markdown source={project.challenge.description} variant="inline" />
+                        </p>
                     </div>
-                </section>
-            )}
+                    <div>
+                        <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
+                            Points Clés du Défi
+                        </h3>
+                        <ul className="space-y-4">
+                            {project.challenge.points.map((point, idx) => (
+                                <li key={idx} className="flex items-start gap-3">
+                                    <div className="bg-primary/10 mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full">
+                                        <div className="bg-primary h-2 w-2 rounded-full" />
+                                    </div>
+                                    <span className="text-foreground">
+                                        <Markdown source={point} variant="inline" />
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </Section>
 
             {/* Solution */}
-            {project.solution && project.solution.description && (
-                <section className="py-16 lg:py-20">
-                    <div className="container mx-auto px-4 lg:px-8">
-                        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-                            {project.solution.points && (
-                                <div className="order-2 lg:order-1">
-                                    <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
-                                        Fonctionnalités Clés
-                                    </h3>
-                                    <ul className="space-y-4">
-                                        {project.solution.points.map((point, idx) => (
-                                            <li key={idx} className="flex items-start gap-3">
-                                                <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
-                                                <span className="text-foreground">{point}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                            <div className="order-1 lg:order-2">
-                                <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">Notre Solution</h2>
-                                <p className="text-foreground/80 text-lg leading-relaxed">
-                                    {project.solution.description}
-                                </p>
-                            </div>
-                        </div>
+            <Section className="bg-surface">
+                <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+                    <div className="order-2 lg:order-1">
+                        <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
+                            Fonctionnalités Clés
+                        </h3>
+                        <ul className="space-y-4">
+                            {project.solution.points.map((point, idx) => (
+                                <li key={idx} className="flex items-start gap-3">
+                                    <div className="bg-primary/10 mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full">
+                                        <div className="bg-primary h-2 w-2 rounded-full" />
+                                    </div>
+                                    <span className="text-foreground">
+                                        <Markdown source={point} variant="inline" />
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                </section>
-            )}
+                    <div className="order-1 lg:order-2">
+                        <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">Notre Solution</h2>
+                        <p className="text-foreground/80 text-lg leading-relaxed">
+                            <Markdown source={project.solution.description} variant="inline" />
+                        </p>
+                    </div>
+                </div>
+            </Section>
 
             {/* Timeline: Engagement & Detailed Implementation */}
-            {(project.engagement || project.tasks.length > 0) && (
-                <section className="bg-light border-border border-t py-16 lg:py-20">
-                    <div className="container mx-auto px-4 lg:px-8">
-                        <div className="mx-auto max-w-4xl">
-                            {/* Section Header */}
-                            <div className="mb-12 text-center">
-                                <div className="mb-6 flex items-center justify-center gap-3">
-                                    {project.projectType === 'one-shot' ? (
-                                        <Zap className="text-secondary h-6 w-6" />
-                                    ) : (
-                                        <Repeat className="text-primary h-6 w-6" />
-                                    )}
-                                    <h2 className="text-foreground text-3xl font-bold lg:text-4xl">
-                                        {project.engagement?.type || 'Réalisation du Projet'}
-                                    </h2>
-                                </div>
-                                {project.engagement?.description && (
-                                    <p className="text-foreground/80 mx-auto max-w-2xl text-lg leading-relaxed">
-                                        <Markdown source={project.engagement.description} variant="inline" />
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="space-y-6">
-                                {/* Tasks Section */}
-                                {project.tasks.length > 0 && (
-                                    <div className="border-border bg-surface rounded-xl border p-6">
-                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-                                            <Calendar className="h-4 w-4" />
-                                            Phases du projet
-                                        </h3>
-                                        <div className="space-y-4">
-                                            {project.tasks.map((task, idx) => (
-                                                <div key={task.slug} className="flex gap-4">
-                                                    {project.tasks.length > 1 && (
-                                                        <div className="flex flex-col items-center">
-                                                            <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
-                                                                {idx + 1}
-                                                            </div>
-                                                            {idx < project.tasks.length - 1 && (
-                                                                <div className="bg-border mt-2 h-full w-0.5" />
-                                                            )}
-                                                        </div>
-                                                    )}
-                                                    <div className={cn({ 'pb-6': idx < project.tasks.length - 1 })}>
-                                                        <div className="text-foreground mb-1 font-semibold">
-                                                            {task.title}
-                                                        </div>
-                                                        <div className="text-muted mb-2 text-sm">{task.date}</div>
-                                                        <div className="text-foreground/80">
-                                                            <article className="prose prose-sm max-w-none">
-                                                                <Markdown source={task.content} />
-                                                            </article>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Deliverables (for one-shot projects) */}
-                                {project.projectType === 'one-shot' && project.engagement?.deliverables && (
-                                    <div className="border-border bg-surface rounded-xl border p-6">
-                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-                                            <CheckCircle2 className="h-4 w-4" />
-                                            Livrables
-                                        </h3>
-                                        <ul className="grid gap-4 sm:grid-cols-2">
-                                            {project.engagement.deliverables.map((deliverable, idx) => (
-                                                <li key={idx} className="flex items-start gap-3">
-                                                    <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
-                                                    <span className="text-foreground">{deliverable}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-
-                                {/* Ongoing Services (for recurring projects) */}
-                                {project.engagement?.ongoing && (
-                                    <div className="border-border bg-surface rounded-xl border p-6">
-                                        <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
-                                            <Users className="h-4 w-4" />
-                                            Services continus
-                                        </h3>
-                                        <ul className="grid gap-4 sm:grid-cols-2">
-                                            {project.engagement.ongoing.map((service, idx) => (
-                                                <li key={idx} className="flex items-start gap-3">
-                                                    <CheckCircle2 className="text-success mt-0.5 h-5 w-5 flex-shrink-0" />
-                                                    <span className="text-foreground">{service}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* Technologies */}
-            {project.technologies.length > 0 && (
-                <section className="border-border border-t py-16 lg:py-20">
-                    <div className="container mx-auto px-4 lg:px-8">
-                        <div className="mx-auto max-w-3xl">
-                            <h2 className="text-foreground mb-6 text-center text-sm font-semibold tracking-wide uppercase">
-                                Technologies Utilisées
+            <Section className="bg-light border-border border-t">
+                <div className="mx-auto max-w-4xl">
+                    {/* Section Header */}
+                    <div className="mb-12 text-center">
+                        <Badge variant="secondary" className="mb-4">
+                            Notre intervention
+                        </Badge>
+                        <div className="mb-6 flex items-center justify-center gap-3">
+                            <h2 className="text-foreground text-3xl font-bold lg:text-4xl">
+                                {getEngagementTypeLabel(project.engagement.type)}
                             </h2>
-                            <div className="flex flex-wrap justify-center gap-3">
-                                {project.technologies.map((tech) => (
-                                    <Button
-                                        as="a"
-                                        key={tech.slug}
-                                        size="sm"
-                                        href={`/technologies/${tech.slug}`}
-                                        variant="outline-primary"
-                                        className="rounded-full"
-                                    >
-                                        {tech.name}
-                                    </Button>
-                                ))}
-                            </div>
                         </div>
-                    </div>
-                </section>
-            )}
-
-            {/* CTA */}
-            <section className="border-border border-t py-16 lg:py-24">
-                <div className="container mx-auto px-4 lg:px-8">
-                    <div className="mx-auto max-w-3xl text-center">
-                        <h2 className="text-foreground mb-6 text-3xl font-bold text-balance lg:text-5xl">
-                            Un projet similaire en tête ?
-                        </h2>
-                        <p className="text-muted mb-8 text-lg leading-relaxed lg:text-xl">
-                            Discutons de vos objectifs et découvrez comment nous pouvons créer une solution sur mesure
-                            pour votre entreprise.
+                        <p className="text-foreground/80 mx-auto max-w-2xl text-lg leading-relaxed">
+                            <Markdown source={project.engagement.description} variant="inline" />
                         </p>
-                        <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                            <Button
-                                as="a"
-                                href="/contact"
-                                size="lg"
-                                className="bg-primary text-surface hover:bg-primary-dark inline-flex items-center font-semibold"
-                            >
-                                Démarrer un projet
-                                <ArrowRight className="ml-2 h-5 w-5" />
-                            </Button>
-                            <Button
-                                as="a"
-                                href="/projets"
-                                size="lg"
-                                variant="outline-primary"
-                                className="bg-surface font-semibold"
-                            >
-                                Voir d&apos;autres projets
-                            </Button>
+                    </div>
+
+                    <div className="space-y-6">
+                        {/* Iterations Section */}
+                        {project.iterations.length > 0 && (
+                            <div className="border-border bg-surface rounded-xl border p-6">
+                                <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                                    <Calendar className="h-4 w-4" />
+                                    Le projet en détails
+                                </h3>
+                                <div className="max-h-96 overflow-y-auto pr-4">
+                                    {project.iterations.map((iteration, idx) => (
+                                        <div key={iteration.slug} className="flex gap-4">
+                                            {project.iterations.length > 1 && (
+                                                <div className="flex flex-col items-center">
+                                                    <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
+                                                        {idx + 1}
+                                                    </div>
+                                                    {idx < project.iterations.length - 1 && (
+                                                        <div className="bg-border mt-2 h-full w-0.5" />
+                                                    )}
+                                                </div>
+                                            )}
+                                            <div className={cn({ 'pb-6': idx < project.iterations.length - 1 })}>
+                                                <div className="text-foreground mb-1 space-x-2 font-semibold">
+                                                    <span>{iteration.title}</span>
+                                                    <span className="text-foreground/80 mb-2 text-sm">
+                                                        {iteration.date.toLocaleDateString('fr-FR', {
+                                                            year: 'numeric',
+                                                            month: 'long',
+                                                        })}
+                                                    </span>
+                                                </div>
+
+                                                <div className="text-foreground/80">
+                                                    <article className="prose prose-sm max-w-none">
+                                                        <Markdown source={iteration.content} />
+                                                    </article>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Deliverables (for one-shot projects) */}
+                        <div className="border-border bg-surface rounded-xl border p-6">
+                            <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                                <FileText className="h-4 w-4" />
+                                Livrables
+                            </h3>
+                            <ul className="grid gap-4 sm:grid-cols-2">
+                                {project.engagement.deliverables.map((deliverable, idx) => (
+                                    <li key={idx} className="flex items-start gap-3">
+                                        <div className="bg-primary/10 mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full">
+                                            <div className="bg-primary h-2 w-2 rounded-full" />
+                                        </div>
+                                        <span className="text-foreground">
+                                            <Markdown source={deliverable} variant="inline" />
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
+            </Section>
+
+            {/* Technologies */}
+            <Section className="border-border bg-surface border-t">
+                <div className="mx-auto max-w-3xl">
+                    <h2 className="text-foreground mb-6 text-center text-sm font-semibold tracking-wide uppercase">
+                        Technologies utilisées
+                    </h2>
+                    <div className="flex flex-wrap justify-center gap-3">
+                        {project.technologies.map((tech) => (
+                            <Button
+                                as="a"
+                                key={tech.slug}
+                                size="sm"
+                                href={`/technologies/${tech.slug}`}
+                                variant="outline-primary"
+                                className="rounded-full"
+                            >
+                                {tech.name}
+                            </Button>
+                        ))}
+                    </div>
+                </div>
+            </Section>
+
+            {/* CTA */}
+            <ProjectsCTA
+                title="Un projet similaire en tête ?"
+                description="Discutons de vos objectifs et découvrez comment nous pouvons créer une solution sur mesure pour votre entreprise."
+                primaryButton={{
+                    text: 'Démarrer un projet',
+                    href: '/contact',
+                    variant: 'primary',
+                }}
+                secondaryButton={{
+                    text: "Voir d'autres projets",
+                    href: '/projets',
+                    variant: 'outline-primary',
+                }}
+            />
+        </>
     )
 }

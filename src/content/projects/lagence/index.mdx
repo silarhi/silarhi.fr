@@ -1,129 +1,37 @@
 ---
-title: "Site de gestion pour agence matrimoniale"
-slug: "lagence"
-projectDate: '2021-06-01'
-excerpt: "Refonte complète application agence matrimoniale en Symfony : gestion adhérents, matching intelligent, système recommandation profils, interface moderne Bootstrap responsive."
-client: "lagence"
-technologies: ["php","symfony","bootstrap","jquery","mysql"]
+title: 'Site de gestion pour agence matrimoniale'
+slug: 'lagence'
+date: '2024-12-02'
+excerpt: "Développement d'une application de gestion d'agence matrimoniale en Symfony : gestion des adhérents, module de matching des profils, relances et suivi personnalisé."
+client: 'lagence'
+technologies: ['php', 'symfony', 'bootstrap', 'jquery', 'mysql']
 published: true
-projectType: "one-shot"
-category: "Gestion"
-duration: "Depuis 42 mois"
-image: "/images/projects/lagence-hero.jpg"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Gestion'
+name: "L'agence"
+image: '/images/projects/lagence-hero.png'
+url: 'https://www.lagence.fr'
 overview: "L'agence est un site de gestion pour agence matrimoniale permettant aux administrateurs de gérer les demandes d'inscription, d'assurer le suivi et de recommander des profils aux abonnés."
-engagement:
-  type: "Partenariat continu"
-  description: "Nous accompagnons L'agence dans la gestion et l'évolution continue de leur plateforme matrimoniale avec support technique dédié"
-  ongoing:
-    - "Support technique réactif"
-    - "Évolutions fonctionnelles régulières"
-    - "Maintenance et optimisations"
-    - "Accompagnement métier"
 challenge:
-  title: "Le Défi"
-  description: "Le développement d'une application pour agence matrimoniale présentait des défis spécifiques : Gestion de l'adhérent de l'inscription à la mise en relation, confidentialité des données personnelles sensibles, et système de recommandation intelligent pour maximiser les chances de succès."
-  points:
-    - "Confidentialité et sécurité données personnelles (RGPD)"
-    - "Système de matching intelligent multicritères"
-    - "Workflow métier complexe de l'inscription à la mise en relation"
-    - "Interface professionnelle pour conseillers"
+    description: "Le développement d'une application pour agence matrimoniale présentait des défis spécifiques : Gestion de l'adhérent de l'inscription à la mise en relation, confidentialité des données personnelles sensibles et système de recommandation intelligent pour maximiser les chances de succès."
+    points:
+        - 'Confidentialité et sécurité données personnelles (RGPD)'
+        - 'Système de matching intelligent multicritères'
+        - "Workflow métier complexe de l'inscription à la mise en relation"
+        - 'Interface professionnelle pour conseillers'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons mis au point une application web complète en Symfony, intégrant un module de gestion des adhérents, un algorithme de matching avancé, et une interface d'administration intuitive pour les conseillers matrimoniaux."
-  points:
-    - "Module gestion adhérents avec fiches complètes et historique"
-    - "Algorithme de matching basé sur critères multiples"
-    - "Interface d'administration intuitive pour conseillers"
-    - "Architecture Symfony robuste et sécurisée"
+    description: "Nous avons mis au point une application web complète en Symfony, intégrant un module de gestion des adhérents, un algorithme de matching avancé, et une interface d'administration intuitive pour les conseillers matrimoniaux."
+    points:
+        - 'Chiffrement et sécurisation des données sensibles'
+        - 'Algorithme de matching basé sur critères multiples'
+        - "Création de formulaires multi étapes pour l'inscription"
+        - 'Interface utilisateur ergonomique pour les conseillers'
+engagement:
+    type: 'project_based'
+    description: "Développement complet de l'application de gestion matrimoniale selon les besoins spécifiques du client."
+    deliverables:
+        - 'Plateforme complète de gestion matrimoniale'
+        - 'Corrections de bugs suite à la mise en service'
+        - 'Évolutions fonctionnelles à la demande'
 ---
-
-## Contexte
-
-[L'agence](https://www.lagence.fr/) est un site de gestion pour agence matrimoniale permettant aux administrateurs de gérer les demandes d'inscription, d'assurer le suivi et de recommander des profils aux abonnés.
-
-Nous sommes intervenus pour une refonte complète de l'application existante, en modernisant la stack technique et en repensant l'expérience utilisateur.
-
-## Défi : Moderniser une Application Legacy
-
-La refonte de L'agence présentait des défis spécifiques au métier de l'agence matrimoniale :
-
-- **Migration technique** : Réécrire une application legacy vers une architecture moderne
-- **Préservation des données** : Migrer l'historique complet des adhérents sans perte
-- **Confidentialité** : Gestion sécurisée des données personnelles sensibles (RGPD)
-- **Matching intelligent** : Système de recommandation basé sur critères multiples
-- **Workflow métier complexe** : Gestion du parcours adhérent de l'inscription à la mise en relation
-- **Interface professionnelle** : Outil adapté au travail quotidien des conseillers
-
-## Notre Solution : Refonte Symfony Complète
-
-Nous avons réécrit l'application en Symfony avec une approche métier centrée utilisateur.
-
-### Gestion des Adhérents
-
-Le module de gestion centralise toutes les informations :
-
-- **Fiches adhérents complètes** : Profils détaillés avec photos, critères de recherche, aspirations
-- **Historique de suivi** : Traçabilité complète des interactions et mises en relation
-- **États du parcours** : Workflow clair (candidat → adhérent → actif → en pause → succès)
-- **Documents** : Stockage sécurisé des justificatifs d'identité et contrats
-- **Notes privées** : Annotations des conseillers pour suivi personnalisé
-
-### Système de Recommandation
-
-L'algorithme de matching repose sur :
-
-- **Critères multiples** : Âge, localisation, situation professionnelle, centres d'intérêt
-- **Score de compatibilité** : Calcul automatique basé sur les préférences déclarées
-- **Suggestions intelligentes** : Recommandations proactives par les conseillers
-- **Historique des propositions** : Suivi des profils présentés et retours adhérents
-- **Gestion des refus** : Mémorisation des incompatibilités pour affiner les suggestions
-
-### Interface d'Administration
-
-L'outil de gestion offre aux conseillers :
-
-- **Dashboard personnalisé** : Vue d'ensemble de l'activité et tâches en attente
-- **Recherche multicritères** : Filtrage avancé pour trouver rapidement les profils compatibles
-- **Planning de suivi** : Rappels automatiques pour relance et entretiens
-- **Statistiques** : Reporting sur taux de succès, activité par conseiller, conversions
-- **Messagerie interne** : Communication sécurisée avec les adhérents
-
-### Architecture Technique
-
-La refonte repose sur Symfony avec :
-
-- **Backend robuste** : Architecture MVC avec Doctrine ORM
-- **Base MySQL** : Modèle relationnel optimisé pour les recherches complexes
-- **Interface responsive** : Bootstrap pour adaptation desktop/tablette
-- **Sécurité renforcée** : Authentification, droits d'accès, chiffrement données sensibles
-- **Conformité RGPD** : Gestion consentements, export et suppression des données
-
-### Migration des Données
-
-La migration depuis l'ancien système a inclus :
-
-- Scripts de migration pour 10+ années d'historique
-- Validation et nettoyage des données legacy
-- Tests exhaustifs de cohérence post-migration
-- Formation des équipes sur la nouvelle plateforme
-
-## Résultats et Impact
-
-La refonte a transformé l'outil de travail de L'agence :
-
-- **Performance** : Application 5x plus rapide que la version legacy
-- **Productivité** : 40% de réduction du temps de traitement d'une mise en relation
-- **Expérience utilisateur** : Interface moderne appréciée par l'équipe de conseillers
-- **Fiabilité** : 100% des données historiques migrées avec succès
-- **Évolutivité** : Architecture permettant facilement l'ajout de nouvelles fonctionnalités
-
-L'agence dispose désormais d'un outil moderne et performant pour accompagner ses adhérents.
-
-## Technologies Utilisées
-
-- Symfony 5.4 - Framework PHP full-stack
-- PHP 8.0 - Langage backend
-- MySQL - Base de données relationnelle
-- Bootstrap 5 - Framework CSS responsive
-- jQuery - Interactions JavaScript
-- Doctrine ORM - Mapping objet-relationnel

@@ -28,7 +28,7 @@ export function MDXImage({ src, alt = '', width = 800, height = 600, caption, cl
                 className={cn(className, 'block w-full rounded')}
                 {...props}
             />
-            {caption && <figcaption className="text-muted mt-2 text-center text-sm">{caption}</figcaption>}
+            {caption && <figcaption className="text-foreground/80 mt-2 text-center text-sm">{caption}</figcaption>}
         </figure>
     )
 }

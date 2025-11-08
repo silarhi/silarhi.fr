@@ -1,130 +1,40 @@
 ---
-title: "Plateforme de gestion de refacturation de bons de commande"
-slug: "master-vendor-portal"
-projectDate: '2024-02-01'
-client: "noous"
-technologies: ["php","symfony","api-platform","react","tailwind","mercure","postgres"]
+title: 'Plateforme de gestion de refacturation de bons de commande'
+slug: 'master-vendor-portal'
+date: '2025-03-12'
+excerpt: "Développement d'un logiciel de gestion et refacturation de bons de commande : synchronisation bidirectionnelle avec logiciel de facturation, interface moderne et API robuste."
+client: 'noous'
+technologies: ['php', 'symfony', 'api-platform', 'react', 'tailwind', 'mercure', 'postgres']
 published: true
-projectType: "one-shot"
-category: "Gestion"
-duration: "Depuis 9 mois"
-image: "/images/projects/mastervendorportal-hero.jpg"
-overview: "Nous avons développé un logiciel de gestion de refacturation de bons de commande permettant aux entreprises de centraliser et automatiser leurs processus de refacturation avec une architecture moderne API Platform et React."
-engagement:
-  type: "Partenariat continu"
-  description: "Nous accompagnons le développement et l'évolution de la plateforme de refacturation avec architecture moderne et support technique dédié"
-  ongoing:
-    - "Développement de nouvelles fonctionnalités"
-    - "Support technique continu"
-    - "Maintenance et optimisations"
-    - "Évolutions API et intégrations"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Gestion'
+duration: '9 mois'
+image: '/images/projects/mvp-hero.png'
+name: 'Master Vendor Portal'
+overview: 'Nous avons développé un logiciel de gestion de bons de commande permettant aux entreprises de centraliser et automatiser leurs processus de refacturation avec une architecture moderne API Platform et React.'
 challenge:
-  title: "Le Défi"
-  description: "Le développement d'une plateforme de refacturation nécessitait de gérer l'intégration bidirectionnelle avec le logiciel de facturation Boomerang Web, mettre en place des systèmes d'import/export de données, tout en assurant la sécurité et la conformité des données financières."
-  points:
-    - "Intégration avec logiciel de facturation Boomerang Web"
-    - "Workflow de validation des données d'import"
-    - "Synchronisation bidirectionnelle des données"
-    - "Interface moderne pour équipes de gestion"
-    - "Gestion des accès et permissions utilisateurs"
+    description: "Le développement d'une plateforme de refacturation nécessitait de gérer l'intégration bidirectionnelle avec le logiciel de facturation [Boomerang Web](https://boomerangweb.net), mettre en place des systèmes d'export/import de données avec circuit de validation, tout en assurant la sécurité et la conformité des données financières."
+    points:
+        - 'Intégration avec logiciel de facturation Boomerang Web'
+        - "Système de validation des données d'import"
+        - 'Synchronisation bidirectionnelle des données'
+        - 'Interface moderne pour équipes de gestion'
+        - 'Gestion des accès et permissions utilisateurs'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons développé une plateforme complète avec API Platform et React, combinant une API REST robuste, interface moderne avec notifications temps réel via Mercure, et architecture PostgreSQL performante."
-  points:
-    - "Moteur de synchronisation bidirectionnelle"
-    - Système d'import/export de données"
-    - "API REST complète avec API Platform"
-    - "Interface utilisateur via React, tailwind CSS & Ant Design"
-    - "Notifications temps réel avec Mercure"
+    description: 'Nous avons développé une plateforme complète avec API Platform et React, combinant une API REST robuste, interface moderne avec notifications temps réel via Mercure, et architecture PostgreSQL performante.'
+    points:
+        - 'Moteur de synchronisation bidirectionnelle'
+        - "Système d'import/export de données"
+        - 'API REST complète avec API Platform'
+        - 'Interface utilisateur via React, tailwind CSS & Ant Design'
+        - 'Notifications temps réel avec Mercure'
+engagement:
+    type: 'project_based'
+    description: 'Développement complet de la plateforme de gestion et refacturation de bons de commande selon les besoins spécifiques du client.'
+    deliverables:
+        - 'Développement de nouvelles fonctionnalités'
+        - 'Support technique continu'
+        - 'Maintenance et optimisations'
+        - 'Évolutions API et intégrations'
 ---
-
-## Contexte
-
-MasterVendorPortal est un logiciel de gestion de refacturation de bons de commande que nous avons développé et que nous maintenons, permettant aux entreprises de centraliser et automatiser leurs processus de facturation.
-
-## Défi : Automatiser la Refacturation B2B
-
-Le développement d'une plateforme de refacturation présente des enjeux spécifiques :
-
-- **Flux complexes** : Gestion des bons de commande, validations, approbations
-- **Facturation automatisée** : Génération documents conformes et personnalisés
-- **Traçabilité** : Historique complet des opérations pour audit
-- **Performance** : Traitement volumes importants de commandes
-- **Interface moderne** : Expérience utilisateur fluide pour équipes comptables
-- **Intégrations** : Connexion avec systèmes ERP et comptables tiers
-
-## Notre Solution : Architecture Moderne API Platform
-
-Nous avons développé une plateforme complète avec API Platform et React.
-
-### API REST avec API Platform
-
-Le backend Symfony + API Platform expose :
-
-- **CRUD complet** : Gestion bons de commande, factures, fournisseurs, clients
-- **Documentation automatique** : Swagger/OpenAPI générée automatiquement
-- **Validation robuste** : Règles métier strictes sur données financières
-- **Pagination et filtres** : Recherche performante sur grands volumes
-- **Sécurité** : Authentification JWT et gestion des droits granulaires
-
-### Interface React Moderne
-
-Le frontend React avec Tailwind CSS offre :
-
-- **Dashboard intuitif** : Vue d'ensemble activité refacturation
-- **Gestion commandes** : Interface fluide pour création et suivi
-- **Génération factures** : Prévisualisation et export PDF
-- **Recherche avancée** : Filtres multicritères et tri dynamique
-- **Responsive** : Adaptation desktop/tablette pour mobilité
-
-### Notifications Temps Réel
-
-Mercure permet :
-
-- **Mises à jour live** : Changements statut visibles instantanément
-- **Alertes** : Notifications pour actions requises (validations, échéances)
-- **Collaboration** : Visibilité temps réel pour équipes distribuées
-
-### Architecture Technique
-
-La stack moderne repose sur :
-
-- **Symfony 6+** : Framework backend robuste
-- **API Platform** : Framework API REST
-- **React 18** : Bibliothèque frontend
-- **Tailwind CSS** : Framework CSS utility-first
-- **PostgreSQL** : Base de données relationnelle
-- **Mercure** : Hub temps réel SSE
-- **Docker** : Conteneurisation complète
-
-### Maintenance et Évolutions
-
-Nous assurons :
-
-- Ajout fonctionnalités selon retours utilisateurs
-- Optimisations performance backend/frontend
-- Mises à jour sécurité des dépendances
-- Support technique et formations
-
-## Résultats et Impact
-
-MasterVendorPortal transforme le processus de refacturation :
-
-- **Automatisation** : 80% de réduction temps traitement commandes
-- **Traçabilité** : Historique complet auditable pour conformité
-- **Performance** : Temps de réponse API < 100ms
-- **Temps réel** : Notifications instantanées améliorant réactivité
-- **Satisfaction** : Interface moderne appréciée des utilisateurs
-
-La plateforme continue d'évoluer pour répondre aux besoins métier de la refacturation.
-
-## Technologies Utilisées
-
-- Symfony 6+ - Framework PHP backend
-- API Platform - Framework API REST
-- React 18 - Bibliothèque frontend
-- Tailwind CSS - Framework CSS
-- PostgreSQL - Base de données
-- Mercure - Notifications temps réel
-- PHP 8.2 - Langage backend
-- Docker - Conteneurisation

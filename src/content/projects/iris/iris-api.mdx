@@ -1,33 +1,20 @@
 ---
-title: "IRIS API : Migration Symfony 6.2 pour Scanner Dentaire"
-projectDate: "2023-10-16"
-excerpt: "Modernisation d'une API Symfony existante : migration vers Symfony 6.2, architecture modulaire multi-bases, authentification SSO et tests optimisés pour Scan4All."
+title: 'IRIS API'
+date: '2023-10-16'
 published: true
 ---
 
-## Défis Techniques
+Refonte de l'API avec nouveaux endpoints, multi-authentification et séparation des bases de données.
 
-L'API existante rencontrait plusieurs limites : authentification unique insuffisante pour l'écosystème croissant, bases de données monolithiques ralentissant les performances avec volumétrie croissante, et suite de tests exécutée en 15 minutes freinant déploiements.
+Fonctionnalités ajoutées :
 
-## Solution Mise en Œuvre
+- Intégration d'API tierces privées
+- Création d'endpoints API dédiés aux partenaires
+- Refonte des différents supports d'authentification (SSO, KeyCloak, Bearer, Header)
+- Séparation des données vers plusieurs bases
 
-### Migration Symfony 4.4 → 6.2
-Montée de version progressive vers Symfony 6.2 avec PHP 8.1, bénéficiant du JIT compiler et optimisations framework. Support long terme garanti jusqu'en 2025.
+Améliorations techniques :
 
-### Architecture Multi-Bases de Données
-Séparation des données selon nature : base patients (données sensibles), base scans (métadonnées volumineuses), base utilisation (analytique). Isolation permettant optimisation spécifique de chaque domaine et sauvegardes ciblées.
-
-### Authentification Modulaire
-Refonte architecture supportant 4 méthodes d'authentification sélectionnables dynamiquement :
-- **SSO d'entreprise** : intégration systèmes cabinets dentaires
-- **Keycloak** : gestion centralisée identités
-- **Bearer tokens** : applications mobiles et web
-- **Headers personnalisés** : systèmes legacy
-
-Cette flexibilité permet intégration naturelle dans infrastructures variées (cabinets, cliniques, laboratoires).
-
-### API Partenaires Privées
-Exposition endpoints API sécurisés pour laboratoires dentaires avec documentation OpenAPI complète. Couche d'abstraction facilitant onboarding partenaires.
-
-### Optimisation Tests CI/CD
-Parallélisation et optimisation suite de tests : réduction de 15 minutes à 1 min 30 (90% gain). Accélération cycles développement et déploiements.
+- Migration Symfony 4.4 vers 6.2
+- Mise en place de CI
+- Temps de tests réduits de 15min à 1mn30

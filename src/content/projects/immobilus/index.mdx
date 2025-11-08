@@ -1,119 +1,40 @@
 ---
-title: "Outil de gestion locative et immobilière"
-slug: "immobilus"
-projectDate: '2023-09-01'
-client: "cimalis"
-technologies: ["php","symfony","bootstrap","jquery","mysql", "ebics"]
+title: 'Outil de gestion locative et immobilière'
+slug: 'immobilus'
+date: '2019-07-24'
+excerpt: 'Application de gestion locative immobilière : centralisation des biens, locataires, loyers, quittances, comptabilité et conformité légale.'
+client: 'cimalis'
+technologies: ['php', 'symfony', 'bootstrap', 'jquery', 'mysql', 'ebics']
 published: true
-projectType: "recurring"
-category: "Gestion"
-duration: "Depuis 18 mois"
-image: "/images/projects/immobilus-hero.jpg"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Gestion'
+name: 'Immobilus'
+image: '/images/projects/immobilus-hero.png'
+url: 'https://immobilus.fr'
 overview: "Immobilus est une application web de gestion locative immobilière que nous avons développé. La plateforme permet aux propriétaires de centraliser et automatiser l'ensemble de leurs processus de gestion : biens, locataires, loyers, quittances et comptabilité dans un outil simple et intuitif."
-engagement:
-  type: "Partenariat continu"
-  description: "Collaboration à long terme avec évolutions régulières et support dédié pour la plateforme de gestion immobilière"
-  ongoing:
-    - "Support technique dédié"
-    - "Évolutions mensuelles"
-    - "Maintenance proactive"
-    - "Accompagnement utilisateurs"
 challenge:
-  title: "Le Défi"
-  description: "Le développement d'une application de gestion locative immobilière implique de digitaliser et automatiser des processus complexes tout en respectant les exigences légales et comptables."
-  points:
-    - "Gestion de patrimoine immobilier complexe avec multiples biens"
-    - "Automatisation des processus financiers (loyers, charges, quittances)"
-    - "Suivi des relations locataires et conformité légale"
-    - "Génération de documents officiels conformes à la législation"
-    - "Interface intuitive pour utilisateurs non-techniques"
+    description: "Le développement d'une application de gestion locative immobilière implique de digitaliser et automatiser des processus complexes tout en respectant les exigences légales et comptables."
+    points:
+        - 'Gestion de patrimoine immobilier complexe avec multiples biens'
+        - 'Automatisation des processus financiers (loyers, charges, quittances)'
+        - 'Suivi des relations locataires et conformité légale'
+        - 'Génération de documents officiels conformes à la législation'
+        - 'Interface intuitive pour utilisateurs non-techniques'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons développé une application web avec Symfony, offrant une interface intuitive et des fonctionnalités métier avancées pour centraliser toute la gestion locative."
-  points:
-    - "Gestion complète du patrimoine : immeubles, biens, équipements et diagnostics"
-    - "Module locatif : contrats, dossiers locataires, états des lieux"
-    - "Comptabilité automatisée : génération loyers et quittances PDF"
-    - "Suivi des paiements via intégration bancaire EBICS"
-    - "Interface responsive Bootstrap"
+    description: 'Nous avons développé une application web avec Symfony, offrant une interface intuitive et des fonctionnalités métier avancées pour centraliser toute la gestion locative.'
+    points:
+        - 'Gestion complète du patrimoine : immeubles, biens, équipements et diagnostics'
+        - 'Module locatif : contrats, dossiers locataires, états des lieux'
+        - 'Comptabilité automatisée : génération loyers et quittances PDF'
+        - 'Suivi des paiements via intégration bancaire EBICS'
+        - 'Interface responsive Bootstrap'
+engagement:
+    type: 'continuous_support'
+    description: 'Collaboration à long terme avec développement initial et maintenance continue de la plateforme'
+    deliverables:
+        - 'Support technique dédié'
+        - 'Évolutions mensuelles'
+        - 'Maintenance proactive'
+        - 'Accompagnement utilisateurs'
 ---
-
-## Contexte
-
-Immobilus est une application web SaaS de gestion locative immobilière que nous avons développée. La plateforme permet aux propriétaires de biens immobiliers de centraliser et automatiser l'ensemble de leurs processus : gestion des biens, locataires, loyers, quittances et comptabilité dans un outil simple et intuitif.
-
-## Défi : Digitaliser une Gestion Complexe
-
-La gestion locative immobilière implique de nombreuses tâches administratives chronophages et répétitives. Les propriétaires doivent gérer :
-
-- **Patrimoine immobilier** : Multiples immeubles et biens avec caractéristiques variées
-- **Relations locataires** : Contrats de location, historique, documents justificatifs
-- **Gestion financière** : Loyers mensuels, charges, quittances, déclarations fiscales
-- **Maintenance** : Factures fournisseurs, travaux, diagnostics obligatoires
-- **Conformité légale** : Respect des obligations légales (quittances, états des lieux, etc.)
-
-L'objectif était de créer une solution web permettant d'automatiser ces processus tout en restant accessible aux propriétaires non-techniciens.
-
-## Notre Solution : Application Symfony Complète
-
-Nous avons développé une application web full-stack avec Symfony, offrant une interface intuitive et des fonctionnalités métier avancées.
-
-### Gestion du Patrimoine Immobilier
-
-Le module de gestion immobilière permet de :
-
-- Créer et organiser la structure immeubles → appartements → pièces
-- Associer photos, plans et documents techniques à chaque bien
-- Suivre les diagnostics obligatoires (DPE, amiante, plomb) avec alertes d'expiration
-- Gérer les équipements et leur maintenance préventive
-
-### Gestion Locative et Locataires
-
-Le système de gestion locative centralise :
-
-- Création de contrats de location avec génération automatique des documents
-- Dossiers locataires complets (pièces d'identité, justificatifs de revenus)
-- Historique des locations et des résiliations
-- États des lieux d'entrée et sortie avec check-lists personnalisables
-
-### Automatisation de la Comptabilité
-
-La gestion financière automatisée inclut :
-
-- Génération automatique des appels de loyer mensuels
-- Émission de quittances au format PDF conformes à la législation
-- Suivi des paiements et relances automatiques en cas d'impayés
-- Gestion des charges locatives et régularisations annuelles
-- Interface comptable pour export vers outils externes
-
-### Architecture Technique Symfony
-
-L'application est développée en Symfony 5.4 (puis migrée vers 6.x) avec :
-
-- **Backend robuste** : Architecture MVC avec Doctrine ORM pour la persistance
-- **Templates Twig** : Rendu côté serveur pour une compatibilité maximale
-- **Bootstrap** : Interface responsive accessible sur desktop et mobile
-- **Sécurité** : Authentification sécurisée, gestion de rôles (admin, gestionnaire, propriétaire)
-- **PDF Generation** : Génération de documents officiels (quittances, contrats)
-
-## Résultats et Impact
-
-Immobilus transforme la gestion locative de ses utilisateurs :
-
-- **Gain de temps** : 70% de réduction du temps passé sur les tâches administratives
-- **Automatisation** : Génération automatique de 100% des quittances et documents
-- **Traçabilité** : Historique complet de toutes les opérations financières
-- **Conformité** : Documents générés conformes aux exigences légales françaises
-- **Accessibilité** : Interface web accessible 24/7 depuis ordinateur ou mobile
-
-La plateforme continue d'évoluer avec l'ajout régulier de nouvelles fonctionnalités basées sur les retours utilisateurs.
-
-## Technologies Utilisées
-
-- Symfony 5.4+ - Framework PHP full-stack
-- PHP 8.1 - Langage backend moderne
-- Twig - Moteur de templates pour le rendu HTML
-- Doctrine ORM - Mapping objet-relationnel pour MySQL
-- Bootstrap 5 - Framework CSS responsive
-- MySQL - Base de données relationnelle
-- Docker - Conteneurisation et déploiement

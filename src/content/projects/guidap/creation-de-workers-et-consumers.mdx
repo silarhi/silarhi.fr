@@ -1,31 +1,14 @@
 ---
-title: "Guidap : Workers AWS SQS et Exponential Back-off"
-projectDate: "2020-10-01"
-excerpt: "Architecture workers asynchrones AWS SQS : files d'attente distribuées, requeue exponential back-off, meta-queue expiration et dispatch messages multi-tentatives."
+title: 'Création de Workers et Consumers'
+date: '2021-01-14'
 published: true
 ---
 
-## Architecture Développée
+Mise en place d'un système de queues et workers pour le traitement asynchrone des tâches.
 
-### Files d'Attente AWS SQS
-Utilisation AWS SQS (Simple Queue Service) pour découplage producteurs/consommateurs :
-- Queues distribuées scalables
-- Garantie livraison messages
-- Haute disponibilité multi-AZ
+Développements techniques :
 
-### Workers PHP Consumers
-Développement workers PHP consommant messages SQS en continu. Traitement asynchrone opérations lourdes sans bloquer API frontend.
-
-### Requeue Exponential Back-off
-**Gestion intelligente échecs** : messages échoués replacés en queue avec délais croissants (1min, 5min, 15min, 1h). Évite saturation sur erreurs temporaires (API tierce indisponible, database lock).
-
-### Meta-Queue Expiration
-**Queue spécialisée stockage définitif** messages expirés après X tentatives. Logging erreurs persistantes pour analyse différée et debugging.
-
-### Dispatch Multi-Tentatives
-Module routing messages selon nombre tentatives :
-- Tentative 1-3 : Queue standard (retry rapide)
-- Tentative 4-7 : Queue slow (retry espacé)
-- Tentative 8+ : Meta-queue (archivage erreur)
-
-Stratégie adaptative optimise ressources et détecte erreurs critiques.
+- Utilisation de queue via AWS SQS
+- Gestion de la requeue avec exponential back-off
+- Mise en place d'une "meta-queue" pour le stockage des messages expirés
+- Module de dispatch de message en fonction du nombre de tentatives

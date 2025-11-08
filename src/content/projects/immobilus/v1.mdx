@@ -1,23 +1,15 @@
 ---
-title: "Immobilus V1 : Plateforme Gestion Locative Symfony avec EBICS"
-projectDate: "2019-07-24"
-excerpt: "Plateforme SaaS gestion immobilière : gestion biens et locations, calcul loyers automatisé, délégations accès, récupération opérations bancaires EBICS pour bailleurs."
+title: 'V1'
+date: '2019-07-24'
 published: true
 ---
 
-## Fonctionnalités
+Première version développée en Symfony 4.3 avec PHP 7.3, établissant les fondations de la plateforme de gestion locative.
 
-### Gestion Patrimoniale
-Le système permet de gérer l'ensemble du patrimoine : immeubles, biens (appartements, maisons, locaux commerciaux), contrats de location et profils locataires. Chaque bien dispose d'une fiche complète avec caractéristiques, documents associés (diagnostics, assurances, mandats) et historique des locations.
+Fonctionnalités développées :
 
-### Calcul Automatisé des Loyers
-Le moteur de facturation génère automatiquement les échéances selon la périodicité définie (mensuelle, trimestrielle, annuelle). Prise en compte des charges, indexations et spécificités de chaque bail. Les avis d'échéance sont générés et envoyés aux locataires.
-
-### Intégration Bancaire EBICS
-Connexion sécurisée aux banques via le protocole EBICS pour récupération automatique des opérations bancaires. Le système importe quotidiennement les mouvements de comptes et facilite le rapprochement avec les loyers attendus.
-
-### Système de Délégations
-Les bailleurs peuvent déléguer l'accès à leur patrimoine à des tiers (comptables, gestionnaires immobiliers, famille) avec permissions granulaires. Chaque délégation définit les droits d'accès (lecture seule, modification, gestion complète) et le périmètre de biens concernés.
-
-### Authentification Sécurisée
-Système d'authentification robuste avec login/password, récupération de mot de passe par email et gestion des rôles (propriétaire, délégataire, administrateur). Protection des données sensibles selon normes RGPD.
+- Mise en place de l'outil (login, reset password, gestion des rôles)
+- Gestion des immeubles, biens, locations, locataires, documents
+- Moteur de calcul des loyers locataires (loyers mensuels, trimestriels)
+- Gestion d'accès via délégations
+- Mise en place de récupération d'opérations bancaires via EBICS

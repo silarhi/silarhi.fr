@@ -1,41 +1,16 @@
 ---
-title: "Lanterne : Veille Politique Elasticsearch et Paiement Stripe"
-projectDate: "2021-04-01"
-excerpt: "Plateforme veille politique temps réel : ingestion Elasticsearch articles/lois, alertes personnalisées mots-clés, scoring pertinence IA, abonnement Stripe SaaS."
+title: 'Lanterne'
+date: '2021-07-20'
 published: true
 ---
 
-## Architecture
+Développement d'un outil de veille politique basé sur l'agrégation de contenus politiques.
 
-### Ingestion Multi-Sources
-Workers Python récupèrent contenus :
-- Articles presse politique
-- Textes lois Assemblée/Sénat
-- Tweets acteurs politiques
+Fonctionnalités développées :
 
-Messages déposés queue RabbitMQ pour traitement asynchrone.
-
-### Workers PHP Elasticsearch
-Workers PHP consomment RabbitMQ et indexent dans Elasticsearch :
-- Stockage articles/textes structurés
-- Indexation full-text multilingue
-- Enrichissements métadonnées (auteur, date, source)
-
-### Veille Personnalisée Mots-Clés
-Module alertes utilisateurs :
-- Configuration mots-clés surveillance (ex: "réforme retraites", "écologie")
-- Notification email/SMS nouveaux contenus matchant
-- Filtres avancés (source, acteur, thématique)
-
-### Scoring Pertinence IA
-**Moteur pertinence intelligent** via back-office :
-- Administration poids mots-clés par thématique
-- Boost canaux officiels (Assemblée > Twitter)
-- Machine learning améliore scoring selon engagement utilisateurs
-
-### Abonnement Stripe
-Monétisation SaaS via Stripe :
-- Paiements récurrents mensuels/annuels
-- Gestion abonnements (upgrade/downgrade)
-- Webhooks synchronisation statuts
-- Conformité PCI DSS
+- Mise en place de workers PHP pour stocker les textes récupérés via script Python et déposés dans une queue RabbitMQ
+- Ingestion des articles et textes de lois dans Elasticsearch
+- Module de veille personnalisée par mots-clés : être alerté en cas de nouveaux articles sur tel ou tel sujet, mot-clés, acteur
+- Gestion de la pertinence : permettre l'administration via le back-office des mots-clés en fonction des thématiques afin d'accorder plus de poids à certains mots ou certains canaux de publication
+- Gestion de l'abonnement et facturation utilisateur via Stripe
+- Intégration des maquettes fournies par le client

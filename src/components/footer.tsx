@@ -1,11 +1,48 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
+import { montserrat } from '@/app/fonts'
 import Button from '@/components/button'
 import iconEnvelope from '@/icons/envelope_hem0.svg'
 import logo from '@/public/images/logo-4096.png'
 import { cn } from '@/utils/lib'
+
+const footerSections = [
+    {
+        title: 'Navigation',
+        links: [
+            { href: '/', label: 'Accueil' },
+            { href: '/projets', label: 'Projets' },
+            { href: '/contact', label: 'Contact' },
+        ],
+    },
+    {
+        title: 'Expertises Backend',
+        links: [
+            { href: '/technologies/php', label: 'PHP' },
+            { href: '/technologies/symfony', label: 'Symfony' },
+            { href: '/technologies/api-platform', label: 'API Platform' },
+        ],
+    },
+    {
+        title: 'Expertises Frontend',
+        links: [
+            { href: '/technologies/react', label: 'React' },
+            { href: '/technologies/bootstrap', label: 'Bootstrap' },
+            { href: '/technologies/tailwind', label: 'Tailwind CSS' },
+        ],
+    },
+    {
+        title: 'Informations',
+        links: [
+            { href: '/mentions-legales', label: 'Mentions légales' },
+            { href: '/conditions-generales-de-vente', label: 'CGV' },
+        ],
+    },
+]
 
 export default function Footer() {
     const pathname = usePathname()
@@ -50,12 +87,8 @@ export default function Footer() {
                                 className="hover:text-secondary mb-6 flex items-center space-x-2 text-inherit transition-colors"
                             >
                                 <Image src={logo} alt="SILARHI" height={60} className={cn('h-14 w-auto')} />
-                                <span className="text-xl">SILARHI</span>
+                                <span className={cn('text-xl', montserrat.className)}>SILARHI</span>
                             </Link>
-                            <p className="text-surface/80 mb-4 leading-relaxed">
-                                Agence web basée à Toulouse, spécialisée dans le développement d&#39;applications sur
-                                mesure avec Symfony, React et les technologies modernes.
-                            </p>
                             <div className="space-y-1">
                                 <p className="mb-0 font-semibold">Notre adresse</p>
                                 <p className="text-surface/80 mb-0">
@@ -68,107 +101,24 @@ export default function Footer() {
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4">
-                            <div>
-                                <h6 className="mb-4 text-base font-bold">Navigation</h6>
-                                <div className="space-y-2">
-                                    <Link href="/" className={cn(linkClasses, 'text-surface/80 block')}>
-                                        Accueil
-                                    </Link>
-                                    <Link href="/projets" className={cn(linkClasses, 'text-surface/80 block')}>
-                                        Projets
-                                    </Link>
-                                    <Link href="/technologies" className={cn(linkClasses, 'text-surface/80 block')}>
-                                        Technologies
-                                    </Link>
-                                    <Link href="/clients" className={cn(linkClasses, 'text-surface/80 block')}>
-                                        Clients
-                                    </Link>
-                                    <Link href="/contact" className={cn(linkClasses, 'text-surface/80 block')}>
-                                        Contact
-                                    </Link>
+                            {footerSections.map((section) => (
+                                <div key={section.title}>
+                                    <h6 className="mb-4 text-base font-bold">{section.title}</h6>
+                                    <div className="space-y-2">
+                                        {section.links.map((link) => (
+                                            <Link
+                                                key={link.href}
+                                                href={link.href}
+                                                className={cn(linkClasses, 'text-surface/80 block')}
+                                            >
+                                                {link.label}
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <h6 className="mb-4 text-base font-bold">Expertises Backend</h6>
-                                <div className="space-y-2">
-                                    <Link
-                                        href="/projets/tag/symfony"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        Symfony
-                                    </Link>
-                                    <Link
-                                        href="/projets/tag/apiplatform"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        API Platform
-                                    </Link>
-                                    <Link href="/projets/tag/php" className={cn(linkClasses, 'text-surface/80 block')}>
-                                        PHP
-                                    </Link>
-                                    <Link
-                                        href="/projets/tag/doctrine"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        Doctrine
-                                    </Link>
-                                </div>
-                            </div>
-                            <div>
-                                <h6 className="mb-4 text-base font-bold">Expertises Frontend</h6>
-                                <div className="space-y-2">
-                                    <Link
-                                        href="/projets/tag/react"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        React
-                                    </Link>
-                                    <Link
-                                        href="/projets/tag/nextjs"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        Next.js
-                                    </Link>
-                                    <Link
-                                        href="/projets/tag/typescript"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        TypeScript
-                                    </Link>
-                                    <Link
-                                        href="/projets/tag/tailwind"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        Tailwind CSS
-                                    </Link>
-                                </div>
-                            </div>
-                            <div>
-                                <h6 className="mb-4 text-base font-bold">Informations</h6>
-                                <div className="space-y-2">
-                                    <Link href="/mentions-legales" className={cn(linkClasses, 'text-surface/80 block')}>
-                                        Mentions légales
-                                    </Link>
-                                    <Link
-                                        href="/conditions-generales-de-vente"
-                                        className={cn(linkClasses, 'text-surface/80 block')}
-                                    >
-                                        CGV
-                                    </Link>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className="border-light/10 border-t py-4">
-                <div className="container mx-auto px-4">
-                    <p className="mb-0">
-                        Site développé par{' '}
-                        <a href="https://sainthillier.fr" className={linkClasses}>
-                            Guillaume Sainthillier
-                        </a>
-                    </p>
                 </div>
             </div>
         </footer>

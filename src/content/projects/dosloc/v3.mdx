@@ -1,32 +1,22 @@
 ---
-title: "Dosloc V3 : PropTech Migration Symfony 6.0 et PHP 8.0"
-projectDate: "2022-05-01"
-excerpt: "Plateforme gestion dossiers locataires PropTech : migration Symfony 6.0 et PHP 8.0, module garants, recherche locataires, relances automatiques et vérification sociétés."
+title: 'V3'
+date: '2022-07-26'
 published: true
 ---
 
-## Migration Technique
+Extension majeure avec gestion avancée des garants, recherche multicritères et préparation du bail.
 
-Symfony 5.4 → 6.0 et PHP 8.0 apportant JIT compilation (+10-20% performance). Support long terme garanti (PHP 7.4 EOL). Syntaxes modernes PHP 8 (named arguments, attributes, union types).
+Fonctionnalités ajoutées :
 
-## Modules Métier
+- Ajout d'informations pour les garants
+- Gestion de locataire ou garant sociétaire
+- Module de recherche locataire
+- Système de relance automatique
+- Module de vérification des données de société (mise à jour, expiration des informations)
+- Suppression automatique du profil après 3 mois
+- Gestion des informations pour préparation du bail après acceptation de la candidature locataire
 
-### Garants Avancés
-Gestion garants physiques et moraux (Action Logement, Visale, garanties bancaires). Validation indépendante pièces, calcul automatique capacité cautionnement (revenus × 3). Évaluation précise solidité financière candidature complète.
+Mises à jour techniques :
 
-### Recherche Multi-Critères
-Moteur recherche avancé : nom/email/téléphone, filtres financiers (revenus, profession, contrat), filtres temporels, recherche géographique. Crucial bailleurs gérant dizaines biens.
-
-### Relances Automatiques
-Optimisation complétion dossiers incomplets. Détection automatique pièces manquantes, relances email/SMS personnalisées :
-- J+3 : rappel aimable
-- J+7 : demande insistante
-- J+14 : alerte archivage
-
-Complétion +40% vs manuel.
-
-### Vérification Sociétés
-Contrôle automatique locataires entreprises via API INSEE (SIRET/SIREN). Détection expirations (Kbis, assurance RC), alertes renouvellement, mise à jour automatique infos légales.
-
-### RGPD et Pré-Bail
-Suppression automatique profils après 3 mois inactivité (conformité RGPD). Module pré-bail centralisant informations contrat location, accélérant signature 5-7 jours.
+- Migration PHP 7.4 vers 8.0
+- Migration Symfony 5.4 vers 6.0

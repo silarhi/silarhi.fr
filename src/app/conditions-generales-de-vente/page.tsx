@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Hero from '@/components/hero-title'
+import HeroSection from '@/components/hero-section'
 import { Download } from '@/components/icons'
 import Section from '@/components/section'
 
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <>
-            <Hero title="Conditions générales de vente" />
+            <HeroSection title="Conditions générales de vente" />
             <Section>
                 <div className="mb-4 flex flex-row flex-wrap gap-4">
-                    <span className="text-muted italic">Mis à jour le 29/03/2019</span>
+                    <span className="text-foreground/80 italic">Mis à jour le 29/03/2019</span>
                     <a href="/pdf/CGV.pdf" download>
                         <Download className="mr-1 inline-block" />
                         Télécharger au format PDF

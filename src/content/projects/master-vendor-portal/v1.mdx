@@ -1,33 +1,15 @@
 ---
-title: "Master Vendor Portal : Plateforme B2B Symfony et Messagerie"
-projectDate: "2025-02-01"
-excerpt: "Portail B2B de gestion fournisseurs avec synchronisation ERP Boomerang : import/export asynchrone données, dépôt sécurisé documents et messagerie instantanée intégrée."
+title: 'V1'
+date: '2025-02-01'
 published: true
 ---
 
-## Défis
+Développement d'une plateforme de refacturation de bons de commandes avec Symfony, API Platform et React.
 
-Gestion multi-fournisseurs complexe : échanges documentaires dispersés (emails, portails, papier) générant retards/erreurs. Absence synchronisation ERP imposant ressaisies manuelles chronophages. Sécurité critique : cloisonnement données fournisseurs avec révocation immédiate. Volumétries importantes nécessitant traitement asynchrone.
+Fonctionnalités développées :
 
-## Solution Symfony
-
-### Gestion Accès Sécurisés
-**Authentification par invitation** : fournisseurs validés uniquement. **Révocation immédiate** désactive accès instantanément. Permissions granulaires : chaque fournisseur accède uniquement ses données.
-
-### Synchronisation ERP Boomerang
-Moteur synchronisation bidirectionnelle automatique :
-- Commandes Boomerang → portail immédiatement
-- Confirmations fournisseur → Boomerang
-- Statuts synchronisés temps réel
-- Catalogues produits actualisés quotidiennement
-
-Cohérence parfaite, zéro ressaisie.
-
-### Import/Export Asynchrone
-Traitement volumétries importantes (milliers références, historiques complets) en arrière-plan via queues. Performance garantie, notifications progression.
-
-### Dépôt Documents Sécurisé
-Espace documentaire chiffré avec versioning, horodatage, traçabilité accès. Notifications automatiques nouveaux dépôts.
-
-### Messagerie Instantanée
-Communication directe acheteurs-fournisseurs contextualisée par commande. Historique complet, pièces jointes, notifications push.
+- Création du site (authentification, gestion des utilisateurs via invitation, révocation des accès)
+- Moteur de synchronisation des commandes dans Boomerang
+- Import et export de données asynchrone
+- Module de dépôt sécurisé de documents
+- Module de messagerie instantanée

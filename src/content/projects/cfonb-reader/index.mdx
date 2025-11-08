@@ -1,129 +1,38 @@
 ---
-title: "Lecteur de fichiers bancaires open-source"
-slug: "cfonb-reader"
-projectDate: '2021-03-01'
-client: "cabinet-adebiaye"
-technologies: ["php","symfony","jquery","bootstrap","ebics"]
+title: 'Lecteur de fichiers bancaires open-source'
+slug: 'cfonb-reader'
+date: '2023-07-10'
+excerpt: 'Lecteur open-source de fichiers bancaires CFONB120 et CFONB240 : Upload de fichiers, visualisation facile, projet open-source.'
+client: 'cabinet-adebiaye'
+technologies: ['php', 'symfony', 'jquery', 'bootstrap', 'ebics', 'docker']
 published: true
-projectType: "one-shot"
-category: "Outils & Open-Source"
-duration: "2 mois"
-image: "/images/projects/cfonb-reader-hero.jpg"
-overview: "CFONB Reader est un outil de consultation de fichiers bancaires que nous avons développé, supportant les formats CFONB120 et CFONB240. Le projet est disponible en open-source sur GitHub, permettant à la communauté de visualiser facilement leurs fichiers bancaires."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Développement d'un outil open-source de parsing et visualisation de fichiers bancaires CFONB"
-  deliverables:
-    - "Outil web Symfony fonctionnel et déployé"
-    - "Parseur CFONB120 et CFONB240 robuste"
-    - "Interface de visualisation intuitive"
-    - "Exports CSV, Excel, JSON et PDF"
-    - "Code open-source publié sur GitHub"
-    - "Documentation technique complète"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Outils & Open-Source'
+name: 'CFONB Reader'
+image: '/images/projects/cfonb-reader-hero.png'
+url: 'https://cfonb.adebiaye.tech'
+overview: 'CFONB Reader est un outil de consultation de fichiers bancaires que nous avons développé, supportant les formats CFONB120 et CFONB240. Le projet est disponible en open-source sur GitHub, permettant à la communauté de visualiser facilement leurs fichiers bancaires.'
 challenge:
-  title: "Le Défi"
-  description: "Le développement d'un lecteur de fichiers CFONB présentait des défis techniques liés à la complexité des formats bancaires propriétaires, la nécessité d'un parsing robuste gérant les variations entre banques, et l'objectif de rendre le code réutilisable par la communauté."
-  points:
-    - "Formats propriétaires CFONB120/240 complexes"
-    - "Parsing robuste gérant variations entre banques"
-    - "Visualisation claire de données encodées techniques"
-    - "Export vers formats exploitables (CSV, Excel, JSON)"
-    - "Code open-source réutilisable et documenté"
+    description: "Le développement d'un lecteur de fichiers CFONB présentait des défis techniques liés à la complexité des formats bancaires propriétaires, la nécessité d'un parsing robuste gérant les variations entre banques, et l'objectif de rendre le projet réutilisable par la communauté."
+    points:
+        - 'Formats propriétaires CFONB120/240 complexes'
+        - 'Parsing robuste gérant variations entre banques'
+        - 'Visualisation claire de données encodées techniques'
+        - 'Code open-source réutilisable et documenté'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons développé un outil web en Symfony pour parser et visualiser les fichiers CFONB, avec une interface intuitive et des fonctionnalités d'export multi-formats. Le code est publié en open-source sur GitHub."
-  points:
-    - "Parseur CFONB120 et CFONB240 complet"
-    - "Validation format et gestion des erreurs"
-    - "Interface de visualisation avec filtrage et tri"
-    - "Exports CSV, Excel, JSON et PDF"
-    - "Architecture Symfony modulaire et testable"
-    - "Documentation et code open-source sur GitHub"
+    description: 'Nous avons développé un outil web en Symfony pour parser et visualiser les fichiers CFONB, avec une interface intuitive. Le code est publié en open-source sur GitHub.'
+    points:
+        - 'Parseur CFONB120 et CFONB240 complet'
+        - 'Validation format et gestion des erreurs'
+        - 'Architecture Symfony et StimulusJS/Turbo'
+        - 'Documentation et code open-source sur GitHub'
+engagement:
+    type: 'project_based'
+    description: "Développement d'un outil open-source de parsing et visualisation de fichiers bancaires CFONB"
+    deliverables:
+        - 'Outil web Symfony fonctionnel et déployé'
+        - 'Parseur CFONB120 et CFONB240 robuste'
+        - 'Code open-source publié sur GitHub'
+        - 'Documentation technique complète'
 ---
-
-## Contexte
-
-[CFONB Reader](https://cfonb.adebiaye.tech/) est un outil de consultation de fichiers bancaires que nous avons développé, supportant les formats CFONB120 et CFONB240. Le code source de ce projet est disponible en [open-source sur GitHub](https://github.com/silarhi/cfonb-reader).
-
-## Défi : Décoder des Formats Bancaires Complexes
-
-Le développement d'un lecteur de fichiers CFONB présentait des défis techniques :
-
-- **Formats propriétaires** : CFONB120/240 sont des formats texte bancaires français complexes
-- **Parsing robuste** : Gérer les variations de format selon les banques
-- **Visualisation claire** : Rendre lisibles des données encodées techniques
-- **Export multi-formats** : Conversion vers formats exploitables (CSV, Excel)
-- **Open-source** : Code réutilisable par la communauté bancaire/fintech
-- **Documentation** : Outil accessible aux développeurs et comptables
-
-## Notre Solution : Application Web Symfony Open-Source
-
-Nous avons développé un outil web en Symfony pour parser et visualiser les fichiers CFONB.
-
-### Parsing des Formats CFONB
-
-Le parseur supporte :
-
-- **CFONB120** : Format relevés de compte (mouvements bancaires, soldes)
-- **CFONB240** : Format virements (ordres de paiement SEPA)
-- **Validation format** : Détection et gestion des erreurs de format
-- **Multi-banques** : Compatible avec variations des différents établissements
-- **Encodages** : Support des différents encodages de caractères
-
-### Visualisation des Transactions
-
-L'interface propose :
-
-- **Tableau synthétique** : Affichage clair de toutes les transactions
-- **Détails opérations** : Informations complètes par mouvement
-- **Filtrage** : Recherche et tri par date, montant, libellé
-- **Soldes** : Calcul et affichage des soldes initial/final
-- **Statistiques** : Agrégations (total crédit/débit, nombre opérations)
-
-### Export et Conversion
-
-Les fonctionnalités d'export incluent :
-
-- **CSV** : Export standard pour import dans outils comptables
-- **Excel** : Format tableur avec mise en forme
-- **JSON** : Format structuré pour développeurs
-- **Impression** : Génération PDF pour archivage
-
-### Architecture Technique
-
-L'application Symfony utilise :
-
-- **Parser CFONB** : Bibliothèque PHP propriétaire pour décoder les formats
-- **Upload sécurisé** : Gestion des fichiers avec validation
-- **Interface simple** : Bootstrap pour design épuré et fonctionnel
-- **Traitement serveur** : Parsing côté backend pour sécurité
-- **Open-source** : Code MIT License sur [GitHub](https://github.com/silarhi/cfonb-reader)
-
-### Contribution Open-Source
-
-Le projet open-source offre :
-
-- **Code réutilisable** : Librairie de parsing CFONB disponible
-- **Documentation** : Guide d'utilisation et exemples
-- **Contributions** : Accueil des PRs et issues communauté
-- **License MIT** : Utilisation libre y compris commerciale
-
-## Résultats et Impact
-
-CFONB Reader facilite le travail avec les fichiers bancaires français :
-
-- **Adoption** : Plusieurs centaines d'utilisations du service en ligne
-- **Open-source** : Stars GitHub et réutilisations par projets fintech
-- **Gain de temps** : Décryptage instantané vs analyse manuelle des fichiers
-- **Pédagogique** : Outil de référence pour comprendre formats CFONB
-- **Communauté** : Contributions et feedbacks d'utilisateurs
-
-L'outil est devenu une référence pour la manipulation de fichiers bancaires CFONB en France.
-
-## Technologies Utilisées
-
-- Symfony 5.4 - Framework PHP full-stack
-- PHP 8.0 - Langage backend
-- Bootstrap 4 - Framework CSS responsive
-- Bibliothèque CFONB Parser - Parsing formats bancaires
-- GitHub - Hébergement open-source code

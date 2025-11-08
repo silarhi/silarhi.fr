@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import Button from '@/components/button'
 import Input from '@/components/forms/input'
 import Textarea from '@/components/forms/textarea'
-import { Envelope, Person, Phone } from '@/components/icons'
+import { Envelope, FileText, Person, Phone } from '@/components/icons'
 
 interface ContactFormData {
     name: string
@@ -134,6 +134,7 @@ export default function ContactForm() {
                         rows={7}
                         placeholder="Message"
                         disabled={pending}
+                        iconPrepend={<FileText />}
                         formState={formState}
                         getFieldState={getFieldState}
                         register={register}

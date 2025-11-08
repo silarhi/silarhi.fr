@@ -1,0 +1,34 @@
+---
+title: "Gestion de stock et d'articles industriels"
+slug: 'prod-fab'
+date: '2021-09-20'
+excerpt: 'Migration d'un outil interne de gestion des stock développé en PHP : intégration SAP, mouvements de stock, inventaires et traçabilité des articles de fabrication.'
+client: 'arcos-technologies'
+technologies: ['php', 'jquery', 'bootstrap', 'mssql']
+published: true
+scope: 'feature_integration'
+codeOwnership: 'shared_codebase'
+category: 'Gestion & ERP'
+name: 'Prod Fab'
+overview: 'Nous avons migré le code de Production Fabrication, un outil interne dédié à la gestion du stock des articles industriels avec intégration SAP. La solution permet de gérer les mouvements de stock, les inventaires et la traçabilité complète des articles de fabrication.'
+challenge:
+    description: "La migration de Production Fabrication nécessitait de mettre à jour le code vers une version PHP supportée, remplacer l'ancienne bibliothèque SAP par le SDK officiel, et optimiser les requêtes SQL pour une meilleure performance."
+    points:
+        - 'Version PHP non supportée'
+        - "Intégration obsolète avec SAP via l'extension PHP COM"
+        - 'Code difficile à maintenir et faire évoluer'
+solution:
+    description: "Nous avons migré le code vers PHP 8.0, remplacé l'ancienne intégration SAP par le SDK officiel, et utilisé des librairies standards pour améliorer la maintenabilité du code."
+    points:
+        - 'Migration vers PHP 8.0 pour support et sécurité'
+        - 'Utilisation du SDK SAP officiel pour intégration'
+        - 'Utilisation de librairies standards pour maintenabilité'
+engagement:
+    type: 'project_based'
+    description: 'Mise à jour de version PHP et utilisation du SDK SAP'
+    deliverables:
+        - 'Application web PHP complète et opérationnelle'
+        - 'Intégration SAP via SDK officiel'
+        - 'Requêtes SQL sécurisées et optimisées'
+        - 'Documentation utilisateur et technique'
+---

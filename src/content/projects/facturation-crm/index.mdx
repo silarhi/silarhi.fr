@@ -1,130 +1,37 @@
 ---
-title: "Outil de synchronisation CRM vers Facturation"
-slug: "facturation-crm"
-projectDate: '2023-06-01'
-client: "one-online"
-technologies: ["php","symfony","docker","mysql", "jquery", "bootstrap"]
+title: 'Outil de synchronisation CRM vers Facturation'
+slug: 'facturation-crm'
+date: '2020-01-01'
+excerpt: 'Synchronisation automatique entre les CRM HubSpot et Zoho Invoice : conversion de deals en factures, gestion des montants via règles fournies dans un Google Sheet.'
+client: 'one-online'
+technologies: ['php', 'symfony', 'docker', 'mysql', 'jquery', 'bootstrap']
 published: true
-projectType: "one-shot"
-category: "Intégration & API"
-duration: "2 mois"
-image: "/images/projects/outil-facturation-crm-hero.jpg"
-overview: "Nous avons développé un outil de synchronisation automatique entre le CRM HubSpot et le logiciel de facturation Zoho Invoice. Concrètement, les deals du CRM HubSpot sont automatiquement convertis en factures dans l'outil Zoho Invoice via une architecture Symfony dockerisée avec traitement asynchrone."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Développement d'un connecteur automatique entre HubSpot et Zoho Invoice pour synchronisation deals vers factures"
-  deliverables:
-    - "Connecteur Symfony opérationnel et dockerisé"
-    - "Synchronisation automatique HubSpot → Zoho Invoice"
-    - "Workflow avec webhooks temps réel"
-    - "Système de retry et gestion erreurs"
-    - "Monitoring et logging complet"
-    - "Documentation technique"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Intégration & API'
+name: 'CRM invoicing sync'
+overview: "Nous avons développé un outil de synchronisation automatique entre le CRM HubSpot et le logiciel de facturation Zoho Invoice. Concrètement, chaque fois qu'un deal est créé ou mis à jour dans HubSpot, notre connecteur convertit ce deal en facture dans Zoho Invoice, en appliquant des règles de calcul des montants et des taxes définies dans un Google Sheet. Cette solution permet à notre client de gérer efficacement la facturation de ses clients tout en assurant une synchronisation fluide entre les deux systèmes."
 challenge:
-  title: "Le Défi"
-  description: "L'intégration entre HubSpot et Zoho nécessitait de gérer des règles d'affectation complexes, tout en assurant une synchronisation bidirectionnelle fiable sans perte de données."
-  points:
-    - "Mapping entre structures CRM et facturation différentes"
-    - "Synchronisation bidirectionnelle fiable"
-    - "Fiabilité dans le calcul des montants et taxes"
-    - "Performance sur volumes importants quotidiens"
+    description: "L'intégration entre HubSpot et Zoho nécessitait de gérer des règles d'affectation complexes, tout en assurant une synchronisation bidirectionnelle fiable sans perte de données."
+    points:
+        - 'Mapping entre structures CRM et facturation différentes'
+        - 'Synchronisation bidirectionnelle fiable'
+        - 'Fiabilité dans le calcul des montants et taxes'
+        - 'Performance sur volumes importants quotidiens'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons développé un connecteur Symfony avec workers asynchrones, intégration CRM et moteur de calcul des montants et taxes."
-  points:
-    - "Webhooks HubSpot pour déclenchement temps réel"
-    - "Intégrations APIs HubSpot et Zoho complètes"
-    - "Tests unitaires et fonctionnels"
-    - "Pagination et dispatching asynchrone pour la performance"
+    description: 'Nous avons développé un connecteur Symfony avec workers asynchrones, intégration CRM et moteur de calcul des montants et taxes.'
+    points:
+        - 'Webhooks HubSpot pour déclenchement temps réel'
+        - 'Intégrations APIs HubSpot et Zoho complètes'
+        - 'Module de connexion sécurisé via OAuth2'
+        - 'Pagination et dispatching asynchrone pour la performance'
+engagement:
+    type: 'project_based'
+    description: "Développement d'un connecteur automatique entre HubSpot et Zoho Invoice pour synchronisation deals vers factures"
+    deliverables:
+        - 'Connecteur Symfony opérationnel et dockerisé'
+        - 'Synchronisation automatique HubSpot → Zoho Invoice'
+        - 'Workflow avec webhooks temps réel'
+        - 'Système de retry et gestion erreurs'
+        - 'Monitoring et logging complet'
 ---
-
-## Contexte
-
-Nous avons développé un outil de synchronisation entre les données de plusieurs CRM. Concrètement, les deals du CRM HubSpot sont automatiquement convertis en factures dans l'outil Zoho Invoice.
-
-## Défi : Synchroniser Deux Systèmes Hétérogènes
-
-L'intégration entre HubSpot et Zoho présente des défis techniques :
-
-- **Modèles de données différents** : Mapping entre structures CRM et facturation
-- **Synchronisation bidirectionnelle** : Mise à jour statuts dans les deux sens
-- **Fiabilité** : Aucune perte de données tolérée
-- **Performance** : Traitement volumes importants de deals quotidiens
-- **Réconciliation** : Gestion des doublons et incohérences
-- **Monitoring** : Visibilité sur succès/échecs synchronisation
-
-## Notre Solution : Connecteur Symfony Dockerisé
-
-Nous avons développé un outil Symfony de synchronisation automatique entre les deux systèmes.
-
-### Architecture du Connecteur
-
-Le système comprend :
-
-- **Workers asynchrones** : Traitement deals en tâches de fond
-- **File de messages** : Queue pour gestion flux et retry
-- **Mapping données** : Conversion modèles HubSpot vers Zoho
-- **Validation** : Règles métier avant création factures
-- **Logging complet** : Traçabilité toutes opérations
-
-### Workflow de Synchronisation
-
-Le process automatisé :
-
-1. **Détection deals** : Webhook HubSpot sur changement statut deal
-2. **Validation** : Vérification complétude données requises
-3. **Transformation** : Conversion format HubSpot → Zoho Invoice
-4. **Création facture** : Appel API Zoho avec données transformées
-5. **Mise à jour HubSpot** : Lien facture ajouté au deal
-6. **Notification** : Alerte équipe en cas d'erreur
-
-### APIs et Intégrations
-
-L'outil utilise :
-
-- **HubSpot API** : Lecture deals, mise à jour propriétés
-- **Zoho Invoice API** : Création factures, clients, articles
-- **Webhooks** : Déclenchement temps réel depuis HubSpot
-- **Retry logic** : Gestion erreurs temporaires APIs
-- **Rate limiting** : Respect quotas APIs tierces
-
-### Réconciliation et Monitoring
-
-Le système assure :
-
-- **Détection doublons** : Évite création factures multiples
-- **Dashboard monitoring** : Vue synchronisations réussies/échouées
-- **Alertes** : Notifications Slack en cas de problème
-- **Logs détaillés** : Historique pour debugging
-- **Statistiques** : Métriques volumes traités
-
-### Déploiement Docker
-
-L'infrastructure Docker permet :
-
-- **Containers isolés** : Workers, base données, queue séparés
-- **Scalabilité** : Ajout workers selon charge
-- **Reproductibilité** : Environnement identique dev/prod
-- **Orchestration** : Docker Compose pour déploiement simple
-
-## Résultats et Impact
-
-L'outil automatise le workflow commercial-facturation :
-
-- **Automatisation** : 100% deals convertis automatiquement en factures
-- **Gain temps** : Élimination saisie manuelle (2h/jour économisées)
-- **Fiabilité** : 0 perte de données grâce retry et logging
-- **Rapidité** : Factures créées < 1min après clôture deal
-- **Traçabilité** : Lien deal-facture pour suivi complet
-
-Le connecteur est devenu essentiel au workflow sales-to-cash.
-
-## Technologies Utilisées
-
-- Symfony 6.x - Framework PHP backend
-- PHP 8.2 - Langage
-- Docker - Conteneurisation
-- HubSpot API - CRM commercial
-- Zoho Invoice API - Facturation
-- RabbitMQ - File de messages
-- MySQL - Base de données synchronisation

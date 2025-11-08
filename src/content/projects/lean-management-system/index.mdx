@@ -1,118 +1,38 @@
 ---
 title: "Mise en place d'infrastructure pour Lean Management System"
-slug: "lean-management-system"
-projectDate: '2021-11-01'
-client: "stillgeek"
-technologies: ["docker"]
+slug: 'lean-management-system'
+date: '2021-03-03'
+excerpt: "Création de l'infrastructure pour visioconférence dans BigBlueButton pour formation à distance : déploiement conteneurisé, intégration complète LMS, scalabilité verticale."
+client: 'stillgeek'
+technologies: ['docker', 'aws']
 published: true
-projectType: "one-shot"
-category: "Infrastructure & DevOps"
-duration: "1 mois"
-image: "/images/projects/lean-management-system-hero.jpg"
-overview: "Nous avons réalisé la mise en place et l'intégration d'une infrastructure BigBlueButton pour un système de visioconférence dédié à la formation à distance, avec déploiement conteneurisé Docker et intégration complète au LMS existant."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Déploiement complet d'une infrastructure de visioconférence BigBlueButton scalable et conteneurisée"
-  deliverables:
-    - "Infrastructure BigBlueButton complète et opérationnelle"
-    - "Conteneurisation Docker des services"
-    - "Load balancing multi-serveurs configuré"
-    - "Intégration LMS avec SSO"
-    - "Système d'enregistrement et transcoding vidéo"
-    - "Documentation technique et d'exploitation"
+scope: 'feature_integration'
+codeOwnership: 'shared_codebase'
+category: 'Infrastructure & DevOps'
+name: 'Lean Management System'
+overview: "Nous avons réalisé la mise en place et l'intégration d'une infrastructure BigBlueButton pour un système de visioconférence dédié à la formation à distance, avec déploiement conteneurisé Docker et auto-scaling via AWS."
 challenge:
-  title: "Le Défi"
-  description: "Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques : supporter de nombreuses sessions simultanées avec une qualité stable, intégrer avec le LMS existant, garantir la sécurité des sessions, et assurer une disponibilité élevée durant les pics de trafic."
-  points:
-    - "Scalabilité pour nombreuses sessions simultanées"
-    - "Performance vidéo/audio stable multi-participants"
-    - "Intégration avec LMS existant"
-    - "Sécurité et isolation des sessions"
+    description: "Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques : supporter de nombreuses sessions simultanées avec une qualité stable, intégrer avec le LMS existant, garantir la sécurité des sessions, et assurer une disponibilité élevée durant les pics de trafic."
+    points:
+        - 'Scalabilité pour nombreuses sessions simultanées'
+        - 'Performance vidéo/audio stable multi-participants'
+        - 'Intégration avec LMS existant'
+        - 'Sécurité et isolation des sessions'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons déployé une infrastructure de visioconférence conteneurisée avec BigBlueButton, load balancing multi-serveurs, système d'enregistrement et intégration complète au LMS."
-  points:
-    - "Serveurs BigBlueButton avec load balancing"
-    - "Scalabilité horizontale selon charge"
-    - "Intégration LMS avec API et SSO"
-    - "Infrastructure résiliente et haute disponibilité"
+    description: "Nous avons déployé une infrastructure de visioconférence conteneurisée avec BigBlueButton, load balancing multi-serveurs, système d'enregistrement et intégration complète au LMS."
+    points:
+        - 'Serveurs BigBlueButton avec load balancing'
+        - 'Scalabilité horizontale selon charge'
+        - 'Intégration LMS avec API et SSO'
+        - 'Infrastructure résiliente et haute disponibilité'
+engagement:
+    type: 'project_based'
+    description: "Déploiement complet d'une infrastructure de visioconférence BigBlueButton scalable et conteneurisée"
+    deliverables:
+        - 'Infrastructure BigBlueButton complète et opérationnelle'
+        - 'Conteneurisation Docker des services'
+        - 'Load balancing multi-serveurs configuré'
+        - 'Intégration LMS avec SSO'
+        - "Système d'enregistrement et transcoding vidéo"
+        - "Documentation technique et d'exploitation"
 ---
-
-## Contexte
-
-Nous avons réalisé la mise en place et l'intégration d'une infrastructure BigBlueButton pour un système de visioconférence dédié à la formation à distance.
-
-## Défi : Déployer une Visioconférence Scalable
-
-Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques :
-
-- **Scalabilité** : Support de nombreuses sessions simultanées
-- **Performance** : Qualité vidéo/audio stable même avec participants multiples
-- **Intégration** : Connexion avec LMS (Learning Management System) existant
-- **Sécurité** : Isolation sessions et données utilisateurs
-- **Disponibilité** : Infrastructure résiliente pour formations critiques
-- **Containerisation** : Déploiement reproductible via Docker
-
-## Notre Intervention : Infrastructure Complète BigBlueButton
-
-Nous avons déployé une infrastructure de visioconférence conteneurisée.
-
-### Déploiement BigBlueButton
-
-L'infrastructure mise en place comprend :
-
-- **Serveurs BigBlueButton** : Installation et configuration complète
-- **Load balancing** : Répartition charge entre serveurs multiples
-- **Enregistrements** : Système capture et stockage sessions
-- **Transcoding** : Processing vidéos pour lecture optimale
-- **API** : Endpoints pour intégration applications tierces
-
-### Containerisation Docker
-
-L'approche Docker permet :
-
-- **Images custom** : Containers BigBlueButton optimisés
-- **Orchestration** : Docker Compose pour services multiples
-- **Scalabilité horizontale** : Ajout serveurs selon charge
-- **Reproductibilité** : Déploiement identique dev/prod
-- **Isolation** : Séparation ressources par service
-
-### Intégration LMS
-
-La connexion avec le système de formation inclut :
-
-- **API LMS** : Création salles depuis interface formation
-- **SSO** : Authentification unique utilisateurs
-- **Synchronisation** : Participants automatiquement ajoutés
-- **Enregistrements** : Vidéos disponibles dans cours
-- **Reporting** : Stats présence et participation
-
-### Configuration Réseau et Sécurité
-
-L'infrastructure intègre :
-
-- **Reverse proxy** : Nginx pour routage et SSL
-- **Certificats SSL** : HTTPS pour sécurité communications
-- **Firewall** : Règles strictes accès serveurs
-- **Monitoring** : Supervision charge et performances
-- **Backups** : Sauvegardes configurations et enregistrements
-
-## Résultats et Impact
-
-L'infrastructure BigBlueButton répond aux besoins de formation :
-
-- **Capacité** : Support de 50+ sessions simultanées
-- **Qualité** : Vidéo HD stable pour expérience optimale
-- **Intégration** : Workflow transparent depuis LMS
-- **Fiabilité** : Infrastructure stable pour formations critiques
-- **Enregistrements** : Replay disponibles pour étudiants
-
-Le système est opérationnel et permet formations à distance de qualité.
-
-## Technologies Utilisées
-
-- BigBlueButton - Plateforme visioconférence open-source
-- Docker - Conteneurisation infrastructure
-- Nginx - Reverse proxy et load balancing
-- Ubuntu Server - Système d'exploitation serveurs
-- FFmpeg - Transcoding vidéos enregistrements

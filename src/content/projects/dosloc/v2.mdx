@@ -1,36 +1,21 @@
 ---
-title: "Dosloc V2 : Migration Symfony 5.4 et Vérification API Impôts"
-projectDate: "2020-06-01"
-excerpt: "Évolution PropTech locative : migration Symfony 5.4, vérification avis imposition API impôts, double authentification, PDF unifiés, API locataires et ergonomie."
+title: 'V2'
+date: '2020-10-02'
 published: true
 ---
 
-## Évolutions Techniques
+Ajout de fonctionnalités de sécurité et d'automatisation de la vérification des documents.
 
-### Migration Symfony 4.3 → 5.4 LTS
-Montée de version vers Symfony 5.4 LTS pour bénéficier du support long terme, performances améliorées et compatibilité PHP 8.x. Migration complète garantissant pérennité de la plateforme.
+Fonctionnalités ajoutées :
 
-### Double Authentification (2FA)
-Ajout authentification à deux facteurs pour sécuriser comptes utilisateurs. Protection accrue contre usurpation d'identité, essentielle pour une plateforme manipulant documents sensibles.
+- Vérification des numéros de téléphone via API SMS
+- Mise en place de la double authentification
+- Vérification automatisée de l'avis d'imposition via le site des impôts
+- Génération d'un PDF reprenant toutes les pièces du dossier locataire
+- Création d'un accès dédié pour les garants
+- Améliorations ergonomiques (miniatures de documents, nombre de candidatures)
+- Mise en place d'une API
 
-### Vérification Téléphones
-Intégration API SMS pour validation numéros de téléphone lors de l'inscription. Envoi code de vérification garantissant l'authenticité du contact fourni.
+Mises à jour techniques :
 
-## Fonctionnalités Anti-Fraude
-
-### Vérification Avis d'Imposition
-**Innovation majeure** : intégration API officielle impôts.gouv.fr permettant la vérification automatique de l'authenticité des avis d'imposition fournis. Le système interroge l'administration fiscale avec numéro fiscal et référence avis pour confirmer validité du document. Lutte efficace contre falsification documentaire.
-
-### Génération PDF Unifiés
-Création de dossiers complets au format PDF unifié regroupant l'ensemble des pièces justificatives d'un candidat. Format standardisé facilitant transmission et archivage pour les bailleurs.
-
-## Fonctionnalités Métier
-
-### Module Garants
-Extension du système pour inclure garants solidaires avec upload de leurs propres justificatifs (pièce d'identité, revenus, avis d'imposition). Dossier locataire complet incluant cautions.
-
-### Améliorations Ergonomiques
-Refonte interface avec miniatures documents pour navigation visuelle rapide, compteurs de progression dossier et indicateurs de complétude. Expérience utilisateur optimisée.
-
-### API REST Intégrations
-Exposition API REST publique permettant aux sites d'annonces immobilières et agences de s'intégrer avec Dosloc. Réception automatique des dossiers candidats.
+- Migration Symfony 4.3 vers 5.4

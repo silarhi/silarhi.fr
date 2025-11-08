@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@/utils/lib'
 
 interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,10 +14,16 @@ export default function Section({
     paddingY = true,
     ...props
 }: SectionProps) {
-    const sectionClasses = cn(paddingY && 'py-16 lg:py-24', className)
-
     return (
-        <section className={sectionClasses} {...props}>
+        <section
+            className={cn(
+                {
+                    'py-16 lg:py-20': paddingY,
+                },
+                className
+            )}
+            {...props}
+        >
             {container ? (
                 <div className={cn('container mx-auto px-4 lg:px-8', { 'w-full': fluid })}>{children}</div>
             ) : (

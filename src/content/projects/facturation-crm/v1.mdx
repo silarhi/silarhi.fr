@@ -1,52 +1,15 @@
 ---
-title: "Outil Facturation CRM : Automatisation HubSpot et Zoho Invoice"
-projectDate: "2020-01-01"
-excerpt: "Outil automatisation facturation : intégration API HubSpot CRM et Zoho Invoice, pilotage Google Sheets, calcul montants automatisés, gestion acomptes et exports mensuels."
+title: 'V1'
+date: '2020-04-14'
 published: true
 ---
 
-## Intégrations API
+Développement d'un outil de synchronisation entre données de plusieurs CRM pour automatiser la facturation.
 
-### HubSpot CRM
-Connexion [API HubSpot](https://www.hubspot.com/) :
-- Récupération deals gagnés automatiquement
-- Import données clients (coordonnées, montants contrats)
-- Synchronisation statuts opportunités
+Fonctionnalités développées :
 
-### Zoho Invoice
-Intégration [API Zoho Invoice](https://www.zoho.com/invoice/) :
-- Création factures automatiques depuis deals HubSpot
-- Génération PDF factures conformes
-- Envoi automatisé clients par email
-- Suivi paiements et relances
-
-### Google Sheets Pilotage
-**Paramétrage dynamique via Google Sheets** :
-- Taux TVA modifiables en temps réel
-- Remises commerciales par client
-- Conditions paiement personnalisées
-- Mentions légales variables
-
-Flexibilité sans redéploiement code.
-
-## Moteur Calcul
-
-### Calcul Automatisé Montants
-Moteur calcul factures :
-- Montant HT base deals HubSpot
-- Application taux TVA (Google Sheets)
-- Remises commerciales selon client
-- Calcul TTC final automatique
-
-### Gestion Acomptes
-Module acomptes avancé :
-- Factures d'acompte (30%, 50%, etc.)
-- Factures solde automatiques
-- Gestion refus empreinte bancaire (paiement manuel)
-- Suivi multi-acomptes par projet
-
-### Téléchargement Mensuel
-Export automatisé factures :
-- Génération ZIP toutes factures mois
-- Organisation par client/date
-- Transmission comptabilité simplifiée
+- Utilisation des API Hubspot et Zoho Invoice
+- Prise en charge de données de pilotage stockées via Google Sheet et modifiable à tout moment
+- Moteur de calcul du montant final de facture
+- Gestion des acomptes, refus d'empreinte bancaire
+- Téléchargement mensuel de toutes les factures établies

@@ -25,13 +25,3 @@ export function getTotalEmployeeHours(employees: Employee[]): number {
         return total + workingDays * employee.hoursPerDay
     }, 0)
 }
-
-/**
- * Calculate total coffees consumed by all employees
- */
-export function getTotalEmployeeCoffees(employees: Employee[]): number {
-    return employees.reduce((total, employee) => {
-        const workingDays = getEmployeeWorkingDays(employee)
-        return total + workingDays * employee.coffeesPerDay
-    }, 0)
-}

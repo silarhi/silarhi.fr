@@ -1,122 +1,38 @@
 ---
-title: "Ameublement.com : Portail Mobilier Français et Annuaire"
-slug: "ameublement"
-projectDate: '2020-05-01'
-excerpt: "Développement portail information ameublement français en Symfony : gestion contenu éditorial, annuaire fabricants, recherche Elasticsearch, promotion mobilier made in France."
-client: "glucoz"
-technologies: ["symfony","php","elasticsearch","mysql"]
+title: 'Gestion multilingue sur portail de Mobilier Français'
+slug: 'ameublement'
+date: '2022-05-16'
+excerpt: 'Mise en place de recherche multilingue sur une architecture Elasticsearch existante.'
+client: 'glucoz'
+technologies: ['symfony', 'php', 'elasticsearch', 'mysql']
 published: true
-projectType: "one-shot"
-category: "Portail & CMS"
-duration: "6 mois"
-image: "/images/projects/ameublement-hero.jpg"
-overview: "ameublement.com est un portail d'information que nous avons développé pour valoriser l'ameublement français. La plateforme combine un système de gestion de contenu éditorial, un annuaire des fabricants et un moteur de recherche Elasticsearch pour promouvoir le mobilier made in France."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Développement complet du portail sectoriel avec système de contenu éditorial et annuaire professionnel"
-  deliverables:
-    - "Plateforme Symfony complète et opérationnelle"
-    - "CMS éditorial avec publication articles et dossiers"
-    - "Annuaire fabricants avec recherche avancée"
-    - "Moteur de recherche Elasticsearch configuré"
-    - "Interface responsive optimisée SEO"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Portail & CMS'
+name: 'ameublement.com'
+image: '/images/projects/ameublement-hero.png'
+url: 'https://www.ameublement.com'
+overview: "ameublement.com est un portail d'information pour valoriser l'ameublement français. La plateforme intègre un CMS éditorial et un moteur de recherche performant basé sur Elasticsearch. Notre mission a été de permettre la recherche en plusieurs langues sur les différents indices existants."
 challenge:
-  title: "Le Défi"
-  description: "Créer un portail sectoriel valorisant le savoir-faire français en ameublement nécessitait de combiner gestion de contenu éditorial riche, annuaire professionnel structuré et recherche performante, tout en assurant une excellente visibilité SEO."
-  points:
-    - "Gestion de contenu éditorial riche et varié"
-    - "Annuaire structuré des fabricants français"
-    - "Recherche performante sur contenus et annuaire"
-    - "Optimisation SEO pour visibilité sectorielle"
-    - "Valorisation du savoir-faire français"
+    description: 'Gérer des données en plusieurs langues tout en maintenant une performance de recherche optimale et un ranking pertinent selon la langue choisie par l’utilisateur.'
+    points:
+        - "Permettre une recherche performante pour n'importe quelle langue"
+        - 'Fiabiliser les critères de ranking selon la langue'
+        - 'Développer les modifications sur un outil existant'
+        - "S'approprier des indices Elasticsearch parfois complexes"
 solution:
-  title: "Notre Solution"
-  description: "Nous avons développé un portail Symfony complet intégrant un CMS éditorial, un annuaire professionnel et un moteur de recherche Elasticsearch, optimisé pour le référencement naturel."
-  points:
-    - "CMS intégré pour articles, dossiers et actualités"
-    - "Module annuaire avec fiches fabricants détaillées"
-    - "Recherche Elasticsearch multicritère performante"
-    - "Optimisation SEO sur requêtes sectorielles"
-    - "Interface responsive et intuitive"
-    - "Architecture Symfony robuste et évolutive"
+    description: "Nous avons mis à jour le portail existant pour créer un indice Elasticsearch par langue et déclencher la recherche sur l'indice approprié selon la langue choisie par l'utilisateur."
+    points:
+        - "Création d'indices Elasticsearch dédiés pour chaque langue"
+        - 'Adaptation du ranking et des filtres selon la langue'
+        - 'Intégration transparente avec le CMS Symfony existant'
+        - 'Optimisation des performances de recherche'
+engagement:
+    type: 'project_based'
+    description: 'Redéveloppement complet des indices de recherche Elasticsearch au sein du portail.'
+    deliverables:
+        - "Audit de l'index Elasticsearch existant"
+        - 'Création automatisée des indices multilingues'
+        - "Tests de performance et d'intégration"
+        - 'Documentation technique pour la maintenance future'
 ---
-
-## Contexte
-
-[ameublement.com](https://ameublement.com) est un site d'information que nous avons développé, dédié à la promotion de l'ameublement français et à l'information des fabricants de meubles.
-
-## Défi : Valoriser le Savoir-Faire Français
-
-Le développement d'un portail sectoriel présentait des enjeux spécifiques :
-
-- **Contenu éditorial riche** : Gestion d'articles, actualités, dossiers thématiques
-- **Annuaire fabricants** : Base de données structurée des acteurs du secteur
-- **Recherche performante** : Moteur permettant de trouver rapidement fabricants et contenus
-- **Visibilité SEO** : Optimisation pour référencement naturel sur requêtes sectorielles
-- **Actualité métier** : Publication régulière de contenus pour maintenir l'audience
-- **Mise en avant filière** : Valorisation du savoir-faire français en ameublement
-
-## Notre Solution : Portail Symfony avec Recherche Elasticsearch
-
-Nous avons développé une plateforme éditoriale complète en Symfony optimisée pour le contenu et la recherche.
-
-### Système de Gestion de Contenu
-
-Le CMS intégré permet de :
-
-- **Articles éditoriaux** : Publication de contenus sur tendances, innovations, savoir-faire
-- **Dossiers thématiques** : Contenus longs structurés par thématique (éco-conception, design, etc.)
-- **Actualités secteur** : Fil d'actualités des fabricants et événements professionnels
-- **Médias riches** : Galeries photos, vidéos, infographies
-- **Catégorisation** : Organisation par type de mobilier, matériaux, styles
-
-### Annuaire des Fabricants
-
-Le module annuaire offre :
-
-- **Fiches entreprises** : Profils détaillés des fabricants français (présentation, produits, contact)
-- **Recherche multicritère** : Filtrage par région, spécialité, type de mobilier
-- **Mise en avant** : Système de profils premium pour fabricants partenaires
-- **Actualités fabricants** : Publication de news par les entreprises référencées
-- **Contact direct** : Formulaires de mise en relation avec fabricants
-
-### Moteur de Recherche Elasticsearch
-
-Elasticsearch propulse la recherche du portail :
-
-- **Recherche full-text** : Recherche textuelle sur l'ensemble du contenu (articles + annuaire)
-- **Suggestions** : Auto-complétion intelligente des requêtes
-- **Facettes dynamiques** : Filtres par catégorie, région, type de contenu
-- **Pertinence** : Scoring optimisé privilégiant contenu récent et pertinent
-- **Performance** : Résultats instantanés même sur large volume de contenus
-
-### Architecture Éditoriale
-
-La plateforme basée sur Symfony intègre :
-
-- **Backend d'administration** : Interface de gestion de contenu pour éditeurs
-- **Workflow éditorial** : Système de validation et publication programmée
-- **SEO optimisé** : URLs structurées, métadonnées, sitemap automatique
-- **Responsive design** : Interface adaptée mobile/desktop
-- **Performance** : Cache et optimisations pour temps de chargement rapide
-
-## Résultats et Impact
-
-Le portail ameublement.com est devenu une référence du secteur :
-
-- **Audience** : Plusieurs milliers de visiteurs mensuels professionnels et particuliers
-- **Contenu** : Centaines d'articles et dossiers sur l'ameublement français
-- **Annuaire** : Plus de 100 fabricants référencés et valorisés
-- **Recherche** : Temps de recherche < 100ms grâce à Elasticsearch
-- **Visibilité** : Bon positionnement SEO sur requêtes sectorielles clés
-
-La plateforme contribue à la promotion du savoir-faire français en ameublement.
-
-## Technologies Utilisées
-
-- Symfony (v5.4) - Framework PHP full-stack
-- PHP (v8.0) - Langage backend
-- Elasticsearch - Moteur de recherche
-- MySQL - Base de données relationnelle
-- Bootstrap (v4) - Framework CSS responsive
-- Doctrine ORM - Mapping objet-relationnel

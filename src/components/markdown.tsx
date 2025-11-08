@@ -5,6 +5,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
 import remarkGfm from 'remark-gfm'
+import type { PluggableList } from 'unified'
 
 import { MDXImage } from '@/components/mdx-image'
 import rehypeAutoLinkTechnologies from '@/lib/rehype-auto-link-technologies'
@@ -12,6 +13,7 @@ import rehypeAutoLinkTechnologies from '@/lib/rehype-auto-link-technologies'
 interface MarkdownProps {
     source: string
     variant?: 'full' | 'inline'
+    autoLinkTechnologies?: boolean
 }
 
 function CustomLink({ href, className, ...props }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
@@ -44,6 +46,9 @@ const fullComponents = {
     pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
         <pre className="text-surface my-3 overflow-auto rounded bg-gray-900 p-3" {...props} />
     ),
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => <ul className="my-3 list-disc pl-6" {...props} />,
+    ol: (props: React.HTMLAttributes<HTMLOListElement>) => <ol className="my-3 list-decimal pl-6" {...props} />,
+    li: (props: React.LiHTMLAttributes<HTMLLIElement>) => <li className="mb-1" {...props} />,
     a: CustomLink,
     img: MDXImage,
     Image: MDXImage,
@@ -57,10 +62,17 @@ const inlineComponents = {
     em: (props: React.HTMLAttributes<HTMLElement>) => <em {...props} />,
 }
 
-export default function Markdown({ source, variant = 'full' }: MarkdownProps) {
+export default function Markdown({ source, variant = 'full', autoLinkTechnologies = true }: MarkdownProps) {
     const components = variant === 'inline' ? inlineComponents : fullComponents
     const rehypePlugins =
-        variant === 'inline' ? [] : [rehypeSlug, rehypeAutolinkHeadings, rehypeUnwrapImages, rehypeAutoLinkTechnologies]
+        variant === 'inline'
+            ? [autoLinkTechnologies && rehypeAutoLinkTechnologies]
+            : [
+                  rehypeSlug,
+                  rehypeAutolinkHeadings,
+                  rehypeUnwrapImages,
+                  autoLinkTechnologies && rehypeAutoLinkTechnologies,
+              ]
 
     return (
         <MDXRemote
@@ -69,7 +81,7 @@ export default function Markdown({ source, variant = 'full' }: MarkdownProps) {
             options={{
                 mdxOptions: {
                     remarkPlugins: [remarkGfm],
-                    rehypePlugins,
+                    rehypePlugins: rehypePlugins.filter(Boolean) as PluggableList,
                 },
             }}
         />

@@ -1,115 +1,40 @@
 ---
-title: "Plateforme de gestion de contrats de location"
-slug: "investlease"
-projectDate: '2022-06-01'
-client: "cimalis"
-technologies: ["php","symfony","jquery","bootstrap","ebics","mysql"]
+title: 'Plateforme de gestion de contrats de location'
+slug: 'investlease'
+date: '2022-02-25'
+excerpt: "Reprise et maintence d'une plateforme de gestion de contrats de location : suivi contrats, soldes, besoins opérationnels."
+client: 'investlease'
+technologies: ['php', 'symfony', 'jquery', 'bootstrap', 'ebics', 'mysql']
 published: true
-projectType: "recurring"
-category: "Gestion"
-duration: "4 mois"
-image: "/images/projects/investlease-hero.jpg"
+scope: 'maintenance_and_support'
+codeOwnership: 'inherited_codebase'
+category: 'Gestion'
+name: 'Investlease'
+image: '/images/projects/investlease-hero.png'
+url: 'https://app.investlease.fr'
 overview: "Investlease est une application web de gestion de contrats de location permettant aux clients de suivre l'état de leurs contrats, leurs soldes et leurs besoins opérationnels. Nous sommes intervenus durant une mission de maintenance applicative pour assurer la stabilité et ajouter de nouvelles fonctionnalités."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Maintenance applicative avec corrections, développement module EBICS et automatisations financières"
-  deliverables:
-    - "Application stabilisée avec bugs critiques corrigés"
-    - "Module EBICS intégré et opérationnel"
-    - "Système de relances automatiques configuré"
-    - "Rapports comptables enrichis"
-    - "Documentation technique mise à jour"
 challenge:
-  title: "Le Défi"
-  description: "La maintenance d'une application financière critique nécessitait une fiabilité absolue sur les calculs de montants, une intégration bancaire sécurisée via EBICS et une disponibilité continue 24/7 pour les clients."
-  points:
-    - "Fiabilité des calculs financiers"
-    - "Intégration bancaire automatique via EBICS"
-    - "Intégration d'API tierces pour calcul de scoring"
-    - "Conformité normes comptables et réglementaires"
+    description: "La reprise et maintenance d'une application financière critique nécessitait une fiabilité absolue sur les calculs de montants, une intégration bancaire sécurisée via EBICS et une disponibilité continue 24/7 pour les clients."
+    points:
+        - 'Reprendre une base de code existante'
+        - 'Assurer la fiabilité des calculs financiers'
+        - 'Refonte de la génération documentaire'
+        - 'Intégration bancaire automatique via EBICS'
+        - "Intégration d'API tierces pour calcul de scoring"
 solution:
-  title: "Notre Solution"
-  description: "Nous avons assuré la maintenance de la plateforme Symfony durant plusieurs mois, développant une intégration bancaire complète et module de scoring bancaire tout en corrigeant les bugs critiques et optimisant les performances."
-  points:
-    - "Maintenance corrective : résolution bugs critiques"
-    - "Module EBICS : synchronisation bancaire automatique"
-    - Module de scoring bancaire intégré"
-    - "Support technique réactif et documentation"
+    description: 'Nous avons assuré la maintenance de la plateforme Symfony durant plusieurs mois, développant une intégration bancaire complète et module de scoring bancaire tout en corrigeant les bugs critiques et optimisant les performances.'
+    points:
+        - 'Rétro-ingénierie et compréhension rapide de la base de code existante'
+        - 'Mise en place de tests unitaires et fonctionnels pour garantir la fiabilité'
+        - 'Refonte de la génération documentaire via puppeteer'
+        - "Utilisation d'outil d'intégration bancaire personnalisé"
+        - "Intégration d'API tierces asynchrones via webhooks pour scoring bancaire"
+engagement:
+    type: 'continuous_support'
+    description: 'Collaboration à long terme avec développement initial et maintenance continue de la plateforme'
+    deliverables:
+        - 'Application stabilisée avec bugs critiques corrigés'
+        - 'Module EBICS intégré et opérationnel'
+        - 'Système de relances automatiques configuré'
+        - 'Support technique'
 ---
-
-## Contexte
-
-Investlease est une application web de gestion de contrats de location permettant aux clients de suivre l'état de leurs contrats, leurs soldes et leurs besoins opérationnels.
-
-Nous sommes intervenus durant une mission de maintenance applicative pour corriger des bugs, ajouter des fonctionnalités et assurer la stabilité de la plateforme.
-
-## Défi : Maintenir une Application Financière Critique
-
-La maintenance d'une application de gestion de contrats présente des enjeux spécifiques :
-
-- **Fiabilité financière** : Zéro erreur tolérée sur calculs de soldes et échéances
-- **Intégration bancaire** : Synchronisation automatique des paiements via EBICS
-- **Conformité** : Respect des normes comptables et réglementaires
-- **Disponibilité** : Application critique accessible 24/7 pour les clients
-- **Évolutions métier** : Adaptation aux besoins changeants de gestion locative
-
-## Notre Intervention : Maintenance et Évolutions
-
-Nous avons assuré la TMA de la plateforme Symfony durant plusieurs mois.
-
-### Maintenance Corrective
-
-Nos interventions ont inclus :
-
-- **Correction de bugs** : Résolution rapide des dysfonctionnements critiques
-- **Debug calculs financiers** : Vérification et correction des algorithmes de solde
-- **Hotfixes production** : Déploiements urgents pour incidents bloquants
-- **Optimisation requêtes** : Amélioration des performances sur grands volumes de contrats
-
-### Évolutions Fonctionnelles
-
-Nous avons développé :
-
-- **Intégration EBICS** : Module de synchronisation bancaire automatique via protocole EBICS
-- **Automatisation relances** : Système d'envoi automatique pour échéances et impayés
-- **Rapports enrichis** : Nouveaux tableaux de bord et exports comptables
-- **Améliorations UX** : Ajustements d'interface basés sur retours utilisateurs
-
-### Module EBICS Bancaire
-
-L'intégration EBICS permet :
-
-- **Synchronisation paiements** : Récupération automatique des règlements clients
-- **Réconciliation** : Matching automatique entre paiements et contrats
-- **Suivi en temps réel** : Mise à jour instantanée des soldes
-- **Fiabilité** : Élimination des saisies manuelles sources d'erreurs
-
-### Support Technique
-
-Notre accompagnement comprenait :
-
-- Support réactif pour équipe interne et clients
-- Documentation des interventions et évolutions
-- Conseils techniques pour futures améliorations
-- Formation sur nouvelles fonctionnalités
-
-## Résultats et Impact
-
-Notre mission a contribué à la stabilité et l'amélioration d'Investlease :
-
-- **Fiabilité** : Réduction de 90% des bugs critiques durant notre intervention
-- **Automatisation** : Synchronisation bancaire EBICS opérationnelle et fiable
-- **Performance** : Temps de chargement des contrats réduit de 30%
-- **Satisfaction** : Retours positifs des clients sur nouvelles fonctionnalités
-- **Disponibilité** : Uptime maintenu > 99.5% durant la mission
-
-La plateforme a gagné en stabilité et en fonctionnalités durant notre intervention.
-
-## Technologies Utilisées
-
-- Symfony 5.4 - Framework PHP application
-- PHP 8.0 - Langage backend
-- EBICS - Protocole bancaire sécurisé
-- jQuery - Interactions JavaScript
-- Bootstrap 4 - Framework CSS
-- MySQL - Base de données relationnelle

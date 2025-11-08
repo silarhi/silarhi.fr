@@ -1,8 +1,9 @@
-import Head from 'next/head'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 
+import Badge from '@/components/badge'
 import Button from '@/components/button'
 import CallToAction from '@/components/call-to-action'
 import FadeInWhenVisible from '@/components/fade-in-when-visible'
@@ -15,11 +16,17 @@ import iconIdeas from '@/icons/ideas_vn7a.svg'
 import iconCloud from '@/icons/maintenance_4unj.svg'
 import iconMeeting from '@/icons/meeting_dunc.svg'
 import home from '@/public/images/home.jpg'
-import { getDaysSince } from '@/utils/dates'
-import { getTotalEmployeeCoffees, getTotalEmployeeHours } from '@/utils/employees'
+import { getAllClients } from '@/utils/client'
+import { getTotalEmployeeHours } from '@/utils/employees'
 import { cn } from '@/utils/lib'
+import { getAllProjects } from '@/utils/project'
 
 import { lato } from './fonts'
+
+export const metadata: Metadata = {
+    title: `Développement d'applications Web & PHP à Toulouse - SILARHI`,
+    description: `Développement d'applications Web à Toulouse et en France. Donnez vie à vos idées d'applications responsive & mobiles. Devis rapide et gratuit.`,
+}
 
 interface Feature {
     icon: string
@@ -41,7 +48,7 @@ interface Employee {
 }
 
 interface NumberData {
-    value: number
+    value: number | string
     unit: string
     text: string
 }
@@ -51,24 +58,25 @@ const FEATURES: Feature[] = [
         icon: iconMeeting,
         title: 'Analyse',
         description:
-            "On vous aide à spécifier votre projet si vous en avez besoin. On peut également vous guider dans l'étude de la faisabilité technique.",
+            'Nous étudions précisément votre besoin pour éliminer toute zone d’ombre. Vous obtenez une vision claire du projet avant même de commencer.',
     },
     {
         icon: iconIdeas,
         title: 'Conception',
-        description: 'On vous présente la façon de mener à bien votre projet !',
+        description:
+            'Nous concevons une solution sur mesure, pensée pour durer. Vous démarrez avec un produit pensé pour évoluer facilement.',
     },
     {
         icon: iconProgramming,
         title: 'Développement',
         description:
-            'On donne vie à votre idée. Vous intervenez à chaque étape majeure du développement pour confirmer la trajectoire du projet.',
+            'Nous développons une application Web robuste, moderne et sécurisée. Votre application évolue proprement grâce à un code clair et maintenable.',
     },
     {
         icon: iconCloud,
         title: 'Déploiement',
         description:
-            "L'application est hébergée sur l'infrastructure de votre choix. Intranet, OVH, AWS, GCP, on s'adapte, et si tous ces sigles ne vous disent rien, laissez-vous guider !",
+            'Nous assurons un déploiement fluide, sans interruption de votre activité. Votre solution est mise en production avec des outils fiables et automatisés.',
     },
 ]
 
@@ -144,7 +152,6 @@ const SERVICES: Service[] = [
 ]
 
 const COMPANY_START_DATE = new Date('2018-08-01')
-const DAYS_SINCE_COMPANY_START_DATE = getDaysSince(COMPANY_START_DATE)
 
 const EMPLOYEES: Employee[] = [
     {
@@ -176,35 +183,25 @@ const EMPLOYEES: Employee[] = [
     },
 ]
 
-const NB_CLIENTS = 11
-const NB_PROJECTS = 109
-
-const NUMBERS: NumberData[] = [
-    {
-        value: getTotalEmployeeHours(EMPLOYEES),
-        unit: 'Heures',
-        text: `passées à travailler sur les projets de nos clients.`,
-    },
-    {
-        value: NB_CLIENTS,
-        unit: 'Clients',
-        text: `Et 100% de satisfaction au cours de ces ${Math.trunc(
-            DAYS_SINCE_COMPANY_START_DATE / 365
-        )} années. Venez vérifier par vous-même !`,
-    },
-    {
-        value: NB_PROJECTS,
-        unit: 'Projets',
-        text: `Plus de ${Math.trunc(
-            NB_PROJECTS / NB_CLIENTS
-        )} projets par client en moyenne, signe de la relation de confiance établie.`,
-    },
-    {
-        value: getTotalEmployeeCoffees(EMPLOYEES),
-        unit: 'Cafés',
-        text: `Être toujours à votre écoute et force de proposition, telle est notre mission !`,
-    },
-]
+function getNumbers(clientsCount: number, projectsCount: number): NumberData[] {
+    return [
+        {
+            value: getTotalEmployeeHours(EMPLOYEES),
+            unit: 'Heures',
+            text: `de développement au service de nos clients`,
+        },
+        {
+            value: clientsCount,
+            unit: 'Clients',
+            text: `nous font confiance pour leurs projets stratégiques`,
+        },
+        {
+            value: projectsCount,
+            unit: 'Projets',
+            text: `livrés avec succès depuis notre création`,
+        },
+    ]
+}
 
 function HeroSection() {
     return (
@@ -220,17 +217,18 @@ function HeroSection() {
             />
             <div className="text-surface absolute z-[2] flex h-full w-full flex-col items-center justify-center">
                 <Section>
-                    <div style={{ maxWidth: '55em' }} className="mx-auto">
+                    <div className="mx-auto max-w-4xl">
                         <FadeInWhenVisible duration={0.8} yOffset={30}>
-                            <h1 className="text-5xl leading-none font-bold xl:text-7xl">
+                            <h1 className="text-5xl font-bold text-shadow-lg lg:text-6xl xl:text-7xl">
                                 Développement d&apos;applications Web
-                                <span className="mt-3 block text-3xl uppercase lg:text-5xl">
+                                <br />
+                                <Badge variant="secondary" className="text-foreground bg-secondary/80">
                                     À Toulouse & en France
-                                </span>
+                                </Badge>
                             </h1>
                         </FadeInWhenVisible>
                         <FadeInWhenVisible delay={0.3} duration={0.8} yOffset={30}>
-                            <h2 className="mt-4 text-3xl font-light uppercase">
+                            <h2 className="mt-4 text-3xl uppercase text-shadow-lg">
                                 Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
                             </h2>
                         </FadeInWhenVisible>
@@ -249,8 +247,8 @@ function HeroSection() {
 function Arrow() {
     return (
         <div className="ml-[50%]">
-            <div className="relative h-6 w-0.5 bg-slate-300 md:h-10">
-                <div className="absolute bottom-0 left-1/2 h-0 w-0 -translate-x-1/2 border-t-8 border-r-4 border-l-4 border-t-slate-300 border-r-transparent border-l-transparent"></div>
+            <div className="relative h-6 w-0.5 bg-gray-300 md:h-10">
+                <div className="absolute bottom-0 left-1/2 h-0 w-0 -translate-x-1/2 border-t-8 border-r-4 border-l-4 border-t-gray-300 border-r-transparent border-l-transparent"></div>
             </div>
         </div>
     )
@@ -258,13 +256,17 @@ function Arrow() {
 
 function MethodologySection() {
     return (
-        <Section id="methodologie" className="bg-surface">
+        <Section id="methodologie" className="bg-surface border-border border-t">
             <SectionHeader
-                title="On développe des applications Web pour donner vie à vos projets"
-                subtitle="Et ça se passe comme ça."
+                title={
+                    <span>
+                        Un processus éprouvé pour <span className="text-primary">votre succès</span>
+                    </span>
+                }
+                subtitle={<Badge variant="secondary">Notre méthodologie</Badge>}
             />
 
-            <div className="mx-auto my-12 max-w-[40rem] space-y-1">
+            <div className="mx-auto my-12 max-w-2xl space-y-4">
                 <FadeInWhenVisible delay={0.1}>
                     <div className="text-center">
                         <span className="bg-primary-light/10 border-primary/10 inline-block rounded-lg border-2 p-3 md:p-4">
@@ -283,7 +285,7 @@ function MethodologySection() {
                         {/* Stage with number outside */}
                         <FadeInWhenVisible delay={0.2 + index * 0.15}>
                             <div className={cn('flex items-start gap-3 md:gap-4')}>
-                                <div className="bg-surface border-border flex-1 overflow-hidden rounded-lg border shadow-xl transition-transform hover:scale-[1.05]">
+                                <div className="bg-surface border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
                                     <div className="p-4 md:p-6">
                                         <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
                                             <div className="flex h-32 w-full flex-shrink-0 items-center justify-center md:w-32">
@@ -291,8 +293,8 @@ function MethodologySection() {
                                             </div>
 
                                             <div className="flex-1">
-                                                <h2 className="mb-2 text-lg font-bold md:text-xl">{stage.title}</h2>
-                                                <p className="text-muted">{stage.description}</p>
+                                                <h3 className="mb-2 text-lg font-bold md:text-xl">{stage.title}</h3>
+                                                <p className="text-foreground/80">{stage.description}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -329,36 +331,47 @@ function MethodologySection() {
     )
 }
 
-function ServiceList({ services, supported }: { services: Service[]; supported: boolean }) {
+function ServiceList({
+    services,
+    supported,
+    title,
+}: {
+    services: Service[]
+    supported: boolean
+    title: React.ReactNode
+}) {
     return (
-        <div className="bg-surface border-border mb-12 rounded-lg border shadow-lg">
-            <ul className="">
-                {services.map((service, key) => (
-                    <li
-                        key={`${key}`}
-                        className="border-border flex items-center gap-x-4 border-b px-4 py-3 last:border-0"
-                    >
-                        <div
-                            className={cn('flex size-5 shrink-0 items-center justify-center rounded-full', {
-                                'bg-success/25 text-success': supported,
-                                'bg-error/25 text-error': !supported,
-                            })}
+        <>
+            <h3 className="text-primary-dark mb-4 text-2xl font-light">{title}</h3>
+            <div className="bg-surface border-border mb-12 rounded-lg border shadow-lg">
+                <ul className="">
+                    {services.map((service, key) => (
+                        <li
+                            key={`${key}`}
+                            className="border-border flex items-center gap-x-4 border-b px-4 py-3 last:border-0"
                         >
-                            {supported ? <Check className="text-xs" /> : <XMark className="text-xs" />}
-                        </div>
-                        <div className="text-muted">
-                            <ReactMarkdown
-                                components={{
-                                    p: ({ children }) => <>{children}</>,
-                                }}
+                            <div
+                                className={cn('flex size-5 shrink-0 items-center justify-center rounded-full', {
+                                    'bg-success/25 text-success': supported,
+                                    'bg-error/25 text-error': !supported,
+                                })}
                             >
-                                {service.text}
-                            </ReactMarkdown>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+                                {supported ? <Check className="text-xs" /> : <XMark className="text-xs" />}
+                            </div>
+                            <div className="text-foreground/80">
+                                <ReactMarkdown
+                                    components={{
+                                        p: ({ children }) => <>{children}</>,
+                                    }}
+                                >
+                                    {service.text}
+                                </ReactMarkdown>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </>
     )
 }
 
@@ -373,14 +386,14 @@ function PresentationSection() {
                 sizes="100vw"
             />
             <FadeInWhenVisible>
-                <div className="text-surface mx-auto max-w-[55rem] text-center">
-                    <h3 className="mb-4 text-3xl">
+                <div className="text-surface mx-auto max-w-4xl text-center">
+                    <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
                         SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
                         sur mesure.
-                    </h3>
+                    </h2>
                     <p className="text-lg">
-                        Spécialistes de l&apos;écosystème PHP, nous développons vos projets en Symfony, du prototype à
-                        la mise en ligne.
+                        Spécialistes de l&apos;écosystème PHP, nous développons ou reprennons vos projets en Symfony, du
+                        prototype à la mise en ligne.
                     </p>
                 </div>
             </FadeInWhenVisible>
@@ -394,59 +407,65 @@ function ServicesSection() {
 
     return (
         <Section id="services">
-            <SectionHeader title="Nos services" subtitle="Vérifiez que votre besoin colle avec notre savoir faire." />
-            <div className="mx-auto max-w-[55rem]">
+            <SectionHeader
+                title={
+                    <span>
+                        Des solutions pensées pour <span className="text-primary">votre réussite</span>
+                    </span>
+                }
+                subtitle={<Badge variant="secondary">Nos services</Badge>}
+            />
+            <div className="mx-auto max-w-4xl">
                 <FadeInWhenVisible delay={0.1}>
-                    <h3 className="text-primary-dark text-2xl font-light">Notre savoir faire</h3>
-                </FadeInWhenVisible>
-                <FadeInWhenVisible delay={0.2}>
-                    <ServiceList services={supportedServices} supported={true} />
+                    <ServiceList services={supportedServices} supported={true} title="Notre savoir faire" />
                 </FadeInWhenVisible>
                 <FadeInWhenVisible delay={0.3}>
-                    <h3 className="text-primary-dark text-2xl font-light">Ce qu&apos;on ne fait PAS</h3>
+                    <ServiceList services={unsupportedServices} supported={false} title="Ce qu'on ne fait PAS" />
                 </FadeInWhenVisible>
-                <FadeInWhenVisible delay={0.4}>
-                    <ServiceList services={unsupportedServices} supported={false} />
-                </FadeInWhenVisible>
-                <CallToAction />
             </div>
         </Section>
     )
 }
 
-function NumbersSection() {
+function NumbersSection({ numbers }: { numbers: NumberData[] }) {
     return (
-        <Section id="chiffres">
-            <SectionHeader title="Les chiffres" subtitle="Quelques chiffres de cette agence fondée en 2018." />
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-                {NUMBERS.map((number, key) => (
+        <Section id="chiffres" className="border-border border-t">
+            <SectionHeader
+                title={
+                    <span>
+                        Des résultats qui <span className="text-primary">parlent d&#39;eux-mêmes</span>
+                    </span>
+                }
+                subtitle={<Badge variant="secondary">Nos chiffres</Badge>}
+            />
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+                {numbers.map((number, key) => (
                     <FadeInWhenVisible key={key} delay={key * 0.1}>
                         <div className="text-center">
                             <div className={cn(lato.className, 'text-secondary mb-3 text-6xl font-bold')}>
                                 {number.value}
                             </div>
                             <h4 className="mb-0 text-2xl font-light lg:mb-3">{number.unit}</h4>
-                            <p className="text-muted">{number.text}</p>
+                            <p className="text-foreground/80">{number.text}</p>
                         </div>
                     </FadeInWhenVisible>
                 ))}
             </div>
-            <CallToAction />
         </Section>
     )
 }
 
-export default function Page() {
+export default async function Page() {
+    const [clients, projects] = await Promise.all([getAllClients(), getAllProjects()])
+    const numbers = getNumbers(clients.length, projects.length)
+
     return (
         <>
-            <Head>
-                <title>{`Développement d'applications Web & PHP à Toulouse - SILARHI`}</title>
-            </Head>
             <HeroSection />
             <PresentationSection />
             <ServicesSection />
             <MethodologySection />
-            <NumbersSection />
+            <NumbersSection numbers={numbers} />
         </>
     )
 }

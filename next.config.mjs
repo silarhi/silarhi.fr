@@ -59,6 +59,64 @@ const nextConfig = {
                     }
                 }
             ),
+            // Project redirects
+            {
+                source: '/projets/api-iris',
+                destination: '/projets/iris',
+                permanent: true,
+            },
+            {
+                source: '/projets/front-iris',
+                destination: '/projets/iris',
+                permanent: true,
+            },
+            // Tag redirects to technologies (when technology exists)
+            {
+                source: '/tag/apiplatform',
+                destination: '/technologies/api-platform',
+                permanent: true,
+            },
+            {
+                source: '/tag/docker',
+                destination: '/technologies/docker',
+                permanent: true,
+            },
+            {
+                source: '/tag/mysql',
+                destination: '/technologies/mysql',
+                permanent: true,
+            },
+            {
+                source: '/tag/postgresql',
+                destination: '/technologies/postgres',
+                permanent: true,
+            },
+            {
+                source: '/tag/react',
+                destination: '/technologies/react',
+                permanent: true,
+            },
+            {
+                source: '/tag/symfony',
+                destination: '/technologies/symfony',
+                permanent: true,
+            },
+            // Tag redirects to projects (when technology doesn't exist)
+            {
+                source: '/tag/api',
+                destination: '/projets',
+                permanent: true,
+            },
+            {
+                source: '/tag/migration',
+                destination: '/projets',
+                permanent: true,
+            },
+            {
+                source: '/tag/reprise',
+                destination: '/projets',
+                permanent: true,
+            },
         ]
     },
 }

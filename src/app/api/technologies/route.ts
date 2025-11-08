@@ -39,8 +39,7 @@ export async function GET() {
         const industryMap = new Map<string, { slug: string; name: string; projectCount: number }>()
 
         allProjects.forEach((project) => {
-            // Check both project.industry and project.client.sector
-            const industry = project.industry || project.client?.sector
+            const industry = project.client.sector
             if (industry) {
                 const slug = industry.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
                 if (industryMap.has(slug)) {
@@ -60,7 +59,7 @@ export async function GET() {
         // Filter to only include items with projects
         const technologies = technologiesWithCounts.filter((tech) => tech.projectCount > 0)
 
-        // Return all projects (no need to simplify, ProjectCard expects full ProjectProject)
+        // Return all projects (no need to simplify, ProjectCard expects full Project)
         const projects = allProjects
 
         return NextResponse.json({

@@ -1,28 +1,22 @@
 ---
-title: "InvestLease : TMA Symfony 6.4 et Scoring Financier"
-projectDate: "2021-10-01"
-excerpt: "Tierce maintenance applicative plateforme financement : migration Symfony 6.4, intégration API scoring partenaires, génération PDF WebKit, tests automatisés et CI/CD."
+title: 'Tierce Maintenance Applicative'
+date: '2022-02-25'
 published: true
 ---
 
-## Évolutions Principales
+Maintenance applicative et ajout de fonctionnalités pour l'application de gestion de contrats de location.
 
-### Migration Symfony 5.4 → 6.4
-Migration vers version LTS avec support long terme. Modernisation base de code et bénéfice des améliorations performance Symfony 6.x.
+Fonctionnalités ajoutées :
 
-### Génération PDF WebKit
-Refonte complète système génération documents contractuels. Passage à moteur WebKit pour rendus HTML/CSS complexes : contrats, tableaux amortissement, conditions générales. Qualité professionnelle et templates maintenables.
+- Refonte du système de génération de documents PDF via webkit
+- Intégration d'API de scoring auprès de partenaires financiers
+- Intégration de relevés bancaires au format CFONB120
+- Maintenance applicative (correction de bugs, fonctionnalités sur mesure)
+- Préparation de l'outil pour passage en marque blanche
+- Mise en place de tests unitaires et fonctionnels
+- Mise en place d'outil d'audit des données
 
-### Intégration API Scoring Financier
-Connexion API partenaires financiers pour scoring crédit automatique. Évaluation en temps réel capacité emprunt candidats avec décision instantanée.
+Migrations techniques :
 
-### Traitement Relevés Bancaires CFONB120
-Intégration relevés bancaires format CFONB120 pour réconciliation automatique paiements et suivi échéances.
-
-### Tests et CI/CD
-- Mise en place tests unitaires et fonctionnels
-- Pipeline CI/CD automatisé (intégration et déploiement continu)
-- Outils audit données pour conformité réglementaire
-
-### Préparation Marque Blanche
-Architecture adaptée pour multi-tenancy : personnalisation identité visuelle, configuration métier par partenaire.
+- Migration de Symfony 5.4 à 6.4
+- Mise en place de CI et CD (intégration et déploiement continu)

@@ -1,38 +1,16 @@
 ---
-title: "PLM : Migration PHP 8.2 et Elasticsearch 7M Documents"
-projectDate: "2019-08-01"
-excerpt: "TMA plateforme PLM industrielle : migration PHP 5.6 vers 8.2, modernisation 10+ applications, Elasticsearch 7M documents, multilingue et synchronisation Active Directory."
+title: 'Tierce Maintenance Applicative'
+date: '2020-02-01'
 published: true
 ---
 
-## Modernisation Technique Massive
+Maintenance et modernisation de l'écosystème d'applications PLM pour la gestion du cycle de vie des produits aéronautiques.
 
-### Migration PHP 5.6 → 8.2
-**Migration critique** PHP 5.6 (EOL 2018) vers PHP 8.2. Modernisation complète :
-- Réécriture code legacy incompatible
-- Adoption syntaxes modernes (attributes, enums, readonly)
-- Performance JIT (+20-30% sur traitements lourds)
-- Sécurité renforcée (versions patchées)
+Fonctionnalités ajoutées :
 
-Opération critique pour **10+ applications** PHP interconnectées.
-
-### Modernisation Architecture
-Refactoring architectural 10 applications monolithiques. Séparation responsabilités, modularisation, patterns modernes (services, dependency injection).
-
-## Fonctionnalités Développées
-
-### Export Asynchrone Données
-Module export volumineux données produits. Traitement asynchrone via queues pour exports CAO, nomenclatures, specs techniques volumineuses. Génération en arrière-plan sans bloquer interface.
-
-### Elasticsearch 7 Millions Documents
-**Indexation massive** : +7 millions documents techniques dans Elasticsearch. Architecture distribuée pour :
-- Recherche full-text specs produits
-- Filtrage multi-critères (version, statut, responsable)
-- Performance sous 100ms sur corpus massif
-- Scalabilité horizontale (sharding)
-
-### Gestion Multilingue Produits
-Support international : descriptions produits, specs techniques, documentations en multiples langues. Workflow traduction intégré pour déploiements globaux.
-
-### Synchronisation Active Directory
-Outil synchronisation groupes IAM vers Active Directory Microsoft. Propagation permissions PLM vers infrastructure Windows automatisée. Cohérence droits accès.
+- Module d'export asynchrone de données
+- Migration du code PHP 5.6 vers 8.2
+- Modernisation de l'architecture de plus de 10 applications PHP
+- Mise en place d'Elasticsearch pour l'indexation de 7M+ documents
+- Gestion multi-langue des différents produits
+- Création d'un outil de synchronisation de groupes IAM vers Active Directory

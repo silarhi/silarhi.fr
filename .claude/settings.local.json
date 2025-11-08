@@ -11,7 +11,18 @@
       "Bash(yarn add:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(npx tailwindcss:*)"
+      "Bash(npx tailwindcss:*)",
+      "mcp__repomix__pack_codebase",
+      "mcp__repomix__grep_repomix_output",
+      "mcp__repomix__read_repomix_output",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "Bash(ls:*)",
+      "Bash(tree:*)",
+      "Bash(yarn prettier:*)",
+      "mcp__filesystem__write_file",
+      "Bash(yarn dev)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

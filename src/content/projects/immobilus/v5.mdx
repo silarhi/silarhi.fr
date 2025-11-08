@@ -1,48 +1,28 @@
 ---
-title: "Immobilus V5 : SEPA, Export Comptable et Intégration Dosloc"
-projectDate: "2022-07-26"
-excerpt: "Enrichissement plateforme immobilière : intégration API Dosloc, SEPA automatisé, exports comptables, Cerfa 10842, gestion litiges, alertes sociétés et OFX bancaire."
+title: 'V5'
+date: '2022-07-26'
 published: true
 ---
 
-## Intégrations Externes
+Intégration avec Dosloc, automatisation fiscale et extension des fonctionnalités de paiement.
 
-### API Dosloc
-Connexion bidirectionnelle avec Dosloc (plateforme dossiers locataires SILARHI). Synchronisation candidatures validées vers Immobilus, création automatique locations et locataires. Workflow complet candidature → bail.
+Fonctionnalités ajoutées :
 
-### Autocomplétion Adresses
-Intégration API adresses françaises pour saisie assistée. Validation temps réel et normalisation format postal.
+- Intégration API Dosloc
+- Autocomplétion des adresses postales
+- Améliorations de l'onboarding des locataires (message de bienvenue, informations de démarrage)
+- Mise en conformité RGPD sur la suppression et l'archivage d'informations
+- Relance par SMS
+- Intégration d'opérations bancaires au format OFX
+- Export d'écritures comptables
+- Auto génération de formulaires type Cerfa 10842\*06
+- Module de suivi de litige des locations
+- Module d'alerte en cas de changement d'informations des sociétés locataires
+- Intégration Solution SEPA
+- Génération automatique des quittances de loyer
+- Gestion des fichiers CAF (création d'une librairie de parsing de fichier CAF)
+- Module de site vitrine pour chaque bailleur
 
-### Import OFX Bancaire
-Support format OFX (Open Financial Exchange) pour import opérations bancaires. Complément EBICS pour banques sans protocole sécurisé.
+Mises à jour techniques :
 
-## Automatisations Comptables
-
-### Export Écritures Comptables
-Génération fichiers export compatibles logiciels comptables (FEC, CSV personnalisés). Bailleurs transmettent données directement à experts-comptables.
-
-### Solution SEPA
-Intégration paiements SEPA : génération fichiers virements XML conformes, prélèvements automatiques loyers. Automatisation complète flux bancaires sortants/entrants.
-
-### Génération Cerfa 10842*06
-Auto-génération formulaire fiscal Cerfa 10842 (déclaration revenus fonciers) pré-rempli selon données plateforme. Gain temps déclarations fiscales.
-
-### Quittances Automatiques
-Génération automatique quittances loyer mensuelles. Envoi email locataires sans intervention bailleur.
-
-## Fonctionnalités Métier
-
-### Onboarding Locataires
-Messages bienvenue automatisés nouveaux locataires avec informations démarrage (codes accès, contacts, règlement immeuble).
-
-### RGPD
-Mise en conformité : suppression et archivage automatisés données selon durées légales conservation. Droit à l'oubli respecté.
-
-### Relances SMS
-Extension relances avec canal SMS en complément email. Multi-canal augmente taux réponse.
-
-### Module Litiges
-Suivi contentieux locations : impayés, dégradations, procédures juridiques. Centralisation documents et échéances procédurales.
-
-### Alertes Sociétés
-Système surveillance modifications données sociétés locataires (changement dirigeants, adresse siège, radiation). Détection automatique via API entreprises.
+- Migration Symfony 6.0 à 6.4

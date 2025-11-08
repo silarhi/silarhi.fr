@@ -1,114 +1,38 @@
 ---
-title: "Module bancaire sur application de gestion de tutelle"
-slug: "accel-gerancia"
-projectDate: '2023-05-01'
-excerpt: "Maintenance applicative et développement module EBICS pour plateforme de gestion de tutelle : intégration bancaire sécurisée, Laravel, MongoDB, synchronisation automatique comptes."
-client: "accel-gerancia"
-technologies: ["php","laravel","mongodb","vuejs","ebics"]
+title: 'Module bancaire sur application de gestion de tutelle'
+slug: 'accel-gerancia'
+date: '2021-08-26'
+duration: '3 mois'
+excerpt: 'Intégration du module EBICS dans une plateforme de gestion de tutelle en Laravel : récupération des relevés bancaires et gestion sécurisée des virements.'
+client: 'accel-gerancia'
+technologies: ['php', 'laravel', 'ebics']
 published: true
-projectType: "recurring"
-category: "Gestion"
-duration: "Depuis 24 mois"
-image: "/images/projects/accel-gerancia-hero.jpg"
-overview: "Accel Gerancia est une application web de gestion de tutelle permettant aux mandataires judiciaires à la protection des majeurs de gérer leurs protégés et de centraliser l'accès à leurs comptes bancaires. Nous avons développé le module d'intégration bancaire EBICS et assurons la maintenance applicative continue de la plateforme."
-engagement:
-  type: "Partenariat continu"
-  description: "Collaboration à long terme avec développement de fonctionnalités stratégiques et support technique dédié pour la plateforme de gestion de tutelle"
-  ongoing:
-    - "Support technique dédié"
-    - "Évolutions fonctionnelles régulières"
-    - "Maintenance corrective et préventive"
-    - "Accompagnement technique"
+scope: 'feature_integration'
+codeOwnership: 'shared_codebase'
+category: 'Gestion'
+name: 'Accel Gerancia'
+image: '/images/projects/accel-gerancia-hero.png'
+url: 'https://app.accelgerancia-tutelle.fr'
+overview: "Accel Gerancia est une application web de gestion de tutelle permettant aux mandataires judiciaires à la protection des majeurs de gérer leurs protégés et de centraliser l'accès à leurs comptes bancaires. Nous avons développé une intégration bancaire EBICS pour automatiser la récupération des relevés bancaires et faciliter la gestion financière des majeurs protégés."
 challenge:
-  title: "Le Défi"
-  description: "Le développement du module EBICS présentait des défis spécifiques au secteur judiciaire et financier, nécessitant une sécurité absolue des données sensibles et une conformité stricte aux normes bancaires et réglementaires."
-  points:
-    - "Sécurité des données sensibles de personnes protégées"
-    - "Conformité réglementaire EBICS et RGPD"
-    - "Intégration avec multiples établissements bancaires"
-    - "Fiabilité critique sur les transactions financières"
-    - "Performance sur volumes importants de relevés"
+    description: 'Le développement du module EBICS présentait des défis spécifiques au secteur judiciaire et financier, nécessitant une sécurité absolue des données sensibles et une conformité stricte aux normes bancaires et réglementaires.'
+    points:
+        - 'Support de multiples établissements bancaires'
+        - 'Gestion de plusieurs versions EBICS'
+        - 'Récupération automatique des relevés bancaires'
+        - "Création et gestion d'ordres de virement sécurisés"
 solution:
-  title: "Notre Solution"
-  description: "Nous avons développé une intégration bancaire EBICS complète sur la plateforme Laravel existante, permettant la synchronisation automatique des comptes bancaires avec un niveau de sécurité et de fiabilité maximal."
-  points:
-    - "Support multi-banques avec connexion EBICS sécurisée"
-    - "Synchronisation quotidienne automatique des relevés"
-    - "Import et classification automatique des transactions"
-    - "Gestion sécurisée des certificats EBICS"
-    - "Réconciliation comptable automatisée"
-    - "Architecture Laravel robuste avec MongoDB"
+    description: 'Nous avons développé une intégration bancaire EBICS sur la plateforme Laravel existante, permettant la synchronisation automatique des comptes bancaires des majeurs protégés.'
+    points:
+        - 'Création de client EBICS avec support multi-banques'
+        - 'Module de gestion & paramétrage des versions EBICS (2.4, 2.5 et 3.0)'
+        - 'Synchronisation quotidienne automatique des relevés'
+        - 'Traitement asynchrone des transactions financières'
+engagement:
+    type: 'project_based'
+    description: "Intégration de fonctionnalités EBICS au sein de l'application."
+    deliverables:
+        - 'Module EBICS complet et intégré'
+        - 'Support technique après intégration'
+        - 'Maintenance corrective post-déploiement'
 ---
-
-## Contexte
-
-Accel Gerancia est une application web de gestion de tutelle permettant aux mandataires judiciaires à la protection des majeurs de gérer leurs protégés et de centraliser l'accès à leurs comptes bancaires et comptables dans un outil simple et intuitif.
-
-Nous sommes intervenus sur cette plateforme pour développer un module d'intégration bancaire EBICS et assurer la maintenance applicative durant la mission.
-
-## Défis : Sécurité et Conformité Bancaire
-
-Le développement du module EBICS présentait des défis spécifiques au secteur judiciaire et financier :
-
-- **Sécurité des données sensibles** : Gestion de comptes bancaires de personnes protégées nécessitant une confidentialité absolue
-- **Conformité réglementaire** : Respect des normes juridiques et bancaires (EBICS, RGPD)
-- **Intégration bancaire** : Connexion sécurisée avec multiples établissements bancaires
-- **Fiabilité** : Zéro erreur tolérée sur les transactions et données financières
-- **Performance** : Traitement de volumes importants de relevés et transactions
-
-## Notre Intervention : Développement Module EBICS
-
-Nous avons développé l'intégration bancaire EBICS sur la plateforme Laravel existante.
-
-### Module d'Intégration Bancaire EBICS
-
-Nous avons développé l'intégration du protocole EBICS :
-
-- **Connexion multi-banques** : Support de plusieurs établissements bancaires français
-- **Synchronisation automatique** : Récupération quotidienne des relevés de comptes
-- **Import de transactions** : Parsing et classification automatique des opérations bancaires
-- **Gestion des certificats** : Stockage sécurisé et renouvellement des certificats EBICS
-- **Reconciliation comptable** : Matching automatique entre transactions et écritures comptables
-
-Le protocole EBICS est la norme bancaire française pour les échanges dématérialisés sécurisés entre entreprises et banques.
-
-### Architecture Technique Laravel
-
-La plateforme repose sur Laravel avec une architecture adaptée aux contraintes métier :
-
-- **Backend robuste** : Laravel pour la logique métier et l'orchestration
-- **Base NoSQL** : MongoDB pour la flexibilité des structures de données
-- **Interface réactive** : Vue.js pour l'expérience utilisateur fluide
-- **Jobs asynchrones** : Queue Laravel pour les traitements bancaires lourds
-- **Chiffrement** : Données sensibles chiffrées au repos et en transit
-
-### Maintenance Durant la Mission
-
-Durant notre intervention, nous avons également assuré :
-
-- Correction de bugs liés à l'intégration EBICS
-- Optimisations de performance sur les requêtes MongoDB
-- Tests exhaustifs des flux bancaires
-- Support technique pour la mise en production
-- Documentation complète du module
-
-## Résultats et Impact
-
-Le module EBICS développé a apporté une valeur significative :
-
-- **Automatisation bancaire** : Synchronisation automatique des comptes via EBICS opérationnelle
-- **Gain de temps** : 80% de réduction du temps de saisie manuelle des transactions bancaires
-- **Support multi-formats** : Compatibilité EBICS 2.5, 3.0 et format CFONB120
-- **Sécurité** : Conformité totale aux normes bancaires et RGPD
-- **Virements planifiés** : Gestion complète des virements sortants via EBICS
-
-Le module EBICS est devenu une fonctionnalité clé différenciante de la plateforme Accel Gerancia.
-
-## Technologies Utilisées
-
-- Laravel - Framework PHP pour l'application web
-- PHP 8.1+ - Langage backend
-- MongoDB - Base de données NoSQL
-- Vue.js - Framework JavaScript frontend
-- EBICS - Protocole d'échange bancaire sécurisé
-- Redis - Cache et queue pour jobs asynchrones

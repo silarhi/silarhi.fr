@@ -1,34 +1,34 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
     /* 🎨 PRIMARY — Digital Confidence (Trust, Professionalism, Clarity) */
-    --color-primary: #2556cf;           /* Main brand blue — strong, confident, and modern */
-    --color-primary-light: #3B82F6;     /* Hover states, accents, icons */
-    --color-primary-dark: #1E40AF;      /* Deep blue for headers, hero sections, or dark modes */
+    --color-primary: #2556cf; /* Main brand blue — strong, confident, and modern */
+    --color-primary-light: #3b82f6; /* Hover states, accents, icons */
+    --color-primary-dark: #1e40af; /* Deep blue for headers, hero sections, or dark modes */
 
     /* 🟨 SECONDARY — Creative Energy (Optimism, Innovation, Dynamism) */
-    --color-secondary: #f7d325;         /* Bright yellow — warm accent for highlights and CTAs */
-    --color-secondary-light: #FDE68A;   /* Soft highlight backgrounds and subtle accents */
-    --color-secondary-dark: #CA8A04;    /* Rich golden tone for contrast or hover states */
+    --color-secondary: #f7d325; /* Bright yellow — warm accent for highlights and CTAs */
+    --color-secondary-light: #fde68a; /* Soft highlight backgrounds and subtle accents */
+    --color-secondary-dark: #ca8a04; /* Rich golden tone for contrast or hover states */
 
     /* ⚪ NEUTRALS — Elegant Foundations (Clean, Readable, Modern) */
-    --color-background: #f8f9fa;        /* Global background — bright and neutral */
-    --color-light: #f8f9fa;             /* Alternative light background (identical for consistency) */
-    --color-dark: #2b2b2a;              /* Dark gray for footers, headers, or dark mode */
-    --color-surface: #ffffff;           /* Surface color for cards, modals, and elevated sections */
+    --color-background: #f8f9fa; /* Global background — bright and neutral */
+    --color-light: #f8f9fa; /* Alternative light background (identical for consistency) */
+    --color-dark: #2b2b2a; /* Dark gray for footers, headers, or dark mode */
+    --color-surface: #ffffff; /* Surface color for cards, modals, and elevated sections */
+    --color-foreground: #111827; /* Default text color for high readability */
 
     /* 🖋️ TEXT — Hierarchy & Readability */
-    --color-text-primary: #111827;      /* Primary text — high contrast, used for titles and main content */
-    --color-muted: #6B7280;              /* Secondary text — medium contrast for subtitles and less prominent info */
+    --color-text-primary: #111827; /* Primary text — high contrast, used for titles and main content */
+    --color-muted: #6b7280; /* Secondary text — medium contrast for subtitles and less prominent info */
 
     /* 📏 STRUCTURE — Subtle Separators */
-    --color-border: #E5E7EB;            /* Light gray for borders, dividers, and input outlines */
+    --color-border: #e5e7eb; /* Light gray for borders, dividers, and input outlines */
 
     /* 🧩 STATUS — Feedback Colors */
-    --color-error: #DC2626;             /* Errors, invalid states, destructive actions */
-    --color-success: #16A34A;           /* Success messages, confirmations, positive states */
-    --color-warning: #F59E0B;           /* Warnings, non-critical alerts, attention cues */
-
+    --color-error: #dc2626; /* Errors, invalid states, destructive actions */
+    --color-success: #16a34a; /* Success messages, confirmations, positive states */
+    --color-warning: #f59e0b; /* Warnings, non-critical alerts, attention cues */
 
     --font-family-body: var(--body-font), sans-serif;
 
@@ -46,18 +46,17 @@
     --spacing-5xl: 10rem;
 
     /* 📐 MAX-WIDTH — Content width constraints */
-    --max-width-sm: 24rem;      /* 384px */
-    --max-width-md: 28rem;      /* 448px */
-    --max-width-lg: 32rem;      /* 512px */
-    --max-width-xl: 36rem;      /* 576px */
-    --max-width-2xl: 42rem;     /* 672px */
-    --max-width-3xl: 48rem;     /* 768px */
-    --max-width-4xl: 56rem;     /* 896px */
-    --max-width-5xl: 64rem;     /* 1024px */
-    --max-width-6xl: 72rem;     /* 1152px */
-    --max-width-7xl: 80rem;     /* 1280px */
+    --max-width-sm: 24rem; /* 384px */
+    --max-width-md: 28rem; /* 448px */
+    --max-width-lg: 32rem; /* 512px */
+    --max-width-xl: 36rem; /* 576px */
+    --max-width-2xl: 42rem; /* 672px */
+    --max-width-3xl: 48rem; /* 768px */
+    --max-width-4xl: 56rem; /* 896px */
+    --max-width-5xl: 64rem; /* 1024px */
+    --max-width-6xl: 72rem; /* 1152px */
+    --max-width-7xl: 80rem; /* 1280px */
 }
-
 
 @layer base {
     h1 {
@@ -95,11 +94,11 @@
 
 @layer utilities {
     .hide-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
     }
 
     .hide-scrollbar::-webkit-scrollbar {
-        display: none;  /* Chrome, Safari and Opera */
+        display: none; /* Chrome, Safari and Opera */
     }
 }

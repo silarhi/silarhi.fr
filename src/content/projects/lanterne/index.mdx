@@ -1,130 +1,36 @@
 ---
 title: "Application de veille politique et d'actualités parlementaires"
-slug: "lanterne"
-projectDate: '2022-11-01'
-excerpt: "Outil de veille politique développé en Symfony : agrégation automatique textes Assemblée/Sénat, analyse Twitter, moteur recherche Elasticsearch, classification thématique IA."
-client: "glucoz"
-technologies: ["symfony","php","elasticsearch","mysql","rabbitmq"]
+slug: 'lanterne'
+date: '2021-07-20'
+excerpt: "Développement d'un outil de veille politique en Symfony : agrégation automatique de textes de l'Assemblée Nationale, Sénat & Twitter, classification des documents par thématique."
+client: 'glucoz'
+technologies: ['symfony', 'php', 'elasticsearch', 'mysql', 'rabbitmq', 'jquery', 'bootstrap']
 published: true
-projectType: "one-shot"
-category: "Data & Analytics"
-duration: "5 mois"
-image: "/images/projects/lanterne-hero.jpg"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Data & Analytics'
+name: 'Lanterne'
 overview: "Nous avons mis au point un outil de veille politique basé sur l'agrégation des textes publiés par l'Assemblée nationale, le Sénat ainsi que sur les comptes Twitter des personnalités politiques françaises. La plateforme permet de consulter les dernières publications par thématiques et d'analyser les positions des acteurs politiques."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Développement complet d'une plateforme de veille politique avec agrégation multi-sources et recherche avancée"
-  deliverables:
-    - "Plateforme Symfony complète et opérationnelle"
-    - "Connecteurs Assemblée nationale et Sénat"
-    - "Monitoring Twitter personnalités politiques"
-    - "Moteur de recherche Elasticsearch configuré"
-    - "Système de classification automatique"
-    - "Workers RabbitMQ pour traitement asynchrone"
 challenge:
-  title: "Le Défi"
-  description: "Le développement présentait des défis techniques complexes : agréger et normaliser des données depuis des sources hétérogènes (textes parlementaires et réseaux sociaux), traiter des milliers de documents, et permettre des recherches performantes sur un corpus massif avec une classification automatique."
-  points:
-    - "Agrégation multi-sources hétérogènes (parlementaires + Twitter)"
-    - "Recherche full-text performante sur corpus massif"
-    - "Classification automatique par thématiques"
-    - "Analyse sémantique des positions politiques"
+    description: 'Le développement présentait des défis techniques complexes : agréger et normaliser des données depuis des sources hétérogènes (textes parlementaires et réseaux sociaux), traiter des milliers de documents, et permettre des recherches performantes sur un corpus massif avec une classification automatique.'
+    points:
+        - 'Agrégation multi-sources hétérogènes (parlementaires + Twitter)'
+        - 'Recherche full-text performante sur corpus massif'
+        - 'Classification automatique par thématiques'
+        - 'Analyse sémantique des positions politiques'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons conçu une architecture robuste combinant Symfony pour l'orchestration, RabbitMQ pour le traitement asynchrone et Elasticsearch pour la recherche performante avec agrégation automatique des sources politiques françaises."
-  points:
-    - "Connecteurs APIs Assemblée nationale et Sénat"
-    - "Workers RabbitMQ pour traitement distribué"
-    - "Elasticsearch pour recherche full-text et facettes"
-    - "Classification automatique par thématiques"
+    description: "Nous avons conçu une architecture robuste combinant Symfony pour l'orchestration, RabbitMQ pour le traitement asynchrone et Elasticsearch pour la recherche performante avec agrégation automatique des sources politiques françaises."
+    points:
+        - 'Connecteurs APIs Assemblée nationale et Sénat'
+        - 'Workers RabbitMQ pour traitement distribué'
+        - 'Elasticsearch pour recherche full-text et facettes'
+        - 'Gestion back-office des mots-clés & pondération par thématique'
+engagement:
+    type: 'project_based'
+    description: "Développement complet d'une plateforme de veille politique avec agrégation multi-sources et recherche avancée"
+    deliverables:
+        - 'Plateforme Symfony complète et opérationnelle'
+        - 'Ajout et mise à jour des documents publiés dans RabbitMQ'
+        - 'Indexation dans Elasticsearch'
+        - 'Système de classification automatique'
 ---
-
-## Contexte
-
-Lanterne est un outil de veille politique que nous avons développé, basé sur l'agrégation des textes publiés par l'Assemblée nationale, le Sénat ainsi que sur les comptes Twitter des personnalités politiques françaises.
-
-La plateforme permet de consulter les dernières publications sur de grandes thématiques (sécurité, éducation, santé, etc.), de voir les acteurs politiques impliqués sur ces sujets ainsi que leurs positions publiques.
-
-## Défi : Agréger et Analyser des Sources Hétérogènes
-
-Le développement de Lanterne présentait des défis techniques complexes :
-
-- **Agrégation multi-sources** : Collecter et normaliser des données depuis APIs parlementaires et réseaux sociaux
-- **Volume de données** : Traiter des milliers de documents quotidiennement (amendements, propositions de loi, tweets)
-- **Recherche performante** : Permettre des recherches full-text rapides sur un corpus massif
-- **Classification automatique** : Catégoriser automatiquement les contenus par thématiques
-- **Analyse sémantique** : Identifier les positions politiques et tendances par sujet
-- **Temps réel** : Mise à jour continue des flux d'information politique
-
-## Notre Solution : Architecture Symfony avec Elasticsearch
-
-Nous avons conçu une architecture robuste combinant Symfony pour l'orchestration et Elasticsearch pour la recherche.
-
-### Système d'Agrégation de Données
-
-Le cœur de Lanterne est son moteur d'agrégation :
-
-- **Connecteurs parlementaires** : APIs Assemblée nationale et Sénat pour récupérer textes législatifs
-- **Monitoring Twitter** : Collecte des tweets de plusieurs centaines de personnalités politiques
-- **Parsing intelligent** : Extraction et normalisation des métadonnées (auteur, date, thématique)
-- **Détection de doublons** : Algorithmes pour éviter les contenus redondants
-- **Enrichissement** : Ajout de contexte et de liens entre documents
-
-### Architecture de Traitement Asynchrone
-
-Pour gérer le volume de données, nous utilisons RabbitMQ :
-
-- **Workers distribués** : Traitement parallèle des documents via files de messages
-- **Jobs planifiés** : Synchronisation automatique quotidienne des sources
-- **Retry automatique** : Gestion des échecs temporaires de récupération
-- **Priorisation** : Traitement prioritaire des contenus récents ou importants
-
-### Moteur de Recherche Elasticsearch
-
-Elasticsearch propulse les fonctionnalités de recherche avancées :
-
-- **Recherche full-text** : Recherche textuelle rapide sur l'intégralité du corpus
-- **Facettes dynamiques** : Filtrage par thématique, auteur, date, institution
-- **Suggestions** : Auto-complétion et suggestions de recherche
-- **Pertinence** : Scoring personnalisé privilégiant les contenus récents et pertinents
-- **Agrégations** : Statistiques et analyses de tendances thématiques
-
-### Classification Thématique
-
-La classification automatique repose sur :
-
-- **Machine Learning** : Modèles entraînés sur corpus politique français
-- **Mots-clés thématiques** : Dictionnaires spécialisés par domaine (santé, éducation, etc.)
-- **Validation manuelle** : Interface d'administration pour affiner les classifications
-- **Apprentissage continu** : Amélioration progressive des modèles
-
-### Stack Technique Symfony
-
-La plateforme est développée en Symfony avec :
-
-- **Backend robuste** : Architecture hexagonale pour séparation des responsabilités
-- **Base de données MySQL** : Métadonnées structurées (acteurs politiques, institutions)
-- **API REST** : Endpoints pour consommation par applications tierces
-- **Interface d'administration** : Gestion des sources, thématiques et modération
-- **Monitoring** : Supervision des flux et alertes en cas d'anomalie
-
-## Résultats et Impact
-
-Lanterne offre une vision complète de l'actualité politique française :
-
-- **Couverture exhaustive** : Plusieurs milliers de documents politiques indexés et consultables
-- **Recherche rapide** : Temps de réponse < 100ms grâce à Elasticsearch
-- **Actualisation continue** : Nouveaux contenus disponibles en temps quasi-réel
-- **Analyse transversale** : Vision claire des positions des acteurs politiques par thématique
-- **Accessible** : Interface intuitive pour journalistes, chercheurs et citoyens
-
-La plateforme est devenue un outil de référence pour l'analyse de l'activité parlementaire et du débat politique français.
-
-## Technologies Utilisées
-
-- Symfony 5.4+ - Framework PHP orchestration
-- PHP 8.1 - Langage backend
-- Elasticsearch - Moteur de recherche full-text
-- RabbitMQ - File de messages asynchrone
-- MySQL - Base de données relationnelle
-- Docker - Conteneurisation des services

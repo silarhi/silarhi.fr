@@ -5,8 +5,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { CSSProperties, useEffect, useRef, useState } from 'react'
 
+import { montserrat } from '@/app/fonts'
 import ActiveLink from '@/components/active-link'
 import Button from '@/components/button'
+import { MenuToggle } from '@/components/icons'
 import logo from '@/public/images/logo-4096.png'
 import { cn } from '@/utils/lib'
 
@@ -22,10 +24,7 @@ interface NavbarProps {
     floatingClass?: string
 }
 
-export default function Navbar({
-    initialClass = 'text-surface bg-transparent',
-    floatingClass = 'text-surface bg-dark',
-}: NavbarProps) {
+export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
     const ref = useRef<HTMLElement>(null)
     const [floating, setFloating] = useState<boolean>(false)
     const [floatingStyle, setFloatingStyle] = useState<CSSProperties>({})
@@ -33,6 +32,7 @@ export default function Navbar({
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
 
     const pathname = usePathname()
+    const isHomePage = pathname === '/'
 
     useEffect(() => {
         if (ref.current) {
@@ -95,6 +95,16 @@ export default function Navbar({
 
     const isMainPage = pathname === '/' || pathname.startsWith('/#')
 
+    // Get the correct href for menu items based on current page
+    const getMenuItemHref = (item: MenuItem) => {
+        // If on homepage, use indexPath if available (hash-only), otherwise use full path
+        if (isMainPage && item.indexPath) {
+            return item.indexPath
+        }
+        // If not on homepage, always use full path (with /) to navigate back to homepage
+        return item.path
+    }
+
     return (
         <>
             <nav
@@ -103,8 +113,13 @@ export default function Navbar({
                     'absolute top-0 right-0 left-0 z-50 transition-opacity',
                     {
                         fixed: floating,
+                        'text-surface': floating || (isHomePage && !floating),
+                        'text-dark': !floating && !isHomePage,
+                        'bg-dark': floating,
+                        'bg-transparent': !floating,
                     },
-                    floating ? floatingClass : initialClass
+                    initialClass && !floating && initialClass,
+                    floatingClass && floating && floatingClass
                 )}
                 style={floatingStyle}
                 ref={ref}
@@ -119,11 +134,12 @@ export default function Navbar({
                                 src={logo}
                                 alt="SILARHI"
                                 height={60}
+                                priority={true}
                                 className={cn('h-14 w-auto', {
                                     'max-h-10': floating,
                                 })}
                             />
-                            <span className="text-xl">SILARHI</span>
+                            <span className={cn('text-xl', montserrat.className)}>SILARHI</span>
                         </Link>
 
                         {/* Mobile menu button */}
@@ -132,14 +148,7 @@ export default function Navbar({
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Toggle menu"
                         >
-                            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d={mobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-                                />
-                            </svg>
+                            <MenuToggle className="h-6 w-6" open={mobileMenuOpen} />
                         </button>
 
                         {/* Desktop menu */}
@@ -147,7 +156,7 @@ export default function Navbar({
                             {menuItems.map((item, i) => (
                                 <li key={i}>
                                     <ActiveLink
-                                        href={isMainPage ? item.path : (item.indexPath ?? item.path)}
+                                        href={getMenuItemHref(item)}
                                         className="hover:text-secondary text-inherit transition-colors duration-300 hover:no-underline"
                                         target={item.target}
                                         activeClassName="text-secondary"
@@ -188,7 +197,7 @@ export default function Navbar({
                             {menuItems.map((item, i) => (
                                 <li key={i}>
                                     <ActiveLink
-                                        href={isMainPage ? item.path : (item.indexPath ?? item.path)}
+                                        href={getMenuItemHref(item)}
                                         className="block rounded px-4 py-3 text-inherit transition-colors"
                                         activeClassName="bg-primary-light text-surface"
                                         target={item.target}

@@ -1,7 +1,8 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState, useTransition } from 'react'
+import Form from 'next/form'
+import { useSearchParams } from 'next/navigation'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import SearchInput from './search-input'
@@ -12,29 +13,41 @@ interface SearchFormProps {
 }
 
 export default function SearchForm({ baseUrl, className }: SearchFormProps) {
-    const router = useRouter()
     const searchParams = useSearchParams()
-    const [isPending, startTransition] = useTransition()
     const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
     const [debouncedSearchQuery] = useDebounce(searchQuery, 300)
+    const formRef = useRef<HTMLFormElement>(null)
 
+    // Enhanced UX: auto-submit form on debounced input
     useEffect(() => {
-        startTransition(() => {
-            const params = new URLSearchParams()
-            if (debouncedSearchQuery) {
-                params.set('search', debouncedSearchQuery)
-            }
-            // Reset to page 1 when searching
-            params.set('page', '1')
+        const currentSearch = searchParams.get('search') || ''
 
-            const newUrl = debouncedSearchQuery ? `${baseUrl}?${params.toString()}` : baseUrl
-            router.push(newUrl)
-        })
-    }, [debouncedSearchQuery, baseUrl, router])
+        // Only auto-submit if search query changed
+        if (currentSearch === debouncedSearchQuery) {
+            return
+        }
+
+        // Trigger form submission programmatically
+        if (formRef.current) {
+            // Use requestSubmit for proper form validation and event handling
+            formRef.current.requestSubmit()
+        }
+    }, [debouncedSearchQuery, searchParams])
 
     const handleSearchChange = (value: string) => {
         setSearchQuery(value)
     }
 
-    return <SearchInput value={searchQuery} onChange={handleSearchChange} className={className} isLoading={isPending} />
+    return (
+        <Form
+            ref={formRef}
+            action={baseUrl}
+            role="search"
+            aria-label="Rechercher des projets"
+            className={className}
+            replace={true}
+        >
+            <SearchInput name="search" value={searchQuery} onChange={handleSearchChange} />
+        </Form>
+    )
 }

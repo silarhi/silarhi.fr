@@ -1,120 +1,40 @@
 ---
-title: "Outil de suivi des formations collaborateurs"
-slug: "eleo-training"
-projectDate: '2023-04-01'
-excerpt: "Mission technique sur plateforme formation ETI : refonte architecture Symfony, migration Kubernetes, optimisation performance, intégration temps réel Mercure, support React."
-client: "noous"
-technologies: ["php","symfony","k8s","react","mercure","docker","mysql"]
+title: 'Outil de suivi des formations collaborateurs'
+slug: 'eleo-training'
+date: '2022-05-01'
+excerpt: 'Mission technique sur plateforme formation ETI : refonte architecture Symfony, migration Kubernetes, optimisation performance, intégration temps réel Mercure, support React.'
+client: 'noous'
+technologies: ['php', 'symfony', 'api-platform', 'aws', 'tailwind', 'react', 'mercure', 'docker', 'mysql', 'rabbitmq']
 published: true
-projectType: "recurring"
-category: "Gestion"
-duration: "3 mois"
-image: "/images/projects/eleo-training-hero.jpg"
-overview: "Eleo est un outil de gestion dédié aux ETI et grands groupes pour structurer et suivre efficacement le parcours de formation et habilitations de leur collaborateur. Nous sommes intervenus pour apporter de nouvelles fonctionnalités."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Mission technique de modernisation architecture avec migration Kubernetes et optimisations performance"
-  deliverables:
-    - "Architecture Symfony modernisée et optimisée"
-    - "Migration complète vers Kubernetes"
-    - "Intégration Mercure pour temps réel"
-    - "Pipeline CI/CD automatisé"
-    - "Documentation technique complète"
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Gestion'
+name: 'Eleo Training'
+image: '/images/projects/eleo-hero.png'
+overview: "Eleo est un outil de gestion dédié aux ETI et grands groupes pour structurer et suivre efficacement le parcours de formation et habilitations de leur collaborateur. Nous sommes intervenus pour rejoindre l'équipe technique en place et apporter notre expertise sur l'architecture de l'outil, la correction de bugs et le développement de nouvelles fonctionnalités."
 challenge:
-  title: "Le Défi"
-  description: "La mission présentait des défis techniques importants : intégrer une architecture compexe, apporter des évolutions performantes et gérer plusieurs versions différentes en production."
-  points:
-    - "Scalabilité pour grands comptes et milliers d'utilisateurs"
-    - "Amélioration significative des temps de réponse"
-    - "Modernisation vers architecture cloud-native"
-    - "Notifications temps réel pour suivi formations"
-    - "Faciliter déploiements et gestion plateforme"
+    description: 'La mission présentait des défis techniques importants : intégrer une architecture complexe, apporter des évolutions performantes et gérer plusieurs versions différentes en production en parallèle.'
+    points:
+        - "Scalabilité pour grands comptes et milliers d'utilisateurs"
+        - 'Gestion de déploiements multi-versions & multi-environnements (Kubernetes, Docker)'
+        - 'Optimisation performance base de données MySQL'
+        - 'Intégration notifications temps réel avec Mercure'
+        - 'Gestion des traductions personnalisées par client'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons travaillé sur plusieurs axes techniques :  et intégration Mercure pour notifications temps réel."
-  points:
-    - "Optimisation base de données et indexation"
-    - "Migration Kubernetes avec auto-scaling"
-    - "Intégration Mercure pour actualisation temps réel"
-    - "Pipeline CI/CD amélioré pour déploiements automatisés"
+    description: 'Nous avons travaillé sur plusieurs axes techniques :  et intégration Mercure pour notifications temps réel.'
+    points:
+        - 'Intégration de fonctionnalités avancées dans architecture Symfony'
+        - 'Pipeline CI/CD amélioré pour déploiements automatisés'
+        - 'Optimisation des exports de données et batch loading MySQL'
+        - 'Utilisation de Mercure pour synchronisation du state React en temps réel'
+        - 'Mise à jour multi-pods des traductions Symfony'
+engagement:
+    type: 'continuous_support'
+    description: "Assistance technique continue avec interventions régulières sur l'outil Eleo."
+    deliverables:
+        - 'Architecture Symfony modernisée et optimisée'
+        - 'Migration complète vers Kubernetes'
+        - 'Intégration Mercure pour temps réel'
+        - 'Pipeline CI/CD automatisé'
+        - 'Documentation technique complète'
 ---
-
-## Contexte
-
-[Eleo](https://www.eleo.io/) est un outil de gestion dédié aux ETI et grands groupes qui souhaitent structurer et suivre efficacement leurs parcours de formation et leurs habilitations.
-
-Nous sommes intervenus durant une mission technique pour moderniser l'architecture et optimiser les performances de la plateforme.
-
-## Défi : Moderniser une Plateforme Enterprise
-
-La mission présentait des défis techniques importants :
-
-- **Scalabilité** : Supporter la croissance des grands comptes avec des milliers d'utilisateurs
-- **Performance** : Améliorer les temps de réponse pour une meilleure expérience utilisateur
-- **Architecture** : Moderniser l'infrastructure vers une approche cloud-native
-- **Temps réel** : Implémenter des notifications instantanées pour le suivi des formations
-- **Maintenance** : Faciliter les déploiements et la gestion de la plateforme
-
-## Notre Intervention : Refonte Architecture et Performance
-
-Nous avons travaillé sur plusieurs axes techniques pour moderniser la plateforme Symfony.
-
-### Refonte Architecture Backend
-
-Nos interventions sur le backend ont inclus :
-
-- **Restructuration Symfony** : Amélioration de l'architecture applicative pour meilleure maintenabilité
-- **Optimisation base de données** : Refactoring des requêtes et indexation pour performance
-- **API modernisée** : Amélioration des endpoints existants et nouveaux services REST
-- **Code review** : Revue approfondie et nettoyage du code legacy
-- **Tests unitaires** : Ajout de coverage pour sécuriser les évolutions
-
-### Migration Kubernetes
-
-Nous avons orchestré la migration vers Kubernetes :
-
-- **Conteneurisation** : Dockerisation complète des services applicatifs
-- **Configuration K8s** : Mise en place des deployments, services, ingress
-- **Auto-scaling** : Configuration d'échelle automatique selon la charge
-- **Monitoring** : Intégration d'outils de supervision (logs, métriques)
-- **CI/CD** : Pipeline automatisé pour déploiements Kubernetes
-
-### Intégration Mercure pour Temps Réel
-
-Nous avons implémenté Mercure pour les notifications temps réel :
-
-- **Server-Sent Events** : Push de notifications instantanées vers les clients
-- **Suivi formations** : Notifications en temps réel des progressions et validations
-- **Alertes habilitations** : Rappels automatiques pour renouvellements
-- **Architecture événementielle** : Découplage via événements Symfony et Mercure
-
-### Support Frontend React
-
-Nos interventions sur le frontend React :
-
-- **Optimisations composants** : Amélioration des performances de rendu
-- **Intégration Mercure** : Connexion au hub pour notifications temps réel
-- **Corrections bugs** : Résolution de problèmes UX signalés
-- **Améliorations interface** : Ajustements d'ergonomie
-
-## Résultats et Impact
-
-Notre mission a apporté des améliorations significatives :
-
-- **Performance** : Temps de réponse API réduits de 40% grâce aux optimisations
-- **Scalabilité** : Infrastructure K8s prête pour croissance exponentielle
-- **Temps réel** : Notifications instantanées améliorant l'engagement utilisateurs
-- **Déploiements** : CI/CD automatisé réduisant les mises en production de 2h à 15min
-- **Maintenabilité** : Code restructuré facilitant les évolutions futures
-
-La plateforme Eleo dispose désormais d'une architecture moderne capable de supporter sa croissance.
-
-## Technologies Utilisées
-
-- Symfony 6.x - Framework PHP backend
-- PHP 8.1 - Langage backend
-- Kubernetes - Orchestration de containers
-- React - Framework JavaScript frontend
-- Mercure - Protocole temps réel Server-Sent Events
-- Docker - Conteneurisation
-- PostgreSQL - Base de données

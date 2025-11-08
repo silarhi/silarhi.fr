@@ -1,27 +1,22 @@
 ---
-title: "Immobilus V6 : Gestion Locative Avancée et Stockage Cloud"
-projectDate: "2025-06-01"
-excerpt: "Plateforme SaaS de gestion immobilière : module facturation, archivage locations, rapprochement bancaire intelligent, grilles vétusté et migration stockage AWS S3."
+title: 'V6'
+date: '2025-06-24'
 published: true
 ---
 
-## Modules Métier Développés
+Gestion avancée des remises, facturation et amélioration majeure du rapprochement bancaire.
 
-### Gestion Financière
-Module **remises exceptionnelles** : franchises loyer temporaires, remises commerciales, gestes exceptionnels tracés automatiquement dans comptabilité et quittances.
+Fonctionnalités ajoutées :
 
-Module **facturation** : prestations annexes (travaux, services) avec génération factures conformes et suivi paiements.
+- Gestion de remises exceptionnelles (franchise de loyer, remise de loyer)
+- Mise en place de l'archivage de locations
+- Améliorations sur l'outil de rapprochement bancaires (Éclatement en sous-opérations, auto-affectation de sous-opérations)
+- Gestion du changement de périodicité des loyers en cours de location
+- Prise en charge des observatoires de loyer pour envoi automatique de données
+- Gestion de la vente des baux en cours de location
+- Module de grilles de vétusté
+- Module de facturation
 
-**Changement périodicité loyers** en cours : automatisation calculs prorata lors passage mensuel ↔ trimestriel.
+Mises à jour techniques :
 
-### Rapprochement Bancaire Intelligent
-Amélioration majeure introduisant **éclatement sous-opérations** : affectation une opération bancaire à plusieurs loyers/charges. **Auto-affectation intelligente** analysant historique proposant affectations probables (réduction 70% travail manuel).
-
-### Conformité et Archivage
-- **Archivage locations** : conservation légale documents (3 ans minimum)
-- **Observatoires loyers** : envoi automatique données aux organismes publics (zones tendues)
-- **Vente baux** : transferts propriété automatisés avec reprise locataires, prorata et documents juridiques
-- **Grilles vétusté** : conformité normes légales calcul retenues dépôt garantie
-
-### Migration Cloud AWS S3
-Migration stockage local → AWS S3 sécurisant documents plateforme (baux, quittances, états lieux). Redondance géographique, sauvegardes automatiques, scalabilité illimitée.
+- Passage du stockage des fichiers via S3

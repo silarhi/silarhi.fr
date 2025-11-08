@@ -1,4 +1,5 @@
 import Skeleton from '@/components/skeleton'
+import { cn } from '@/utils/lib'
 
 interface ProjectListSkeletonProps {
     count?: number
@@ -10,46 +11,50 @@ export default function ProjectListSkeleton({ count = 3 }: ProjectListSkeletonPr
             {Array.from({ length: count }).map((_, index) => (
                 <article
                     key={index}
-                    className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-16 ${
-                        index % 2 === 1 ? 'lg:grid-flow-dense' : ''
-                    }`}
+                    className={cn('grid items-center gap-8 lg:grid-cols-2 lg:gap-16', {
+                        'lg:grid-flow-dense': index % 2 === 1,
+                    })}
                 >
                     {/* Image skeleton */}
                     <div
-                        className={`bg-muted relative aspect-[4/3] overflow-hidden rounded-2xl ${
-                            index % 2 === 1 ? 'lg:col-start-2' : ''
-                        }`}
+                        className={cn(
+                            'bg-muted/10 relative flex h-full items-center justify-center overflow-hidden rounded-2xl p-2 lg:p-4',
+                            {
+                                'lg:col-start-2': index % 2 === 1,
+                            }
+                        )}
                     >
                         <Skeleton className="h-full w-full" />
+
+                        {/* Project scope badge on image */}
+                        <div className="absolute top-4 right-4">
+                            <Skeleton className="h-6 w-32 rounded-full" />
+                        </div>
                     </div>
 
                     {/* Content skeleton */}
-                    <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                        {/* Category badge */}
-                        <Skeleton className="mb-4 h-6 w-24 rounded-full" />
+                    <div
+                        className={cn({
+                            'lg:col-start-1 lg:row-start-1': index % 2 === 1,
+                        })}
+                    >
+                        {/* Badges (category + sector) */}
+                        <div className="mb-4 flex gap-2">
+                            <Skeleton className="h-6 w-24 rounded-full" />
+                            <Skeleton className="h-6 w-20 rounded-full" />
+                        </div>
 
                         {/* Title */}
-                        <Skeleton className="mb-3 h-10 w-3/4" />
+                        <Skeleton className="mb-3 h-8 w-3/4" />
+                        <Skeleton className="mb-3 h-8 w-3/4" />
 
                         {/* Client name */}
                         <Skeleton className="mb-6 h-4 w-32" />
 
-                        {/* Excerpt - 3 lines */}
-                        <div className="mb-8 space-y-2">
-                            <Skeleton className="h-5 w-full" />
-                            <Skeleton className="h-5 w-full" />
-                            <Skeleton className="h-5 w-4/5" />
-                        </div>
-
-                        {/* Key points box */}
-                        <div className="border-border bg-surface mb-8 rounded-xl border p-6">
-                            <Skeleton className="mb-4 h-4 w-24" />
-                            <div className="space-y-3">
-                                <Skeleton className="h-4 w-full" />
-                                <Skeleton className="h-4 w-5/6" />
-                                <Skeleton className="h-4 w-4/5" />
-                            </div>
-                        </div>
+                        {/* Excerpt */}
+                        <Skeleton className="mb-2 h-5 w-full" />
+                        <Skeleton className="mb-2 h-5 w-full" />
+                        <Skeleton className="mb-8 h-5 w-full" />
 
                         {/* Technology tags */}
                         <div className="mb-6 flex flex-wrap gap-2">

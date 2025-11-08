@@ -1,18 +1,15 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import { StaticImageData } from 'next/image'
 import path from 'path'
-
-import { getOptimizedImage } from '@/lib/images'
 
 const clientsDirectory = path.join(process.cwd(), 'src/content/clients')
 
 export interface ClientMetadata {
     slug: string
     name: string
-    logo?: string | StaticImageData
+    logo?: string
     logoClassName?: string
-    sector?: string
+    sector: string
     description?: string
     challenges?: string
     content: string
@@ -22,7 +19,7 @@ interface ClientFrontMatter {
     name: string
     slug: string
     logo?: string
-    sector?: string
+    sector: string
     description?: string
     challenges?: string
 }
@@ -35,7 +32,7 @@ function ensureClientDirectory() {
 }
 
 // Get all client slugs
-export function getAllClientSlugs(): string[] {
+function getAllClientSlugs(): string[] {
     ensureClientDirectory()
     if (!fs.existsSync(clientsDirectory)) {
         return []
@@ -62,7 +59,7 @@ export async function getClientBySlug(slug: string): Promise<ClientMetadata | nu
     return {
         slug,
         name: frontMatter.name,
-        logo: await getOptimizedImage(frontMatter.logo),
+        logo: frontMatter.logo,
         sector: frontMatter.sector,
         description: frontMatter.description,
         challenges: frontMatter.challenges,

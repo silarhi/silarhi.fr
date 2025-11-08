@@ -1,31 +1,21 @@
 ---
-title: "Immobilus V2 : Migration Symfony 5.4 et API INSEE"
-projectDate: "2020-10-02"
-excerpt: "Évolution gestion locative : migration Symfony 5.4, double authentification, prorata loyers, dépôt garantie, relances automatiques et intégration API INSEE indices."
+title: 'V2'
+date: '2020-10-02'
 published: true
 ---
 
-## Évolutions Techniques
+Ajout de fonctionnalités de sécurité et de gestion avancée des loyers.
 
-### Migration Symfony 4.3 → 5.4
-La montée de version vers Symfony 5.4 LTS apporte stabilité long terme, performances améliorées et compatibilité PHP 8.x. Migration complète de FOSUserBundle vers le nouveau système d'authentification Symfony natif, plus moderne et maintenable.
+Fonctionnalités ajoutées :
 
-### Double Authentification (2FA)
-Renforcement de la sécurité avec authentification à deux facteurs pour tous les comptes. Protection accrue des données sensibles (informations locataires, transactions financières).
+- Double authentification
+- Gestion des prorata de loyers (locataire arrivé ou parti en cours de mois)
+- Gestion du dépôt de garantie
+- Mise en place de relances automatiques
+- Récupération des indices de loyer via API INSEE
+- Moteur de recherche globale
 
-## Fonctionnalités Métier
+Mise à jour technique :
 
-### Prorata et Loyers
-Calcul automatisé des loyers au prorata lors d'entrées ou sorties en cours de mois. Le système détermine le nombre de jours d'occupation et ajuste la facturation automatiquement.
-
-### Dépôt de Garantie
-Gestion complète du cycle de vie des dépôts : encaissement à l'entrée, conservation pendant la location, calcul retenues pour dégradations, restitution partielle ou totale en fin de bail.
-
-### Relances Automatiques
-Envoi programmé de relances aux locataires en cas d'impayé. Système configurable avec paliers d'escalade (rappel amiable, mise en demeure, transmission au contentieux).
-
-### Intégration API INSEE
-Récupération automatique des indices de révision des loyers (IRL, ICC) via l'API officielle INSEE. Application automatique des révisions annuelles selon les indices légaux, garantissant conformité réglementaire.
-
-### Recherche Globale
-Moteur de recherche unifié permettant de trouver rapidement locataires, biens, paiements ou documents à travers toute la plateforme.
+- Migration FOSUserBundle
+- Migration Symfony 4.3 vers 5.4

@@ -1,133 +1,39 @@
 ---
-title: "Formation pour protocole bancaire EBICS"
-slug: "consulting-ebics"
-projectDate: '2022-08-01'
-excerpt: "Mission consulting formation protocole EBICS : explication standard bancaire français, implémentation PHP, sécurité certificats, intégration APIs banques, cas pratiques."
-client: "cube43"
-technologies: ["php","ebics"]
+title: 'Formation pour protocole bancaire EBICS'
+slug: 'consulting-ebics'
+date: '2020-05-06'
+excerpt: 'Mission de consulting pour formation protocole EBICS : Explication standard bancaire français, implémentation PHP, sécurité des certificats, cas pratiques.'
+client: 'cube43'
+technologies: ['php', 'ebics']
 published: true
-projectType: "one-shot"
-category: "Consulting & Formation"
-duration: "1 semaine"
-image: "/images/projects/consulting-ebics-hero.jpg"
-overview: "Nous avons réalisé une mission de consulting et de formation sur le fonctionnement du protocole EBICS, son implémentation et sa mise en place en PHP. Formation théorique et pratique couvrant sécurité cryptographique, normes bancaires et intégration."
-engagement:
-  type: "Mission ponctuelle"
-  description: "Formation approfondie sur le protocole EBICS avec théorie, pratique et cas d'usage réels"
-  deliverables:
-    - "Formation complète théorique et pratique dispensée"
-    - "Documentation pédagogique remise"
-    - "Exemples de code PHP fonctionnels"
-    - "Cas pratiques d'intégration bancaire"
-    - "Support post-formation pour questions"
+scope: 'maintenance_and_support'
+codeOwnership: 'shared_codebase'
+category: 'Consulting & Formation'
+image: '/images/projects/cube43-hero.png'
+overview: 'Nous avons réalisé une mission de consulting et de formation sur le fonctionnement du protocole EBICS, son implémentation et sa mise en place en PHP. Formation théorique et pratique couvrant sécurité cryptographique, normes bancaires et intégration.'
 challenge:
-  title: "Le Défi"
-  description: "La formation sur EBICS présentait des défis pédagogiques spécifiques : rendre accessible un protocole bancaire technique complexe, expliquer les mécanismes cryptographiques, et permettre le passage rapide de la théorie à l'implémentation pratique en PHP."
-  points:
-    - "Protocole bancaire français technique et exigeant"
-    - "Compréhension des mécanismes cryptographiques"
-    - "Respect strict des spécifications EBICS 2.5 et 3.0"
-    - "Passage de la théorie au code fonctionnel"
-    - "Application concrète aux besoins métier réels"
+    description: "La formation sur EBICS présentait des défis pédagogiques spécifiques : rendre accessible un protocole bancaire technique complexe, expliquer les mécanismes cryptographiques, et permettre le passage rapide de la théorie à l'implémentation pratique en PHP."
+    points:
+        - 'Protocole bancaire EBICS technique et parfois obscur'
+        - 'Compréhension des mécanismes cryptographiques'
+        - 'Respect des spécifications EBICS 2.5 et 3.0'
+        - 'Passage de la théorie au code fonctionnel'
+        - 'Application concrète aux besoins métier réels'
 solution:
-  title: "Notre Solution"
-  description: "Nous avons dispensé une formation couvrant théorie et pratique du protocole EBICS, avec modules dédiés à la compréhension du protocole, la sécurité cryptographique et l'implémentation concrète en PHP."
-  points:
-    - "Module théorique : architecture et fonctionnement EBICS"
-    - "Module sécurité : certificats, signatures et chiffrement"
-    - "Module pratique : implémentation PHP avec bibliothèques"
-    - "Cas pratiques : virements SEPA et récupération relevés"
-    - "Documentation pédagogique complète"
-    - "Support post-formation pour accompagnement"
+    description: "Nous avons dispensé une formation couvrant théorie et pratique du protocole EBICS, avec modules dédiés à la compréhension du protocole, la sécurité cryptographique et l'implémentation concrète en PHP."
+    points:
+        - 'Module théorique : architecture et fonctionnement EBICS'
+        - 'Module sécurité : certificats, signatures et chiffrement'
+        - 'Module pratique : implémentation PHP avec bibliothèques'
+        - 'Cas pratiques : virements SEPA et récupération relevés'
+        - 'Support post-formation pour accompagnement'
+engagement:
+    type: 'consulting'
+    description: "Formation sur le protocole EBICS avec théorie, pratique et cas d'usage réels"
+    deliverables:
+        - 'Formation complète théorique et pratique dispensée'
+        - 'Documentation pédagogique remise'
+        - 'Exemples de code PHP fonctionnels'
+        - "Cas pratiques d'intégration bancaire"
+        - 'Support post-formation pour questions'
 ---
-
-## Contexte
-
-Nous avons réalisé une mission de consulting et formation sur le fonctionnement du protocole EBICS, son implémentation et sa mise en place en PHP.
-
-## Défi : Maîtriser un Protocole Bancaire Complexe
-
-La formation sur EBICS présente des défis pédagogiques spécifiques :
-
-- **Protocole complexe** : Standard bancaire français technique et exigeant
-- **Sécurité cryptographique** : Compréhension des mécanismes de chiffrement et certificats
-- **Normes bancaires** : Respect strict des spécifications EBICS 2.5 et 3.0
-- **Implémentation pratique** : Passage de la théorie au code fonctionnel
-- **Cas d'usage réels** : Application concrète aux besoins métier
-- **Documentation technique** : Specs bancaires denses à rendre accessibles
-
-## Notre Intervention : Formation Complète EBICS
-
-Nous avons dispensé une formation approfondie couvrant théorie et pratique du protocole EBICS.
-
-### Module 1 : Compréhension du Protocole EBICS
-
-La partie théorique a couvert :
-
-- **Historique et contexte** : Origine EBICS et adoption en France
-- **Architecture protocole** : Modèle client-serveur et échanges HTTP(S)
-- **Types d'ordres** : Upload (virements, prélèvements), Download (relevés, retours)
-- **Formats supportés** : CFONB, SEPA XML, relevés bancaires
-- **Versions** : Différences EBICS 2.5 et 3.0
-- **Acteurs** : Banques françaises supportant EBICS
-
-### Module 2 : Sécurité et Certificats
-
-Focus sur les aspects cryptographiques :
-
-- **Clés et certificats** : Génération paire clés RSA, certificats X.509
-- **Signatures électroniques** : Mécanismes de signature des ordres
-- **Chiffrement** : Protection des données échangées
-- **Authentification** : Process d'initialisation et identification
-- **Renouvellement** : Gestion cycle de vie des certificats
-
-### Module 3 : Implémentation PHP
-
-La partie pratique a inclus :
-
-- **Bibliothèques PHP** : Présentation librairies open-source EBICS
-- **Connexion banque** : Configuration endpoints et paramètres
-- **Envoi ordres** : Code PHP pour virements SEPA
-- **Récupération relevés** : Download automatique mouvements bancaires
-- **Parsing réponses** : Traitement fichiers CFONB et XML retournés
-- **Gestion erreurs** : Codes retour bancaires et retry logic
-
-### Module 4 : Cas Pratiques
-
-Exercices appliqués sur :
-
-- Initialisation compte EBICS avec une banque test
-- Envoi fichier de virements SEPA
-- Récupération et parsing relevés de compte
-- Gestion des erreurs et rejets bancaires
-- Architecture application EBICS complète
-
-### Support et Documentation
-
-Nous avons fourni :
-
-- Slides de formation détaillés
-- Code source exemples PHP commentés
-- Documentation de référence EBICS
-- Contacts bibliothèques open-source
-- Support post-formation pour questions
-
-## Résultats et Impact
-
-La formation a permis une montée en compétence rapide :
-
-- **Compréhension** : Maîtrise du protocole EBICS acquise
-- **Autonomie** : Capacité à implémenter EBICS en PHP de manière autonome
-- **Pratique** : Code fonctionnel produit durant formation
-- **Projet réussi** : Intégration EBICS déployée avec succès après formation
-- **Expertise** : Équipe devenue référente EBICS en interne
-
-Notre expertise EBICS a permis un transfert de compétences efficace.
-
-## Technologies Utilisées
-
-- EBICS - Protocole bancaire français
-- PHP 8+ - Langage d'implémentation
-- Bibliothèques EBICS PHP - Librairies open-source
-- OpenSSL - Génération certificats et chiffrement
-- SEPA XML - Format virements européens

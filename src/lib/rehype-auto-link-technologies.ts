@@ -20,13 +20,17 @@ export default function rehypeAutoLinkTechnologies() {
         const technologies = await getAllTechnologies()
 
         // Build regex patterns for each technology (case-insensitive, word boundaries)
-        const technologyLinks: TechnologyLink[] = technologies.map((tech) => ({
-            name: tech.name,
-            slug: tech.slug,
-            // Use word boundaries to avoid partial matches
-            // The \b ensures we match whole words only
-            regex: new RegExp(`\\b(${escapeRegex(tech.name)})\\b`, 'gi'),
-        }))
+        // Include both the main name and any aliases
+        const technologyLinks: TechnologyLink[] = technologies.flatMap((tech) => {
+            const names = [tech.name, ...(tech.name_aliases || [])]
+            return names.map((name) => ({
+                name,
+                slug: tech.slug,
+                // Use word boundaries to avoid partial matches
+                // The \b ensures we match whole words only
+                regex: new RegExp(`\\b(${escapeRegex(name)})\\b`, 'gi'),
+            }))
+        })
 
         // Skip linking inside these elements
         const skipElements = new Set(['code', 'pre', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
