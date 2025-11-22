@@ -78,6 +78,11 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
             label: 'Méthodologie',
         },
         {
+            path: '/#clients',
+            indexPath: '#clients',
+            label: 'Clients',
+        },
+        {
             path: '/#chiffres',
             indexPath: '#chiffres',
             label: 'Chiffres',

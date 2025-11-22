@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import CallToAction from '@/components/call-to-action'
+import ClientsSection from '@/components/clients-section'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
@@ -465,6 +466,7 @@ export default async function Page() {
             <PresentationSection />
             <ServicesSection />
             <MethodologySection />
+            <ClientsSection clients={clients} />
             <NumbersSection numbers={numbers} />
         </>
     )
