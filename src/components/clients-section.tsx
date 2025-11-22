@@ -32,7 +32,7 @@ export default function ClientsSection({ clients, projects }: ClientsSectionProp
     }
 
     return (
-        <Section id="clients" className="border-border border-t">
+        <Section id="clients" className="bg-surface border-border border-t">
             <SectionHeader
                 title={
                     <span>

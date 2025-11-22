@@ -257,7 +257,7 @@ function Arrow() {
 
 function MethodologySection() {
     return (
-        <Section id="methodologie" className="bg-surface border-border border-t">
+        <Section id="methodologie" className="bg-light border-border border-t">
             <SectionHeader
                 title={
                     <span>
@@ -407,7 +407,7 @@ function ServicesSection() {
     const unsupportedServices = SERVICES.filter((service) => !service.supported)
 
     return (
-        <Section id="services">
+        <Section id="services" className="bg-surface">
             <SectionHeader
                 title={
                     <span>
@@ -430,7 +430,7 @@ function ServicesSection() {
 
 function NumbersSection({ numbers }: { numbers: NumberData[] }) {
     return (
-        <Section id="chiffres" className="border-border border-t">
+        <Section id="chiffres" className="bg-light border-border border-t">
             <SectionHeader
                 title={
                     <span>
