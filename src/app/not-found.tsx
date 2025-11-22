@@ -37,7 +37,7 @@ export default function NotFound() {
                         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                             <Button as="a" href="/" size="lg">
                                 <ArrowLeft className="size-5" />
-                                Retour à l'accueil
+                                Retour à l&apos;accueil
                             </Button>
 
                             <Button as="a" href="/projets" variant="outline-primary" size="lg">
