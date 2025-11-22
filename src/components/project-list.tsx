@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
-import Badge from '@/components/badge'
-import BadgeGroup from '@/components/badge-group'
-import Button from '@/components/button'
-import { ArrowRight } from '@/components/icons'
-import { LaptopMockup } from '@/components/mockup'
-import ProjectScopeBadge from '@/components/project-scope-badge'
+import Badge from '@/components/ui/badge'
+import BadgeGroup from '@/components/ui/badge-group'
+import Button from '@/components/ui/button'
+import { ArrowRight } from '@/components/ui/icons'
+import { LaptopMockup } from '@/components/ui/mockup'
+import ProjectScopeBadge from '@/components/ui/project-scope-badge'
 import { cn } from '@/utils/lib'
 import { Project } from '@/utils/project'
 

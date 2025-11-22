@@ -1,5 +1,5 @@
-import { ArrowLeft } from '@/components/icons'
-import Section from '@/components/section'
+import { ArrowLeft } from '@/components/ui/icons'
+import Section from '@/components/ui/section'
 
 export default function Loading() {
     return (

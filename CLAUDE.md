@@ -72,9 +72,9 @@ All pages are statically generated at build time using `generateStaticParams()`.
 - Analytics script in `src/app/layout.tsx` with `next/script`
 
 ### Content Management (MDX)
-Projects and content are stored as MDX files in `src/content/`:
+Projects and content are stored as MDX files in the `content/` directory at the project root:
 
-- **Projects**: `src/content/projects/[project-slug]/` directories with:
+- **Projects**: `content/projects/[project-slug]/` directories with:
   - `index.mdx` - Main project overview with YAML frontmatter
   - `*.mdx` - Project iterations/versions (v1.mdx, v2.mdx, etc.)
 
@@ -99,8 +99,8 @@ Projects and content are stored as MDX files in `src/content/`:
   solution: object (description, points[])
   ```
 
-- **Clients**: `src/content/clients/*.mdx` with client metadata
-- **Technologies**: `src/content/technologies/*.mdx` with technology metadata
+- **Clients**: `content/clients/*.mdx` with client metadata
+- **Technologies**: `content/technologies/*.mdx` with technology metadata
 
 Content processing pipeline:
 - **gray-matter** parses YAML frontmatter
@@ -116,21 +116,33 @@ Content processing pipeline:
 ### Component Organization
 ```
 src/components/
+├── ui/               # Reusable UI components (badge, button, icons, section, etc.)
 ├── layouts/          # Page layouts (default layout with navbar/footer)
 ├── forms/            # Form components (input, textarea, label, group, help)
-├── *.tsx             # UI components (button, hero-title, navbar, footer, etc.)
+├── *.tsx             # Feature-specific components (navbar, footer, project-list, etc.)
 ```
 
-**Key Components**:
+**Reusable UI Components** (`src/components/ui/`):
 - `active-link.tsx` - Navigation link with active state styling
-- `project-card.tsx` - Project preview card with client, tech badges
-- `project-grid.tsx` - Grid layout for project listings
+- `badge.tsx` / `badge-group.tsx` - Badge components for labels and tags
+- `button.tsx` - Primary button component
+- `fade-in-when-visible.tsx` - Framer Motion scroll animations
+- `icons.tsx` - Centralized icon exports
+- `mdx-image.tsx` - Image component for MDX content
+- `mockup.tsx` - Device mockup components
+- `pagination.tsx` - Server-side pagination component
+- `project-scope-badge.tsx` - Specialized badge for project scope
+- `section.tsx` / `section-header.tsx` / `section-title.tsx` - Section layout components
+- `skeleton.tsx` - Loading skeleton component
+
+**Feature Components** (`src/components/`):
+- `navbar.tsx` / `footer.tsx` - Layout components
+- `hero-section.tsx` - Hero section wrapper
+- `project-list.tsx` - Project listing display
 - `projects-content.tsx` - Main projects listing with search/filter
 - `search-form.tsx` / `search-input.tsx` - Fuse.js-powered fuzzy search
-- `fade-in-when-visible.tsx` - Framer Motion scroll animations
 - `markdown.tsx` - MDX content renderer with custom components
 - `contact-form.tsx` - Contact form with react-hook-form validation
-- `pagination.tsx` - Server-side pagination component
 
 Components follow these patterns:
 - Functional components with TypeScript interfaces for props
@@ -204,13 +216,13 @@ Forms use **react-hook-form** with a custom hook pattern:
 - Export components as **default** unless there's a specific reason not to
 
 ### Icons
-- **ALWAYS import icons from `@/components/icons.tsx`** instead of directly from `react-icons`
+- **ALWAYS import icons from `@/components/ui/icons.tsx`** instead of directly from `react-icons`
 - The icons file provides a centralized, curated set of Lucide icons via `react-icons/lu`
 - Available icons: `Download`, `Map`, `Clock`, `Phone`, `Person`, `Envelope`, `Check`, `XMark`, `FilterIcon`, `ArrowLeft`, `ArrowRight`, `FileText`, `Calendar`, `Repeat`, `Code`, `Zap`
 - Custom SVG icons: `FaceSad`, `MenuToggle`, `Spinner`, `Search`, `XCircle`, `ChevronLeft`, `ChevronRight`
-- If you need a new icon, add it to `@/components/icons.tsx` first, then import it
+- If you need a new icon, add it to `@/components/ui/icons.tsx` first, then import it
 - Example:
-  - ✅ Good: `import { Check, ArrowRight } from '@/components/icons'`
+  - ✅ Good: `import { Check, ArrowRight } from '@/components/ui/icons'`
   - ❌ Bad: `import { LuCheck } from 'react-icons/lu'`
 
 ### Styling
@@ -233,11 +245,11 @@ Forms use **react-hook-form** with a custom hook pattern:
 ## Adding New Features
 
 ### Adding a New Project
-1. Create directory `src/content/projects/[project-slug]/`
+1. Create directory `content/projects/[project-slug]/`
 2. Create `index.mdx` with required frontmatter fields:
    - `title`, `slug`, `date`, `excerpt`
-   - `client` (slug reference to client in `src/content/clients/`)
-   - `technologies` (array of slugs referencing `src/content/technologies/`)
+   - `client` (slug reference to client in `content/clients/`)
+   - `technologies` (array of slugs referencing `content/technologies/`)
    - `published` (boolean)
    - `projectType` ('one-shot' | 'recurring')
    - `projectScope`, `codeOwnership`, `category`, `engagement`

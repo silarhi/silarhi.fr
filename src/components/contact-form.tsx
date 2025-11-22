@@ -2,10 +2,10 @@
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import Button from '@/components/button'
 import Input from '@/components/forms/input'
 import Textarea from '@/components/forms/textarea'
-import { Envelope, FileText, Person, Phone } from '@/components/icons'
+import Button from '@/components/ui/button'
+import { Envelope, FileText, Person, Phone } from '@/components/ui/icons'
 
 interface ContactFormData {
     name: string

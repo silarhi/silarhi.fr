@@ -6,7 +6,7 @@ import path from 'path'
 import { type ClientMetadata, getClientBySlug } from './client'
 import { getTechnologyBySlug, type TechnologyMetadata } from './technology'
 
-const projectsDirectory = path.join(process.cwd(), 'src/content/projects')
+const projectsDirectory = path.join(process.cwd(), 'content/projects')
 
 export type ProjectScope =
     | 'full_development'

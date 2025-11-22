@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { ChevronLeft, ChevronRight } from '@/components/icons'
+import { ChevronLeft, ChevronRight } from '@/components/ui/icons'
 
 interface PaginationServerProps {
     currentPage: number

@@ -7,7 +7,7 @@ import rehypeUnwrapImages from 'rehype-unwrap-images'
 import remarkGfm from 'remark-gfm'
 import type { PluggableList } from 'unified'
 
-import { MDXImage } from '@/components/mdx-image'
+import { MDXImage } from '@/components/ui/mdx-image'
 import rehypeAutoLinkTechnologies from '@/lib/rehype-auto-link-technologies'
 
 interface MarkdownProps {

@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Search, Spinner, XCircle } from '@/components/icons'
+import { Search, Spinner, XCircle } from '@/components/ui/icons'
 import { cn } from '@/utils/lib'
 
 interface SearchInputProps {

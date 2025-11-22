@@ -2,7 +2,7 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 
-const clientsDirectory = path.join(process.cwd(), 'src/content/clients')
+const clientsDirectory = path.join(process.cwd(), 'content/clients')
 
 export interface ClientMetadata {
     slug: string
