@@ -75,7 +75,7 @@ export default function PaginationServer({
                 {/* Previous button */}
                 {currentPage === 1 ? (
                     <span
-                        className="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-400"
+                        className="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-400 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
                         aria-label="Page précédente"
                         aria-disabled="true"
                     >
@@ -84,7 +84,7 @@ export default function PaginationServer({
                 ) : (
                     <Link
                         href={buildUrl(currentPage - 1)}
-                        className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-gray-700 no-underline transition-colors"
+                        className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-gray-700 no-underline transition-colors dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300"
                         aria-label="Page précédente"
                         prefetch={false}
                     >
@@ -98,7 +98,7 @@ export default function PaginationServer({
                         page === currentPage ? (
                             <span
                                 key={index}
-                                className="border-primary bg-primary text-surface flex h-10 min-w-[2.5rem] items-center justify-center rounded-lg border px-3 text-sm font-medium shadow-sm"
+                                className="border-primary bg-primary text-surface dark:border-primary dark:bg-primary dark:text-surface flex h-10 min-w-10 items-center justify-center rounded-lg border px-3 text-sm font-medium shadow-sm"
                                 aria-label={`Page ${page}`}
                                 aria-current="page"
                             >
@@ -108,7 +108,7 @@ export default function PaginationServer({
                             <Link
                                 key={index}
                                 href={buildUrl(page)}
-                                className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface flex h-10 min-w-[2.5rem] items-center justify-center rounded-lg border border-gray-300 px-3 text-sm font-medium text-gray-700 no-underline transition-colors"
+                                className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface flex h-10 min-w-10 items-center justify-center rounded-lg border border-gray-300 px-3 text-sm font-medium text-gray-700 no-underline transition-colors dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300"
                                 aria-label={`Page ${page}`}
                                 prefetch={false}
                             >
@@ -116,7 +116,7 @@ export default function PaginationServer({
                             </Link>
                         )
                     ) : (
-                        <span key={index} className="flex h-10 items-center px-2 text-gray-400">
+                        <span key={index} className="flex h-10 items-center px-2 text-gray-400 dark:text-gray-500">
                             {page}
                         </span>
                     )
@@ -125,7 +125,7 @@ export default function PaginationServer({
                 {/* Next button */}
                 {currentPage === totalPages ? (
                     <span
-                        className="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-400"
+                        className="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-gray-400 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-500"
                         aria-label="Page suivante"
                         aria-disabled="true"
                     >
@@ -134,7 +134,7 @@ export default function PaginationServer({
                 ) : (
                     <Link
                         href={buildUrl(currentPage + 1)}
-                        className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-gray-700 no-underline transition-colors"
+                        className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-gray-700 no-underline transition-colors dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300"
                         aria-label="Page suivante"
                         prefetch={false}
                     >

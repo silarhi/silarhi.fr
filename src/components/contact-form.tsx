@@ -79,7 +79,10 @@ export default function ContactForm() {
 
     if (success) {
         return (
-            <div className="text-success border-success/20 bg-success/10 mb-0 rounded border p-4" role="alert">
+            <div
+                className="text-success border-success/20 bg-success/10 dark:bg-success/20 mb-0 rounded border p-4"
+                role="alert"
+            >
                 <h4 className="mb-2 font-bold">Merci !</h4>
                 <p className="mb-0">Votre message a bien été envoyé, je vous répondrai dans les plus brefs délais.</p>
             </div>
@@ -89,7 +92,10 @@ export default function ContactForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {submitError && (
-                <div className="border-error/20 bg-error/10 text-error mb-4 rounded border p-4" role="alert">
+                <div
+                    className="border-error/20 bg-error/10 dark:bg-error/20 text-error mb-4 rounded border p-4"
+                    role="alert"
+                >
                     Une erreur est survenue pendant l&apos;envoi du message.
                 </div>
             )}

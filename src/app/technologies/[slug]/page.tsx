@@ -119,7 +119,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
                 </Section>
             )}
 
-            <Section>
+            <Section className="dark:bg-surface">
                 <SectionHeader
                     title={
                         totalProjects > 1

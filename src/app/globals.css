@@ -1,34 +1,42 @@
 @import 'tailwindcss';
 
+/* Dark mode custom variant for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-    /* 🎨 PRIMARY — Digital Confidence (Trust, Professionalism, Clarity) */
-    --color-primary: #2556cf; /* Main brand blue — strong, confident, and modern */
-    --color-primary-light: #3b82f6; /* Hover states, accents, icons */
-    --color-primary-dark: #1e40af; /* Deep blue for headers, hero sections, or dark modes */
+    /* 🎨 PRIMARY — Main Brand Color */
+    --color-primary: #2556cf; /* Buttons, active states, links, badges, list bullets, section highlights */
+    --color-primary-light: #3b82f6; /* Hover states on buttons, soft badge backgrounds, nav active states */
+    --color-primary-dark: #1e40af; /* Presentation section backgrounds, dark accents, headings */
 
-    /* 🟨 SECONDARY — Creative Energy (Optimism, Innovation, Dynamism) */
-    --color-secondary: #f7d325; /* Bright yellow — warm accent for highlights and CTAs */
-    --color-secondary-light: #fde68a; /* Soft highlight backgrounds and subtle accents */
-    --color-secondary-dark: #ca8a04; /* Rich golden tone for contrast or hover states */
+    /* 🟨 SECONDARY — Accent Color for CTAs & Highlights */
+    --color-secondary: #f7d325; /* Footer banner, key metrics numbers, hover accents */
+    --color-secondary-light: #fde68a; /* Badge backgrounds in dark mode */
+    --color-secondary-dark: #ca8a04; /* Badge text color, button hover states */
 
-    /* ⚪ NEUTRALS — Elegant Foundations (Clean, Readable, Modern) */
-    --color-background: #f8f9fa; /* Global background — bright and neutral */
-    --color-light: #f8f9fa; /* Alternative light background (identical for consistency) */
-    --color-dark: #2b2b2a; /* Dark gray for footers, headers, or dark mode */
-    --color-surface: #ffffff; /* Surface color for cards, modals, and elevated sections */
-    --color-foreground: #111827; /* Default text color for high readability */
+    /* ⚪ NEUTRALS — Layout Backgrounds */
+    --color-background: #f9fafb; /* HTML body background */
+    --color-surface-dark: #2b2b2a; /* Header background, footer background */
+    --color-surface: #ffffff; /* Cards, modals, sections, form inputs, buttons, pagination */
+    --color-light: #f9fafb; /* Alternate section backgrounds (zebra striping), form inputs in dark mode */
+    --color-dark: #2b2b2a; /* Footer, floating navbar background */
+    --color-dark-foreground: #f1f5f9; /* Text on dark backgrounds (footer address, nav items) */
+    --color-foreground: #111827; /* Main text color for headings, labels, body content */
+    --color-surface-elevated: #ffffff; /* Higher elevation surfaces like modals/tooltips */
+    --color-input: #ffffff; /* Form inputs, buttons */
+    --color-input-foreground: #111827; /* Form input text */
 
     /* 🖋️ TEXT — Hierarchy & Readability */
-    --color-text-primary: #111827; /* Primary text — high contrast, used for titles and main content */
-    --color-muted: #6b7280; /* Secondary text — medium contrast for subtitles and less prominent info */
+    --color-muted: #6b7280; /* Placeholders, secondary text, loading skeletons */
 
-    /* 📏 STRUCTURE — Subtle Separators */
-    --color-border: #e5e7eb; /* Light gray for borders, dividers, and input outlines */
+    /* 📏 STRUCTURE — Borders & Dividers */
+    --color-border: var(--color-gray-200); /* Card borders, section dividers, form field borders, separators */
+    --color-overlay: rgb(43 43 42 / 0.8); /* Modal/menu backdrop overlay */
 
-    /* 🧩 STATUS — Feedback Colors */
-    --color-error: #dc2626; /* Errors, invalid states, destructive actions */
-    --color-success: #16a34a; /* Success messages, confirmations, positive states */
-    --color-warning: #f59e0b; /* Warnings, non-critical alerts, attention cues */
+    /* 🧩 STATUS — Form Validation & Feedback */
+    --color-error: #dc2626; /* Form errors, invalid states, danger buttons */
+    --color-success: #16a34a; /* Form success states, validation checkmarks, positive badges */
+    --color-warning: #f59e0b; /* Reserved for future warning states (currently unused) */
 
     --font-family-body: var(--body-font), sans-serif;
 
@@ -56,6 +64,43 @@
     --max-width-5xl: 64rem; /* 1024px */
     --max-width-6xl: 72rem; /* 1152px */
     --max-width-7xl: 80rem; /* 1280px */
+}
+
+/* 🌙 DARK MODE OVERRIDES */
+.dark {
+    /* Primary colors - brighter for visibility on dark backgrounds */
+    --color-primary: #3b82f6; /* Buttons, links, active states, badges */
+    --color-primary-light: #60a5fa; /* Hover states, soft backgrounds */
+    --color-primary-dark: #3b4f92; /* Section title accents */
+
+    /* Secondary colors - slightly muted for dark mode comfort */
+    --color-secondary: #d7be44; /* Footer banner, button variants */
+    --color-secondary-light: #fcd34d; /* Badge backgrounds */
+    --color-secondary-dark: #f59e0b; /* Dark text on secondary buttons */
+
+    /* Neutrals following Material Design elevation (darker = lower, lighter = higher) */
+    --color-surface-dark: #0f0e0f; /* Baseline black, header and footer */
+    --color-background: #121212; /* HTML body - baseline dark (Material Design standard) */
+    --color-surface: #1e1e1e; /* Cards, modals, form inputs - dp02 elevation */
+    --color-light: #121212; /* Alternate sections, navbar dropdowns - dp04 elevation */
+    --color-surface-elevated: #2c2c2c; /* Higher elevation surfaces like modals/tooltips - dp04 */
+    --color-dark: #2b2b2a; /* Footer background */
+    --color-dark-foreground: #e0e0e0; /* Footer text, nav items on dark */
+    --color-foreground: #e0e0e0; /* Body text, headings - 87% white for reduced eye strain */
+    --color-input: #2c2c2c; /* Form inputs, buttons - dp03 elevation */
+    --color-input-foreground: #e0e0e0; /* Form input text */
+
+    /* Text hierarchy */
+    --color-muted: #a0a0a0; /* Placeholders, secondary text (60% white) */
+
+    /* Borders & overlays */
+    --color-border: #3f3f3f; /* Card borders, section dividers, form fields */
+    --color-overlay: rgb(0 0 0 / 0.7); /* Modal/menu backdrop - darker for dark mode */
+
+    /* Status colors - desaturated for dark mode to prevent visual vibration */
+    --color-error: #cf6679; /* Form errors, danger buttons */
+    --color-success: #81c784; /* Form success, validation */
+    --color-warning: #ffb74d; /* Reserved for future use (currently unused) */
 }
 
 @layer base {

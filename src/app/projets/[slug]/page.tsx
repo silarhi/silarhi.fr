@@ -149,7 +149,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                         alt={`Logo ${project.client.name}`}
                                         fill
                                         sizes="64px"
-                                        className="object-contain"
+                                        className="object-contain dark:invert"
                                     />
                                 </div>
                             )}

@@ -18,14 +18,16 @@ const BaseTextareaWidget = forwardRef<
             ref={ref}
             className={cn(
                 'w-full rounded-lg border px-4 py-3 text-base transition-all duration-200 ease-in-out',
-                'placeholder:text-gray-400',
+                'placeholder:text-gray-400 dark:placeholder:text-gray-300',
                 'focus:ring-4 focus:outline-none',
-                'hover:border-gray-400',
-                'bg-surface resize-none shadow-sm',
+                'dark:hover:border-muted hover:border-gray-400',
+                'bg-input resize-none shadow-sm',
                 {
-                    'focus:border-primary focus:ring-primary/20 border-gray-300': !isValid && !isInvalid,
-                    'border-success focus:border-success focus:ring-success/20 bg-success/5': isValid,
-                    'border-error focus:border-error focus:ring-error/20 bg-error/5': isInvalid,
+                    'focus:border-primary focus:ring-primary/20 dark:border-border border-gray-300':
+                        !isValid && !isInvalid,
+                    'border-success focus:border-success focus:ring-success/20 bg-success/5 dark:bg-success/10':
+                        isValid,
+                    'border-error focus:border-error focus:ring-error/20 bg-error/5 dark:bg-error/10': isInvalid,
                 },
                 className
             )}

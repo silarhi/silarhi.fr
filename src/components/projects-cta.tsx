@@ -50,7 +50,7 @@ export default function ProjectsCTA({
     const secondaryArrow = secondaryButton.showArrow ?? false
 
     return (
-        <Section className={cn('bg-light border-border border-t py-16 lg:py-24', className)}>
+        <Section className={cn('bg-light border-border dark:bg-background border-t py-16 lg:py-24', className)}>
             <div className="mx-auto max-w-3xl text-center">
                 <h2 className="text-foreground mb-6 text-3xl font-bold text-balance lg:text-5xl">{title}</h2>
                 <p className="text-foreground/80 mb-8 text-lg leading-relaxed lg:text-xl">{description}</p>

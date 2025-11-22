@@ -122,22 +122,20 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
             </ProjectsHero>
 
             <Section id="projects-list">
-                <div className="container mx-auto px-4 lg:px-8">
-                    <Suspense
-                        key={`${searchQuery}-${currentPage}-${technology}-${category}-${industry}-${client}`}
-                        fallback={<ProjectListSkeleton count={9} />}
-                    >
-                        <ProjectsListAsync
-                            searchQuery={searchQuery}
-                            currentPage={currentPage}
-                            itemsPerPage={ITEMS_PER_PAGE}
-                            technology={technology}
-                            category={category}
-                            industry={industry}
-                            client={client}
-                        />
-                    </Suspense>
-                </div>
+                <Suspense
+                    key={`${searchQuery}-${currentPage}-${technology}-${category}-${industry}-${client}`}
+                    fallback={<ProjectListSkeleton count={9} />}
+                >
+                    <ProjectsListAsync
+                        searchQuery={searchQuery}
+                        currentPage={currentPage}
+                        itemsPerPage={ITEMS_PER_PAGE}
+                        technology={technology}
+                        category={category}
+                        industry={industry}
+                        client={client}
+                    />
+                </Suspense>
             </Section>
 
             <ProjectsCTA />
