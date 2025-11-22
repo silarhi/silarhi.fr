@@ -55,7 +55,6 @@ export default function ClientsSection({ clients, projects }: ClientsSectionProp
                                             src={client.logo}
                                             alt={client.name}
                                             fill
-                                            unoptimized={client.logo.endsWith('.svg') || client.logo.endsWith('.gif')}
                                             className={cn(
                                                 'object-contain transition-opacity duration-300 group-hover:opacity-80',
                                                 client.logoClassName
