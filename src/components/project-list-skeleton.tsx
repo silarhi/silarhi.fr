@@ -1,4 +1,4 @@
-import Skeleton from '@/components/skeleton'
+import Skeleton from '@/components/ui/skeleton'
 import { cn } from '@/utils/lib'
 
 interface ProjectListSkeletonProps {

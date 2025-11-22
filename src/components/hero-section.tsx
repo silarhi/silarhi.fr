@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Section from '@/components/section'
+import Section from '@/components/ui/section'
 import { cn } from '@/utils/lib'
 
 interface HeroTitleProps extends React.HTMLAttributes<HTMLElement> {

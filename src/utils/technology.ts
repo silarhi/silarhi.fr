@@ -2,7 +2,7 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 
-const technologiesDirectory = path.join(process.cwd(), 'src/content/technologies')
+const technologiesDirectory = path.join(process.cwd(), 'content/technologies')
 
 interface TechnologyReason {
     title: string

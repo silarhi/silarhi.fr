@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 
-import Button from '@/components/button'
-import { ArrowRight } from '@/components/icons'
-import Section from '@/components/section'
+import Button from '@/components/ui/button'
+import { ArrowRight } from '@/components/ui/icons'
+import Section from '@/components/ui/section'
 import { cn } from '@/utils/lib'
 
 interface CTAButton {

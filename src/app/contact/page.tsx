@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 
 import ContactForm from '@/components/contact-form'
-import FadeInWhenVisible from '@/components/fade-in-when-visible'
 import HeroSection from '@/components/hero-section'
-import { Clock, Envelope, Map, Phone } from '@/components/icons'
-import Section from '@/components/section'
+import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
+import { Clock, Envelope, Map, Phone } from '@/components/ui/icons'
+import Section from '@/components/ui/section'
 import { cn } from '@/utils/lib'
 
 export const metadata: Metadata = {

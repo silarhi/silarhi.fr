@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation'
 import { CSSProperties, useEffect, useRef, useState } from 'react'
 
 import { montserrat } from '@/app/fonts'
-import ActiveLink from '@/components/active-link'
-import Button from '@/components/button'
-import { MenuToggle } from '@/components/icons'
+import ActiveLink from '@/components/ui/active-link'
+import Button from '@/components/ui/button'
+import { MenuToggle } from '@/components/ui/icons'
 import logo from '@/public/images/logo-4096.png'
 import { cn } from '@/utils/lib'
 

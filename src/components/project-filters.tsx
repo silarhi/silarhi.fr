@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
-import Badge from '@/components/badge'
-import Button from '@/components/button'
-import { FilterIcon } from '@/components/icons'
+import Badge from '@/components/ui/badge'
+import Button from '@/components/ui/button'
+import { FilterIcon } from '@/components/ui/icons'
 import { cn } from '@/utils/lib'
 
 interface FilterOption {

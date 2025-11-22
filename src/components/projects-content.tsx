@@ -1,6 +1,6 @@
-import { FaceSad } from '@/components/icons'
-import Pagination from '@/components/pagination'
 import ProjectList from '@/components/project-list'
+import { FaceSad } from '@/components/ui/icons'
+import Pagination from '@/components/ui/pagination'
 import { Project } from '@/utils/project'
 
 interface ProjectsContentProps {

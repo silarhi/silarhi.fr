@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { montserrat } from '@/app/fonts'
-import Button from '@/components/button'
+import Button from '@/components/ui/button'
 import iconEnvelope from '@/icons/envelope_hem0.svg'
 import logo from '@/public/images/logo-4096.png'
 import { cn } from '@/utils/lib'
