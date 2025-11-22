@@ -72,48 +72,48 @@ const nextConfig = {
             },
             // Tag redirects to technologies (when technology exists)
             {
-                source: '/tag/apiplatform',
+                source: '/projets/tag/apiplatform',
                 destination: '/technologies/api-platform',
                 permanent: true,
             },
             {
-                source: '/tag/docker',
+                source: '/projets/tag/docker',
                 destination: '/technologies/docker',
                 permanent: true,
             },
             {
-                source: '/tag/mysql',
+                source: '/projets/tag/mysql',
                 destination: '/technologies/mysql',
                 permanent: true,
             },
             {
-                source: '/tag/postgresql',
+                source: '/projets/tag/postgresql',
                 destination: '/technologies/postgres',
                 permanent: true,
             },
             {
-                source: '/tag/react',
+                source: '/projets/tag/react',
                 destination: '/technologies/react',
                 permanent: true,
             },
             {
-                source: '/tag/symfony',
+                source: '/projets/tag/symfony',
                 destination: '/technologies/symfony',
                 permanent: true,
             },
             // Tag redirects to projects (when technology doesn't exist)
             {
-                source: '/tag/api',
+                source: '/projets/tag/api',
                 destination: '/projets',
                 permanent: true,
             },
             {
-                source: '/tag/migration',
+                source: '/projets/tag/migration',
                 destination: '/projets',
                 permanent: true,
             },
             {
-                source: '/tag/reprise',
+                source: '/projets/tag/reprise',
                 destination: '/projets',
                 permanent: true,
             },
