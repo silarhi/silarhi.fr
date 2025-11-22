@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 
 import { getAllProjects } from '@/utils/project'
+import { getAllTechnologies } from '@/utils/technology'
 
 const getBaseUrl = () => {
     if (process.env.NEXT_PUBLIC_SITE_URL) {
@@ -24,6 +25,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: new Date(),
             changeFrequency: 'monthly' as const,
             priority: 1,
+        },
+        {
+            url: `${baseUrl}/contact`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
         },
         {
             url: `${baseUrl}/mentions-legales`,
@@ -59,7 +66,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.7,
         }))
 
-        return [...staticPages, ...projectPages, ...projectPosts]
+        // Get all technologies
+        const technologies = await getAllTechnologies()
+        const technologyPages = technologies.map((technology) => ({
+            url: `${baseUrl}/technologies/${technology.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.6,
+        }))
+
+        return [...staticPages, ...projectPages, ...projectPosts, ...technologyPages]
     } catch (error) {
         console.error('Error generating sitemap:', error)
 
