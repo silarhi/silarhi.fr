@@ -143,13 +143,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <div className="border-border bg-surface dark:bg-light rounded-xl border p-8">
                         <div className="mb-6 flex items-center gap-4">
                             {project.client.logo && (
-                                <div className="relative h-8 w-16 flex-shrink-0 rounded bg-white px-2 py-1 dark:bg-white">
+                                <div className="relative h-8 w-16 flex-shrink-0">
                                     <Image
                                         src={project.client.logo}
                                         alt={`Logo ${project.client.name}`}
                                         fill
                                         sizes="64px"
-                                        className="object-contain"
+                                        className="object-contain dark:invert"
                                     />
                                 </div>
                             )}
