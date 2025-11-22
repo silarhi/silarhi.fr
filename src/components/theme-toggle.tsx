@@ -1,7 +1,9 @@
 'use client'
 
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
+
 import { Moon, Sun } from '@/components/ui/icons'
-import { useTheme } from '@/providers/theme-provider'
 import { cn } from '@/utils/lib'
 
 interface ThemeToggleProps {
@@ -9,7 +11,32 @@ interface ThemeToggleProps {
 }
 
 export default function ThemeToggle({ className }: ThemeToggleProps) {
-    const { theme, toggleTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+    const { theme, setTheme } = useTheme()
+
+    // useEffect only runs on the client, so now we can safely show the UI
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return (
+            <div
+                className={cn(
+                    'rounded-lg p-2 transition-colors duration-200',
+                    'hover:bg-primary/10 dark:hover:bg-primary-light/10',
+                    className
+                )}
+            >
+                <div className="h-5 w-5" />
+            </div>
+        )
+    }
+
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+    }
 
     return (
         <button

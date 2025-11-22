@@ -37,19 +37,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <meta name="theme-color" content="#ffffff" />
                 <link rel="manifest" href="/site.webmanifest" />
                 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            (function() {
-                                const theme = localStorage.getItem('theme');
-                                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                                if (theme === 'dark' || (!theme && prefersDark)) {
-                                    document.documentElement.classList.add('dark');
-                                }
-                            })();
-                        `,
-                    }}
-                />
             </head>
             <body
                 className={cn(
