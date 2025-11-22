@@ -7,14 +7,29 @@ import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import type { ClientMetadata } from '@/utils/client'
 import { cn } from '@/utils/lib'
+import type { Project } from '@/utils/project'
 
 interface ClientsSectionProps {
     clients: ClientMetadata[]
+    projects: Project[]
 }
 
-export default function ClientsSection({ clients }: ClientsSectionProps) {
+export default function ClientsSection({ clients, projects }: ClientsSectionProps) {
     // Filter clients that have projects
     const clientsWithProjects = clients.filter((client) => client.slug)
+
+    // Helper function to get the correct link for each client
+    const getClientLink = (clientSlug: string): string => {
+        const clientProjects = projects.filter((project) => project.client.slug === clientSlug)
+
+        // If only one project, link directly to it
+        if (clientProjects.length === 1) {
+            return `/projets/${clientProjects[0].slug}`
+        }
+
+        // Otherwise, link to projects page with client filter
+        return `/projets?client=${clientSlug}`
+    }
 
     return (
         <Section id="clients" className="border-border border-t">
@@ -30,7 +45,7 @@ export default function ClientsSection({ clients }: ClientsSectionProps) {
                 {clientsWithProjects.map((client, index) => (
                     <FadeInWhenVisible key={client.slug} delay={index * 0.05}>
                         <Link
-                            href={`/projets?client=${client.slug}`}
+                            href={getClientLink(client.slug)}
                             className="bg-surface border-border group block overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md"
                         >
                             <div className="flex aspect-square items-center justify-center p-6">

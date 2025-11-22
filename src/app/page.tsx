@@ -466,7 +466,7 @@ export default async function Page() {
             <PresentationSection />
             <ServicesSection />
             <MethodologySection />
-            <ClientsSection clients={clients} />
+            <ClientsSection clients={clients} projects={projects} />
             <NumbersSection numbers={numbers} />
         </>
     )
