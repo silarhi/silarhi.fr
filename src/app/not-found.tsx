@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import Button from '@/components/button'
-import FadeInWhenVisible from '@/components/fade-in-when-visible'
 import HeroSection from '@/components/hero-section'
-import { ArrowLeft, FaceSad } from '@/components/icons'
-import Section from '@/components/section'
+import Button from '@/components/ui/button'
+import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
+import { ArrowLeft, FaceSad } from '@/components/ui/icons'
+import Section from '@/components/ui/section'
 
 export const metadata: Metadata = {
     title: 'Page introuvable - SILARHI',
