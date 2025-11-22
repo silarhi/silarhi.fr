@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import HeroSection from '@/components/hero-section'
 import Button from '@/components/ui/button'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
-import { ArrowLeft, FaceSad } from '@/components/ui/icons'
+import { ArrowLeft } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
+import notFoundImage from '@/public/images/404.svg'
 
 export const metadata: Metadata = {
     title: 'Page introuvable - SILARHI',
@@ -23,8 +25,15 @@ export default function NotFound() {
             <Section className="text-center">
                 <FadeInWhenVisible delay={0.1}>
                     <div className="mx-auto max-w-2xl">
-                        <div className="text-primary mb-8 flex justify-center">
-                            <FaceSad className="size-32" />
+                        <div className="mb-8 flex justify-center">
+                            <Image
+                                src={notFoundImage}
+                                alt="Page non trouvée"
+                                width={400}
+                                height={300}
+                                priority
+                                className="w-full max-w-md"
+                            />
                         </div>
 
                         <h2 className="mb-6 text-2xl font-bold lg:text-3xl">Erreur 404</h2>
