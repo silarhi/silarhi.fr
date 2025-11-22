@@ -11,8 +11,10 @@ import {
     LuFilter,
     LuMail,
     LuMapPin,
+    LuMoon,
     LuPhone,
     LuRepeat,
+    LuSun,
     LuUser,
     LuX,
     LuZap,
@@ -34,6 +36,8 @@ export const Calendar = LuCalendar
 export const Repeat = LuRepeat
 export const Code = LuCode
 export const Zap = LuZap
+export const Moon = LuMoon
+export const Sun = LuSun
 
 // Custom SVG icons
 export function FaceSad(props: React.SVGProps<SVGSVGElement>) {

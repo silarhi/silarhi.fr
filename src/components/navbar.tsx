@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { CSSProperties, useEffect, useRef, useState } from 'react'
 
 import { montserrat } from '@/app/fonts'
+import ThemeToggle from '@/components/theme-toggle'
 import ActiveLink from '@/components/ui/active-link'
 import Button from '@/components/ui/button'
 import { MenuToggle } from '@/components/ui/icons'
@@ -118,9 +119,9 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                     'absolute top-0 right-0 left-0 z-50 transition-opacity',
                     {
                         fixed: floating,
-                        'text-surface': floating || (isHomePage && !floating),
-                        'text-dark': !floating && !isHomePage,
-                        'bg-dark': floating,
+                        'text-surface dark:text-foreground': floating || (isHomePage && !floating),
+                        'text-dark dark:text-foreground': !floating && !isHomePage,
+                        'bg-dark dark:bg-surface': floating,
                         'bg-transparent': !floating,
                     },
                     initialClass && !floating && initialClass,
@@ -147,14 +148,17 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                             <span className={cn('text-xl', montserrat.className)}>SILARHI</span>
                         </Link>
 
-                        {/* Mobile menu button */}
-                        <button
-                            className="p-2 text-inherit lg:hidden"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            <MenuToggle className="h-6 w-6" open={mobileMenuOpen} />
-                        </button>
+                        {/* Mobile menu button and theme toggle */}
+                        <div className="flex items-center space-x-2 lg:hidden">
+                            <ThemeToggle className="text-inherit" />
+                            <button
+                                className="p-2 text-inherit"
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                <MenuToggle className="h-6 w-6" open={mobileMenuOpen} />
+                            </button>
+                        </div>
 
                         {/* Desktop menu */}
                         <ul className="hidden items-center space-x-9 lg:flex">
@@ -170,7 +174,10 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                                     </ActiveLink>
                                 </li>
                             ))}
-                            <li className="ml-4">
+                            <li>
+                                <ThemeToggle className="text-inherit" />
+                            </li>
+                            <li>
                                 <Button as="a" href="/contact" variant="secondary">
                                     Contact
                                 </Button>
@@ -190,7 +197,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                 )}
                 <div
                     className={cn(
-                        'bg-surface fixed top-0 bottom-0 left-0 w-80 overflow-y-auto shadow-xl transition-transform duration-300',
+                        'bg-surface dark:bg-light fixed top-0 bottom-0 left-0 w-80 overflow-y-auto shadow-xl transition-transform duration-300',
                         {
                             'translate-x-0': mobileMenuOpen,
                             '-translate-x-full': !mobileMenuOpen,
@@ -203,8 +210,8 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                                 <li key={i}>
                                     <ActiveLink
                                         href={getMenuItemHref(item)}
-                                        className="block rounded px-4 py-3 text-inherit transition-colors"
-                                        activeClassName="bg-primary-light text-surface"
+                                        className="hover:bg-primary/10 dark:hover:bg-primary-light/10 block rounded px-4 py-3 text-inherit transition-colors"
+                                        activeClassName="bg-primary-light text-surface dark:bg-primary dark:text-surface"
                                         target={item.target}
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
@@ -213,6 +220,10 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                                 </li>
                             ))}
                             <li className="border-border -mx-4 border-t px-4 pt-4">
+                                <div className="mb-3 flex items-center justify-between">
+                                    <span className="text-sm font-medium">Theme</span>
+                                    <ThemeToggle />
+                                </div>
                                 <Button as="a" href="/contact" variant="secondary" className="w-full">
                                     Contact
                                 </Button>

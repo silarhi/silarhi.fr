@@ -11,10 +11,10 @@ interface BadgeProps {
 }
 
 const variantStyles = {
-    primary: 'bg-primary/10 text-primary',
-    secondary: 'bg-secondary/10 text-secondary-dark',
+    primary: 'bg-primary/10 text-primary dark:bg-primary-light/20 dark:text-primary-light',
+    secondary: 'bg-secondary/10 text-secondary-dark dark:bg-secondary-light/20 dark:text-secondary-light',
     'outline-primary':
-        'hover:border-primary hover:bg-primary/5 hover:text-primary text-gray-700 bg-surface border border-gray-300 transition-colors',
+        'hover:border-primary hover:bg-primary/5 hover:text-primary text-gray-700 bg-surface border border-gray-300 transition-colors dark:bg-light dark:border-border dark:text-foreground dark:hover:border-primary-light dark:hover:bg-primary-light/10',
 }
 
 const sizeStyles = {

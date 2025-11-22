@@ -50,12 +50,12 @@ export default function Footer() {
 
     return (
         <footer
-            className={cn('bg-dark text-surface', {
+            className={cn('bg-dark dark:bg-light text-surface dark:text-foreground', {
                 'mt-20': pathname !== '/contact',
             })}
         >
             {pathname !== '/contact' && (
-                <div className="bg-secondary text-dark py-6">
+                <div className="bg-secondary dark:bg-secondary-dark text-dark dark:text-surface py-6">
                     <div className="container mx-auto px-4">
                         <div className="flex flex-row flex-wrap items-center justify-center gap-2 text-center lg:justify-start lg:gap-8 lg:text-left">
                             <Image
@@ -91,7 +91,7 @@ export default function Footer() {
                             </Link>
                             <div className="space-y-1">
                                 <p className="mb-0 font-semibold">Notre adresse</p>
-                                <p className="text-surface/80 mb-0">
+                                <p className="text-surface/80 dark:text-foreground/80 mb-0">
                                     116 route d&#39;Espagne
                                     <br />
                                     BAL 411
@@ -109,7 +109,10 @@ export default function Footer() {
                                             <Link
                                                 key={link.href}
                                                 href={link.href}
-                                                className={cn(linkClasses, 'text-surface/80 block')}
+                                                className={cn(
+                                                    linkClasses,
+                                                    'text-surface/80 dark:text-foreground/80 block'
+                                                )}
                                             >
                                                 {link.label}
                                             </Link>
