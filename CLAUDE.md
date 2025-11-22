@@ -251,6 +251,10 @@ Forms use **react-hook-form** with a custom hook pattern:
 2. Define metadata using Next.js `metadata` export or `generateMetadata()`
 3. Use `DefaultLayout` wrapper if the page needs navbar/footer (most pages do)
 4. For dynamic routes, implement `generateStaticParams()` for static generation
+5. **Update sitemap** (`src/app/sitemap.ts`):
+   - For static pages: Add entry to `staticPages` array with appropriate priority and change frequency
+   - For dynamic routes: Import utility function (e.g., `getAllTechnologies`), fetch data, and map to sitemap entries
+   - Example priorities: homepage (1.0), main pages (0.8), detail pages (0.6-0.7), legal (0.3)
 
 ### Adding Form Fields
 1. Define field in parent form component using `useForm<FormData>()`
