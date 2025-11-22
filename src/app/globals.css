@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Dark mode custom variant for Tailwind v4 */
+@custom-variant dark (&:is(.dark *));
+
 @theme {
     /* 🎨 PRIMARY — Digital Confidence (Trust, Professionalism, Clarity) */
     --color-primary: #2556cf; /* Main brand blue — strong, confident, and modern */
