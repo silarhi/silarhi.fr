@@ -17,20 +17,16 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
+    // Initialize from DOM class that was set by the blocking script
     const [theme, setThemeState] = useState<Theme>(() => {
-        // Initialize from localStorage on first render (client-side only)
-        if (typeof window === 'undefined') return 'light'
-
-        const storedTheme = localStorage.getItem('theme') as Theme | null
-        if (storedTheme) return storedTheme
-
-        // Check system preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-        return prefersDark ? 'dark' : 'light'
+        if (typeof window !== 'undefined') {
+            return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        }
+        return 'light'
     })
     const mountedRef = useRef(false)
 
-    // Apply theme to HTML element
+    // Apply theme changes to HTML element and localStorage
     useEffect(() => {
         mountedRef.current = true
         const root = document.documentElement

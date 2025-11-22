@@ -257,7 +257,7 @@ function Arrow() {
 
 function MethodologySection() {
     return (
-        <Section id="methodologie" className="bg-light border-border border-t">
+        <Section id="methodologie" className="bg-surface dark:bg-light border-border border-t">
             <SectionHeader
                 title={
                     <span>
@@ -286,7 +286,7 @@ function MethodologySection() {
                         {/* Stage with number outside */}
                         <FadeInWhenVisible delay={0.2 + index * 0.15}>
                             <div className={cn('flex items-start gap-3 md:gap-4')}>
-                                <div className="bg-surface border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
+                                <div className="bg-surface dark:bg-light border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
                                     <div className="p-4 md:p-6">
                                         <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
                                             <div className="flex h-32 w-full flex-shrink-0 items-center justify-center md:w-32">
@@ -343,8 +343,8 @@ function ServiceList({
 }) {
     return (
         <>
-            <h3 className="text-primary-dark mb-4 text-2xl font-light">{title}</h3>
-            <div className="bg-surface border-border mb-12 rounded-lg border shadow-lg">
+            <h3 className="text-primary mb-4 text-2xl font-light">{title}</h3>
+            <div className="bg-surface dark:bg-light border-border mb-12 rounded-lg border shadow-lg">
                 <ul className="">
                     {services.map((service, key) => (
                         <li
@@ -378,7 +378,7 @@ function ServiceList({
 
 function PresentationSection() {
     return (
-        <Section id="presentation" className="bg-primary-dark relative z-[2]">
+        <Section id="presentation" className="bg-primary dark:bg-primary-light relative z-[2]">
             <Image
                 src={coding}
                 alt="Coding"
@@ -387,7 +387,7 @@ function PresentationSection() {
                 sizes="100vw"
             />
             <FadeInWhenVisible>
-                <div className="text-surface mx-auto max-w-4xl text-center">
+                <div className="text-surface dark:text-dark mx-auto max-w-4xl text-center">
                     <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
                         SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
                         sur mesure.
