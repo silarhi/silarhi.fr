@@ -20,7 +20,6 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 ## 🔍 Code Quality Checks
 
 Always ensure code quality by running:
-
 - `yarn lint` - ESLint checks
 - `yarn typecheck` - TypeScript compiler checks
 - `yarn knip` - Detect unused exports, dependencies, and files
@@ -33,27 +32,23 @@ Always ensure code quality by running:
 ## 🧩 Coding Conventions
 
 ### General
-
 - Prefer **functional components** with TypeScript.
 - Follow the **ESLint + Prettier** configuration provided.
 - Write **self-documenting code**: clear variable names > comments.
 - Use **async/await** over `.then()` syntax.
 
 ### Components
-
 - Each component should live in its own file under `src/components/`.
 - Keep components **stateless** when possible.
 - Use **props interfaces** for all components.
 - Export components as **default** unless there’s a good reason not to.
 
 ### Styling
-
 - Use **Tailwind CSS** utility classes.
 - For complex compositions, use custom components or component-level style objects.
 - Follow **SILARHI design system** (rounded corners, soft shadows, generous spacing).
 
 ### Accessibility & SEO
-
 - Always use semantic HTML (e.g., `<button>`, `<nav>`, `<header>`).
 - Include alt text for images.
 - Optimize metadata via Next.js `metadata` API.
@@ -61,7 +56,6 @@ Always ensure code quality by running:
 - Use `next/image` for optimized images.
 
 ### Git & Project Structure
-
 - Branch naming: `feature/…`, `fix/…`, `content/…`
 - Commit messages: imperative style (“Add hero section” not “Added…”).
 - Pull requests should include a short description of the feature or fix.
@@ -71,7 +65,6 @@ Always ensure code quality by running:
 ## 🧪 Copilot Guidance
 
 When generating code, **Copilot should**:
-
 - Prefer **concise, readable code** over clever tricks.
 - Follow the structure and conventions of existing files.
 - Suggest **reusable UI components** instead of duplicating layout.
