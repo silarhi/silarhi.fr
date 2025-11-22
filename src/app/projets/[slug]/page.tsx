@@ -218,7 +218,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Section>
 
             {/* Solution */}
-            <Section className="bg-surface">
+            <Section className="bg-surface dark:bg-light">
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="order-2 lg:order-1">
                         <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">

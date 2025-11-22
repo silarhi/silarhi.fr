@@ -407,7 +407,7 @@ function ServicesSection() {
     const unsupportedServices = SERVICES.filter((service) => !service.supported)
 
     return (
-        <Section id="services" className="bg-surface">
+        <Section id="services" className="bg-surface dark:bg-light">
             <SectionHeader
                 title={
                     <span>
@@ -430,7 +430,7 @@ function ServicesSection() {
 
 function NumbersSection({ numbers }: { numbers: NumberData[] }) {
     return (
-        <Section id="chiffres" className="bg-light border-border border-t">
+        <Section id="chiffres" className="bg-light dark:bg-surface border-border border-t">
             <SectionHeader
                 title={
                     <span>

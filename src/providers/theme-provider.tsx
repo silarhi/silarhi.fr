@@ -9,6 +9,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
     return (
+        // prettier-ignore
         <NextThemesProvider
             attribute="class"
             defaultTheme="system"
