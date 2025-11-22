@@ -150,7 +150,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                         fill
                                         sizes="64px"
                                         className="object-contain"
-                                        unoptimized={project.client.logo.endsWith('.svg')}
                                     />
                                 </div>
                             )}
