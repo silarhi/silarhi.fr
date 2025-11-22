@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import CallToAction from '@/components/call-to-action'
+import ClientsSection from '@/components/clients-section'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
@@ -256,7 +257,7 @@ function Arrow() {
 
 function MethodologySection() {
     return (
-        <Section id="methodologie" className="bg-surface border-border border-t">
+        <Section id="methodologie" className="bg-light border-border border-t">
             <SectionHeader
                 title={
                     <span>
@@ -406,7 +407,7 @@ function ServicesSection() {
     const unsupportedServices = SERVICES.filter((service) => !service.supported)
 
     return (
-        <Section id="services">
+        <Section id="services" className="bg-surface">
             <SectionHeader
                 title={
                     <span>
@@ -429,7 +430,7 @@ function ServicesSection() {
 
 function NumbersSection({ numbers }: { numbers: NumberData[] }) {
     return (
-        <Section id="chiffres" className="border-border border-t">
+        <Section id="chiffres" className="bg-light border-border border-t">
             <SectionHeader
                 title={
                     <span>
@@ -465,6 +466,7 @@ export default async function Page() {
             <PresentationSection />
             <ServicesSection />
             <MethodologySection />
+            <ClientsSection clients={clients} projects={projects} />
             <NumbersSection numbers={numbers} />
         </>
     )
