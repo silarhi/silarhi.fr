@@ -1,0 +1,14 @@
+---
+title: 'Création de Workers et Consumers'
+date: '2021-01-14'
+published: true
+---
+
+Mise en place d'un système de queues et workers pour le traitement asynchrone des tâches.
+
+Développements techniques :
+
+- Utilisation de queue via AWS SQS
+- Gestion de la requeue avec exponential back-off
+- Mise en place d'une "meta-queue" pour le stockage des messages expirés
+- Module de dispatch de message en fonction du nombre de tentatives

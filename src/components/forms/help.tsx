@@ -7,7 +7,7 @@ interface HelpProps {
 
 export default function Help({ type, children }: HelpProps) {
     if (type === 'help') {
-        return <div className="text-muted mt-1.5 text-sm">{children}</div>
+        return <div className="text-foreground/80 mt-1.5 text-sm">{children}</div>
     }
 
     if (type === 'invalid') {

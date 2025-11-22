@@ -1,0 +1,16 @@
+---
+title: 'Lanterne'
+date: '2021-07-20'
+published: true
+---
+
+Développement d'un outil de veille politique basé sur l'agrégation de contenus politiques.
+
+Fonctionnalités développées :
+
+- Mise en place de workers PHP pour stocker les textes récupérés via script Python et déposés dans une queue RabbitMQ
+- Ingestion des articles et textes de lois dans Elasticsearch
+- Module de veille personnalisée par mots-clés : être alerté en cas de nouveaux articles sur tel ou tel sujet, mot-clés, acteur
+- Gestion de la pertinence : permettre l'administration via le back-office des mots-clés en fonction des thématiques afin d'accorder plus de poids à certains mots ou certains canaux de publication
+- Gestion de l'abonnement et facturation utilisateur via Stripe
+- Intégration des maquettes fournies par le client

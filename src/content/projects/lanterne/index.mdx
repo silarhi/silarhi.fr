@@ -1,0 +1,36 @@
+---
+title: "Application de veille politique et d'actualités parlementaires"
+slug: 'lanterne'
+date: '2021-07-20'
+excerpt: "Développement d'un outil de veille politique en Symfony : agrégation automatique de textes de l'Assemblée Nationale, Sénat & Twitter, classification des documents par thématique."
+client: 'glucoz'
+technologies: ['symfony', 'php', 'elasticsearch', 'mysql', 'rabbitmq', 'jquery', 'bootstrap']
+published: true
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Data & Analytics'
+name: 'Lanterne'
+overview: "Nous avons mis au point un outil de veille politique basé sur l'agrégation des textes publiés par l'Assemblée nationale, le Sénat ainsi que sur les comptes Twitter des personnalités politiques françaises. La plateforme permet de consulter les dernières publications par thématiques et d'analyser les positions des acteurs politiques."
+challenge:
+    description: 'Le développement présentait des défis techniques complexes : agréger et normaliser des données depuis des sources hétérogènes (textes parlementaires et réseaux sociaux), traiter des milliers de documents, et permettre des recherches performantes sur un corpus massif avec une classification automatique.'
+    points:
+        - 'Agrégation multi-sources hétérogènes (parlementaires + Twitter)'
+        - 'Recherche full-text performante sur corpus massif'
+        - 'Classification automatique par thématiques'
+        - 'Analyse sémantique des positions politiques'
+solution:
+    description: "Nous avons conçu une architecture robuste combinant Symfony pour l'orchestration, RabbitMQ pour le traitement asynchrone et Elasticsearch pour la recherche performante avec agrégation automatique des sources politiques françaises."
+    points:
+        - 'Connecteurs APIs Assemblée nationale et Sénat'
+        - 'Workers RabbitMQ pour traitement distribué'
+        - 'Elasticsearch pour recherche full-text et facettes'
+        - 'Gestion back-office des mots-clés & pondération par thématique'
+engagement:
+    type: 'project_based'
+    description: "Développement complet d'une plateforme de veille politique avec agrégation multi-sources et recherche avancée"
+    deliverables:
+        - 'Plateforme Symfony complète et opérationnelle'
+        - 'Ajout et mise à jour des documents publiés dans RabbitMQ'
+        - 'Indexation dans Elasticsearch'
+        - 'Système de classification automatique'
+---

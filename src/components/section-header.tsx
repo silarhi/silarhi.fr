@@ -1,16 +1,24 @@
+import { cn } from '@/utils/lib'
+
 import FadeInWhenVisible from './fade-in-when-visible'
 
 interface SectionHeaderProps {
-    title: string
-    subtitle?: string
+    title: React.ReactNode
+    subtitle?: React.ReactNode
 }
 
 export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
     return (
-        <div className="mt-4 mb-5 text-center">
+        <div className="py-6 text-center">
             <FadeInWhenVisible>
-                <h2 className="mb-3 text-4xl">{title}</h2>
-                {subtitle && <p className="text-muted text-lg">{subtitle}</p>}
+                {subtitle}
+                <h2
+                    className={cn('mb-6 text-4xl', {
+                        'mt-4': subtitle,
+                    })}
+                >
+                    {title}
+                </h2>
             </FadeInWhenVisible>
         </div>
     )

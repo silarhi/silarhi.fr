@@ -2,9 +2,10 @@ import { Metadata } from 'next'
 
 import ContactForm from '@/components/contact-form'
 import FadeInWhenVisible from '@/components/fade-in-when-visible'
-import Hero from '@/components/hero-title'
+import HeroSection from '@/components/hero-section'
 import { Clock, Envelope, Map, Phone } from '@/components/icons'
 import Section from '@/components/section'
+import { cn } from '@/utils/lib'
 
 export const metadata: Metadata = {
     title: `Contactez-nous - SILARHI`,
@@ -13,90 +14,104 @@ export const metadata: Metadata = {
 export default function ContactPage() {
     return (
         <>
-            <Hero title="Contact" subtitle="Besoin d'un renseignement ou d'un devis ? Vous êtes au bon endroit." />
-            <div className="grid grid-cols-1 gap-0 md:grid-cols-2">
-                <ContactSection />
-                <InfoSection />
-            </div>
+            <HeroSection
+                title="Contact"
+                description="Besoin d'un renseignement ou d'un devis ? Vous êtes au bon endroit."
+            />
+
+            <Section>
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-12 lg:gap-12 xl:gap-16">
+                    <div className="md:col-span-7">
+                        <ContactSection />
+                    </div>
+                    <div className="md:col-span-5">
+                        <InfoSection />
+                    </div>
+                </div>
+            </Section>
         </>
     )
 }
 
 function ContactSection() {
     return (
-        <Section id="contact" className="xl:pl-4xl md:pr-lg lg:pr-xl xl:pr-2xl px-4" paddingX={false} container={false}>
-            <div className="container md:mr-0">
-                <FadeInWhenVisible delay={0.1}>
-                    <h2 className="mb-3 text-3xl">Contact</h2>
-                    <p className="text-muted">
-                        Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
-                    </p>
-                </FadeInWhenVisible>
-                <FadeInWhenVisible delay={0.2}>
-                    <ContactForm />
-                </FadeInWhenVisible>
-            </div>
-        </Section>
+        <>
+            <FadeInWhenVisible delay={0.1}>
+                <h2 className="mb-4 text-3xl font-bold lg:text-4xl">Contact</h2>
+                <p className="text-foreground/80">
+                    Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
+                </p>
+            </FadeInWhenVisible>
+            <FadeInWhenVisible delay={0.2}>
+                <ContactForm />
+            </FadeInWhenVisible>
+        </>
     )
 }
 
 function InfoSection() {
+    const contactItems = [
+        {
+            icon: Map,
+            content: (
+                <>
+                    116 Route d&apos;Espagne
+                    <br />
+                    HELIOS 4<br />
+                    BAT 113
+                    <br />
+                    31100 Toulouse
+                </>
+            ),
+        },
+        {
+            icon: Clock,
+            content: (
+                <>
+                    Du lundi au vendredi
+                    <br />
+                    De 9h à 18h
+                </>
+            ),
+        },
+        {
+            icon: Phone,
+            content: <a href="tel:+33607275826">0 607.275.826</a>,
+        },
+        {
+            icon: Envelope,
+            content: <a href="mailto:%68ell%6F@si%6Ca%72hi.fr">hello@silarhi.fr</a>,
+        },
+    ]
+
     return (
-        <Section
-            id="silarhi"
-            className="xl:pr-4xl md:pl-lg lg:pl-xl xl:pl-2xl bg-[#f4f6fd] px-4"
-            paddingX={false}
-            container={false}
-        >
-            <div className="container-half-md container md:ml-0">
-                <FadeInWhenVisible delay={0.1}>
-                    <h2 className="mb-3 text-3xl">SILARHI</h2>
-                    <p className="text-muted">Les infos pratiques, c&apos;est par ici.</p>
-                </FadeInWhenVisible>
-                <FadeInWhenVisible delay={0.2}>
-                    <ul className="space-y-0">
-                        <li className="border-border flex flex-nowrap border-b py-3">
-                            <span className="text-primary mr-1 md:mr-2 lg:mr-3">
-                                <Map />
-                            </span>
-                            <span className="text-muted">
-                                116 Route d&apos;Espagne
-                                <br />
-                                HELIOS 4<br />
-                                BAT 113
-                                <br />
-                                31100 Toulouse
-                            </span>
-                        </li>
-                        <li className="border-border flex flex-nowrap border-b py-3">
-                            <span className="text-primary mr-1 md:mr-2 lg:mr-3">
-                                <Clock />
-                            </span>
-                            <span className="text-muted">
-                                Du lundi au vendredi
-                                <br />
-                                De 9h à 18h
-                            </span>
-                        </li>
-                        <li className="border-border flex flex-nowrap border-b py-3">
-                            <span className="text-primary mr-1 md:mr-2 lg:mr-3">
-                                <Phone />
-                            </span>
-                            <span className="text-muted">
-                                <a href="tel:+33607275826">0 607.275.826</a>
-                            </span>
-                        </li>
-                        <li className="border-border flex flex-nowrap py-3">
-                            <span className="text-primary mr-1 md:mr-2 lg:mr-3">
-                                <Envelope />
-                            </span>
-                            <span className="text-muted">
-                                <a href="mailto:%68ell%6F@si%6Ca%72hi.fr">hello@silarhi.fr</a>
-                            </span>
-                        </li>
-                    </ul>
-                </FadeInWhenVisible>
-            </div>
-        </Section>
+        <>
+            <FadeInWhenVisible delay={0.1}>
+                <h2 className="mb-4 text-3xl font-bold lg:text-4xl">SILARHI</h2>
+                <p className="text-foreground/80">Les infos pratiques, c&apos;est par ici.</p>
+            </FadeInWhenVisible>
+            <FadeInWhenVisible delay={0.2}>
+                <ul className="space-y-0">
+                    {contactItems.map((item, index) => {
+                        const Icon = item.icon
+                        const isLast = index === contactItems.length - 1
+
+                        return (
+                            <li
+                                key={index}
+                                className={cn('border-border flex flex-nowrap items-baseline py-3', {
+                                    'border-b': !isLast,
+                                })}
+                            >
+                                <span className="text-primary mr-1 md:mr-2 lg:mr-3">
+                                    <Icon />
+                                </span>
+                                <span className="text-foreground/80">{item.content}</span>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </FadeInWhenVisible>
+        </>
     )
 }

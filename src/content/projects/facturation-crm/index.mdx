@@ -1,0 +1,37 @@
+---
+title: 'Outil de synchronisation CRM vers Facturation'
+slug: 'facturation-crm'
+date: '2020-01-01'
+excerpt: 'Synchronisation automatique entre les CRM HubSpot et Zoho Invoice : conversion de deals en factures, gestion des montants via règles fournies dans un Google Sheet.'
+client: 'one-online'
+technologies: ['php', 'symfony', 'docker', 'mysql', 'jquery', 'bootstrap']
+published: true
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Intégration & API'
+name: 'CRM invoicing sync'
+overview: "Nous avons développé un outil de synchronisation automatique entre le CRM HubSpot et le logiciel de facturation Zoho Invoice. Concrètement, chaque fois qu'un deal est créé ou mis à jour dans HubSpot, notre connecteur convertit ce deal en facture dans Zoho Invoice, en appliquant des règles de calcul des montants et des taxes définies dans un Google Sheet. Cette solution permet à notre client de gérer efficacement la facturation de ses clients tout en assurant une synchronisation fluide entre les deux systèmes."
+challenge:
+    description: "L'intégration entre HubSpot et Zoho nécessitait de gérer des règles d'affectation complexes, tout en assurant une synchronisation bidirectionnelle fiable sans perte de données."
+    points:
+        - 'Mapping entre structures CRM et facturation différentes'
+        - 'Synchronisation bidirectionnelle fiable'
+        - 'Fiabilité dans le calcul des montants et taxes'
+        - 'Performance sur volumes importants quotidiens'
+solution:
+    description: 'Nous avons développé un connecteur Symfony avec workers asynchrones, intégration CRM et moteur de calcul des montants et taxes.'
+    points:
+        - 'Webhooks HubSpot pour déclenchement temps réel'
+        - 'Intégrations APIs HubSpot et Zoho complètes'
+        - 'Module de connexion sécurisé via OAuth2'
+        - 'Pagination et dispatching asynchrone pour la performance'
+engagement:
+    type: 'project_based'
+    description: "Développement d'un connecteur automatique entre HubSpot et Zoho Invoice pour synchronisation deals vers factures"
+    deliverables:
+        - 'Connecteur Symfony opérationnel et dockerisé'
+        - 'Synchronisation automatique HubSpot → Zoho Invoice'
+        - 'Workflow avec webhooks temps réel'
+        - 'Système de retry et gestion erreurs'
+        - 'Monitoring et logging complet'
+---

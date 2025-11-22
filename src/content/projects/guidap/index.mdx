@@ -1,0 +1,34 @@
+---
+title: 'Gestion de centres de loisirs et réservations'
+slug: 'guidap'
+date: '2021-04-13'
+excerpt: "Intervention technique sur solution SaaS pour centres de loisirs : Implémentation d'une architecture asynchrone avec AWS SQS pour gérer le renvoi des messages en échec selon une stratégie de back-off exponentiel."
+client: 'guidap'
+technologies: ['php', 'symfony', 'aws', 'docker']
+published: true
+scope: 'feature_integration'
+codeOwnership: 'shared_codebase'
+category: 'Gestion'
+name: 'GUIDAP'
+url: 'https://guidap.com'
+overview: "GUIDAP est un logiciel SaaS de gestion d'établissements de loisirs. Nous sommes intervenus pour développer la gestion asynchrone des traitements via AWS SQS, assurant la fiabilité et la résilience du système face aux erreurs temporaires."
+challenge:
+    description: "Le développement devait permettre la gestion de queue SQS et la gestion des réessais en cas d'erreurs temporaires"
+    points:
+        - 'Fiabilité critique : aucun message perdu'
+        - "Monitoring et visibilité sur files d'attente"
+        - 'Capacité à rejouer messages en échec'
+solution:
+    description: 'Nous avons développé un système de workers et consumers basé sur AWS SQS et intégré à Symfony, avec gestion intelligente des erreurs via exponential back-off et meta-queue pour garantir la fiabilité.'
+    points:
+        - "Files d'attente AWS SQS dédiées par type de traitement"
+        - 'Exponential back-off pour tentatives de retraitement'
+        - 'Meta-queue pour messages en échec multiples et traitement manuel'
+engagement:
+    type: 'project_based'
+    description: "Développement d'une architecture asynchrone AWS pour la gestion des erreurs et la fiabilité des traitements."
+    deliverables:
+        - 'Architecture asynchrone AWS SQS opérationnelle'
+        - 'Workers et consumers Symfony performants'
+        - "Système de gestion d'erreurs avec meta-queue"
+---

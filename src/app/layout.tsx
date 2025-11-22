@@ -7,7 +7,7 @@ import { ReactNode } from 'react'
 import DefaultLayout from '@/components/layouts/default'
 import { cn } from '@/utils/lib'
 
-import { montserrat } from './fonts'
+import { lato, montserrat } from './fonts'
 
 export const metadata: Metadata = {
     title: `Agence de développement Web PHP à Toulouse - SILARHI`,
@@ -36,19 +36,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <meta name="theme-color" content="#ffffff" />
                 <link rel="manifest" href="/site.webmanifest" />
                 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-                <Script src="https://www.googletagmanager.com/gtag/js?id=G-PDTD5T600H" />
-                <Script id="google-analytics">
+            </head>
+            <body className={cn(lato.className, lato.variable, montserrat.variable, 'h-full bg-gray-50')}>
+                <DefaultLayout>{children}</DefaultLayout>
+                <Script src="https://www.googletagmanager.com/gtag/js?id=G-PDTD5T600H" strategy="afterInteractive" />
+                <Script id="google-analytics" strategy="afterInteractive">
                     {`
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-         
+
                   gtag('config', 'G-PDTD5T600H');
                 `}
                 </Script>
-            </head>
-            <body className={cn(montserrat.className, montserrat.variable, 'h-full bg-gray-50')}>
-                <DefaultLayout>{children}</DefaultLayout>
             </body>
         </html>
     )

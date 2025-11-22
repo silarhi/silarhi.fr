@@ -1,0 +1,38 @@
+---
+title: "Mise en place d'infrastructure pour Lean Management System"
+slug: 'lean-management-system'
+date: '2021-03-03'
+excerpt: "Création de l'infrastructure pour visioconférence dans BigBlueButton pour formation à distance : déploiement conteneurisé, intégration complète LMS, scalabilité verticale."
+client: 'stillgeek'
+technologies: ['docker', 'aws']
+published: true
+scope: 'feature_integration'
+codeOwnership: 'shared_codebase'
+category: 'Infrastructure & DevOps'
+name: 'Lean Management System'
+overview: "Nous avons réalisé la mise en place et l'intégration d'une infrastructure BigBlueButton pour un système de visioconférence dédié à la formation à distance, avec déploiement conteneurisé Docker et auto-scaling via AWS."
+challenge:
+    description: "Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques : supporter de nombreuses sessions simultanées avec une qualité stable, intégrer avec le LMS existant, garantir la sécurité des sessions, et assurer une disponibilité élevée durant les pics de trafic."
+    points:
+        - 'Scalabilité pour nombreuses sessions simultanées'
+        - 'Performance vidéo/audio stable multi-participants'
+        - 'Intégration avec LMS existant'
+        - 'Sécurité et isolation des sessions'
+solution:
+    description: "Nous avons déployé une infrastructure de visioconférence conteneurisée avec BigBlueButton, load balancing multi-serveurs, système d'enregistrement et intégration complète au LMS."
+    points:
+        - 'Serveurs BigBlueButton avec load balancing'
+        - 'Scalabilité horizontale selon charge'
+        - 'Intégration LMS avec API et SSO'
+        - 'Infrastructure résiliente et haute disponibilité'
+engagement:
+    type: 'project_based'
+    description: "Déploiement complet d'une infrastructure de visioconférence BigBlueButton scalable et conteneurisée"
+    deliverables:
+        - 'Infrastructure BigBlueButton complète et opérationnelle'
+        - 'Conteneurisation Docker des services'
+        - 'Load balancing multi-serveurs configuré'
+        - 'Intégration LMS avec SSO'
+        - "Système d'enregistrement et transcoding vidéo"
+        - "Documentation technique et d'exploitation"
+---

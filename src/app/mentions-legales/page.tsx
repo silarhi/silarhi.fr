@@ -1,16 +1,16 @@
 import { Metadata } from 'next'
 
-import Hero from '@/components/hero-title'
+import HeroSection from '@/components/hero-section'
 import Section from '@/components/section'
 
 export const metadata: Metadata = {
     title: `Mentions légales - SILARHI`,
 }
 
-export default function Page() {
+export default function LegalMentionPage() {
     return (
         <>
-            <Hero title="Mentions Légales" />
+            <HeroSection title="Mentions Légales" />
             <Section>
                 <h2>1. Présentation du site.</h2>
                 <p>
