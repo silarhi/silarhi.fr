@@ -216,14 +216,14 @@ function HeroSection() {
                 priority
                 alt="SILARHI, Agence de développement Web Toulouse"
             />
-            <div className="text-surface absolute z-[2] flex h-full w-full flex-col items-center justify-center dark:text-white">
+            <div className="absolute z-[2] flex h-full w-full flex-col items-center justify-center text-white">
                 <Section>
                     <div className="mx-auto max-w-4xl">
                         <FadeInWhenVisible duration={0.8} yOffset={30}>
                             <h1 className="text-5xl font-bold text-shadow-lg lg:text-6xl xl:text-7xl">
                                 Développement d&apos;applications Web
                                 <br />
-                                <Badge variant="secondary" className="bg-secondary/80 text-foreground dark:text-dark">
+                                <Badge variant="secondary" className="bg-secondary/80 text-gray-900">
                                     À Toulouse & en France
                                 </Badge>
                             </h1>
