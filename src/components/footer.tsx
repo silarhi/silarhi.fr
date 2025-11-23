@@ -50,7 +50,7 @@ export default function Footer() {
 
     return (
         <footer
-            className={cn('bg-dark text-surface dark:text-foreground', {
+            className={cn('bg-dark dark:bg-light text-surface dark:text-foreground', {
                 'mt-20': pathname !== '/contact',
             })}
         >

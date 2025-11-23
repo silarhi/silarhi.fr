@@ -21,7 +21,7 @@ const BaseInputWidget = forwardRef<
                 'dark:placeholder:text-muted placeholder:text-gray-400',
                 'focus:ring-4 focus:outline-none',
                 'dark:hover:border-muted hover:border-gray-400',
-                'bg-surface dark:text-foreground shadow-sm',
+                'bg-surface dark:bg-light dark:text-foreground shadow-sm',
                 {
                     'focus:border-primary focus:ring-primary/20 dark:border-border border-gray-300':
                         !isValid && !isInvalid,

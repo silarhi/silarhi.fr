@@ -121,7 +121,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                         fixed: floating,
                         'text-surface dark:text-foreground': floating || (isHomePage && !floating),
                         'text-dark dark:text-foreground': !floating && !isHomePage,
-                        'bg-dark': floating,
+                        'bg-dark dark:bg-surface': floating,
                         'bg-transparent': !floating,
                     },
                     initialClass && !floating && initialClass,
@@ -197,7 +197,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                 )}
                 <div
                     className={cn(
-                        'bg-surface fixed top-0 bottom-0 left-0 w-80 overflow-y-auto shadow-xl transition-transform duration-300',
+                        'bg-surface dark:bg-light fixed top-0 bottom-0 left-0 w-80 overflow-y-auto shadow-xl transition-transform duration-300',
                         {
                             'translate-x-0': mobileMenuOpen,
                             '-translate-x-full': !mobileMenuOpen,
