@@ -64,10 +64,10 @@ export default function Loading() {
             </Section>
 
             {/* About Client Section Skeleton */}
-            <Section className="bg-light">
+            <Section className="bg-light dark:bg-background">
                 <div className="max-w-3xl">
                     <div className="bg-muted/20 mb-4 h-4 w-36 animate-pulse rounded" />
-                    <div className="border-border bg-surface rounded-xl border p-8">
+                    <div className="border-border bg-surface dark:bg-light rounded-xl border p-8">
                         <div className="mb-6 flex items-center gap-4">
                             <div className="bg-muted/20 h-8 w-16 animate-pulse rounded" />
                             <div className="bg-muted/30 h-6 w-48 animate-pulse rounded" />
@@ -112,7 +112,7 @@ export default function Loading() {
             </Section>
 
             {/* Solution Section Skeleton */}
-            <Section className="bg-surface">
+            <Section className="bg-surface dark:bg-light">
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                     <div>
                         <div className="bg-muted/20 mb-6 h-4 w-40 animate-pulse rounded" />

@@ -59,7 +59,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     return (
         <>
             {/* Hero Section */}
-            <Section className="bg-surface pt-32 pb-16 lg:pt-40 lg:pb-24">
+            <Section className="bg-surface dark:bg-light pt-32 pb-16 lg:pt-40 lg:pb-24">
                 <Link
                     href="/projets"
                     className="group text-foreground/80 hover:text-primary mb-8 inline-flex items-center gap-2 text-sm transition-colors"
@@ -123,7 +123,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Section>
 
             {/* Overview */}
-            <Section className="border-border bg-surface border-b">
+            <Section className="border-border bg-surface dark:bg-light border-b">
                 <div className="max-w-3xl">
                     <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
                         Vue d&apos;ensemble
@@ -135,12 +135,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Section>
 
             {/* About Client */}
-            <Section className="bg-light">
+            <Section className="bg-light dark:bg-background">
                 <div className="max-w-3xl">
                     <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
                         À propos du client
                     </h2>
-                    <div className="border-border bg-surface rounded-xl border p-8">
+                    <div className="border-border bg-surface dark:bg-light rounded-xl border p-8">
                         <div className="mb-6 flex items-center gap-4">
                             {project.client.logo && (
                                 <div className="relative h-8 w-16 flex-shrink-0">
@@ -149,7 +149,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                         alt={`Logo ${project.client.name}`}
                                         fill
                                         sizes="64px"
-                                        className="object-contain"
+                                        className="object-contain dark:invert"
                                     />
                                 </div>
                             )}
@@ -189,7 +189,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Section>
 
             {/* Challenge */}
-            <Section className="border-border bg-surface border-t">
+            <Section className="border-border bg-surface dark:bg-light border-t">
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                     <div>
                         <h2 className="text-foreground mb-6 text-3xl font-bold lg:text-4xl">Le Défi</h2>
@@ -218,7 +218,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Section>
 
             {/* Solution */}
-            <Section className="bg-surface">
+            <Section className="bg-surface dark:bg-light">
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="order-2 lg:order-1">
                         <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">

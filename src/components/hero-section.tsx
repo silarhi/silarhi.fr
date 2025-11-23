@@ -11,7 +11,9 @@ interface HeroTitleProps extends React.HTMLAttributes<HTMLElement> {
 
 export default function HeroSection({ pretitle, title, description, children, className }: HeroTitleProps) {
     return (
-        <Section className={cn('bg-surface border-border border-b pt-32 pb-16 lg:pt-40 lg:pb-24', className)}>
+        <Section
+            className={cn('bg-surface dark:bg-light border-border border-b pt-32 pb-16 lg:pt-40 lg:pb-24', className)}
+        >
             <div className="max-w-3xl">
                 {pretitle && <div className="mb-6">{pretitle}</div>}
 
