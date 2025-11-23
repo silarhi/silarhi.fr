@@ -62,7 +62,7 @@
 }
 
 /* 🌙 DARK MODE OVERRIDES */
-@theme dark {
+.dark {
     /* Primary colors remain similar but adjusted for dark backgrounds */
     --color-primary: #3b82f6;
     --color-primary-light: #60a5fa;
