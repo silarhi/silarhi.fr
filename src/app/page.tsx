@@ -257,7 +257,7 @@ function Arrow() {
 
 function MethodologySection() {
     return (
-        <Section id="methodologie" className="bg-surface dark:bg-light border-border border-t">
+        <Section id="methodologie" className="bg-light border-border border-t">
             <SectionHeader
                 title={
                     <span>
@@ -286,7 +286,7 @@ function MethodologySection() {
                         {/* Stage with number outside */}
                         <FadeInWhenVisible delay={0.2 + index * 0.15}>
                             <div className={cn('flex items-start gap-3 md:gap-4')}>
-                                <div className="bg-surface dark:bg-background border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
+                                <div className="bg-surface border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
                                     <div className="p-4 md:p-6">
                                         <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
                                             <div className="flex h-32 w-full flex-shrink-0 items-center justify-center md:w-32">
@@ -344,7 +344,7 @@ function ServiceList({
     return (
         <>
             <h3 className="text-primary mb-4 text-2xl font-light">{title}</h3>
-            <div className="bg-surface dark:bg-light border-border mb-12 rounded-lg border shadow-lg">
+            <div className="bg-surface border-border mb-12 rounded-lg border shadow-lg">
                 <ul className="">
                     {services.map((service, key) => (
                         <li
@@ -407,7 +407,7 @@ function ServicesSection() {
     const unsupportedServices = SERVICES.filter((service) => !service.supported)
 
     return (
-        <Section id="services" className="bg-surface dark:bg-background">
+        <Section id="services" className="bg-surface">
             <SectionHeader
                 title={
                     <span>
@@ -430,7 +430,7 @@ function ServicesSection() {
 
 function NumbersSection({ numbers }: { numbers: NumberData[] }) {
     return (
-        <Section id="chiffres" className="bg-light dark:bg-background border-border border-t">
+        <Section id="chiffres" className="bg-light border-border border-t">
             <SectionHeader
                 title={
                     <span>

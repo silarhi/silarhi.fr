@@ -75,9 +75,9 @@
 
     /* Dark mode neutrals - inverted hierarchy */
     --color-background: #0f172a; /* Very dark blue-gray for main background */
-    --color-light: #1e293b; /* Slightly lighter for contrast */
-    --color-dark: #f8fafc; /* Light color for text/headers in dark mode */
     --color-surface: #1e293b; /* Elevated surfaces (cards, modals) */
+    --color-light: #334155; /* Lighter sections for alternating contrast */
+    --color-dark: #f8fafc; /* Light color for text/headers in dark mode */
     --color-foreground: #f1f5f9; /* Default text color - very light */
 
     /* Text colors for dark mode */
