@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 /* Dark mode custom variant for Tailwind v4 */
-@custom-variant dark (&:is(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
     /* 🎨 PRIMARY — Digital Confidence (Trust, Professionalism, Clarity) */
