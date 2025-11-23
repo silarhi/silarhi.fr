@@ -223,10 +223,7 @@ function HeroSection() {
                             <h1 className="text-5xl font-bold text-shadow-lg lg:text-6xl xl:text-7xl">
                                 Développement d&apos;applications Web
                                 <br />
-                                <Badge
-                                    variant="secondary"
-                                    className="text-foreground bg-secondary/80 [text-shadow:none]"
-                                >
+                                <Badge variant="secondary" className="text-foreground bg-secondary/80 text-shadow-none">
                                     À Toulouse & en France
                                 </Badge>
                             </h1>
