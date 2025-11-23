@@ -30,7 +30,12 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
-        <html lang="en" className="h-full scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
+        <html
+            lang="en"
+            className="bg-background text-foreground h-full scroll-smooth"
+            data-scroll-behavior="smooth"
+            suppressHydrationWarning
+        >
             <head>
                 <meta name="msapplication-TileColor" content="#2b5797" />
                 <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
@@ -38,14 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <link rel="manifest" href="/site.webmanifest" />
                 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
             </head>
-            <body
-                className={cn(
-                    lato.className,
-                    lato.variable,
-                    montserrat.variable,
-                    'bg-background text-foreground h-full'
-                )}
-            >
+            <body className={cn(lato.className, lato.variable, montserrat.variable, 'h-full')}>
                 <ThemeProvider>
                     <DefaultLayout>{children}</DefaultLayout>
                 </ThemeProvider>
