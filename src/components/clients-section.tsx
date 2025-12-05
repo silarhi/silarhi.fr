@@ -46,6 +46,7 @@ export default function ClientsSection({ clients, projects }: ClientsSectionProp
                     <FadeInWhenVisible key={client.slug} delay={index * 0.05}>
                         <Link
                             href={getClientLink(client.slug)}
+                            title={client.name}
                             className="bg-surface border-border group block overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md"
                         >
                             <div className="flex aspect-square items-center justify-center p-6">
