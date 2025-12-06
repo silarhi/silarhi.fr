@@ -4,6 +4,7 @@ import ContactForm from '@/components/contact-form'
 import HeroSection from '@/components/hero-section'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import { Clock, Envelope, Map, Phone } from '@/components/ui/icons'
+import OverlapContent from '@/components/ui/overlap-content'
 import Section from '@/components/ui/section'
 import { cn } from '@/utils/lib'
 
@@ -17,17 +18,20 @@ export default function ContactPage() {
             <HeroSection
                 title="Contact"
                 description="Besoin d'un renseignement ou d'un devis ? Vous êtes au bon endroit."
+                overlap
             />
 
-            <Section>
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-12 lg:gap-12 xl:gap-16">
-                    <div className="md:col-span-7">
-                        <ContactSection />
+            <Section className="bg-surface pb-16 lg:pb-20" paddingY={false} container={false}>
+                <OverlapContent>
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-12 lg:gap-12 xl:gap-16">
+                        <div className="md:col-span-7">
+                            <ContactSection />
+                        </div>
+                        <div className="md:col-span-5">
+                            <InfoSection />
+                        </div>
                     </div>
-                    <div className="md:col-span-5">
-                        <InfoSection />
-                    </div>
-                </div>
+                </OverlapContent>
             </Section>
         </>
     )
