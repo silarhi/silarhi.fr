@@ -18,7 +18,7 @@
         "framer-motion": "^12.23.25",
         "fuse.js": "^7.1.0",
         "gray-matter": "^4.0.3",
-        "next": "16.0.7",
+        "next": "16.0.9",
         "next-mdx-remote": "^5.0.0",
         "react": "19.2.1",
         "react-dom": "19.2.1",
