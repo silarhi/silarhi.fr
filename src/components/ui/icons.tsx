@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import React from 'react'
 import {
     LuArrowLeft,
@@ -21,6 +20,8 @@ import {
     LuX,
     LuZap,
 } from 'react-icons/lu'
+
+import { cn } from '@/utils/lib'
 
 export const Download = LuDownload
 export const Map = LuMapPin
@@ -56,46 +57,44 @@ export function FaceSad(props: React.SVGProps<SVGSVGElement>) {
     )
 }
 
-export function MenuToggle({ open, ...props }: React.SVGProps<SVGSVGElement> & { open: boolean }) {
-    const transition = { duration: 0.3, ease: 'easeInOut' as const }
-
+export function MenuToggle({ open, className, ...props }: React.SVGProps<SVGSVGElement> & { open: boolean }) {
     return (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
-            {/* Top line - transforms to first diagonal of X */}
-            <motion.path
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className={className} {...props}>
+            {/* Top line - rotates to first diagonal of X */}
+            <line
+                x1="4"
+                y1="6"
+                x2="20"
+                y2="6"
                 strokeLinecap="round"
-                strokeLinejoin="round"
                 strokeWidth={2}
-                initial={false}
-                animate={{
-                    d: open ? 'M6 6L18 18' : 'M4 6L20 6',
-                }}
-                transition={transition}
+                className={cn('origin-center transition-transform duration-200 ease-in-out', {
+                    'translate-y-1.5 rotate-45': open,
+                })}
             />
             {/* Middle line - fades out */}
-            <motion.path
+            <line
+                x1="4"
+                y1="12"
+                x2="20"
+                y2="12"
                 strokeLinecap="round"
-                strokeLinejoin="round"
                 strokeWidth={2}
-                d="M4 12L20 12"
-                initial={false}
-                animate={{
-                    opacity: open ? 0 : 1,
-                    scaleX: open ? 0 : 1,
-                }}
-                transition={transition}
-                style={{ originX: 0.5 }}
+                className={cn('origin-center transition-all duration-200 ease-in-out', {
+                    'scale-x-0 opacity-0': open,
+                })}
             />
-            {/* Bottom line - transforms to second diagonal of X */}
-            <motion.path
+            {/* Bottom line - rotates to second diagonal of X */}
+            <line
+                x1="4"
+                y1="18"
+                x2="20"
+                y2="18"
                 strokeLinecap="round"
-                strokeLinejoin="round"
                 strokeWidth={2}
-                initial={false}
-                animate={{
-                    d: open ? 'M6 18L18 6' : 'M4 18L20 18',
-                }}
-                transition={transition}
+                className={cn('origin-center transition-transform duration-200 ease-in-out', {
+                    '-translate-y-[3px] -rotate-45': open,
+                })}
             />
         </svg>
     )
