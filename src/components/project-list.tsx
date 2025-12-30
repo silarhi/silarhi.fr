@@ -34,7 +34,11 @@ export default function ProjectList({ projects }: ProjectListProps) {
                             )}
                         >
                             <div className="flex-1">
-                                <LaptopMockup src={project.image} alt={project.title} />
+                                <LaptopMockup
+                                    src={project.image}
+                                    alt={project.title}
+                                    blurDataURL={project.blurDataURL}
+                                />
                             </div>
 
                             {/* Project type badge on image */}

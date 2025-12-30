@@ -119,7 +119,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
                     {project.image && (
                         <div>
-                            <LaptopMockup src={project.image} alt={project.title} />
+                            <LaptopMockup src={project.image} alt={project.title} blurDataURL={project.blurDataURL} />
                         </div>
                     )}
                 </div>
