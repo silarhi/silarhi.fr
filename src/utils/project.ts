@@ -68,6 +68,7 @@ export interface Project {
     duration?: string
     engagement: ProjectEngagement
     image?: string | StaticImageData
+    blurDataURL?: string
     overview: string
     challenge: ProjectChallenge
     solution: ProjectSolution
@@ -88,6 +89,7 @@ interface ProjectFrontMatter {
     duration?: string
     engagement: ProjectEngagement
     image?: string
+    blurDataURL?: string
     overview: string
     challenge: ProjectChallenge
     solution: ProjectSolution
@@ -189,6 +191,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
         duration: frontMatter.duration,
         engagement: frontMatter.engagement,
         image: frontMatter.image,
+        blurDataURL: frontMatter.blurDataURL,
         overview: frontMatter.overview,
         challenge: frontMatter.challenge,
         solution: frontMatter.solution,
