@@ -143,7 +143,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     <div className="border-border bg-surface rounded-xl border p-8">
                         <div className="mb-6 flex items-center gap-4">
                             {project.client.logo && (
-                                <div className="relative h-8 w-16 flex-shrink-0">
+                                <div className="relative h-8 w-16 shrink-0">
                                     <Image
                                         src={project.client.logo}
                                         alt={`Logo ${project.client.name}`}
@@ -157,21 +157,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         </div>
                         <div className="text-foreground/80 space-y-4">
                             <div className="flex items-start gap-3">
-                                <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                                <div className="bg-primary mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
                                 <div>
                                     <span className="text-foreground font-semibold">Secteur : </span>
                                     <Markdown source={project.client.sector} variant="inline" />
                                 </div>
                             </div>
-                            {project.client.description && (
-                                <div className="flex items-start gap-3">
-                                    <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                                    <div>
-                                        <span className="text-foreground font-semibold">Contexte : </span>
-                                        <Markdown source={project.client.description} variant="inline" />
-                                    </div>
+                            <div className="flex items-start gap-3">
+                                <div className="bg-primary mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
+                                <div>
+                                    <span className="text-foreground font-semibold">Contexte : </span>
+                                    <Markdown source={project.client.description} variant="inline" />
                                 </div>
-                            )}
+                            </div>
                         </div>
                         {hasMultipleProjects && (
                             <div className="border-border mt-6 border-t pt-6">
@@ -204,7 +202,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         <ul className="space-y-4">
                             {project.challenge.points.map((point, idx) => (
                                 <li key={idx} className="flex items-start gap-3">
-                                    <div className="bg-primary/10 mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full">
+                                    <div className="bg-primary/10 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                                         <div className="bg-primary h-2 w-2 rounded-full" />
                                     </div>
                                     <span className="text-foreground">
@@ -227,7 +225,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         <ul className="space-y-4">
                             {project.solution.points.map((point, idx) => (
                                 <li key={idx} className="flex items-start gap-3">
-                                    <div className="bg-primary/10 mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full">
+                                    <div className="bg-primary/10 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                                         <div className="bg-primary h-2 w-2 rounded-full" />
                                     </div>
                                     <span className="text-foreground">
@@ -277,7 +275,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                         <div key={iteration.slug} className="flex gap-4">
                                             {project.iterations.length > 1 && (
                                                 <div className="flex flex-col items-center">
-                                                    <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold">
+                                                    <div className="bg-primary/10 text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold">
                                                         {idx + 1}
                                                     </div>
                                                     {idx < project.iterations.length - 1 && (
@@ -317,7 +315,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                             <ul className="grid gap-4 sm:grid-cols-2">
                                 {project.engagement.deliverables.map((deliverable, idx) => (
                                     <li key={idx} className="flex items-start gap-3">
-                                        <div className="bg-primary/10 mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full">
+                                        <div className="bg-primary/10 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                                             <div className="bg-primary h-2 w-2 rounded-full" />
                                         </div>
                                         <span className="text-foreground">
