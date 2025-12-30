@@ -152,11 +152,14 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                         <div className="flex items-center space-x-2 xl:hidden">
                             <ThemeToggle className="text-inherit" />
                             <button
-                                className="p-2 text-inherit"
+                                className={cn(
+                                    'cursor-pointer rounded-lg p-2 text-inherit transition-colors duration-200',
+                                    'hover:bg-primary/10 dark:hover:bg-primary-light/10'
+                                )}
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                                 aria-label="Toggle menu"
                             >
-                                <MenuToggle className="h-6 w-6" open={mobileMenuOpen} />
+                                <MenuToggle className="h-5 w-5" open={mobileMenuOpen} />
                             </button>
                         </div>
 
@@ -189,7 +192,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
 
             {/* Mobile menu */}
             <div
-                className={cn('fixed inset-0 z-40 transition-[visibility] duration-200 xl:hidden', {
+                className={cn('fixed inset-0 z-60 transition-[visibility] duration-200 xl:hidden', {
                     invisible: !mobileMenuOpen,
                 })}
                 aria-hidden={!mobileMenuOpen}
@@ -205,15 +208,38 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                 {/* Slide panel */}
                 <div
                     className={cn(
-                        'bg-surface dark:bg-surface-dark fixed top-0 bottom-0 left-0 w-80 overflow-y-auto shadow-xl transition-transform duration-200 ease-in-out',
+                        'bg-surface dark:bg-surface-dark fixed top-0 bottom-0 left-0 flex w-80 flex-col shadow-xl transition-transform duration-200 ease-in-out',
                         {
                             'translate-x-0': mobileMenuOpen,
                             '-translate-x-full': !mobileMenuOpen,
                         }
                     )}
                 >
-                    <div className="p-4">
-                        <ul className="mt-16 space-y-1">
+                    {/* Mobile menu header */}
+                    <div className="border-border flex shrink-0 items-center justify-between border-b p-4">
+                        <Link
+                            href="/"
+                            className="hover:text-secondary flex items-center space-x-2 text-inherit transition-colors duration-300 hover:no-underline"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            <Image src={logo} alt="SILARHI" height={40} className="h-10 w-auto" />
+                            <span className={cn('text-lg', montserrat.className)}>SILARHI</span>
+                        </Link>
+                        <button
+                            className={cn(
+                                'cursor-pointer rounded-lg p-2 transition-colors duration-200',
+                                'hover:bg-primary/10 dark:hover:bg-primary-light/10'
+                            )}
+                            onClick={() => setMobileMenuOpen(false)}
+                            aria-label="Close menu"
+                        >
+                            <MenuToggle className="h-5 w-5" open={true} />
+                        </button>
+                    </div>
+
+                    {/* Mobile menu body - scrollable */}
+                    <div className="flex-1 overflow-y-auto p-4">
+                        <ul className="space-y-1">
                             {menuItems.map((item, i) => (
                                 <li key={i}>
                                     <ActiveLink

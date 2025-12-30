@@ -68,8 +68,8 @@ export function MenuToggle({ open, className, ...props }: React.SVGProps<SVGSVGE
                 y2="6"
                 strokeLinecap="round"
                 strokeWidth={2}
-                className={cn('origin-center transition-transform duration-200 ease-in-out', {
-                    'translate-y-1.5 rotate-45': open,
+                className={cn('origin-[5px_10px] transition-transform duration-200 ease-in-out', {
+                    'rotate-45': open,
                 })}
             />
             {/* Middle line - fades out */}
@@ -80,7 +80,7 @@ export function MenuToggle({ open, className, ...props }: React.SVGProps<SVGSVGE
                 y2="12"
                 strokeLinecap="round"
                 strokeWidth={2}
-                className={cn('origin-center transition-all duration-200 ease-in-out', {
+                className={cn('transition-all duration-200 ease-in-out', {
                     'scale-x-0 opacity-0': open,
                 })}
             />
@@ -92,8 +92,8 @@ export function MenuToggle({ open, className, ...props }: React.SVGProps<SVGSVGE
                 y2="18"
                 strokeLinecap="round"
                 strokeWidth={2}
-                className={cn('origin-center transition-transform duration-200 ease-in-out', {
-                    '-translate-y-[3px] -rotate-45': open,
+                className={cn('origin-[5px_14px] transition-transform duration-200 ease-in-out', {
+                    '-rotate-45': open,
                 })}
             />
         </svg>
