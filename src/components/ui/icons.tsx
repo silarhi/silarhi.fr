@@ -21,6 +21,8 @@ import {
     LuZap,
 } from 'react-icons/lu'
 
+import { cn } from '@/utils/lib'
+
 export const Download = LuDownload
 export const Map = LuMapPin
 export const Clock = LuClock
@@ -55,14 +57,44 @@ export function FaceSad(props: React.SVGProps<SVGSVGElement>) {
     )
 }
 
-export function MenuToggle({ open, ...props }: React.SVGProps<SVGSVGElement> & { open: boolean }) {
+export function MenuToggle({ open, className, ...props }: React.SVGProps<SVGSVGElement> & { open: boolean }) {
     return (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
-            <path
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className={className} {...props}>
+            {/* Top line - rotates to first diagonal of X */}
+            <line
+                x1="4"
+                y1="6"
+                x2="20"
+                y2="6"
                 strokeLinecap="round"
-                strokeLinejoin="round"
                 strokeWidth={2}
-                d={open ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+                className={cn('origin-center transition-transform duration-200 ease-in-out', {
+                    'translate-y-1.5 rotate-45': open,
+                })}
+            />
+            {/* Middle line - fades out */}
+            <line
+                x1="4"
+                y1="12"
+                x2="20"
+                y2="12"
+                strokeLinecap="round"
+                strokeWidth={2}
+                className={cn('origin-center transition-all duration-200 ease-in-out', {
+                    'scale-x-0 opacity-0': open,
+                })}
+            />
+            {/* Bottom line - rotates to second diagonal of X */}
+            <line
+                x1="4"
+                y1="18"
+                x2="20"
+                y2="18"
+                strokeLinecap="round"
+                strokeWidth={2}
+                className={cn('origin-center transition-transform duration-200 ease-in-out', {
+                    '-translate-y-[3px] -rotate-45': open,
+                })}
             />
         </svg>
     )

@@ -189,15 +189,23 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
 
             {/* Mobile menu */}
             <div
-                className={cn('fixed inset-0 z-40 xl:hidden', { hidden: !mobileMenuOpen })}
+                className={cn('fixed inset-0 z-40 transition-[visibility] duration-200 xl:hidden', {
+                    invisible: !mobileMenuOpen,
+                })}
                 aria-hidden={!mobileMenuOpen}
             >
-                {mobileMenuOpen && (
-                    <div className="bg-overlay fixed inset-0" onClick={() => setMobileMenuOpen(false)} />
-                )}
+                {/* Backdrop with fade transition */}
+                <div
+                    className={cn('bg-overlay fixed inset-0 transition-opacity duration-200', {
+                        'opacity-100': mobileMenuOpen,
+                        'opacity-0': !mobileMenuOpen,
+                    })}
+                    onClick={() => setMobileMenuOpen(false)}
+                />
+                {/* Slide panel */}
                 <div
                     className={cn(
-                        'bg-surface dark:bg-surface-dark fixed top-0 bottom-0 left-0 w-80 overflow-y-auto shadow-xl transition-transform duration-300',
+                        'bg-surface dark:bg-surface-dark fixed top-0 bottom-0 left-0 w-80 overflow-y-auto shadow-xl transition-transform duration-200 ease-in-out',
                         {
                             'translate-x-0': mobileMenuOpen,
                             '-translate-x-full': !mobileMenuOpen,
