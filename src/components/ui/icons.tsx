@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import React from 'react'
 import {
     LuArrowLeft,
@@ -56,13 +57,45 @@ export function FaceSad(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export function MenuToggle({ open, ...props }: React.SVGProps<SVGSVGElement> & { open: boolean }) {
+    const transition = { duration: 0.3, ease: 'easeInOut' as const }
+
     return (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" {...props}>
-            <path
+            {/* Top line - transforms to first diagonal of X */}
+            <motion.path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d={open ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+                initial={false}
+                animate={{
+                    d: open ? 'M6 6L18 18' : 'M4 6L20 6',
+                }}
+                transition={transition}
+            />
+            {/* Middle line - fades out */}
+            <motion.path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 12L20 12"
+                initial={false}
+                animate={{
+                    opacity: open ? 0 : 1,
+                    scaleX: open ? 0 : 1,
+                }}
+                transition={transition}
+                style={{ originX: 0.5 }}
+            />
+            {/* Bottom line - transforms to second diagonal of X */}
+            <motion.path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                initial={false}
+                animate={{
+                    d: open ? 'M6 18L18 6' : 'M4 18L20 18',
+                }}
+                transition={transition}
             />
         </svg>
     )
