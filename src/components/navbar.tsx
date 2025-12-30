@@ -149,7 +149,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
 
                         {/* Mobile menu button */}
                         <button
-                            className="p-2 text-inherit lg:hidden"
+                            className="p-2 text-inherit xl:hidden"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Toggle menu"
                         >
@@ -157,7 +157,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                         </button>
 
                         {/* Desktop menu */}
-                        <ul className="hidden items-center space-x-9 lg:flex">
+                        <ul className="hidden items-center space-x-9 xl:flex">
                             {menuItems.map((item, i) => (
                                 <li key={i}>
                                     <ActiveLink
@@ -182,7 +182,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
 
             {/* Mobile menu */}
             <div
-                className={cn('fixed inset-0 z-40 lg:hidden', { hidden: !mobileMenuOpen })}
+                className={cn('fixed inset-0 z-40 xl:hidden', { hidden: !mobileMenuOpen })}
                 aria-hidden={!mobileMenuOpen}
             >
                 {mobileMenuOpen && (
