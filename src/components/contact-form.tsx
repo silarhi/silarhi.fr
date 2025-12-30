@@ -14,16 +14,28 @@ interface ContactFormData {
     message: string
 }
 
+interface FormspreeValidationError {
+    code: string
+    field: string
+    message: string
+}
+
+interface FormspreeErrorResponse {
+    error: string
+    errors?: FormspreeValidationError[]
+}
+
 export default function ContactForm() {
     const [pending, setPending] = useState<boolean>(false)
     const [success, setSuccess] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
+    const [submitError, setSubmitError] = useState<boolean>(false)
 
-    const { register, handleSubmit, reset, formState, getFieldState } = useForm<ContactFormData>()
+    const { register, handleSubmit, reset, formState, getFieldState, setError } = useForm<ContactFormData>()
 
     const onSubmit = useCallback(
         async (data: ContactFormData) => {
             setPending(true)
+            setSubmitError(false)
 
             try {
                 const response = await fetch('https://formspree.io/f/maykddyv', {
@@ -35,20 +47,34 @@ export default function ContactForm() {
                 })
 
                 if (!response.ok) {
+                    if (response.status === 422) {
+                        const errorResponse: FormspreeErrorResponse = await response.json()
+                        if (errorResponse.errors) {
+                            for (const validationError of errorResponse.errors) {
+                                const fieldName = validationError.field as keyof ContactFormData
+                                if (fieldName in data) {
+                                    setError(fieldName, {
+                                        type: 'server',
+                                        message: validationError.message,
+                                    })
+                                }
+                            }
+                            return
+                        }
+                    }
                     throw new Error('Response error')
                 }
 
                 reset()
                 setSuccess(true)
-                setError(false)
             } catch (_) {
                 setSuccess(false)
-                setError(true)
+                setSubmitError(true)
             } finally {
                 setPending(false)
             }
         },
-        [reset]
+        [reset, setError]
     )
 
     if (success) {
@@ -62,7 +88,7 @@ export default function ContactForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            {error && (
+            {submitError && (
                 <div className="border-error/20 bg-error/10 text-error mb-4 rounded border p-4" role="alert">
                     Une erreur est survenue pendant l&apos;envoi du message.
                 </div>
