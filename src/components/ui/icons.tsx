@@ -7,6 +7,7 @@ import {
     LuClock,
     LuCode,
     LuDownload,
+    LuExpand,
     LuFileText,
     LuFilter,
     LuMail,
@@ -24,6 +25,7 @@ import {
 import { cn } from '@/utils/lib'
 
 export const Download = LuDownload
+export const Expand = LuExpand
 export const Map = LuMapPin
 export const Clock = LuClock
 export const Phone = LuPhone
