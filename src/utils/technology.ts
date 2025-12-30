@@ -14,10 +14,10 @@ export interface Technology {
     name: string
     name_aliases?: string[]
     title: string
+    excerpt: string
     description: string
     meta_title: string
     meta_description: string
-    long_description: string
     url: string
     reasons: TechnologyReason[]
     content: string
@@ -27,10 +27,10 @@ interface TechnologyFrontMatter {
     name: string
     name_aliases?: string[]
     title: string
+    excerpt: string
     description: string
     meta_title: string
     meta_description: string
-    long_description: string
     url: string
     reasons: TechnologyReason[]
 }
@@ -72,10 +72,10 @@ export async function getTechnologyBySlug(slug: string): Promise<Technology | nu
         name: frontMatter.name,
         name_aliases: frontMatter.name_aliases,
         title: frontMatter.title,
+        excerpt: frontMatter.excerpt,
         description: frontMatter.description,
         meta_title: frontMatter.meta_title,
         meta_description: frontMatter.meta_description,
-        long_description: frontMatter.long_description,
         url: frontMatter.url,
         reasons: frontMatter.reasons,
         content,

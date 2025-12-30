@@ -67,12 +67,12 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
                     </Link>
                 }
                 title={technology.title}
-                description={technology.description}
+                description={technology.excerpt}
                 className="border-0"
             />
 
             {/* Overview Section */}
-            {technology.long_description && (
+            {technology.description && (
                 <Section className="border-border bg-surface border-b pt-0 lg:pt-0">
                     <div className="max-w-3xl">
                         <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
@@ -80,7 +80,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
                         </h2>
                         <div className="text-foreground text-xl leading-relaxed lg:text-2xl">
                             <Markdown
-                                source={technology.long_description}
+                                source={technology.description}
                                 variant="inline"
                                 autoLinkTechnologies={false}
                             />
