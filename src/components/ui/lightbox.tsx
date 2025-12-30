@@ -43,7 +43,7 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+                    className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black/90 backdrop-blur-sm"
                     onClick={onClose}
                     role="dialog"
                     aria-modal="true"
@@ -64,17 +64,10 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
                         transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
-                        className="relative max-h-[90vh] max-w-[90vw]"
+                        className="relative h-[80vh] w-[90vw] max-w-5xl"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <Image
-                            src={src}
-                            alt={alt}
-                            width={1920}
-                            height={1080}
-                            className="h-auto max-h-[90vh] w-auto max-w-[90vw] rounded-lg object-contain"
-                            priority
-                        />
+                        <Image src={src} alt={alt} fill className="rounded-lg object-contain" priority sizes="90vw" />
                     </motion.div>
 
                     {/* Caption */}
