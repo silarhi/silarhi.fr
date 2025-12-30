@@ -207,7 +207,7 @@ function getNumbers(clientsCount: number, projectsCount: number): NumberData[] {
 function HeroSection() {
     return (
         <div className="relative h-screen w-full overflow-hidden">
-            <div className="absolute top-0 left-0 z-[1] h-full w-full bg-black opacity-60"></div>
+            <div className="absolute top-0 left-0 z-1 h-full w-full bg-black opacity-60"></div>
             <Image
                 src={home}
                 sizes="100vw"
@@ -216,14 +216,17 @@ function HeroSection() {
                 priority
                 alt="SILARHI, Agence de développement Web Toulouse"
             />
-            <div className="text-surface absolute z-[2] flex h-full w-full flex-col items-center justify-center">
+            <div className="absolute z-2 flex h-full w-full flex-col items-center justify-center text-white">
                 <Section>
                     <div className="mx-auto max-w-4xl">
                         <FadeInWhenVisible duration={0.8} yOffset={30}>
                             <h1 className="text-5xl font-bold text-shadow-lg lg:text-6xl xl:text-7xl">
                                 Développement d&apos;applications Web
                                 <br />
-                                <Badge variant="secondary" className="text-foreground bg-secondary/80 text-shadow-none">
+                                <Badge
+                                    variant="secondary"
+                                    className="bg-secondary/80 dark:bg-secondary/70 dark:text-surface text-gray-900 text-shadow-none"
+                                >
                                     À Toulouse & en France
                                 </Badge>
                             </h1>
@@ -270,7 +273,7 @@ function MethodologySection() {
             <div className="mx-auto my-12 max-w-2xl space-y-4">
                 <FadeInWhenVisible delay={0.1}>
                     <div className="text-center">
-                        <span className="bg-primary-light/10 border-primary/10 inline-block rounded-lg border-2 p-3 md:p-4">
+                        <span className="bg-primary-light/10 border-primary/10 dark:bg-primary/20 dark:border-primary/10 inline-block rounded-lg border-2 p-3 md:p-4">
                             <h3 className="text-base font-bold md:text-lg">Prise de contact / devis</h3>
                         </span>
                     </div>
@@ -289,7 +292,7 @@ function MethodologySection() {
                                 <div className="bg-surface border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
                                     <div className="p-4 md:p-6">
                                         <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
-                                            <div className="flex h-32 w-full flex-shrink-0 items-center justify-center md:w-32">
+                                            <div className="flex h-32 w-full shrink-0 items-center justify-center md:w-32">
                                                 <Image src={stage.icon} sizes="100vw" height={128} alt={stage.title} />
                                             </div>
 
@@ -318,7 +321,7 @@ function MethodologySection() {
                 {/* Success block - small, only title */}
                 <FadeInWhenVisible delay={0.2 + FEATURES.length * 0.15}>
                     <div className="text-center">
-                        <span className="bg-success/10 border-success/10 inline-block rounded-lg border-2 p-3 md:p-4">
+                        <span className="bg-success/10 border-success/10 dark:bg-success/20 dark:border-success/20 inline-block rounded-lg border-2 p-3 md:p-4">
                             <h3 className="text-base font-bold md:text-lg">
                                 Client satisfait
                                 <Check className="ml-2 inline-block" />
@@ -343,8 +346,8 @@ function ServiceList({
 }) {
     return (
         <>
-            <h3 className="text-primary-dark mb-4 text-2xl font-light">{title}</h3>
-            <div className="bg-surface border-border mb-12 rounded-lg border shadow-lg">
+            <h3 className="text-primary-dark dark:text-primary mb-4 text-2xl font-light">{title}</h3>
+            <div className="bg-surface dark:bg-light dark:text-foreground border-border mb-12 rounded-lg border shadow-lg">
                 <ul className="">
                     {services.map((service, key) => (
                         <li
@@ -378,7 +381,7 @@ function ServiceList({
 
 function PresentationSection() {
     return (
-        <Section id="presentation" className="bg-primary-dark relative z-[2]">
+        <Section id="presentation" className="bg-primary-dark relative z-2 text-white">
             <Image
                 src={coding}
                 alt="Coding"
@@ -387,7 +390,7 @@ function PresentationSection() {
                 sizes="100vw"
             />
             <FadeInWhenVisible>
-                <div className="text-surface mx-auto max-w-4xl text-center">
+                <div className="mx-auto max-w-4xl text-center">
                     <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
                         SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
                         sur mesure.
@@ -430,7 +433,7 @@ function ServicesSection() {
 
 function NumbersSection({ numbers }: { numbers: NumberData[] }) {
     return (
-        <Section id="chiffres" className="bg-light border-border border-t">
+        <Section id="chiffres" className="bg-light border-border dark:bg-background border-t">
             <SectionHeader
                 title={
                     <span>

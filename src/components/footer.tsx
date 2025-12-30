@@ -46,11 +46,10 @@ const footerSections = [
 
 export default function Footer() {
     const pathname = usePathname()
-    const linkClasses = 'text-inherit hover:text-secondary transition-colors'
 
     return (
         <footer
-            className={cn('bg-dark text-surface', {
+            className={cn('bg-surface-dark text-dark-foreground dark:bg-background', {
                 'mt-20': pathname !== '/contact',
             })}
         >
@@ -78,7 +77,7 @@ export default function Footer() {
                     </div>
                 </div>
             )}
-            <div className="border-dark/10 border-t py-12">
+            <div className="border-surface-dark/10 dark:border-border border-t py-12">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
                         <div className="lg:col-span-4">
@@ -91,7 +90,7 @@ export default function Footer() {
                             </Link>
                             <div className="space-y-1">
                                 <p className="mb-0 font-semibold">Notre adresse</p>
-                                <p className="text-surface/80 mb-0">
+                                <p className="text-dark-foreground/80 dark:text-dark-foreground/90 mb-0">
                                     116 route d&#39;Espagne
                                     <br />
                                     BAL 411
@@ -109,7 +108,9 @@ export default function Footer() {
                                             <Link
                                                 key={link.href}
                                                 href={link.href}
-                                                className={cn(linkClasses, 'text-surface/80 block')}
+                                                className={cn(
+                                                    'hover:text-secondary text-dark-foreground/80 dark:text-dark-foreground/90 block transition-colors'
+                                                )}
                                             >
                                                 {link.label}
                                             </Link>

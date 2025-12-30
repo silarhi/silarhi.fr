@@ -27,7 +27,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                     {project.image && (
                         <div
                             className={cn(
-                                'bg-muted/10 relative flex h-full items-center justify-center overflow-hidden rounded-2xl p-2 lg:p-4',
+                                'bg-muted/10 dark:bg-muted/5 relative flex h-full items-center justify-center overflow-hidden rounded-2xl p-2 lg:p-4',
                                 {
                                     'lg:col-start-2': index % 2 === 1,
                                 }
@@ -42,7 +42,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 <ProjectScopeBadge
                                     scope={project.scope}
                                     size="sm"
-                                    className="text-foreground bg-surface/95 shadow-lg backdrop-blur-sm"
+                                    className="text-foreground dark:text-foreground bg-surface/95 dark:bg-light/95 shadow-lg backdrop-blur-sm"
                                 />
                             </div>
                         </div>
@@ -86,7 +86,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 <Link
                                     key={tech.slug}
                                     href={`/technologies/${tech.slug}`}
-                                    className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface rounded-full border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700 no-underline transition-colors"
+                                    className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface dark:bg-light dark:border-border dark:text-foreground dark:hover:border-primary-light dark:hover:bg-primary-light/10 rounded-full border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700 no-underline transition-colors"
                                 >
                                     {tech.name}
                                 </Link>

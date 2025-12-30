@@ -47,7 +47,7 @@ export default function ClientsSection({ clients, projects }: ClientsSectionProp
                         <Link
                             href={getClientLink(client.slug)}
                             title={client.name}
-                            className="bg-surface border-border group block overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md"
+                            className="bg-surface dark:bg-surface-elevated border-border group block overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md"
                         >
                             <div className="flex aspect-square items-center justify-center p-6">
                                 {client.logo ? (
@@ -57,7 +57,7 @@ export default function ClientsSection({ clients, projects }: ClientsSectionProp
                                             alt={client.name}
                                             fill
                                             className={cn(
-                                                'object-contain transition-opacity duration-300 group-hover:opacity-80',
+                                                'object-contain transition-opacity duration-300 group-hover:opacity-80 dark:invert',
                                                 client.logoClassName
                                             )}
                                             sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
