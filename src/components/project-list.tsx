@@ -33,7 +33,9 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 }
                             )}
                         >
-                            <LaptopMockup src={project.image} alt={project.title} />
+                            <div className="flex-1">
+                                <LaptopMockup src={project.image} alt={project.title} />
+                            </div>
 
                             {/* Project type badge on image */}
                             <div className="absolute top-4 right-4">

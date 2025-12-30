@@ -51,9 +51,13 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
                 >
                     {/* Close button */}
                     <button
-                        onClick={onClose}
-                        className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/20"
-                        aria-label="Close lightbox"
+                        type="button"
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            onClose()
+                        }}
+                        className="absolute top-4 right-4 z-10 cursor-pointer rounded-lg p-2 text-white transition-colors duration-200 hover:bg-white/20"
+                        aria-label="Fermer"
                     >
                         <XMark className="h-6 w-6" />
                     </button>
