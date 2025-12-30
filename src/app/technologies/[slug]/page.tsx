@@ -36,10 +36,8 @@ export async function generateMetadata({ params }: TechnologyPageProps): Promise
     }
 
     return {
-        title: `Développement ${technology.name} Toulouse - Agence Web SILARHI`,
-        description:
-            technology.description ||
-            `Agence de développement ${technology.name} à Toulouse. Découvrez nos projets et expertise en développement ${technology.name} pour créer votre application web sur mesure.`,
+        title: technology.meta_title || `Développement ${technology.name} Toulouse - Agence Web SILARHI`,
+        description: technology.meta_description,
     }
 }
 
@@ -68,20 +66,24 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
                         Retour aux projets
                     </Link>
                 }
-                title={`Développement ${technology.name} à Toulouse`}
-                description={`Agence web experte en ${technology.name}. Découvrez nos projets et notre expertise pour votre application sur mesure.`}
+                title={technology.title}
+                description={technology.description}
                 className="border-0"
             />
 
             {/* Overview Section */}
-            {technology.description && (
+            {technology.meta_description && (
                 <Section className="border-border bg-surface border-b pt-0 lg:pt-0">
                     <div className="max-w-3xl">
                         <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
                             Vue d&apos;ensemble
                         </h2>
                         <div className="text-foreground text-xl leading-relaxed lg:text-2xl">
-                            <Markdown source={technology.description} variant="inline" autoLinkTechnologies={false} />
+                            <Markdown
+                                source={technology.meta_description}
+                                variant="inline"
+                                autoLinkTechnologies={false}
+                            />
                         </div>
                         {technology.url && (
                             <div className="mt-6">
