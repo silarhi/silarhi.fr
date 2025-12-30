@@ -5,12 +5,11 @@ import Badge from '@/components/ui/badge'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
-import type { ClientMetadata } from '@/utils/client'
-import { cn } from '@/utils/lib'
+import type { Client } from '@/utils/client'
 import type { Project } from '@/utils/project'
 
 interface ClientsSectionProps {
-    clients: ClientMetadata[]
+    clients: Client[]
     projects: Project[]
 }
 
@@ -56,10 +55,7 @@ export default function ClientsSection({ clients, projects }: ClientsSectionProp
                                             src={client.logo}
                                             alt={client.name}
                                             fill
-                                            className={cn(
-                                                'object-contain transition-opacity duration-300 group-hover:opacity-80 dark:invert',
-                                                client.logoClassName
-                                            )}
+                                            className="object-contain transition-opacity duration-300 group-hover:opacity-80 dark:invert"
                                             sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                                         />
                                     </div>

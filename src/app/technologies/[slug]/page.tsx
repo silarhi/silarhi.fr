@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: TechnologyPageProps): Promise
     }
 
     return {
-        title: technology.meta_title || `Développement ${technology.name} Toulouse - Agence Web SILARHI`,
+        title: `${technology.meta_title} | SILARHI`,
         description: technology.meta_description,
     }
 }
@@ -103,7 +103,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
             )}
 
             {/* Why Choose Section */}
-            {technology.reasons && technology.reasons.length > 0 && (
+            {technology.reasons.length > 0 && (
                 <Section className="bg-light border-border border-b">
                     <div className="mx-auto max-w-4xl">
                         <h2 className="text-foreground mb-8 text-center text-3xl font-bold lg:text-4xl">

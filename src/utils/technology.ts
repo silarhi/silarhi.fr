@@ -9,15 +9,15 @@ interface TechnologyReason {
     description: string
 }
 
-export interface TechnologyMetadata {
+export interface Technology {
     slug: string
     name: string
     name_aliases?: string[]
     title: string
     description: string
-    meta_title?: string
+    meta_title: string
     meta_description: string
-    url?: string
+    url: string
     reasons: TechnologyReason[]
     content: string
 }
@@ -27,10 +27,10 @@ interface TechnologyFrontMatter {
     name_aliases?: string[]
     title: string
     description: string
-    meta_title?: string
+    meta_title: string
     meta_description: string
-    url?: string
-    reasons?: TechnologyReason[]
+    url: string
+    reasons: TechnologyReason[]
 }
 
 // Ensure technology directory exists
@@ -52,7 +52,7 @@ export function getAllTechnologySlugs(): string[] {
 }
 
 // Get a single technology by slug
-export async function getTechnologyBySlug(slug: string): Promise<TechnologyMetadata | null> {
+export async function getTechnologyBySlug(slug: string): Promise<Technology | null> {
     ensureTechnologyDirectory()
     const fullPath = path.join(technologiesDirectory, `${slug}.mdx`)
 
@@ -74,17 +74,17 @@ export async function getTechnologyBySlug(slug: string): Promise<TechnologyMetad
         meta_title: frontMatter.meta_title,
         meta_description: frontMatter.meta_description,
         url: frontMatter.url,
-        reasons: frontMatter.reasons ?? [],
+        reasons: frontMatter.reasons,
         content,
     }
 }
 
 // Get all technologies
-export async function getAllTechnologies(): Promise<TechnologyMetadata[]> {
+export async function getAllTechnologies(): Promise<Technology[]> {
     const slugs = getAllTechnologySlugs()
     const technologies = await Promise.all(slugs.map((slug) => getTechnologyBySlug(slug)))
 
     return technologies
-        .filter((technology): technology is TechnologyMetadata => technology !== null)
+        .filter((technology): technology is Technology => technology !== null)
         .sort((a, b) => a.name.localeCompare(b.name))
 }

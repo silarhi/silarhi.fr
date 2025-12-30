@@ -4,15 +4,12 @@ import path from 'path'
 
 const clientsDirectory = path.join(process.cwd(), 'content/clients')
 
-export interface ClientMetadata {
+export interface Client {
     slug: string
     name: string
     logo?: string
-    logoClassName?: string
     sector: string
-    description?: string
-    challenges?: string
-    content: string
+    description: string
 }
 
 interface ClientFrontMatter {
@@ -20,8 +17,7 @@ interface ClientFrontMatter {
     slug: string
     logo?: string
     sector: string
-    description?: string
-    challenges?: string
+    description: string
 }
 
 // Ensure client directory exists
@@ -43,7 +39,7 @@ function getAllClientSlugs(): string[] {
 }
 
 // Get a single client by slug
-export async function getClientBySlug(slug: string): Promise<ClientMetadata | null> {
+export async function getClientBySlug(slug: string): Promise<Client | null> {
     ensureClientDirectory()
     const fullPath = path.join(clientsDirectory, `${slug}.mdx`)
 
@@ -52,7 +48,7 @@ export async function getClientBySlug(slug: string): Promise<ClientMetadata | nu
     }
 
     const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const { data, content } = matter(fileContents)
+    const { data } = matter(fileContents)
 
     const frontMatter = data as ClientFrontMatter
 
@@ -62,17 +58,13 @@ export async function getClientBySlug(slug: string): Promise<ClientMetadata | nu
         logo: frontMatter.logo,
         sector: frontMatter.sector,
         description: frontMatter.description,
-        challenges: frontMatter.challenges,
-        content,
     }
 }
 
 // Get all clients
-export async function getAllClients(): Promise<ClientMetadata[]> {
+export async function getAllClients(): Promise<Client[]> {
     const slugs = getAllClientSlugs()
     const clients = await Promise.all(slugs.map((slug) => getClientBySlug(slug)))
 
-    return clients
-        .filter((client): client is ClientMetadata => client !== null)
-        .sort((a, b) => a.name.localeCompare(b.name))
+    return clients.filter((client): client is Client => client !== null).sort((a, b) => a.name.localeCompare(b.name))
 }

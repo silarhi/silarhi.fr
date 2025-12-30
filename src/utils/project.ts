@@ -3,8 +3,8 @@ import matter from 'gray-matter'
 import { StaticImageData } from 'next/image'
 import path from 'path'
 
-import { type ClientMetadata, getClientBySlug } from './client'
-import { getTechnologyBySlug, type TechnologyMetadata } from './technology'
+import { type Client, getClientBySlug } from './client'
+import { getTechnologyBySlug, type Technology } from './technology'
 
 const projectsDirectory = path.join(process.cwd(), 'content/projects')
 
@@ -55,8 +55,8 @@ export interface Project {
     title: string
     date: Date
     excerpt: string
-    client: ClientMetadata
-    technologies: TechnologyMetadata[]
+    client: Client
+    technologies: Technology[]
     published: boolean
     content: string
     iterations: ProjectIteration[]
@@ -178,7 +178,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
         excerpt: frontMatter.excerpt,
         client,
         url: frontMatter.url,
-        technologies: technologies.filter((tech): tech is TechnologyMetadata => tech !== null),
+        technologies: technologies.filter((tech): tech is Technology => tech !== null),
         published: frontMatter.published,
         content,
         iterations,

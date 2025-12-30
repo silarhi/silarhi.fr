@@ -163,15 +163,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                     <Markdown source={project.client.sector} variant="inline" />
                                 </div>
                             </div>
-                            {project.client.description && (
-                                <div className="flex items-start gap-3">
-                                    <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
-                                    <div>
-                                        <span className="text-foreground font-semibold">Contexte : </span>
-                                        <Markdown source={project.client.description} variant="inline" />
-                                    </div>
+                            <div className="flex items-start gap-3">
+                                <div className="bg-primary mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                                <div>
+                                    <span className="text-foreground font-semibold">Contexte : </span>
+                                    <Markdown source={project.client.description} variant="inline" />
                                 </div>
-                            )}
+                            </div>
                         </div>
                         {hasMultipleProjects && (
                             <div className="border-border mt-6 border-t pt-6">
