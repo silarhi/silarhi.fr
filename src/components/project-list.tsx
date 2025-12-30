@@ -33,7 +33,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 }
                             )}
                         >
-                            <div className="flex-1 transition-transform hover:scale-105">
+                            <div className="flex-1">
                                 <LaptopMockup src={project.image} alt={project.title} />
                             </div>
 

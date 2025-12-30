@@ -115,7 +115,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </div>
 
                     {project.image && (
-                        <div className="transition-transform hover:scale-105">
+                        <div>
                             <LaptopMockup src={project.image} alt={project.title} />
                         </div>
                     )}
