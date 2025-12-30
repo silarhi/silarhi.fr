@@ -1,30 +1,33 @@
 {
-    "permissions": {
-        "allow": [
-            "Bash(npm run dev:*)",
-            "Bash(yarn remove:*)",
-            "Bash(yarn typecheck:*)",
-            "Bash(yarn lint-ci:*)",
-            "Bash(yarn knip:*)",
-            "Bash(yarn build:*)",
-            "Bash(yarn lint:*)",
-            "Bash(yarn add:*)",
-            "Bash(git add:*)",
-            "Bash(git commit:*)",
-            "Bash(npx tailwindcss:*)",
-            "mcp__repomix__pack_codebase",
-            "mcp__repomix__grep_repomix_output",
-            "mcp__repomix__read_repomix_output",
-            "mcp__context7__resolve-library-id",
-            "mcp__context7__get-library-docs",
-            "Bash(ls:*)",
-            "Bash(tree:*)",
-            "Bash(yarn prettier:*)",
-            "mcp__filesystem__write_file",
-            "Bash(yarn dev)",
-            "Bash(git log:*)"
-        ],
-        "deny": [],
-        "ask": []
-    }
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(yarn remove:*)",
+      "Bash(yarn typecheck:*)",
+      "Bash(yarn lint-ci:*)",
+      "Bash(yarn knip:*)",
+      "Bash(yarn build:*)",
+      "Bash(yarn lint:*)",
+      "Bash(yarn add:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx tailwindcss:*)",
+      "mcp__repomix__pack_codebase",
+      "mcp__repomix__grep_repomix_output",
+      "mcp__repomix__read_repomix_output",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "Bash(ls:*)",
+      "Bash(tree:*)",
+      "Bash(yarn prettier:*)",
+      "mcp__filesystem__write_file",
+      "Bash(yarn dev)",
+      "Bash(git log:*)",
+      "mcp__filesystem__read_multiple_files",
+      "Bash(git show:*)",
+      "Bash(npx tsc:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
 }

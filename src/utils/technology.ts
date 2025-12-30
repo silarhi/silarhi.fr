@@ -17,6 +17,7 @@ export interface Technology {
     description: string
     meta_title: string
     meta_description: string
+    long_description: string
     url: string
     reasons: TechnologyReason[]
     content: string
@@ -29,6 +30,7 @@ interface TechnologyFrontMatter {
     description: string
     meta_title: string
     meta_description: string
+    long_description: string
     url: string
     reasons: TechnologyReason[]
 }
@@ -73,6 +75,7 @@ export async function getTechnologyBySlug(slug: string): Promise<Technology | nu
         description: frontMatter.description,
         meta_title: frontMatter.meta_title,
         meta_description: frontMatter.meta_description,
+        long_description: frontMatter.long_description,
         url: frontMatter.url,
         reasons: frontMatter.reasons,
         content,
