@@ -39,3 +39,32 @@ export function getCanonicalUrl(path: string = ''): string {
 
     return `${normalizedBase}${cleanPath}`
 }
+
+/**
+ * Filter parameters that are valid for canonical URLs on the projects page.
+ * Only one of these should be used at a time in the canonical URL.
+ */
+const CANONICAL_FILTER_PARAMS = ['technology', 'client', 'category', 'industry'] as const
+
+/**
+ * Generates a canonical URL for the projects page with optional single filter parameter.
+ * Only includes one filter parameter (first found in priority order).
+ * Pagination and search parameters are excluded from canonical URLs.
+ *
+ * @param searchParams - The search parameters from the URL
+ * @returns The canonical URL for the projects page
+ */
+export function getProjectsCanonicalUrl(searchParams: Partial<Record<string, string>>): string {
+    const basePath = '/projets'
+
+    // Find the first valid filter parameter (in priority order)
+    for (const param of CANONICAL_FILTER_PARAMS) {
+        const value = searchParams[param]
+        if (value) {
+            return getCanonicalUrl(`${basePath}?${param}=${encodeURIComponent(value)}`)
+        }
+    }
+
+    // No filter parameters, return base URL
+    return getCanonicalUrl(basePath)
+}
