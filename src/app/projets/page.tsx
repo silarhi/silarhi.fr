@@ -11,11 +11,7 @@ import Section from '@/components/ui/section'
 import { getAllClients } from '@/utils/client'
 import { getAllProjects } from '@/utils/project'
 import { getAllTechnologies } from '@/utils/technology'
-
-export const metadata: Metadata = {
-    title: 'Projets récents - SILARHI',
-    description: 'Découvrez nos projets sur le développement web, PHP, Symfony et bien plus encore.',
-}
+import { getProjectsCanonicalUrl } from '@/utils/url'
 
 interface ProjectPageProps {
     searchParams: Promise<{
@@ -26,6 +22,18 @@ interface ProjectPageProps {
         industry?: string
         client?: string
     }>
+}
+
+export async function generateMetadata({ searchParams }: ProjectPageProps): Promise<Metadata> {
+    const params = await searchParams
+
+    return {
+        title: 'Projets récents - SILARHI',
+        description: 'Découvrez nos projets sur le développement web, PHP, Symfony et bien plus encore.',
+        alternates: {
+            canonical: getProjectsCanonicalUrl(params),
+        },
+    }
 }
 
 const ITEMS_PER_PAGE = 9

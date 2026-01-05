@@ -11,6 +11,7 @@ import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import { getProjectsByTechnology } from '@/utils/project'
 import { getAllTechnologySlugs, getTechnologyBySlug } from '@/utils/technology'
+import { getCanonicalUrl } from '@/utils/url'
 
 interface TechnologyPageProps {
     params: Promise<{
@@ -38,6 +39,9 @@ export async function generateMetadata({ params }: TechnologyPageProps): Promise
     return {
         title: `${technology.meta_title} | SILARHI`,
         description: technology.meta_description,
+        alternates: {
+            canonical: getCanonicalUrl(`/technologies/${slug}`),
+        },
     }
 }
 

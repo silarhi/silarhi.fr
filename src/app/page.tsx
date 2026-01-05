@@ -21,12 +21,16 @@ import { getAllClients } from '@/utils/client'
 import { getTotalEmployeeHours } from '@/utils/employees'
 import { cn } from '@/utils/lib'
 import { getAllProjects } from '@/utils/project'
+import { getCanonicalUrl } from '@/utils/url'
 
 import { lato } from './fonts'
 
 export const metadata: Metadata = {
     title: `Développement d'applications Web & PHP à Toulouse - SILARHI`,
     description: `Développement d'applications Web à Toulouse et en France. Donnez vie à vos idées d'applications responsive & mobiles. Devis rapide et gratuit.`,
+    alternates: {
+        canonical: getCanonicalUrl(),
+    },
 }
 
 interface Feature {

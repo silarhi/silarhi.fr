@@ -3,9 +3,13 @@ import { Metadata } from 'next'
 import HeroSection from '@/components/hero-section'
 import { Download } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
+import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
     title: `Conditions Générales de Vente - SILARHI`,
+    alternates: {
+        canonical: getCanonicalUrl('/conditions-generales-de-vente'),
+    },
 }
 
 export default function Page() {
