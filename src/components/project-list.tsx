@@ -59,6 +59,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                         <BadgeGroup gap="md" size="sm" className="mb-4">
                             <Badge size="sm">{project.category}</Badge>
                             <Badge size="sm">{project.client.sector}</Badge>
+                            {!project.image && <ProjectScopeBadge scope={project.scope} size="sm" />}
                         </BadgeGroup>
 
                         <h2 className="text-foreground mb-3 text-3xl font-bold lg:text-4xl">
