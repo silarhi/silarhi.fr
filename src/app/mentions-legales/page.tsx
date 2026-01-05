@@ -2,9 +2,13 @@ import { Metadata } from 'next'
 
 import HeroSection from '@/components/hero-section'
 import Section from '@/components/ui/section'
+import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
     title: `Mentions légales - SILARHI`,
+    alternates: {
+        canonical: getCanonicalUrl('/mentions-legales'),
+    },
 }
 
 export default function LegalMentionPage() {

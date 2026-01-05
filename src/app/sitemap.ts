@@ -2,18 +2,7 @@ import { MetadataRoute } from 'next'
 
 import { getAllProjects } from '@/utils/project'
 import { getAllTechnologies } from '@/utils/technology'
-
-const getBaseUrl = () => {
-    if (process.env.NEXT_PUBLIC_SITE_URL) {
-        return process.env.NEXT_PUBLIC_SITE_URL
-    }
-
-    if (process.env.VERCEL_URL) {
-        return `https://${process.env.VERCEL_URL}`
-    }
-
-    return 'http://localhost:3000'
-}
+import { getBaseUrl } from '@/utils/url'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = getBaseUrl()

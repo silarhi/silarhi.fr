@@ -11,10 +11,14 @@ import Section from '@/components/ui/section'
 import { getAllClients } from '@/utils/client'
 import { getAllProjects } from '@/utils/project'
 import { getAllTechnologies } from '@/utils/technology'
+import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
     title: 'Projets récents - SILARHI',
     description: 'Découvrez nos projets sur le développement web, PHP, Symfony et bien plus encore.',
+    alternates: {
+        canonical: getCanonicalUrl('/projets'),
+    },
 }
 
 interface ProjectPageProps {

@@ -15,6 +15,7 @@ import Section from '@/components/ui/section'
 import SectionTitle from '@/components/ui/section-title'
 import { cn } from '@/utils/lib'
 import { getAllProjects, getAllProjectSlugs, getEngagementTypeLabel, getProjectBySlug } from '@/utils/project'
+import { getCanonicalUrl } from '@/utils/url'
 
 interface ProjectPageProps {
     params: Promise<{
@@ -40,6 +41,9 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     return {
         title: `${project.title} - SILARHI`,
         description: project.excerpt,
+        alternates: {
+            canonical: getCanonicalUrl(`/projets/${slug}`),
+        },
     }
 }
 
