@@ -58,16 +58,6 @@ export default function NotFound() {
                             <p className="text-foreground/60 mb-4 text-sm">Liens utiles :</p>
                             <ul className="text-primary flex flex-wrap justify-center gap-x-6 gap-y-2">
                                 <li>
-                                    <Link href="/technologies" className="hover:text-primary-light underline">
-                                        Technologies
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/clients" className="hover:text-primary-light underline">
-                                        Clients
-                                    </Link>
-                                </li>
-                                <li>
                                     <Link href="/contact" className="hover:text-primary-light underline">
                                         Contact
                                     </Link>
