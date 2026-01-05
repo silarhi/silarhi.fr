@@ -7,6 +7,7 @@ import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { FilterIcon } from '@/components/ui/icons'
 import { cn } from '@/utils/lib'
+import { clearFilterParams, FilterType, getActiveFilter } from '@/utils/url'
 
 interface FilterOption {
     slug: string
@@ -21,28 +22,14 @@ interface ProjectFiltersProps {
     clients: FilterOption[]
 }
 
-type FilterType = 'technology' | 'category' | 'industry' | 'client'
-
 export default function ProjectFilters({ technologies, categories, industries, clients }: ProjectFiltersProps) {
     const router = useRouter()
     const searchParams = useSearchParams()
     const [expandedSection, setExpandedSection] = useState<FilterType | null>(null)
 
-    const technology = searchParams.get('technology') || null
-    const category = searchParams.get('category') || null
-    const industry = searchParams.get('industry') || null
-    const client = searchParams.get('client') || null
-
-    // Determine active section from URL params (for highlighting active filter)
-    const activeSectionFromUrl = technology
-        ? 'technology'
-        : category
-          ? 'category'
-          : industry
-            ? 'industry'
-            : client
-              ? 'client'
-              : null
+    // Get the active filter from URL (ensures only one is considered)
+    const activeFilter = getActiveFilter(searchParams)
+    const activeSectionFromUrl = activeFilter?.type ?? null
 
     // Show filters when: expanded manually OR there's an active filter from URL
     const activeSection = expandedSection || activeSectionFromUrl
@@ -53,21 +40,18 @@ export default function ProjectFilters({ technologies, categories, industries, c
     }
 
     const applyFilter = (filterType: FilterType, filterValue: string | null) => {
-        const params = new URLSearchParams(searchParams.toString())
+        const params = new URLSearchParams()
 
-        // Clear all filter types (only one filter type active at a time)
-        params.delete('technology')
-        params.delete('category')
-        params.delete('industry')
-        params.delete('client')
+        // Preserve search query
+        const search = searchParams.get('search')
+        if (search) {
+            params.set('search', search)
+        }
 
-        // Set the new filter if provided
+        // Set the new filter if provided (only one filter at a time)
         if (filterValue) {
             params.set(filterType, filterValue)
         }
-
-        // Reset to first page
-        params.delete('page')
 
         const queryString = params.toString()
         const url = queryString ? `/projets?${queryString}` : '/projets'
@@ -79,10 +63,7 @@ export default function ProjectFilters({ technologies, categories, industries, c
         const params = new URLSearchParams(searchParams.toString())
 
         // Clear all filters
-        params.delete('technology')
-        params.delete('category')
-        params.delete('industry')
-        params.delete('client')
+        clearFilterParams(params)
         params.delete('page')
 
         const queryString = params.toString()
@@ -96,19 +77,19 @@ export default function ProjectFilters({ technologies, categories, industries, c
 
     if (activeSection === 'technology') {
         currentFilters = technologies
-        activeFilterValue = technology
+        activeFilterValue = activeFilter?.type === 'technology' ? activeFilter.value : null
     } else if (activeSection === 'category') {
         currentFilters = categories
-        activeFilterValue = category
+        activeFilterValue = activeFilter?.type === 'category' ? activeFilter.value : null
     } else if (activeSection === 'industry') {
         currentFilters = industries
-        activeFilterValue = industry
+        activeFilterValue = activeFilter?.type === 'industry' ? activeFilter.value : null
     } else if (activeSection === 'client') {
         currentFilters = clients
-        activeFilterValue = client
+        activeFilterValue = activeFilter?.type === 'client' ? activeFilter.value : null
     }
 
-    const hasActiveFilters = technology || category || industry || client
+    const hasActiveFilters = activeFilter !== null
 
     return (
         <div className="mt-8 flex flex-col gap-6">
