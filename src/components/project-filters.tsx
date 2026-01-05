@@ -126,12 +126,9 @@ export default function ProjectFilters({ technologies, categories, industries, c
                     Clients
                 </Button>
                 {hasActiveFilters && (
-                    <button
-                        onClick={resetFilters}
-                        className="text-foreground/80 hover:text-foreground text-sm underline transition-colors"
-                    >
+                    <Button variant="link" size="sm" onClick={resetFilters}>
                         Réinitialiser
-                    </button>
+                    </Button>
                 )}
             </div>
 
@@ -139,22 +136,20 @@ export default function ProjectFilters({ technologies, categories, industries, c
             {activeSection && (
                 <div className="flex flex-wrap gap-3">
                     {currentFilters.map((filter) => (
-                        <button
+                        <Badge
                             key={filter.slug}
+                            as="button"
+                            variant={activeFilterValue === filter.slug ? 'primary' : 'outline-primary'}
+                            className={cn('cursor-pointer', {
+                                'bg-primary text-surface scale-105 shadow-md': activeFilterValue === filter.slug,
+                            })}
                             onClick={() =>
                                 applyFilter(activeSection, activeFilterValue === filter.slug ? null : filter.slug)
                             }
                         >
-                            <Badge
-                                variant={activeFilterValue === filter.slug ? 'primary' : 'outline-primary'}
-                                className={cn({
-                                    'bg-primary text-surface scale-105 shadow-md': activeFilterValue === filter.slug,
-                                })}
-                            >
-                                {filter.name}
-                                <span className="text-xs opacity-70">({filter.projectCount})</span>
-                            </Badge>
-                        </button>
+                            {filter.name}
+                            <span className="text-xs opacity-70">({filter.projectCount})</span>
+                        </Badge>
                     ))}
                 </div>
             )}
