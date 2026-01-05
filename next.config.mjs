@@ -117,6 +117,17 @@ const nextConfig = {
                 destination: '/projets',
                 permanent: true,
             },
+            // Legacy urls
+            {
+                source: '/clients',
+                destination: '/projets',
+                permanent: true,
+            },
+            {
+                source: '/technologies',
+                destination: '/projets',
+                permanent: true,
+            },
         ]
     },
 }
