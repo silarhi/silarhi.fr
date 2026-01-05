@@ -48,7 +48,7 @@ export default function SearchInput({
                 <button
                     type="button"
                     onClick={() => onChange('')}
-                    className="dark:text-muted dark:hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 transition-colors hover:text-gray-600"
+                    className="dark:text-muted dark:hover:text-foreground absolute inset-y-0 right-0 flex cursor-pointer items-center pr-4 text-gray-400 transition-colors hover:text-gray-600"
                     aria-label="Effacer la recherche"
                 >
                     <XCircle className="h-6 w-6" />
