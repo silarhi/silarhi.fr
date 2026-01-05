@@ -1,24 +1,14 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 import { cn } from '@/utils/lib'
 
-interface BadgeBaseProps {
+interface BadgeProps {
     children: ReactNode
     variant?: 'primary' | 'secondary' | 'outline-primary'
     size?: 'sm' | 'md'
     icon?: ReactNode
     className?: string
 }
-
-interface BadgeSpanProps extends BadgeBaseProps {
-    as?: 'span'
-}
-
-interface BadgeButtonProps extends BadgeBaseProps, Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
-    as: 'button'
-}
-
-type BadgeProps = BadgeSpanProps | BadgeButtonProps
 
 const variantStyles = {
     primary: 'bg-primary/10 text-primary dark:bg-primary-light/20 dark:text-primary-light',
@@ -32,33 +22,16 @@ const sizeStyles = {
     md: 'px-4 py-1.5 text-sm',
 }
 
-export default function Badge({
-    children,
-    variant = 'primary',
-    size = 'md',
-    icon,
-    className,
-    as,
-    ...props
-}: BadgeProps) {
-    const classes = cn(
-        'inline-flex items-center gap-2 rounded-full font-medium',
-        variantStyles[variant],
-        sizeStyles[size],
-        className
-    )
-
-    if (as === 'button') {
-        return (
-            <button className={classes} {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}>
-                {icon}
-                {children}
-            </button>
-        )
-    }
-
+export default function Badge({ children, variant = 'primary', size = 'md', icon, className }: BadgeProps) {
     return (
-        <span className={classes}>
+        <span
+            className={cn(
+                'inline-flex items-center gap-2 rounded-full font-medium',
+                variantStyles[variant],
+                sizeStyles[size],
+                className
+            )}
+        >
             {icon}
             {children}
         </span>
