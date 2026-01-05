@@ -25,7 +25,10 @@
       "Bash(git log:*)",
       "mcp__filesystem__read_multiple_files",
       "Bash(git show:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(yarn validate:technologies:*)",
+      "Bash(git checkout:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
