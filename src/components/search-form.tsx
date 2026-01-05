@@ -12,6 +12,9 @@ interface SearchFormProps {
     className?: string
 }
 
+// Filter parameters to preserve when searching
+const FILTER_PARAMS = ['technology', 'category', 'industry', 'client'] as const
+
 export default function SearchForm({ baseUrl, className }: SearchFormProps) {
     const searchParams = useSearchParams()
     const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
@@ -48,6 +51,11 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
             replace={true}
         >
             <SearchInput name="search" value={searchQuery} onChange={handleSearchChange} />
+            {/* Preserve existing filter parameters */}
+            {FILTER_PARAMS.map((param) => {
+                const value = searchParams.get(param)
+                return value ? <input key={param} type="hidden" name={param} value={value} /> : null
+            })}
         </Form>
     )
 }
