@@ -14,7 +14,7 @@ import ProjectScopeBadge from '@/components/ui/project-scope-badge'
 import Section from '@/components/ui/section'
 import SectionTitle from '@/components/ui/section-title'
 import { cn } from '@/utils/lib'
-import { getAllProjects, getAllProjectSlugs, getEngagementTypeLabel, getProjectBySlug } from '@/utils/project'
+import { getAllProjectSlugs, getEngagementTypeLabel, getProjectBySlug, getProjectsByClient } from '@/utils/project'
 import { getCanonicalUrl } from '@/utils/url'
 
 interface ProjectPageProps {
@@ -55,9 +55,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         notFound()
     }
 
-    // Get all projects by this client to check if we should show a link
-    const allProjects = await getAllProjects()
-    const clientProjects = allProjects.filter((p) => p.client.slug === project.client.slug)
+    // Get projects by this client to check if we should show a link (efficient lookup)
+    const clientProjects = await getProjectsByClient(project.client.slug)
     const hasMultipleProjects = clientProjects.length > 1
 
     return (

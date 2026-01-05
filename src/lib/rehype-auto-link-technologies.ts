@@ -10,30 +10,56 @@ interface TechnologyLink {
 }
 
 /**
+ * Escape special regex characters in a string
+ */
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+// In-memory cache for technology links (built once per build)
+let technologyLinksCache: TechnologyLink[] | null = null
+
+/**
+ * Load and cache technology links with pre-built regex patterns
+ */
+async function loadTechnologyLinks(): Promise<TechnologyLink[]> {
+    if (technologyLinksCache) {
+        return technologyLinksCache
+    }
+
+    const technologies = await getAllTechnologies()
+
+    // Build regex patterns for each technology (case-insensitive, word boundaries)
+    // Include both the main name and any aliases
+    technologyLinksCache = technologies.flatMap((tech) => {
+        const names = [tech.name, ...(tech.name_aliases || [])]
+        return names.map((name) => ({
+            name,
+            slug: tech.slug,
+            // Use word boundaries to avoid partial matches
+            // The \b ensures we match whole words only
+            regex: new RegExp(`\\b(${escapeRegex(name)})\\b`, 'gi'),
+        }))
+    })
+
+    return technologyLinksCache
+}
+
+// Skip linking inside these elements
+const skipElements = new Set(['code', 'pre', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+
+/**
  * Rehype plugin that automatically links technology keywords to their respective pages.
  * Scans text nodes and wraps matching technology names with links to /technologies/{slug}.
  * Excludes links from code blocks, existing links, and headings (h1-h6).
+ *
+ * Performance optimization: Technology links and regex patterns are cached at module level
+ * to avoid rebuilding on every markdown render.
  */
 export default function rehypeAutoLinkTechnologies() {
     return async (tree: Root) => {
-        // Fetch all technologies
-        const technologies = await getAllTechnologies()
-
-        // Build regex patterns for each technology (case-insensitive, word boundaries)
-        // Include both the main name and any aliases
-        const technologyLinks: TechnologyLink[] = technologies.flatMap((tech) => {
-            const names = [tech.name, ...(tech.name_aliases || [])]
-            return names.map((name) => ({
-                name,
-                slug: tech.slug,
-                // Use word boundaries to avoid partial matches
-                // The \b ensures we match whole words only
-                regex: new RegExp(`\\b(${escapeRegex(name)})\\b`, 'gi'),
-            }))
-        })
-
-        // Skip linking inside these elements
-        const skipElements = new Set(['code', 'pre', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+        // Use cached technology links (built once per build)
+        const technologyLinks = await loadTechnologyLinks()
 
         visit(tree, 'text', (node: Text, index, parent) => {
             // Skip if we're inside a code block, link, or heading
@@ -119,11 +145,4 @@ export default function rehypeAutoLinkTechnologies() {
             }
         })
     }
-}
-
-/**
- * Escape special regex characters in a string
- */
-function escapeRegex(str: string): string {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
