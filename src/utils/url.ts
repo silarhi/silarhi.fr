@@ -64,15 +64,6 @@ export function getActiveFilter(
 }
 
 /**
- * Clears all filter parameters from URLSearchParams.
- */
-export function clearFilterParams(params: URLSearchParams): void {
-    for (const param of FILTER_PARAMS) {
-        params.delete(param)
-    }
-}
-
-/**
  * Generates a canonical URL for the projects page with optional single filter parameter and pagination.
  * Only includes one filter parameter (first found in priority order) plus optional page number.
  * Search parameter is excluded from canonical URLs.

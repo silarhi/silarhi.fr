@@ -14,6 +14,8 @@ interface ProjectsListAsyncProps {
     client?: string
 }
 
+type FilterType = 'technology' | 'category' | 'industry' | 'client'
+
 export default async function ProjectsListAsync({
     searchQuery,
     currentPage,
@@ -26,6 +28,18 @@ export default async function ProjectsListAsync({
     // Get all projects and filter by search query
     const allProjects = await getAllProjects()
     let filteredProjects = allProjects
+
+    // Determine active filter (only one at a time)
+    let activeFilter: { type: FilterType; value: string } | null = null
+    if (technology) {
+        activeFilter = { type: 'technology', value: technology }
+    } else if (category) {
+        activeFilter = { type: 'category', value: category }
+    } else if (industry) {
+        activeFilter = { type: 'industry', value: industry }
+    } else if (client) {
+        activeFilter = { type: 'client', value: client }
+    }
 
     // Apply filters if present
     if (technology) {
@@ -102,6 +116,7 @@ export default async function ProjectsListAsync({
             currentPage={currentPage}
             totalPages={totalPages}
             searchQuery={searchQuery}
+            activeFilter={activeFilter}
         />
     )
 }

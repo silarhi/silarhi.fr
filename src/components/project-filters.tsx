@@ -1,13 +1,14 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { FilterIcon } from '@/components/ui/icons'
 import { cn } from '@/utils/lib'
-import { clearFilterParams, FilterType, getActiveFilter } from '@/utils/url'
+import { FilterType, getActiveFilter } from '@/utils/url'
 
 interface FilterOption {
     slug: string
@@ -23,13 +24,13 @@ interface ProjectFiltersProps {
 }
 
 export default function ProjectFilters({ technologies, categories, industries, clients }: ProjectFiltersProps) {
-    const router = useRouter()
     const searchParams = useSearchParams()
     const [expandedSection, setExpandedSection] = useState<FilterType | null>(null)
 
     // Get the active filter from URL (ensures only one is considered)
     const activeFilter = getActiveFilter(searchParams)
     const activeSectionFromUrl = activeFilter?.type ?? null
+    const searchQuery = searchParams.get('search') || ''
 
     // Show filters when: expanded manually OR there's an active filter from URL
     const activeSection = expandedSection || activeSectionFromUrl
@@ -39,37 +40,28 @@ export default function ProjectFilters({ technologies, categories, industries, c
         setExpandedSection(activeSection === section ? null : section)
     }
 
-    const applyFilter = (filterType: FilterType, filterValue: string | null) => {
+    const buildFilterUrl = (filterType: FilterType, filterValue: string | null) => {
         const params = new URLSearchParams()
 
         // Preserve search query
-        const search = searchParams.get('search')
-        if (search) {
-            params.set('search', search)
+        if (searchQuery) {
+            params.set('search', searchQuery)
         }
 
-        // Set the new filter if provided (only one filter at a time)
+        // Set the filter (only one filter at a time)
         if (filterValue) {
             params.set(filterType, filterValue)
         }
 
         const queryString = params.toString()
-        const url = queryString ? `/projets?${queryString}` : '/projets'
-
-        router.replace(url, { scroll: false })
+        return queryString ? `/projets?${queryString}` : '/projets'
     }
 
-    const resetFilters = () => {
-        const params = new URLSearchParams(searchParams.toString())
-
-        // Clear all filters
-        clearFilterParams(params)
-        params.delete('page')
-
-        const queryString = params.toString()
-        const url = queryString ? `/projets?${queryString}` : '/projets'
-
-        router.replace(url, { scroll: false })
+    const buildResetUrl = () => {
+        if (searchQuery) {
+            return `/projets?search=${encodeURIComponent(searchQuery)}`
+        }
+        return '/projets'
     }
 
     let currentFilters: FilterOption[] = []
@@ -126,7 +118,7 @@ export default function ProjectFilters({ technologies, categories, industries, c
                     Clients
                 </Button>
                 {hasActiveFilters && (
-                    <Button variant="link" size="sm" onClick={resetFilters}>
+                    <Button variant="link" size="sm" as="a" href={buildResetUrl()}>
                         Réinitialiser
                     </Button>
                 )}
@@ -136,12 +128,10 @@ export default function ProjectFilters({ technologies, categories, industries, c
             {activeSection && (
                 <div className="flex flex-wrap gap-3">
                     {currentFilters.map((filter) => (
-                        <button
+                        <Link
                             key={filter.slug}
+                            href={buildFilterUrl(activeSection, activeFilterValue === filter.slug ? null : filter.slug)}
                             className="cursor-pointer"
-                            onClick={() =>
-                                applyFilter(activeSection, activeFilterValue === filter.slug ? null : filter.slug)
-                            }
                         >
                             <Badge
                                 variant={activeFilterValue === filter.slug ? 'primary' : 'outline-primary'}
@@ -152,7 +142,7 @@ export default function ProjectFilters({ technologies, categories, industries, c
                                 {filter.name}
                                 <span className="text-xs opacity-70">({filter.projectCount})</span>
                             </Badge>
-                        </button>
+                        </Link>
                     ))}
                 </div>
             )}

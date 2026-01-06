@@ -3,11 +3,17 @@ import React from 'react'
 
 import { ChevronLeft, ChevronRight } from '@/components/ui/icons'
 
+interface ActiveFilter {
+    type: 'technology' | 'category' | 'industry' | 'client'
+    value: string
+}
+
 interface PaginationServerProps {
     currentPage: number
     totalPages: number
     baseUrl: string
     searchQuery?: string
+    activeFilter?: ActiveFilter | null
     className?: string
 }
 
@@ -16,6 +22,7 @@ export default function PaginationServer({
     totalPages,
     baseUrl,
     searchQuery,
+    activeFilter,
     className,
 }: PaginationServerProps) {
     if (totalPages <= 1) {
@@ -27,6 +34,9 @@ export default function PaginationServer({
         params.set('page', page.toString())
         if (searchQuery) {
             params.set('search', searchQuery)
+        }
+        if (activeFilter) {
+            params.set(activeFilter.type, activeFilter.value)
         }
         return `${baseUrl}?${params.toString()}#projects-list`
     }

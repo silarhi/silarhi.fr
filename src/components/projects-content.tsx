@@ -3,12 +3,18 @@ import { FaceSad } from '@/components/ui/icons'
 import Pagination from '@/components/ui/pagination'
 import { Project } from '@/utils/project'
 
+interface ActiveFilter {
+    type: 'technology' | 'category' | 'industry' | 'client'
+    value: string
+}
+
 interface ProjectsContentProps {
     projects: Project[]
     filteredCount: number
     currentPage: number
     totalPages: number
     searchQuery: string
+    activeFilter?: ActiveFilter | null
 }
 
 export default function ProjectsContent({
@@ -17,6 +23,7 @@ export default function ProjectsContent({
     currentPage,
     totalPages,
     searchQuery,
+    activeFilter,
 }: ProjectsContentProps) {
     return (
         <>
@@ -58,6 +65,7 @@ export default function ProjectsContent({
                                 totalPages={totalPages}
                                 baseUrl="/projets"
                                 searchQuery={searchQuery}
+                                activeFilter={activeFilter}
                             />
                         </div>
                     )}
