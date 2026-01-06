@@ -1,0 +1,27 @@
+name: Validate URLs
+
+on:
+    # Run weekly on Mondays at 9:00 AM UTC
+    schedule:
+        - cron: '0 9 * * 1'
+    # Allow manual trigger
+    workflow_dispatch:
+
+jobs:
+    validate-urls:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Use Node.js LTS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  cache: 'yarn'
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Validate URLs
+              run: yarn validate:urls
