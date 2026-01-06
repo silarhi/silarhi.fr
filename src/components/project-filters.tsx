@@ -131,7 +131,7 @@ export default function ProjectFilters({ technologies, categories, industries, c
                         <Link
                             key={filter.slug}
                             href={buildFilterUrl(activeSection, activeFilterValue === filter.slug ? null : filter.slug)}
-                            className="cursor-pointer"
+                            scroll={false}
                         >
                             <Badge
                                 variant={activeFilterValue === filter.slug ? 'primary' : 'outline-primary'}
