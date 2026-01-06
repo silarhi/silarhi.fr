@@ -6,29 +6,16 @@ import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import type { Client } from '@/utils/client'
-import type { Project } from '@/utils/project'
+import type { ClientLinkData } from '@/utils/project'
 
 interface ClientsSectionProps {
     clients: Client[]
-    projects: Project[]
+    clientLinks: Record<string, ClientLinkData>
 }
 
-export default function ClientsSection({ clients, projects }: ClientsSectionProps) {
-    // Filter clients that have projects
-    const clientsWithProjects = clients.filter((client) => client.slug)
-
-    // Helper function to get the correct link for each client
-    const getClientLink = (clientSlug: string): string => {
-        const clientProjects = projects.filter((project) => project.client.slug === clientSlug)
-
-        // If only one project, link directly to it
-        if (clientProjects.length === 1) {
-            return `/projets/${clientProjects[0].slug}`
-        }
-
-        // Otherwise, link to projects page with client filter
-        return `/projets?client=${clientSlug}`
-    }
+export default function ClientsSection({ clients, clientLinks }: ClientsSectionProps) {
+    // Filter clients that have projects (use pre-computed data)
+    const clientsWithProjects = clients.filter((client) => clientLinks[client.slug])
 
     return (
         <Section id="clients" className="bg-surface border-border border-t">
@@ -44,7 +31,7 @@ export default function ClientsSection({ clients, projects }: ClientsSectionProp
                 {clientsWithProjects.map((client, index) => (
                     <FadeInWhenVisible key={client.slug} delay={index * 0.05}>
                         <Link
-                            href={getClientLink(client.slug)}
+                            href={clientLinks[client.slug].link}
                             title={client.name}
                             className="bg-surface dark:bg-surface-elevated border-border group block overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md"
                         >

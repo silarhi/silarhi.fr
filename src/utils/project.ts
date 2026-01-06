@@ -239,3 +239,167 @@ export async function getProjectsByTechnology(technologySlug: string): Promise<P
         project.technologies.some((tech) => tech.slug.toLowerCase() === technologySlug.toLowerCase())
     )
 }
+
+// Get projects by client slug (efficient lookup without loading all projects for counting)
+export async function getProjectsByClient(clientSlug: string): Promise<Project[]> {
+    const allProjects = await getAllProjects()
+    return allProjects.filter((project) => project.client.slug === clientSlug)
+}
+
+// Pre-computed filter data interface
+interface FilterItemWithCount {
+    slug: string
+    name: string
+    projectCount: number
+}
+
+interface ProjectFilterData {
+    technologies: FilterItemWithCount[]
+    categories: FilterItemWithCount[]
+    industries: FilterItemWithCount[]
+    clients: FilterItemWithCount[]
+    projects: Project[]
+}
+
+// In-memory cache for filter data (computed once per build)
+let filterDataCache: ProjectFilterData | null = null
+
+// Client link data for efficient rendering
+export interface ClientLinkData {
+    slug: string
+    link: string
+    projectCount: number
+}
+
+// Pre-compute client links (for single project -> direct link, multiple -> filter link)
+export async function getClientLinksData(): Promise<Map<string, ClientLinkData>> {
+    const allProjects = await getAllProjects()
+    const clientProjectsMap = new Map<string, { projects: Project[]; slug: string }>()
+
+    // Group projects by client
+    for (const project of allProjects) {
+        const clientSlug = project.client.slug
+        const existing = clientProjectsMap.get(clientSlug)
+        if (existing) {
+            existing.projects.push(project)
+        } else {
+            clientProjectsMap.set(clientSlug, { projects: [project], slug: clientSlug })
+        }
+    }
+
+    // Convert to link data
+    const result = new Map<string, ClientLinkData>()
+    for (const [clientSlug, data] of clientProjectsMap) {
+        const link = data.projects.length === 1 ? `/projets/${data.projects[0].slug}` : `/projets?client=${clientSlug}`
+        result.set(clientSlug, {
+            slug: clientSlug,
+            link,
+            projectCount: data.projects.length,
+        })
+    }
+
+    return result
+}
+
+// Get all filter data with counts in a single pass (O(n) instead of O(n×m))
+export async function getProjectFilterData(): Promise<ProjectFilterData> {
+    if (filterDataCache) {
+        return filterDataCache
+    }
+
+    const allProjects = await getAllProjects()
+
+    // Initialize counters using Maps for O(1) lookups
+    const techCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+    const categoryCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+    const industryCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+    const clientCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+
+    // Single pass through all projects to compute all counts
+    for (const project of allProjects) {
+        // Count technologies
+        for (const tech of project.technologies) {
+            const existing = techCounts.get(tech.slug)
+            if (existing) {
+                existing.projectCount++
+            } else {
+                techCounts.set(tech.slug, {
+                    slug: tech.slug,
+                    name: tech.name,
+                    projectCount: 1,
+                })
+            }
+        }
+
+        // Count categories
+        if (project.category) {
+            const slug = project.category.toLowerCase().replace(/\s+/g, '-')
+            const existing = categoryCounts.get(slug)
+            if (existing) {
+                existing.projectCount++
+            } else {
+                categoryCounts.set(slug, {
+                    slug,
+                    name: project.category,
+                    projectCount: 1,
+                })
+            }
+        }
+
+        // Count industries
+        const industry = project.client.sector
+        if (industry) {
+            const slug = industry.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
+            const existing = industryCounts.get(slug)
+            if (existing) {
+                existing.projectCount++
+            } else {
+                industryCounts.set(slug, {
+                    slug,
+                    name: industry,
+                    projectCount: 1,
+                })
+            }
+        }
+
+        // Count clients
+        const clientSlug = project.client.slug
+        const existing = clientCounts.get(clientSlug)
+        if (existing) {
+            existing.projectCount++
+        } else {
+            clientCounts.set(clientSlug, {
+                slug: clientSlug,
+                name: project.client.name,
+                projectCount: 1,
+            })
+        }
+    }
+
+    // Convert Maps to sorted arrays (filter out items with 0 projects)
+    const technologies = Array.from(techCounts.values())
+        .filter((t) => t.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    const categories = Array.from(categoryCounts.values())
+        .filter((c) => c.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    const industries = Array.from(industryCounts.values())
+        .filter((i) => i.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    const clients = Array.from(clientCounts.values())
+        .filter((c) => c.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    filterDataCache = {
+        technologies,
+        categories,
+        industries,
+        clients,
+        projects: allProjects,
+    }
+
+    return filterDataCache
+}
