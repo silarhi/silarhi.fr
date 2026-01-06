@@ -2,11 +2,7 @@ import ProjectList from '@/components/project-list'
 import { FaceSad } from '@/components/ui/icons'
 import Pagination from '@/components/ui/pagination'
 import { Project } from '@/utils/project'
-
-interface ActiveFilter {
-    type: 'technology' | 'category' | 'industry' | 'client'
-    value: string
-}
+import { ActiveFilter } from '@/utils/url'
 
 interface ProjectsContentProps {
     projects: Project[]

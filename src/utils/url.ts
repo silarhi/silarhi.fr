@@ -47,13 +47,16 @@ export function getCanonicalUrl(path: string = ''): string {
 const FILTER_PARAMS = ['technology', 'category', 'industry', 'client'] as const
 export type FilterType = (typeof FILTER_PARAMS)[number]
 
+export interface ActiveFilter {
+    type: FilterType
+    value: string
+}
+
 /**
  * Finds the first active filter parameter from URL search params.
  * Returns the filter type and value, or null if no filter is active.
  */
-export function getActiveFilter(
-    searchParams: URLSearchParams | Record<string, string | null>
-): { type: FilterType; value: string } | null {
+export function getActiveFilter(searchParams: URLSearchParams | Record<string, string | null>): ActiveFilter | null {
     for (const param of FILTER_PARAMS) {
         const value = searchParams instanceof URLSearchParams ? searchParams.get(param) : searchParams[param]
         if (value) {

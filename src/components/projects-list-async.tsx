@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 
 import ProjectsContent from '@/components/projects-content'
 import { getAllProjects } from '@/utils/project'
+import { ActiveFilter } from '@/utils/url'
 
 interface ProjectsListAsyncProps {
     searchQuery: string
@@ -13,8 +14,6 @@ interface ProjectsListAsyncProps {
     industry?: string
     client?: string
 }
-
-type FilterType = 'technology' | 'category' | 'industry' | 'client'
 
 export default async function ProjectsListAsync({
     searchQuery,
@@ -30,7 +29,7 @@ export default async function ProjectsListAsync({
     let filteredProjects = allProjects
 
     // Determine active filter (only one at a time)
-    let activeFilter: { type: FilterType; value: string } | null = null
+    let activeFilter: ActiveFilter | null = null
     if (technology) {
         activeFilter = { type: 'technology', value: technology }
     } else if (category) {

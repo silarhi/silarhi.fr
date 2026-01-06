@@ -2,11 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { ChevronLeft, ChevronRight } from '@/components/ui/icons'
-
-interface ActiveFilter {
-    type: 'technology' | 'category' | 'industry' | 'client'
-    value: string
-}
+import { ActiveFilter } from '@/utils/url'
 
 interface PaginationServerProps {
     currentPage: number
