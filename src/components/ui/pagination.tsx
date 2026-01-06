@@ -3,7 +3,7 @@ import React from 'react'
 
 import { ChevronLeft, ChevronRight } from '@/components/ui/icons'
 
-interface PaginationServerProps {
+interface PaginationProps {
     currentPage: number
     totalPages: number
     baseUrl: string
@@ -11,13 +11,7 @@ interface PaginationServerProps {
     className?: string
 }
 
-export default function PaginationServer({
-    currentPage,
-    totalPages,
-    baseUrl,
-    searchQuery,
-    className,
-}: PaginationServerProps) {
+export default function Pagination({ currentPage, totalPages, baseUrl, searchQuery, className }: PaginationProps) {
     if (totalPages <= 1) {
         return null
     }
