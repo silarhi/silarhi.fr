@@ -8,11 +8,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     size?: 'xs' | 'sm' | 'md' | 'lg'
     as?: 'a'
     href?: string
+    scroll?: boolean
     children: ReactNode
 }
 
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-    ({ variant = 'primary', size = 'md', as, href, className, children, disabled, ...props }, ref) => {
+    ({ variant = 'primary', size = 'md', as, href, scroll, className, children, disabled, ...props }, ref) => {
         const baseClasses =
             'cursor-pointer hover:no-underline inline-flex items-center justify-center gap-2 font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
 
@@ -49,7 +50,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
         if (as === 'a' && href) {
             return (
-                <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={classes}>
+                <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} scroll={scroll} className={classes}>
                     {children}
                 </Link>
             )

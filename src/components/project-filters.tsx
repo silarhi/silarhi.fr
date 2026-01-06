@@ -118,7 +118,7 @@ export default function ProjectFilters({ technologies, categories, industries, c
                     Clients
                 </Button>
                 {hasActiveFilters && (
-                    <Button variant="link" size="sm" as="a" href={buildResetUrl()}>
+                    <Button variant="link" size="sm" as="a" href={buildResetUrl()} scroll={false}>
                         Réinitialiser
                     </Button>
                 )}
