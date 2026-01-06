@@ -4,8 +4,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
-import { getActiveFilter } from '@/utils/url'
-
 import SearchInput from './search-input'
 
 interface SearchFormProps {
@@ -28,19 +26,17 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
             return
         }
 
-        // Build new URL preserving only one filter param (enforce mutual exclusivity)
-        const params = new URLSearchParams()
+        // Copy existing params and only update search
+        const params = new URLSearchParams(searchParams.toString())
 
-        // Set search query
         if (debouncedSearchQuery) {
             params.set('search', debouncedSearchQuery)
+        } else {
+            params.delete('search')
         }
 
-        // Preserve only the first active filter
-        const activeFilter = getActiveFilter(searchParams)
-        if (activeFilter) {
-            params.set(activeFilter.type, activeFilter.value)
-        }
+        // Reset page when search changes
+        params.delete('page')
 
         const queryString = params.toString()
         const url = queryString ? `${baseUrl}?${queryString}` : baseUrl
