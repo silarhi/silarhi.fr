@@ -20,28 +20,17 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
     // Update URL when debounced search query changes
     useEffect(() => {
         const currentSearch = searchParams.get('search') || ''
-
-        // Only update URL if search query changed
         if (currentSearch === debouncedSearchQuery) {
             return
         }
 
-        // Copy existing params and only update search
         const params = new URLSearchParams(searchParams.toString())
-
-        if (debouncedSearchQuery) {
-            params.set('search', debouncedSearchQuery)
-        } else {
-            params.delete('search')
-        }
-
-        // Reset page when search changes
+        if (debouncedSearchQuery) params.set('search', debouncedSearchQuery)
+        else params.delete('search')
         params.delete('page')
 
         const queryString = params.toString()
-        const url = queryString ? `${baseUrl}?${queryString}` : baseUrl
-
-        router.replace(url, { scroll: false })
+        router.replace(queryString ? `${baseUrl}?${queryString}` : baseUrl, { scroll: false })
     }, [debouncedSearchQuery, searchParams, baseUrl, router])
 
     const handleSearchChange = (value: string) => {
