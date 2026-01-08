@@ -8,6 +8,7 @@ import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { FilterIcon } from '@/components/ui/icons'
 import { cn } from '@/utils/lib'
+import { FilterType, getActiveFilter } from '@/utils/url'
 
 interface FilterOption {
     slug: string
@@ -24,52 +25,43 @@ interface ProjectFiltersProps {
 
 export default function ProjectFilters({ technologies, categories, industries, clients }: ProjectFiltersProps) {
     const searchParams = useSearchParams()
-    const [expandedSection, setExpandedSection] = useState<'technology' | 'category' | 'industry' | 'client' | null>(
-        null
-    )
+    const [expandedSection, setExpandedSection] = useState<FilterType | null>(null)
 
-    const technology = searchParams.get('technology') || null
-    const category = searchParams.get('category') || null
-    const industry = searchParams.get('industry') || null
-    const client = searchParams.get('client') || null
+    // Get the active filter from URL (ensures only one is considered)
+    const activeFilter = getActiveFilter(searchParams)
+    const activeSectionFromUrl = activeFilter?.type ?? null
     const searchQuery = searchParams.get('search') || ''
-
-    // Determine active section from URL params (for highlighting active filter)
-    const activeSectionFromUrl = technology
-        ? 'technology'
-        : category
-          ? 'category'
-          : industry
-            ? 'industry'
-            : client
-              ? 'client'
-              : null
 
     // Show filters when: expanded manually OR there's an active filter from URL
     const activeSection = expandedSection || activeSectionFromUrl
 
     // Toggle section expansion
-    const toggleExpandedSection = (section: 'technology' | 'category' | 'industry' | 'client') => {
+    const toggleExpandedSection = (section: FilterType) => {
         setExpandedSection(activeSection === section ? null : section)
     }
 
-    const buildFilterUrl = (filterType: string, filterValue: string | null) => {
+    const buildFilterUrl = (filterType: FilterType, filterValue: string | null) => {
         const params = new URLSearchParams()
 
-        // Keep search query if present
+        // Preserve search query
         if (searchQuery) {
             params.set('search', searchQuery)
         }
 
-        // Set the filter
+        // Set the filter (only one filter at a time)
         if (filterValue) {
             params.set(filterType, filterValue)
         }
 
-        // Reset to first page
-        params.set('page', '1')
+        const queryString = params.toString()
+        return queryString ? `/projets?${queryString}` : '/projets'
+    }
 
-        return `/projets?${params.toString()}`
+    const buildResetUrl = () => {
+        if (searchQuery) {
+            return `/projets?search=${encodeURIComponent(searchQuery)}`
+        }
+        return '/projets'
     }
 
     let currentFilters: FilterOption[] = []
@@ -77,19 +69,19 @@ export default function ProjectFilters({ technologies, categories, industries, c
 
     if (activeSection === 'technology') {
         currentFilters = technologies
-        activeFilterValue = technology
+        activeFilterValue = activeFilter?.type === 'technology' ? activeFilter.value : null
     } else if (activeSection === 'category') {
         currentFilters = categories
-        activeFilterValue = category
+        activeFilterValue = activeFilter?.type === 'category' ? activeFilter.value : null
     } else if (activeSection === 'industry') {
         currentFilters = industries
-        activeFilterValue = industry
+        activeFilterValue = activeFilter?.type === 'industry' ? activeFilter.value : null
     } else if (activeSection === 'client') {
         currentFilters = clients
-        activeFilterValue = client
+        activeFilterValue = activeFilter?.type === 'client' ? activeFilter.value : null
     }
 
-    const hasActiveFilters = technology || category || industry || client
+    const hasActiveFilters = activeFilter !== null
 
     return (
         <div className="mt-8 flex flex-col gap-6">
@@ -126,12 +118,9 @@ export default function ProjectFilters({ technologies, categories, industries, c
                     Clients
                 </Button>
                 {hasActiveFilters && (
-                    <Link
-                        href={searchQuery ? `/projets?search=${searchQuery}` : '/projets'}
-                        className="text-foreground/80 hover:text-foreground text-sm underline transition-colors"
-                    >
+                    <Button variant="link" size="sm" as="a" href={buildResetUrl()} scroll={false}>
                         Réinitialiser
-                    </Link>
+                    </Button>
                 )}
             </div>
 
@@ -142,6 +131,7 @@ export default function ProjectFilters({ technologies, categories, industries, c
                         <Link
                             key={filter.slug}
                             href={buildFilterUrl(activeSection, activeFilterValue === filter.slug ? null : filter.slug)}
+                            scroll={false}
                         >
                             <Badge
                                 variant={activeFilterValue === filter.slug ? 'primary' : 'outline-primary'}

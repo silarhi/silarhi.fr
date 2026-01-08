@@ -1,18 +1,30 @@
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react'
 
 import { cn } from '@/utils/lib'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'muted' | 'danger' | 'outline-dark' | 'outline-primary'
+interface ButtonBaseProps {
+    variant?: 'primary' | 'secondary' | 'muted' | 'danger' | 'outline-dark' | 'outline-primary' | 'link'
     size?: 'xs' | 'sm' | 'md' | 'lg'
-    as?: 'a'
-    href?: string
     children: ReactNode
+    disabled?: boolean
+    className?: string
 }
 
+interface ButtonAsButton extends ButtonBaseProps, Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+    as?: never
+    href?: never
+    scroll?: never
+}
+
+interface ButtonAsLink extends ButtonBaseProps, Omit<LinkProps, 'children'> {
+    as: 'a'
+}
+
+type ButtonProps = ButtonAsButton | ButtonAsLink
+
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-    ({ variant = 'primary', size = 'md', as, href, className, children, disabled, ...props }, ref) => {
+    ({ variant = 'primary', size = 'md', as, href, scroll, className, children, disabled, ...props }, ref) => {
         const baseClasses =
             'cursor-pointer hover:no-underline inline-flex items-center justify-center gap-2 font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2'
 
@@ -27,6 +39,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             danger: 'bg-red-600 text-surface hover:bg-red-700 focus:ring-red-600 dark:bg-error dark:hover:bg-red-600',
             'outline-dark':
                 'bg-surface border border-dark text-dark hover:bg-dark hover:text-surface focus:ring-dark dark:bg-surface dark:text-foreground dark:hover:bg-surface-elevated dark:hover:text-foreground',
+            link: 'bg-transparent text-foreground/80 hover:text-foreground underline focus:ring-primary p-0',
         }
 
         const sizeClasses = {
@@ -48,7 +61,13 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
         if (as === 'a' && href) {
             return (
-                <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={classes}>
+                <Link
+                    ref={ref as React.Ref<HTMLAnchorElement>}
+                    href={href}
+                    scroll={scroll}
+                    className={classes}
+                    {...(props as Omit<LinkProps, 'href'>)}
+                >
                     {children}
                 </Link>
             )

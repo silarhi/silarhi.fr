@@ -41,10 +41,30 @@ export function getCanonicalUrl(path: string = ''): string {
 }
 
 /**
- * Filter parameters that are valid for canonical URLs on the projects page.
- * Only one of these should be used at a time in the canonical URL.
+ * Filter parameters for the projects page.
+ * Only one of these should be active at a time.
  */
-const CANONICAL_FILTER_PARAMS = ['technology', 'client', 'category', 'industry'] as const
+const FILTER_PARAMS = ['technology', 'category', 'industry', 'client'] as const
+export type FilterType = (typeof FILTER_PARAMS)[number]
+
+interface ActiveFilter {
+    type: FilterType
+    value: string
+}
+
+/**
+ * Finds the first active filter parameter from URL search params.
+ * Returns the filter type and value, or null if no filter is active.
+ */
+export function getActiveFilter(searchParams: URLSearchParams | Record<string, string | null>): ActiveFilter | null {
+    for (const param of FILTER_PARAMS) {
+        const value = searchParams instanceof URLSearchParams ? searchParams.get(param) : searchParams[param]
+        if (value) {
+            return { type: param, value }
+        }
+    }
+    return null
+}
 
 /**
  * Generates a canonical URL for the projects page with optional single filter parameter and pagination.
@@ -59,7 +79,7 @@ export function getProjectsCanonicalUrl(searchParams: Partial<Record<string, str
     const queryParts: string[] = []
 
     // Find the first valid filter parameter (in priority order)
-    for (const param of CANONICAL_FILTER_PARAMS) {
+    for (const param of FILTER_PARAMS) {
         const value = searchParams[param]
         if (value) {
             queryParts.push(`${param}=${encodeURIComponent(value)}`)

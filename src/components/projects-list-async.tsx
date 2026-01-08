@@ -12,6 +12,7 @@ interface ProjectsListAsyncProps {
     category?: string
     industry?: string
     client?: string
+    searchParams: string
 }
 
 export default async function ProjectsListAsync({
@@ -22,6 +23,7 @@ export default async function ProjectsListAsync({
     category,
     industry,
     client,
+    searchParams,
 }: ProjectsListAsyncProps) {
     // Get all projects and filter by search query
     const allProjects = await getAllProjects()
@@ -75,23 +77,8 @@ export default async function ProjectsListAsync({
     // Redirect if page is out of bounds
     if (currentPage < 1 || (currentPage > totalPages && filteredProjects.length > 0)) {
         const validPage = Math.max(1, Math.min(currentPage, totalPages))
-        const redirectParams = new URLSearchParams()
+        const redirectParams = new URLSearchParams(searchParams)
         redirectParams.set('page', validPage.toString())
-        if (searchQuery) {
-            redirectParams.set('search', searchQuery)
-        }
-        if (technology) {
-            redirectParams.set('technology', technology)
-        }
-        if (category) {
-            redirectParams.set('category', category)
-        }
-        if (industry) {
-            redirectParams.set('industry', industry)
-        }
-        if (client) {
-            redirectParams.set('client', client)
-        }
         redirect(`/projets?${redirectParams.toString()}`)
     }
 
@@ -102,6 +89,7 @@ export default async function ProjectsListAsync({
             currentPage={currentPage}
             totalPages={totalPages}
             searchQuery={searchQuery}
+            searchParams={searchParams}
         />
     )
 }

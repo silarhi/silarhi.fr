@@ -7,7 +7,7 @@ interface PaginationServerProps {
     currentPage: number
     totalPages: number
     baseUrl: string
-    searchQuery?: string
+    searchParams?: string
     className?: string
 }
 
@@ -15,7 +15,7 @@ export default function PaginationServer({
     currentPage,
     totalPages,
     baseUrl,
-    searchQuery,
+    searchParams,
     className,
 }: PaginationServerProps) {
     if (totalPages <= 1) {
@@ -23,11 +23,8 @@ export default function PaginationServer({
     }
 
     const buildUrl = (page: number) => {
-        const params = new URLSearchParams()
+        const params = new URLSearchParams(searchParams)
         params.set('page', page.toString())
-        if (searchQuery) {
-            params.set('search', searchQuery)
-        }
         return `${baseUrl}?${params.toString()}#projects-list`
     }
 

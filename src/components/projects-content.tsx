@@ -9,6 +9,7 @@ interface ProjectsContentProps {
     currentPage: number
     totalPages: number
     searchQuery: string
+    searchParams: string
 }
 
 export default function ProjectsContent({
@@ -17,6 +18,7 @@ export default function ProjectsContent({
     currentPage,
     totalPages,
     searchQuery,
+    searchParams,
 }: ProjectsContentProps) {
     return (
         <>
@@ -57,7 +59,7 @@ export default function ProjectsContent({
                                 currentPage={currentPage}
                                 totalPages={totalPages}
                                 baseUrl="/projets"
-                                searchQuery={searchQuery}
+                                searchParams={searchParams}
                             />
                         </div>
                     )}
