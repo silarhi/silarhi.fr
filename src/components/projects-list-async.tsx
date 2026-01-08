@@ -26,8 +26,7 @@ export default async function ProjectsListAsync({
     searchParams,
 }: ProjectsListAsyncProps) {
     // Get all projects and filter by search query
-    const allProjects = await getAllProjects()
-    let filteredProjects = allProjects
+    let filteredProjects = await getAllProjects()
 
     // Apply filters if present
     if (technology) {
