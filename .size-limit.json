@@ -1,0 +1,20 @@
+[
+  {
+    "name": "JS (First Load)",
+    "path": ".next/static/chunks/*.js",
+    "limit": "150 kB",
+    "gzip": true
+  },
+  {
+    "name": "JS (Pages)",
+    "path": ".next/static/chunks/pages/**/*.js",
+    "limit": "50 kB",
+    "gzip": true
+  },
+  {
+    "name": "JS (App)",
+    "path": ".next/static/chunks/app/**/*.js",
+    "limit": "200 kB",
+    "gzip": true
+  }
+]
