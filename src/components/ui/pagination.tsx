@@ -11,13 +11,7 @@ interface PaginationProps {
     className?: string
 }
 
-export default function Pagination({
-    currentPage,
-    totalPages,
-    baseUrl,
-    searchParams,
-    className,
-}: PaginationProps) {
+export default function Pagination({ currentPage, totalPages, baseUrl, searchParams, className }: PaginationProps) {
     if (totalPages <= 1) {
         return null
     }
