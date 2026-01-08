@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react'
 
 import { cn } from '@/utils/lib'
@@ -7,6 +7,8 @@ interface ButtonBaseProps {
     variant?: 'primary' | 'secondary' | 'muted' | 'danger' | 'outline-dark' | 'outline-primary' | 'link'
     size?: 'xs' | 'sm' | 'md' | 'lg'
     children: ReactNode
+    disabled?: boolean
+    className?: string
 }
 
 interface ButtonAsButton extends ButtonBaseProps, Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
@@ -15,12 +17,8 @@ interface ButtonAsButton extends ButtonBaseProps, Omit<ButtonHTMLAttributes<HTML
     scroll?: never
 }
 
-interface ButtonAsLink extends ButtonBaseProps {
+interface ButtonAsLink extends ButtonBaseProps, Omit<LinkProps, 'children'> {
     as: 'a'
-    href: string
-    scroll?: boolean
-    className?: string
-    disabled?: boolean
 }
 
 type ButtonProps = ButtonAsButton | ButtonAsLink
@@ -63,7 +61,13 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
 
         if (as === 'a' && href) {
             return (
-                <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} scroll={scroll} className={classes}>
+                <Link
+                    ref={ref as React.Ref<HTMLAnchorElement>}
+                    href={href}
+                    scroll={scroll}
+                    className={classes}
+                    {...(props as Omit<LinkProps, 'href'>)}
+                >
                     {children}
                 </Link>
             )
