@@ -37,7 +37,7 @@ export default function SearchInput({
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 className={cn(
-                    'focus:border-primary focus:ring-primary/20 bg-surface dark:bg-light dark:border-border dark:text-foreground dark:placeholder-muted block w-full rounded-lg border border-gray-300 py-4 pr-12 pl-12 text-lg text-gray-900 placeholder-gray-500 shadow-sm transition-all focus:ring-2 focus:outline-none',
+                    'focus:border-primary focus:ring-primary/20 bg-surface dark:bg-light dark:border-border dark:text-foreground dark:placeholder-muted block w-full rounded-lg border border-gray-300 py-4 pr-12 pl-12 text-lg text-gray-900 placeholder-gray-500 shadow-sm transition-all focus:ring-2 focus:outline-none [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden',
                     isLoading && 'opacity-70'
                 )}
                 placeholder={placeholder}
@@ -48,7 +48,7 @@ export default function SearchInput({
                 <button
                     type="button"
                     onClick={() => onChange('')}
-                    className="dark:text-muted dark:hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 transition-colors hover:text-gray-600"
+                    className="dark:text-muted dark:hover:text-foreground absolute inset-y-0 right-0 flex cursor-pointer items-center pr-4 text-gray-400 transition-colors hover:text-gray-600"
                     aria-label="Effacer la recherche"
                 >
                     <XCircle className="h-6 w-6" />

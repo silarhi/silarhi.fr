@@ -6,9 +6,13 @@ import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import { Clock, Envelope, Map, Phone } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import { cn } from '@/utils/lib'
+import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
     title: `Contactez-nous - SILARHI`,
+    alternates: {
+        canonical: getCanonicalUrl('/contact'),
+    },
 }
 
 export default function ContactPage() {

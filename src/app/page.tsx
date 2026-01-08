@@ -20,13 +20,17 @@ import home from '@/public/images/home.jpg'
 import { getAllClients } from '@/utils/client'
 import { getTotalEmployeeHours } from '@/utils/employees'
 import { cn } from '@/utils/lib'
-import { getAllProjects } from '@/utils/project'
+import { getAllProjects, getClientLinksData } from '@/utils/project'
+import { getCanonicalUrl } from '@/utils/url'
 
 import { lato } from './fonts'
 
 export const metadata: Metadata = {
     title: `Développement d'applications Web & PHP à Toulouse - SILARHI`,
     description: `Développement d'applications Web à Toulouse et en France. Donnez vie à vos idées d'applications responsive & mobiles. Devis rapide et gratuit.`,
+    alternates: {
+        canonical: getCanonicalUrl(),
+    },
 }
 
 interface Feature {
@@ -460,8 +464,15 @@ function NumbersSection({ numbers }: { numbers: NumberData[] }) {
 }
 
 export default async function Page() {
-    const [clients, projects] = await Promise.all([getAllClients(), getAllProjects()])
+    const [clients, projects, clientLinksData] = await Promise.all([
+        getAllClients(),
+        getAllProjects(),
+        getClientLinksData(),
+    ])
     const numbers = getNumbers(clients.length, projects.length)
+
+    // Convert Map to plain object for serialization
+    const clientLinks = Object.fromEntries(clientLinksData)
 
     return (
         <>
@@ -469,7 +480,7 @@ export default async function Page() {
             <PresentationSection />
             <ServicesSection />
             <MethodologySection />
-            <ClientsSection clients={clients} projects={projects} />
+            <ClientsSection clients={clients} clientLinks={clientLinks} />
             <NumbersSection numbers={numbers} />
         </>
     )

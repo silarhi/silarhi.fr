@@ -99,110 +99,137 @@ interface IterationFrontMatter {
     project: string
 }
 
-// Get all project slugs
-export function getAllProjectSlugs(): string[] {
-    const entries = fs.readdirSync(projectsDirectory, { withFileTypes: true })
-    return entries
-        .filter((entry) => entry.isDirectory())
-        .map((entry) => entry.name)
-        .filter((dirName) => fs.existsSync(path.join(projectsDirectory, dirName, 'index.mdx')))
-}
+// In-memory cache for projects (loaded once per build)
+let projectsCache: Map<string, Project> | null = null
 
-// Get all iterations for a project
-async function getProjectIterations(projectSlug: string): Promise<ProjectIteration[]> {
-    const projectDir = path.join(projectsDirectory, projectSlug)
-
-    if (!fs.existsSync(projectDir)) {
+// Get all project slugs by scanning directories that contain index.mdx
+function scanProjectSlugs(): string[] {
+    if (!fs.existsSync(projectsDirectory)) {
         return []
     }
 
+    const entries = fs.readdirSync(projectsDirectory, { withFileTypes: true })
+    const slugs: string[] = []
+
+    for (const entry of entries) {
+        if (entry.isDirectory()) {
+            const indexPath = path.join(projectsDirectory, entry.name, 'index.mdx')
+            if (fs.existsSync(indexPath)) {
+                slugs.push(entry.name)
+            }
+        }
+    }
+
+    return slugs
+}
+
+// Parse iterations from a project directory (reads files in one pass)
+function parseProjectIterations(projectDir: string): ProjectIteration[] {
     const files = fs.readdirSync(projectDir)
     const iterationFiles = files.filter((file) => file.endsWith('.mdx') && file !== 'index.mdx')
 
-    const iterations = await Promise.all(
-        iterationFiles.map(async (file) => {
-            const fullPath = path.join(projectDir, file)
-            const fileContents = fs.readFileSync(fullPath, 'utf8')
-            const { data, content } = matter(fileContents)
-            const frontMatter = data as IterationFrontMatter
+    const iterations: ProjectIteration[] = []
 
-            return {
-                slug: file.replace(/\.mdx$/, ''),
-                title: frontMatter.title,
-                date: new Date(frontMatter.date),
-                project: frontMatter.project,
-                content,
-            }
+    for (const file of iterationFiles) {
+        const fullPath = path.join(projectDir, file)
+        const fileContents = fs.readFileSync(fullPath, 'utf8')
+        const { data, content } = matter(fileContents)
+        const frontMatter = data as IterationFrontMatter
+
+        iterations.push({
+            slug: file.replace(/\.mdx$/, ''),
+            title: frontMatter.title,
+            date: new Date(frontMatter.date),
+            project: frontMatter.project,
+            content,
         })
-    )
+    }
 
     // Sort iterations by date (oldest first for chronological order)
     return iterations.sort((a, b) => a.date.getTime() - b.date.getTime())
 }
 
+// Load all projects into cache (single filesystem scan)
+async function loadProjectsCache(): Promise<Map<string, Project>> {
+    if (projectsCache) {
+        return projectsCache
+    }
+
+    projectsCache = new Map()
+    const slugs = scanProjectSlugs()
+
+    for (const slug of slugs) {
+        const projectDir = path.join(projectsDirectory, slug)
+        const indexPath = path.join(projectDir, 'index.mdx')
+        const fileContents = fs.readFileSync(indexPath, 'utf8')
+        const { data, content } = matter(fileContents)
+        const frontMatter = data as ProjectFrontMatter
+
+        // Skip unpublished projects
+        if (!frontMatter.published) {
+            continue
+        }
+
+        // Lookup client metadata (uses cached client data)
+        const client = await getClientBySlug(frontMatter.client)
+        if (!client) {
+            continue
+        }
+
+        // Lookup technology metadata (uses cached technology data)
+        const technologies = await Promise.all(
+            frontMatter.technologies.map((techSlug) => getTechnologyBySlug(techSlug))
+        )
+
+        // Get iterations from the same directory scan
+        const iterations = parseProjectIterations(projectDir)
+
+        projectsCache.set(slug, {
+            slug,
+            title: frontMatter.title,
+            date: new Date(frontMatter.date),
+            excerpt: frontMatter.excerpt,
+            client,
+            url: frontMatter.url,
+            technologies: technologies.filter((tech): tech is Technology => tech !== null),
+            published: frontMatter.published,
+            content,
+            iterations,
+            scope: frontMatter.scope,
+            codeOwnership: frontMatter.codeOwnership,
+            category: frontMatter.category,
+            name: frontMatter.name,
+            duration: frontMatter.duration,
+            engagement: frontMatter.engagement,
+            image: frontMatter.image,
+            overview: frontMatter.overview,
+            challenge: frontMatter.challenge,
+            solution: frontMatter.solution,
+        })
+    }
+
+    return projectsCache
+}
+
+// Get all project slugs
+export function getAllProjectSlugs(): string[] {
+    // If cache exists, return cached slugs; otherwise scan filesystem
+    if (projectsCache) {
+        return Array.from(projectsCache.keys())
+    }
+    return scanProjectSlugs()
+}
+
 // Get a single project by slug
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
-    const fullPath = path.join(projectsDirectory, slug, 'index.mdx')
-
-    if (!fs.existsSync(fullPath)) {
-        return null
-    }
-
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const { data, content } = matter(fileContents)
-
-    const frontMatter = data as ProjectFrontMatter
-
-    // Only return published projects or if published is not defined
-    if (!frontMatter.published) {
-        return null
-    }
-
-    // Lookup client metadata
-    const client = await getClientBySlug(frontMatter.client)
-
-    if (!client) {
-        return null
-    }
-
-    // Lookup technology metadata for each technology
-    const technologies = await Promise.all(frontMatter.technologies.map((techSlug) => getTechnologyBySlug(techSlug)))
-
-    // Get all iterations for this project
-    const iterations = await getProjectIterations(slug)
-
-    return {
-        slug,
-        title: frontMatter.title,
-        date: new Date(frontMatter.date),
-        excerpt: frontMatter.excerpt,
-        client,
-        url: frontMatter.url,
-        technologies: technologies.filter((tech): tech is Technology => tech !== null),
-        published: frontMatter.published,
-        content,
-        iterations,
-        scope: frontMatter.scope,
-        codeOwnership: frontMatter.codeOwnership,
-        category: frontMatter.category,
-        name: frontMatter.name,
-        duration: frontMatter.duration,
-        engagement: frontMatter.engagement,
-        image: frontMatter.image,
-        overview: frontMatter.overview,
-        challenge: frontMatter.challenge,
-        solution: frontMatter.solution,
-    }
+    const cache = await loadProjectsCache()
+    return cache.get(slug) ?? null
 }
 
 // Get all project projects
 export async function getAllProjects(): Promise<Project[]> {
-    const slugs = getAllProjectSlugs()
-    const projects = await Promise.all(slugs.map((slug) => getProjectBySlug(slug)))
-
-    return projects
-        .filter((project): project is Project => project !== null)
-        .sort((a, b) => b.date.getTime() - a.date.getTime())
+    const cache = await loadProjectsCache()
+    return Array.from(cache.values()).sort((a, b) => b.date.getTime() - a.date.getTime())
 }
 
 // Get projects by technology
@@ -211,4 +238,168 @@ export async function getProjectsByTechnology(technologySlug: string): Promise<P
     return allProjects.filter((project) =>
         project.technologies.some((tech) => tech.slug.toLowerCase() === technologySlug.toLowerCase())
     )
+}
+
+// Get projects by client slug (efficient lookup without loading all projects for counting)
+export async function getProjectsByClient(clientSlug: string): Promise<Project[]> {
+    const allProjects = await getAllProjects()
+    return allProjects.filter((project) => project.client.slug === clientSlug)
+}
+
+// Pre-computed filter data interface
+interface FilterItemWithCount {
+    slug: string
+    name: string
+    projectCount: number
+}
+
+interface ProjectFilterData {
+    technologies: FilterItemWithCount[]
+    categories: FilterItemWithCount[]
+    industries: FilterItemWithCount[]
+    clients: FilterItemWithCount[]
+    projects: Project[]
+}
+
+// In-memory cache for filter data (computed once per build)
+let filterDataCache: ProjectFilterData | null = null
+
+// Client link data for efficient rendering
+export interface ClientLinkData {
+    slug: string
+    link: string
+    projectCount: number
+}
+
+// Pre-compute client links (for single project -> direct link, multiple -> filter link)
+export async function getClientLinksData(): Promise<Map<string, ClientLinkData>> {
+    const allProjects = await getAllProjects()
+    const clientProjectsMap = new Map<string, { projects: Project[]; slug: string }>()
+
+    // Group projects by client
+    for (const project of allProjects) {
+        const clientSlug = project.client.slug
+        const existing = clientProjectsMap.get(clientSlug)
+        if (existing) {
+            existing.projects.push(project)
+        } else {
+            clientProjectsMap.set(clientSlug, { projects: [project], slug: clientSlug })
+        }
+    }
+
+    // Convert to link data
+    const result = new Map<string, ClientLinkData>()
+    for (const [clientSlug, data] of clientProjectsMap) {
+        const link = data.projects.length === 1 ? `/projets/${data.projects[0].slug}` : `/projets?client=${clientSlug}`
+        result.set(clientSlug, {
+            slug: clientSlug,
+            link,
+            projectCount: data.projects.length,
+        })
+    }
+
+    return result
+}
+
+// Get all filter data with counts in a single pass (O(n) instead of O(n×m))
+export async function getProjectFilterData(): Promise<ProjectFilterData> {
+    if (filterDataCache) {
+        return filterDataCache
+    }
+
+    const allProjects = await getAllProjects()
+
+    // Initialize counters using Maps for O(1) lookups
+    const techCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+    const categoryCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+    const industryCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+    const clientCounts = new Map<string, { slug: string; name: string; projectCount: number }>()
+
+    // Single pass through all projects to compute all counts
+    for (const project of allProjects) {
+        // Count technologies
+        for (const tech of project.technologies) {
+            const existing = techCounts.get(tech.slug)
+            if (existing) {
+                existing.projectCount++
+            } else {
+                techCounts.set(tech.slug, {
+                    slug: tech.slug,
+                    name: tech.name,
+                    projectCount: 1,
+                })
+            }
+        }
+
+        // Count categories
+        if (project.category) {
+            const slug = project.category.toLowerCase().replace(/\s+/g, '-')
+            const existing = categoryCounts.get(slug)
+            if (existing) {
+                existing.projectCount++
+            } else {
+                categoryCounts.set(slug, {
+                    slug,
+                    name: project.category,
+                    projectCount: 1,
+                })
+            }
+        }
+
+        // Count industries
+        const industry = project.client.sector
+        if (industry) {
+            const slug = industry.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
+            const existing = industryCounts.get(slug)
+            if (existing) {
+                existing.projectCount++
+            } else {
+                industryCounts.set(slug, {
+                    slug,
+                    name: industry,
+                    projectCount: 1,
+                })
+            }
+        }
+
+        // Count clients
+        const clientSlug = project.client.slug
+        const existing = clientCounts.get(clientSlug)
+        if (existing) {
+            existing.projectCount++
+        } else {
+            clientCounts.set(clientSlug, {
+                slug: clientSlug,
+                name: project.client.name,
+                projectCount: 1,
+            })
+        }
+    }
+
+    // Convert Maps to sorted arrays (filter out items with 0 projects)
+    const technologies = Array.from(techCounts.values())
+        .filter((t) => t.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    const categories = Array.from(categoryCounts.values())
+        .filter((c) => c.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    const industries = Array.from(industryCounts.values())
+        .filter((i) => i.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    const clients = Array.from(clientCounts.values())
+        .filter((c) => c.projectCount > 0)
+        .sort((a, b) => a.name.localeCompare(b.name))
+
+    filterDataCache = {
+        technologies,
+        categories,
+        industries,
+        clients,
+        projects: allProjects,
+    }
+
+    return filterDataCache
 }

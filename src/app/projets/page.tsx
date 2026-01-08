@@ -8,14 +8,8 @@ import ProjectsHero from '@/components/projects-hero'
 import ProjectsListAsync from '@/components/projects-list-async'
 import Badge from '@/components/ui/badge'
 import Section from '@/components/ui/section'
-import { getAllClients } from '@/utils/client'
-import { getAllProjects } from '@/utils/project'
-import { getAllTechnologies } from '@/utils/technology'
-
-export const metadata: Metadata = {
-    title: 'Projets récents - SILARHI',
-    description: 'Découvrez nos projets sur le développement web, PHP, Symfony et bien plus encore.',
-}
+import { getProjectFilterData } from '@/utils/project'
+import { getProjectsCanonicalUrl } from '@/utils/url'
 
 interface ProjectPageProps {
     searchParams: Promise<{
@@ -26,6 +20,18 @@ interface ProjectPageProps {
         industry?: string
         client?: string
     }>
+}
+
+export async function generateMetadata({ searchParams }: ProjectPageProps): Promise<Metadata> {
+    const params = await searchParams
+
+    return {
+        title: 'Projets récents - SILARHI',
+        description: 'Découvrez nos projets sur le développement web, PHP, Symfony et bien plus encore.',
+        alternates: {
+            canonical: getProjectsCanonicalUrl(params),
+        },
+    }
 }
 
 const ITEMS_PER_PAGE = 9
@@ -39,71 +45,13 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
     const industry = params.industry || ''
     const client = params.client || ''
 
-    // Fetch data for filters
-    const [allProjects, allTechnologies, allClients] = await Promise.all([
-        getAllProjects(),
-        getAllTechnologies(),
-        getAllClients(),
-    ])
+    // Build searchParams string for pagination
+    const searchParamsString = new URLSearchParams(
+        Object.entries(params).filter(([, v]) => v) as [string, string][]
+    ).toString()
 
-    // Calculate project counts for each technology
-    const technologiesWithCounts = allTechnologies.map((tech) => ({
-        slug: tech.slug,
-        name: tech.name,
-        projectCount: allProjects.filter((project) => project.technologies.some((t) => t.slug === tech.slug)).length,
-    }))
-
-    // Get all unique categories with counts
-    const categoryMap = new Map<string, { slug: string; name: string; projectCount: number }>()
-
-    allProjects.forEach((project) => {
-        if (project.category) {
-            const slug = project.category.toLowerCase().replace(/\s+/g, '-')
-            if (categoryMap.has(slug)) {
-                categoryMap.get(slug)!.projectCount++
-            } else {
-                categoryMap.set(slug, {
-                    slug,
-                    name: project.category,
-                    projectCount: 1,
-                })
-            }
-        }
-    })
-
-    const categories = Array.from(categoryMap.values()).sort((a, b) => a.name.localeCompare(b.name))
-
-    // Get all unique industries/sectors with counts
-    const industryMap = new Map<string, { slug: string; name: string; projectCount: number }>()
-
-    allProjects.forEach((project) => {
-        const industry = project.client.sector
-        if (industry) {
-            const slug = industry.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
-            if (industryMap.has(slug)) {
-                industryMap.get(slug)!.projectCount++
-            } else {
-                industryMap.set(slug, {
-                    slug,
-                    name: industry,
-                    projectCount: 1,
-                })
-            }
-        }
-    })
-
-    const industries = Array.from(industryMap.values()).sort((a, b) => a.name.localeCompare(b.name))
-
-    // Get all clients with counts
-    const clientsWithCounts = allClients.map((client) => ({
-        slug: client.slug,
-        name: client.name,
-        projectCount: allProjects.filter((project) => project.client.slug === client.slug).length,
-    }))
-
-    // Filter to only include items with projects
-    const technologies = technologiesWithCounts.filter((tech) => tech.projectCount > 0)
-    const clients = clientsWithCounts.filter((client) => client.projectCount > 0)
+    // Fetch pre-computed filter data (O(n) instead of O(n×m))
+    const { technologies, categories, industries, clients } = await getProjectFilterData()
 
     return (
         <>
@@ -134,6 +82,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                         category={category}
                         industry={industry}
                         client={client}
+                        searchParams={searchParamsString}
                     />
                 </Suspense>
             </Section>
