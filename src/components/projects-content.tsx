@@ -2,7 +2,6 @@ import ProjectList from '@/components/project-list'
 import { FaceSad } from '@/components/ui/icons'
 import Pagination from '@/components/ui/pagination'
 import { Project } from '@/utils/project'
-import { ActiveFilter } from '@/utils/url'
 
 interface ProjectsContentProps {
     projects: Project[]
@@ -10,7 +9,7 @@ interface ProjectsContentProps {
     currentPage: number
     totalPages: number
     searchQuery: string
-    activeFilter?: ActiveFilter | null
+    searchParams: string
 }
 
 export default function ProjectsContent({
@@ -19,7 +18,7 @@ export default function ProjectsContent({
     currentPage,
     totalPages,
     searchQuery,
-    activeFilter,
+    searchParams,
 }: ProjectsContentProps) {
     return (
         <>
@@ -60,8 +59,7 @@ export default function ProjectsContent({
                                 currentPage={currentPage}
                                 totalPages={totalPages}
                                 baseUrl="/projets"
-                                searchQuery={searchQuery}
-                                activeFilter={activeFilter}
+                                searchParams={searchParams}
                             />
                         </div>
                     )}

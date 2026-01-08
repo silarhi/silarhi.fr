@@ -45,6 +45,11 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
     const industry = params.industry || ''
     const client = params.client || ''
 
+    // Build searchParams string for pagination
+    const searchParamsString = new URLSearchParams(
+        Object.entries(params).filter(([, v]) => v) as [string, string][]
+    ).toString()
+
     // Fetch pre-computed filter data (O(n) instead of O(n×m))
     const { technologies, categories, industries, clients } = await getProjectFilterData()
 
@@ -77,6 +82,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                         category={category}
                         industry={industry}
                         client={client}
+                        searchParams={searchParamsString}
                     />
                 </Suspense>
             </Section>

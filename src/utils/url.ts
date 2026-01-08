@@ -47,7 +47,7 @@ export function getCanonicalUrl(path: string = ''): string {
 const FILTER_PARAMS = ['technology', 'category', 'industry', 'client'] as const
 export type FilterType = (typeof FILTER_PARAMS)[number]
 
-export interface ActiveFilter {
+interface ActiveFilter {
     type: FilterType
     value: string
 }

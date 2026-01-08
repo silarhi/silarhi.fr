@@ -2,14 +2,12 @@ import Link from 'next/link'
 import React from 'react'
 
 import { ChevronLeft, ChevronRight } from '@/components/ui/icons'
-import { ActiveFilter } from '@/utils/url'
 
 interface PaginationServerProps {
     currentPage: number
     totalPages: number
     baseUrl: string
-    searchQuery?: string
-    activeFilter?: ActiveFilter | null
+    searchParams?: string
     className?: string
 }
 
@@ -17,8 +15,7 @@ export default function PaginationServer({
     currentPage,
     totalPages,
     baseUrl,
-    searchQuery,
-    activeFilter,
+    searchParams,
     className,
 }: PaginationServerProps) {
     if (totalPages <= 1) {
@@ -26,14 +23,8 @@ export default function PaginationServer({
     }
 
     const buildUrl = (page: number) => {
-        const params = new URLSearchParams()
+        const params = new URLSearchParams(searchParams)
         params.set('page', page.toString())
-        if (searchQuery) {
-            params.set('search', searchQuery)
-        }
-        if (activeFilter) {
-            params.set(activeFilter.type, activeFilter.value)
-        }
         return `${baseUrl}?${params.toString()}#projects-list`
     }
 
