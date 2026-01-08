@@ -3,14 +3,27 @@ import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react'
 
 import { cn } from '@/utils/lib'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonBaseProps {
     variant?: 'primary' | 'secondary' | 'muted' | 'danger' | 'outline-dark' | 'outline-primary' | 'link'
     size?: 'xs' | 'sm' | 'md' | 'lg'
-    as?: 'a'
-    href?: string
-    scroll?: boolean
     children: ReactNode
 }
+
+interface ButtonAsButton extends ButtonBaseProps, Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+    as?: never
+    href?: never
+    scroll?: never
+}
+
+interface ButtonAsLink extends ButtonBaseProps {
+    as: 'a'
+    href: string
+    scroll?: boolean
+    className?: string
+    disabled?: boolean
+}
+
+type ButtonProps = ButtonAsButton | ButtonAsLink
 
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     ({ variant = 'primary', size = 'md', as, href, scroll, className, children, disabled, ...props }, ref) => {
