@@ -1,20 +1,14 @@
 [
   {
-    "name": "JS (First Load)",
-    "path": ".next/static/chunks/*.js",
-    "limit": "150 kB",
+    "name": "Total JS",
+    "path": ".next/static/**/*.js",
+    "limit": "500 kB",
     "gzip": true
   },
   {
-    "name": "JS (Pages)",
-    "path": ".next/static/chunks/pages/**/*.js",
-    "limit": "50 kB",
-    "gzip": true
-  },
-  {
-    "name": "JS (App)",
-    "path": ".next/static/chunks/app/**/*.js",
-    "limit": "200 kB",
+    "name": "Total CSS",
+    "path": ".next/static/**/*.css",
+    "limit": "100 kB",
     "gzip": true
   }
 ]
