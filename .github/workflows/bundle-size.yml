@@ -30,7 +30,7 @@ jobs:
             - name: Get bundle size
               id: size
               run: |
-                  yarn size:json > size-output.json 2>/dev/null || echo "[]" > size-output.json
+                  yarn --silent size:json > size-output.json 2>/dev/null || echo "[]" > size-output.json
                   cat size-output.json
 
             - name: Post comment
