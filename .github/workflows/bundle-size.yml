@@ -33,3 +33,4 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   skip_step: build
                   package_manager: yarn
+                  script: yarn run size-limit --json
