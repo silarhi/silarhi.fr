@@ -7,6 +7,9 @@
  * 1. URLs that return 404 (not found)
  * 2. URLs that redirect to a different domain
  *
+ * Note: 403 (Forbidden) responses are treated as valid since some websites
+ * block automated requests but the URLs themselves are still valid.
+ *
  * Exit codes:
  * - 0: All URLs are valid
  * - 1: Invalid URLs found
@@ -205,7 +208,8 @@ async function validateUrl(urlInfo: UrlInfo): Promise<ValidationResult> {
                     signal: AbortSignal.timeout(10000),
                 })
 
-                if (getResponse.status >= 400) {
+                // Treat 403 as valid (site blocks bots but URL exists)
+                if (getResponse.status >= 400 && getResponse.status !== 403) {
                     return {
                         url,
                         file,
@@ -216,6 +220,12 @@ async function validateUrl(urlInfo: UrlInfo): Promise<ValidationResult> {
                 }
 
                 return { url, file, source, status: 'valid', statusCode: getResponse.status }
+            }
+
+            // Treat 403 as valid - some websites block automated requests
+            // but the URL itself is still valid
+            if (statusCode === 403) {
+                return { url, file, source, status: 'valid', statusCode }
             }
 
             return {
