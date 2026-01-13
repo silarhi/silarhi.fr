@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import Image, { StaticImageData } from 'next/image'
 import { useCallback, useEffect } from 'react'
 
@@ -38,7 +38,7 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
     return (
         <AnimatePresence>
             {isOpen && (
-                <motion.div
+                <m.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -63,7 +63,7 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
                     </button>
 
                     {/* Image container */}
-                    <motion.div
+                    <m.div
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.9, opacity: 0 }}
@@ -72,11 +72,11 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <Image src={src} alt={alt} fill className="rounded-lg object-contain" priority sizes="90vw" />
-                    </motion.div>
+                    </m.div>
 
                     {/* Caption */}
                     {alt && (
-                        <motion.p
+                        <m.p
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
@@ -84,9 +84,9 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
                             className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-sm text-white/80"
                         >
                             {alt}
-                        </motion.p>
+                        </m.p>
                     )}
-                </motion.div>
+                </m.div>
             )}
         </AnimatePresence>
     )

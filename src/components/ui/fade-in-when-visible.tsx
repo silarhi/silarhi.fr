@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
 interface FadeInWhenVisibleProps {
@@ -22,7 +22,7 @@ export default function FadeInWhenVisible({
     const isInView = useInView(ref, { once: true, margin: '-50px' })
 
     return (
-        <motion.div
+        <m.div
             ref={ref}
             initial={{ opacity: 0, y: yOffset }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: yOffset }}
@@ -34,6 +34,6 @@ export default function FadeInWhenVisible({
             className={className}
         >
             {children}
-        </motion.div>
+        </m.div>
     )
 }
