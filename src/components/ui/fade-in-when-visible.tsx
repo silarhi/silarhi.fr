@@ -1,6 +1,7 @@
 'use client'
 
-import { m, useInView } from 'framer-motion'
+import { useInView } from 'motion/react'
+import * as m from 'motion/react-m'
 import { useRef } from 'react'
 
 interface FadeInWhenVisibleProps {
