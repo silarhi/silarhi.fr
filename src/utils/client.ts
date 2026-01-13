@@ -57,6 +57,12 @@ function loadClientsCache(): Map<string, Client> {
     return clientsCache
 }
 
+// Get all client slugs
+export function getAllClientSlugs(): string[] {
+    const cache = loadClientsCache()
+    return Array.from(cache.keys())
+}
+
 // Get a single client by slug
 export async function getClientBySlug(slug: string): Promise<Client | null> {
     const cache = loadClientsCache()
