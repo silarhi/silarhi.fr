@@ -1,15 +1,15 @@
 #!/usr/bin/env npx tsx
 
 /**
- * Validates that all image references in content files exist in the public directory.
+ * Validates image references in content files and public directory.
  *
  * Checks:
- * 1. Client logos (logo field in content/clients/[slug].mdx)
- * 2. Project hero images (image field in content/projects/[slug]/index.mdx)
+ * 1. Missing images: referenced in MDX but not in public directory
+ * 2. Unused images: in public directory but not referenced by any MDX
  *
  * Exit codes:
- * - 0: All images exist
- * - 1: Missing images found
+ * - 0: All validations passed
+ * - 1: Validation errors found
  */
 
 import fs from 'fs'
@@ -37,7 +37,7 @@ interface ProjectFrontMatter {
     image?: string
 }
 
-// Get all client logo references
+// Get all client logo references from MDX files
 function getClientLogoReferences(): ImageReference[] {
     const clientsDirectory = path.join(contentDirectory, 'clients')
     const references: ImageReference[] = []
@@ -66,7 +66,7 @@ function getClientLogoReferences(): ImageReference[] {
     return references
 }
 
-// Get all project hero image references
+// Get all project hero image references from MDX files
 function getProjectImageReferences(): ImageReference[] {
     const projectsDirectory = path.join(contentDirectory, 'projects')
     const references: ImageReference[] = []
@@ -101,12 +101,31 @@ function getProjectImageReferences(): ImageReference[] {
     return references
 }
 
+// Get all image files from a directory
+function getImagesInDirectory(dirPath: string): string[] {
+    if (!fs.existsSync(dirPath)) {
+        return []
+    }
+
+    const files = fs.readdirSync(dirPath)
+    const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp']
+
+    return files.filter((file) => {
+        const ext = path.extname(file).toLowerCase()
+        return imageExtensions.includes(ext)
+    })
+}
+
 // Check if an image file exists in the public directory
 function imageExists(imagePath: string): boolean {
-    // Image paths in content start with / and are relative to public directory
     const normalizedPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath
     const fullPath = path.join(publicDirectory, normalizedPath)
     return fs.existsSync(fullPath)
+}
+
+// Normalize path to compare references with files
+function normalizePath(imagePath: string): string {
+    return imagePath.startsWith('/') ? imagePath.slice(1) : imagePath
 }
 
 function validate() {
@@ -116,20 +135,42 @@ function validate() {
     const projectImages = getProjectImageReferences()
     const allReferences = [...clientLogos, ...projectImages]
 
-    const missingImages: ImageReference[] = []
+    // Get all referenced paths as a Set for quick lookup
+    const referencedPaths = new Set(allReferences.map((ref) => normalizePath(ref.path)))
 
+    // Check for missing images (referenced but not in public)
+    const missingImages: ImageReference[] = []
     for (const ref of allReferences) {
         if (!imageExists(ref.path)) {
             missingImages.push(ref)
         }
     }
 
-    // Group missing images by type for better output
+    // Check for unused images in public/images/clients/
+    const clientImagesDir = path.join(publicDirectory, 'images/clients')
+    const clientImageFiles = getImagesInDirectory(clientImagesDir)
+    const unusedClientImages = clientImageFiles.filter((file) => {
+        const relativePath = `images/clients/${file}`
+        return !referencedPaths.has(relativePath)
+    })
+
+    // Check for unused images in public/images/projects/
+    const projectImagesDir = path.join(publicDirectory, 'images/projects')
+    const projectImageFiles = getImagesInDirectory(projectImagesDir)
+    const unusedProjectImages = projectImageFiles.filter((file) => {
+        const relativePath = `images/projects/${file}`
+        return !referencedPaths.has(relativePath)
+    })
+
+    let hasErrors = false
+
+    // Report missing images
     const missingClientLogos = missingImages.filter((img) => img.type === 'client-logo')
     const missingProjectHeroes = missingImages.filter((img) => img.type === 'project-hero')
 
     if (missingClientLogos.length > 0) {
-        console.log('❌ Missing client logos:')
+        hasErrors = true
+        console.log('❌ Missing client logos (referenced but not found):')
         for (const img of missingClientLogos) {
             console.log(`   - ${img.path}`)
             console.log(`     Referenced in: ${img.source}`)
@@ -138,7 +179,8 @@ function validate() {
     }
 
     if (missingProjectHeroes.length > 0) {
-        console.log('❌ Missing project hero images:')
+        hasErrors = true
+        console.log('❌ Missing project hero images (referenced but not found):')
         for (const img of missingProjectHeroes) {
             console.log(`   - ${img.path}`)
             console.log(`     Referenced in: ${img.source}`)
@@ -146,15 +188,36 @@ function validate() {
         console.log()
     }
 
+    // Report unused images
+    if (unusedClientImages.length > 0) {
+        hasErrors = true
+        console.log('⚠️  Unused client logos (in public but not referenced):')
+        for (const file of unusedClientImages) {
+            console.log(`   - public/images/clients/${file}`)
+        }
+        console.log()
+    }
+
+    if (unusedProjectImages.length > 0) {
+        hasErrors = true
+        console.log('⚠️  Unused project images (in public but not referenced):')
+        for (const file of unusedProjectImages) {
+            console.log(`   - public/images/projects/${file}`)
+        }
+        console.log()
+    }
+
     // Summary
     console.log('📊 Summary:')
-    console.log(`   Client logos checked: ${clientLogos.length}`)
-    console.log(`   Project images checked: ${projectImages.length}`)
-    console.log(`   Total images checked: ${allReferences.length}`)
-    console.log(`   Missing images: ${missingImages.length}`)
+    console.log(`   Client logos referenced: ${clientLogos.length}`)
+    console.log(`   Project images referenced: ${projectImages.length}`)
+    console.log(`   Client images in public: ${clientImageFiles.length}`)
+    console.log(`   Project images in public: ${projectImageFiles.length}`)
+    console.log(`   Missing: ${missingImages.length}`)
+    console.log(`   Unused: ${unusedClientImages.length + unusedProjectImages.length}`)
     console.log()
 
-    if (missingImages.length > 0) {
+    if (hasErrors) {
         console.log('❌ Validation failed!\n')
         process.exit(1)
     } else {
