@@ -2,7 +2,7 @@
 
 import Link, { LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useMemo } from 'react'
 
 import { cn } from '@/utils/lib'
 
@@ -17,25 +17,21 @@ interface ActiveLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElem
 export default function ActiveLink({ children, className, activeClassName, ...props }: ActiveLinkProps) {
     const pathname = usePathname()
 
-    const [linkClassName, setLinkClassName] = useState<string>(className || '')
-
-    useEffect(() => {
-        if (pathname) {
-            // Dynamic route will be matched via props.as Static route will be matched via props.href
-            const linkPathname = new URL(props.as || props.href, location.href).href
-
-            // Using URL().pathname to get rid of query and hash
-            const activePathname = new URL(pathname, location.href).href
-
-            const newClassName = cn(className, {
-                [activeClassName || '']: linkPathname === activePathname,
-            })
-
-            if (newClassName !== linkClassName) {
-                setLinkClassName(newClassName)
-            }
+    const linkClassName = useMemo(() => {
+        if (!pathname) {
+            return className || ''
         }
-    }, [pathname, props.as, props.href, className, activeClassName, setLinkClassName, linkClassName])
+
+        // Dynamic route will be matched via props.as Static route will be matched via props.href
+        const linkPathname = new URL(props.as || props.href, location.href).href
+
+        // Using URL().pathname to get rid of query and hash
+        const activePathname = new URL(pathname, location.href).href
+
+        return cn(className, {
+            [activeClassName || '']: linkPathname === activePathname,
+        })
+    }, [pathname, props.as, props.href, className, activeClassName])
 
     return (
         <Link className={linkClassName} {...props}>
