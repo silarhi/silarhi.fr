@@ -17,7 +17,7 @@
         "prettier:check": "prettier --check .",
         "size": "size-limit",
         "size:json": "size-limit --json",
-        "generate-blur": "node scripts/generate-blur-data.mjs"
+        "generate-blur": "tsx scripts/generate-blur-data.ts"
     },
     "dependencies": {
         "@types/hast": "^3.0.4",

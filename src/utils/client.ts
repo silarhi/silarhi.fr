@@ -8,6 +8,7 @@ export interface Client {
     slug: string
     name: string
     logo?: string
+    blurDataURL?: string
     sector: string
     description: string
 }
@@ -16,6 +17,7 @@ interface ClientFrontMatter {
     name: string
     slug: string
     logo?: string
+    blurDataURL?: string
     sector: string
     description: string
 }
@@ -49,6 +51,7 @@ function loadClientsCache(): Map<string, Client> {
             slug,
             name: frontMatter.name,
             logo: frontMatter.logo,
+            blurDataURL: frontMatter.blurDataURL,
             sector: frontMatter.sector,
             description: frontMatter.description,
         })
