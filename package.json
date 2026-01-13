@@ -11,6 +11,7 @@
         "validate:technologies": "tsx scripts/validate-technologies.ts",
         "validate:clients": "tsx scripts/validate-clients.ts",
         "validate:urls": "tsx scripts/validate-urls.ts",
+        "check:images": "tsx scripts/check-images.ts",
         "typecheck": "tsc --noEmit",
         "prettier": "prettier --write .",
         "prettier:check": "prettier --check ."
