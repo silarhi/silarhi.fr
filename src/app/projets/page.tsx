@@ -1,8 +1,6 @@
 import { Metadata } from 'next'
-import { Suspense } from 'react'
 
 import ProjectFilters from '@/components/project-filters'
-import ProjectListSkeleton from '@/components/project-list-skeleton'
 import ProjectsCTA from '@/components/projects-cta'
 import ProjectsHero from '@/components/projects-hero'
 import ProjectsListAsync from '@/components/projects-list-async'
@@ -70,21 +68,16 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
             </ProjectsHero>
 
             <Section id="projects-list">
-                <Suspense
-                    key={`${searchQuery}-${currentPage}-${technology}-${category}-${industry}-${client}`}
-                    fallback={<ProjectListSkeleton count={9} />}
-                >
-                    <ProjectsListAsync
-                        searchQuery={searchQuery}
-                        currentPage={currentPage}
-                        itemsPerPage={ITEMS_PER_PAGE}
-                        technology={technology}
-                        category={category}
-                        industry={industry}
-                        client={client}
-                        searchParams={searchParamsString}
-                    />
-                </Suspense>
+                <ProjectsListAsync
+                    searchQuery={searchQuery}
+                    currentPage={currentPage}
+                    itemsPerPage={ITEMS_PER_PAGE}
+                    technology={technology}
+                    category={category}
+                    industry={industry}
+                    client={client}
+                    searchParams={searchParamsString}
+                />
             </Section>
 
             <ProjectsCTA />
