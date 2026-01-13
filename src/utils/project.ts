@@ -100,7 +100,7 @@ interface IterationFrontMatter {
 }
 
 // In-memory cache for projects (loaded once per build)
-let projectsCache: Map<string, Project> | null = null
+let projectsCachePromise: Promise<Map<string, Project>> | null = null
 
 // Get all project slugs by scanning directories that contain index.mdx
 function scanProjectSlugs(): string[] {
@@ -150,72 +150,73 @@ function parseProjectIterations(projectDir: string): ProjectIteration[] {
 }
 
 // Load all projects into cache (single filesystem scan)
-async function loadProjectsCache(): Promise<Map<string, Project>> {
-    if (projectsCache) {
-        return projectsCache
+function loadProjectsCache(): Promise<Map<string, Project>> {
+    if (!projectsCachePromise) {
+        projectsCachePromise = (async () => {
+            const cache = new Map<string, Project>()
+            const slugs = scanProjectSlugs()
+
+            for (const slug of slugs) {
+                const projectDir = path.join(projectsDirectory, slug)
+                const indexPath = path.join(projectDir, 'index.mdx')
+                const fileContents = fs.readFileSync(indexPath, 'utf8')
+                const { data, content } = matter(fileContents)
+                const frontMatter = data as ProjectFrontMatter
+
+                // Skip unpublished projects
+                if (!frontMatter.published) {
+                    continue
+                }
+
+                // Lookup client metadata (uses cached client data)
+                const client = await getClientBySlug(frontMatter.client)
+                if (!client) {
+                    continue
+                }
+
+                // Lookup technology metadata (uses cached technology data)
+                const technologies = await Promise.all(
+                    frontMatter.technologies.map((techSlug) => getTechnologyBySlug(techSlug))
+                )
+
+                // Get iterations from the same directory scan
+                const iterations = parseProjectIterations(projectDir)
+
+                cache.set(slug, {
+                    slug,
+                    title: frontMatter.title,
+                    date: new Date(frontMatter.date),
+                    excerpt: frontMatter.excerpt,
+                    client,
+                    url: frontMatter.url,
+                    technologies: technologies.filter((tech): tech is Technology => tech !== null),
+                    published: frontMatter.published,
+                    content,
+                    iterations,
+                    scope: frontMatter.scope,
+                    codeOwnership: frontMatter.codeOwnership,
+                    category: frontMatter.category,
+                    name: frontMatter.name,
+                    duration: frontMatter.duration,
+                    engagement: frontMatter.engagement,
+                    image: frontMatter.image,
+                    overview: frontMatter.overview,
+                    challenge: frontMatter.challenge,
+                    solution: frontMatter.solution,
+                })
+            }
+
+            return cache
+        })()
     }
-
-    projectsCache = new Map()
-    const slugs = scanProjectSlugs()
-
-    for (const slug of slugs) {
-        const projectDir = path.join(projectsDirectory, slug)
-        const indexPath = path.join(projectDir, 'index.mdx')
-        const fileContents = fs.readFileSync(indexPath, 'utf8')
-        const { data, content } = matter(fileContents)
-        const frontMatter = data as ProjectFrontMatter
-
-        // Skip unpublished projects
-        if (!frontMatter.published) {
-            continue
-        }
-
-        // Lookup client metadata (uses cached client data)
-        const client = await getClientBySlug(frontMatter.client)
-        if (!client) {
-            continue
-        }
-
-        // Lookup technology metadata (uses cached technology data)
-        const technologies = await Promise.all(
-            frontMatter.technologies.map((techSlug) => getTechnologyBySlug(techSlug))
-        )
-
-        // Get iterations from the same directory scan
-        const iterations = parseProjectIterations(projectDir)
-
-        projectsCache.set(slug, {
-            slug,
-            title: frontMatter.title,
-            date: new Date(frontMatter.date),
-            excerpt: frontMatter.excerpt,
-            client,
-            url: frontMatter.url,
-            technologies: technologies.filter((tech): tech is Technology => tech !== null),
-            published: frontMatter.published,
-            content,
-            iterations,
-            scope: frontMatter.scope,
-            codeOwnership: frontMatter.codeOwnership,
-            category: frontMatter.category,
-            name: frontMatter.name,
-            duration: frontMatter.duration,
-            engagement: frontMatter.engagement,
-            image: frontMatter.image,
-            overview: frontMatter.overview,
-            challenge: frontMatter.challenge,
-            solution: frontMatter.solution,
-        })
-    }
-
-    return projectsCache
+    return projectsCachePromise
 }
 
 // Get all project slugs
-export function getAllProjectSlugs(): string[] {
-    // If cache exists, return cached slugs; otherwise scan filesystem
-    if (projectsCache) {
-        return Array.from(projectsCache.keys())
+export async function getAllProjectSlugs(): Promise<string[]> {
+    if (projectsCachePromise) {
+        const cache = await projectsCachePromise
+        return Array.from(cache.keys())
     }
     return scanProjectSlugs()
 }
