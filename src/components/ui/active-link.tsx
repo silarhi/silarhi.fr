@@ -22,11 +22,14 @@ export default function ActiveLink({ children, className, activeClassName, ...pr
             return className || ''
         }
 
+        // Use a dummy base URL for comparison - we only care about the path
+        const base = 'https://n'
+
         // Dynamic route will be matched via props.as Static route will be matched via props.href
-        const linkPathname = new URL(props.as || props.href, location.href).href
+        const linkPathname = new URL(props.as || props.href, base).pathname
 
         // Using URL().pathname to get rid of query and hash
-        const activePathname = new URL(pathname, location.href).href
+        const activePathname = new URL(pathname, base).pathname
 
         return cn(className, {
             [activeClassName || '']: linkPathname === activePathname,
