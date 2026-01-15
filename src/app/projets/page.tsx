@@ -1,11 +1,13 @@
 import { Metadata } from 'next'
 
+import JsonLd from '@/components/json-ld'
 import ProjectFilters from '@/components/project-filters'
 import ProjectsCTA from '@/components/projects-cta'
 import ProjectsHero from '@/components/projects-hero'
 import ProjectsListAsync from '@/components/projects-list-async'
 import Badge from '@/components/ui/badge'
 import Section from '@/components/ui/section'
+import { generateProjectsCollectionPageSchema, generateProjectsListSchema } from '@/lib/schemas/project'
 import { getProjectFilterData } from '@/utils/project'
 import { getProjectsCanonicalUrl } from '@/utils/url'
 
@@ -49,10 +51,14 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
     ).toString()
 
     // Fetch pre-computed filter data (O(n) instead of O(n×m))
-    const { technologies, categories, industries, clients } = await getProjectFilterData()
+    const { technologies, categories, industries, clients, projects } = await getProjectFilterData()
+
+    // Generate projects page schemas
+    const projectsPageSchemas = [generateProjectsCollectionPageSchema(projects), generateProjectsListSchema(projects)]
 
     return (
         <>
+            <JsonLd data={projectsPageSchemas} />
             <ProjectsHero
                 badge={<Badge variant="secondary">Nos Réalisations</Badge>}
                 title="Des projets qui transforment les entreprises"

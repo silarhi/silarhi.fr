@@ -3,12 +3,14 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import HeroSection from '@/components/hero-section'
+import JsonLd from '@/components/json-ld'
 import Markdown from '@/components/markdown'
 import ProjectList from '@/components/project-list'
 import ProjectsCTA from '@/components/projects-cta'
 import { ArrowLeft, ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
+import { generateTechnologyPageSchema, generateTechnologyProjectsListSchema } from '@/lib/schemas/technology'
 import { getProjectsByTechnology } from '@/utils/project'
 import { getAllTechnologySlugs, getTechnologyBySlug } from '@/utils/technology'
 import { getCanonicalUrl } from '@/utils/url'
@@ -58,8 +60,15 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
     const totalProjects = allProjects.length
     const projects = allProjects.slice(0, MAX_PROJECTS_DISPLAY)
 
+    // Generate technology page schemas
+    const technologySchemas = [
+        generateTechnologyPageSchema(technology, allProjects),
+        generateTechnologyProjectsListSchema(technology, allProjects),
+    ]
+
     return (
         <>
+            <JsonLd data={technologySchemas} />
             <HeroSection
                 pretitle={
                     <Link

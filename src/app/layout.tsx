@@ -4,7 +4,9 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { ReactNode } from 'react'
 
+import JsonLd from '@/components/json-ld'
 import DefaultLayout from '@/components/layouts/default'
+import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/schemas'
 import { MotionProvider } from '@/providers/motion-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { cn } from '@/utils/lib'
@@ -43,6 +45,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <meta name="theme-color" content="#ffffff" />
                 <link rel="manifest" href="/site.webmanifest" />
                 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+                <JsonLd data={[generateOrganizationSchema(), generateWebSiteSchema()]} />
             </head>
             <body className={cn(lato.className, lato.variable, montserrat.variable, 'h-full')}>
                 <ThemeProvider>
