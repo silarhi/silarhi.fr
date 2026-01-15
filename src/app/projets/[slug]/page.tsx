@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import JsonLd from '@/components/json-ld'
 import Markdown from '@/components/markdown'
 import ProjectsCTA from '@/components/projects-cta'
 import Badge from '@/components/ui/badge'
@@ -13,6 +14,7 @@ import { LaptopMockup } from '@/components/ui/mockup'
 import ProjectScopeBadge from '@/components/ui/project-scope-badge'
 import Section from '@/components/ui/section'
 import SectionTitle from '@/components/ui/section-title'
+import { generateProjectPageSchema, generateProjectSchema } from '@/lib/schemas/project'
 import { cn } from '@/utils/lib'
 import { getAllProjectSlugs, getEngagementTypeLabel, getProjectBySlug, getProjectsByClient } from '@/utils/project'
 import { getCanonicalUrl } from '@/utils/url'
@@ -59,8 +61,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     const clientProjects = await getProjectsByClient(project.client.slug)
     const hasMultipleProjects = clientProjects.length > 1
 
+    // Generate project page schemas
+    const projectSchemas = [generateProjectPageSchema(project), generateProjectSchema(project)]
+
     return (
         <>
+            <JsonLd data={projectSchemas} />
             {/* Hero Section */}
             <Section className="bg-surface pt-32 pb-16 lg:pt-40 lg:pb-24">
                 <Link

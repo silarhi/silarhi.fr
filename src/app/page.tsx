@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 
 import CallToAction from '@/components/call-to-action'
 import ClientsSection from '@/components/clients-section'
+import JsonLd from '@/components/json-ld'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
@@ -16,6 +17,7 @@ import coding from '@/icons/floating-cogs.svg'
 import iconIdeas from '@/icons/ideas_vn7a.svg'
 import iconCloud from '@/icons/maintenance_4unj.svg'
 import iconMeeting from '@/icons/meeting_dunc.svg'
+import { generateLocalBusinessSchema, generateServicesSchema, generateWebPageSchema } from '@/lib/schemas'
 import home from '@/public/images/home.jpg'
 import { getAllClients } from '@/utils/client'
 import { getTotalEmployeeHours } from '@/utils/employees'
@@ -474,8 +476,22 @@ export default async function Page() {
     // Convert Map to plain object for serialization
     const clientLinks = Object.fromEntries(clientLinksData)
 
+    // Generate homepage schemas
+    const homepageSchemas = [
+        generateLocalBusinessSchema(),
+        generateWebPageSchema({
+            name: "Développement d'applications Web & PHP à Toulouse - SILARHI",
+            description:
+                "Développement d'applications Web à Toulouse et en France. Donnez vie à vos idées d'applications responsive & mobiles.",
+            url: getCanonicalUrl(),
+            type: 'WebPage',
+        }),
+        ...generateServicesSchema(),
+    ]
+
     return (
         <>
+            <JsonLd data={homepageSchemas} />
             <HeroSection />
             <PresentationSection />
             <ServicesSection />

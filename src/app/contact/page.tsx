@@ -2,9 +2,11 @@ import { Metadata } from 'next'
 
 import ContactForm from '@/components/contact-form'
 import HeroSection from '@/components/hero-section'
+import JsonLd from '@/components/json-ld'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import { Clock, Envelope, Map, Phone } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
+import { COMPANY_INFO, generateWebPageSchema } from '@/lib/schemas'
 import { cn } from '@/utils/lib'
 import { getCanonicalUrl } from '@/utils/url'
 
@@ -15,9 +17,25 @@ export const metadata: Metadata = {
     },
 }
 
+// Generate contact page schemas
+const contactPageSchemas = [
+    generateWebPageSchema({
+        name: 'Contactez-nous - SILARHI',
+        description:
+            "Besoin d'un renseignement ou d'un devis ? Contactez notre agence de développement Web à Toulouse.",
+        url: getCanonicalUrl('/contact'),
+        type: 'ContactPage',
+        breadcrumbs: [
+            { name: 'Accueil', url: COMPANY_INFO.url },
+            { name: 'Contact', url: getCanonicalUrl('/contact') },
+        ],
+    }),
+]
+
 export default function ContactPage() {
     return (
         <>
+            <JsonLd data={contactPageSchemas} />
             <HeroSection
                 title="Contact"
                 description="Besoin d'un renseignement ou d'un devis ? Vous êtes au bon endroit."
