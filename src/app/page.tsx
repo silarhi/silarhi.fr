@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Fragment } from 'react'
-import ReactMarkdown from 'react-markdown'
 
 import CallToAction from '@/components/call-to-action'
 import ClientsSection from '@/components/clients-section'
 import JsonLd from '@/components/json-ld'
+import Markdown from '@/components/markdown'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
@@ -369,13 +369,7 @@ function ServiceList({
                                 {supported ? <Check className="text-xs" /> : <XMark className="text-xs" />}
                             </div>
                             <div className="text-foreground/80">
-                                <ReactMarkdown
-                                    components={{
-                                        p: ({ children }) => <>{children}</>,
-                                    }}
-                                >
-                                    {service.text}
-                                </ReactMarkdown>
+                                <Markdown source={service.text} variant="inline" autoLinkTechnologies={false} />
                             </div>
                         </li>
                     ))}
