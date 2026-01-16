@@ -2,7 +2,7 @@
 
 import Link, { LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import { cn } from '@/utils/lib'
 
@@ -16,15 +16,15 @@ interface ActiveLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElem
 
 export default function ActiveLink({ children, className, activeClassName, ...props }: ActiveLinkProps) {
     const pathname = usePathname()
+    const [isActive, setIsActive] = useState(false)
 
-    const linkHref = props.as || props.href
+    useEffect(() => {
+        // Compare full hrefs to properly handle external URLs and hashes
+        const linkHref = new URL(props.as || props.href, location.href).href
+        const currentHref = new URL(pathname, location.href).href
 
-    // Hash-only links (e.g., #section) or links with hash (e.g., /#section)
-    // should never be marked as active since we can't track hash from pathname
-    const isHashLink = linkHref.startsWith('#') || linkHref.includes('#')
-
-    // Check if this link is active by comparing pathnames (only for non-hash links)
-    const isActive = !isHashLink && pathname === new URL(linkHref, 'http://localhost').pathname
+        setIsActive(linkHref === currentHref)
+    }, [pathname, props.as, props.href])
 
     return (
         <Link className={cn(className, { [activeClassName || '']: isActive })} {...props}>
