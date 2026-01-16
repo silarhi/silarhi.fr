@@ -9,9 +9,19 @@ interface MDXImageProps extends Omit<ComponentProps<typeof Image>, 'src'> {
     width?: number
     height?: number
     caption?: string
+    blurDataURL?: string
 }
 
-export function MDXImage({ src, alt = '', width = 800, height = 600, caption, className, ...props }: MDXImageProps) {
+export function MDXImage({
+    src,
+    alt = '',
+    width = 800,
+    height = 600,
+    caption,
+    className,
+    blurDataURL,
+    ...props
+}: MDXImageProps) {
     let imageSrc = src
     // Handle external images
     if (!imageSrc.startsWith('/')) {
@@ -26,6 +36,8 @@ export function MDXImage({ src, alt = '', width = 800, height = 600, caption, cl
                 width={width}
                 height={height}
                 className={cn(className, 'block w-full rounded')}
+                placeholder={blurDataURL ? 'blur' : 'empty'}
+                blurDataURL={blurDataURL}
                 {...props}
             />
             {caption && <figcaption className="text-foreground/80 mt-2 text-center text-sm">{caption}</figcaption>}

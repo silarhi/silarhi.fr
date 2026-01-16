@@ -220,6 +220,7 @@ function HeroSection() {
                 fill
                 style={{ objectFit: 'cover' }}
                 priority
+                placeholder="blur"
                 alt="SILARHI, Agence de développement Web Toulouse"
             />
             <div className="absolute z-2 flex h-full w-full flex-col items-center justify-center text-white">

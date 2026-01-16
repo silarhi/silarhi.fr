@@ -1,0 +1,51 @@
+name: Generate Image Metadata
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'content/**'
+            - 'public/images/**'
+    pull_request:
+        paths:
+            - 'content/**'
+            - 'public/images/**'
+
+jobs:
+    generate-metadata:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.head_ref || github.ref_name }}
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Use Node.js LTS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  cache: 'yarn'
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Generate image metadata
+              run: yarn generate:image-metadata
+
+            - name: Check for changes
+              id: git-check
+              run: |
+                  git diff --quiet content/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+            - name: Commit and push if changed
+              if: steps.git-check.outputs.changed == 'true'
+              run: |
+                  git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                  git config --local user.name "github-actions[bot]"
+                  git add content/
+                  git commit -m "chore: update image metadata in MDX files"
+                  git push

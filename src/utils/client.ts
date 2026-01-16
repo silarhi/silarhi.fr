@@ -2,12 +2,15 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 
+import { ImageMetadata } from './project'
+
 const clientsDirectory = path.join(process.cwd(), 'content/clients')
 
 export interface Client {
     slug: string
     name: string
     logo?: string
+    logoMetadata?: ImageMetadata
     sector: string
     description: string
 }
@@ -16,6 +19,7 @@ interface ClientFrontMatter {
     name: string
     slug: string
     logo?: string
+    logo_metadata?: ImageMetadata
     sector: string
     description: string
 }
@@ -49,6 +53,7 @@ function loadClientsCache(): Map<string, Client> {
             slug,
             name: frontMatter.name,
             logo: frontMatter.logo,
+            logoMetadata: frontMatter.logo_metadata,
             sector: frontMatter.sector,
             description: frontMatter.description,
         })
