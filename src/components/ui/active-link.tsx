@@ -2,7 +2,7 @@
 
 import Link, { LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode } from 'react'
 
 import { cn } from '@/utils/lib'
 
@@ -17,28 +17,12 @@ interface ActiveLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElem
 export default function ActiveLink({ children, className, activeClassName, ...props }: ActiveLinkProps) {
     const pathname = usePathname()
 
-    const [linkClassName, setLinkClassName] = useState<string>(className || '')
-
-    useEffect(() => {
-        if (pathname) {
-            // Dynamic route will be matched via props.as Static route will be matched via props.href
-            const linkPathname = new URL(props.as || props.href, location.href).href
-
-            // Using URL().pathname to get rid of query and hash
-            const activePathname = new URL(pathname, location.href).href
-
-            const newClassName = cn(className, {
-                [activeClassName || '']: linkPathname === activePathname,
-            })
-
-            if (newClassName !== linkClassName) {
-                setLinkClassName(newClassName)
-            }
-        }
-    }, [pathname, props.as, props.href, className, activeClassName, setLinkClassName, linkClassName])
+    // Check if this link is active by comparing pathnames
+    const linkPathname = props.as || props.href
+    const isActive = pathname === linkPathname || pathname === new URL(linkPathname, 'http://localhost').pathname
 
     return (
-        <Link className={linkClassName} {...props}>
+        <Link className={cn(className, { [activeClassName || '']: isActive })} {...props}>
             {children}
         </Link>
     )

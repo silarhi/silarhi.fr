@@ -1,12 +1,9 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import { montserrat } from '@/app/fonts'
-import Button from '@/components/ui/button'
-import iconEnvelope from '@/icons/envelope_hem0.svg'
+import FooterContactBanner from '@/components/footer-contact-banner'
+import FooterWrapper from '@/components/footer-wrapper'
 import logo from '@/public/images/logo-4096.png'
 import { cn } from '@/utils/lib'
 
@@ -45,38 +42,9 @@ const footerSections = [
 ]
 
 export default function Footer() {
-    const pathname = usePathname()
-
     return (
-        <footer
-            className={cn('bg-surface-dark text-dark-foreground dark:bg-background', {
-                'mt-20': pathname !== '/contact',
-            })}
-        >
-            {pathname !== '/contact' && (
-                <div className="bg-secondary text-dark py-6">
-                    <div className="container mx-auto px-4">
-                        <div className="flex flex-row flex-wrap items-center justify-center gap-2 text-center lg:justify-start lg:gap-8 lg:text-left">
-                            <Image
-                                src={iconEnvelope}
-                                alt="Contactez nous"
-                                height={160}
-                                className="-mt-3xl mx-auto lg:mx-0"
-                            />
-                            <p className="mb-0">
-                                <span className="text-xl font-bold">Besoin d’un renseignement ?</span>
-                                <br />
-                                <span className="font-medium">Vous avez un projet ?</span>
-                            </p>
-                            <span className="lg:ml-auto">
-                                <Button as="a" href="/contact" variant="outline-dark">
-                                    Contactez-nous
-                                </Button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            )}
+        <FooterWrapper className="bg-surface-dark text-dark-foreground dark:bg-background">
+            <FooterContactBanner />
             <div className="border-surface-dark/10 dark:border-border border-t py-12">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
@@ -122,6 +90,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-        </footer>
+        </FooterWrapper>
     )
 }
