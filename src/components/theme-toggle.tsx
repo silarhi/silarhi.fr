@@ -12,7 +12,7 @@ interface ThemeToggleProps {
 
 export default function ThemeToggle({ className }: ThemeToggleProps) {
     const [mounted, setMounted] = useState(false)
-    const { theme, setTheme } = useTheme()
+    const { setTheme, resolvedTheme } = useTheme()
     // Separate state for animation that updates after theme change
     const [displayTheme, setDisplayTheme] = useState<string | undefined>(undefined)
 
@@ -24,14 +24,14 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
 
     // Update display theme after a short delay to allow animation
     useEffect(() => {
-        if (mounted && theme) {
+        if (mounted && resolvedTheme) {
             // Small delay to let next-themes re-enable transitions
             const timeout = setTimeout(() => {
-                setDisplayTheme(theme)
+                setDisplayTheme(resolvedTheme)
             }, 10)
             return () => clearTimeout(timeout)
         }
-    }, [theme, mounted])
+    }, [resolvedTheme, mounted])
 
     if (!mounted) {
         return (
@@ -48,7 +48,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
     }
 
     const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark')
+        setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
     }
 
     const isLight = displayTheme === 'light'
@@ -61,7 +61,7 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
                 'hover:bg-primary/10 dark:hover:bg-primary-light/10',
                 className
             )}
-            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+            aria-label={resolvedTheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
         >
             {/* Moon - visible in light mode */}
             <Moon
