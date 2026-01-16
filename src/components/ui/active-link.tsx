@@ -17,9 +17,14 @@ interface ActiveLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElem
 export default function ActiveLink({ children, className, activeClassName, ...props }: ActiveLinkProps) {
     const pathname = usePathname()
 
-    // Check if this link is active by comparing pathnames
-    const linkPathname = props.as || props.href
-    const isActive = pathname === linkPathname || pathname === new URL(linkPathname, 'http://localhost').pathname
+    const linkHref = props.as || props.href
+
+    // Hash-only links (e.g., #section) or links with hash (e.g., /#section)
+    // should never be marked as active since we can't track hash from pathname
+    const isHashLink = linkHref.startsWith('#') || linkHref.includes('#')
+
+    // Check if this link is active by comparing pathnames (only for non-hash links)
+    const isActive = !isHashLink && pathname === new URL(linkHref, 'http://localhost').pathname
 
     return (
         <Link className={cn(className, { [activeClassName || '']: isActive })} {...props}>
