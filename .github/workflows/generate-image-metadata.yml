@@ -35,7 +35,8 @@ jobs:
             - name: Install dependencies
               run: |
                 yarn install --frozen-lockfile
-                yarn global add sharp-cli
+                yarn remove -D sharp
+                yarn add -D sharp
 
             - name: Generate image metadata
               run: yarn generate:image-metadata
