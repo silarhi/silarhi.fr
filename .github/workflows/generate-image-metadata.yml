@@ -32,6 +32,8 @@ jobs:
 
             - name: Install dependencies
               run: yarn install --frozen-lockfile
+              env:
+                SHARP_IGNORE_GLOBAL_LIBVIPS: 1
 
             - name: Generate image metadata
               run: yarn generate:image-metadata
