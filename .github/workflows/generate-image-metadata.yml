@@ -30,19 +30,17 @@ jobs:
                   node-version: '22'
                   cache: 'yarn'
 
-            - run: yarn cache clean
+            - name: Install system libvips
+              run: |
+                sudo apt-get update
+                sudo apt-get install -y libvips-dev
 
             - name: Install dependencies
               run: |
                 yarn install --frozen-lockfile
-                yarn remove sharp
-                yarn add -D sharp
 
             - name: Generate image metadata
               run: yarn generate:image-metadata
-              env:
-                SHARP_IGNORE_GLOBAL_LIBVIPS: 1
-                YARN_IGNORE_OPTIONAL: "false"
 
             - name: Check for changes
               id: git-check
