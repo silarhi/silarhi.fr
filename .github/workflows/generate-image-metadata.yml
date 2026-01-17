@@ -32,8 +32,10 @@ jobs:
             - name: Install dependencies
               run: yarn install --frozen-lockfile
 
-            - name: Install sharp for Linux
-              run: npm install --no-save @img/sharp-linux-x64
+            - name: Reinstall sharp for Linux
+              run: |
+                  rm -rf node_modules/sharp node_modules/@img/sharp-*
+                  npm install sharp --no-save
 
             - name: Generate image metadata
               run: yarn generate:image-metadata
