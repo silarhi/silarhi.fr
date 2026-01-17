@@ -345,18 +345,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         Technologies utilisées
                     </h2>
                     <div className="flex flex-wrap justify-center gap-3">
-                        {project.technologies.map((tech) => (
-                            <Button
-                                as="a"
-                                key={tech.slug}
-                                size="sm"
-                                href={`/technologies/${tech.slug}`}
-                                variant="outline-primary"
-                                className="rounded-full"
-                            >
-                                {tech.name}
-                            </Button>
-                        ))}
+                        {[...project.technologies]
+                            .sort((a, b) => a.name.localeCompare(b.name))
+                            .map((tech) => (
+                                <Button
+                                    as="a"
+                                    key={tech.slug}
+                                    size="sm"
+                                    href={`/technologies/${tech.slug}`}
+                                    variant="outline-primary"
+                                    className="rounded-full"
+                                >
+                                    {tech.name}
+                                </Button>
+                            ))}
                     </div>
                 </div>
             </Section>

@@ -83,15 +83,18 @@ export default function ProjectList({ projects }: ProjectListProps) {
 
                         {/* Technologies tags */}
                         <div className="mb-6 flex flex-wrap gap-2">
-                            {project.technologies.slice(0, 4).map((tech) => (
-                                <Link
-                                    key={tech.slug}
-                                    href={`/technologies/${tech.slug}`}
-                                    className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface dark:bg-light dark:border-border dark:text-foreground dark:hover:border-primary-light dark:hover:bg-primary-light/10 rounded-full border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700 no-underline transition-colors"
-                                >
-                                    {tech.name}
-                                </Link>
-                            ))}
+                            {[...project.technologies]
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .slice(0, 4)
+                                .map((tech) => (
+                                    <Link
+                                        key={tech.slug}
+                                        href={`/technologies/${tech.slug}`}
+                                        className="hover:border-primary hover:bg-primary/5 hover:text-primary bg-surface dark:bg-light dark:border-border dark:text-foreground dark:hover:border-primary-light dark:hover:bg-primary-light/10 rounded-full border border-gray-300 px-3 py-1 text-xs font-medium text-gray-700 no-underline transition-colors"
+                                    >
+                                        {tech.name}
+                                    </Link>
+                                ))}
                         </div>
 
                         <Link href={`/projets/${project.slug}`}>
