@@ -36,7 +36,7 @@ jobs:
             - name: Reinstall sharp for Linux
               run: |
                   rm -rf node_modules/sharp node_modules/@img/sharp-*
-                  yarn install --frozen-lockfile --check-files
+                  npm install sharp --no-save
 
             - name: Generate image metadata
               run: yarn generate:image-metadata
