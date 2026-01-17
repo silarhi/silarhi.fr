@@ -37,6 +37,7 @@ jobs:
               run: yarn generate:image-metadata
               env:
                 SHARP_IGNORE_GLOBAL_LIBVIPS: 1
+                YARN_IGNORE_OPTIONAL: "false"
 
             - name: Check for changes
               id: git-check
