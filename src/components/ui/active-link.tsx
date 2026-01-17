@@ -2,7 +2,7 @@
 
 import Link, { LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useCallback, useEffect, useState } from 'react'
 
 import { cn } from '@/utils/lib'
 
@@ -18,13 +18,26 @@ export default function ActiveLink({ children, className, activeClassName, ...pr
     const pathname = usePathname()
     const [isActive, setIsActive] = useState(false)
 
-    useEffect(() => {
-        // Compare full hrefs to properly handle external URLs and hashes
+    const checkIsActive = useCallback(() => {
+        // Build the full href for this link
         const linkHref = new URL(props.as || props.href, location.href).href
-        const currentHref = new URL(pathname, location.href).href
+        // Use location.href directly to include the current hash
+        const currentHref = location.href
 
         setIsActive(linkHref === currentHref)
-    }, [pathname, props.as, props.href])
+    }, [props.as, props.href])
+
+    useEffect(() => {
+        // Check on mount and when pathname changes
+        checkIsActive()
+
+        // Listen for hash changes
+        window.addEventListener('hashchange', checkIsActive)
+
+        return () => {
+            window.removeEventListener('hashchange', checkIsActive)
+        }
+    }, [pathname, checkIsActive])
 
     return (
         <Link className={cn(className, { [activeClassName || '']: isActive })} {...props}>
