@@ -30,6 +30,8 @@ jobs:
                   node-version: '22'
                   cache: 'yarn'
 
+            - run: yarn cache clean
+
             - name: Install dependencies
               run: yarn install --frozen-lockfile
 
