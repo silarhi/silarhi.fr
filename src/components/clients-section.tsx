@@ -44,6 +44,8 @@ export default function ClientsSection({ clients, clientLinks }: ClientsSectionP
                                             fill
                                             className="object-contain transition-opacity duration-300 group-hover:opacity-80 dark:invert"
                                             sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                                            placeholder={client.logoMetadata?.blur ? 'blur' : 'empty'}
+                                            blurDataURL={client.logoMetadata?.blur}
                                         />
                                     </div>
                                 ) : (

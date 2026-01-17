@@ -1,14 +1,14 @@
 [
-  {
-    "name": "Total JS",
-    "path": ".next/static/**/*.js",
-    "limit": "500 kB",
-    "gzip": true
-  },
-  {
-    "name": "Total CSS",
-    "path": ".next/static/**/*.css",
-    "limit": "100 kB",
-    "gzip": true
-  }
+    {
+        "name": "Total JS",
+        "path": ".next/static/**/*.js",
+        "limit": "500 kB",
+        "gzip": true
+    },
+    {
+        "name": "Total CSS",
+        "path": ".next/static/**/*.css",
+        "limit": "100 kB",
+        "gzip": true
+    }
 ]

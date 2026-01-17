@@ -6,7 +6,13 @@ import { useState } from 'react'
 import { Expand } from '@/components/ui/icons'
 import Lightbox from '@/components/ui/lightbox'
 
-export function LaptopMockup({ src, alt }: { src: string | StaticImageData; alt: string }) {
+interface LaptopMockupProps {
+    src: string | StaticImageData
+    alt: string
+    blurDataURL?: string
+}
+
+export function LaptopMockup({ src, alt, blurDataURL }: LaptopMockupProps) {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false)
 
     return (
@@ -20,6 +26,8 @@ export function LaptopMockup({ src, alt }: { src: string | StaticImageData; alt:
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
                             className="h-[278px] w-full rounded-lg object-cover object-top"
+                            placeholder={blurDataURL ? 'blur' : 'empty'}
+                            blurDataURL={blurDataURL}
                         />
                     </div>
                 </div>

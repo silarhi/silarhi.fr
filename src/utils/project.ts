@@ -50,6 +50,12 @@ interface ProjectSolution {
     points: string[]
 }
 
+export interface ImageMetadata {
+    blur: string
+    width: number
+    height: number
+}
+
 export interface Project {
     slug: string
     title: string
@@ -68,6 +74,7 @@ export interface Project {
     duration?: string
     engagement: ProjectEngagement
     image?: string | StaticImageData
+    imageMetadata?: ImageMetadata
     overview: string
     challenge: ProjectChallenge
     solution: ProjectSolution
@@ -88,6 +95,7 @@ interface ProjectFrontMatter {
     duration?: string
     engagement: ProjectEngagement
     image?: string
+    image_metadata?: ImageMetadata
     overview: string
     challenge: ProjectChallenge
     solution: ProjectSolution
@@ -200,6 +208,7 @@ function loadProjectsCache(): Promise<Map<string, Project>> {
                     duration: frontMatter.duration,
                     engagement: frontMatter.engagement,
                     image: frontMatter.image,
+                    imageMetadata: frontMatter.image_metadata,
                     overview: frontMatter.overview,
                     challenge: frontMatter.challenge,
                     solution: frontMatter.solution,
