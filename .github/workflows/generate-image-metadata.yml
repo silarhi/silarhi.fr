@@ -28,16 +28,9 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: '22'
-                  cache: 'yarn'
-
-            - name: Install system libvips
-              run: |
-                sudo apt-get update
-                sudo apt-get install -y libvips-dev
 
             - name: Install dependencies
-              run: |
-                yarn install --frozen-lockfile
+              run: yarn install --frozen-lockfile
 
             - name: Generate image metadata
               run: yarn generate:image-metadata
