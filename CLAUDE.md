@@ -14,9 +14,10 @@ SILARHI.fr is the official website for SILARHI, a web development agency based i
 - **Styling**: Tailwind CSS 4 with @tailwindcss/postcss
 - **Content**: MDX via next-mdx-remote + gray-matter
 - **Forms**: react-hook-form 7
-- **Animation**: framer-motion 12
+- **Animation**: motion 12 (formerly framer-motion)
 - **Search**: fuse.js 7
-- **Icons**: lucide-react, react-icons 5
+- **Icons**: react-icons 5 (Lucide icons via react-icons/lu)
+- **Theming**: next-themes
 - **Utilities**: clsx, tailwind-merge, use-debounce
 
 ## Development Commands
@@ -36,7 +37,17 @@ yarn start           # Start production server
 yarn lint            # Run ESLint
 yarn typecheck       # Run TypeScript compiler checks
 yarn knip            # Check for unused exports, dependencies, and files
-yarn lint-ci         # Run all checks (lint + typecheck + knip for unused code)
+yarn lint-ci         # Run all checks (lint + typecheck + knip + validations)
+```
+
+### Content Validation
+
+```bash
+yarn validate:technologies  # Validate technology references in projects
+yarn validate:clients       # Validate client references in projects
+yarn validate:images        # Validate image paths and metadata
+yarn validate:urls          # Validate external URLs in content
+yarn generate:image-metadata # Generate blur placeholders for images
 ```
 
 **IMPORTANT**: Always run `yarn knip` along with `yarn lint` and `yarn typecheck` to ensure code quality. Knip detects:
@@ -57,10 +68,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/page.tsx` - Home page
 - `src/app/projets/page.tsx` - Projects listing with search
 - `src/app/projets/[slug]/page.tsx` - Dynamic project detail pages
-- `src/app/technologies/page.tsx` - Technologies listing
 - `src/app/technologies/[slug]/page.tsx` - Technology detail pages (projects using that tech)
-- `src/app/clients/page.tsx` - Clients listing
-- `src/app/clients/[slug]/page.tsx` - Client detail pages (projects for that client)
 - `src/app/contact/page.tsx` - Contact form with Formspree integration
 - `src/app/mentions-legales/page.tsx` - Legal notices page
 - `src/app/conditions-generales-de-vente/page.tsx` - Terms and conditions page
@@ -139,14 +147,14 @@ src/components/
 - `active-link.tsx` - Navigation link with active state styling
 - `badge.tsx` / `badge-group.tsx` - Badge components for labels and tags
 - `button.tsx` - Primary button component
-- `fade-in-when-visible.tsx` - Framer Motion scroll animations
+- `fade-in-when-visible.tsx` - Motion scroll animations
 - `icons.tsx` - Centralized icon exports
+- `lightbox.tsx` - Image lightbox component
 - `mdx-image.tsx` - Image component for MDX content
 - `mockup.tsx` - Device mockup components
 - `pagination.tsx` - Server-side pagination component
 - `project-scope-badge.tsx` - Specialized badge for project scope
 - `section.tsx` / `section-header.tsx` / `section-title.tsx` - Section layout components
-- `skeleton.tsx` - Loading skeleton component
 
 **Feature Components** (`src/components/`):
 
