@@ -2,8 +2,9 @@
 
 import Link, { LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useMemo } from 'react'
 
+import { useHash } from '@/providers/hash-provider'
 import { cn } from '@/utils/lib'
 
 interface ActiveLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps>, LinkProps {
@@ -14,31 +15,75 @@ interface ActiveLinkProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElem
     as?: string
 }
 
-export default function ActiveLink({ children, className, activeClassName, ...props }: ActiveLinkProps) {
+function isExternalUrl(href: string): boolean {
+    if (href.startsWith('/') || href.startsWith('#')) {
+        return false
+    }
+    try {
+        const url = new URL(href, 'https://silarhi.fr')
+        return url.hostname !== 'silarhi.fr' && url.hostname !== 'www.silarhi.fr'
+    } catch {
+        return false
+    }
+}
+
+function getPathname(href: string): string {
+    if (href.startsWith('#')) {
+        return ''
+    }
+    if (href.startsWith('/')) {
+        return href.split(/[?#]/)[0]
+    }
+    try {
+        return new URL(href).pathname
+    } catch {
+        return href.split(/[?#]/)[0]
+    }
+}
+
+function getHash(href: string): string | null {
+    const hashIndex = href.indexOf('#')
+    return hashIndex >= 0 ? href.slice(hashIndex) : null
+}
+
+export default function ActiveLink({ children, className, activeClassName, onClick, ...props }: ActiveLinkProps) {
     const pathname = usePathname()
+    const { hash: currentHash, setHash } = useHash()
 
-    const [linkClassName, setLinkClassName] = useState<string>(className || '')
+    const isActive = useMemo(() => {
+        const href = props.as || props.href
 
-    useEffect(() => {
-        if (pathname) {
-            // Dynamic route will be matched via props.as Static route will be matched via props.href
-            const linkPathname = new URL(props.as || props.href, location.href).href
-
-            // Using URL().pathname to get rid of query and hash
-            const activePathname = new URL(pathname, location.href).href
-
-            const newClassName = cn(className, {
-                [activeClassName || '']: linkPathname === activePathname,
-            })
-
-            if (newClassName !== linkClassName) {
-                setLinkClassName(newClassName)
-            }
+        if (isExternalUrl(href)) {
+            return false
         }
-    }, [pathname, props.as, props.href, className, activeClassName, setLinkClassName, linkClassName])
+
+        if (href.startsWith('#')) {
+            return href === currentHash
+        }
+
+        const linkPathname = getPathname(href)
+        const linkHash = getHash(href)
+
+        if (linkHash) {
+            return linkPathname === pathname && linkHash === currentHash
+        }
+
+        return linkPathname === pathname
+    }, [pathname, props.as, props.href, currentHash])
+
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        const href = props.as || props.href
+        const hash = getHash(href)
+        if (hash) {
+            setHash(hash)
+        }
+        onClick?.(e)
+    }
+
+    const linkClassName = cn(className, { [activeClassName || '']: isActive })
 
     return (
-        <Link className={linkClassName} {...props}>
+        <Link className={linkClassName} onClick={handleClick} {...props}>
             {children}
         </Link>
     )
