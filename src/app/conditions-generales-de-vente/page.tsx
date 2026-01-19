@@ -121,10 +121,10 @@ export default function Page() {
                     force majeure ; le contrat entre les parties est suspendu jusqu&apos;à l&apos;extinction des causes
                     ayant engendrées la force majeure. La force majeure prend en compte des faits ou circonstances
                     irrésistibles, extérieurs aux parties, imprévisibles et indépendants de la volonté des parties,
-                    malgré tous les efforts raisonnablement possibles pour les empêcher. Sont aussi considérés comme
-                    cas de force majeure, le blocage des moyens de transports ou d&apos;approvisionnements, tremblements
-                    de terre, incendies, tempêtes, inondations, foudre, l&apos;arrêt des réseaux de télécommunication,
-                    et notamment tous les réseaux accessibles par internet, ou difficultés propres aux réseaux de
+                    malgré tous les efforts raisonnablement possibles pour les empêcher. Sont aussi considérés comme cas
+                    de force majeure, le blocage des moyens de transports ou d&apos;approvisionnements, tremblements de
+                    terre, incendies, tempêtes, inondations, foudre, l&apos;arrêt des réseaux de télécommunication, et
+                    notamment tous les réseaux accessibles par internet, ou difficultés propres aux réseaux de
                     télécommunication extérieurs aux parties. La partie touchée par la force majeure en avisera
                     l&apos;autre dans les cinq (5) jours ouvrables suivant la date à laquelle elle en aura eu
                     connaissance. Les deux parties conviendront alors des conditions dans lesquelles l&apos;exécution du
@@ -213,8 +213,13 @@ export default function Page() {
                         si l&apos;immatriculation DU PRESTATAIRE au Registre du Commerce et des Sociétés ou au
                         Répertoire des Métiers est obligatoire, l&apos;un des documents suivants :
                         <ul>
-                            <li>un extrait de l&apos;inscription au Registre du Commerce et des Sociétés (K ou K bis) ;</li>
-                            <li>une carte d&apos;identification justifiant de l&apos;inscription au répertoire des métiers ;</li>
+                            <li>
+                                un extrait de l&apos;inscription au Registre du Commerce et des Sociétés (K ou K bis) ;
+                            </li>
+                            <li>
+                                une carte d&apos;identification justifiant de l&apos;inscription au répertoire des
+                                métiers ;
+                            </li>
                             <li>
                                 un devis, un document publicitaire ou une correspondance professionnelle, à condition
                                 qu&apos;y soient mentionnés le nom ou la dénomination sociale, l&apos;adresse complète
