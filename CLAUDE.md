@@ -73,6 +73,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/mentions-legales/page.tsx` - Legal notices page
 - `src/app/conditions-generales-de-vente/page.tsx` - Terms and conditions page
 - `src/app/layout.tsx` - Root layout with metadata, Google Analytics (G-PDTD5T600H), fonts
+- `src/app/not-found.tsx` - Custom 404 page
 - `src/app/sitemap.ts` - Dynamic sitemap generation
 
 All pages are statically generated at build time using `generateStaticParams()`.
@@ -162,9 +163,17 @@ src/components/
 - `hero-section.tsx` - Hero section wrapper
 - `project-list.tsx` - Project listing display
 - `projects-content.tsx` - Main projects listing with search/filter
+- `projects-hero.tsx` - Projects page hero with search
+- `projects-cta.tsx` - Projects call-to-action section
+- `projects-list-async.tsx` - Async project list component
+- `project-filters.tsx` - Project filtering controls
 - `search-form.tsx` / `search-input.tsx` - Fuse.js-powered fuzzy search
 - `markdown.tsx` - MDX content renderer with custom components
 - `contact-form.tsx` - Contact form with react-hook-form validation
+- `clients-section.tsx` - Clients showcase section
+- `call-to-action.tsx` - Generic CTA component
+- `json-ld.tsx` - JSON-LD structured data component
+- `theme-toggle.tsx` - Dark/light theme toggle
 
 Components follow these patterns:
 
@@ -196,15 +205,15 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 **Animations**:
 
-- Scroll-triggered animations via **Framer Motion 12**
+- Scroll-triggered animations via **Motion 12** (formerly Framer Motion)
 - `FadeInWhenVisible` component for entrance animations
 - Smooth scrolling enabled globally (see `src/app/layout.tsx`)
 - Optimized animations with `initial`, `whileInView`, `viewport` props
 
 **Image Optimization**:
 
-- Optimized image handling via `src/lib/images.ts`
-- Supports both static imports and public paths
+- Blur placeholders generated via `yarn generate:image-metadata`
+- Image metadata stored in MDX frontmatter (`image_metadata.blur`, `width`, `height`)
 - Used throughout for project images, client logos, technology icons
 
 ### Utilities & Libraries
@@ -215,13 +224,16 @@ Forms use **react-hook-form** with a custom hook pattern:
 - `project.ts` - Project MDX parsing and retrieval functions
 - `technology.ts` - Technology metadata handling
 - `client.ts` - Client metadata handling
-- `dates.ts` - Date formatting utilities
+- `url.ts` - URL validation and formatting utilities
 - `employees.ts` - Employee/author data
 
 **Custom Rehype Plugins** (`src/lib/`):
 
 - `rehype-auto-link-technologies.ts` - Auto-links technology mentions in content
-- `images.ts` - Image optimization helpers
+
+**Validation Schemas** (`src/lib/schemas/`):
+
+- Schema definitions for project and technology frontmatter validation
 
 ### TypeScript Configuration
 
