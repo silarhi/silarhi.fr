@@ -98,12 +98,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         </p>
                         <div className="flex gap-8 text-sm">
                             <div>
-                                <div className="text-foreground/80 mb-1">Année</div>
+                                <div className="text-foreground/80 mb-1 uppercase">Année</div>
                                 <div className="text-foreground font-semibold">{project.date.getFullYear()}</div>
                             </div>
                             {project.duration && (
                                 <div>
-                                    <div className="text-foreground/80 mb-1">Durée</div>
+                                    <div className="text-foreground/80 mb-1 uppercase">Durée</div>
                                     <div className="text-foreground font-semibold">{project.duration}</div>
                                 </div>
                             )}
@@ -308,7 +308,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                                 </div>
 
                                                 <div className="text-foreground/80">
-                                                    <article className="prose prose-sm max-w-none">
+                                                    <article className="prose prose-sm max-w-none last:mb-0">
                                                         <Markdown source={iteration.content} />
                                                     </article>
                                                 </div>

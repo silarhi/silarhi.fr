@@ -46,9 +46,9 @@ const fullComponents = {
     pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
         <pre className="text-surface my-3 overflow-auto rounded bg-gray-900 p-3" {...props} />
     ),
-    ul: (props: React.HTMLAttributes<HTMLUListElement>) => <ul className="my-3 list-disc pl-6" {...props} />,
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => <ul className="my-3 list-disc pl-6 last:mb-0" {...props} />,
     ol: (props: React.HTMLAttributes<HTMLOListElement>) => <ol className="my-3 list-decimal pl-6" {...props} />,
-    li: (props: React.LiHTMLAttributes<HTMLLIElement>) => <li className="mb-1" {...props} />,
+    li: (props: React.LiHTMLAttributes<HTMLLIElement>) => <li className="mb-1 last:mb-0" {...props} />,
     a: CustomLink,
     img: MDXImage,
     Image: MDXImage,
