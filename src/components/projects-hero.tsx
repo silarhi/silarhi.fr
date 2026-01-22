@@ -12,7 +12,7 @@ interface ProjectsHeroProps {
 
 export default function ProjectsHero({ badge, title, description, children }: ProjectsHeroProps) {
     return (
-        <HeroSection title={title} description={description} pretitle={badge} className="border-0">
+        <HeroSection title={title} description={description} pretitle={badge} className="border-b">
             <div className="max-w-3xl">
                 <div className="mt-8">
                     <SearchForm baseUrl="/projets" />
