@@ -29,7 +29,8 @@
       "Bash(yarn validate:technologies:*)",
       "Bash(git checkout:*)",
       "Bash(grep:*)",
-      "mcp__jetbrains__list_directory_tree"
+      "mcp__jetbrains__list_directory_tree",
+      "Bash(yarn validate:clients:*)"
     ],
     "deny": [],
     "ask": []

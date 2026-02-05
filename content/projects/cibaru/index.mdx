@@ -1,0 +1,49 @@
+---
+title: Plateforme de gestion de mandats de travaux
+slug: cibaru
+date: '2025-11-01'
+excerpt: 'Plateforme web Symfony de gestion de mandats de travaux : suivi des missions et sous-traitants, intégration API Pappers et SIRENE, recherche d''adresses et génération de documents.'
+client: cimalis
+technologies:
+    - php
+    - symfony
+    - twig
+    - api-platform
+    - mysql
+published: true
+scope: full_development
+codeOwnership: from_scratch
+category: Gestion
+name: Cibaru
+image: /images/projects/cibaru-hero.png
+url: 'https://cibaru.fr'
+overview: 'Cibaru est une plateforme 100% gratuite dédiée à la gestion de mandats de travaux. L''application permet aux mandataires de travaux de piloter l''ensemble de leurs missions et de collaborer efficacement avec leurs sous-traitants. Elle centralise le suivi des tâches, la gestion des intervenants et la documentation associée à chaque mandat.'
+challenge:
+    description: 'Le développement d''une plateforme de gestion de mandats de travaux présentait des défis liés à la modélisation de workflows métier complexes, l''intégration de sources de données externes et la nécessité d''offrir une expérience fluide à des profils utilisateurs très différents.'
+    points:
+        - Modélisation des relations mandataires / sous-traitants / missions
+        - Intégration de l'API Pappers pour la recherche d'entreprises
+        - Connexion à la base SIRENE pour la récupération automatique des données société
+        - Recherche et validation d'adresses de chantier
+        - Interface intuitive pour des utilisateurs non-techniques du BTP
+solution:
+    description: 'Nous avons développé une application web Symfony avec API Platform, offrant un espace dédié pour les mandataires et les sous-traitants, avec des intégrations tierces pour automatiser la saisie et fiabiliser les données.'
+    points:
+        - 'Espace mandataire : création de mandats, affectation de missions, suivi d''avancement'
+        - 'Espace sous-traitant : réception des missions, mise à jour du statut, échanges'
+        - Intégration API Pappers et SIRENE pour l'auto-complétion des fiches entreprises
+        - Module de recherche d'adresses avec validation géographique
+        - API REST exposée via API Platform pour une architecture découplée
+engagement:
+    type: continuous_support
+    description: Collaboration à long terme avec développement initial et évolutions continues de la plateforme
+    deliverables:
+        - Plateforme complète de gestion de mandats de travaux
+        - 'Intégrations API tierces (Pappers, SIRENE)'
+        - Évolutions fonctionnelles régulières
+        - Maintenance applicative continue
+image_metadata:
+    blur: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAOElEQVR4nGMITsj6f+X5rf/XX9z9f/PFvf8MMSkF/0Hg39/////9+fefISKp4P/PX7//f//xE4wB4NYo6Z2/RQIAAAAASUVORK5CYII='
+    width: 3840
+    height: 2880
+---
