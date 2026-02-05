@@ -9,12 +9,13 @@ import { XMark } from '@/components/ui/icons'
 
 interface LightboxProps {
     src: string | StaticImageData
+    blurDataURL: string | undefined
     alt: string
     isOpen: boolean
     onClose: () => void
 }
 
-export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
+export default function Lightbox({ src, blurDataURL, alt, isOpen, onClose }: LightboxProps) {
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
@@ -72,7 +73,16 @@ export default function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
                         className="relative h-[80vh] w-[90vw] max-w-5xl"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <Image src={src} alt={alt} fill className="rounded-lg object-contain" priority sizes="90vw" />
+                        <Image
+                            src={src}
+                            alt={alt}
+                            fill
+                            className="rounded-lg object-contain"
+                            priority
+                            sizes="90vw"
+                            placeholder={blurDataURL ? 'blur' : 'empty'}
+                            blurDataURL={blurDataURL}
+                        />
                     </m.div>
 
                     {/* Caption */}

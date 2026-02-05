@@ -163,6 +163,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                         fill
                                         sizes="64px"
                                         className="object-contain dark:invert"
+                                        placeholder={project.client.logoMetadata?.blur ? 'blur' : 'empty'}
+                                        blurDataURL={project.client.logoMetadata?.blur}
                                     />
                                 </div>
                             )}

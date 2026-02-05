@@ -222,7 +222,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                             className="hover:text-secondary flex items-center space-x-2 text-inherit transition-colors duration-300 hover:no-underline"
                             onClick={() => setMobileMenuOpen(false)}
                         >
-                            <Image src={logo} alt="SILARHI" height={40} className="h-10 w-auto" />
+                            <Image src={logo} alt="SILARHI" height={40} className="h-10 w-auto" placeholder="blur" />
                             <span className={cn('text-lg', montserrat.className)}>SILARHI</span>
                         </Link>
                         <button

@@ -42,7 +42,13 @@ export function LaptopMockup({ src, alt, blurDataURL }: LaptopMockupProps) {
                 </div>
             </div>
 
-            <Lightbox src={src} alt={alt} isOpen={isLightboxOpen} onClose={() => setIsLightboxOpen(false)} />
+            <Lightbox
+                src={src}
+                blurDataURL={blurDataURL}
+                alt={alt}
+                isOpen={isLightboxOpen}
+                onClose={() => setIsLightboxOpen(false)}
+            />
         </>
     )
 }
