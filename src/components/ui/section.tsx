@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { cn } from '@/utils/lib'
 
 export default function Section({ children, className, ...props }: React.HTMLAttributes<HTMLElement>) {
