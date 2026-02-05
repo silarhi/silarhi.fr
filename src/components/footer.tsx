@@ -85,7 +85,13 @@ export default function Footer() {
                                 href="/"
                                 className="hover:text-secondary mb-6 flex items-center space-x-2 text-inherit transition-colors"
                             >
-                                <Image src={logo} alt="SILARHI" height={60} className={cn('h-14 w-auto')} />
+                                <Image
+                                    src={logo}
+                                    alt="SILARHI"
+                                    height={60}
+                                    className={cn('h-14 w-auto')}
+                                    placeholder="blur"
+                                />
                                 <span className={cn('text-xl', montserrat.className)}>SILARHI</span>
                             </Link>
                             <div className="space-y-1">

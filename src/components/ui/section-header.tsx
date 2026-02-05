@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { cn } from '@/utils/lib'
 
 import FadeInWhenVisible from './fade-in-when-visible'
