@@ -19,7 +19,7 @@ jobs:
 
             # Build base branch first
             - name: Checkout base branch
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                   ref: ${{ github.base_ref }}
 
@@ -36,7 +36,7 @@ jobs:
 
             # Build PR branch
             - name: Checkout PR branch
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                   clean: false
 
