@@ -5515,9 +5515,9 @@ side-channel@^1.1.0:
     side-channel-weakmap "^1.0.2"
 
 size-limit@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-12.0.0.tgz#9f714026a1bae632d7516d37cb02a5e884fe3c9a"
-  integrity sha512-JBG8dioIs0m2kHOhs9jD6E/tZKD08vmbf2bfqj/rJyNWqJxk/ZcakixjhYtsqdbi+AKVbfPkt3g2RRZiKaizYA==
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/size-limit/-/size-limit-12.0.1.tgz#521737c1ab57e5b271c7e7f1e286bce61d69fd06"
+  integrity sha512-vuFj+6lDOoBJQu6OLhcMQv7jnbXjuoEn4WsQHlSLOV/8EFfOka/tfjtLQ/rZig5Gagi3R0GnU/0kd4EY/y2etg==
   dependencies:
     bytes-iec "^3.1.1"
     lilconfig "^3.1.3"
