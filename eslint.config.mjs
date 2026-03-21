@@ -18,6 +18,13 @@ const eslintConfig = defineConfig([
             'simple-import-sort': simpleImportSort,
             prettier: prettierPlugin,
         },
+        // Override react version to avoid eslint-plugin-react calling deprecated
+        // context.getFilename() API (removed in ESLint 10) when version is 'detect'
+        settings: {
+            react: {
+                version: '19',
+            },
+        },
         rules: {
             // Custom React rules
             'react/jsx-curly-brace-presence': 'error',
