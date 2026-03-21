@@ -9,7 +9,7 @@ import Markdown from '@/components/markdown'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
-import { Check, XMark } from '@/components/ui/icons'
+import { ArrowRight, Check, Code, XMark, Zap } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import iconProgramming from '@/icons/dev-productivity_5wps.svg'
@@ -17,8 +17,8 @@ import coding from '@/icons/floating-cogs.svg'
 import iconIdeas from '@/icons/ideas_vn7a.svg'
 import iconCloud from '@/icons/maintenance_4unj.svg'
 import iconMeeting from '@/icons/meeting_dunc.svg'
+import programmingIllustration from '@/icons/programming_65t2.svg'
 import { generateLocalBusinessSchema, generateServicesSchema, generateWebPageSchema } from '@/lib/schemas'
-import home from '@/public/images/home.jpg'
 import { getAllClients } from '@/utils/client'
 import { getTotalEmployeeHours } from '@/utils/employees'
 import { cn } from '@/utils/lib'
@@ -37,6 +37,12 @@ export const metadata: Metadata = {
 
 interface Feature {
     icon: string
+    title: string
+    description: string
+}
+
+interface Benefit {
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
     title: string
     description: string
 }
@@ -84,6 +90,27 @@ const FEATURES: Feature[] = [
         title: 'Déploiement',
         description:
             'Nous assurons un déploiement fluide, sans interruption de votre activité. Votre solution est mise en production avec des outils fiables et automatisés.',
+    },
+]
+
+const BENEFITS: Benefit[] = [
+    {
+        icon: Code,
+        title: 'Code de qualité',
+        description:
+            "Votre application est construite avec des technologies éprouvées, un code propre et maintenable, conçu pour évoluer avec votre activité.",
+    },
+    {
+        icon: Zap,
+        title: 'Livraison efficace',
+        description:
+            "Des itérations régulières et une communication transparente pour vous garantir une visibilité constante sur l'avancement de votre projet.",
+    },
+    {
+        icon: Check,
+        title: 'Partenaire de confiance',
+        description:
+            "Plus qu'un prestataire : une équipe technique dédiée, engagée dans la réussite durable de vos projets, avec transparence et réactivité.",
     },
 ]
 
@@ -210,47 +237,94 @@ function getNumbers(clientsCount: number, projectsCount: number): NumberData[] {
     ]
 }
 
-function HeroSection() {
+function HeroSection({ numbers }: { numbers: NumberData[] }) {
     return (
-        <div className="relative h-screen w-full overflow-hidden">
-            <div className="absolute top-0 left-0 z-1 h-full w-full bg-black opacity-60"></div>
+        <div className="relative overflow-hidden bg-primary-dark text-white">
+            {/* Subtle background decoration */}
             <Image
-                src={home}
+                src={coding}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover opacity-5"
+                height={160}
                 sizes="100vw"
-                fill
-                style={{ objectFit: 'cover' }}
-                priority
-                placeholder="blur"
-                alt="SILARHI, Agence de développement Web Toulouse"
             />
-            <div className="absolute z-2 flex h-full w-full flex-col items-center justify-center text-white">
-                <Section>
-                    <div className="mx-auto max-w-4xl">
-                        <FadeInWhenVisible duration={0.8} yOffset={30}>
-                            <h1 className="text-5xl font-bold text-shadow-lg lg:text-6xl xl:text-7xl">
-                                Développement d&apos;applications Web
+            {/* Gradient overlay for depth */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-primary-dark/60" />
+
+            <Section className="relative z-10 pb-0 pt-32 lg:pt-44">
+                <div className="grid items-center gap-8 lg:grid-cols-5 lg:gap-12">
+                    {/* Text content — 3 columns */}
+                    <div className="lg:col-span-3">
+                        <FadeInWhenVisible>
+                            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur-sm">
+                                <span className="h-2 w-2 animate-pulse rounded-full bg-secondary" aria-hidden="true" />
+                                Agence Web · Toulouse & France
+                            </div>
+                        </FadeInWhenVisible>
+
+                        <FadeInWhenVisible delay={0.15} duration={0.8} yOffset={30}>
+                            <h1 className="mb-6 text-5xl font-bold leading-tight lg:text-6xl xl:text-7xl">
+                                Donnez vie à vos
                                 <br />
-                                <Badge
-                                    variant="secondary"
-                                    className="bg-secondary/80 dark:bg-secondary/70 dark:text-surface text-gray-900 text-shadow-none"
-                                >
-                                    À Toulouse & en France
-                                </Badge>
+                                <span className="text-secondary">projets Web</span>
+                                <br />
+                                avec des experts
                             </h1>
                         </FadeInWhenVisible>
-                        <FadeInWhenVisible delay={0.3} duration={0.8} yOffset={30}>
-                            <h2 className="mt-4 text-3xl uppercase text-shadow-lg">
-                                Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
-                            </h2>
+
+                        <FadeInWhenVisible delay={0.25} duration={0.8} yOffset={30}>
+                            <p className="mb-8 text-lg leading-relaxed text-white/80 lg:text-xl">
+                                Applications sur mesure, migrations, audits de performance… SILARHI accompagne les
+                                entreprises dans la réalisation de leurs projets digitaux, de la conception au
+                                déploiement.
+                            </p>
                         </FadeInWhenVisible>
-                        <FadeInWhenVisible delay={0.5} duration={0.8} yOffset={30}>
-                            <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
-                                En savoir plus
-                            </Button>
+
+                        <FadeInWhenVisible delay={0.35} duration={0.8} yOffset={30}>
+                            <div className="flex flex-wrap gap-4">
+                                <Button as="a" href="/contact" size="lg" variant="secondary">
+                                    Démarrer mon projet
+                                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                                </Button>
+                                <Button as="a" href="/projets" size="lg" variant="outline-white">
+                                    Voir nos réalisations
+                                </Button>
+                            </div>
                         </FadeInWhenVisible>
                     </div>
-                </Section>
-            </div>
+
+                    {/* Illustration — 2 columns, hidden on mobile */}
+                    <div className="hidden justify-center lg:col-span-2 lg:flex">
+                        <FadeInWhenVisible delay={0.4} yOffset={40}>
+                            <Image
+                                src={programmingIllustration}
+                                alt="Développement d'applications Web"
+                                height={420}
+                                priority
+                                className="max-w-full drop-shadow-2xl"
+                            />
+                        </FadeInWhenVisible>
+                    </div>
+                </div>
+
+                {/* Key stats strip */}
+                <div className="mt-12 border-t border-white/15 py-10">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                        {numbers.map((number, key) => (
+                            <FadeInWhenVisible key={key} delay={0.55 + key * 0.1}>
+                                <div className="text-center">
+                                    <div className={cn(lato.className, 'mb-1 text-5xl font-bold text-secondary')}>
+                                        {number.value}
+                                    </div>
+                                    <div className="mb-1 text-lg font-medium">{number.unit}</div>
+                                    <p className="mb-0 text-sm text-white/60">{number.text}</p>
+                                </div>
+                            </FadeInWhenVisible>
+                        ))}
+                    </div>
+                </div>
+            </Section>
         </div>
     )
 }
@@ -382,26 +456,36 @@ function ServiceList({
 
 function PresentationSection() {
     return (
-        <Section id="presentation" className="bg-primary-dark relative z-2 text-white">
-            <Image
-                src={coding}
-                alt="Coding"
-                className="absolute top-0 left-0 -z-1 h-full w-full object-cover opacity-5"
-                height={160}
-                sizes="100vw"
-            />
+        <Section id="presentation" className="bg-surface border-border border-t">
             <FadeInWhenVisible>
-                <div className="mx-auto max-w-4xl text-center">
-                    <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
-                        SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
-                        sur mesure.
+                <div className="mb-12 text-center">
+                    <Badge variant="secondary" className="mb-4">
+                        Notre approche
+                    </Badge>
+                    <h2 className="mb-4 text-4xl font-bold">
+                        Un partenaire technique qui comprend <span className="text-primary">vos enjeux</span>
                     </h2>
-                    <p className="text-lg">
-                        Spécialistes de l&apos;écosystème PHP, nous développons ou reprennons vos projets en Symfony, du
-                        prototype à la mise en ligne.
+                    <p className="text-foreground/70 mx-auto max-w-3xl text-xl">
+                        SILARHI est une agence spécialisée dans le développement d&apos;applications Web sur mesure en
+                        PHP / Symfony. Nous transformons vos besoins métier en solutions digitales robustes et
+                        pérennes.
                     </p>
                 </div>
             </FadeInWhenVisible>
+
+            <div className="grid gap-8 lg:grid-cols-3">
+                {BENEFITS.map((benefit, i) => (
+                    <FadeInWhenVisible key={i} delay={0.1 + i * 0.1}>
+                        <div className="bg-surface border-border group rounded-xl border p-8 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md">
+                            <div className="bg-primary/10 text-primary mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
+                                <benefit.icon className="h-6 w-6" />
+                            </div>
+                            <h3 className="mb-3 text-xl font-bold">{benefit.title}</h3>
+                            <p className="text-foreground/70 mb-0">{benefit.description}</p>
+                        </div>
+                    </FadeInWhenVisible>
+                ))}
+            </div>
         </Section>
     )
 }
@@ -427,34 +511,6 @@ function ServicesSection() {
                 <FadeInWhenVisible delay={0.3}>
                     <ServiceList services={unsupportedServices} supported={false} title="Ce qu'on ne fait PAS" />
                 </FadeInWhenVisible>
-            </div>
-        </Section>
-    )
-}
-
-function NumbersSection({ numbers }: { numbers: NumberData[] }) {
-    return (
-        <Section id="chiffres" className="bg-light border-border dark:bg-background border-t">
-            <SectionHeader
-                title={
-                    <span>
-                        Des résultats qui <span className="text-primary">parlent d&#39;eux-mêmes</span>
-                    </span>
-                }
-                subtitle={<Badge variant="secondary">Nos chiffres</Badge>}
-            />
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-                {numbers.map((number, key) => (
-                    <FadeInWhenVisible key={key} delay={key * 0.1}>
-                        <div className="text-center">
-                            <div className={cn(lato.className, 'text-secondary mb-3 text-6xl font-bold')}>
-                                {number.value}
-                            </div>
-                            <h4 className="mb-0 text-2xl font-light lg:mb-3">{number.unit}</h4>
-                            <p className="text-foreground/80">{number.text}</p>
-                        </div>
-                    </FadeInWhenVisible>
-                ))}
             </div>
         </Section>
     )
@@ -487,12 +543,11 @@ export default async function Page() {
     return (
         <>
             <JsonLd data={homepageSchemas} />
-            <HeroSection />
+            <HeroSection numbers={numbers} />
             <PresentationSection />
             <ServicesSection />
             <MethodologySection />
             <ClientsSection clients={clients} clientLinks={clientLinks} />
-            <NumbersSection numbers={numbers} />
         </>
     )
 }

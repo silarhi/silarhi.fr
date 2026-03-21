@@ -4,7 +4,7 @@ import React, { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react'
 import { cn } from '@/utils/lib'
 
 interface ButtonBaseProps {
-    variant?: 'primary' | 'secondary' | 'muted' | 'danger' | 'outline-dark' | 'outline-primary' | 'link'
+    variant?: 'primary' | 'secondary' | 'muted' | 'danger' | 'outline-dark' | 'outline-primary' | 'outline-white' | 'link'
     size?: 'xs' | 'sm' | 'md' | 'lg'
     children: ReactNode
     disabled?: boolean
@@ -39,6 +39,8 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             danger: 'bg-red-600 text-surface hover:bg-red-700 focus:ring-red-600 dark:bg-error dark:hover:bg-red-600',
             'outline-dark':
                 'bg-surface border border-dark text-dark hover:bg-dark hover:text-surface focus:ring-dark dark:bg-surface dark:text-foreground dark:hover:bg-surface-elevated dark:hover:text-foreground',
+            'outline-white':
+                'bg-transparent border border-white/40 text-white hover:bg-white/15 focus:ring-white/30',
             link: 'bg-transparent text-foreground/80 hover:text-foreground underline focus:ring-primary p-0',
         }
 
