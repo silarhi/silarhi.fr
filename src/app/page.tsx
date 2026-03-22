@@ -25,7 +25,7 @@ import { cn } from '@/utils/lib'
 import { getAllProjects, getClientLinksData } from '@/utils/project'
 import { getCanonicalUrl } from '@/utils/url'
 
-import { lato, montserrat } from './fonts'
+import { lato } from './fonts'
 
 export const metadata: Metadata = {
     title: `Développement d'applications Web & PHP à Toulouse - SILARHI`,
@@ -296,7 +296,7 @@ function MethodologySection() {
         <Section id="methodologie" className="bg-light border-border border-t">
             <SectionHeader
                 title={
-                    <span className={montserrat.className}>
+                    <span>
                         Un processus éprouvé pour <span className="text-primary">votre succès</span>
                     </span>
                 }
@@ -416,7 +416,7 @@ function ServicesSection() {
         <Section id="services" className="bg-surface">
             <SectionHeader
                 title={
-                    <span className={montserrat.className}>
+                    <span>
                         Des solutions pensées pour <span className="text-primary">votre réussite</span>
                     </span>
                 }
@@ -439,7 +439,7 @@ function NumbersSection({ numbers }: { numbers: NumberData[] }) {
         <Section id="chiffres" className="bg-light border-border dark:bg-background border-t">
             <SectionHeader
                 title={
-                    <span className={montserrat.className}>
+                    <span>
                         Des résultats qui <span className="text-primary">parlent d&#39;eux-mêmes</span>
                     </span>
                 }
