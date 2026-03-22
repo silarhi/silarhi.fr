@@ -9,16 +9,16 @@ import Markdown from '@/components/markdown'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
-import { ArrowRight, Check, Code, XMark, Zap } from '@/components/ui/icons'
+import { Check, XMark } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
-import iconProcess from '@/icons/creation-process_uvp6.svg'
 import iconProgramming from '@/icons/dev-productivity_5wps.svg'
 import coding from '@/icons/floating-cogs.svg'
 import iconIdeas from '@/icons/ideas_vn7a.svg'
 import iconCloud from '@/icons/maintenance_4unj.svg'
 import iconMeeting from '@/icons/meeting_dunc.svg'
 import { generateLocalBusinessSchema, generateServicesSchema, generateWebPageSchema } from '@/lib/schemas'
+import home from '@/public/images/home.jpg'
 import { getAllClients } from '@/utils/client'
 import { getTotalEmployeeHours } from '@/utils/employees'
 import { cn } from '@/utils/lib'
@@ -39,7 +39,6 @@ interface Feature {
     icon: string
     title: string
     description: string
-    step: number
 }
 
 interface Service {
@@ -61,58 +60,30 @@ interface NumberData {
     text: string
 }
 
-interface ValueProp {
-    icon: React.ReactNode
-    title: string
-    description: string
-}
-
-const VALUE_PROPS: ValueProp[] = [
-    {
-        icon: <Code className="size-6" />,
-        title: 'Code sur mesure',
-        description: 'Chaque ligne de code est écrite pour votre projet, pas de template générique.',
-    },
-    {
-        icon: <Zap className="size-6" />,
-        title: 'Livraison rapide',
-        description: 'Un processus agile et itératif pour des résultats concrets, rapidement.',
-    },
-    {
-        icon: <Check className="size-6" />,
-        title: 'Qualité garantie',
-        description: 'Tests automatisés, revue de code et intégration continue sur chaque projet.',
-    },
-]
-
 const FEATURES: Feature[] = [
     {
         icon: iconMeeting,
         title: 'Analyse',
         description:
             'Nous étudions précisément votre besoin pour éliminer toute zone d\u2019ombre. Vous obtenez une vision claire du projet avant même de commencer.',
-        step: 1,
     },
     {
         icon: iconIdeas,
         title: 'Conception',
         description:
             'Nous concevons une solution sur mesure, pensée pour durer. Vous démarrez avec un produit pensé pour évoluer facilement.',
-        step: 2,
     },
     {
         icon: iconProgramming,
         title: 'Développement',
         description:
             'Nous développons une application Web robuste, moderne et sécurisée. Votre application évolue proprement grâce à un code clair et maintenable.',
-        step: 3,
     },
     {
         icon: iconCloud,
         title: 'Déploiement',
         description:
             'Nous assurons un déploiement fluide, sans interruption de votre activité. Votre solution est mise en production avec des outils fiables et automatisés.',
-        step: 4,
     },
 ]
 
@@ -239,119 +210,54 @@ function getNumbers(clientsCount: number, projectsCount: number): NumberData[] {
     ]
 }
 
-function HeroDecoration() {
-    return (
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            {/* Top-right gradient blob */}
-            <div className="bg-primary/10 dark:bg-primary/5 absolute -top-32 -right-32 h-96 w-96 rounded-full blur-3xl" />
-            {/* Bottom-left gradient blob */}
-            <div className="bg-secondary/10 dark:bg-secondary/5 absolute -bottom-24 -left-24 h-72 w-72 rounded-full blur-3xl" />
-            {/* Subtle grid pattern */}
-            <div
-                className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]"
-                style={{
-                    backgroundImage: `radial-gradient(circle, var(--color-primary) 1px, transparent 1px)`,
-                    backgroundSize: '32px 32px',
-                }}
-            />
-        </div>
-    )
-}
-
 function HeroSection() {
     return (
-        <div className="relative min-h-screen overflow-hidden">
-            <HeroDecoration />
-            <Section className="relative z-1 pt-32 pb-16 lg:pt-40 lg:pb-24">
-                <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-                    {/* Left: Text content */}
-                    <div>
+        <div className="relative h-screen w-full overflow-hidden">
+            <div className="absolute top-0 left-0 z-1 h-full w-full bg-black opacity-60"></div>
+            <Image
+                src={home}
+                sizes="100vw"
+                fill
+                style={{ objectFit: 'cover' }}
+                priority
+                placeholder="blur"
+                alt="SILARHI, Agence de développement Web Toulouse"
+            />
+            <div className="absolute z-2 flex h-full w-full flex-col items-center justify-center text-white">
+                <Section>
+                    <div className="mx-auto max-w-4xl">
                         <FadeInWhenVisible duration={0.8} yOffset={30}>
-                            <Badge variant="secondary" className="mb-6">
-                                Agence Web à Toulouse
-                            </Badge>
-                        </FadeInWhenVisible>
-
-                        <FadeInWhenVisible delay={0.15} duration={0.8} yOffset={30}>
-                            <h1
-                                className={cn(
-                                    montserrat.className,
-                                    'text-foreground mb-6 text-4xl font-bold tracking-tight text-balance md:text-5xl lg:text-6xl'
-                                )}
-                            >
-                                Votre projet Web mérite <span className="text-primary">un code d&apos;exception</span>
+                            <h1 className="text-5xl font-bold text-shadow-lg lg:text-6xl xl:text-7xl">
+                                Développement d&apos;applications Web
+                                <br />
+                                <Badge
+                                    variant="secondary"
+                                    className="bg-secondary/80 dark:bg-secondary/70 dark:text-surface text-gray-900 text-shadow-none"
+                                >
+                                    À Toulouse &amp; en France
+                                </Badge>
                             </h1>
                         </FadeInWhenVisible>
-
                         <FadeInWhenVisible delay={0.3} duration={0.8} yOffset={30}>
-                            <p className="text-foreground/70 mb-8 max-w-xl text-lg leading-relaxed lg:text-xl">
-                                Nous développons des applications Web sur mesure en PHP &amp; Symfony. Du prototype à la
-                                production, nous transformons vos idées en solutions performantes.
-                            </p>
+                            <h2 className="mt-4 text-3xl uppercase text-shadow-lg">
+                                Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
+                            </h2>
                         </FadeInWhenVisible>
-
-                        <FadeInWhenVisible delay={0.45} duration={0.8} yOffset={30}>
-                            <div className="flex flex-wrap gap-4">
-                                <Button as="a" size="lg" href="/contact">
-                                    Démarrer votre projet
-                                    <ArrowRight className="size-5" />
-                                </Button>
-                                <Button as="a" size="lg" href="#services" variant="outline-primary">
-                                    Découvrir nos services
-                                </Button>
-                            </div>
+                        <FadeInWhenVisible delay={0.5} duration={0.8} yOffset={30}>
+                            <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
+                                En savoir plus
+                            </Button>
                         </FadeInWhenVisible>
                     </div>
-
-                    {/* Right: Illustration with floating elements */}
-                    <div className="relative hidden lg:block">
-                        <FadeInWhenVisible delay={0.3} duration={1} yOffset={40}>
-                            <div className="relative">
-                                {/* Main illustration */}
-                                <div className="bg-primary/5 dark:bg-primary/10 flex items-center justify-center rounded-3xl p-8">
-                                    <Image
-                                        src={iconProcess}
-                                        alt="Processus de création"
-                                        height={400}
-                                        className="h-auto w-full max-w-md"
-                                    />
-                                </div>
-                                {/* Floating accent card top-right */}
-                                <div className="bg-surface dark:bg-surface-elevated border-border absolute -top-4 -right-4 rounded-xl border p-4 shadow-lg">
-                                    <div className="flex items-center gap-3">
-                                        <div className="bg-success/10 text-success flex size-10 items-center justify-center rounded-full">
-                                            <Check className="size-5" />
-                                        </div>
-                                        <div>
-                                            <p className="mb-0 text-sm font-semibold">Projet livré</p>
-                                            <p className="text-muted mb-0 text-xs">En production</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* Floating accent card bottom-left */}
-                                <div className="bg-surface dark:bg-surface-elevated border-border absolute -bottom-4 -left-4 rounded-xl border p-4 shadow-lg">
-                                    <div className="flex items-center gap-3">
-                                        <div className="bg-primary/10 text-primary flex size-10 items-center justify-center rounded-full">
-                                            <Code className="size-5" />
-                                        </div>
-                                        <div>
-                                            <p className="mb-0 text-sm font-semibold">Code maintenable</p>
-                                            <p className="text-muted mb-0 text-xs">Tests &amp; CI/CD</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </FadeInWhenVisible>
-                    </div>
-                </div>
-            </Section>
+                </Section>
+            </div>
         </div>
     )
 }
 
-function ValuePropsSection() {
+function PresentationSection() {
     return (
-        <Section className="bg-primary-dark relative z-2 text-white">
+        <Section id="presentation" className="bg-primary-dark relative z-2 text-white">
             <Image
                 src={coding}
                 alt="Coding"
@@ -359,60 +265,18 @@ function ValuePropsSection() {
                 height={160}
                 sizes="100vw"
             />
-            <div className="grid gap-8 md:grid-cols-3 md:gap-12">
-                {VALUE_PROPS.map((prop, index) => (
-                    <FadeInWhenVisible key={index} delay={index * 0.15}>
-                        <div className="text-center">
-                            <div className="bg-surface/10 mx-auto mb-4 flex size-14 items-center justify-center rounded-2xl">
-                                {prop.icon}
-                            </div>
-                            <h3 className="mb-2 text-xl font-bold">{prop.title}</h3>
-                            <p className="mb-0 text-white/80">{prop.description}</p>
-                        </div>
-                    </FadeInWhenVisible>
-                ))}
-            </div>
-        </Section>
-    )
-}
-
-function PresentationSection() {
-    return (
-        <Section id="presentation" className="bg-surface border-border border-t">
-            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-                <FadeInWhenVisible>
-                    <div className="relative hidden lg:block">
-                        <div className="bg-secondary/5 dark:bg-secondary/10 flex items-center justify-center rounded-3xl p-8">
-                            <Image
-                                src={iconProgramming}
-                                alt="Productivité développement"
-                                height={320}
-                                className="h-auto w-full max-w-sm"
-                            />
-                        </div>
-                    </div>
-                </FadeInWhenVisible>
-                <FadeInWhenVisible delay={0.15}>
-                    <div>
-                        <Badge variant="secondary" className="mb-4">
-                            Qui sommes-nous
-                        </Badge>
-                        <h2 className={cn(montserrat.className, 'mb-6 text-3xl font-bold tracking-tight lg:text-4xl')}>
-                            Une agence dédiée à la réalisation d&apos;applications Web{' '}
-                            <span className="text-primary">sur mesure</span>
-                        </h2>
-                        <p className="text-foreground/70 mb-4 text-lg leading-relaxed">
-                            Spécialistes de l&apos;écosystème PHP et Symfony, nous accompagnons nos clients de
-                            l&apos;idée initiale à la mise en production. Chaque projet bénéficie d&apos;un code propre,
-                            testé et conçu pour durer.
-                        </p>
-                        <p className="text-foreground/70 text-lg leading-relaxed">
-                            Que vous ayez besoin de créer une application de A à Z ou de reprendre un projet existant,
-                            nous mettons notre expertise technique au service de votre réussite.
-                        </p>
-                    </div>
-                </FadeInWhenVisible>
-            </div>
+            <FadeInWhenVisible>
+                <div className="mx-auto max-w-4xl text-center">
+                    <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
+                        SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
+                        sur mesure.
+                    </h2>
+                    <p className="text-lg">
+                        Spécialistes de l&apos;écosystème PHP, nous développons ou reprennons vos projets en Symfony, du
+                        prototype à la mise en ligne.
+                    </p>
+                </div>
+            </FadeInWhenVisible>
         </Section>
     )
 }
@@ -466,7 +330,7 @@ function MethodologySection() {
                                             <div className="flex-1">
                                                 <div className="mb-2 flex items-center gap-3">
                                                     <span className="bg-primary/10 text-primary flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-bold">
-                                                        {stage.step}
+                                                        {index + 1}
                                                     </span>
                                                     <h3 className="text-lg font-bold md:text-xl">{stage.title}</h3>
                                                 </div>
@@ -626,7 +490,6 @@ export default async function Page() {
         <>
             <JsonLd data={homepageSchemas} />
             <HeroSection />
-            <ValuePropsSection />
             <PresentationSection />
             <ServicesSection />
             <MethodologySection />
