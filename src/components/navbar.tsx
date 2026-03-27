@@ -84,11 +84,6 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
             label: 'Clients',
         },
         {
-            path: '/#chiffres',
-            indexPath: '#chiffres',
-            label: 'Chiffres',
-        },
-        {
             path: '/projets',
             label: 'Projets',
         },
