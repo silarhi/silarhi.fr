@@ -65,7 +65,7 @@ const FEATURES: Feature[] = [
         icon: iconMeeting,
         title: 'Analyse',
         description:
-            'Nous étudions précisément votre besoin pour éliminer toute zone d’ombre. Vous obtenez une vision claire du projet avant même de commencer.',
+            'Nous étudions précisément votre besoin pour éliminer toute zone d\u2019ombre. Vous obtenez une vision claire du projet avant même de commencer.',
     },
     {
         icon: iconIdeas,
@@ -195,12 +195,12 @@ function getNumbers(clientsCount: number, projectsCount: number): NumberData[] {
         {
             value: getTotalEmployeeHours(EMPLOYEES),
             unit: 'Heures',
-            text: `de développement au service de nos clients`,
+            text: `de développement investies dans la réussite de nos clients`,
         },
         {
             value: clientsCount,
             unit: 'Clients',
-            text: `nous font confiance pour leurs projets stratégiques`,
+            text: `nous confient leurs projets les plus ambitieux`,
         },
         {
             value: projectsCount,
@@ -234,7 +234,7 @@ function HeroSection() {
                                     variant="secondary"
                                     className="bg-secondary/80 dark:bg-secondary/70 dark:text-surface text-gray-900 text-shadow-none"
                                 >
-                                    À Toulouse & en France
+                                    À Toulouse &amp; en France
                                 </Badge>
                             </h1>
                         </FadeInWhenVisible>
@@ -252,6 +252,32 @@ function HeroSection() {
                 </Section>
             </div>
         </div>
+    )
+}
+
+function PresentationSection() {
+    return (
+        <Section id="presentation" className="bg-primary-dark relative z-2 text-white">
+            <Image
+                src={coding}
+                alt="Coding"
+                className="absolute top-0 left-0 -z-1 h-full w-full object-cover opacity-5"
+                height={160}
+                sizes="100vw"
+            />
+            <FadeInWhenVisible>
+                <div className="mx-auto max-w-4xl text-center">
+                    <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
+                        SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
+                        sur mesure.
+                    </h2>
+                    <p className="text-lg">
+                        Spécialistes de l&apos;écosystème PHP, nous développons ou reprennons vos projets en Symfony, du
+                        prototype à la mise en ligne.
+                    </p>
+                </div>
+            </FadeInWhenVisible>
+        </Section>
     )
 }
 
@@ -290,10 +316,8 @@ function MethodologySection() {
                     <Arrow />
                 </FadeInWhenVisible>
 
-                {/* Main stages */}
                 {FEATURES.map((stage, index) => (
                     <Fragment key={index}>
-                        {/* Stage with number outside */}
                         <FadeInWhenVisible delay={0.2 + index * 0.15}>
                             <div className={cn('flex items-start gap-3 md:gap-4')}>
                                 <div className="bg-surface border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
@@ -304,7 +328,12 @@ function MethodologySection() {
                                             </div>
 
                                             <div className="flex-1">
-                                                <h3 className="mb-2 text-lg font-bold md:text-xl">{stage.title}</h3>
+                                                <div className="mb-2 flex items-center gap-3">
+                                                    <span className="bg-primary/10 text-primary flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-bold">
+                                                        {index + 1}
+                                                    </span>
+                                                    <h3 className="text-lg font-bold md:text-xl">{stage.title}</h3>
+                                                </div>
                                                 <p className="text-foreground/80">{stage.description}</p>
                                             </div>
                                         </div>
@@ -325,7 +354,6 @@ function MethodologySection() {
                     <Arrow />
                 </FadeInWhenVisible>
 
-                {/* Success block - small, only title */}
                 <FadeInWhenVisible delay={0.2 + FEATURES.length * 0.15}>
                     <div className="text-center">
                         <span className="bg-success/10 border-success/10 dark:bg-success/20 dark:border-success/20 inline-block rounded-lg border-2 p-3 md:p-4">
@@ -380,32 +408,6 @@ function ServiceList({
     )
 }
 
-function PresentationSection() {
-    return (
-        <Section id="presentation" className="bg-primary-dark relative z-2 text-white">
-            <Image
-                src={coding}
-                alt="Coding"
-                className="absolute top-0 left-0 -z-1 h-full w-full object-cover opacity-5"
-                height={160}
-                sizes="100vw"
-            />
-            <FadeInWhenVisible>
-                <div className="mx-auto max-w-4xl text-center">
-                    <h2 className="mb-4 text-3xl font-bold lg:text-4xl">
-                        SILARHI est une agence de développement spécialisée dans la réalisation d&apos;applications Web
-                        sur mesure.
-                    </h2>
-                    <p className="text-lg">
-                        Spécialistes de l&apos;écosystème PHP, nous développons ou reprennons vos projets en Symfony, du
-                        prototype à la mise en ligne.
-                    </p>
-                </div>
-            </FadeInWhenVisible>
-        </Section>
-    )
-}
-
 function ServicesSection() {
     const supportedServices = SERVICES.filter((service) => service.supported)
     const unsupportedServices = SERVICES.filter((service) => !service.supported)
@@ -446,12 +448,12 @@ function NumbersSection({ numbers }: { numbers: NumberData[] }) {
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
                 {numbers.map((number, key) => (
                     <FadeInWhenVisible key={key} delay={key * 0.1}>
-                        <div className="text-center">
-                            <div className={cn(lato.className, 'text-secondary mb-3 text-6xl font-bold')}>
+                        <div className="bg-surface dark:bg-surface-elevated border-border rounded-2xl border p-8 text-center shadow-sm transition-shadow hover:shadow-md">
+                            <div className={cn(lato.className, 'text-primary mb-3 text-6xl font-bold')}>
                                 {number.value}
                             </div>
-                            <h4 className="mb-0 text-2xl font-light lg:mb-3">{number.unit}</h4>
-                            <p className="text-foreground/80">{number.text}</p>
+                            <h4 className="mb-2 text-2xl font-semibold">{number.unit}</h4>
+                            <p className="text-foreground/70 mb-0">{number.text}</p>
                         </div>
                     </FadeInWhenVisible>
                 ))}
