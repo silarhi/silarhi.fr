@@ -1027,9 +1027,9 @@
   integrity sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==
 
 "@size-limit/file@^12.0.0":
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/@size-limit/file/-/file-12.0.1.tgz#b8a61e2df61378e5f5accbe913a311b73aac8988"
-  integrity sha512-Kvbnz46iV7WeHaANf1HmWjXBVMU2KkCU+0xJ78FzIjZwlVKKEqy+QCZprdBMfIWrzrvYeqP4cfuzKG8z6xVivg==
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/@size-limit/file/-/file-12.1.0.tgz#3e0740e98cbb5c46c7e53939a37df5de68269fe2"
+  integrity sha512-eGwDcIufnNnvJRzv3liDOn6MAOGgmOTUdpeGQ2KuRTlgIgO54AJH1ilvktlJc6PIjNfwpYY0dOGyap1QgM1swQ==
 
 "@swc/helpers@0.5.15":
   version "0.5.15"
