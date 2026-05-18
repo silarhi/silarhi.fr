@@ -14,6 +14,14 @@ const eslintConfig = defineConfig([
 
     // Custom configuration
     {
+        // eslint-config-next sets `react.version: 'detect'`, whose detection
+        // path in eslint-plugin-react@7.37.5 calls the `context.getFilename()`
+        // removed in ESLint 10. Pinning an explicit version skips that path.
+        settings: {
+            react: {
+                version: '19.2',
+            },
+        },
         plugins: {
             'simple-import-sort': simpleImportSort,
             prettier: prettierPlugin,
