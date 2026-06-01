@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import React, { Fragment } from 'react'
+import type React from 'react'
+import { Fragment } from 'react'
 
 import CallToAction from '@/components/call-to-action'
 import ClientsSection from '@/components/clients-section'

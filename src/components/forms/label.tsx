@@ -1,4 +1,4 @@
-import { LabelHTMLAttributes, ReactNode } from 'react'
+import type { LabelHTMLAttributes, ReactNode } from 'react'
 
 import { cn } from '@/utils/lib'
 

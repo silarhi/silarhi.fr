@@ -6,7 +6,14 @@ import type { Project } from '@/utils/project'
 import type { Technology } from '@/utils/technology'
 import { getCanonicalUrl } from '@/utils/url'
 
-import { BreadcrumbList, COMPANY_INFO, generateBreadcrumbSchema, ItemList, Thing, WebPage } from './index'
+import {
+    type BreadcrumbList,
+    COMPANY_INFO,
+    generateBreadcrumbSchema,
+    type ItemList,
+    type Thing,
+    type WebPage,
+} from './index'
 import { generateProjectSchema } from './project'
 
 /**

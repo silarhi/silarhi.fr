@@ -6,7 +6,8 @@
         "dev": "next dev --turbopack",
         "build": "next build",
         "start": "next start",
-        "lint": "eslint .",
+        "lint": "biome check src scripts",
+        "lint:fix": "biome check --write src scripts",
         "lint-ci": "yarn lint && yarn typecheck && yarn knip && yarn validate:technologies && yarn validate:clients && yarn validate:images",
         "validate:technologies": "tsx scripts/validate-technologies.ts",
         "validate:clients": "tsx scripts/validate-clients.ts",
@@ -14,8 +15,8 @@
         "validate:images": "tsx scripts/validate-images.ts",
         "generate:image-metadata": "tsx scripts/generate-image-metadata.ts",
         "typecheck": "tsc --noEmit",
-        "prettier": "prettier --write .",
-        "prettier:check": "prettier --check .",
+        "prettier": "prettier --write \"**/*.{css,scss,md,mdx,yaml,yml}\"",
+        "prettier:check": "prettier --check \"**/*.{css,scss,md,mdx,yaml,yml}\"",
         "size": "size-limit",
         "size:json": "size-limit --json",
         "prepare": "husky"
@@ -43,17 +44,13 @@
         "use-debounce": "^10.1.0"
     },
     "devDependencies": {
+        "@biomejs/biome": "2.4.16",
         "@size-limit/file": "^12.0.0",
         "@tailwindcss/postcss": "^4.1.18",
         "@types/node": "^25.0.9",
         "@types/react": "^19.2.8",
         "@types/react-dom": "^19.2.3",
         "autoprefixer": "^10.4.23",
-        "eslint": "^10.4.0",
-        "eslint-config-next": "16.2.6",
-        "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-prettier": "^5.5.5",
-        "eslint-plugin-simple-import-sort": "^13.0.0",
         "husky": "^9.1.7",
         "knip": "^6.0.0",
         "lint-staged": "^17.0.0",
@@ -70,13 +67,7 @@
         "typescript": "^6.0.0"
     },
     "lint-staged": {
-        "*.{js,ts,jsx,tsx}": "eslint --fix",
-        "*.{scss,md,yaml,yml,json}": "prettier --write"
-    },
-    "resolutions": {
-        "typescript-eslint": "8.60.0",
-        "@typescript-eslint/utils": "8.60.0",
-        "@typescript-eslint/eslint-plugin": "8.60.0",
-        "@typescript-eslint/parser": "8.60.0"
+        "*.{js,jsx,ts,tsx,mjs,cjs,json}": "biome check --write --no-errors-on-unmatched",
+        "*.{css,scss,md,mdx,yaml,yml}": "prettier --write"
     }
 }

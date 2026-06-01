@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
 import { cn } from '@/utils/lib'
 

@@ -1,0 +1,68 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
+    "files": {
+        "includes": ["src/**", "scripts/**", "!src/**/*.css", "!src/**/*.scss"]
+    },
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineEnding": "lf",
+        "lineWidth": 120
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "a11y": {
+                "noRedundantRoles": "off",
+                "noStaticElementInteractions": "off",
+                "noSvgWithoutTitle": "off",
+                "useAriaPropsSupportedByRole": "off",
+                "useButtonType": "off",
+                "useKeyWithClickEvents": "off",
+                "useSemanticElements": "off"
+            },
+            "correctness": {
+                "noUnusedFunctionParameters": "off",
+                "noUnusedImports": "off",
+                "useExhaustiveDependencies": "off"
+            },
+            "security": {
+                "noDangerouslySetInnerHtml": "off"
+            },
+            "style": {
+                "noNonNullAssertion": "off",
+                "useNodejsImportProtocol": "off",
+                "useTemplate": "off"
+            },
+            "suspicious": {
+                "noArrayIndexKey": "off",
+                "noAssignInExpressions": "off",
+                "noExplicitAny": "off",
+                "noImplicitAnyLet": "off",
+                "noShadowRestrictedNames": "off"
+            }
+        },
+        "domains": {
+            "next": "recommended",
+            "react": "recommended"
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single",
+            "trailingCommas": "es5",
+            "semicolons": "asNeeded",
+            "arrowParentheses": "always",
+            "bracketSameLine": false,
+            "bracketSpacing": true,
+            "quoteProperties": "asNeeded"
+        }
+    }
+}

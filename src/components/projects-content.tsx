@@ -1,7 +1,7 @@
 import ProjectList from '@/components/project-list'
 import { FaceSad } from '@/components/ui/icons'
 import Pagination from '@/components/ui/pagination'
-import { Project } from '@/utils/project'
+import type { Project } from '@/utils/project'
 
 interface ProjectsContentProps {
     projects: Project[]

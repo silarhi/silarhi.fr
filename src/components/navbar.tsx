@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { CSSProperties, useEffect, useRef, useState } from 'react'
+import { type CSSProperties, useEffect, useRef, useState } from 'react'
 
 import { montserrat } from '@/app/fonts'
 import ThemeToggle from '@/components/theme-toggle'

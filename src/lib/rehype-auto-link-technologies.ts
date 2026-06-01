@@ -1,4 +1,4 @@
-import { Element, Root, Text } from 'hast'
+import type { Element, Root, Text } from 'hast'
 import { SKIP, visit } from 'unist-util-visit'
 
 import { getAllTechnologies } from '@/utils/technology'

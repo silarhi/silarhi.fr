@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 import JsonLd from '@/components/json-ld'
 import ProjectFilters from '@/components/project-filters'

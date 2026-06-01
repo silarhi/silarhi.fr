@@ -2,7 +2,7 @@
 
 import { AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
-import Image, { StaticImageData } from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
 import { useCallback, useEffect } from 'react'
 
 import { XMark } from '@/components/ui/icons'

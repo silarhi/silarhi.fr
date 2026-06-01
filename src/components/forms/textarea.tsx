@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react'
-import { FieldValues } from 'react-hook-form'
+import type React from 'react'
+import { forwardRef } from 'react'
+import type { FieldValues } from 'react-hook-form'
 
-import { FormFieldProps } from '@/types/forms'
+import type { FormFieldProps } from '@/types/forms'
 import { cn } from '@/utils/lib'
 
 import FormField from './form-field'

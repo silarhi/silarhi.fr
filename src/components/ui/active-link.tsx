@@ -1,8 +1,9 @@
 'use client'
 
-import Link, { LinkProps } from 'next/link'
+import Link, { type LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode, useMemo } from 'react'
+import type React from 'react'
+import { type ReactNode, useMemo } from 'react'
 
 import { useHash } from '@/providers/hash-provider'
 import { cn } from '@/utils/lib'

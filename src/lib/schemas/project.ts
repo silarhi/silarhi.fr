@@ -6,13 +6,13 @@ import type { Project } from '@/utils/project'
 import { getCanonicalUrl } from '@/utils/url'
 
 import {
-    BreadcrumbList,
+    type BreadcrumbList,
     COMPANY_INFO,
-    CreativeWork,
+    type CreativeWork,
     generateBreadcrumbSchema,
-    ItemList,
-    Organization,
-    WebPage,
+    type ItemList,
+    type Organization,
+    type WebPage,
 } from './index'
 
 /**

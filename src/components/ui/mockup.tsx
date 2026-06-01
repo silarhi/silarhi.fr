@@ -1,6 +1,6 @@
 'use client'
 
-import Image, { StaticImageData } from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
 import { useState } from 'react'
 
 import { Expand } from '@/components/ui/icons'
