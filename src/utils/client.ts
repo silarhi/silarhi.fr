@@ -2,7 +2,7 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 
-import { ImageMetadata } from './project'
+import type { ImageMetadata } from './project'
 
 const clientsDirectory = path.join(process.cwd(), 'content/clients')
 

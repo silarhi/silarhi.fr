@@ -7,7 +7,7 @@ import { ArrowRight } from '@/components/ui/icons'
 import { LaptopMockup } from '@/components/ui/mockup'
 import ProjectScopeBadge from '@/components/ui/project-scope-badge'
 import { cn } from '@/utils/lib'
-import { Project } from '@/utils/project'
+import type { Project } from '@/utils/project'
 
 interface ProjectListProps {
     projects: Project[]

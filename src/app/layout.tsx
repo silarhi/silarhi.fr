@@ -2,7 +2,7 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 import JsonLd from '@/components/json-ld'
 import DefaultLayout from '@/components/layouts/default'

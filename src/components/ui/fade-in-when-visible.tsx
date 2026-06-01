@@ -2,7 +2,8 @@
 
 import { useInView } from 'motion/react'
 import * as m from 'motion/react-m'
-import React, { useRef } from 'react'
+import type React from 'react'
+import { useRef } from 'react'
 
 interface FadeInWhenVisibleProps {
     children: React.ReactNode

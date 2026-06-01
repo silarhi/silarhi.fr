@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 import Help from '@/components/forms/help'
 import { cn } from '@/utils/lib'

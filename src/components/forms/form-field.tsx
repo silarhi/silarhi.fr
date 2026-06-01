@@ -1,8 +1,8 @@
-import { ReactNode } from 'react'
-import { FieldValues } from 'react-hook-form'
+import type { ReactNode } from 'react'
+import type { FieldValues } from 'react-hook-form'
 
 import { useFormFieldProps } from '@/hooks/form'
-import { FormFieldProps } from '@/types/forms'
+import type { FormFieldProps } from '@/types/forms'
 
 import Group from './group'
 import InputIcon from './input-icon'

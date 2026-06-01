@@ -1,6 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import { StaticImageData } from 'next/image'
+import type { StaticImageData } from 'next/image'
 import path from 'path'
 
 import { type Client, getClientBySlug } from './client'

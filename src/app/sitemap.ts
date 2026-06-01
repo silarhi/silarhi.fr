@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 
 import { getAllProjects } from '@/utils/project'
 import { getAllTechnologies } from '@/utils/technology'

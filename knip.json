@@ -1,3 +1,8 @@
 {
-    "ignoreDependencies": ["svgo", "unified"]
+    "$schema": "https://unpkg.com/knip@6/schema.json",
+    "ignoreDependencies": ["svgo", "unified"],
+    "paths": {
+        "@/*": ["src/*"],
+        "@/public/*": ["public/*"]
+    }
 }

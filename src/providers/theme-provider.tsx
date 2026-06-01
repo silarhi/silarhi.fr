@@ -1,7 +1,7 @@
 'use client'
 
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface ThemeProviderProps {
     children: ReactNode
@@ -10,12 +10,7 @@ interface ThemeProviderProps {
 export function ThemeProvider({ children }: ThemeProviderProps) {
     return (
         // prettier-ignore
-        <NextThemesProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-        >
+        <NextThemesProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             {children}
         </NextThemesProvider>
     )

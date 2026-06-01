@@ -1,7 +1,7 @@
 'use client'
 
 import { domAnimation, LazyMotion } from 'motion/react'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface MotionProviderProps {
     children: ReactNode

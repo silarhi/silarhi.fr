@@ -1,6 +1,6 @@
-import Link, { LinkProps } from 'next/link'
+import Link, { type LinkProps } from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import React from 'react'
+import type React from 'react'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 import rehypeUnwrapImages from 'rehype-unwrap-images'

@@ -8,7 +8,7 @@ import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import { FilterIcon } from '@/components/ui/icons'
 import { cn } from '@/utils/lib'
-import { FilterType, getActiveFilter } from '@/utils/url'
+import { type FilterType, getActiveFilter } from '@/utils/url'
 
 interface FilterOption {
     slug: string

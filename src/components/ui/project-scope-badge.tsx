@@ -1,7 +1,7 @@
 import Badge from '@/components/ui/badge'
 import { Code, Repeat, Zap } from '@/components/ui/icons'
 import { cn } from '@/utils/lib'
-import { ProjectScope } from '@/utils/project'
+import type { ProjectScope } from '@/utils/project'
 
 interface ProjectTypeBadgeProps {
     scope: ProjectScope

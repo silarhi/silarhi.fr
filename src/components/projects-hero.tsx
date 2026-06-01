@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 import HeroSection from '@/components/hero-section'
 import SearchForm from '@/components/search-form'
