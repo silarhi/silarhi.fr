@@ -1376,12 +1376,12 @@ css-select@^5.1.0:
     nth-check "^2.0.1"
 
 css-tree@^3.0.1:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-3.1.0.tgz#7aabc035f4e66b5c86f54570d55e05b1346eb0fd"
-  integrity sha512-0eW44TGN5SQXU1mWSkKwFstI/22X2bG1nYzZTYMAWjylYURhse752YgbE4Cx46AC+bAvI+/dYTPRk1LqSUnu6w==
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-3.2.1.tgz#86cac7011561272b30e6b1e042ba6ce047aa7518"
+  integrity sha512-X7sjQzceUhu1u7Y/ylrRZFU2FS6LRiFVp6rKLPg23y3x3c3DOKAwuXGDp+PAGjh6CSnCjYeAul8pcT8bAl+lSA==
   dependencies:
-    mdn-data "2.12.2"
-    source-map-js "^1.0.1"
+    mdn-data "2.27.1"
+    source-map-js "^1.2.1"
 
 css-tree@~2.2.0:
   version "2.2.1"
@@ -2240,10 +2240,10 @@ mdn-data@2.0.28:
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.28.tgz#5ec48e7bef120654539069e1ae4ddc81ca490eba"
   integrity sha512-aylIc7Z9y4yzHYAJNuESG3hfhC+0Ibp/MAMiaOZgNv4pmEdFyfZhhhny4MNiAfWdBQ1RQ2mfDWmM1x8SvGyp8g==
 
-mdn-data@2.12.2:
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.12.2.tgz#9ae6c41a9e65adf61318b32bff7b64fbfb13f8cf"
-  integrity sha512-IEn+pegP1aManZuckezWCO+XZQDplx1366JoVhTpMpBB1sPey/SbveZQUosKiKiGYjg1wH4pMlNgXbCiYgihQA==
+mdn-data@2.27.1:
+  version "2.27.1"
+  resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.27.1.tgz#e37b9c50880b75366c4d40ac63d9bbcacdb61f0e"
+  integrity sha512-9Yubnt3e8A0OKwxYSXyhLymGW4sCufcLG6VdiDdUGVkPhpqLxlvP5vl1983gQjJl3tqbrM731mjaZaP68AgosQ==
 
 micromark-core-commonmark@^2.0.0:
   version "2.0.0"
@@ -3041,9 +3041,9 @@ sass@^1.97.2:
     "@parcel/watcher" "^2.4.1"
 
 sax@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-1.5.0.tgz#b5549b671069b7aa392df55ec7574cf411179eb8"
-  integrity sha512-21IYA3Q5cQf089Z6tgaUTr7lDAyzoTPx5HRtbhsME8Udispad8dC/+sziTNugOEx54ilvatQ9YCzl4KQLPcRHA==
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.6.0.tgz#da59637629307b97e7c4cb28e080a7bc38560d5b"
+  integrity sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA==
 
 scheduler@^0.27.0:
   version "0.27.0"
@@ -3280,9 +3280,9 @@ svgo-add-viewbox@^3.1.0:
   integrity sha512-hBpN3f6CsrhGLWBDY++n0Om9vsF5iC/hEExdS/hnZw6lXhHK+P9u3qZKWl4z6bHk61XcdhmV7hiLkJsDG4gaZA==
 
 svgo@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/svgo/-/svgo-4.0.1.tgz#c82dacd04ee9f1d55cd4e0b7f9a214c86670e3ee"
-  integrity sha512-XDpWUOPC6FEibaLzjfe0ucaV0YrOjYotGJO1WpF0Zd+n6ZGEQUsSugaoLq9QkEZtAfQIxT42UChcssDVPP3+/w==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/svgo/-/svgo-4.0.2.tgz#a62246f0a9d671c0314d04f3cc15f78b1bd0667f"
+  integrity sha512-ekx94z1rRc5LDi6oSUaeRnYhd0UOJxdtQCL2rF8xpWxD3TPAsISWOrxezqGovqS38GRZOdpDfvQe3ts6F7nsng==
   dependencies:
     commander "^11.1.0"
     css-select "^5.1.0"
