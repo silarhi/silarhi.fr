@@ -45,7 +45,7 @@
         "use-debounce": "^10.1.0"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.5.13",
+        "@biomejs/biome": "2.5.14",
         "@size-limit/file": "^13.0.0",
         "@tailwindcss/postcss": "^4.1.18",
         "@types/node": "^25.0.9",
