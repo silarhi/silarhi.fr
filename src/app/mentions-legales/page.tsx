@@ -24,7 +24,7 @@ export default function LegalMentionPage() {
                     le cadre de sa réalisation et de son suivi :<br />
                 </p>
                 <p>
-                    <strong>Propriétaire</strong>&nbsp;: SILARHI – SASU – SIRET N° 84154166700017 – 116 Route d&apos;
+                    <strong>Propriétaire</strong>&nbsp;: SILARHI – EURL – SIRET N° 84154166700017 – 116 Route d&apos;
                     Espagne, BAL 411, 31100 Toulouse
                     <br />
                     <strong>Créateur</strong>&nbsp;:&nbsp;<a href="https://sainthillier.fr/">Guillaume Sainthillier</a>

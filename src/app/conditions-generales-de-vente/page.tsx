@@ -30,7 +30,7 @@ export default function Page() {
                     Prestataire pour toute prestation de services ou produit proposé audit Client.
                 </p>
                 <p>
-                    Le terme « Prestataire » désigne la société SILARHI, SARL au capital de 1 000 €, 116 Route
+                    Le terme « Prestataire » désigne la société SILARHI, EURL au capital de 1 000 €, 116 Route
                     d&apos;Espagne - BAT 113 BAL 411, 31100 Toulouse, immatriculée au RCS de TOULOUSE sous le numéro
                     841541667 et représentée par Guillaume Sainthillier en sa qualité de Gérant.
                 </p>

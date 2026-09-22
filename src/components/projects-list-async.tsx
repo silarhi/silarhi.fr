@@ -77,8 +77,13 @@ export default async function ProjectsListAsync({
     if (currentPage < 1 || (currentPage > totalPages && filteredProjects.length > 0)) {
         const validPage = Math.max(1, Math.min(currentPage, totalPages))
         const redirectParams = new URLSearchParams(searchParams)
-        redirectParams.set('page', validPage.toString())
-        redirect(`/projets?${redirectParams.toString()}`)
+        if (validPage > 1) {
+            redirectParams.set('page', validPage.toString())
+        } else {
+            redirectParams.delete('page')
+        }
+        const queryString = redirectParams.toString()
+        redirect(queryString ? `/projets?${queryString}` : '/projets')
     }
 
     return (

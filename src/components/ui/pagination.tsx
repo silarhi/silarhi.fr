@@ -18,8 +18,14 @@ export default function Pagination({ currentPage, totalPages, baseUrl, searchPar
 
     const buildUrl = (page: number) => {
         const params = new URLSearchParams(searchParams)
-        params.set('page', page.toString())
-        return `${baseUrl}?${params.toString()}#projects-list`
+        // Page 1 is the canonical listing itself: never link to it with a page parameter
+        if (page > 1) {
+            params.set('page', page.toString())
+        } else {
+            params.delete('page')
+        }
+        const queryString = params.toString()
+        return `${baseUrl}${queryString ? `?${queryString}` : ''}#projects-list`
     }
 
     const getPageNumbers = () => {
