@@ -35,7 +35,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html
-            lang="en"
+            lang="fr"
             className="bg-background text-foreground h-full scroll-smooth"
             data-scroll-behavior="smooth"
             suppressHydrationWarning

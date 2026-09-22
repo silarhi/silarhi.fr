@@ -95,6 +95,7 @@ interface WebSite {
     name: string
     url: string
     description?: string
+    inLanguage?: string
     publisher?: Organization
     potentialAction?: SearchAction
 }
@@ -281,6 +282,7 @@ export function generateWebSiteSchema(): WebSite {
         name: COMPANY_INFO.name,
         url: COMPANY_INFO.url,
         description: COMPANY_INFO.description,
+        inLanguage: 'fr-FR',
         publisher: {
             '@id': `${COMPANY_INFO.url}/#organization`,
         } as Organization,
