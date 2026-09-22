@@ -24,13 +24,20 @@ interface ProjectPageProps {
 
 export async function generateMetadata({ searchParams }: ProjectPageProps): Promise<Metadata> {
     const params = await searchParams
+    const page = Number(params.page) || 1
+    const isFiltered = Boolean(
+        params.technology || params.category || params.industry || params.client || params.search
+    )
 
     return {
-        title: 'Projets récents - SILARHI',
+        title: page > 1 ? `Projets récents (page ${page}) - SILARHI` : 'Projets récents - SILARHI',
         description: 'Découvrez nos projets sur le développement web, PHP, Symfony et bien plus encore.',
         alternates: {
             canonical: getProjectsCanonicalUrl(params),
         },
+        // Filtered and searched listings are thin variants of /projets: keep them out of the index
+        // while still letting crawlers follow their links to the project pages.
+        robots: isFiltered ? { index: false, follow: true } : undefined,
     }
 }
 
