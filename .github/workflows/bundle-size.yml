@@ -1,4 +1,4 @@
-name: Bundle Size
+name: 'Bundle Size'
 
 on:
     pull_request:
@@ -10,6 +10,7 @@ permissions:
 
 jobs:
     size:
+        name: Bundle size
         runs-on: ubuntu-latest
         steps:
             - name: Use Node.js LTS
