@@ -1,4 +1,4 @@
-name: Validate URLs
+name: 'Validate URLs'
 
 on:
     # Run weekly on Mondays at 9:00 AM UTC
@@ -9,6 +9,7 @@ on:
 
 jobs:
     validate-urls:
+        name: Validate URLs
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
