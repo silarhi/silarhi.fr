@@ -24,7 +24,8 @@ export function LaptopMockup({ src, alt, blurDataURL }: LaptopMockupProps) {
                             src={src}
                             alt={alt}
                             fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+                            // Screen is capped by max-w-lg minus borders (496px); below 560px it spans the viewport minus paddings
+                            sizes="(max-width: 560px) calc(100vw - 4rem), 496px"
                             className="h-69.5 w-full rounded-lg object-cover object-top"
                             placeholder={blurDataURL ? 'blur' : 'empty'}
                             blurDataURL={blurDataURL}

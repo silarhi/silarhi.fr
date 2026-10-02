@@ -226,8 +226,9 @@ function HeroSection() {
             />
             <div className="absolute z-2 flex h-full w-full flex-col items-center justify-center text-white">
                 <Section>
+                    {/* No entrance animation: the h1 is the LCP element and FadeInWhenVisible hides it until hydration */}
                     <div className="mx-auto max-w-4xl">
-                        <FadeInWhenVisible duration={0.8} yOffset={30}>
+                        <div>
                             <h1 className="text-5xl font-bold text-shadow-lg lg:text-6xl xl:text-7xl">
                                 Développement d&apos;applications Web
                                 <br />
@@ -238,17 +239,17 @@ function HeroSection() {
                                     À Toulouse &amp; en France
                                 </Badge>
                             </h1>
-                        </FadeInWhenVisible>
-                        <FadeInWhenVisible delay={0.3} duration={0.8} yOffset={30}>
+                        </div>
+                        <div>
                             <h2 className="mt-4 text-3xl uppercase text-shadow-lg">
                                 Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
                             </h2>
-                        </FadeInWhenVisible>
-                        <FadeInWhenVisible delay={0.5} duration={0.8} yOffset={30}>
+                        </div>
+                        <div>
                             <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
                                 En savoir plus
                             </Button>
-                        </FadeInWhenVisible>
+                        </div>
                     </div>
                 </Section>
             </div>

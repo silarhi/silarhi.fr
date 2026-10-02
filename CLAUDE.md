@@ -14,7 +14,7 @@ SILARHI.fr is the official website for SILARHI, a web development agency based i
 - **Styling**: Tailwind CSS 4 with @tailwindcss/postcss
 - **Content**: MDX via next-mdx-remote 6 (RSC) + gray-matter 4
 - **Forms**: react-hook-form 7
-- **Animation**: motion 13 (formerly framer-motion)
+- **Animation**: CSS only (scroll-driven animations, Tailwind `animate-*` theme tokens), no animation library
 - **Search**: fuse.js 7
 - **Icons**: react-icons 5 (Lucide icons via react-icons/lu)
 - **Theming**: next-themes 0.4
@@ -95,7 +95,7 @@ Dynamic routes (`projets/[slug]`, `technologies/[slug]`) are pre-rendered at bui
 **Fonts & Analytics**:
 
 - Fonts configured in `src/app/fonts.ts` via `next/font/google`: Lato (body, `--body-font`) and Montserrat (brand, `--brand-font`)
-- Google Analytics 4 (ID: G-PDTD5T600H), loaded in `src/app/layout.tsx` with two `next/script` tags (`strategy="afterInteractive"`): the gtag.js loader and an inline `gtag('config', …)` snippet
+- Google Analytics 4 (ID: G-PDTD5T600H), loaded in `src/app/layout.tsx` with two `next/script` tags (`strategy="lazyOnload"`, so the 170 kB gtag.js never competes with the page's own resources): the gtag.js loader and an inline `gtag('config', …)` snippet
 
 ### Content Management (MDX)
 
@@ -161,14 +161,14 @@ src/components/
 ├── *.tsx             # Feature-specific components (navbar, footer, project-list, etc.)
 ```
 
-Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes, `motion-provider.tsx` for `LazyMotion`, `hash-provider.tsx` exposing `useHash()` for the URL hash). They are all mounted in `src/app/layout.tsx`.
+Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes, `hash-provider.tsx` exposing `useHash()` for the URL hash). They are all mounted in `src/app/layout.tsx`.
 
 **Reusable UI Components** (`src/components/ui/`):
 
 - `active-link.tsx` - Navigation link with active state styling
 - `badge.tsx` / `badge-group.tsx` - Badge components for labels and tags
 - `button.tsx` - Primary button component
-- `fade-in-when-visible.tsx` - Motion scroll animations
+- `fade-in-when-visible.tsx` - CSS scroll-driven fade-in (server component)
 - `icons.tsx` - Centralized icon exports
 - `lightbox.tsx` - Image lightbox component
 - `mdx-image.tsx` - Image component for MDX content (`MDXImage`)
@@ -226,9 +226,9 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 **Animations**:
 
-- Scroll-triggered animations via **Motion 13** (formerly Framer Motion)
-- `MotionProvider` wraps the app in `<LazyMotion features={domAnimation} strict>`: use the lightweight `m` components (`import * as m from 'motion/react-m'`), never `motion.*`, or strict mode throws
-- `FadeInWhenVisible` component for entrance animations (`useInView` once + `animate`)
+- CSS only, no animation library: nothing to download or hydrate for them
+- `FadeInWhenVisible` (server component) fades its content in as it scrolls into view with a CSS scroll-driven animation (`.fade-in-on-scroll` in `globals.css`, `animation-timeline: view()`); `delay` staggers siblings. Browsers without scroll-driven animations and reduced-motion visitors get the content without the effect, never hidden. Below the fold only: above-the-fold content (heroes, the contact form, the 404 message) is rendered without it
+- The lightbox animates with `animate-lightbox-*` theme tokens and stays mounted with `data-state="closed"` while it fades out
 - Smooth scrolling enabled globally (see `src/app/layout.tsx`)
 
 **Image Optimization**:

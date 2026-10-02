@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import HeroSection from '@/components/hero-section'
 import Button from '@/components/ui/button'
-import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import { ArrowLeft } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import notFoundImage from '@/public/images/404.svg'
@@ -23,7 +22,7 @@ export default function NotFound() {
             />
 
             <Section className="text-center">
-                <FadeInWhenVisible delay={0.1}>
+                <div>
                     <div className="mx-auto max-w-2xl">
                         <div className="mb-8 flex justify-center">
                             <Image
@@ -66,7 +65,7 @@ export default function NotFound() {
                             </ul>
                         </div>
                     </div>
-                </FadeInWhenVisible>
+                </div>
             </Section>
         </>
     )

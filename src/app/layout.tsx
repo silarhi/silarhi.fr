@@ -8,7 +8,6 @@ import JsonLd from '@/components/json-ld'
 import DefaultLayout from '@/components/layouts/default'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/schemas'
 import { HashProvider } from '@/providers/hash-provider'
-import { MotionProvider } from '@/providers/motion-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { cn } from '@/utils/lib'
 
@@ -51,13 +50,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <body className={cn(lato.className, lato.variable, montserrat.variable, 'h-full')}>
                 <ThemeProvider>
                     <HashProvider>
-                        <MotionProvider>
-                            <DefaultLayout>{children}</DefaultLayout>
-                        </MotionProvider>
+                        <DefaultLayout>{children}</DefaultLayout>
                     </HashProvider>
                 </ThemeProvider>
-                <Script src="https://www.googletagmanager.com/gtag/js?id=G-PDTD5T600H" strategy="afterInteractive" />
-                <Script id="google-analytics" strategy="afterInteractive">
+                <Script src="https://www.googletagmanager.com/gtag/js?id=G-PDTD5T600H" strategy="lazyOnload" />
+                <Script id="google-analytics" strategy="lazyOnload">
                     {`
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}

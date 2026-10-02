@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import ContactForm from '@/components/contact-form'
 import HeroSection from '@/components/hero-section'
 import JsonLd from '@/components/json-ld'
-import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import { Clock, Envelope, Map, Phone } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import { COMPANY_INFO, generateWebPageSchema } from '@/lib/schemas'
@@ -58,15 +57,15 @@ export default function ContactPage() {
 function ContactSection() {
     return (
         <>
-            <FadeInWhenVisible delay={0.1}>
+            <div>
                 <h2 className="mb-4 text-3xl font-bold lg:text-4xl">Contact</h2>
                 <p className="text-foreground/80">
                     Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
                 </p>
-            </FadeInWhenVisible>
-            <FadeInWhenVisible delay={0.2}>
+            </div>
+            <div>
                 <ContactForm />
-            </FadeInWhenVisible>
+            </div>
         </>
     )
 }
@@ -108,11 +107,11 @@ function InfoSection() {
 
     return (
         <>
-            <FadeInWhenVisible delay={0.1}>
+            <div>
                 <h2 className="mb-4 text-3xl font-bold lg:text-4xl">SILARHI</h2>
                 <p className="text-foreground/80">Les infos pratiques, c&apos;est par ici.</p>
-            </FadeInWhenVisible>
-            <FadeInWhenVisible delay={0.2}>
+            </div>
+            <div>
                 <ul className="space-y-0">
                     {contactItems.map((item, index) => {
                         const Icon = item.icon
@@ -133,7 +132,7 @@ function InfoSection() {
                         )
                     })}
                 </ul>
-            </FadeInWhenVisible>
+            </div>
         </>
     )
 }

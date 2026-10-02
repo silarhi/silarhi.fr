@@ -14,7 +14,7 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 - **Frontend:** Next.js 16 (React 19 + TypeScript)
 - **Styling:** Tailwind CSS v4
 - **Content:** MDX files in `content/` for projects, clients and technologies (the blog is the separate blog.silarhi.fr)
-- **Animation:** motion (`LazyMotion strict`: use `m` from `motion/react-m`, never `motion.*`)
+- **Animation:** CSS only, no animation library (`FadeInWhenVisible` is a CSS scroll-driven fade, below the fold only; Tailwind `animate-*` theme tokens elsewhere)
 - **Tooling:** Biome (JS/TS/JSON), Prettier (CSS/MD/MDX/YAML), Knip
 - **Hosting:** Vercel, behind Cloudflare
 - **CI/CD:** GitHub Actions (Node 24)
@@ -86,7 +86,7 @@ When generating code, **Copilot should**:
 ## 🧭 Example Prompts
 
 > “Add a new section on the homepage showcasing recent projects.”  
-> “Create a React component for a testimonial carousel with Tailwind and motion effects.”  
+> “Create a React component for a testimonial carousel with Tailwind and CSS transitions.”  
 > “Generate MDX content for a new project case study in `content/projects/`.”  
 > “Suggest meta tags for the contact page.”
 
