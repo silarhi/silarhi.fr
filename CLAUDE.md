@@ -228,7 +228,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 - Scroll-triggered animations via **Motion 13** (formerly Framer Motion)
 - `MotionProvider` wraps the app in `<LazyMotion features={domAnimation} strict>`: use the lightweight `m` components (`import * as m from 'motion/react-m'`), never `motion.*`, or strict mode throws
-- `FadeInWhenVisible` component for entrance animations (`useInView` once + `animate`)
+- `FadeInWhenVisible` component for entrance animations (`useInView` once + `animate`), below the fold only: it server-renders its content at opacity 0 until hydration, so above-the-fold content (heroes, the contact form, the 404 message) is rendered without it
 - Smooth scrolling enabled globally (see `src/app/layout.tsx`)
 
 **Image Optimization**:

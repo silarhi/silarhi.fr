@@ -13,6 +13,11 @@ interface FadeInWhenVisibleProps {
     className?: string
 }
 
+/**
+ * Fades its content in when scrolled into view. The content is server-rendered at opacity 0 and only revealed
+ * once React has hydrated, so never wrap above-the-fold content with it: it would delay the LCP and leave the
+ * first screen blank on slow devices.
+ */
 export default function FadeInWhenVisible({
     children,
     delay = 0,
