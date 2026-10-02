@@ -95,7 +95,7 @@ Dynamic routes (`projets/[slug]`, `technologies/[slug]`) are pre-rendered at bui
 **Fonts & Analytics**:
 
 - Fonts configured in `src/app/fonts.ts` via `next/font/google`: Lato (body, `--body-font`) and Montserrat (brand, `--brand-font`)
-- Google Analytics 4 (ID: G-PDTD5T600H), loaded in `src/app/layout.tsx` with two `next/script` tags (`strategy="afterInteractive"`): the gtag.js loader and an inline `gtag('config', …)` snippet
+- Google Analytics 4 (ID: G-PDTD5T600H), loaded in `src/app/layout.tsx` with two `next/script` tags (`strategy="lazyOnload"`, so the 170 kB gtag.js never competes with the page's own resources): the gtag.js loader and an inline `gtag('config', …)` snippet
 
 ### Content Management (MDX)
 
