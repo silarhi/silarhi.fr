@@ -12,18 +12,21 @@
 
 ## 🧰 Tech Stack
 
-- **Frontend**: Next.js (React + TypeScript)
-- **Styling**: Tailwind CSS
-- **Content**: Markdown / MDX
-- **CI/CD**: GitHub Actions
-- **Hosting**: Vercel
+- **Framework**: Next.js 16 (App Router, Turbopack dev server) + React 19 + TypeScript
+- **Styling**: Tailwind CSS v4
+- **Content**: MDX files in `content/` (`clients/`, `projects/`, `technologies/`), rendered with `next-mdx-remote`
+- **Tooling**: Biome (JS/TS lint + format), Prettier (CSS/Markdown/MDX/YAML), Knip
+- **CI**: GitHub Actions (Node 24)
+- **Hosting**: Vercel, behind Cloudflare
 
 ## ✨ Main Features
 
-- Agency and team presentation
-- Portfolio of recent projects
-- Business blog (MDX)
-- Optimized SEO & accessibility
+- Agency presentation (methodology, services, key figures)
+- Project portfolio with search and filters (`/projets`), plus one page per technology (`/technologies/[slug]`)
+- Contact form (Formspree), legal notices and terms of sale
+- Optimized SEO (JSON-LD, sitemap, robots) & accessibility, light/dark theme
+
+The blog is a separate site ([blog.silarhi.fr](https://blog.silarhi.fr)), linked from the navigation.
 
 ## 📦 Local Installation
 
@@ -34,13 +37,22 @@ yarn dev
 
 The site will be available at [http://localhost:3000](http://localhost:3000).
 
+## 🔍 Quality Checks
+
+```bash
+yarn lint-ci        # lint + typecheck + knip + validate:technologies/clients/images (run in CI)
+yarn lint:fix       # Biome autofix on src/ and scripts/
+yarn prettier       # format CSS/Markdown/MDX/YAML
+yarn validate:urls  # check external URLs in content (weekly in CI)
+```
+
 ## 🧑‍💻 Contributing
 
 - Fork the repository
 - Create a branch `feature/…` or `fix/…`
-- Follow the code conventions (see `.github/copilot-instructions.md`)
+- Make sure `yarn lint-ci` passes
 - Open a descriptive Pull Request
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+© SILARHI — all rights reserved. The source code is published for reference only; the content (texts, images, logos) is proprietary.
