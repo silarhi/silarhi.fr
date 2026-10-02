@@ -7,10 +7,14 @@ on:
     # Allow manual trigger
     workflow_dispatch:
 
+permissions:
+    contents: read
+
 jobs:
     validate-urls:
         name: Validate URLs
         runs-on: ubuntu-latest
+        timeout-minutes: 15
         steps:
             - name: Checkout code
               uses: actions/checkout@v7
