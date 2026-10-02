@@ -7,8 +7,8 @@ export const lato = Lato({
     variable: '--body-font',
 })
 
+// Variable font: one file covers every weight, listing weights only duplicates @font-face rules
 export const montserrat = Montserrat({
-    weight: ['300', '400', '500', '700'],
     subsets: ['latin'],
     display: 'swap',
     variable: '--brand-font',
