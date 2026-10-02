@@ -12,6 +12,9 @@ on:
             - 'content/**'
             - 'public/images/**'
 
+permissions:
+    contents: read
+
 jobs:
     generate-metadata:
         name: Generate image metadata
