@@ -13,18 +13,20 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 
 - **Frontend:** Next.js 16 (React 19 + TypeScript)
 - **Styling:** Tailwind CSS v4
-- **Content:** Markdown / MDX files for blog and portfolio entries
-- **Hosting:** Vercel
-- **CI/CD:** GitHub Actions
+- **Content:** MDX files in `content/` for projects, clients and technologies (the blog is the separate blog.silarhi.fr)
+- **Animation:** motion (`LazyMotion strict`: use `m` from `motion/react-m`, never `motion.*`)
+- **Tooling:** Biome (JS/TS/JSON), Prettier (CSS/MD/MDX/YAML), Knip
+- **Hosting:** Vercel, behind Cloudflare
+- **CI/CD:** GitHub Actions (Node 24)
 
 ## 🔍 Code Quality Checks
 
 Always ensure code quality by running:
 
-- `yarn lint` - ESLint checks
+- `yarn lint` - Biome checks (`yarn lint:fix` to apply fixes)
 - `yarn typecheck` - TypeScript compiler checks
 - `yarn knip` - Detect unused exports, dependencies, and files
-- `yarn lint-ci` - Run all checks together
+- `yarn lint-ci` - Run all checks together (lint, typecheck, knip and the content validations)
 
 **Before completing any feature or fix**, verify all quality checks pass. Fix any issues reported by knip (unused code, dependencies, or exports).
 
@@ -35,7 +37,7 @@ Always ensure code quality by running:
 ### General
 
 - Prefer **functional components** with TypeScript.
-- Follow the **ESLint + Prettier** configuration provided.
+- Follow the **Biome + Prettier** configuration provided (applied by the pre-commit hook).
 - Write **self-documenting code**: clear variable names > comments.
 - Use **async/await** over `.then()` syntax.
 
@@ -48,8 +50,9 @@ Always ensure code quality by running:
 
 ### Styling
 
-- Use **Tailwind CSS** utility classes.
-- For complex compositions, use custom components or component-level style objects.
+- Use **Tailwind CSS** utility classes exclusively.
+- Compose conditional classes with `cn()` from `@/utils/lib`, using object syntax: `cn('base', { 'is-active': active })`.
+- Import icons from `@/components/ui/icons`, never directly from `react-icons`.
 - Follow **SILARHI design system** (rounded corners, soft shadows, generous spacing).
 
 ### Accessibility & SEO
@@ -84,7 +87,7 @@ When generating code, **Copilot should**:
 
 > “Add a new section on the homepage showcasing recent projects.”  
 > “Create a React component for a testimonial carousel with Tailwind and motion effects.”  
-> “Generate MDX content for a new blog post about Symfony best practices.”  
+> “Generate MDX content for a new project case study in `content/projects/`.”  
 > “Suggest meta tags for the contact page.”
 
 ---
@@ -93,3 +96,5 @@ When generating code, **Copilot should**:
 
 > Build with elegance, simplicity, and technical excellence.  
 > The SILARHI website is both a marketing showcase and a reflection of our code quality.
+
+See `CLAUDE.md` for the full architecture and conventions.
