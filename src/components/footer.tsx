@@ -24,19 +24,20 @@ const footerSections = [
         ],
     },
     {
-        title: 'Expertises Backend',
+        title: 'Services',
         links: [
-            { href: '/technologies/php', label: 'PHP' },
-            { href: '/technologies/symfony', label: 'Symfony' },
-            { href: '/technologies/api-platform', label: 'API Platform' },
+            { href: '/developpement-logiciel-sur-mesure', label: 'Logiciel métier sur mesure' },
+            { href: '/reprise-application-web-existante', label: "Reprise d'application" },
+            { href: '/tierce-maintenance-applicative', label: 'Tierce maintenance applicative' },
         ],
     },
     {
-        title: 'Expertises Frontend',
+        title: 'Expertises',
         links: [
+            { href: '/technologies/symfony', label: 'Symfony' },
+            { href: '/technologies/php', label: 'PHP' },
+            { href: '/technologies/api-platform', label: 'API Platform' },
             { href: '/technologies/react', label: 'React' },
-            { href: '/technologies/bootstrap', label: 'Bootstrap' },
-            { href: '/technologies/tailwind', label: 'Tailwind CSS' },
         ],
     },
     {
