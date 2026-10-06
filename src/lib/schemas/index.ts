@@ -33,6 +33,14 @@ export interface Organization {
     address?: PostalAddress
     contactPoint?: ContactPoint[]
     sameAs?: string[]
+    founder?: Person
+}
+
+interface Person {
+    '@type': 'Person'
+    '@id'?: string
+    name: string
+    url?: string
 }
 
 interface LocalBusiness {
@@ -196,6 +204,11 @@ export const COMPANY_INFO = {
         longitude: 1.4,
     },
     socialProfiles: ['https://github.com/silarhi', 'https://www.linkedin.com/company/silarhi'],
+    // Freelance activity and personal site of the founder (Person entity declared on sainthillier.fr)
+    founder: {
+        name: 'Guillaume Sainthillier',
+        url: 'https://sainthillier.fr',
+    },
 }
 
 /**
@@ -227,6 +240,12 @@ export function generateOrganizationSchema(): Organization {
             },
         ],
         sameAs: COMPANY_INFO.socialProfiles,
+        founder: {
+            '@type': 'Person',
+            '@id': `${COMPANY_INFO.founder.url}/#person`,
+            name: COMPANY_INFO.founder.name,
+            url: COMPANY_INFO.founder.url,
+        },
     }
 }
 
