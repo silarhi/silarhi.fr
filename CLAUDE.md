@@ -90,6 +90,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/projets/[slug]/page.tsx` - Dynamic project detail pages (+ `loading.tsx`)
 - `src/app/technologies/[slug]/page.tsx` - Technology detail pages (projects using that tech, and the open-source packages tagged with it)
 - `src/app/open-source/page.tsx` - SILARHI's open-source packages, each linking to its documentation site (`<slug>.silarhi.dev`), GitHub and Packagist
+- `src/app/[slug]/page.tsx` - Service pages, one per published file in `content/services/` (static, unknown slugs 404)
 - `src/app/contact/page.tsx` - Contact form with Formspree integration
 - `src/app/mentions-legales/page.tsx` - Legal notices page (forwards the old `#donnees-personnelles` and `#cookies` anchors to their new pages)
 - `src/app/politique-de-confidentialite/page.tsx` - Privacy policy page
@@ -168,6 +169,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
 
 - **Clients**: `content/clients/*.mdx` with client metadata (optional `logo` + generated `logo_metadata`)
 - **Technologies**: `content/technologies/*.mdx` with technology metadata (`name`, optional `name_aliases`, SEO fields, `reasons`)
+- **Services**: `content/services/*.mdx`, one file per service page. Frontmatter: `title` (H1), `order`, `date`, `published`, `meta_title`, `meta_description`, `excerpt` (hero), `intro` (overview paragraph), `service_type` (schema.org), `projects` (case-study slugs shown as proof), `faq` (question/answer pairs, also emitted as FAQPage JSON-LD), `cta`. The MDX body holds the H2 sections.
 
 Content processing pipeline:
 
@@ -288,7 +290,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 **Structured Data** (`src/lib/schemas/`):
 
-- Schema.org JSON-LD generators (`index.ts`: Organization, WebSite, WebPage, Breadcrumb, Services…; `project.ts`; `technology.ts`; `open-source.ts`), rendered with the `JsonLd` component
+- Schema.org JSON-LD generators (`index.ts`: Organization, WebSite, WebPage, Breadcrumb, Services…; `project.ts`; `service.ts`; `technology.ts`; `open-source.ts`), rendered with the `JsonLd` component
 - `COMPANY_INFO` (`index.ts`) is the single source of the company identity: legal form, share capital, RCS, SIRET, VAT number, manager, address, phone and email. The footer, the contact page and the legal pages (identity card, privacy policy, CGV) render it; never hard-code these values in a page
 
 ### TypeScript Configuration

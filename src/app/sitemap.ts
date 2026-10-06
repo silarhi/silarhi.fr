@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 import { getAllProjects } from '@/utils/project'
+import { getAllServices } from '@/utils/service'
 import { getAllTechnologies } from '@/utils/technology'
 import { getBaseUrl } from '@/utils/url'
 
@@ -82,7 +83,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.6,
         }))
 
-        return [...staticPages, ...projectPages, ...projectPosts, ...technologyPages]
+        // Get all services
+        const services = await getAllServices()
+        const servicePages = services.map((service) => ({
+            url: `${baseUrl}/${service.slug}`,
+            lastModified: service.date ? new Date(service.date) : new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.9,
+        }))
+
+        return [...staticPages, ...servicePages, ...projectPages, ...projectPosts, ...technologyPages]
     } catch (error) {
         console.error('Error generating sitemap:', error)
 

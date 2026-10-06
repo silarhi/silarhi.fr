@@ -156,10 +156,12 @@ export interface CreativeWork {
     applicationCategory?: string
 }
 
-interface Service {
+export interface Service {
     '@type': 'Service'
+    '@id'?: string
     name: string
     description?: string
+    url?: string
     provider?: Organization
     serviceType?: string
     areaServed?: string | Place | Place[]
@@ -180,6 +182,20 @@ interface ListItem {
     url?: string
     item?: CreativeWork | Thing
 }
+
+export interface FAQPage {
+    '@type': 'FAQPage'
+    '@id'?: string
+    mainEntity: {
+        '@type': 'Question'
+        name: string
+        acceptedAnswer: {
+            '@type': 'Answer'
+            text: string
+        }
+    }[]
+}
+
 
 // Street and building lines of the postal address, printed on separate lines in the footer and the contact page
 const streetAddressLines = ["116 Route d'Espagne", 'HELIOS 4, BAT 113, BAL 411']
