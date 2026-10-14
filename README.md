@@ -31,8 +31,8 @@ The blog is a separate site ([blog.silarhi.fr](https://blog.silarhi.fr)), linked
 ## 📦 Local Installation
 
 ```bash
-yarn install
-yarn dev
+pnpm install
+pnpm dev
 ```
 
 The site will be available at [http://localhost:3000](http://localhost:3000).
@@ -40,17 +40,17 @@ The site will be available at [http://localhost:3000](http://localhost:3000).
 ## 🔍 Quality Checks
 
 ```bash
-yarn lint-ci        # lint + typecheck + knip + validate:technologies/clients/images (run in CI)
-yarn lint:fix       # Biome autofix on src/ and scripts/
-yarn prettier       # format CSS/Markdown/MDX/YAML
-yarn validate:urls  # check external URLs in content (weekly in CI)
+pnpm lint-ci        # lint + typecheck + knip + validate:technologies/clients/images (run in CI)
+pnpm lint:fix       # Biome autofix on src/ and scripts/
+pnpm prettier       # format CSS/Markdown/MDX/YAML
+pnpm validate:urls  # check external URLs in content (weekly in CI)
 ```
 
 ## 🧑‍💻 Contributing
 
 - Fork the repository
 - Create a branch `feature/…` or `fix/…`
-- Make sure `yarn lint-ci` passes
+- Make sure `pnpm lint-ci` passes
 - Open a descriptive Pull Request
 
 ## 📄 License
