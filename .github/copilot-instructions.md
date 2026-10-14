@@ -23,10 +23,10 @@ The goal is to maintain **clean, modern, and performant code**, with attention t
 
 Always ensure code quality by running:
 
-- `yarn lint` - Biome checks (`yarn lint:fix` to apply fixes)
-- `yarn typecheck` - TypeScript compiler checks
-- `yarn knip` - Detect unused exports, dependencies, and files
-- `yarn lint-ci` - Run all checks together (lint, typecheck, knip and the content validations)
+- `pnpm lint` - Biome checks (`pnpm lint:fix` to apply fixes)
+- `pnpm typecheck` - TypeScript compiler checks
+- `pnpm knip` - Detect unused exports, dependencies, and files
+- `pnpm lint-ci` - Run all checks together (lint, typecheck, knip and the content validations)
 
 **Before completing any feature or fix**, verify all quality checks pass. Fix any issues reported by knip (unused code, dependencies, or exports).
 

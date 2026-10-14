@@ -9,7 +9,7 @@
         "lint": "biome check src scripts",
         "lint:fix": "biome check --write src scripts",
         "knip": "knip",
-        "lint-ci": "yarn lint && yarn typecheck && yarn knip && yarn validate:technologies && yarn validate:clients && yarn validate:images",
+        "lint-ci": "pnpm lint && pnpm typecheck && pnpm knip && pnpm validate:technologies && pnpm validate:clients && pnpm validate:images",
         "validate:technologies": "tsx scripts/validate-technologies.ts",
         "validate:clients": "tsx scripts/validate-clients.ts",
         "validate:urls": "tsx scripts/validate-urls.ts",
@@ -40,6 +40,7 @@
         "rehype-unwrap-images": "^1.0.0",
         "remark-gfm": "^4.0.1",
         "tailwind-merge": "^3.7.0",
+        "unified": "^11.0.5",
         "unist-util-visit": "^5.1.0",
         "use-debounce": "^10.1.1"
     },
@@ -69,5 +70,6 @@
     "lint-staged": {
         "*.{js,jsx,ts,tsx,mjs,cjs,json}": "biome check --write --no-errors-on-unmatched",
         "*.{css,scss,md,mdx,yaml,yml}": "prettier --write"
-    }
+    },
+    "packageManager": "pnpm@12.11.2"
 }
