@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -180,6 +181,10 @@ export default function ContactForm() {
             <Button variant="primary" type="submit" size="lg" className="mt-4 w-full" disabled={pending}>
                 Envoyer
             </Button>
+            <p className="text-foreground/70 mt-3 mb-0 text-sm">
+                Vos données servent uniquement à répondre à votre demande et sont transmises via Formspree.{' '}
+                <Link href="/mentions-legales#donnees-personnelles">En savoir plus</Link>
+            </p>
         </form>
     )
 }
