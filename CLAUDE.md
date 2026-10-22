@@ -83,7 +83,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/contact/page.tsx` - Contact form with Formspree integration
 - `src/app/mentions-legales/page.tsx` - Legal notices page
 - `src/app/conditions-generales-de-vente/page.tsx` - Terms and conditions page
-- `src/app/layout.tsx` - Root layout: metadata, fonts, JSON-LD (Organization + WebSite), providers, `DefaultLayout`, Google Analytics
+- `src/app/layout.tsx` - Root layout: metadata, fonts, JSON-LD (Organization + WebSite), providers, `DefaultLayout`, Umami analytics
 - `src/app/not-found.tsx` - Custom 404 page
 - `src/app/sitemap.ts` - Dynamic sitemap generation
 - `src/app/robots.ts` - robots.txt (disallows `/api/`, points to the sitemap)
@@ -97,7 +97,7 @@ Dynamic routes (`projets/[slug]`, `technologies/[slug]`) are pre-rendered at bui
 **Fonts & Analytics**:
 
 - Fonts configured in `src/app/fonts.ts` via `next/font/google`: Lato (body, `--body-font`) and Montserrat (brand, `--brand-font`)
-- Google Analytics 4 (ID: G-PDTD5T600H), loaded in `src/app/layout.tsx` with two `next/script` tags (`strategy="lazyOnload"`, so the 170 kB gtag.js never competes with the page's own resources): the gtag.js loader and an inline `gtag('config', …)` snippet
+- Umami (self-hosted at `analytics.silarhi.fr`, cookieless, so no consent banner), loaded in `src/app/layout.tsx` with a `next/script` tag only when `NEXT_PUBLIC_UMAMI_WEBSITE_ID` is set (Vercel project env var; leave it unset locally)
 
 ### Content Management (MDX)
 
