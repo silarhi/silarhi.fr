@@ -97,9 +97,9 @@ export default function Footer() {
                             <div className="space-y-1">
                                 <p className="mb-0 font-semibold">Notre adresse</p>
                                 <p className="text-dark-foreground/80 dark:text-dark-foreground/90 mb-0">
-                                    116 route d&#39;Espagne
+                                    116 Route d&apos;Espagne
                                     <br />
-                                    BAL 411
+                                    HELIOPOLIS 4, BAT 113, BAL 411
                                     <br />
                                     31100 Toulouse
                                 </p>

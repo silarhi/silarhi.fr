@@ -31,8 +31,8 @@ export default function Page() {
                 </p>
                 <p>
                     Le terme « Prestataire » désigne la société SILARHI, EURL au capital de 1 000 €, 116 Route
-                    d&apos;Espagne - BAT 113 BAL 411, 31100 Toulouse, immatriculée au RCS de TOULOUSE sous le numéro
-                    841541667 et représentée par Guillaume Sainthillier en sa qualité de Gérant.
+                    d&apos;Espagne, HELIOPOLIS 4, BAT 113, BAL 411, 31100 Toulouse, immatriculée au RCS de TOULOUSE sous
+                    le numéro 841541667 et représentée par Guillaume Sainthillier en sa qualité de Gérant.
                 </p>
                 <h2>Article 2 : L&apos;objet du contrat</h2>
                 <p>Le contrat établit les relations commerciales entre le Prestataire et le Client.</p>
