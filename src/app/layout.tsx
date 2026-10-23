@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import type { ReactNode } from 'react'
 
+import Analytics from '@/components/analytics'
 import JsonLd from '@/components/json-ld'
 import DefaultLayout from '@/components/layouts/default'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/schemas'
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                         <DefaultLayout>{children}</DefaultLayout>
                     </HashProvider>
                 </ThemeProvider>
+                {umamiWebsiteId && <Analytics />}
                 {umamiWebsiteId && (
                     <Script
                         defer
