@@ -70,6 +70,11 @@ const nextConfig = {
                 destination: '/projets/iris',
                 permanent: true,
             },
+            {
+                source: '/projets/cartographie-cadastre',
+                destination: '/projets/tracmi',
+                permanent: true,
+            },
             // Tag redirects to technologies (when technology exists)
             {
                 source: '/projets/tag/apiplatform',

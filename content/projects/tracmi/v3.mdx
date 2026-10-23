@@ -1,0 +1,27 @@
+---
+title: 'V3'
+date: '2026-10-21'
+published: true
+---
+
+Réécriture complète et relance sous le nom Tracmi : l'outil cartographique devient un CRM de prospection construit sur le cadastre, développé comme une application Symfony à l'image des autres applications Locades.
+
+Fonctionnalités ajoutées :
+
+- Organisations multi-utilisateurs avec arborescence de membres : chacun voit ses prospects et ceux de ses collaborateurs, les administrateurs toute l'organisation
+- Prospects regroupant une ou plusieurs parcelles, avec contacts (propriétaire, héritier, notaire…), activités, tâches et documents
+- Pipeline de prospection en kanban, de « À contacter » à « Signé », avec l'historique de chaque changement d'étape
+- Carte MapLibre GL : parcelles du cadastre en tuiles vectorielles, vue aérienne, recherche d'adresse, sélection au clic ou par rectangle (Shift + glisser), menu contextuel
+- Zones de prospection dessinées sur la carte ou importées (KML, GeoJSON)
+- Ventes immobilières (DVF) de chaque parcelle consultables depuis la carte
+- Demandes de relevés de propriété au CDIF préremplies et envoyées par e-mail
+- Import des relevés de propriété reçus, rattachés automatiquement aux parcelles d'après le nom des fichiers
+- Marqueurs colorés selon l'étape du prospect et estompés selon l'ancienneté du dernier relevé
+- Tableau de bord et recherche globale (⌘K) sur les prospects et les contacts
+
+Mises à jour techniques :
+
+- Réécriture en Symfony 7.4 et PHP 8.4 avec Twig, Turbo et les composants Symfony UX, à la place de l'API et de l'interface Next.js
+- MySQL 8.4 avec index spatial sur les centroïdes des parcelles, import des données cadastre (Etalab) et DVF par département
+- Sécurité des comptes alignée sur les applications Locades : double authentification (application TOTP, passkeys), réinitialisation du mot de passe, piste d'audit
+- Tests fonctionnels (isolation des organisations, visibilité hiérarchique), PHPStan niveau 7, CI GitLab et déploiement automatique sur tag
