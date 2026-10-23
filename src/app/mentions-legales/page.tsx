@@ -25,8 +25,8 @@ export default function LegalMentionPage() {
                 </p>
                 <p>
                     <strong>Éditeur</strong>&nbsp;: SILARHI, SARL au capital de 1 000 € – 116 Route d&apos;Espagne,
-                    HELIOS 4, BAT 113, BAL 411, 31100 Toulouse – RCS Toulouse 841 541 667 – SIRET 841 541 667 00017
-                    – TVA FR96841541667
+                    HELIOS 4, BAT 113, BAL 411, 31100 Toulouse – RCS Toulouse 841 541 667 – SIRET 841 541 667 00017 –
+                    TVA FR96841541667
                     <br />
                     <strong>Contact</strong>&nbsp;: hello@silarhi.fr – <a href="tel:+33607275826">06 07 27 58 26</a>
                     <br />
