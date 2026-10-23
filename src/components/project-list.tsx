@@ -7,7 +7,7 @@ import { ArrowRight } from '@/components/ui/icons'
 import { LaptopMockup } from '@/components/ui/mockup'
 import ProjectScopeBadge from '@/components/ui/project-scope-badge'
 import { cn } from '@/utils/lib'
-import type { Project } from '@/utils/project'
+import { formatProjectPeriod, type Project } from '@/utils/project'
 
 interface ProjectListProps {
     projects: Project[]
@@ -79,11 +79,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                         </h2>
 
                         <p className="text-foreground/80 mb-6 text-sm uppercase">
-                            {project.client.name} -{' '}
-                            {project.date.toLocaleDateString('fr-FR', {
-                                year: 'numeric',
-                                month: 'long',
-                            })}
+                            {project.client.name} - {formatProjectPeriod(project, 'month')}
                         </p>
                         <p className="text-foreground/80 mb-8 text-lg leading-relaxed">{project.excerpt}</p>
 
