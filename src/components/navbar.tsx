@@ -181,7 +181,13 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                                 <ThemeToggle className="text-inherit" />
                             </li>
                             <li>
-                                <Button as="a" href="/contact" variant="secondary">
+                                <Button
+                                    as="a"
+                                    href="/contact"
+                                    variant="secondary"
+                                    data-analytics-event="cta"
+                                    data-analytics-location="header"
+                                >
                                     Contact
                                 </Button>
                             </li>
@@ -260,7 +266,14 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                                 </div>
                             </li>
                             <li>
-                                <Button as="a" href="/contact" variant="secondary" className="w-full">
+                                <Button
+                                    as="a"
+                                    href="/contact"
+                                    variant="secondary"
+                                    className="w-full"
+                                    data-analytics-event="cta"
+                                    data-analytics-location="mobile-menu"
+                                >
                                     Contact
                                 </Button>
                             </li>

@@ -69,6 +69,8 @@ export default function ProjectList({ projects }: ProjectListProps) {
                         <h2 className="text-foreground mb-3 text-3xl font-bold lg:text-4xl">
                             <Link
                                 href={`/projets/${project.slug}`}
+                                data-analytics-event="project-view"
+                                data-analytics-slug={project.slug}
                                 className="hover:text-primary text-inherit no-underline transition-colors"
                             >
                                 {project.name && project.name + ' - '}
@@ -101,7 +103,11 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 ))}
                         </div>
 
-                        <Link href={`/projets/${project.slug}`}>
+                        <Link
+                            href={`/projets/${project.slug}`}
+                            data-analytics-event="project-view"
+                            data-analytics-slug={project.slug}
+                        >
                             <Button variant="primary" className="group">
                                 Le projet en détail
                                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
