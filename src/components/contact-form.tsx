@@ -109,7 +109,8 @@ export default function ContactForm() {
                         name="name"
                         type="text"
                         autoComplete="name"
-                        placeholder="Nom"
+                        label="Nom"
+                        placeholder="Jean Dupont"
                         disabled={pending}
                         iconPrepend={<Person />}
                         formState={formState}
@@ -130,7 +131,8 @@ export default function ContactForm() {
                         name="email"
                         type="email"
                         autoComplete="email"
-                        placeholder="Email"
+                        label="Email"
+                        placeholder="nom@exemple.fr"
                         disabled={pending}
                         iconPrepend={<Envelope />}
                         formState={formState}
@@ -151,7 +153,8 @@ export default function ContactForm() {
                         name="phone"
                         type="text"
                         autoComplete="tel"
-                        placeholder="Téléphone"
+                        label="Téléphone"
+                        placeholder="06 12 34 56 78"
                         disabled={pending}
                         iconPrepend={<Phone />}
                         formState={formState}
@@ -167,7 +170,8 @@ export default function ContactForm() {
                         id="message"
                         name="message"
                         rows={7}
-                        placeholder="Message"
+                        label="Message"
+                        placeholder="Parlez-nous de votre projet"
                         disabled={pending}
                         iconPrepend={<FileText />}
                         formState={formState}
