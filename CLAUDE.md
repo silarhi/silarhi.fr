@@ -81,12 +81,16 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/projets/[slug]/page.tsx` - Dynamic project detail pages (+ `loading.tsx`)
 - `src/app/technologies/[slug]/page.tsx` - Technology detail pages (projects using that tech)
 - `src/app/contact/page.tsx` - Contact form with Formspree integration
-- `src/app/mentions-legales/page.tsx` - Legal notices page
+- `src/app/mentions-legales/page.tsx` - Legal notices page (forwards the old `#donnees-personnelles` and `#cookies` anchors to their new pages)
+- `src/app/politique-de-confidentialite/page.tsx` - Privacy policy page
+- `src/app/cookies/page.tsx` - Cookies page
 - `src/app/conditions-generales-de-vente/page.tsx` - Terms and conditions page
 - `src/app/layout.tsx` - Root layout: metadata, fonts, JSON-LD (Organization + WebSite), providers, `DefaultLayout`, Umami analytics
 - `src/app/not-found.tsx` - Custom 404 page
 - `src/app/sitemap.ts` - Dynamic sitemap generation
 - `src/app/robots.ts` - robots.txt (disallows `/api/`, points to the sitemap)
+
+The four legal pages share `LegalLayout` (`src/components/legal-layout.tsx`): breadcrumb, H1, lead, last update date, tabs between the pages, a sticky "Sur cette page" table of contents with scrollspy (`legal-toc.tsx`) and the identity card (`legal-identity-card.tsx`, mentions légales only). Its children are `LegalSection` elements (`legal-section.tsx`), one numbered card each, listed in the table of contents.
 
 Dynamic routes (`projets/[slug]`, `technologies/[slug]`) are pre-rendered at build time with `generateStaticParams()`. `/projets` reads `searchParams`, so it is rendered per request. Legacy WordPress URLs and old tags are redirected in `next.config.mjs`.
 
@@ -288,7 +292,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 - **ALWAYS import icons from `@/components/ui/icons.tsx`** instead of directly from `react-icons`
 - The icons file provides a centralized, curated set of Lucide icons via `react-icons/lu`
-- Available icons: `Download`, `Expand`, `Map`, `Clock`, `Phone`, `Person`, `Envelope`, `Check`, `XMark`, `FilterIcon`, `ArrowLeft`, `ArrowRight`, `FileText`, `Calendar`, `Repeat`, `Code`, `Zap`, `Moon`, `SunMoon`, `Sun`
+- Available icons: `Download`, `Expand`, `Map`, `Clock`, `Phone`, `Person`, `Envelope`, `Check`, `XMark`, `FilterIcon`, `ArrowLeft`, `ArrowRight`, `FileText`, `Calendar`, `Repeat`, `Code`, `Zap`, `Moon`, `SunMoon`, `Sun`, `House`, `Landmark`, `ShieldCheck`, `Cookie`
 - Custom SVG icons: `FaceSad`, `MenuToggle`, `Spinner`, `Search`, `XCircle`, `ChevronLeft`, `ChevronRight`
 - If you need a new icon, add it to `@/components/ui/icons.tsx` first, then import it
 - Example:

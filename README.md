@@ -23,7 +23,7 @@
 
 - Agency presentation (methodology, services, key figures)
 - Project portfolio with search and filters (`/projets`), plus one page per technology (`/technologies/[slug]`)
-- Contact form (Formspree), legal notices and terms of sale
+- Contact form (Formspree), legal notices, privacy and cookies policies, terms of sale
 - Optimized SEO (JSON-LD, sitemap, robots) & accessibility, light/dark theme
 
 The blog is a separate site ([blog.silarhi.fr](https://blog.silarhi.fr)), linked from the navigation.
