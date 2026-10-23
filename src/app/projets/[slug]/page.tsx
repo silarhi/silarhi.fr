@@ -377,6 +377,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     text: 'Démarrer un projet',
                     href: '/contact',
                     variant: 'primary',
+                    ctaLocation: 'project',
                 }}
                 secondaryButton={{
                     text: "Voir d'autres projets",

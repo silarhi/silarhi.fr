@@ -71,7 +71,7 @@ export default function Footer() {
                                 <span className="font-medium">Vous avez un projet ?</span>
                             </p>
                             <span className="lg:ml-auto">
-                                <Button as="a" href="/contact" variant="outline-dark">
+                                <Button as="a" href="/contact" variant="outline-dark" data-cta-location="footer-banner">
                                     Contactez-nous
                                 </Button>
                             </span>

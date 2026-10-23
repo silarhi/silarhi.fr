@@ -10,6 +10,8 @@ interface CTAButton {
     href: string
     variant?: 'primary' | 'secondary' | 'outline-primary' | 'outline-dark' | 'muted' | 'danger'
     showArrow?: boolean
+    /** Sent as the `location` of the Umami `cta` event when set (see `@/utils/analytics`) */
+    ctaLocation?: string
 }
 
 interface ProjectsCTAProps {
@@ -20,9 +22,16 @@ interface ProjectsCTAProps {
     className?: string
 }
 
-function ProjectCtaButton({ text, href, variant, showArrow }: CTAButton & { showArrow: boolean }) {
+function ProjectCtaButton({ text, href, variant, showArrow, ctaLocation }: CTAButton & { showArrow: boolean }) {
     return (
-        <Button as="a" href={href} size="lg" variant={variant} className={cn({ group: showArrow })}>
+        <Button
+            as="a"
+            href={href}
+            size="lg"
+            variant={variant}
+            className={cn({ group: showArrow })}
+            data-cta-location={ctaLocation}
+        >
             {text}
             {showArrow && <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />}
         </Button>
@@ -37,6 +46,7 @@ export default function ProjectsCTA({
         href: '/#contact',
         variant: 'primary',
         showArrow: true,
+        ctaLocation: 'projects-cta',
     },
     secondaryButton = {
         text: 'Découvrir nos services',
