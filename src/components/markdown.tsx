@@ -17,10 +17,11 @@ interface MarkdownProps {
 }
 
 function CustomLink({ href, className, ...props }: LinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-    // Special styling for auto-linked technology keywords
+    // Special styling for auto-linked technology keywords; the vertical padding grows the tap target to 24px+
+    // without changing the line height
     const isTechLink = className?.includes('tech-link')
     const linkClasses = isTechLink
-        ? 'text-primary hover:text-primary-dark font-medium underline decoration-primary/30 hover:decoration-primary transition-colors'
+        ? 'text-primary hover:text-primary-dark py-1 font-medium underline decoration-primary/30 hover:decoration-primary transition-colors'
         : 'text-primary hover:text-primary-dark underline'
 
     if (href.startsWith('/')) {

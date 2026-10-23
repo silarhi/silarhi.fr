@@ -96,11 +96,19 @@ function InfoSection() {
         },
         {
             icon: Phone,
-            content: <a href="tel:+33607275826">0 607.275.826</a>,
+            content: (
+                <a href="tel:+33607275826" className="py-1">
+                    0 607.275.826
+                </a>
+            ),
         },
         {
             icon: Envelope,
-            content: <a href="mailto:%68ell%6F@si%6Ca%72hi.fr">hello@silarhi.fr</a>,
+            content: (
+                <a href="mailto:%68ell%6F@si%6Ca%72hi.fr" className="py-1">
+                    hello@silarhi.fr
+                </a>
+            ),
         },
     ]
 
