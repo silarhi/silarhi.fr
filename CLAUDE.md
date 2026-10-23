@@ -103,6 +103,18 @@ Dynamic routes (`projets/[slug]`, `technologies/[slug]`) are pre-rendered at bui
 - Fonts configured in `src/app/fonts.ts` via `next/font/google`: Lato (body, `--body-font`) and Montserrat (brand, `--brand-font`)
 - Umami (self-hosted at `analytics.silarhi.fr`, cookieless, so no consent banner), loaded in `src/app/layout.tsx` with a `next/script` tag only when `NEXT_PUBLIC_UMAMI_WEBSITE_ID` is set (Vercel project env var; leave it unset locally)
 
+**Umami goals** (conversion events):
+
+`src/utils/analytics.ts` holds the `track()` helper and a delegated click listener, registered by `<Analytics />` (`src/components/analytics.tsx`, mounted in the root layout with the Umami script) and classifying links by their href. CTAs are marked with `data-cta-location="…"` and project cards sit in `[data-project-list]`. Umami's own `data-umami-event` attribute is not used on links: its click handler calls `preventDefault()` then sets `location.href`, which turns a `next/link` navigation into a full reload. Each event is a goal to create in Umami (Reports → Goals, type "Event"):
+
+| Event            | Where it fires                                                                              | Data                                                                                                     |
+| ---------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `contact-form`   | Formspree answered 2xx to the contact form (`contact-form.tsx`, after `setSuccess(true)`)   | none (the form has no subject/need field)                                                                |
+| `contact-direct` | click on any `tel:` / `mailto:` link (contact page, legal pages)                            | `channel`: `phone` / `email`                                                                             |
+| `cgv-download`   | click on `/pdf/CGV.pdf` (CGV page)                                                          | none                                                                                                     |
+| `project-view`   | click on a `/projets/{slug}` link inside `ProjectList` (`/projets`, `/technologies/[slug]`) | `slug`                                                                                                   |
+| `cta`            | click on a link with `data-cta-location`                                                    | `location`: `header`, `mobile-menu`, `footer-banner`, `home` (`CallToAction`), `project`, `projects-cta` |
+
 ### Content Management (MDX)
 
 Projects and content are stored as MDX files in the `content/` directory at the project root:
@@ -199,6 +211,7 @@ Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes
 - `clients-section.tsx` - Clients showcase section
 - `call-to-action.tsx` - Generic CTA component
 - `json-ld.tsx` - JSON-LD structured data component
+- `analytics.tsx` - Registers the Umami goal click listener (`src/utils/analytics.ts`)
 - `theme-toggle.tsx` - Dark/light theme toggle
 
 Components follow these patterns:
@@ -254,6 +267,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 - `client.ts` - Client metadata handling
 - `url.ts` - Base/canonical URL helpers (`NEXT_PUBLIC_SITE_URL`, then `VERCEL_URL`, then localhost) and project filter query params
 - `employees.ts` - `getTotalEmployeeHours()` for the home page key figures
+- `analytics.ts` - Umami `track()` helper and the link classifier behind the goal events
 
 **Custom Rehype Plugins** (`src/lib/`):
 
