@@ -88,9 +88,9 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
             {technology.long_description && (
                 <Section className="border-border bg-surface border-b pt-0 lg:pt-0">
                     <div className="max-w-3xl">
-                        <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
+                        <p className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
                             Vue d&apos;ensemble
-                        </h2>
+                        </p>
                         <div className="text-foreground text-xl leading-relaxed lg:text-2xl">
                             <Markdown
                                 source={technology.long_description}

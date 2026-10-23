@@ -241,9 +241,9 @@ function HeroSection() {
                             </h1>
                         </div>
                         <div>
-                            <h2 className="mt-4 text-3xl uppercase text-shadow-lg">
+                            <p className="mt-4 mb-0 text-2xl uppercase text-shadow-lg">
                                 Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
-                            </h2>
+                            </p>
                         </div>
                         <div>
                             <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
@@ -451,7 +451,7 @@ function NumbersSection({ numbers }: { numbers: NumberData[] }) {
                 {numbers.map((number, key) => (
                     <FadeInWhenVisible key={key} delay={key * 0.1}>
                         <div className="bg-surface dark:bg-surface-elevated border-border rounded-2xl border p-8 text-center shadow-sm transition-shadow hover:shadow-md">
-                            <div className={cn(lato.className, 'text-primary mb-3 text-6xl font-bold')}>
+                            <div className={cn(lato.className, 'text-primary mb-3 text-5xl font-bold')}>
                                 {number.value}
                             </div>
                             <h4 className="mb-2 text-2xl font-semibold">{number.unit}</h4>

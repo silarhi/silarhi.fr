@@ -15,7 +15,7 @@ export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
             <FadeInWhenVisible>
                 {subtitle}
                 <h2
-                    className={cn('mb-6 text-4xl', {
+                    className={cn('mb-6 text-3xl font-bold lg:text-4xl', {
                         'mt-4': subtitle,
                     })}
                 >
