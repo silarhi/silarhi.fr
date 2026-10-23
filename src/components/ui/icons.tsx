@@ -6,15 +6,19 @@ import {
     LuCheck,
     LuClock,
     LuCode,
+    LuCookie,
     LuDownload,
     LuExpand,
     LuFileText,
     LuFilter,
+    LuHouse,
+    LuLandmark,
     LuMail,
     LuMapPin,
     LuMoon,
     LuPhone,
     LuRepeat,
+    LuShieldCheck,
     LuSun,
     LuSunMoon,
     LuUser,
@@ -44,6 +48,10 @@ export const Zap = LuZap
 export const Moon = LuMoon
 export const SunMoon = LuSunMoon
 export const Sun = LuSun
+export const House = LuHouse
+export const Landmark = LuLandmark
+export const ShieldCheck = LuShieldCheck
+export const Cookie = LuCookie
 
 // Custom SVG icons
 export function FaceSad(props: React.SVGProps<SVGSVGElement>) {
