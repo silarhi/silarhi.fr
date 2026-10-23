@@ -26,6 +26,33 @@ export function getEngagementTypeLabel(type: EngagementType): string {
     return labels[type]
 }
 
+// Frontmatter dates are parsed as UTC midnight, so format them in UTC
+const monthFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'long', timeZone: 'UTC' })
+const monthYearFormatter = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+
+// Format the engagement period: "2019" or "2019 – 2024" by year, "avril 2019" or "avril 2019 – juillet 2024" by month
+export function formatProjectPeriod(
+    { date, endDate }: Pick<Project, 'date' | 'endDate'>,
+    precision: 'year' | 'month'
+): string {
+    if (precision === 'year') {
+        const startYear = date.getUTCFullYear()
+        const endYear = endDate?.getUTCFullYear()
+        return endYear && endYear !== startYear ? `${startYear} – ${endYear}` : `${startYear}`
+    }
+
+    if (!endDate) {
+        return monthYearFormatter.format(date)
+    }
+    if (date.getUTCFullYear() !== endDate.getUTCFullYear()) {
+        return `${monthYearFormatter.format(date)} – ${monthYearFormatter.format(endDate)}`
+    }
+    if (date.getUTCMonth() !== endDate.getUTCMonth()) {
+        return `${monthFormatter.format(date)} – ${monthYearFormatter.format(endDate)}`
+    }
+    return monthYearFormatter.format(endDate)
+}
+
 interface ProjectIteration {
     slug: string
     title: string
@@ -60,6 +87,7 @@ export interface Project {
     slug: string
     title: string
     date: Date
+    endDate?: Date
     excerpt: string
     client: Client
     technologies: Technology[]
@@ -83,6 +111,7 @@ export interface Project {
 interface ProjectFrontMatter {
     title: string
     date: string
+    endDate?: string
     excerpt: string
     client: string
     technologies: string[]
@@ -194,6 +223,7 @@ function loadProjectsCache(): Promise<Map<string, Project>> {
                     slug,
                     title: frontMatter.title,
                     date: new Date(frontMatter.date),
+                    endDate: frontMatter.endDate ? new Date(frontMatter.endDate) : undefined,
                     excerpt: frontMatter.excerpt,
                     client,
                     url: frontMatter.url,

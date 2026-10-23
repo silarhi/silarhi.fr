@@ -16,7 +16,13 @@ import Section from '@/components/ui/section'
 import SectionTitle from '@/components/ui/section-title'
 import { generateProjectPageSchema, generateProjectSchema } from '@/lib/schemas/project'
 import { cn } from '@/utils/lib'
-import { getAllProjectSlugs, getEngagementTypeLabel, getProjectBySlug, getProjectsByClient } from '@/utils/project'
+import {
+    formatProjectPeriod,
+    getAllProjectSlugs,
+    getEngagementTypeLabel,
+    getProjectBySlug,
+    getProjectsByClient,
+} from '@/utils/project'
 import { getCanonicalUrl } from '@/utils/url'
 
 interface ProjectPageProps {
@@ -98,8 +104,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         </p>
                         <div className="flex gap-8 text-sm">
                             <div>
-                                <div className="text-foreground/80 mb-1 uppercase">Année</div>
-                                <div className="text-foreground font-semibold">{project.date.getFullYear()}</div>
+                                <div className="text-foreground/80 mb-1 uppercase">
+                                    {project.endDate ? 'Période' : 'Année'}
+                                </div>
+                                <div className="text-foreground font-semibold">
+                                    {formatProjectPeriod(project, 'year')}
+                                </div>
                             </div>
                             {project.duration && (
                                 <div>

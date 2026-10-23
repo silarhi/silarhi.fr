@@ -129,6 +129,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
     title: string
     slug: string (kept equal to the directory name, which is what the code uses as the slug)
     date: string (YYYY-MM-DD, date of SILARHI's first commit on the client repository)
+    endDate: string (optional, YYYY-MM-DD, end of an engagement that has ended: SILARHI's last commit or release; shown as a period on the page and the cards)
     excerpt: string
     client: string (slug reference)
     technologies: string[] (slug references)
@@ -154,7 +155,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
 
     Iteration files (`v1.mdx`, …) have `title`, `date` (when that iteration's work landed: release tag or merge date) and `published` frontmatter and are listed oldest first.
 
-    When an engagement has ended, `engagement.description` says so in a closing sentence ("Mission terminée en juillet 2024.", "Projet archivé en octobre 2026.").
+    When an engagement has ended, set `endDate` and say so in a closing sentence of `engagement.description` ("Mission terminée en juillet 2024.", "Projet archivé en octobre 2026.").
 
 - **Clients**: `content/clients/*.mdx` with client metadata (optional `logo` + generated `logo_metadata`)
 - **Technologies**: `content/technologies/*.mdx` with technology metadata (`name`, optional `name_aliases`, SEO fields, `reasons`)
