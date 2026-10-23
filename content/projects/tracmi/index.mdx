@@ -1,0 +1,38 @@
+---
+title: 'CRM de prospection immobilière sur le cadastre'
+slug: 'tracmi'
+date: '2021-07-23'
+excerpt: 'Tracmi, CRM de prospection immobilière construit sur le cadastre : carte des parcelles, prospects et propriétaires, demandes de relevés au CDIF, pipeline de prospection.'
+client: 'cimalis'
+technologies: ['php', 'symfony', 'twig', 'bootstrap', 'mysql']
+published: true
+scope: 'full_development'
+codeOwnership: 'from_scratch'
+category: 'Cartographie & GIS'
+name: 'Tracmi'
+url: 'https://tracmi.fr'
+overview: 'Tracmi est un CRM de prospection immobilière construit sur le cadastre français, que nous avons développé pour Cimali. Les équipes repèrent les parcelles sur une carte, les regroupent en prospects, y rattachent propriétaires et contacts, demandent les relevés de propriété au CDIF et suivent chaque prospect dans un pipeline. Né en 2021 comme outil cartographique, il a été entièrement réécrit en 2026.'
+challenge:
+    description: "Un outil de prospection foncière doit manipuler les parcelles et les ventes immobilières de départements entiers sur un hébergement mutualisé, tout en organisant le travail d'équipes commerciales hiérarchisées."
+    points:
+        - 'Données cadastrales et DVF volumineuses sur un hébergement mutualisé'
+        - 'Affichage fluide des parcelles sur la carte'
+        - 'Équipes hiérarchisées : chacun voit ses prospects et ceux de ses collaborateurs'
+        - 'Rapprochement des relevés de propriété reçus avec les bonnes parcelles'
+solution:
+    description: 'Nous avons réécrit Tracmi en application Symfony, sur le modèle des autres applications Locades : une carte MapLibre GL alimentée par les tuiles vectorielles publiques du cadastre, un CRM complet et une organisation multi-utilisateurs avec droits par hiérarchie.'
+    points:
+        - 'Parcelles affichées depuis les tuiles vectorielles du cadastre, centroïdes indexés en MySQL spatial'
+        - 'Carte MapLibre GL : sélection de parcelles, zones dessinées ou importées, mutations DVF'
+        - 'CRM complet : prospects, contacts, activités, tâches, documents et pipeline'
+        - 'Demandes CDIF préremplies et import des relevés de propriété rattachés automatiquement aux parcelles'
+        - 'Organisations multi-utilisateurs avec arborescence de membres et droits par hiérarchie'
+engagement:
+    type: 'project_based'
+    description: "Conception de l'outil cartographique en 2021, puis réécriture complète en CRM de prospection sous le nom Tracmi en 2026."
+    deliverables:
+        - 'Application web Tracmi en production'
+        - 'Imports des données cadastre et DVF par département'
+        - 'Évolutions fonctionnelles cartographiques'
+        - 'Maintenance et optimisations'
+---
