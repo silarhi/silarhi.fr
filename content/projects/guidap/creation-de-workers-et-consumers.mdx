@@ -1,6 +1,6 @@
 ---
 title: 'Création de Workers et Consumers'
-date: '2021-01-14'
+date: '2021-04-13'
 published: true
 ---
 
@@ -8,7 +8,7 @@ Mise en place d'un système de queues et workers pour le traitement asynchrone d
 
 Développements techniques :
 
-- Utilisation de queue via AWS SQS
+- Migration des producers et consumers RabbitMQ et des workers Beanstalk vers AWS SQS (Enqueue)
 - Gestion de la requeue avec exponential back-off
 - Mise en place d'une "meta-queue" pour le stockage des messages expirés
 - Module de dispatch de message en fonction du nombre de tentatives

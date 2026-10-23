@@ -1,0 +1,20 @@
+---
+title: 'Partenaires et authentification'
+date: '2025-11-23'
+published: true
+---
+
+Intégrations partenaires et refonte de l'authentification.
+
+Fonctionnalités ajoutées :
+
+- Intégration d'une plateforme partenaire : appairage, synchronisation des contacts, commandes, messages et statuts
+- Code de vérification à la première connexion et au changement d'e-mail
+- Refonte de l'authentification centralisée
+- Connexion OAuth à une seconde plateforme partenaire, avec webhook et conversion des fichiers 3D STL
+- Envoi asynchrone des commandes aux plateformes partenaires
+
+Mises à jour techniques :
+
+- Serveur OAuth2 standard (league/oauth2-server-bundle)
+- Refonte des authenticators et hachage des mots de passe via Symfony

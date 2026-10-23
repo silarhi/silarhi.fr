@@ -2,15 +2,15 @@
 title: "Mise en place d'infrastructure pour Lean Management System"
 slug: 'lean-management-system'
 date: '2021-03-03'
-excerpt: "Création de l'infrastructure pour visioconférence dans BigBlueButton pour formation à distance : déploiement conteneurisé, intégration complète LMS, scalabilité verticale."
+excerpt: "Création de l'infrastructure pour visioconférence dans BigBlueButton pour formation à distance : déploiement conteneurisé, intégration LMS, scalabilité horizontale."
 client: 'stillgeek'
-technologies: ['docker', 'aws']
+technologies: ['docker', 'aws', 'postgres']
 published: true
 scope: 'feature_integration'
 codeOwnership: 'shared_codebase'
 category: 'Infrastructure & DevOps'
 name: 'Lean Management System'
-overview: "Nous avons réalisé la mise en place et l'intégration d'une infrastructure BigBlueButton pour un système de visioconférence dédié à la formation à distance, avec déploiement conteneurisé Docker et auto-scaling via AWS."
+overview: "Nous avons réalisé la mise en place et l'intégration d'une infrastructure BigBlueButton pour un système de visioconférence dédié à la formation à distance, répartie sur 7 serveurs BigBlueButton derrière un équilibreur de charge Scalelite."
 challenge:
     description: "Le déploiement d'une infrastructure BigBlueButton présentait des défis techniques : supporter de nombreuses sessions simultanées avec une qualité stable, intégrer avec le LMS existant, garantir la sécurité des sessions, et assurer une disponibilité élevée durant les pics de trafic."
     points:

@@ -1,0 +1,48 @@
+---
+title: Application de gestion des demandes de facturation
+slug: paynoous
+date: '2026-06-26'
+excerpt: 'Reprise et évolution de PayNoous, application Symfony de gestion des demandes de facturation : paiements, clients et entités juridiques, relances des impayés et exports.'
+client: noous
+technologies:
+    - php
+    - symfony
+    - api-platform
+    - twig
+    - tailwind
+    - mysql
+published: true
+scope: takeover_and_evolution
+codeOwnership: inherited_codebase
+category: Gestion
+name: PayNoous
+image: /images/projects/paynoous-hero.png
+overview: "PayNoous est l'application interne de NOOUS pour gérer les demandes de facturation : activités, paiements, clients, entités juridiques et commandes, en lien avec Master Vendor Portal. Nous avons repris l'application développée par d'autres prestataires pour la faire évoluer et fiabiliser sa base de code."
+challenge:
+    description: "La reprise d'une application de facturation en cours d'utilisation demandait de faire évoluer les fonctionnalités sans perturber les équipes, tout en remettant à niveau l'outillage qualité."
+    points:
+        - Base de code héritée de plusieurs prestataires successifs
+        - Suivi des impayés jusqu'ici manuel
+        - Exports volumineux des commandes et des clients
+        - Absence d'analyse statique et de règles de formatage communes
+solution:
+    description: "Nous avons ajouté un module de relance des impayés et des exports, et mis en place l'outillage qualité habituel de nos projets Symfony."
+    points:
+        - 'Relances des factures impayées : modèles, destinataires, pièces jointes et envoi asynchrone'
+        - Contacts autorisés à recevoir les relances par client
+        - Export CSV et Excel des commandes et des clients
+        - Suppression d'un paiement avec recalcul du statut de paiement
+        - "PHPStan niveau 6, Biome et twig-cs-fixer dans l'intégration continue"
+engagement:
+    type: continuous_support
+    description: Reprise de l'application et évolutions continues depuis juin 2026
+    deliverables:
+        - Module de relance des impayés
+        - Exports des commandes et des clients
+        - Outillage qualité en intégration continue
+        - Support technique continu
+image_metadata:
+    blur: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsSAAALEgHS3X78AAAAJklEQVQImR3CgQkAMAgEMfcfsne8UB2j0JBCO+kELYG7zAilnl99aYsfn8Tk75QAAAAASUVORK5CYII='
+    width: 3840
+    height: 2880
+---

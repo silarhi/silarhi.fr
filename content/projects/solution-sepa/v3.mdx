@@ -1,0 +1,24 @@
+---
+title: 'V3'
+date: '2026-10-17'
+published: true
+---
+
+Rapprochement bancaire, nouveaux formats SEPA et gestion avancée des contrats EBICS.
+
+Fonctionnalités ajoutées :
+
+- Serveur OAuth2 pour les applications partenaires, avec révocation des jetons
+- Connexion par passkey (WebAuthn)
+- Virements au format pain.001.001.09 et prélèvements au format pain.008.001.08
+- Récupération des transactions bancaires via EBICS
+- Rapprochement automatique des transactions et suivi des opérations non rapprochées
+- Renouvellement automatique des certificats EBICS et alertes en cas d'échec
+- Contrat EBICS choisi par paiement et comptes bancaires par émetteur
+- Relance des opérations et renvoi des fichiers XML à la banque
+
+Mises à jour techniques :
+
+- Stockage des fichiers sur S3
+- Migration Symfony 6.0 vers 7.4 et PHP 8.0 vers 8.2
+- Passage à la version 3 de la librairie EBICS

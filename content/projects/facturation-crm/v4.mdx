@@ -1,0 +1,21 @@
+---
+title: 'V4'
+date: '2026-05-29'
+published: true
+---
+
+Gestion automatique de la TVA et modernisation de l'application.
+
+Fonctionnalités ajoutées :
+
+- Taux de TVA déterminé selon le pays du contact, avec prise en charge des pays hors Union européenne et des avoirs
+- Mode forcé pour recalculer la TVA des factures existantes
+- Date de paiement alignée sur la date de facture
+- Passage au nouveau domaine de l'API Zoho Invoice
+
+Mises à jour techniques :
+
+- Migration Symfony 6.0 vers 7.3 et PHP 8.0 vers 8.2
+- Ajout de Rector, PHPStan et des premiers tests PHPUnit
+- Mise en place de l'intégration continue GitLab
+- Remontée des erreurs dans Sentry

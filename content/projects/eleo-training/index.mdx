@@ -1,8 +1,8 @@
 ---
 title: Outil de suivi des formations collaborateurs
 slug: eleo-training
-date: '2022-05-01'
-excerpt: 'Mission technique sur plateforme formation ETI : refonte architecture Symfony, migration Kubernetes, optimisation performance, intégration temps réel Mercure, support React.'
+date: '2022-04-14'
+excerpt: "Mission technique sur plateforme formation ETI : évolutions de l'architecture Symfony, amélioration du déploiement Kubernetes, optimisation performance, refonte du temps réel Mercure, support React."
 client: noous
 technologies:
     - php
@@ -17,8 +17,8 @@ technologies:
     - mysql
     - rabbitmq
 published: true
-scope: full_development
-codeOwnership: from_scratch
+scope: takeover_and_evolution
+codeOwnership: inherited_codebase
 category: Gestion
 name: Eleo Training
 image: /images/projects/eleo-hero.png
@@ -29,10 +29,10 @@ challenge:
         - Scalabilité pour grands comptes et milliers d'utilisateurs
         - 'Gestion de déploiements multi-versions & multi-environnements (Kubernetes, Docker)'
         - Optimisation performance base de données MySQL
-        - Intégration notifications temps réel avec Mercure
+        - Fiabilisation des notifications temps réel avec Mercure
         - Gestion des traductions personnalisées par client
 solution:
-    description: 'Nous avons travaillé sur plusieurs axes techniques :  et intégration Mercure pour notifications temps réel.'
+    description: "Nous avons travaillé sur plusieurs axes techniques : évolutions fonctionnelles, pipeline CI/CD, performances MySQL et refonte de l'architecture Mercure (topics, cookies d'autorisation) pour le suivi en temps réel des exports asynchrones."
     points:
         - Intégration de fonctionnalités avancées dans architecture Symfony
         - Pipeline CI/CD amélioré pour déploiements automatisés
@@ -41,11 +41,11 @@ solution:
         - Mise à jour multi-pods des traductions Symfony
 engagement:
     type: continuous_support
-    description: Assistance technique continue avec interventions régulières sur l'outil Eleo.
+    description: Assistance technique continue avec interventions régulières sur l'outil Eleo. Mission terminée en juillet 2024.
     deliverables:
         - Architecture Symfony modernisée et optimisée
-        - Migration complète vers Kubernetes
-        - Intégration Mercure pour temps réel
+        - Amélioration des manifestes Kubernetes et de la CI
+        - "Refonte de l'architecture Mercure (topics, cookies) et suivi temps réel des exports"
         - Pipeline CI/CD automatisé
         - Documentation technique complète
 image_metadata:

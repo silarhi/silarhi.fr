@@ -1,0 +1,20 @@
+---
+title: 'V3'
+date: '2022-09-30'
+published: true
+---
+
+Remplacement de Zoho CRM par HubSpot comme source des ventes.
+
+Fonctionnalités ajoutées :
+
+- Lecture des ventes depuis HubSpot à la place de Zoho CRM
+- Traitement des ventes par lots via Symfony Messenger
+- Synchronisation limitée aux ventes modifiées dans les 2 dernières heures
+- Gestion des limites de l'API HubSpot
+- Gestion des factures vides, des contacts inactifs et des clients en doublon
+
+Mises à jour techniques :
+
+- Migration Symfony 5.3 vers 6.0 et PHP 7.4 vers 8.0
+- Authentification HubSpot par application privée

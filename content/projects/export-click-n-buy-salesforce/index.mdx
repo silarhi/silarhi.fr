@@ -1,0 +1,38 @@
+---
+title: Export des devis Salesforce vers Click'N'Buy
+slug: export-click-n-buy-salesforce
+date: '2024-03-19'
+excerpt: "Développements Salesforce pour Airbus : export des devis validés vers l'outil d'achat Click'N'Buy, réimport des numéros de commande et mapping des entités comptables."
+client: stillgeek
+technologies:
+    - salesforce
+published: true
+scope: takeover_and_evolution
+codeOwnership: inherited_codebase
+category: Intégration & API
+name: Click'N'Buy
+overview: "Les devis des applications MMS et Docland sont synchronisés dans Salesforce, puis transmis à Click'N'Buy, l'outil d'achat d'Airbus, pour la création des demandes d'achat. Nous avons repris les développements Salesforce existants (Apex, Lightning Web Components) et les faisons évoluer pour fiabiliser ces échanges."
+challenge:
+    description: "Les devis validés doivent être transmis à l'outil d'achat avec les bonnes entités comptables, puis rapprochés des commandes créées, sans ressaisie par les équipes."
+    points:
+        - Code Apex et Lightning Web Components hérités, à reprendre et sécuriser
+        - Format CSV imposé par l'outil d'achat
+        - Entités et segments comptables propres à chaque filiale Airbus
+        - Rapprochement des numéros de commande avec les devis Salesforce
+solution:
+    description: "Nous avons versionné l'organisation Salesforce avec Salesforce DX, couvert le code Apex par des tests et ajouté des composants d'export et d'import directement dans Salesforce."
+    points:
+        - "Export des devis validés au format CSV de Click'N'Buy (demandes d'achat et lignes)"
+        - "Réimport des numéros de commande et de demande d'achat sur les devis"
+        - Composants Lightning Web Components d'export et d'import
+        - Mapping des entités et segments comptables des filiales Airbus
+        - Export des devis Docland et des centres d'impression
+engagement:
+    type: continuous_support
+    description: 'Évolutions et maintenance des développements Salesforce liés aux applications MMS et Docland'
+    deliverables:
+        - Export et import Click'N'Buy opérationnels
+        - Tests Apex et couverture de code
+        - Configurations Data Loader versionnées
+        - Support technique continu
+---
