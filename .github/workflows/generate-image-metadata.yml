@@ -49,6 +49,11 @@ jobs:
             - name: Generate image metadata
               run: pnpm generate:image-metadata
 
+            # The generator rewrites the frontmatter in its own YAML style; format it like the
+            # pre-commit hook does, so only real metadata changes count (and the commit is never empty).
+            - name: Format content
+              run: pnpm exec prettier --write content/
+
             - name: Check for changes
               id: git-check
               run: |
