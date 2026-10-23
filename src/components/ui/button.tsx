@@ -35,7 +35,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             'outline-primary':
                 'bg-surface border border-gray-300 text-gray-700 hover:border-primary hover:bg-primary/5 hover:text-primary focus:ring-primary dark:bg-light dark:border-border dark:text-foreground dark:hover:border-primary-light dark:hover:bg-primary-light/10',
             secondary:
-                'bg-secondary text-surface hover:bg-secondary/80 focus:ring-secondary dark:text-dark dark:bg-secondary-light dark:hover:bg-secondary',
+                'bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:ring-secondary dark:bg-secondary-light dark:hover:bg-secondary',
             muted: 'bg-muted text-surface hover:bg-gray-700 focus:ring-muted dark:bg-muted/20 dark:hover:bg-muted/30',
             danger: 'bg-red-600 text-surface hover:bg-red-700 focus:ring-red-600 dark:bg-error dark:hover:bg-red-600',
             'outline-dark':

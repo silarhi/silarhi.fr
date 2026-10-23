@@ -13,6 +13,7 @@
     --color-secondary: #f7d325; /* Footer banner, key metrics numbers, hover accents */
     --color-secondary-light: #fde68a; /* Badge backgrounds in dark mode */
     --color-secondary-dark: #ca8a04; /* Badge text color, button hover states */
+    --color-secondary-foreground: #111827; /* Text on secondary (yellow) fills, light and dark mode */
 
     /* ⚪ NEUTRALS — Layout Backgrounds */
     --color-background: #f9fafb; /* HTML body background */
