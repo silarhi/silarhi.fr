@@ -183,7 +183,7 @@ export default function ContactForm() {
             </Button>
             <p className="text-foreground/70 mt-3 mb-0 text-sm">
                 Vos données servent uniquement à répondre à votre demande et sont transmises via Formspree.{' '}
-                <Link href="/mentions-legales#donnees-personnelles">En savoir plus</Link>
+                <Link href="/politique-de-confidentialite">En savoir plus</Link>
             </p>
         </form>
     )
