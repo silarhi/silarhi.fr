@@ -78,7 +78,7 @@ function InfoSection() {
                 <>
                     116 Route d&apos;Espagne
                     <br />
-                    HELIOPOLIS 4, BAT 113, BAL 411
+                    HELIOS 4, BAT 113, BAL 411
                     <br />
                     31100 Toulouse
                 </>

@@ -99,7 +99,7 @@ export default function Footer() {
                                 <p className="text-dark-foreground/80 dark:text-dark-foreground/90 mb-0">
                                     116 Route d&apos;Espagne
                                     <br />
-                                    HELIOPOLIS 4, BAT 113, BAL 411
+                                    HELIOS 4, BAT 113, BAL 411
                                     <br />
                                     31100 Toulouse
                                 </p>
