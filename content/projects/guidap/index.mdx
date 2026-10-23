@@ -1,25 +1,25 @@
 ---
 title: 'Gestion de centres de loisirs et réservations'
 slug: 'guidap'
-date: '2021-04-13'
-excerpt: "Intervention technique sur solution SaaS pour centres de loisirs : Implémentation d'une architecture asynchrone avec AWS SQS pour gérer le renvoi des messages en échec selon une stratégie de back-off exponentiel."
+date: '2021-03-30'
+excerpt: 'Intervention technique sur solution SaaS pour centres de loisirs : Migration des workers RabbitMQ et Beanstalk vers une architecture asynchrone AWS SQS pour gérer le renvoi des messages en échec selon une stratégie de back-off exponentiel.'
 client: 'guidap'
-technologies: ['php', 'symfony', 'aws', 'docker']
+technologies: ['php', 'symfony', 'aws', 'rabbitmq', 'docker']
 published: true
 scope: 'feature_integration'
 codeOwnership: 'shared_codebase'
 category: 'Gestion'
 name: 'GUIDAP'
 url: 'https://guidap.com'
-overview: "GUIDAP est un logiciel SaaS de gestion d'établissements de loisirs. Nous sommes intervenus pour développer la gestion asynchrone des traitements via AWS SQS, assurant la fiabilité et la résilience du système face aux erreurs temporaires."
+overview: "GUIDAP est un logiciel SaaS de gestion d'établissements de loisirs. Nous sommes intervenus pour migrer la gestion asynchrone des traitements de RabbitMQ et Beanstalk vers AWS SQS (via Enqueue), assurant la fiabilité et la résilience du système face aux erreurs temporaires."
 challenge:
-    description: "Le développement devait permettre la gestion de queue SQS et la gestion des réessais en cas d'erreurs temporaires"
+    description: "Le développement devait permettre la migration des consumers RabbitMQ vers des queues SQS et la gestion des réessais en cas d'erreurs temporaires"
     points:
         - 'Fiabilité critique : aucun message perdu'
         - "Monitoring et visibilité sur files d'attente"
         - 'Capacité à rejouer messages en échec'
 solution:
-    description: 'Nous avons développé un système de workers et consumers basé sur AWS SQS et intégré à Symfony, avec gestion intelligente des erreurs via exponential back-off et meta-queue pour garantir la fiabilité.'
+    description: 'Nous avons remplacé les producers et consumers RabbitMQ par un système de workers basé sur AWS SQS et intégré à Symfony via Enqueue, avec gestion intelligente des erreurs via exponential back-off et meta-queue pour garantir la fiabilité.'
     points:
         - "Files d'attente AWS SQS dédiées par type de traitement"
         - 'Exponential back-off pour tentatives de retraitement'

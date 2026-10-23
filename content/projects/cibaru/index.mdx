@@ -1,13 +1,14 @@
 ---
 title: Plateforme de gestion de mandats de travaux
 slug: cibaru
-date: '2025-11-01'
-excerpt: "Plateforme web Symfony de gestion de mandats de travaux : suivi des missions et sous-traitants, intégration API Pappers et SIRENE, recherche d'adresses et génération de documents."
+date: '2025-06-20'
+excerpt: "Plateforme web Symfony de gestion de mandats de travaux : suivi des missions et sous-traitants, intégration de la base SIRENE, recherche d'adresses et génération de documents."
 client: cimalis
 technologies:
     - php
     - symfony
     - twig
+    - bootstrap
     - api-platform
     - mysql
 published: true
@@ -22,7 +23,6 @@ challenge:
     description: "Le développement d'une plateforme de gestion de mandats de travaux présentait des défis liés à la modélisation de workflows métier complexes, l'intégration de sources de données externes et la nécessité d'offrir une expérience fluide à des profils utilisateurs très différents."
     points:
         - Modélisation des relations mandataires / sous-traitants / missions
-        - Intégration de l'API Pappers pour la recherche d'entreprises
         - Connexion à la base SIRENE pour la récupération automatique des données société
         - Recherche et validation d'adresses de chantier
         - Interface intuitive pour des utilisateurs non-techniques du BTP
@@ -31,7 +31,7 @@ solution:
     points:
         - "Espace mandataire : création de mandats, affectation de missions, suivi d'avancement"
         - 'Espace sous-traitant : réception des missions, mise à jour du statut, échanges'
-        - Intégration API Pappers et SIRENE pour l'auto-complétion des fiches entreprises
+        - Intégration de la base SIRENE pour l'auto-complétion des fiches entreprises
         - Module de recherche d'adresses avec validation géographique
         - API REST exposée via API Platform pour une architecture découplée
 engagement:
@@ -39,7 +39,7 @@ engagement:
     description: Collaboration à long terme avec développement initial et évolutions continues de la plateforme
     deliverables:
         - Plateforme complète de gestion de mandats de travaux
-        - 'Intégrations API tierces (Pappers, SIRENE)'
+        - 'Intégrations API tierces (SIRENE, Base Adresse Nationale)'
         - Évolutions fonctionnelles régulières
         - Maintenance applicative continue
 image_metadata:

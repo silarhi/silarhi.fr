@@ -1,0 +1,25 @@
+---
+title: 'Reprise et relances'
+date: '2026-10-13'
+published: true
+---
+
+Reprise de l'application et ajout du suivi des impayés.
+
+Fonctionnalités ajoutées :
+
+- Relances des factures impayées : modèles, balises, destinataires, pièces jointes et envoi asynchrone
+- Paramétrage des relances et contacts autorisés à les recevoir par client
+- Export CSV et Excel des commandes et des clients
+- Filtres et colonnes supplémentaires sur les demandes de facturation traitées et leur export
+- Suppression d'un paiement avec recalcul du statut de paiement
+- Sélecteur de dates localisé
+- Journal d'audit des entités
+- Envoi des e-mails via SendGrid
+
+Mises à jour techniques :
+
+- PHPStan niveau 6, Biome et twig-cs-fixer dans l'intégration continue
+- Passage à Node 24
+- Réduction des requêtes SQL des exports
+- Worker Messenger exécuté par cron, avec stockage partagé

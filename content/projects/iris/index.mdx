@@ -1,7 +1,7 @@
 ---
 title: Outil de gestion commandes dentaires
 slug: iris
-date: '2023-10-16'
+date: '2023-10-31'
 excerpt: 'Plateforme web gestion commandes scanner intra-oral dentaire IRIS : gestion distributeurs, commandes, suivi livraisons, interface partenaires professionnels.'
 client: scan4all
 technologies:
@@ -11,9 +11,10 @@ technologies:
     - tailwind
     - mysql
     - docker
+    - mercure
 published: true
-scope: full_development
-codeOwnership: from_scratch
+scope: takeover_and_evolution
+codeOwnership: inherited_codebase
 category: Gestion
 name: IRIS
 image: /images/projects/iris-hero.png
@@ -30,7 +31,7 @@ solution:
     points:
         - Migration Symfony 4.4 → 6.2 avec PHP 8.2
         - 'Refonte authentification multi-méthodes (SSO, Keycloak)'
-        - Migration React 14 → 15 avec refonte graphique
+        - Migration React 15 → 16 avec refonte graphique
         - Migration vers Tailwind CSS et shadcn/ui
         - 'Optimisation CI/CD : tests 15min → 1min30'
         - Architecture multi-bases pour scalabilité

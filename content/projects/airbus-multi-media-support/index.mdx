@@ -1,7 +1,7 @@
 ---
 title: Plateforme de gestion de demande de support marketing & multimédia
 slug: airbus-multi-media-support
-date: '2019-06-27'
+date: '2019-02-25'
 excerpt: "Développement d'une application Airbus interne pour la gestion de demandes de supports marketing : demandes sur mesure, médiathèque, workflow de validation."
 client: stillgeek
 technologies:
@@ -13,6 +13,7 @@ technologies:
     - mysql
     - docker
     - aws
+    - mercure
 published: true
 scope: full_development
 codeOwnership: from_scratch
@@ -32,10 +33,12 @@ solution:
     description: 'Nous avons développé une plateforme complète en Symfony avec séparation de fonctionnalités en plusieurs compartiments, workflow de validation sophistiqué et système de recherche performant adapté aux besoins du client.'
     points:
         - Interface utilisateur intuitive avec Bootstrap et jQuery
+        - Éditeur de documents en ligne via Chili Publish et partage des documents entre utilisateurs
+        - Authentification unifiée SSO SAML (OneLogin)
         - Module de validation sur 3 niveaux pour le contrôle des coûts
         - Création d'un bundle Symfony personnalisé pour réutilisation interne
         - Gestion avancée des droits utilisateurs
-        - Intégration bi-directionnelle avec CRM Salesforce via SDK officiel
+        - Intégration bi-directionnelle avec le CRM Salesforce via un client API REST sur mesure (Symfony HttpClient)
 engagement:
     type: continuous_support
     description: Collaboration à long terme avec développement initial et maintenance continue de la plateforme

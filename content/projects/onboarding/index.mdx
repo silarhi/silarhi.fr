@@ -1,0 +1,43 @@
+---
+title: Application d'onboarding RH
+slug: onboarding
+date: '2026-03-16'
+excerpt: "Évolutions d'Eleo Onboarding, application RH de recrutement et d'intégration des collaborateurs : champs personnalisés, formulaires de candidature et exports planifiés."
+client: noous
+technologies:
+    - php
+    - symfony
+    - api-platform
+    - react
+    - postgres
+    - k8s
+published: true
+scope: feature_integration
+codeOwnership: shared_codebase
+category: Gestion
+name: Eleo Onboarding
+overview: "Eleo Onboarding est une application RH qui accompagne les entreprises dans le recrutement et l'intégration de leurs collaborateurs : candidatures, contrats et formulaires administratifs. Déployée pour une vingtaine de clients, elle repose sur une API Symfony et une interface React. Nous avons rejoint l'équipe technique en place pour développer de nouvelles fonctionnalités et fiabiliser les traitements en arrière-plan."
+challenge:
+    description: "Chaque client de l'application a ses propres besoins de collecte d'informations et d'export vers ses outils RH, sur une plateforme mutualisée et déployée sur plusieurs environnements."
+    points:
+        - Besoins de collecte d'informations propres à chaque client
+        - Exports réguliers vers les outils RH des clients
+        - Plateforme déployée pour une vingtaine de clients sur Kubernetes et Upsun
+        - Cohérence des types entre l'API et l'interface
+solution:
+    description: "Nous avons ajouté des champs personnalisés configurables par les administrateurs et fiabilisé les exports planifiés, dans le respect de l'architecture existante."
+    points:
+        - "Champs personnalisés gérés dans l'API, le back-office et les formulaires de candidature"
+        - Exports planifiés avec Symfony Scheduler
+        - Génération des énumérations du front depuis l'API
+        - Tests du front avec Vitest
+        - Fiabilisation des déploiements Kubernetes et Upsun
+engagement:
+    type: project_based
+    description: "Renfort de l'équipe technique en place sur le développement de nouvelles fonctionnalités, de mars à mai 2026."
+    deliverables:
+        - Module de champs personnalisés
+        - Exports planifiés
+        - Tests du front
+        - Correctifs de déploiement
+---

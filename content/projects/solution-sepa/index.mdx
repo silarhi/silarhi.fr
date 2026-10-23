@@ -1,7 +1,7 @@
 ---
 title: Application de gestion de flux SEPA via protocole bancaire EBICS
 slug: solution-sepa
-date: '2022-05-31'
+date: '2021-10-29'
 excerpt: Reprise et amélioration d'une application de gestion de virements et prélèvements SEPA via le protocole EBICS pour automatisation bancaire.
 client: cimalis
 technologies:
@@ -12,6 +12,7 @@ technologies:
     - jquery
     - ebics
     - mysql
+    - api-platform
 published: true
 scope: takeover_and_evolution
 codeOwnership: inherited_codebase
@@ -30,8 +31,8 @@ challenge:
 solution:
     description: "Nous avons repris et modernisé une application de gestion de virements SEPA, en assurant la migration technique et l'ajout de nouvelles fonctionnalités de sécurité et de gestion."
     points:
-        - 'Migration technique vers versions récentes (PHP 8.2, Symfony 6)'
-        - Implémentation du protocole EBICS 2.5 et 3.0
+        - 'Migration technique progressive : Symfony 4.4 vers 6.0 avec PHP 8, puis PHP 8.2 et Symfony 7.4'
+        - Évolution des échanges EBICS (2.5 et 3.0) et du traitement des relevés CFONB
         - Module de gestion des virements SEPA
         - Module de gestion des prélèvements et mandats
         - Double authentification et gestion avancée des permissions

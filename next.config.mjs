@@ -128,6 +128,12 @@ const nextConfig = {
                 destination: '/projets',
                 permanent: true,
             },
+            // Removed technologies (no project uses them any more)
+            {
+                source: '/technologies/vuejs',
+                destination: '/projets',
+                permanent: true,
+            },
         ]
     },
 }

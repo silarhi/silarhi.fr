@@ -1,0 +1,24 @@
+---
+title: 'V4'
+date: '2026-09-29'
+published: true
+---
+
+Facturation des missions, rapprochement des paiements et connexion par passkey.
+
+Fonctionnalités ajoutées :
+
+- Connexion par passkey (WebAuthn) et vérification du code ou de la passkey sur un seul écran
+- Fils de discussion avec les clients
+- Aperçu des factures et transformation de devis en facture
+- Rapprochement des transactions bancaires avec les paiements de factures
+- Missions impayées sur les tableaux de bord
+- Calcul du numéro de TVA depuis le SIRET et auto-complétion des codes postaux
+- Facturation des forfaits récurrents et réouverture d'une mission terminée
+
+Mises à jour techniques :
+
+- Migration Node 20 vers 22 et Webpack Encore 5 vers 6
+- Remplacement d'ESLint et Prettier par Biome
+- Passage à silarhi/turbo-bundle et ajout de Live Components
+- Suppression de requêtes N+1
