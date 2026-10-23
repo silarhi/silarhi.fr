@@ -15,7 +15,7 @@ interface ProjectListProps {
 
 export default function ProjectList({ projects }: ProjectListProps) {
     return (
-        <div className="space-y-24">
+        <div className="space-y-24" data-project-list>
             {projects.map((project, index) => (
                 <article
                     key={project.slug}
