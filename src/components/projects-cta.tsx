@@ -10,7 +10,7 @@ interface CTAButton {
     href: string
     variant?: 'primary' | 'secondary' | 'outline-primary' | 'outline-dark' | 'muted' | 'danger'
     showArrow?: boolean
-    /** Sent as the `location` of the Umami `cta` event when set (see `@/utils/analytics`) */
+    /** Sent as the `location` of the `cta` analytics event when set (see `@/utils/analytics`) */
     ctaLocation?: string
 }
 
@@ -30,7 +30,8 @@ function ProjectCtaButton({ text, href, variant, showArrow, ctaLocation }: CTABu
             size="lg"
             variant={variant}
             className={cn({ group: showArrow })}
-            data-cta-location={ctaLocation}
+            data-analytics-event={ctaLocation ? 'cta' : undefined}
+            data-analytics-location={ctaLocation}
         >
             {text}
             {showArrow && <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />}

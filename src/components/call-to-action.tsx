@@ -9,7 +9,8 @@ export default function CallToAction() {
                 size="lg"
                 variant="primary"
                 className="px-16 py-4 text-2xl"
-                data-cta-location="home"
+                data-analytics-event="cta"
+                data-analytics-location="home"
             >
                 Demander un devis
             </Button>
