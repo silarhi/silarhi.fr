@@ -32,6 +32,8 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+    const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+
     return (
         <html
             lang="fr"
@@ -53,16 +55,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
                         <DefaultLayout>{children}</DefaultLayout>
                     </HashProvider>
                 </ThemeProvider>
-                <Script src="https://www.googletagmanager.com/gtag/js?id=G-PDTD5T600H" strategy="lazyOnload" />
-                <Script id="google-analytics" strategy="lazyOnload">
-                    {`
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-
-                  gtag('config', 'G-PDTD5T600H');
-                `}
-                </Script>
+                {umamiWebsiteId && (
+                    <Script
+                        defer
+                        src="https://analytics.silarhi.fr/script.js"
+                        data-website-id={umamiWebsiteId}
+                        data-domains="silarhi.fr"
+                    />
+                )}
             </body>
         </html>
     )

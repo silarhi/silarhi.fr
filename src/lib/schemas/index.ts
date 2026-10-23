@@ -193,7 +193,7 @@ export const COMPANY_INFO = {
     telephone: '+33607275826',
     email: 'hello@silarhi.fr',
     address: {
-        streetAddress: "116 Route d'Espagne, HELIOS 4, BAT 113",
+        streetAddress: "116 Route d'Espagne, HELIOS 4, BAT 113, BAL 411",
         addressLocality: 'Toulouse',
         postalCode: '31100',
         addressCountry: 'FR',
