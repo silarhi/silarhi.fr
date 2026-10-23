@@ -7,6 +7,7 @@ import Input from '@/components/forms/input'
 import Textarea from '@/components/forms/textarea'
 import Button from '@/components/ui/button'
 import { Envelope, FileText, Person, Phone } from '@/components/ui/icons'
+import { track } from '@/utils/analytics'
 
 interface ContactFormData {
     name: string
@@ -68,6 +69,7 @@ export default function ContactForm() {
 
                 reset()
                 setSuccess(true)
+                track('contact-form')
             } catch (_) {
                 setSuccess(false)
                 setSubmitError(true)
