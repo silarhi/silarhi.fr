@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import LegalLayout from '@/components/legal-layout'
 import LegalSection from '@/components/legal-section'
+import { COMPANY_INFO } from '@/lib/schemas'
 import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
@@ -23,10 +24,11 @@ export default function PrivacyPolicyPage() {
         >
             <LegalSection id="responsable" title="Responsable du traitement">
                 <p>
-                    Le responsable des traitements décrits ci-dessous est <strong>SILARHI</strong>, SARL au capital de
-                    1&nbsp;000&nbsp;€ – 116 Route d&apos;Espagne, HELIOS 4, BAT 113, BAL 411, 31100 Toulouse – RCS
-                    Toulouse 841 541 667, représentée par Guillaume Sainthillier, gérant. Contact&nbsp;:{' '}
-                    <a href="mailto:hello@silarhi.fr">hello@silarhi.fr</a>.
+                    Le responsable des traitements décrits ci-dessous est <strong>{COMPANY_INFO.legalName}</strong>,{' '}
+                    {COMPANY_INFO.legalForm} au capital de {COMPANY_INFO.shareCapital} –{' '}
+                    {COMPANY_INFO.addressLines.join(', ')} – RCS {COMPANY_INFO.rcs.city} {COMPANY_INFO.rcs.number},
+                    représentée par {COMPANY_INFO.manager}, gérant. Contact&nbsp;:{' '}
+                    <a href={`mailto:${COMPANY_INFO.email}`}>{COMPANY_INFO.email}</a>.
                 </p>
                 <p>
                     Les données personnelles sont traitées conformément au règlement (UE) 2016/679 du 27 avril 2016
@@ -171,7 +173,7 @@ export default function PrivacyPolicyPage() {
                     </li>
                 </ul>
                 <p>
-                    Pour les exercer, écrivez à <a href="mailto:hello@silarhi.fr">hello@silarhi.fr</a> ou à
+                    Pour les exercer, écrivez à <a href={`mailto:${COMPANY_INFO.email}`}>{COMPANY_INFO.email}</a> ou à
                     l&apos;adresse postale ci-dessus. Aucune pièce d&apos;identité n&apos;est demandée, sauf doute
                     raisonnable sur votre identité. Une réponse vous est apportée dans un délai d&apos;un mois, qui peut
                     être prolongé de deux mois pour une demande complexe&nbsp;; vous en êtes alors informé.

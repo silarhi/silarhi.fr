@@ -4,6 +4,7 @@ import Link from 'next/link'
 import LegacyLegalAnchorRedirect from '@/components/legacy-legal-anchor-redirect'
 import LegalLayout from '@/components/legal-layout'
 import LegalSection from '@/components/legal-section'
+import { COMPANY_INFO } from '@/lib/schemas'
 import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
@@ -37,7 +38,7 @@ export default function LegalMentionPage() {
                         <strong>Créateur</strong>&nbsp;:&nbsp;
                         <a href="https://sainthillier.fr/">Guillaume Sainthillier</a>
                         <br />
-                        <strong>Webmaster</strong>&nbsp;: Guillaume Sainthillier – hello@silarhi.fr
+                        <strong>Webmaster</strong>&nbsp;: Guillaume Sainthillier – {COMPANY_INFO.email}
                     </p>
                 </LegalSection>
                 <LegalSection id="hebergement" title="Hébergement et diffusion">

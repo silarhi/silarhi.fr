@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import LegalLayout from '@/components/legal-layout'
 import LegalSection from '@/components/legal-section'
+import { COMPANY_INFO } from '@/lib/schemas'
 import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
@@ -137,7 +138,7 @@ export default function CookiesPage() {
                 <p>
                     Les données personnelles traitées par le site et vos droits sont décrits dans la{' '}
                     <Link href="/politique-de-confidentialite">politique de confidentialité</Link>. Pour toute question,
-                    écrivez à <a href="mailto:hello@silarhi.fr">hello@silarhi.fr</a>.
+                    écrivez à <a href={`mailto:${COMPANY_INFO.email}`}>{COMPANY_INFO.email}</a>.
                 </p>
             </LegalSection>
         </LegalLayout>

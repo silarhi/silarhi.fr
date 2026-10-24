@@ -279,6 +279,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 **Structured Data** (`src/lib/schemas/`):
 
 - Schema.org JSON-LD generators (`index.ts`: Organization, WebSite, WebPage, Breadcrumb, Services…; `project.ts`; `technology.ts`), rendered with the `JsonLd` component
+- `COMPANY_INFO` (`index.ts`) is the single source of the company identity: legal form, share capital, RCS, SIRET, VAT number, manager, address, phone and email. The footer, the contact page and the legal pages (identity card, privacy policy, CGV) render it; never hard-code these values in a page
 
 ### TypeScript Configuration
 
