@@ -44,7 +44,7 @@ export default function ProjectsCTA({
     description = 'Discutons de vos objectifs et découvrez comment nous pouvons vous accompagner dans votre transformation digitale.',
     primaryButton = {
         text: 'Démarrer un projet',
-        href: '/#contact',
+        href: '/contact',
         variant: 'primary',
         showArrow: true,
         ctaLocation: 'projects-cta',

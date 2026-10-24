@@ -62,6 +62,15 @@ pnpm generate:image-metadata # Write blur placeholder + width/height into MDX fr
 
 All scripts live in `scripts/` and run with `tsx`.
 
+### CGV PDF
+
+`public/pdf/CGV.pdf` is the CGV page printed by Chrome: the site hides its navbar, footer, tabs and table of contents in print (`print:hidden`), flattens the legal section cards and sets A4 margins (`@page` in `globals.css`). After any change to the CGV page or to `COMPANY_INFO`, bump the page's `updated` date, then regenerate the file from a production build:
+
+```bash
+pnpm build && pnpm start -p 3123
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --no-pdf-header-footer --print-to-pdf=public/pdf/CGV.pdf http://localhost:3123/conditions-generales-de-vente
+```
+
 **IMPORTANT**: Always run `pnpm knip` along with `pnpm lint` and `pnpm typecheck` to ensure code quality. Knip detects:
 
 - Unused files, exports, and types
@@ -84,7 +93,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/mentions-legales/page.tsx` - Legal notices page (forwards the old `#donnees-personnelles` and `#cookies` anchors to their new pages)
 - `src/app/politique-de-confidentialite/page.tsx` - Privacy policy page
 - `src/app/cookies/page.tsx` - Cookies page
-- `src/app/conditions-generales-de-vente/page.tsx` - Terms and conditions page
+- `src/app/conditions-generales-de-vente/page.tsx` - Terms and conditions page (its downloadable copy, `public/pdf/CGV.pdf`, is the page printed to PDF: regenerate it whenever the page changes, see [CGV PDF](#cgv-pdf))
 - `src/app/layout.tsx` - Root layout: metadata, fonts, JSON-LD (Organization + WebSite), providers, `DefaultLayout`, Umami analytics
 - `src/app/not-found.tsx` - Custom 404 page
 - `src/app/sitemap.ts` - Dynamic sitemap generation
@@ -129,7 +138,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
     title: string
     slug: string (kept equal to the directory name, which is what the code uses as the slug)
     date: string (YYYY-MM-DD, date of SILARHI's first commit on the client repository)
-    endDate: string (optional, YYYY-MM-DD, end of an engagement that has ended: SILARHI's last commit or release; shown as a period on the page and the cards)
+    endDate: string (optional, YYYY-MM-DD, end of an engagement that has ended: SILARHI's last commit or release; shown as a period on the page and the cards, and as a duration on the page, computed by `formatProjectDuration()`)
     excerpt: string
     client: string (slug reference)
     technologies: string[] (slug references)
@@ -139,7 +148,6 @@ Projects and content are stored as MDX files in the `content/` directory at the 
     category: string
     name: string (optional, product/app name if applicable)
     url: string (optional, live site URL)
-    duration: string (optional)
     engagement:
         type: 'project_based' | 'continuous_support' | 'consulting'
         description: string
@@ -153,9 +161,9 @@ Projects and content are stored as MDX files in the `content/` directory at the 
 
     The source of truth is the `ProjectFrontMatter` type in `src/utils/project.ts` (there is no runtime schema validation). Projects with `published: false` or an unknown `client` are skipped.
 
-    Iteration files (`v1.mdx`, …) have `title`, `date` (when that iteration's work landed: release tag or merge date) and `published` frontmatter and are listed oldest first.
+    Iteration files (`v1.mdx`, …) have `title`, `date` (when that iteration's work landed: release tag or merge date) and `published` frontmatter and are listed oldest first; an iteration with `published: false` is skipped (a missing flag counts as published).
 
-    When an engagement has ended, set `endDate` and say so in a closing sentence of `engagement.description` ("Mission terminée en juillet 2024.", "Projet archivé en octobre 2026.").
+    When an engagement has ended, set `endDate` and say so in a closing sentence of `engagement.description` ("Mission terminée en juillet 2024.", "Projet archivé en octobre 2026."). There is no `duration` field: the page derives it from `date` and `endDate`, so an ongoing engagement shows none.
 
 - **Clients**: `content/clients/*.mdx` with client metadata (optional `logo` + generated `logo_metadata`)
 - **Technologies**: `content/technologies/*.mdx` with technology metadata (`name`, optional `name_aliases`, SEO fields, `reasons`)
@@ -279,6 +287,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 **Structured Data** (`src/lib/schemas/`):
 
 - Schema.org JSON-LD generators (`index.ts`: Organization, WebSite, WebPage, Breadcrumb, Services…; `project.ts`; `technology.ts`), rendered with the `JsonLd` component
+- `COMPANY_INFO` (`index.ts`) is the single source of the company identity: legal form, share capital, RCS, SIRET, VAT number, manager, address, phone and email. The footer, the contact page and the legal pages (identity card, privacy policy, CGV) render it; never hard-code these values in a page
 
 ### TypeScript Configuration
 

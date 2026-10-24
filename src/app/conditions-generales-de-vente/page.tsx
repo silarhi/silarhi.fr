@@ -3,10 +3,12 @@ import type { Metadata } from 'next'
 import LegalLayout from '@/components/legal-layout'
 import LegalSection from '@/components/legal-section'
 import { Download } from '@/components/ui/icons'
+import { COMPANY_INFO } from '@/lib/schemas'
 import { getCanonicalUrl } from '@/utils/url'
 
 export const metadata: Metadata = {
     title: `Conditions Générales de Vente - SILARHI`,
+    description: `Les conditions générales de vente des prestations de SILARHI : devis, cession des droits, confidentialité, règlement, recette des livrables et litiges.`,
     alternates: {
         canonical: getCanonicalUrl('/conditions-generales-de-vente'),
     },
@@ -18,7 +20,7 @@ export default function Page() {
             current="/conditions-generales-de-vente"
             title="Conditions générales de vente"
             lead="Les conditions qui encadrent les prestations réalisées par SILARHI pour ses clients."
-            updated="2026-01-19"
+            updated="2026-10-24"
             actions={
                 <a href="/pdf/CGV.pdf" download className="inline-flex items-center gap-1.5 text-sm font-medium">
                     <Download aria-hidden="true" />
@@ -32,9 +34,10 @@ export default function Page() {
                     Prestataire pour toute prestation de services ou produit proposé audit Client.
                 </p>
                 <p>
-                    Le terme « Prestataire » désigne la société SILARHI, EURL au capital de 1 000 €, 116 Route
-                    d&apos;Espagne, HELIOS 4, BAT 113, BAL 411, 31100 Toulouse, immatriculée au RCS de TOULOUSE sous le
-                    numéro 841541667 et représentée par Guillaume Sainthillier en sa qualité de Gérant.
+                    Le terme « Prestataire » désigne la société {COMPANY_INFO.legalName}, {COMPANY_INFO.legalForm} au
+                    capital de {COMPANY_INFO.shareCapital}, {COMPANY_INFO.addressLines.join(', ')}, immatriculée au RCS
+                    de {COMPANY_INFO.rcs.city} sous le numéro {COMPANY_INFO.rcs.number} et représentée par{' '}
+                    {COMPANY_INFO.manager} en sa qualité de Gérant.
                 </p>
             </LegalSection>
             <LegalSection id="article-2" title="L'objet du contrat">
