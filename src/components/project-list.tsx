@@ -99,16 +99,17 @@ export default function ProjectList({ projects }: ProjectListProps) {
                                 ))}
                         </div>
 
-                        <Link
+                        <Button
+                            as="a"
                             href={`/projets/${project.slug}`}
+                            variant="primary"
+                            className="group"
                             data-analytics-event="project-view"
                             data-analytics-slug={project.slug}
                         >
-                            <Button variant="primary" className="group">
-                                Le projet en détail
-                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                            </Button>
-                        </Link>
+                            Le projet en détail
+                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Button>
                     </div>
                 </article>
             ))}

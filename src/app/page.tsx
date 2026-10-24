@@ -241,9 +241,9 @@ function HeroSection() {
                             </h1>
                         </div>
                         <div>
-                            <h2 className="mt-4 text-3xl uppercase text-shadow-lg">
+                            <p className="mt-4 mb-0 text-2xl uppercase text-shadow-lg">
                                 Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
-                            </h2>
+                            </p>
                         </div>
                         <div>
                             <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">

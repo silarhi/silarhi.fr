@@ -77,7 +77,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <Section className="bg-surface pt-32 pb-16 lg:pt-40 lg:pb-24">
                 <Link
                     href="/projets"
-                    className="group text-foreground/80 hover:text-primary mb-8 inline-flex items-center gap-2 text-sm transition-colors"
+                    className="group text-foreground/80 hover:text-primary mb-8 inline-flex min-h-6 items-center gap-2 text-sm transition-colors"
                 >
                     <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
                     Retour aux projets
@@ -148,9 +148,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {/* Overview */}
             <Section className="border-border bg-surface border-b">
                 <div className="max-w-3xl">
-                    <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
+                    <p className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
                         Vue d&apos;ensemble
-                    </h2>
+                    </p>
                     <div className="text-foreground text-xl leading-relaxed lg:text-2xl">
                         <Markdown source={project.overview} variant="inline" />
                     </div>
@@ -160,9 +160,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {/* About Client */}
             <Section className="bg-light">
                 <div className="max-w-3xl">
-                    <h2 className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
+                    <p className="text-primary mb-4 text-sm font-semibold tracking-wide uppercase">
                         À propos du client
-                    </h2>
+                    </p>
                     <div className="border-border bg-surface rounded-xl border p-8">
                         <div className="mb-6 flex items-center gap-4">
                             {project.client.logo && (
@@ -178,7 +178,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                     />
                                 </div>
                             )}
-                            <h3 className="text-foreground text-2xl font-bold uppercase">{project.client.name}</h3>
+                            <h2 className="text-foreground text-2xl font-bold uppercase">{project.client.name}</h2>
                         </div>
                         <div className="text-foreground/80 space-y-4">
                             <div className="flex items-start gap-3">
@@ -221,9 +221,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         </p>
                     </div>
                     <div>
-                        <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
+                        <p className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
                             Points Clés du Défi
-                        </h3>
+                        </p>
                         <ul className="space-y-4">
                             {project.challenge.points.map((point, idx) => (
                                 <li key={idx} className="flex items-start gap-3">
@@ -244,9 +244,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <Section className="bg-surface">
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="order-2 lg:order-1">
-                        <h3 className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
+                        <p className="text-foreground mb-6 text-sm font-semibold tracking-wide uppercase">
                             Fonctionnalités Clés
-                        </h3>
+                        </p>
                         <ul className="space-y-4">
                             {project.solution.points.map((point, idx) => (
                                 <li key={idx} className="flex items-start gap-3">
@@ -291,10 +291,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                         {/* Iterations Section */}
                         {project.iterations.length > 0 && (
                             <div className="border-border bg-surface rounded-xl border p-6">
-                                <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                                <p className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
                                     <Calendar className="h-4 w-4" />
                                     Le projet en détails
-                                </h3>
+                                </p>
                                 <div className="max-h-96 overflow-y-auto pr-4">
                                     {project.iterations.map((iteration, idx) => (
                                         <div key={iteration.slug} className="flex gap-4">
@@ -333,10 +333,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
                         {/* Deliverables (for one-shot projects) */}
                         <div className="border-border bg-surface rounded-xl border p-6">
-                            <h3 className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+                            <p className="text-foreground mb-4 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
                                 <FileText className="h-4 w-4" />
                                 Livrables
-                            </h3>
+                            </p>
                             <ul className="grid gap-4 sm:grid-cols-2">
                                 {project.engagement.deliverables.map((deliverable, idx) => (
                                     <li key={idx} className="flex items-start gap-3">
@@ -357,9 +357,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {/* Technologies */}
             <Section className="border-border bg-surface border-t">
                 <div className="mx-auto max-w-3xl">
-                    <h2 className="text-foreground mb-6 text-center text-sm font-semibold tracking-wide uppercase">
+                    <p className="text-foreground mb-6 text-center text-sm font-semibold tracking-wide uppercase">
                         Technologies utilisées
-                    </h2>
+                    </p>
                     <div className="flex flex-wrap justify-center gap-3">
                         {[...project.technologies]
                             .sort((a, b) => a.name.localeCompare(b.name))

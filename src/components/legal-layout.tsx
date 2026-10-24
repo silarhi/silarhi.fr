@@ -53,7 +53,7 @@ export default function LegalLayout({ current, title, lead, updated, actions, id
                             <li>
                                 <Link
                                     href="/"
-                                    className="text-foreground/70 hover:text-primary flex items-center gap-1.5 hover:no-underline"
+                                    className="text-foreground/70 hover:text-primary flex min-h-6 items-center gap-1.5 hover:no-underline"
                                 >
                                     <House aria-hidden="true" />
                                     Accueil

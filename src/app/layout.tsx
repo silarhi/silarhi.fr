@@ -11,10 +11,13 @@ import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/schemas
 import { HashProvider } from '@/providers/hash-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { cn } from '@/utils/lib'
+import { getBaseUrl } from '@/utils/url'
 
 import { lato, montserrat } from './fonts'
 
 export const metadata: Metadata = {
+    // Resolves the default og:image (app/opengraph-image.png) to an absolute URL
+    metadataBase: new URL(getBaseUrl()),
     title: `Agence de développement Web PHP à Toulouse - SILARHI`,
     description: `Développement d'applications Web à Toulouse et en France. Donnez vie à vos idées d'applications responsive & mobiles. Devis rapide et gratuit.`,
     icons: {
