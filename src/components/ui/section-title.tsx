@@ -21,7 +21,7 @@ export default function SectionTitle({ children, level, uppercase = false, class
                     'text-sm tracking-wide uppercase': uppercase && level === 3,
                     'text-xl': level === 3 && !uppercase,
                     'text-3xl font-bold lg:text-4xl': level === 2,
-                    'text-4xl font-bold lg:text-5xl': level === 1,
+                    'text-4xl font-bold lg:text-6xl': level === 1,
                 },
                 className
             ),

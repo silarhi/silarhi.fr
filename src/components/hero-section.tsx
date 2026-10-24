@@ -16,7 +16,7 @@ export default function HeroSection({ pretitle, title, description, children, cl
                 {pretitle && <div className="mb-6">{pretitle}</div>}
 
                 <h1
-                    className={cn('text-foreground mb-6 text-4xl font-bold text-balance lg:text-5xl', {
+                    className={cn('text-foreground mb-6 text-4xl font-bold text-balance lg:text-6xl', {
                         'mb-0': !description && !children,
                     })}
                 >
