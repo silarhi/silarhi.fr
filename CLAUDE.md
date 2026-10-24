@@ -153,7 +153,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
 
     The source of truth is the `ProjectFrontMatter` type in `src/utils/project.ts` (there is no runtime schema validation). Projects with `published: false` or an unknown `client` are skipped.
 
-    Iteration files (`v1.mdx`, …) have `title`, `date` (when that iteration's work landed: release tag or merge date) and `published` frontmatter and are listed oldest first.
+    Iteration files (`v1.mdx`, …) have `title`, `date` (when that iteration's work landed: release tag or merge date) and `published` frontmatter and are listed oldest first; an iteration with `published: false` is skipped (a missing flag counts as published).
 
     When an engagement has ended, set `endDate` and say so in a closing sentence of `engagement.description` ("Mission terminée en juillet 2024.", "Projet archivé en octobre 2026.").
 

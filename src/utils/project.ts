@@ -57,7 +57,6 @@ interface ProjectIteration {
     slug: string
     title: string
     date: Date
-    project: string
     content: string
 }
 
@@ -133,7 +132,8 @@ interface ProjectFrontMatter {
 interface IterationFrontMatter {
     title: string
     date: string
-    project: string
+    // Only an explicit `published: false` hides an iteration
+    published?: boolean
 }
 
 // In-memory cache for projects (loaded once per build)
@@ -173,11 +173,14 @@ function parseProjectIterations(projectDir: string): ProjectIteration[] {
         const { data, content } = matter(fileContents)
         const frontMatter = data as IterationFrontMatter
 
+        if (frontMatter.published === false) {
+            continue
+        }
+
         iterations.push({
             slug: file.replace(/\.mdx$/, ''),
             title: frontMatter.title,
             date: new Date(frontMatter.date),
-            project: frontMatter.project,
             content,
         })
     }
