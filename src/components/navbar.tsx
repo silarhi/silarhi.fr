@@ -101,6 +101,12 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
 
     const isMainPage = pathname === '/' || pathname.startsWith('/#')
 
+    // The yellow accent only reads on the dark bars (home hero, floating bar, dark mode): on the light background of
+    // the other pages it is 1.4:1, so the active and hovered links take the primary blue there
+    const onLightBar = !floating && !isHomePage
+    const accentClass = onLightBar ? 'text-primary dark:text-secondary' : 'text-secondary'
+    const hoverAccentClass = onLightBar ? 'hover:text-primary dark:hover:text-secondary' : 'hover:text-secondary'
+
     // Get the correct href for menu items based on current page
     const getMenuItemHref = (item: MenuItem) => {
         // If on homepage, use indexPath if available (hash-only), otherwise use full path
@@ -134,7 +140,10 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                     <div className="flex items-center justify-between py-3">
                         <Link
                             href="/"
-                            className="hover:text-secondary flex items-center space-x-2 text-inherit transition-colors duration-300 hover:no-underline"
+                            className={cn(
+                                'flex items-center space-x-2 text-inherit transition-colors duration-300 hover:no-underline',
+                                hoverAccentClass
+                            )}
                         >
                             <Image
                                 src={logo}
@@ -169,9 +178,12 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                                 <li key={i}>
                                     <ActiveLink
                                         href={getMenuItemHref(item)}
-                                        className="hover:text-secondary text-inherit transition-colors duration-300 hover:no-underline"
+                                        className={cn(
+                                            'text-inherit transition-colors duration-300 hover:no-underline',
+                                            hoverAccentClass
+                                        )}
                                         target={item.target}
-                                        activeClassName="text-secondary"
+                                        activeClassName={accentClass}
                                     >
                                         {item.label}
                                     </ActiveLink>
