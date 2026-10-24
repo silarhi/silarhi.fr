@@ -167,6 +167,13 @@
     }
 }
 
+/* 🖨️ PRINT — the site chrome is hidden (print:hidden) and the legal pages print as a plain document:
+   public/pdf/CGV.pdf is the CGV page printed this way (see CLAUDE.md) */
+@page {
+    size: A4;
+    margin: 18mm 16mm;
+}
+
 /* 🎬 SCROLL FADE-IN — FadeInWhenVisible, CSS only (no JavaScript, nothing to hydrate)
    The fade follows the element's entry into the viewport. Browsers without scroll-driven animations and
    visitors who prefer reduced motion get the content without the effect: it is never hidden.

@@ -20,11 +20,14 @@ export default function LegalSection({ id, title, children, className }: LegalSe
             id={id}
             aria-labelledby={`${id}-title`}
             className={cn(
-                'bg-surface dark:bg-surface-elevated border-border scroll-mt-24 rounded-2xl border p-5 shadow-sm [counter-increment:legal-section] sm:p-8',
+                'bg-surface dark:bg-surface-elevated border-border scroll-mt-24 rounded-2xl border p-5 shadow-sm [counter-increment:legal-section] sm:p-8 print:border-0 print:p-0 print:shadow-none',
                 className
             )}
         >
-            <h2 id={`${id}-title`} className="mb-5 flex items-start gap-3 text-xl font-bold lg:text-2xl">
+            <h2
+                id={`${id}-title`}
+                className="mb-5 flex items-start gap-3 text-xl font-bold lg:text-2xl print:mb-3 print:break-after-avoid"
+            >
                 <span
                     className="bg-primary/10 text-primary dark:bg-primary-light/20 dark:text-primary-light flex size-9 shrink-0 items-center justify-center rounded-lg text-base before:content-[counter(legal-section)]"
                     aria-hidden="true"

@@ -122,7 +122,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
             <nav
                 id="app-navbar"
                 className={cn(
-                    'absolute top-0 right-0 left-0 z-50 transition-opacity',
+                    'absolute top-0 right-0 left-0 z-50 transition-opacity print:hidden',
                     {
                         fixed: floating,
                         'text-surface dark:text-foreground': floating || (isHomePage && !floating),

@@ -53,7 +53,7 @@ export default function Footer() {
 
     return (
         <footer
-            className={cn('bg-surface-dark text-dark-foreground dark:bg-background', {
+            className={cn('bg-surface-dark text-dark-foreground dark:bg-background print:hidden', {
                 'mt-20': pathname !== '/contact',
             })}
         >
