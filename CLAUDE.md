@@ -129,7 +129,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
     title: string
     slug: string (kept equal to the directory name, which is what the code uses as the slug)
     date: string (YYYY-MM-DD, date of SILARHI's first commit on the client repository)
-    endDate: string (optional, YYYY-MM-DD, end of an engagement that has ended: SILARHI's last commit or release; shown as a period on the page and the cards)
+    endDate: string (optional, YYYY-MM-DD, end of an engagement that has ended: SILARHI's last commit or release; shown as a period on the page and the cards, and as a duration on the page, computed by `formatProjectDuration()`)
     excerpt: string
     client: string (slug reference)
     technologies: string[] (slug references)
@@ -139,7 +139,6 @@ Projects and content are stored as MDX files in the `content/` directory at the 
     category: string
     name: string (optional, product/app name if applicable)
     url: string (optional, live site URL)
-    duration: string (optional)
     engagement:
         type: 'project_based' | 'continuous_support' | 'consulting'
         description: string
@@ -155,7 +154,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
 
     Iteration files (`v1.mdx`, …) have `title`, `date` (when that iteration's work landed: release tag or merge date) and `published` frontmatter and are listed oldest first; an iteration with `published: false` is skipped (a missing flag counts as published).
 
-    When an engagement has ended, set `endDate` and say so in a closing sentence of `engagement.description` ("Mission terminée en juillet 2024.", "Projet archivé en octobre 2026.").
+    When an engagement has ended, set `endDate` and say so in a closing sentence of `engagement.description` ("Mission terminée en juillet 2024.", "Projet archivé en octobre 2026."). There is no `duration` field: the page derives it from `date` and `endDate`, so an ongoing engagement shows none.
 
 - **Clients**: `content/clients/*.mdx` with client metadata (optional `logo` + generated `logo_metadata`)
 - **Technologies**: `content/technologies/*.mdx` with technology metadata (`name`, optional `name_aliases`, SEO fields, `reasons`)
