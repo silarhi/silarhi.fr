@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Fragment } from 'react'
 
 import ContactForm from '@/components/contact-form'
 import HeroSection from '@/components/hero-section'
@@ -74,15 +75,12 @@ function InfoSection() {
     const contactItems = [
         {
             icon: Map,
-            content: (
-                <>
-                    116 Route d&apos;Espagne
-                    <br />
-                    HELIOS 4, BAT 113, BAL 411
-                    <br />
-                    31100 Toulouse
-                </>
-            ),
+            content: COMPANY_INFO.addressLines.map((line, index) => (
+                <Fragment key={line}>
+                    {index > 0 && <br />}
+                    {line}
+                </Fragment>
+            )),
         },
         {
             icon: Clock,
@@ -97,16 +95,16 @@ function InfoSection() {
         {
             icon: Phone,
             content: (
-                <a href="tel:+33607275826" className="py-1">
-                    0 607.275.826
+                <a href={`tel:${COMPANY_INFO.telephone}`} className="py-1">
+                    {COMPANY_INFO.telephoneDisplay}
                 </a>
             ),
         },
         {
             icon: Envelope,
             content: (
-                <a href="mailto:%68ell%6F@si%6Ca%72hi.fr" className="py-1">
-                    hello@silarhi.fr
+                <a href={`mailto:${COMPANY_INFO.email}`} className="py-1">
+                    {COMPANY_INFO.email}
                 </a>
             ),
         },

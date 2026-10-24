@@ -53,11 +53,33 @@ export function formatProjectPeriod(
     return monthYearFormatter.format(endDate)
 }
 
+const dayInMs = 24 * 60 * 60 * 1000
+const averageMonthInDays = 365.25 / 12
+
+// Format the length of an ended engagement: in weeks under four weeks ("2 semaines"), else rounded to the month
+// ("7 mois", "1 an", "2 ans et 3 mois")
+export function formatProjectDuration(date: Date, endDate: Date): string {
+    const days = (endDate.getTime() - date.getTime()) / dayInMs
+    if (days < 28) {
+        const weeks = Math.max(1, Math.round(days / 7))
+        return weeks > 1 ? `${weeks} semaines` : '1 semaine'
+    }
+
+    const months = Math.round(days / averageMonthInDays)
+    if (months < 12) {
+        return `${months} mois`
+    }
+
+    const years = Math.floor(months / 12)
+    const remainingMonths = months % 12
+    const yearsLabel = years > 1 ? `${years} ans` : '1 an'
+    return remainingMonths ? `${yearsLabel} et ${remainingMonths} mois` : yearsLabel
+}
+
 interface ProjectIteration {
     slug: string
     title: string
     date: Date
-    project: string
     content: string
 }
 
@@ -99,7 +121,6 @@ export interface Project {
     category: string
     url?: string
     name?: string
-    duration?: string
     engagement: ProjectEngagement
     image?: string | StaticImageData
     imageMetadata?: ImageMetadata
@@ -121,7 +142,6 @@ interface ProjectFrontMatter {
     category: string
     url?: string
     name?: string
-    duration?: string
     engagement: ProjectEngagement
     image?: string
     image_metadata?: ImageMetadata
@@ -133,7 +153,8 @@ interface ProjectFrontMatter {
 interface IterationFrontMatter {
     title: string
     date: string
-    project: string
+    // Only an explicit `published: false` hides an iteration
+    published?: boolean
 }
 
 // In-memory cache for projects (loaded once per build)
@@ -173,11 +194,14 @@ function parseProjectIterations(projectDir: string): ProjectIteration[] {
         const { data, content } = matter(fileContents)
         const frontMatter = data as IterationFrontMatter
 
+        if (frontMatter.published === false) {
+            continue
+        }
+
         iterations.push({
             slug: file.replace(/\.mdx$/, ''),
             title: frontMatter.title,
             date: new Date(frontMatter.date),
-            project: frontMatter.project,
             content,
         })
     }
@@ -235,7 +259,6 @@ function loadProjectsCache(): Promise<Map<string, Project>> {
                     codeOwnership: frontMatter.codeOwnership,
                     category: frontMatter.category,
                     name: frontMatter.name,
-                    duration: frontMatter.duration,
                     engagement: frontMatter.engagement,
                     image: frontMatter.image,
                     imageMetadata: frontMatter.image_metadata,

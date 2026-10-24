@@ -3,10 +3,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Fragment } from 'react'
 
 import { montserrat } from '@/app/fonts'
 import Button from '@/components/ui/button'
 import iconEnvelope from '@/icons/envelope_hem0.svg'
+import { COMPANY_INFO } from '@/lib/schemas'
 import logo from '@/public/images/logo-4096.png'
 import { cn } from '@/utils/lib'
 
@@ -51,7 +53,7 @@ export default function Footer() {
 
     return (
         <footer
-            className={cn('bg-surface-dark text-dark-foreground dark:bg-background', {
+            className={cn('bg-surface-dark text-dark-foreground dark:bg-background print:hidden', {
                 'mt-20': pathname !== '/contact',
             })}
         >
@@ -105,11 +107,12 @@ export default function Footer() {
                             <div className="space-y-1">
                                 <p className="mb-0 font-semibold">Notre adresse</p>
                                 <p className="text-dark-foreground/80 dark:text-dark-foreground/90 mb-0">
-                                    116 Route d&apos;Espagne
-                                    <br />
-                                    HELIOS 4, BAT 113, BAL 411
-                                    <br />
-                                    31100 Toulouse
+                                    {COMPANY_INFO.addressLines.map((line, index) => (
+                                        <Fragment key={line}>
+                                            {index > 0 && <br />}
+                                            {line}
+                                        </Fragment>
+                                    ))}
                                 </p>
                             </div>
                         </div>

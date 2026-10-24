@@ -41,7 +41,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html
             lang="fr"
-            className="bg-background text-foreground h-full scroll-smooth"
+            className="bg-background text-foreground h-full scroll-smooth print:bg-white"
             data-scroll-behavior="smooth"
             suppressHydrationWarning
         >

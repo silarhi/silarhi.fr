@@ -46,9 +46,9 @@ export default function LegalLayout({ current, title, lead, updated, actions, id
 
     return (
         <>
-            <div className="bg-surface border-border border-b pt-28 pb-10 lg:pt-36 lg:pb-12">
+            <div className="bg-surface border-border border-b pt-28 pb-10 lg:pt-36 lg:pb-12 print:border-0 print:p-0">
                 <div className="container mx-auto px-4 lg:px-8">
-                    <nav aria-label="Fil d’Ariane" className="mb-8">
+                    <nav aria-label="Fil d’Ariane" className="mb-8 print:hidden">
                         <ol className="text-foreground/70 flex flex-wrap items-center gap-2 text-sm">
                             <li>
                                 <Link
@@ -72,7 +72,7 @@ export default function LegalLayout({ current, title, lead, updated, actions, id
                         </ol>
                     </nav>
                     <div className="max-w-3xl">
-                        <Badge size="sm" className="mb-5 uppercase tracking-wide">
+                        <Badge size="sm" className="mb-5 uppercase tracking-wide print:hidden">
                             Informations juridiques
                         </Badge>
                         <h1 className="text-foreground mb-5 text-4xl font-bold text-balance lg:text-5xl">{title}</h1>
@@ -85,12 +85,12 @@ export default function LegalLayout({ current, title, lead, updated, actions, id
                                     <time dateTime={updated}>{dateFormatter.format(new Date(updated))}</time>
                                 </span>
                             </p>
-                            {actions}
+                            {actions && <div className="print:hidden">{actions}</div>}
                         </div>
                     </div>
                     <nav
                         aria-label="Documents juridiques"
-                        className="bg-background border-border mt-10 grid grid-cols-2 gap-1.5 rounded-xl border p-1.5 sm:flex sm:w-fit sm:flex-wrap"
+                        className="bg-background border-border mt-10 grid grid-cols-2 gap-1.5 rounded-xl border p-1.5 sm:flex sm:w-fit sm:flex-wrap print:hidden"
                     >
                         {legalPages.map((page) => {
                             const Icon = page.icon
@@ -117,9 +117,9 @@ export default function LegalLayout({ current, title, lead, updated, actions, id
                     </nav>
                 </div>
             </div>
-            <Section className="py-10 lg:py-16">
+            <Section className="py-10 lg:py-16 print:py-8">
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-                    <aside className="hidden lg:col-span-4 lg:block">
+                    <aside className="hidden lg:col-span-4 lg:block print:hidden">
                         <LegalToc items={tocItems} />
                     </aside>
                     <article className="space-y-6 [counter-reset:legal-section] lg:col-span-8">

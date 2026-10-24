@@ -17,6 +17,7 @@ import SectionTitle from '@/components/ui/section-title'
 import { generateProjectPageSchema, generateProjectSchema } from '@/lib/schemas/project'
 import { cn } from '@/utils/lib'
 import {
+    formatProjectDuration,
     formatProjectPeriod,
     getAllProjectSlugs,
     getEngagementTypeLabel,
@@ -111,10 +112,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                     {formatProjectPeriod(project, 'year')}
                                 </div>
                             </div>
-                            {project.duration && (
+                            {project.endDate && (
                                 <div>
                                     <div className="text-foreground/80 mb-1 uppercase">Durée</div>
-                                    <div className="text-foreground font-semibold">{project.duration}</div>
+                                    <div className="text-foreground font-semibold">
+                                        {formatProjectDuration(project.date, project.endDate)}
+                                    </div>
                                 </div>
                             )}
                         </div>

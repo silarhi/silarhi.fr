@@ -181,24 +181,41 @@ interface ListItem {
     item?: CreativeWork | Thing
 }
 
-// Company information constants
+// Street and building lines of the postal address, printed on separate lines in the footer and the contact page
+const streetAddressLines = ["116 Route d'Espagne", 'HELIOS 4, BAT 113, BAL 411']
+const postalCode = '31100'
+const addressLocality = 'Toulouse'
+
+// Company information constants (the single source for the identity shown on the site)
 export const COMPANY_INFO = {
     name: 'SILARHI',
     legalName: 'SILARHI',
+    legalForm: 'SARL',
+    shareCapital: '1 000 €',
+    // Registre du commerce et des sociétés: registry city and SIREN number
+    rcs: { city: 'Toulouse', number: '841 541 667' },
+    siret: '841 541 667 00017',
+    vatNumber: 'FR96841541667',
+    // Gérant: legal representative and publication director
+    manager: 'Guillaume Sainthillier',
     description:
         "Agence de développement Web PHP spécialisée dans la réalisation d'applications Web sur mesure à Toulouse et en France.",
     foundingDate: '2018-08-01',
     url: getBaseUrl(),
     logo: `${getBaseUrl()}/icon.png`,
     telephone: '+33607275826',
+    telephoneDisplay: '06 07 27 58 26',
     email: 'hello@silarhi.fr',
+    // Spread as is into the schema.org PostalAddress
     address: {
-        streetAddress: "116 Route d'Espagne, HELIOS 4, BAT 113, BAL 411",
-        addressLocality: 'Toulouse',
-        postalCode: '31100',
+        streetAddress: streetAddressLines.join(', '),
+        addressLocality,
+        postalCode,
         addressCountry: 'FR',
         addressRegion: 'Occitanie',
     },
+    // The address as printed: one entry per line, or joined with commas on the legal pages
+    addressLines: [...streetAddressLines, `${postalCode} ${addressLocality}`],
     geo: {
         latitude: 43.5667,
         longitude: 1.4,
