@@ -170,7 +170,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
 
 - **Clients**: `content/clients/*.mdx` with client metadata (optional `logo` + generated `logo_metadata`)
 - **Technologies**: `content/technologies/*.mdx` with technology metadata (`name`, optional `name_aliases`, SEO fields, `reasons`)
-- **Services**: `content/services/*.mdx`, one file per service page. Frontmatter: `title` (H1), `order`, `date`, `published`, `meta_title`, `meta_description`, `excerpt` (hero), `intro` (overview paragraph), `service_type` (schema.org), `projects` (case-study slugs shown as proof), `packages` (`OPEN_SOURCE_PACKAGES` slugs, shown as cards linking to their documentation sites), `technologies` (slugs of the technology pages that link back to the service), `faq` (question/answer pairs, also emitted as FAQPage JSON-LD), `cta`. The MDX body holds the H2 sections.
+- **Services**: `content/services/*.mdx`, one file per service page. Frontmatter: `title` (H1), `order`, `date`, `published`, `meta_title`, `meta_description`, `excerpt` (hero), `intro` (overview paragraph), `service_type` (schema.org), `projects` (case-study slugs; the page shows the 3 most recent, like the technology pages, so the MDX body does not list them again), `packages` (`OPEN_SOURCE_PACKAGES` slugs, shown as cards linking to their documentation sites), `technologies` (slugs of the technology pages that link back to the service), `faq` (question/answer pairs, also emitted as FAQPage JSON-LD), `cta`. The MDX body holds the H2 sections.
 
 Content processing pipeline:
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import HeroSection from '@/components/hero-section'
@@ -8,6 +9,7 @@ import OpenSourcePackages from '@/components/open-source-packages'
 import ProjectList from '@/components/project-list'
 import ProjectsCTA from '@/components/projects-cta'
 import Badge from '@/components/ui/badge'
+import { ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import { generateServiceFaqSchema, generateServicePageSchema, generateServiceSchema } from '@/lib/schemas/service'
@@ -51,17 +53,22 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
     }
 }
 
-// Resolve the case studies referenced by a service; a typo in the front matter must fail the build, not hide a card
+// Resolve the case studies referenced by a service, newest first; a typo in the front matter must fail the build, not hide a card
 async function getServiceProjects(slugs: string[]): Promise<Project[]> {
     const projects = await Promise.all(slugs.map((slug) => getProjectBySlug(slug)))
 
-    return projects.map((project, index) => {
-        if (!project) {
-            throw new Error(`Unknown project "${slugs[index]}" referenced by a service page`)
-        }
-        return project
-    })
+    return projects
+        .map((project, index) => {
+            if (!project) {
+                throw new Error(`Unknown project "${slugs[index]}" referenced by a service page`)
+            }
+            return project
+        })
+        .sort((a, b) => b.date.getTime() - a.date.getTime())
 }
+
+// Only the latest case studies are shown, as on the technology pages: the project pages stay the reference for each one
+const MAX_PROJECTS_DISPLAY = 3
 
 export default async function ServicePage({ params }: ServicePageProps) {
     const { slug } = await params
@@ -71,7 +78,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
         notFound()
     }
 
-    const projects = await getServiceProjects(service.projects)
+    const allProjects = await getServiceProjects(service.projects)
+    const projects = allProjects.slice(0, MAX_PROJECTS_DISPLAY)
     const packages = getPackagesBySlugs(service.packages)
 
     // Generate service page schemas (the FAQ block is only emitted when questions are visible on the page)
@@ -113,10 +121,22 @@ export default async function ServicePage({ params }: ServicePageProps) {
             {projects.length > 0 && (
                 <Section className="bg-light border-border border-y">
                     <SectionHeader
-                        title="Nos réalisations"
+                        title={projects.length > 1 ? `Nos ${projects.length} derniers projets` : 'Notre dernier projet'}
                         subtitle="Des projets livrés et maintenus dans la durée pour ce type de besoin"
                     />
                     <ProjectList projects={projects} />
+
+                    {allProjects.length > MAX_PROJECTS_DISPLAY && (
+                        <div className="mt-12 text-center">
+                            <Link
+                                href="/projets"
+                                className="text-primary hover:text-primary-dark group inline-flex items-center gap-2 text-lg font-medium transition-colors"
+                            >
+                                Voir tous nos projets
+                                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                            </Link>
+                        </div>
+                    )}
                 </Section>
             )}
 
