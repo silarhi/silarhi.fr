@@ -16,6 +16,7 @@
         "validate:images": "tsx scripts/validate-images.ts",
         "generate:image-metadata": "tsx scripts/generate-image-metadata.ts",
         "typecheck": "tsc --noEmit",
+        "og-image": "node scripts/og-image.mjs",
         "prettier": "prettier --write \"**/*.{css,scss,md,mdx,yaml,yml}\"",
         "prettier:check": "prettier --check \"**/*.{css,scss,md,mdx,yaml,yml}\"",
         "size": "size-limit",
