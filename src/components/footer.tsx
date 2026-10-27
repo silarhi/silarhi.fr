@@ -29,6 +29,8 @@ const footerSections = [
             { href: '/developpement-logiciel-sur-mesure', label: 'Logiciel métier sur mesure' },
             { href: '/reprise-application-web-existante', label: "Reprise d'application" },
             { href: '/tierce-maintenance-applicative', label: 'Tierce maintenance applicative' },
+            { href: '/integration-flux-bancaires', label: 'Intégration bancaire' },
+            { href: '/modernisation-interface-symfony', label: 'Modernisation Symfony UX' },
         ],
     },
     {
@@ -38,6 +40,7 @@ const footerSections = [
             { href: '/technologies/php', label: 'PHP' },
             { href: '/technologies/api-platform', label: 'API Platform' },
             { href: '/technologies/react', label: 'React' },
+            { href: '/technologies', label: 'Toutes les technologies' },
         ],
     },
     {

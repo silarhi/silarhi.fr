@@ -88,7 +88,8 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/page.tsx` - Home page
 - `src/app/projets/page.tsx` - Projects listing with search, filters (`technology`, `category`, `industry`, `client`) and pagination, all driven by query params
 - `src/app/projets/[slug]/page.tsx` - Dynamic project detail pages (+ `loading.tsx`)
-- `src/app/technologies/[slug]/page.tsx` - Technology detail pages (projects using that tech, and the open-source packages tagged with it)
+- `src/app/technologies/page.tsx` - Technologies index: the most used ones (by project count), then all of them A–Z; a technology without published project has no page and is left out
+- `src/app/technologies/[slug]/page.tsx` - Technology detail pages (projects using that tech, the service pages and the open-source packages tagged with it)
 - `src/app/open-source/page.tsx` - SILARHI's open-source packages, each linking to its documentation site (`<slug>.silarhi.dev`), GitHub and Packagist
 - `src/app/[slug]/page.tsx` - Service pages, one per published file in `content/services/` (static, unknown slugs 404)
 - `src/app/contact/page.tsx` - Contact form with Formspree integration
@@ -169,7 +170,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
 
 - **Clients**: `content/clients/*.mdx` with client metadata (optional `logo` + generated `logo_metadata`)
 - **Technologies**: `content/technologies/*.mdx` with technology metadata (`name`, optional `name_aliases`, SEO fields, `reasons`)
-- **Services**: `content/services/*.mdx`, one file per service page. Frontmatter: `title` (H1), `order`, `date`, `published`, `meta_title`, `meta_description`, `excerpt` (hero), `intro` (overview paragraph), `service_type` (schema.org), `projects` (case-study slugs shown as proof), `faq` (question/answer pairs, also emitted as FAQPage JSON-LD), `cta`. The MDX body holds the H2 sections.
+- **Services**: `content/services/*.mdx`, one file per service page. Frontmatter: `title` (H1), `order`, `date`, `published`, `meta_title`, `meta_description`, `excerpt` (hero), `intro` (overview paragraph), `service_type` (schema.org), `projects` (case-study slugs shown as proof), `packages` (`OPEN_SOURCE_PACKAGES` slugs, shown as cards linking to their documentation sites), `technologies` (slugs of the technology pages that link back to the service), `faq` (question/answer pairs, also emitted as FAQPage JSON-LD), `cta`. The MDX body holds the H2 sections.
 
 Content processing pipeline:
 

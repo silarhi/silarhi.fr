@@ -26,6 +26,10 @@ export interface Service {
     published: boolean
     service_type: string
     projects: string[]
+    /** Open-source packages (`OPEN_SOURCE_PACKAGES` slugs) shown as the tools behind the service. */
+    packages: string[]
+    /** Technology slugs whose pages link back to this service. */
+    technologies: string[]
     faq: ServiceFaqItem[]
     cta: ServiceCta
     content: string
@@ -91,6 +95,8 @@ function loadServicesCache(): Map<string, Service> {
             published: true,
             service_type: frontMatter.service_type ?? title,
             projects: frontMatter.projects ?? [],
+            packages: frontMatter.packages ?? [],
+            technologies: frontMatter.technologies ?? [],
             faq: frontMatter.faq ?? [],
             cta: frontMatter.cta,
             content,
@@ -116,4 +122,10 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
 export async function getAllServices(): Promise<Service[]> {
     const cache = loadServicesCache()
     return Array.from(cache.values()).sort((a, b) => a.order - b.order || a.title.localeCompare(b.title))
+}
+
+// Get the services that list a technology, in editorial order
+export async function getServicesByTechnology(technologySlug: string): Promise<Service[]> {
+    const services = await getAllServices()
+    return services.filter((service) => service.technologies.includes(technologySlug))
 }

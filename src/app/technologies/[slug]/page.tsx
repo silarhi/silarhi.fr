@@ -14,6 +14,7 @@ import SectionHeader from '@/components/ui/section-header'
 import { generateTechnologyPageSchema, generateTechnologyProjectsListSchema } from '@/lib/schemas/technology'
 import { getPackagesByTechnology } from '@/utils/open-source'
 import { getProjectsByTechnology } from '@/utils/project'
+import { getServicesByTechnology } from '@/utils/service'
 import { getAllTechnologySlugs, getTechnologyBySlug } from '@/utils/technology'
 import { getCanonicalUrl } from '@/utils/url'
 
@@ -62,6 +63,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
     const totalProjects = allProjects.length
     const projects = allProjects.slice(0, MAX_PROJECTS_DISPLAY)
     const packages = getPackagesByTechnology(slug)
+    const services = await getServicesByTechnology(slug)
 
     // Generate technology page schemas
     const technologySchemas = [
@@ -75,11 +77,11 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
             <HeroSection
                 pretitle={
                     <Link
-                        href="/projets"
+                        href="/technologies"
                         className="group text-foreground/80 hover:text-primary inline-flex min-h-6 items-center gap-2 text-sm transition-colors"
                     >
                         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                        Retour aux projets
+                        Toutes les technologies
                     </Link>
                 }
                 title={technology.title}
@@ -133,6 +135,31 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                </Section>
+            )}
+
+            {/* Service pages built on this technology: the commercial offer behind the technical page */}
+            {services.length > 0 && (
+                <Section className="bg-surface border-border border-b">
+                    <SectionHeader title={`Nos services liés à ${technology.name}`} />
+                    <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+                        {services.map((service) => (
+                            <Link
+                                key={service.slug}
+                                href={`/${service.slug}`}
+                                className="group border-border bg-light hover:border-primary flex flex-col rounded-xl border p-6 transition-colors"
+                            >
+                                <h3 className="text-foreground group-hover:text-primary mb-3 text-lg font-semibold">
+                                    {service.title}
+                                </h3>
+                                <p className="text-foreground/80 mb-6 grow">{service.excerpt}</p>
+                                <span className="text-primary inline-flex items-center gap-1.5 text-sm font-medium">
+                                    Découvrir le service
+                                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                </span>
+                            </Link>
+                        ))}
                     </div>
                 </Section>
             )}

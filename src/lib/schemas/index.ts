@@ -196,7 +196,6 @@ export interface FAQPage {
     }[]
 }
 
-
 // Street and building lines of the postal address, printed on separate lines in the footer and the contact page
 const streetAddressLines = ["116 Route d'Espagne", 'HELIOS 4, BAT 113, BAL 411']
 const postalCode = '31100'
