@@ -1,0 +1,83 @@
+---
+title: "Moderniser l'interface de votre application Symfony"
+category: 'Symfony UX & Turbo'
+order: 6
+date: '2026-10-27'
+published: true
+meta_title: 'Moderniser une application Symfony : Symfony UX, Turbo, Stimulus'
+meta_description: "jQuery, rechargements complets, front JavaScript séparé : nous modernisons l'interface de votre application Symfony avec Symfony UX et Turbo, sans tout réécrire."
+excerpt: "Pages qui se rechargent à chaque clic, jQuery partout, front JavaScript qui double le travail : nous modernisons l'interface de votre application Symfony avec Symfony UX et Hotwire Turbo, écran par écran."
+intro: "Moderniser l'interface d'une application Symfony consiste à lui donner la réactivité d'une application JavaScript moderne en gardant le rendu côté serveur : navigation sans rechargement avec Turbo, comportements ciblés avec Stimulus, composants dynamiques avec les Live Components et mises à jour en temps réel avec Mercure. SILARHI mène ces modernisations sur des applications en production, pour Airbus comme pour des éditeurs de logiciels métier."
+service_type: "Modernisation d'interface d'application web Symfony"
+technologies:
+    - symfony
+    - twig
+    - mercure
+projects_title: 'Nos 3 dernières interfaces modernisées'
+projects_subtitle: 'Des interfaces Symfony passées à Turbo et aux composants Symfony UX'
+projects:
+    - airbus-multi-media-support
+    - docland
+    - cibaru
+    - tracmi
+packages:
+    - turbo-bundle
+    - tabler-ux-components
+    - ux-icons-js-bundle
+cta:
+    title: 'Une interface à moderniser ?'
+    description: "Montrez-nous l'application et les écrans qui posent problème : nous vous proposons un plan de modernisation par étapes, chiffré."
+faq:
+    - question: 'Faut-il réécrire le front en React ou en Vue pour moderniser une application ?'
+      answer: "Rarement. Pour une application métier, Symfony UX apporte la même fluidité en gardant les templates Twig existants : une seule base de code, une seule équipe, et pas d'API à maintenir uniquement pour l'interface. Nous réservons React aux écrans qui le justifient, comme un éditeur riche, et l'intégrons alors dans la page Symfony."
+    - question: "Qu'est-ce que Hotwire Turbo ?"
+      answer: "Turbo est une bibliothèque JavaScript qui intercepte les clics et les formulaires pour ne remplacer que le contenu de la page, sans rechargement complet. Avec les Turbo Frames, une partie de la page se met à jour seule ; avec les Turbo Streams, le serveur peut modifier plusieurs zones à la fois, y compris en temps réel via Mercure. Symfony UX Turbo l'intègre à Symfony."
+    - question: 'Peut-on moderniser une application sans interrompre le service ?'
+      answer: "Oui. Turbo s'active sur toute l'application, puis chaque écran est adapté à son rythme ; les écrans encore en jQuery continuent de fonctionner pendant la transition. Chaque étape est livrée en production séparément."
+    - question: 'Mon application est en Symfony 4 ou 5 : est-ce possible ?'
+      answer: "Symfony UX demande une version récente de Symfony et de PHP. La montée de version fait donc partie du plan, et c'est souvent la première étape : nous la menons de toute façon pour la sécurité de l'application."
+    - question: 'Combien coûte une modernisation ?'
+      answer: "Cela dépend du nombre d'écrans et de l'état du code. Nous commençons par un état des lieux, puis chiffrons lot par lot : navigation, composants communs, écrans prioritaires. Vous décidez de ce que vous lancez, et dans quel ordre."
+---
+
+## Les signes que votre interface a vieilli
+
+- Chaque clic recharge toute la page, et les utilisateurs perdent leur position ou leur saisie.
+- Le JavaScript est un empilement de plugins jQuery que plus personne n'ose toucher.
+- Les mêmes boutons, alertes et tableaux sont recopiés d'écran en écran, chacun un peu différent.
+- Un front React ou Vue séparé double chaque fonctionnalité : une API à écrire, deux bases de code à faire évoluer.
+- Les utilisateurs rafraîchissent la page pour savoir si une demande a avancé.
+
+## Symfony UX : la réactivité sans tout réécrire
+
+### Navigation fluide avec Turbo
+
+[Turbo](https://turbo.hotwired.dev) transforme la navigation en échanges de fragments HTML : plus de rechargement complet, des formulaires qui affichent leurs erreurs sur place, des parties de page chargées à la demande. Les contrôleurs et les templates Twig restent les mêmes.
+
+### Comportements ciblés avec Stimulus
+
+Le JavaScript qui reste nécessaire est rangé dans des contrôleurs Stimulus, petits, testables et attachés au HTML qu'ils pilotent. Ils remplacent les écouteurs jQuery dispersés dans les templates.
+
+### Composants dynamiques avec les Live Components
+
+Pour une recherche qui filtre en direct ou un formulaire qui s'adapte à chaque saisie, les Live Components se mettent à jour depuis le serveur, en PHP, sans écrire d'API.
+
+### Temps réel avec Mercure
+
+Les notifications, l'avancement d'une demande ou l'arrivée d'un message sont poussés aux navigateurs ouverts par [Mercure](/technologies/mercure) et appliqués en Turbo Streams : plus besoin de rafraîchir la page.
+
+## Un système de composants partagé
+
+Nous regroupons les éléments d'interface dans des composants Twig réutilisables : alertes, cartes, modales, menus, tableaux. Chaque écran assemble les mêmes briques, ce qui uniformise l'application et accélère les évolutions suivantes. Sur les applications Airbus, ce socle est partagé entre plusieurs applications, qui suivent ainsi la même charte.
+
+## Une modernisation par étapes
+
+1. **État des lieux** : versions de Symfony et de PHP, dépendances JavaScript, écrans les plus utilisés et les plus fragiles.
+2. **Socle** : montée de version si nécessaire, activation de Turbo sur toute l'application, outillage JavaScript à jour.
+3. **Composants communs** : mise en place du système de composants et migration des éléments recopiés.
+4. **Écrans prioritaires** : réécriture des écrans critiques en Stimulus et Live Components, suppression du jQuery associé.
+5. **Temps réel** : notifications et mises à jour en direct là où les utilisateurs en ont besoin.
+
+## Et pour une application à reprendre
+
+Si l'application n'a plus de prestataire ou tourne sur une version de Symfony qui n'est plus maintenue, la modernisation commence par une [reprise de l'application](/reprise-application-web-existante) : audit, montée de version, puis évolutions de l'interface.

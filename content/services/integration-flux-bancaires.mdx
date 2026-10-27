@@ -1,0 +1,77 @@
+---
+title: 'Intégration de flux bancaires dans vos applications'
+category: 'Finance & Banque'
+order: 4
+date: '2026-10-27'
+published: true
+meta_title: 'Intégration bancaire sur mesure : relevés, virements SEPA, EBICS'
+meta_description: 'Relevés CFONB, virements et prélèvements SEPA, rejets, lettrage, fichiers CAF : nous connectons votre application métier à vos banques via EBICS.'
+excerpt: 'Relevés importés chaque matin, virements et prélèvements SEPA envoyés sans ressaisie, paiements lettrés automatiquement : nous connectons votre application métier à vos banques.'
+intro: "L'intégration bancaire consiste à faire échanger directement une application métier et ses banques : récupération des relevés de compte, envoi des ordres de virement et de prélèvement, traitement des rejets et rapprochement des paiements. SILARHI développe ces intégrations en PHP et Symfony depuis 2020, sur EBICS et sur les formats CFONB et SEPA XML."
+service_type: 'Intégration bancaire et automatisation des flux financiers'
+technologies:
+    - ebics
+projects_title: 'Nos 3 dernières intégrations bancaires'
+projects_subtitle: 'Des flux bancaires automatisés via EBICS, en production'
+projects:
+    - solution-sepa
+    - investlease
+    - accel-gerancia
+    - immobilus
+    - consulting-ebics
+packages:
+    - cfonb-parser
+    - caf-parser
+    - qif-library
+cta:
+    title: 'Un flux bancaire à automatiser ?'
+    description: "Dites-nous quelles banques, quels formats et quel logiciel sont concernés : nous évaluons l'intégration et vous proposons un chiffrage."
+faq:
+    - question: 'Faut-il passer par EBICS pour automatiser ses échanges bancaires ?'
+      answer: 'Pour une entreprise qui émet des virements ou des prélèvements en volume, oui : EBICS est le canal proposé par les banques françaises pour échanger des fichiers de façon sécurisée et signée. Pour la seule lecture des comptes, un agrégateur DSP2 ou un import manuel de fichiers peut suffire au démarrage.'
+    - question: 'Pourquoi un développement sur mesure plutôt qu’un logiciel du marché ?'
+      answer: "Les logiciels de trésorerie et de rapprochement savent lire vos comptes, mais ils ne connaissent pas vos contrats, vos locataires ou vos dossiers. Une intégration dans votre propre application lettre chaque paiement avec l'objet métier qu'il règle et déclenche la suite : quittance, relance, clôture du dossier."
+    - question: 'Quels formats de fichiers bancaires savez-vous traiter ?'
+      answer: 'Les relevés CFONB 120, les fichiers de virements CFONB 240, les virements SEPA pain.001 et les prélèvements SEPA pain.008, les bordereaux de paiement CAF LA44ZZ, ainsi que les fichiers OFX et QIF. Pour les relevés camt.053, qui remplacent peu à peu le CFONB 120, nous concevons les imports pour accepter les deux.'
+    - question: 'Combien de temps faut-il pour connecter une banque ?'
+      answer: "Le développement se compte en semaines ; le délai vient surtout du côté de la banque : signature du contrat EBICS, envoi des clés, activation des types d'ordres. Nous vous accompagnons dans ces démarches et testons sur l'environnement de recette de la banque quand elle en propose un."
+    - question: 'Pouvez-vous intervenir sur une application existante ?'
+      answer: "Oui, c'est le cas de la plupart de nos missions : nous avons ajouté des modules bancaires à des applications Symfony et Laravel développées par d'autres équipes, sans refonte."
+---
+
+## Ce que nous automatisons
+
+- **Relevés de compte** : récupération quotidienne des relevés de chaque banque, import des opérations et de leur détail dans votre application.
+- **Virements** : génération des lots de virements SEPA à partir de vos données, signature et envoi à la banque, suivi de leur exécution.
+- **Prélèvements** : gestion des mandats SEPA B2C et B2B, émission des prélèvements récurrents, fin de mandat.
+- **Rejets et impayés** : lecture des codes motif, mise à jour du statut du paiement, relance automatique ou réintégration dans le lot suivant.
+- **Rapprochement** : lettrage de chaque opération bancaire avec la facture, le contrat ou le loyer qu'elle règle, et suivi des opérations non rapprochées.
+
+## Les formats que nous traitons
+
+### Relevés : CFONB 120 et camt.053
+
+Le relevé CFONB 120 reste le format le plus répandu dans les banques françaises : un fichier texte à positions fixes, une ligne de 120 caractères par enregistrement. Le camt.053, son équivalent XML de la norme ISO 20022, le remplace progressivement : un import conçu aujourd'hui doit accepter les deux. Notre guide détaille [la structure d'un fichier CFONB](/structure-fichiers-cfonb).
+
+### Virements et prélèvements : SEPA XML et CFONB 240
+
+Les ordres de virement partent au format pain.001, les prélèvements au format pain.008, dans les versions exigées par chaque banque : pain.001.001.09 et pain.008.001.08 sur nos projets récents. Certains échanges utilisent encore les fichiers CFONB 240, que nous lisons aussi.
+
+### Paiements CAF : LA44ZZ
+
+Les bailleurs qui perçoivent les aides au logement en tiers payant reçoivent de la CAF un bordereau de paiement LA44ZZ : une ligne par bénéficiaire, avec la période, le montant brut, les retenues et le montant net versé. Nous l'avons intégré à un logiciel de gestion locative pour affecter chaque versement au bon locataire, sans ressaisie.
+
+### Exports comptables et personnels : OFX et QIF
+
+Pour les comptes qui n'ont pas d'accès EBICS, nous importons aussi les fichiers OFX et QIF, encore proposés au téléchargement par la plupart des banques en ligne.
+
+## EBICS : le canal entre votre application et la banque
+
+Les fichiers ne voyagent pas par email : ils transitent par [EBICS](/technologies/ebics), le protocole sécurisé des échanges entre entreprises et banques. Nous prenons en charge toute la chaîne : génération et envoi des clés, initialisation du contrat avec chaque banque, signature des ordres, téléchargement planifié des relevés, renouvellement des certificats avant leur expiration et alerte en cas d'échec.
+
+## Sécurité et traçabilité
+
+- Les certificats EBICS sont renouvelés automatiquement avant leur expiration, avec une alerte en cas d'échec.
+- Chaque fichier envoyé à la banque est archivé, et peut être relancé ou renvoyé.
+- Les ordres de paiement sont soumis à des droits par utilisateur, avec double authentification ou connexion par passkey.
+- Les applications partenaires accèdent aux transactions par une API protégée par OAuth2, jamais par un partage d'identifiants.

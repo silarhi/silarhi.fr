@@ -43,7 +43,9 @@ const fullComponents = {
     blockquote: (props: React.HTMLAttributes<HTMLElement>) => (
         <blockquote className="border-primary my-4 border-l-4 pl-3 italic" {...props} />
     ),
-    code: (props: React.HTMLAttributes<HTMLElement>) => <code className="rounded bg-gray-100 px-1" {...props} />,
+    code: (props: React.HTMLAttributes<HTMLElement>) => (
+        <code className="rounded bg-gray-100 px-1 dark:bg-white/10" {...props} />
+    ),
     pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
         <pre className="text-surface my-3 overflow-auto rounded bg-gray-900 p-3" {...props} />
     ),

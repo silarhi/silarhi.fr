@@ -32,7 +32,6 @@ export default function NotFound() {
                                 height={300}
                                 priority
                                 className="w-full max-w-md"
-                                placeholder="blur"
                             />
                         </div>
 

@@ -1,0 +1,88 @@
+---
+title: 'Fichiers CFONB 120 et 240 : lecture et intégration'
+category: 'Finance & Banque'
+order: 5
+date: '2026-10-27'
+published: true
+meta_title: 'Format CFONB 120 et 240 : structure et intégration'
+meta_description: "Comment lire un relevé CFONB 120 ou un fichier CFONB 240 : structure des enregistrements, montants signés, codes opération et pièges. Et comment l'intégrer."
+excerpt: "Structure des enregistrements, montants signés, codes opération, dates à zéro : ce qu'il faut savoir pour lire un fichier CFONB, et comment nous l'intégrons à votre application."
+intro: "Un fichier CFONB est un fichier bancaire au format texte défini par le Comité Français d'Organisation et de Normalisation Bancaires : le CFONB 120 transporte les relevés de compte, le CFONB 240 des lots de virements. Chaque ligne a une longueur fixe, 120 ou 240 caractères, et ses deux premiers caractères donnent le type d'enregistrement. SILARHI intègre ces fichiers dans des applications métier depuis 2022 et publie en open source le lecteur PHP qu'elle utilise."
+service_type: 'Intégration de fichiers bancaires CFONB'
+technologies:
+    - ebics
+projects_title: 'Nos 3 derniers projets avec des fichiers CFONB'
+projects_subtitle: 'Des projets qui lisent et exploitent des fichiers CFONB'
+projects:
+    - investlease
+    - solution-sepa
+    - accel-gerancia
+    - cfonb-reader
+packages:
+    - cfonb-parser
+cta:
+    title: 'Des fichiers CFONB à intégrer ?'
+    description: "Envoyez-nous un fichier d'exemple anonymisé et ce que vous voulez en faire : nous vous proposons l'intégration adaptée à votre application."
+faq:
+    - question: "Qu'est-ce qu'un fichier CFONB 120 ?"
+      answer: "C'est le relevé de compte au format CFONB : un fichier texte où chaque ligne de 120 caractères est un solde d'ouverture (01), une opération (04), un complément d'opération (05) ou un solde de clôture (07). Les banques françaises le fournissent par EBICS ou en téléchargement sur leur espace entreprise."
+    - question: 'Quelle différence entre CFONB 120 et CFONB 240 ?'
+      answer: "Le CFONB 120 décrit ce qui s'est passé sur un compte : soldes et opérations. Le CFONB 240 décrit des ordres de virement : un en-tête (31), les virements (34) et un total (39). Les deux formats n'ont pas la même longueur de ligne et ne codent pas les montants de la même façon."
+    - question: 'Comment ouvrir un fichier CFONB ?'
+      answer: "Un éditeur de texte l'ouvre, mais les montants et les dates restent codés. Pour le consulter, il faut un outil qui le décode ; pour l'exploiter, il faut l'importer dans votre application ou votre logiciel comptable avec un lecteur qui en vérifie la structure."
+    - question: 'Le CFONB 120 va-t-il disparaître ?'
+      answer: "Les banques poussent le camt.053, le relevé XML de la norme ISO 20022, mais la plupart fournissent encore le CFONB 120 aux entreprises. Une intégration conçue aujourd'hui doit savoir lire les deux formats."
+    - question: 'Pouvez-vous convertir des fichiers CFONB en Excel ?'
+      answer: "Nous ne proposons pas de conversion ponctuelle. Notre métier est d'intégrer ces fichiers dans votre application pour que les opérations soient importées, lettrées et suivies automatiquement, sans passer par un tableur."
+---
+
+## Le CFONB 120 : le relevé de compte
+
+Un relevé CFONB 120 se lit ligne par ligne. Chaque compte et chaque journée forment un bloc : un solde d'ouverture, les opérations de la journée et leurs détails, puis un solde de clôture.
+
+| Code | Enregistrement         | Contenu                                                                           |
+| ---- | ---------------------- | --------------------------------------------------------------------------------- |
+| `01` | Ancien solde           | Banque, guichet, compte, devise, date et montant du solde d'ouverture             |
+| `04` | Opération              | Code opération, dates d'opération et de valeur, libellé, référence, montant       |
+| `05` | Complément d'opération | Informations supplémentaires : nom du donneur d'ordre, motif, référence de mandat |
+| `07` | Nouveau solde          | Mêmes zones que le `01`, pour le solde de clôture                                 |
+
+Les zones sont à positions fixes : le code banque occupe les caractères 3 à 7, le numéro de compte les caractères 22 à 32, la date d'opération les caractères 35 à 40, le libellé les caractères 49 à 79 et le montant les caractères 91 à 104. Le code opération, sur les caractères 33 et 34, dit de quoi il s'agit : chèque, virement reçu, prélèvement, frais, rejet…
+
+## Le CFONB 240 : les lots de virements
+
+Le CFONB 240 ne décrit pas un compte, mais des ordres de paiement. Chaque lot commence par un en-tête `31`, contient un enregistrement `34` par virement et se termine par un total `39`. Les montants sont exprimés en centimes, sur 12 chiffres, sans signe.
+
+## Les pièges d'un fichier CFONB
+
+### Des montants signés par une lettre
+
+Dans un relevé CFONB 120, un montant tient sur 14 caractères : 13 chiffres et un caractère qui porte à la fois le dernier chiffre et le signe. `{` et `A` à `I` valent 0 à 9 pour un crédit, `}` et `J` à `R` valent 0 à 9 pour un débit. Le nombre de décimales est donné à part, au caractère 20. Ainsi `0000000166956E` avec 2 décimales vaut 16 695,65 €, et `0000000000227R` vaut −22,79 €.
+
+### Des dates sur six chiffres
+
+Les dates sont écrites `JJMMAA`. Certaines banques remplissent de zéros une date qu'elles n'ont pas, y compris la date de valeur, pourtant obligatoire : un lecteur trop tolérant en fait un 30 novembre 1999 au lieu de signaler l'erreur.
+
+### Des fichiers mal découpés
+
+Selon la banque et le canal, les lignes se terminent par `\n`, `\r\n`, `\r`, ou ne sont pas séparées du tout. L'ordre des enregistrements compte aussi : une opération sans solde d'ouverture, ou un bloc sans solde de clôture, signale un fichier tronqué.
+
+### Des rejets à interpréter
+
+Un prélèvement rejeté revient dans le relevé avec un code motif, sur les caractères 41 et 42 de l'opération : provision insuffisante, compte clos, mandat révoqué… C'est ce code qui doit décider de la suite : relance, nouvelle présentation ou clôture du mandat.
+
+## Intégrer des fichiers CFONB à votre application
+
+Lire le fichier n'est que la première étape. Une intégration complète :
+
+1. **récupère les fichiers** automatiquement chaque jour, via [EBICS](/technologies/ebics) ou depuis un dépôt ;
+2. **vérifie leur structure** et refuse un fichier incomplet plutôt que d'importer des données fausses ;
+3. **importe les opérations** sans doublon, même quand un relevé est reçu deux fois ;
+4. **lettre chaque opération** avec la facture, le contrat ou le loyer qu'elle règle ;
+5. **traite les rejets** selon leur code motif et alerte quand une opération reste sans correspondance.
+
+C'est ce que nous avons mis en place sur [InvestLease](/projets/investlease), où les relevés CFONB 120 alimentent un moteur de lettrage avec les contrats de location, et sur [Solution SEPA](/projets/solution-sepa), qui rapproche automatiquement les transactions des virements et prélèvements émis. Ces fichiers s'inscrivent dans une [intégration bancaire](/integration-flux-bancaires) plus large : envoi des virements et prélèvements SEPA, fichiers CAF, échanges EBICS.
+
+## Un lecteur CFONB open source
+
+Nous avons publié notre lecteur, [CFONB Parser](https://cfonb-parser.silarhi.dev), sous licence MIT : une bibliothèque PHP sans dépendance qui transforme les fichiers CFONB 120 et 240 en objets typés, décode les montants signés et les dates, et lève une erreur explicite sur un fichier mal formé. Sa documentation détaille chaque zone et chaque code opération.

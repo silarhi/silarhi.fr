@@ -79,3 +79,36 @@ export function generateTechnologyProjectsListSchema(technology: Technology, pro
         })),
     }
 }
+
+/**
+ * Generate CollectionPage and ItemList schemas for the technologies index
+ */
+export function generateTechnologiesIndexSchemas(technologies: Technology[]): [WebPage, ItemList] {
+    const url = getCanonicalUrl('/technologies')
+
+    return [
+        {
+            '@type': 'CollectionPage',
+            '@id': `${url}/#webpage`,
+            name: 'Technologies - SILARHI',
+            description: 'Les technologies utilisées par SILARHI sur ses projets clients, avec les projets de chacune.',
+            url,
+            isPartOf: { '@id': `${COMPANY_INFO.url}/#website` },
+            breadcrumb: generateBreadcrumbSchema([
+                { name: 'Accueil', url: COMPANY_INFO.url },
+                { name: 'Technologies', url },
+            ]),
+        },
+        {
+            '@type': 'ItemList',
+            name: 'Technologies SILARHI',
+            numberOfItems: technologies.length,
+            itemListElement: technologies.map((technology, index) => ({
+                '@type': 'ListItem',
+                position: index + 1,
+                name: technology.name,
+                url: getCanonicalUrl(`/technologies/${technology.slug}`),
+            })),
+        },
+    ]
+}

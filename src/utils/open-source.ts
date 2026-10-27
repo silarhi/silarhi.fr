@@ -91,3 +91,13 @@ export const getDocsUrl = (pkg: OpenSourcePackage) => `https://${pkg.slug}.silar
 
 export const getPackagesByTechnology = (technology: string) =>
     OPEN_SOURCE_PACKAGES.filter((pkg) => pkg.technologies.includes(technology))
+
+// Resolve package slugs listed in content; a typo must fail the build, not hide a card
+export const getPackagesBySlugs = (slugs: string[]) =>
+    slugs.map((slug) => {
+        const pkg = OPEN_SOURCE_PACKAGES.find((candidate) => candidate.slug === slug)
+        if (!pkg) {
+            throw new Error(`Unknown open-source package "${slug}"`)
+        }
+        return pkg
+    })

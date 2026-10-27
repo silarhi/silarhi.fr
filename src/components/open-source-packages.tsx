@@ -1,3 +1,4 @@
+import CardGrid from '@/components/ui/card-grid'
 import { ArrowRight } from '@/components/ui/icons'
 import { getDocsUrl, type OpenSourcePackage } from '@/utils/open-source'
 
@@ -8,7 +9,7 @@ export interface OpenSourcePackagesProps {
 // `rel` without `noreferrer`: the documentation sites see the visits coming from silarhi.fr in their analytics
 export default function OpenSourcePackages({ packages }: OpenSourcePackagesProps) {
     return (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <CardGrid>
             {packages.map((pkg) => (
                 <article key={pkg.slug} className="border-border bg-surface flex flex-col rounded-xl border p-6">
                     <h3 className="text-foreground mb-3 text-lg font-semibold">
@@ -46,6 +47,6 @@ export default function OpenSourcePackages({ packages }: OpenSourcePackagesProps
                     </div>
                 </article>
             ))}
-        </div>
+        </CardGrid>
     )
 }
