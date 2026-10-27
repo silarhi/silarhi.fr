@@ -5,12 +5,14 @@ import { notFound } from 'next/navigation'
 import HeroSection from '@/components/hero-section'
 import JsonLd from '@/components/json-ld'
 import Markdown from '@/components/markdown'
+import OpenSourcePackages from '@/components/open-source-packages'
 import ProjectList from '@/components/project-list'
 import ProjectsCTA from '@/components/projects-cta'
 import { ArrowLeft, ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import { generateTechnologyPageSchema, generateTechnologyProjectsListSchema } from '@/lib/schemas/technology'
+import { getPackagesByTechnology } from '@/utils/open-source'
 import { getProjectsByTechnology } from '@/utils/project'
 import { getAllTechnologySlugs, getTechnologyBySlug } from '@/utils/technology'
 import { getCanonicalUrl } from '@/utils/url'
@@ -59,6 +61,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
     const MAX_PROJECTS_DISPLAY = 3
     const totalProjects = allProjects.length
     const projects = allProjects.slice(0, MAX_PROJECTS_DISPLAY)
+    const packages = getPackagesByTechnology(slug)
 
     // Generate technology page schemas
     const technologySchemas = [
@@ -157,6 +160,22 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
                     </div>
                 )}
             </Section>
+
+            {packages.length > 0 && (
+                <Section className="bg-light border-border border-t">
+                    <SectionHeader title={`Nos packages open source ${technology.name}`} />
+                    <OpenSourcePackages packages={packages} />
+                    <div className="mt-12 text-center">
+                        <Link
+                            href="/open-source"
+                            className="text-primary hover:text-primary-dark group inline-flex items-center gap-2 text-lg font-medium transition-colors"
+                        >
+                            Tous nos packages open source
+                            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                    </div>
+                </Section>
+            )}
 
             <ProjectsCTA
                 title={`Un projet avec ${technology.name} ?`}

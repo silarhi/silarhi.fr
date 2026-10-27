@@ -88,7 +88,8 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/page.tsx` - Home page
 - `src/app/projets/page.tsx` - Projects listing with search, filters (`technology`, `category`, `industry`, `client`) and pagination, all driven by query params
 - `src/app/projets/[slug]/page.tsx` - Dynamic project detail pages (+ `loading.tsx`)
-- `src/app/technologies/[slug]/page.tsx` - Technology detail pages (projects using that tech)
+- `src/app/technologies/[slug]/page.tsx` - Technology detail pages (projects using that tech, and the open-source packages tagged with it)
+- `src/app/open-source/page.tsx` - SILARHI's open-source packages, each linking to its documentation site (`<slug>.silarhi.dev`), GitHub and Packagist
 - `src/app/contact/page.tsx` - Contact form with Formspree integration
 - `src/app/mentions-legales/page.tsx` - Legal notices page (forwards the old `#donnees-personnelles` and `#cookies` anchors to their new pages)
 - `src/app/politique-de-confidentialite/page.tsx` - Privacy policy page
@@ -278,6 +279,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 - `client.ts` - Client metadata handling
 - `url.ts` - Base/canonical URL helpers (`NEXT_PUBLIC_SITE_URL`, then `VERCEL_URL`, then localhost) and project filter query params
 - `employees.ts` - `getTotalEmployeeHours()` for the home page key figures
+- `open-source.ts` - The open-source packages (French descriptions, technology slugs). Add a package there after publishing its documentation site: the English registry is `packages.js` in github.com/silarhi/docs-kit
 - `analytics.ts` - Umami `track()` helper and the link classifier behind the goal events
 
 **Custom Rehype Plugins** (`src/lib/`):
@@ -286,7 +288,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 **Structured Data** (`src/lib/schemas/`):
 
-- Schema.org JSON-LD generators (`index.ts`: Organization, WebSite, WebPage, Breadcrumb, Services…; `project.ts`; `technology.ts`), rendered with the `JsonLd` component
+- Schema.org JSON-LD generators (`index.ts`: Organization, WebSite, WebPage, Breadcrumb, Services…; `project.ts`; `technology.ts`; `open-source.ts`), rendered with the `JsonLd` component
 - `COMPANY_INFO` (`index.ts`) is the single source of the company identity: legal form, share capital, RCS, SIRET, VAT number, manager, address, phone and email. The footer, the contact page and the legal pages (identity card, privacy policy, CGV) render it; never hard-code these values in a page
 
 ### TypeScript Configuration

@@ -18,6 +18,7 @@ const footerSections = [
         links: [
             { href: '/', label: 'Accueil' },
             { href: '/projets', label: 'Projets' },
+            { href: '/open-source', label: 'Open source' },
             { href: '/contact', label: 'Contact' },
             { href: 'https://www.linkedin.com/company/silarhi', label: 'LinkedIn', external: true },
         ],
