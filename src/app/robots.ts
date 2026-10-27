@@ -9,7 +9,9 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: '/api/',
+            // /cdn-cgi/: Cloudflare's email obfuscation rewrites mailto: links to
+            // /cdn-cgi/l/email-protection, a 404 for crawlers
+            disallow: ['/api/', '/cdn-cgi/'],
         },
         sitemap: `${baseUrl}/sitemap.xml`,
     }
