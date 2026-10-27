@@ -98,7 +98,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/layout.tsx` - Root layout: metadata, fonts, JSON-LD (Organization + WebSite), providers, `DefaultLayout`, Umami analytics
 - `src/app/not-found.tsx` - Custom 404 page
 - `src/app/sitemap.ts` - Dynamic sitemap generation
-- `src/app/robots.ts` - robots.txt (disallows `/api/`, points to the sitemap)
+- `src/app/robots.ts` - robots.txt (disallows `/api/` and `/cdn-cgi/`, points to the sitemap)
 
 The four legal pages share `LegalLayout` (`src/components/legal-layout.tsx`): breadcrumb, H1, lead, last update date, tabs between the pages, a sticky "Sur cette page" table of contents with scrollspy (`legal-toc.tsx`) and the identity card (`legal-identity-card.tsx`, mentions légales only). Its children are `LegalSection` elements (`legal-section.tsx`), one numbered card each, listed in the table of contents.
 
