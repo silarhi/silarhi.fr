@@ -28,6 +28,10 @@ export interface Service {
     projects: string[]
     /** Heading of the case studies section, written for 3 projects ("Nos 3 dernières reprises d'application"). */
     projects_title?: string
+    /** Line above that heading; a generic one when absent. */
+    projects_subtitle?: string
+    /** Badge above the H1 ("Finance & Banque"), also printed on the Open Graph image; "Service" when absent. */
+    category?: string
     /** Open-source packages (`OPEN_SOURCE_PACKAGES` slugs) shown as the tools behind the service. */
     packages: string[]
     /** Technology slugs whose pages link back to this service. */
@@ -98,6 +102,8 @@ function loadServicesCache(): Map<string, Service> {
             service_type: frontMatter.service_type ?? title,
             projects: frontMatter.projects ?? [],
             projects_title: frontMatter.projects_title,
+            projects_subtitle: frontMatter.projects_subtitle,
+            category: frontMatter.category,
             packages: frontMatter.packages ?? [],
             technologies: frontMatter.technologies ?? [],
             faq: frontMatter.faq ?? [],

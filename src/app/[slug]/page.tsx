@@ -14,8 +14,9 @@ import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import { generateServiceFaqSchema, generateServicePageSchema, generateServiceSchema } from '@/lib/schemas/service'
 import { getPackagesBySlugs } from '@/utils/open-source'
-import { getProjectBySlug, type Project } from '@/utils/project'
+import { getProjectBySlug, getProjectsByTechnology, type Project } from '@/utils/project'
 import { getAllServiceSlugs, getServiceBySlug, type Service } from '@/utils/service'
+import { getTechnologyBySlug } from '@/utils/technology'
 import { getCanonicalUrl } from '@/utils/url'
 
 interface ServicePageProps {
@@ -78,6 +79,28 @@ function getProjectsTitle(service: Service, count: number): string {
     return count > 1 ? `Nos ${count} derniers projets` : 'Notre dernier projet'
 }
 
+interface ProjectsLink {
+    href: string
+    label: string
+}
+
+// "See more" target: the projects of the service's main technology (its first one) when there are more of them than shown
+async function getProjectsLink(service: Service, shown: number, total: number): Promise<ProjectsLink | null> {
+    const [technologySlug] = service.technologies
+    if (technologySlug) {
+        const technology = await getTechnologyBySlug(technologySlug)
+        const technologyProjects = await getProjectsByTechnology(technologySlug)
+        if (technology && technologyProjects.length > shown) {
+            return {
+                href: `/projets?technology=${technologySlug}`,
+                label: `Voir nos ${technologyProjects.length} projets ${technology.name}`,
+            }
+        }
+    }
+
+    return total > shown ? { href: '/projets', label: 'Voir tous nos projets' } : null
+}
+
 export default async function ServicePage({ params }: ServicePageProps) {
     const { slug } = await params
     const service = await getServiceBySlug(slug)
@@ -89,6 +112,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     const allProjects = await getServiceProjects(service.projects)
     const projects = allProjects.slice(0, MAX_PROJECTS_DISPLAY)
     const packages = getPackagesBySlugs(service.packages)
+    const projectsLink = await getProjectsLink(service, projects.length, allProjects.length)
 
     // Generate service page schemas (the FAQ block is only emitted when questions are visible on the page)
     const serviceSchemas = [
@@ -101,7 +125,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <>
             <JsonLd data={serviceSchemas} />
             <HeroSection
-                pretitle={<Badge variant="secondary">Service</Badge>}
+                pretitle={<Badge variant="secondary">{service.category ?? 'Service'}</Badge>}
                 title={service.title}
                 description={service.excerpt}
                 className="border-0"
@@ -130,17 +154,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 <Section className="bg-light border-border border-y">
                     <SectionHeader
                         title={getProjectsTitle(service, projects.length)}
-                        subtitle="Des projets livrés et maintenus dans la durée pour ce type de besoin"
+                        subtitle={
+                            service.projects_subtitle ??
+                            'Des projets livrés et maintenus dans la durée pour ce type de besoin'
+                        }
                     />
                     <ProjectList projects={projects} />
 
-                    {allProjects.length > MAX_PROJECTS_DISPLAY && (
+                    {projectsLink && (
                         <div className="mt-12 text-center">
                             <Link
-                                href="/projets"
+                                href={projectsLink.href}
                                 className="text-primary hover:text-primary-dark group inline-flex items-center gap-2 text-lg font-medium transition-colors"
                             >
-                                Voir tous nos projets
+                                {projectsLink.label}
                                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </Link>
                         </div>
