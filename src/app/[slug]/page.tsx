@@ -15,7 +15,7 @@ import SectionHeader from '@/components/ui/section-header'
 import { generateServiceFaqSchema, generateServicePageSchema, generateServiceSchema } from '@/lib/schemas/service'
 import { getPackagesBySlugs } from '@/utils/open-source'
 import { getProjectBySlug, type Project } from '@/utils/project'
-import { getAllServiceSlugs, getServiceBySlug } from '@/utils/service'
+import { getAllServiceSlugs, getServiceBySlug, type Service } from '@/utils/service'
 import { getCanonicalUrl } from '@/utils/url'
 
 interface ServicePageProps {
@@ -70,6 +70,14 @@ async function getServiceProjects(slugs: string[]): Promise<Project[]> {
 // Only the latest case studies are shown, as on the technology pages: the project pages stay the reference for each one
 const MAX_PROJECTS_DISPLAY = 3
 
+// The custom heading is written for a full section: a page listing fewer projects falls back to the generic one
+function getProjectsTitle(service: Service, count: number): string {
+    if (service.projects_title && count === MAX_PROJECTS_DISPLAY) {
+        return service.projects_title
+    }
+    return count > 1 ? `Nos ${count} derniers projets` : 'Notre dernier projet'
+}
+
 export default async function ServicePage({ params }: ServicePageProps) {
     const { slug } = await params
     const service = await getServiceBySlug(slug)
@@ -121,7 +129,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             {projects.length > 0 && (
                 <Section className="bg-light border-border border-y">
                     <SectionHeader
-                        title={projects.length > 1 ? `Nos ${projects.length} derniers projets` : 'Notre dernier projet'}
+                        title={getProjectsTitle(service, projects.length)}
                         subtitle="Des projets livrés et maintenus dans la durée pour ce type de besoin"
                     />
                     <ProjectList projects={projects} />

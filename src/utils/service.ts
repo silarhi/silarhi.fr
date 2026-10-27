@@ -26,6 +26,8 @@ export interface Service {
     published: boolean
     service_type: string
     projects: string[]
+    /** Heading of the case studies section, written for 3 projects ("Nos 3 dernières reprises d'application"). */
+    projects_title?: string
     /** Open-source packages (`OPEN_SOURCE_PACKAGES` slugs) shown as the tools behind the service. */
     packages: string[]
     /** Technology slugs whose pages link back to this service. */
@@ -95,6 +97,7 @@ function loadServicesCache(): Map<string, Service> {
             published: true,
             service_type: frontMatter.service_type ?? title,
             projects: frontMatter.projects ?? [],
+            projects_title: frontMatter.projects_title,
             packages: frontMatter.packages ?? [],
             technologies: frontMatter.technologies ?? [],
             faq: frontMatter.faq ?? [],
