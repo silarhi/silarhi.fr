@@ -15,19 +15,37 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 
-import { generateImageMetadata, imageExists } from './image-metadata'
+import { generateImageMetadata, imageExists, isSameImageMetadata } from './image-metadata'
 
 const contentDirectory = path.join(process.cwd(), 'content')
 const publicDirectory = path.join(process.cwd(), 'public')
 
+// Re-serializing rewrites the whole frontmatter in js-yaml's style (e.g. it quotes any string with a comma),
+// so a file is only written when its metadata changed, never just to restyle hand-written YAML.
+function writeFrontMatter(filePath: string, content: string, data: Record<string, unknown>): void {
+    const updatedContent = matter.stringify(content, data, {
+        indent: 4,
+        lineWidth: 1000,
+        noCompatMode: true,
+    } as Parameters<typeof matter.stringify>[2])
+    fs.writeFileSync(filePath, updatedContent)
+}
+
+interface ProcessResults {
+    generated: number
+    failed: number
+    unchanged: number
+}
+
 // Process project MDX files
-async function processProjects(): Promise<{ generated: number; failed: number }> {
+async function processProjects(): Promise<ProcessResults> {
     const projectsDirectory = path.join(contentDirectory, 'projects')
     let generated = 0
     let failed = 0
+    let unchanged = 0
 
     if (!fs.existsSync(projectsDirectory)) {
-        return { generated, failed }
+        return { generated, failed, unchanged }
     }
 
     const entries = fs.readdirSync(projectsDirectory, { withFileTypes: true })
@@ -55,16 +73,14 @@ async function processProjects(): Promise<{ generated: number; failed: number }>
 
         try {
             const imageMetadata = await generateImageMetadata(data.image, publicDirectory)
-            data.image_metadata = imageMetadata
 
-            // Write back to file
-            const updatedContent = matter.stringify(content, data, {
-                indent: 4,
-                lineWidth: 1000,
-                forceQuotes: true,
-                noCompatMode: true,
-            } as Parameters<typeof matter.stringify>[2])
-            fs.writeFileSync(indexPath, updatedContent)
+            if (isSameImageMetadata(data.image_metadata, imageMetadata)) {
+                unchanged++
+                continue
+            }
+
+            data.image_metadata = imageMetadata
+            writeFrontMatter(indexPath, content, data)
 
             generated++
             console.log(`✅ Project: ${projectDir}`)
@@ -75,17 +91,18 @@ async function processProjects(): Promise<{ generated: number; failed: number }>
         }
     }
 
-    return { generated, failed }
+    return { generated, failed, unchanged }
 }
 
 // Process client MDX files
-async function processClients(): Promise<{ generated: number; failed: number }> {
+async function processClients(): Promise<ProcessResults> {
     const clientsDirectory = path.join(contentDirectory, 'clients')
     let generated = 0
     let failed = 0
+    let unchanged = 0
 
     if (!fs.existsSync(clientsDirectory)) {
-        return { generated, failed }
+        return { generated, failed, unchanged }
     }
 
     const files = fs.readdirSync(clientsDirectory).filter((file) => file.endsWith('.mdx'))
@@ -106,16 +123,15 @@ async function processClients(): Promise<{ generated: number; failed: number }> 
         }
 
         try {
-            data.logo_metadata = await generateImageMetadata(data.logo, publicDirectory)
+            const logoMetadata = await generateImageMetadata(data.logo, publicDirectory)
 
-            // Write back to file
-            const updatedContent = matter.stringify(content, data, {
-                indent: 4,
-                lineWidth: 1000,
-                forceQuotes: true,
-                noCompatMode: true,
-            } as Parameters<typeof matter.stringify>[2])
-            fs.writeFileSync(filePath, updatedContent)
+            if (isSameImageMetadata(data.logo_metadata, logoMetadata)) {
+                unchanged++
+                continue
+            }
+
+            data.logo_metadata = logoMetadata
+            writeFrontMatter(filePath, content, data)
 
             generated++
             console.log(`✅ Client: ${file.replace('.mdx', '')}`)
@@ -126,7 +142,7 @@ async function processClients(): Promise<{ generated: number; failed: number }> 
         }
     }
 
-    return { generated, failed }
+    return { generated, failed, unchanged }
 }
 
 async function generate() {
@@ -144,8 +160,12 @@ async function generate() {
     const totalFailed = projectResults.failed + clientResults.failed
 
     console.log('📊 Summary:')
-    console.log(`   Projects - Generated: ${projectResults.generated}, Failed: ${projectResults.failed}`)
-    console.log(`   Clients  - Generated: ${clientResults.generated}, Failed: ${clientResults.failed}`)
+    console.log(
+        `   Projects - Generated: ${projectResults.generated}, Unchanged: ${projectResults.unchanged}, Failed: ${projectResults.failed}`
+    )
+    console.log(
+        `   Clients  - Generated: ${clientResults.generated}, Unchanged: ${clientResults.unchanged}, Failed: ${clientResults.failed}`
+    )
     console.log(`   Total    - Generated: ${totalGenerated}, Failed: ${totalFailed}`)
     console.log()
 

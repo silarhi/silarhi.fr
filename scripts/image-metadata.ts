@@ -8,6 +8,11 @@ interface ImageMetadata {
     height: number
 }
 
+// Compare freshly generated metadata with the one already stored in the frontmatter
+export function isSameImageMetadata(stored: Partial<ImageMetadata> | undefined, generated: ImageMetadata): boolean {
+    return stored?.blur === generated.blur && stored.width === generated.width && stored.height === generated.height
+}
+
 // Normalize path (remove leading slash)
 function normalizePath(imagePath: string): string {
     return imagePath.startsWith('/') ? imagePath.slice(1) : imagePath
