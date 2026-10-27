@@ -19,6 +19,7 @@ const footerSections = [
             { href: '/', label: 'Accueil' },
             { href: '/projets', label: 'Projets' },
             { href: '/contact', label: 'Contact' },
+            { href: 'https://www.linkedin.com/company/silarhi', label: 'LinkedIn', external: true },
         ],
     },
     {
@@ -125,6 +126,9 @@ export default function Footer() {
                                             <Link
                                                 key={link.href}
                                                 href={link.href}
+                                                {...('external' in link && link.external
+                                                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                                                    : {})}
                                                 className={cn(
                                                     'hover:text-secondary text-dark-foreground/80 dark:text-dark-foreground/90 block transition-colors'
                                                 )}
