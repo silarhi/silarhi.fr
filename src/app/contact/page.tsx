@@ -88,7 +88,7 @@ function InfoSection() {
                 <>
                     Du lundi au vendredi
                     <br />
-                    De 9h à 18h
+                    De 9h à 19h30
                 </>
             ),
         },
