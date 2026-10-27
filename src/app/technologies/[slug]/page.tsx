@@ -8,6 +8,7 @@ import Markdown from '@/components/markdown'
 import OpenSourcePackages from '@/components/open-source-packages'
 import ProjectList from '@/components/project-list'
 import ProjectsCTA from '@/components/projects-cta'
+import CardGrid from '@/components/ui/card-grid'
 import { ArrowLeft, ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
@@ -143,12 +144,12 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
             {services.length > 0 && (
                 <Section className="bg-surface border-border border-b">
                     <SectionHeader title={`Nos services liés à ${technology.name}`} />
-                    <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+                    <CardGrid columns={2} className="mx-auto max-w-4xl">
                         {services.map((service) => (
                             <Link
                                 key={service.slug}
                                 href={`/${service.slug}`}
-                                className="group border-border bg-light hover:border-primary flex flex-col rounded-xl border p-6 transition-colors"
+                                className="group border-border bg-light hover:border-primary flex flex-col rounded-xl border p-6 transition-colors hover:no-underline"
                             >
                                 <h3 className="text-foreground group-hover:text-primary mb-3 text-lg font-semibold">
                                     {service.title}
@@ -160,7 +161,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
                                 </span>
                             </Link>
                         ))}
-                    </div>
+                    </CardGrid>
                 </Section>
             )}
 

@@ -5,6 +5,7 @@ import HeroSection from '@/components/hero-section'
 import JsonLd from '@/components/json-ld'
 import ProjectsCTA from '@/components/projects-cta'
 import Badge from '@/components/ui/badge'
+import CardGrid from '@/components/ui/card-grid'
 import { ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
@@ -63,12 +64,12 @@ export default async function TechnologiesPage() {
 
             <Section className="bg-light border-border border-b">
                 <SectionHeader title="Les plus utilisées" subtitle="Classées par nombre de projets" />
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <CardGrid>
                     {top.map(({ technology, projects }) => (
                         <Link
                             key={technology.slug}
                             href={`/technologies/${technology.slug}`}
-                            className="group border-border bg-surface hover:border-primary flex flex-col rounded-xl border p-6 transition-colors"
+                            className="group border-border bg-surface hover:border-primary flex flex-col rounded-xl border p-6 transition-colors hover:no-underline"
                         >
                             <div className="mb-3 flex items-start justify-between gap-3">
                                 <h3 className="text-foreground group-hover:text-primary text-xl font-semibold">
@@ -88,7 +89,7 @@ export default async function TechnologiesPage() {
                             </span>
                         </Link>
                     ))}
-                </div>
+                </CardGrid>
             </Section>
 
             <Section className="bg-surface">
@@ -98,7 +99,7 @@ export default async function TechnologiesPage() {
                         <li key={technology.slug}>
                             <Link
                                 href={`/technologies/${technology.slug}`}
-                                className="group border-border hover:border-primary flex min-h-12 items-center justify-between gap-3 rounded-lg border px-4 py-3 transition-colors"
+                                className="group border-border hover:border-primary flex min-h-12 items-center justify-between gap-3 rounded-lg border px-4 py-3 transition-colors hover:no-underline"
                             >
                                 <span className="text-foreground group-hover:text-primary font-medium">
                                     {technology.name}

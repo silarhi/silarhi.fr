@@ -208,6 +208,7 @@ Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes
 - `mockup.tsx` - Device mockup (`LaptopMockup`)
 - `pagination.tsx` - Server-side pagination component
 - `project-scope-badge.tsx` - Specialized badge for project scope
+- `card-grid.tsx` - Wrapping row of cards (2 or 3 per row) that centers an incomplete last row, or a single card
 - `section.tsx` / `section-header.tsx` / `section-title.tsx` - Section layout components
 
 **Feature Components** (`src/components/`):
