@@ -20,7 +20,6 @@ export default function Page() {
             current="/conditions-generales-de-vente"
             title="Conditions générales de vente"
             lead="Les conditions qui encadrent les prestations réalisées par SILARHI pour ses clients."
-            updated="2026-10-24"
             actions={
                 <a href="/pdf/CGV.pdf" download className="inline-flex items-center gap-1.5 text-sm font-medium">
                     <Download aria-hidden="true" />

@@ -64,7 +64,7 @@ All scripts live in `scripts/` and run with `tsx`.
 
 ### CGV PDF
 
-`public/pdf/CGV.pdf` is the CGV page printed by Chrome: the site hides its navbar, footer, tabs and table of contents in print (`print:hidden`), flattens the legal section cards and sets A4 margins (`@page` in `globals.css`). After any change to the CGV page or to `COMPANY_INFO`, bump the page's `updated` date, then regenerate the file from a production build:
+`public/pdf/CGV.pdf` is the CGV page printed by Chrome: the site hides its navbar, footer, tabs and table of contents in print (`print:hidden`), flattens the legal section cards and sets A4 margins (`@page` in `globals.css`). After any change to the CGV page or to `COMPANY_INFO`, bump the page's date in `LEGAL_PAGE_UPDATES` (`src/utils/legal-pages.ts`, also its sitemap `lastmod`), then regenerate the file from a production build:
 
 ```bash
 pnpm build && pnpm start -p 3123

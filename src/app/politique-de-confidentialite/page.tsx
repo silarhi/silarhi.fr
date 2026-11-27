@@ -20,7 +20,6 @@ export default function PrivacyPolicyPage() {
             current="/politique-de-confidentialite"
             title="Politique de confidentialité"
             lead="Les données que le site traite, pourquoi, avec qui, combien de temps, et comment exercer vos droits. Le site ne dépose aucun cookie soumis à consentement."
-            updated="2026-10-23"
         >
             <LegalSection id="responsable" title="Responsable du traitement">
                 <p>
