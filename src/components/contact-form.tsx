@@ -1,12 +1,13 @@
 'use client'
 import Link from 'next/link'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Input from '@/components/forms/input'
 import Textarea from '@/components/forms/textarea'
 import Button from '@/components/ui/button'
 import { Envelope, FileText, Person, Phone, Spinner } from '@/components/ui/icons'
+import { COMPANY_INFO } from '@/lib/schemas'
 import { track } from '@/utils/analytics'
 
 interface ContactFormData {
@@ -33,6 +34,14 @@ export default function ContactForm() {
     const [submitError, setSubmitError] = useState<boolean>(false)
 
     const { register, handleSubmit, reset, formState, getFieldState, setError } = useForm<ContactFormData>()
+    const errorRef = useRef<HTMLDivElement>(null)
+
+    // The error shows above the form: bring it into view, the submit button may be the only thing on screen
+    useEffect(() => {
+        if (submitError) {
+            errorRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+        }
+    }, [submitError])
 
     const onSubmit = useCallback(
         async (data: ContactFormData) => {
@@ -96,10 +105,22 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
             {submitError && (
                 <div
+                    ref={errorRef}
                     className="border-error/20 bg-error/10 dark:bg-error/20 text-error mb-4 rounded border p-4"
                     role="alert"
                 >
-                    Une erreur est survenue pendant l&apos;envoi du message.
+                    <p className="mb-1 font-bold">Votre message n&apos;a pas pu être envoyé.</p>
+                    <p className="mb-0">
+                        Réessayez dans un instant, ou écrivez-nous directement à{' '}
+                        <a href={`mailto:${COMPANY_INFO.email}`} className="text-inherit underline">
+                            {COMPANY_INFO.email}
+                        </a>{' '}
+                        ou appelez le{' '}
+                        <a href={`tel:${COMPANY_INFO.telephone}`} className="text-inherit underline">
+                            {COMPANY_INFO.telephoneDisplay}
+                        </a>
+                        .
+                    </p>
                 </div>
             )}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
