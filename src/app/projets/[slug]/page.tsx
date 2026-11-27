@@ -301,7 +301,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                     <Calendar className="h-4 w-4" />
                                     Le projet en détails
                                 </p>
-                                <div className="max-h-96 overflow-y-auto pr-4">
+                                <div>
                                     {project.iterations.map((iteration, idx) => (
                                         <div key={iteration.slug} className="flex gap-4">
                                             {project.iterations.length > 1 && (
