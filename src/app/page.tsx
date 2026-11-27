@@ -90,7 +90,7 @@ const FEATURES: Feature[] = [
 
 const SERVICES: Service[] = [
     {
-        text: `**Développement d'applications Web** type gestion, CRM, ERP, ...`,
+        text: `**[Développement de logiciels métier sur mesure](/developpement-logiciel-sur-mesure)** type gestion, CRM, ERP, ...`,
         supported: true,
     },
     {
@@ -114,7 +114,7 @@ const SERVICES: Service[] = [
         supported: false,
     },
     {
-        text: `Migration de version Symfony`,
+        text: `[Tierce maintenance applicative (TMA)](/tierce-maintenance-applicative) et migration de version Symfony`,
         supported: true,
     },
     {
@@ -122,7 +122,7 @@ const SERVICES: Service[] = [
         supported: true,
     },
     {
-        text: `Reprise d'application PHP existante`,
+        text: `[Reprise d'application web existante](/reprise-application-web-existante) (PHP, Symfony)`,
         supported: true,
     },
     {
@@ -135,6 +135,14 @@ const SERVICES: Service[] = [
     },
     {
         text: `Intégration de maquette UI / UX`,
+        supported: true,
+    },
+    {
+        text: `[Modernisation d'interface Symfony](/modernisation-interface-symfony) avec Symfony UX et Turbo`,
+        supported: true,
+    },
+    {
+        text: `[Intégration de flux bancaires](/integration-flux-bancaires) : EBICS, SEPA, [fichiers CFONB](/structure-fichiers-cfonb)`,
         supported: true,
     },
     {
