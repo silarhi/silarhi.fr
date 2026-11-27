@@ -322,8 +322,8 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 - **ALWAYS import icons from `@/components/ui/icons.tsx`** instead of directly from `react-icons`
 - The icons file provides a centralized, curated set of Lucide icons via `react-icons/lu`
-- Available icons: `Download`, `Expand`, `Map`, `Clock`, `Phone`, `Person`, `Envelope`, `Check`, `XMark`, `FilterIcon`, `ArrowLeft`, `ArrowRight`, `FileText`, `Calendar`, `Repeat`, `Code`, `Zap`, `Moon`, `SunMoon`, `Sun`, `House`, `Landmark`, `ShieldCheck`, `Cookie`
-- Custom SVG icons: `FaceSad`, `MenuToggle`, `Spinner`, `Search`, `XCircle`, `ChevronLeft`, `ChevronRight`
+- Available icons: `Download`, `Expand`, `Map`, `Clock`, `Phone`, `Person`, `Envelope`, `Check`, `ChevronDown`, `XMark`, `FilterIcon`, `ArrowLeft`, `ArrowRight`, `FileText`, `Calendar`, `Repeat`, `Code`, `Zap`, `Moon`, `SunMoon`, `Sun`, `House`, `Landmark`, `ShieldCheck`, `Cookie`
+- Custom SVG icons: `MenuToggle`, `Spinner`, `Search`, `XCircle`, `ChevronLeft`, `ChevronRight`
 - If you need a new icon, add it to `@/components/ui/icons.tsx` first, then import it
 - Example:
     - ✅ Good: `import { Check, ArrowRight } from '@/components/ui/icons'`

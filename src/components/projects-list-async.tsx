@@ -14,6 +14,7 @@ interface ProjectsListAsyncProps {
     client?: string
     searchParams: string
     activeFilter: ActiveFilterSummary | null
+    suggestions: { slug: string; name: string }[]
 }
 
 export default async function ProjectsListAsync({
@@ -26,6 +27,7 @@ export default async function ProjectsListAsync({
     client,
     searchParams,
     activeFilter,
+    suggestions,
 }: ProjectsListAsyncProps) {
     // Get all projects and filter by search query
     let filteredProjects = await getAllProjects()
@@ -92,6 +94,7 @@ export default async function ProjectsListAsync({
             searchQuery={searchQuery}
             searchParams={searchParams}
             activeFilter={activeFilter}
+            suggestions={suggestions}
         />
     )
 }

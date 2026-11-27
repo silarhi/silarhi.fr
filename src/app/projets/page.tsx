@@ -43,6 +43,9 @@ export async function generateMetadata({ searchParams }: ProjectPageProps): Prom
 
 const ITEMS_PER_PAGE = 9
 
+// Technologies offered when a search or filter finds nothing
+const SUGGESTED_TECHNOLOGIES = 6
+
 export default async function ProjectPage({ searchParams }: ProjectPageProps) {
     const params = await searchParams
     const searchQuery = params.search || ''
@@ -68,6 +71,10 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
         : undefined
     const activeFilterSummary =
         activeFilter && activeFilterName ? { label: FILTER_LABELS[activeFilter.type], name: activeFilterName } : null
+    const suggestions = [...technologies]
+        .sort((a, b) => b.projectCount - a.projectCount)
+        .slice(0, SUGGESTED_TECHNOLOGIES)
+        .map(({ slug, name }) => ({ slug, name }))
 
     // Generate projects page schemas
     const projectsPageSchemas = [generateProjectsCollectionPageSchema(projects), generateProjectsListSchema(projects)]
@@ -100,6 +107,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                     client={client}
                     searchParams={searchParamsString}
                     activeFilter={activeFilterSummary}
+                    suggestions={suggestions}
                 />
             </Section>
 
