@@ -8,7 +8,6 @@ import Analytics from '@/components/analytics'
 import JsonLd from '@/components/json-ld'
 import DefaultLayout from '@/components/layouts/default'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/schemas'
-import { HashProvider } from '@/providers/hash-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { cn } from '@/utils/lib'
 import { getBaseUrl } from '@/utils/url'
@@ -55,9 +54,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </head>
             <body className={cn(lato.className, lato.variable, montserrat.variable, 'h-full')}>
                 <ThemeProvider>
-                    <HashProvider>
-                        <DefaultLayout>{children}</DefaultLayout>
-                    </HashProvider>
+                    <DefaultLayout>{children}</DefaultLayout>
                 </ThemeProvider>
                 {umamiWebsiteId && <Analytics />}
                 {umamiWebsiteId && (

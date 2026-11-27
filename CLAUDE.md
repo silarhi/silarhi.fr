@@ -193,11 +193,10 @@ src/components/
 ├── *.tsx             # Feature-specific components (navbar, footer, project-list, etc.)
 ```
 
-Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes, `hash-provider.tsx` exposing `useHash()` for the URL hash). They are all mounted in `src/app/layout.tsx`.
+The context provider lives in `src/providers/` (`theme-provider.tsx` for next-themes) and is mounted in `src/app/layout.tsx`.
 
 **Reusable UI Components** (`src/components/ui/`):
 
-- `active-link.tsx` - Navigation link with active state styling
 - `badge.tsx` / `badge-group.tsx` - Badge components for labels and tags
 - `button.tsx` - Primary button component
 - `fade-in-when-visible.tsx` - CSS scroll-driven fade-in (server component)
@@ -212,7 +211,7 @@ Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes
 
 **Feature Components** (`src/components/`):
 
-- `navbar.tsx` / `footer.tsx` - Layout components; the footer is a server component, only `footer-frame.tsx` (client) reads the pathname to hide the contact banner on `/contact`
+- `navbar.tsx` / `footer.tsx` - Layout components; the navbar lists the service pages under a "Services" dropdown (`services-menu.tsx`), fed by `DefaultLayout` from `content/services/`; the footer is a server component, only `footer-frame.tsx` (client) reads the pathname to hide the contact banner on `/contact`
 - `hero-section.tsx` - Hero section wrapper
 - `project-list.tsx` - Project cards grid
 - `projects-content.tsx` - Search result count, project list and pagination

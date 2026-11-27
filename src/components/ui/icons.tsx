@@ -4,6 +4,7 @@ import {
     LuArrowRight,
     LuCalendar,
     LuCheck,
+    LuChevronDown,
     LuClock,
     LuCode,
     LuCookie,
@@ -36,6 +37,7 @@ export const Phone = LuPhone
 export const Person = LuUser
 export const Envelope = LuMail
 export const Check = LuCheck
+export const ChevronDown = LuChevronDown
 export const XMark = LuX
 export const FilterIcon = LuFilter
 export const ArrowLeft = LuArrowLeft

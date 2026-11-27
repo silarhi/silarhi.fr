@@ -6,26 +6,41 @@ import { usePathname } from 'next/navigation'
 import { type CSSProperties, useEffect, useRef, useState } from 'react'
 
 import { montserrat } from '@/app/fonts'
+import ServicesMenu, { type NavService } from '@/components/services-menu'
 import ThemeToggle from '@/components/theme-toggle'
-import ActiveLink from '@/components/ui/active-link'
 import Button from '@/components/ui/button'
 import { MenuToggle } from '@/components/ui/icons'
 import logo from '@/public/images/logo-4096.png'
 import { cn } from '@/utils/lib'
 
 interface MenuItem {
-    path: string
-    indexPath?: string
+    href: string
     label: string
-    target?: string
+    external?: boolean
+}
+
+const MENU_ITEMS: MenuItem[] = [
+    { href: '/projets', label: 'Projets' },
+    { href: '/technologies', label: 'Technologies' },
+    { href: '/open-source', label: 'Open source' },
+    { href: 'https://blog.silarhi.fr', label: 'Blog', external: true },
+]
+
+// A section stays highlighted on its detail pages (/projets/foo, /technologies/bar)
+function isActivePath(pathname: string, item: MenuItem): boolean {
+    return !item.external && (pathname === item.href || pathname.startsWith(`${item.href}/`))
+}
+
+function externalProps(item: MenuItem) {
+    return item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 }
 
 interface NavbarProps {
-    initialClass?: string
-    floatingClass?: string
+    /** Service pages listed under "Services", in editorial order */
+    services: NavService[]
 }
 
-export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
+export default function Navbar({ services }: NavbarProps) {
     const ref = useRef<HTMLElement>(null)
     const [floating, setFloating] = useState<boolean>(false)
     const [floatingStyle, setFloatingStyle] = useState<CSSProperties>({})
@@ -62,77 +77,23 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
         }
     }, [navbarHeight, setFloating, setFloatingStyle])
 
-    const menuItems: MenuItem[] = [
-        {
-            path: '/#presentation',
-            indexPath: '#presentation',
-            label: 'Présentation',
-        },
-        {
-            path: '/#services',
-            indexPath: '#services',
-            label: 'Services',
-        },
-        {
-            path: '/#methodologie',
-            indexPath: '#methodologie',
-            label: 'Méthodologie',
-        },
-        {
-            path: '/#clients',
-            indexPath: '#clients',
-            label: 'Clients',
-        },
-        {
-            path: '/#chiffres',
-            indexPath: '#chiffres',
-            label: 'Chiffres',
-        },
-        {
-            path: '/projets',
-            label: 'Projets',
-        },
-        {
-            path: 'https://blog.silarhi.fr',
-            label: 'Blog',
-            target: '_blank',
-        },
-    ]
-
-    const isMainPage = pathname === '/' || pathname.startsWith('/#')
-
     // The yellow accent only reads on the dark bars (home hero, floating bar, dark mode): on the light background of
     // the other pages it is 1.4:1, so the active and hovered links take the primary blue there
     const onLightBar = !floating && !isHomePage
     const accentClass = onLightBar ? 'text-primary dark:text-secondary' : 'text-secondary'
     const hoverAccentClass = onLightBar ? 'hover:text-primary dark:hover:text-secondary' : 'hover:text-secondary'
 
-    // Get the correct href for menu items based on current page
-    const getMenuItemHref = (item: MenuItem) => {
-        // If on homepage, use indexPath if available (hash-only), otherwise use full path
-        if (isMainPage && item.indexPath) {
-            return item.indexPath
-        }
-        // If not on homepage, always use full path (with /) to navigate back to homepage
-        return item.path
-    }
-
     return (
         <>
             <nav
                 id="app-navbar"
-                className={cn(
-                    'absolute top-0 right-0 left-0 z-50 transition-opacity print:hidden',
-                    {
-                        fixed: floating,
-                        'text-surface dark:text-foreground': floating || (isHomePage && !floating),
-                        'text-dark dark:text-foreground': !floating && !isHomePage,
-                        'bg-surface-dark': floating,
-                        'bg-transparent': !floating,
-                    },
-                    initialClass && !floating && initialClass,
-                    floatingClass && floating && floatingClass
-                )}
+                className={cn('absolute top-0 right-0 left-0 z-50 transition-opacity print:hidden', {
+                    fixed: floating,
+                    'text-surface dark:text-foreground': floating || (isHomePage && !floating),
+                    'text-dark dark:text-foreground': !floating && !isHomePage,
+                    'bg-surface-dark': floating,
+                    'bg-transparent': !floating,
+                })}
                 style={floatingStyle}
                 ref={ref}
             >
@@ -158,7 +119,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                         </Link>
 
                         {/* Mobile menu button and theme toggle */}
-                        <div className="flex items-center space-x-2 xl:hidden">
+                        <div className="flex items-center space-x-2 lg:hidden">
                             <ThemeToggle className="text-inherit" />
                             <button
                                 className={cn(
@@ -173,20 +134,28 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                         </div>
 
                         {/* Desktop menu */}
-                        <ul className="hidden items-center space-x-9 xl:flex">
-                            {menuItems.map((item, i) => (
-                                <li key={i}>
-                                    <ActiveLink
-                                        href={getMenuItemHref(item)}
+                        <ul className="hidden items-center space-x-7 lg:flex xl:space-x-9">
+                            <li>
+                                <ServicesMenu
+                                    services={services}
+                                    accentClass={accentClass}
+                                    hoverAccentClass={hoverAccentClass}
+                                />
+                            </li>
+                            {MENU_ITEMS.map((item) => (
+                                <li key={item.href}>
+                                    <Link
+                                        href={item.href}
+                                        {...externalProps(item)}
+                                        aria-current={isActivePath(pathname, item) ? 'page' : undefined}
                                         className={cn(
                                             'text-inherit transition-colors duration-300 hover:no-underline',
-                                            hoverAccentClass
+                                            hoverAccentClass,
+                                            { [accentClass]: isActivePath(pathname, item) }
                                         )}
-                                        target={item.target}
-                                        activeClassName={accentClass}
                                     >
                                         {item.label}
-                                    </ActiveLink>
+                                    </Link>
                                 </li>
                             ))}
                             <li>
@@ -210,7 +179,7 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
 
             {/* Mobile menu */}
             <div
-                className={cn('fixed inset-0 z-60 transition-[visibility] duration-200 xl:hidden', {
+                className={cn('fixed inset-0 z-60 transition-[visibility] duration-200 lg:hidden', {
                     invisible: !mobileMenuOpen,
                 })}
                 aria-hidden={!mobileMenuOpen}
@@ -258,17 +227,30 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                     {/* Mobile menu body - scrollable */}
                     <div className="flex-1 overflow-y-auto p-4">
                         <ul className="space-y-1">
-                            {menuItems.map((item, i) => (
-                                <li key={i}>
-                                    <ActiveLink
-                                        href={getMenuItemHref(item)}
-                                        className="hover:bg-primary/10 dark:hover:bg-primary-light/10 block rounded px-4 py-3 text-inherit transition-colors"
-                                        activeClassName="bg-primary-light text-surface dark:bg-primary dark:text-surface"
-                                        target={item.target}
-                                        onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                        {item.label}
-                                    </ActiveLink>
+                            <li className="border-border mb-2 border-b pb-3">
+                                <p className="text-foreground/60 px-4 pt-1 pb-2 text-xs font-semibold tracking-wide uppercase">
+                                    Services
+                                </p>
+                                <ul className="space-y-1">
+                                    {services.map((service) => (
+                                        <li key={service.slug}>
+                                            <MobileMenuLink
+                                                item={{ href: `/${service.slug}`, label: service.title }}
+                                                active={pathname === `/${service.slug}`}
+                                                onNavigate={() => setMobileMenuOpen(false)}
+                                                className="py-2.5 text-sm"
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                            {MENU_ITEMS.map((item) => (
+                                <li key={item.href}>
+                                    <MobileMenuLink
+                                        item={item}
+                                        active={isActivePath(pathname, item)}
+                                        onNavigate={() => setMobileMenuOpen(false)}
+                                    />
                                 </li>
                             ))}
                             <li className="border-border -mx-4 border-t px-4 py-4">
@@ -294,5 +276,33 @@ export default function Navbar({ initialClass, floatingClass }: NavbarProps) {
                 </div>
             </div>
         </>
+    )
+}
+
+interface MobileMenuLinkProps {
+    item: MenuItem
+    active: boolean
+    onNavigate: () => void
+    className?: string
+}
+
+function MobileMenuLink({ item, active, onNavigate, className }: MobileMenuLinkProps) {
+    return (
+        <Link
+            href={item.href}
+            {...externalProps(item)}
+            aria-current={active ? 'page' : undefined}
+            onClick={onNavigate}
+            className={cn(
+                'block rounded px-4 py-3 text-inherit transition-colors hover:no-underline',
+                {
+                    'bg-primary-light text-surface dark:bg-primary dark:text-surface': active,
+                    'hover:bg-primary/10 dark:hover:bg-primary-light/10': !active,
+                },
+                className
+            )}
+        >
+            {item.label}
+        </Link>
     )
 }
