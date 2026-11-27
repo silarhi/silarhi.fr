@@ -95,7 +95,7 @@ interface NoProjectFoundProps {
 // Empty result: says what matched nothing, then offers ways out (other technologies, the full list, a message)
 function NoProjectFound({ searchQuery, activeFilter, suggestions }: NoProjectFoundProps) {
     return (
-        <div className="bg-light border-border mx-auto max-w-2xl rounded-2xl border px-6 py-12 text-center">
+        <div className="bg-surface dark:bg-surface-elevated border-border mx-auto max-w-2xl rounded-2xl border px-6 py-12 text-center shadow-sm">
             <span className="bg-primary/10 text-primary dark:bg-primary-light/20 dark:text-primary-light mx-auto mb-6 flex size-14 items-center justify-center rounded-full">
                 <Search className="size-6" />
             </span>
