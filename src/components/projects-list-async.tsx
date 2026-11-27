@@ -2,7 +2,7 @@ import Fuse from 'fuse.js'
 import { redirect } from 'next/navigation'
 
 import ProjectsContent from '@/components/projects-content'
-import { getAllProjects } from '@/utils/project'
+import { getAllProjects, getCategorySlug, getIndustrySlug } from '@/utils/project'
 
 interface ProjectsListAsyncProps {
     searchQuery: string
@@ -36,16 +36,11 @@ export default async function ProjectsListAsync({
     }
 
     if (category) {
-        filteredProjects = filteredProjects.filter(
-            (project) => project.category.toLowerCase().replace(/\s+/g, '-') === category
-        )
+        filteredProjects = filteredProjects.filter((project) => getCategorySlug(project.category) === category)
     }
 
     if (industry) {
-        filteredProjects = filteredProjects.filter((project) => {
-            const sector = project.client.sector
-            return sector.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and') === industry
-        })
+        filteredProjects = filteredProjects.filter((project) => getIndustrySlug(project.client.sector) === industry)
     }
 
     if (client) {

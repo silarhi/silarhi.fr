@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    images: {
+        // AVIF first (about 20% lighter than WebP), WebP for browsers without AVIF support
+        formats: ['image/avif', 'image/webp'],
+    },
     redirects: async () => {
         return [
             {

@@ -1,20 +1,69 @@
 import fs from 'fs'
-import matter from 'gray-matter'
 import type { StaticImageData } from 'next/image'
 import path from 'path'
+import * as v from 'valibot'
 
 import { type Client, getClientBySlug } from './client'
+import {
+    contentDirectory,
+    type ImageMetadata,
+    imageMetadataSchema,
+    isoDate,
+    lazy,
+    optionalText,
+    parseFrontMatter,
+    readMdxDirectory,
+    readMdxFile,
+    requiredText,
+} from './content'
 import { getTechnologyBySlug, type Technology } from './technology'
 
-const projectsDirectory = path.join(process.cwd(), 'content/projects')
+const projectsDirectory = path.join(contentDirectory, 'projects')
 
-export type ProjectScope =
-    | 'full_development'
-    | 'feature_integration'
-    | 'takeover_and_evolution'
-    | 'maintenance_and_support'
-type CodeOwnership = 'from_scratch' | 'shared_codebase' | 'inherited_codebase'
-type EngagementType = 'project_based' | 'continuous_support' | 'consulting'
+const scopeSchema = v.picklist([
+    'full_development',
+    'feature_integration',
+    'takeover_and_evolution',
+    'maintenance_and_support',
+])
+const engagementTypeSchema = v.picklist(['project_based', 'continuous_support', 'consulting'])
+const pointsSchema = v.object({ description: requiredText, points: v.array(requiredText) })
+
+// Source of truth of the project front matter (content/projects/<slug>/index.mdx)
+const projectFrontMatterSchema = v.object({
+    title: requiredText,
+    date: isoDate,
+    endDate: v.optional(isoDate),
+    excerpt: requiredText,
+    client: requiredText,
+    technologies: v.array(requiredText),
+    published: v.boolean(),
+    scope: scopeSchema,
+    codeOwnership: v.picklist(['from_scratch', 'shared_codebase', 'inherited_codebase']),
+    category: requiredText,
+    url: v.optional(v.pipe(v.string(), v.url())),
+    name: optionalText,
+    engagement: v.object({
+        type: engagementTypeSchema,
+        description: requiredText,
+        deliverables: v.array(requiredText),
+    }),
+    image: optionalText,
+    image_metadata: v.optional(imageMetadataSchema),
+    overview: requiredText,
+    challenge: pointsSchema,
+    solution: pointsSchema,
+})
+
+// Iteration files (content/projects/<slug>/v1.mdx, …): only an explicit `published: false` hides one
+const iterationFrontMatterSchema = v.object({
+    title: requiredText,
+    date: isoDate,
+})
+
+type ProjectFrontMatter = v.InferOutput<typeof projectFrontMatterSchema>
+export type ProjectScope = v.InferOutput<typeof scopeSchema>
+type EngagementType = v.InferOutput<typeof engagementTypeSchema>
 
 // Helper function to get engagement type label in French
 export function getEngagementTypeLabel(type: EngagementType): string {
@@ -76,223 +125,100 @@ export function formatProjectDuration(date: Date, endDate: Date): string {
     return remainingMonths ? `${yearsLabel} et ${remainingMonths} mois` : yearsLabel
 }
 
-interface ProjectIteration {
+interface ProjectIteration extends v.InferOutput<typeof iterationFrontMatterSchema> {
     slug: string
-    title: string
-    date: Date
     content: string
 }
 
-interface ProjectEngagement {
-    type: EngagementType
-    description: string
-    deliverables: string[]
-}
-
-interface ProjectChallenge {
-    description: string
-    points: string[]
-}
-
-interface ProjectSolution {
-    description: string
-    points: string[]
-}
-
-export interface ImageMetadata {
-    blur: string
-    width: number
-    height: number
-}
-
-export interface Project {
+export interface Project extends Omit<ProjectFrontMatter, 'client' | 'technologies' | 'image' | 'image_metadata'> {
     slug: string
-    title: string
-    date: Date
-    endDate?: Date
-    excerpt: string
     client: Client
     technologies: Technology[]
-    published: boolean
     content: string
     iterations: ProjectIteration[]
-    scope: ProjectScope
-    codeOwnership: CodeOwnership
-    category: string
-    url?: string
-    name?: string
-    engagement: ProjectEngagement
     image?: string | StaticImageData
     imageMetadata?: ImageMetadata
-    overview: string
-    challenge: ProjectChallenge
-    solution: ProjectSolution
 }
 
-interface ProjectFrontMatter {
-    title: string
-    date: string
-    endDate?: string
-    excerpt: string
-    client: string
-    technologies: string[]
-    published: boolean
-    scope: ProjectScope
-    codeOwnership: CodeOwnership
-    category: string
-    url?: string
-    name?: string
-    engagement: ProjectEngagement
-    image?: string
-    image_metadata?: ImageMetadata
-    overview: string
-    challenge: ProjectChallenge
-    solution: ProjectSolution
+// Query param value of a category filter ("Gestion documentaire" → "gestion-documentaire")
+export function getCategorySlug(category: string): string {
+    return category.toLowerCase().replace(/\s+/g, '-')
 }
 
-interface IterationFrontMatter {
-    title: string
-    date: string
-    // Only an explicit `published: false` hides an iteration
-    published?: boolean
+// Query param value of an industry filter, from the client sector ("Banque & Finance" → "banque-and-finance")
+export function getIndustrySlug(sector: string): string {
+    return getCategorySlug(sector).replace(/&/g, 'and')
 }
 
-// In-memory cache for projects (loaded once per build)
-let projectsCachePromise: Promise<Map<string, Project>> | null = null
+// Published iterations of a project, oldest first
+function loadProjectIterations(projectDirectory: string): ProjectIteration[] {
+    return readMdxDirectory(projectDirectory)
+        .filter((file) => file.data.published !== false)
+        .map((file) => ({
+            slug: file.slug,
+            ...parseFrontMatter(iterationFrontMatterSchema, file),
+            content: file.content,
+        }))
+        .sort((a, b) => a.date.getTime() - b.date.getTime())
+}
 
-// Get all project slugs by scanning directories that contain index.mdx
-function scanProjectSlugs(): string[] {
-    if (!fs.existsSync(projectsDirectory)) {
-        return []
-    }
-
-    const entries = fs.readdirSync(projectsDirectory, { withFileTypes: true })
-    const slugs: string[] = []
+// Published projects whose client exists, keyed by directory name (drafts are not validated)
+const loadProjects = lazy(async () => {
+    const projects = new Map<string, Project>()
+    const entries = fs.existsSync(projectsDirectory) ? fs.readdirSync(projectsDirectory, { withFileTypes: true }) : []
 
     for (const entry of entries) {
-        if (entry.isDirectory()) {
-            const indexPath = path.join(projectsDirectory, entry.name, 'index.mdx')
-            if (fs.existsSync(indexPath)) {
-                slugs.push(entry.name)
-            }
-        }
-    }
-
-    return slugs
-}
-
-// Parse iterations from a project directory (reads files in one pass)
-function parseProjectIterations(projectDir: string): ProjectIteration[] {
-    const files = fs.readdirSync(projectDir)
-    const iterationFiles = files.filter((file) => file.endsWith('.mdx') && file !== 'index.mdx')
-
-    const iterations: ProjectIteration[] = []
-
-    for (const file of iterationFiles) {
-        const fullPath = path.join(projectDir, file)
-        const fileContents = fs.readFileSync(fullPath, 'utf8')
-        const { data, content } = matter(fileContents)
-        const frontMatter = data as IterationFrontMatter
-
-        if (frontMatter.published === false) {
+        const projectDirectory = path.join(projectsDirectory, entry.name)
+        const indexPath = path.join(projectDirectory, 'index.mdx')
+        if (!entry.isDirectory() || !fs.existsSync(indexPath)) {
             continue
         }
 
-        iterations.push({
-            slug: file.replace(/\.mdx$/, ''),
-            title: frontMatter.title,
-            date: new Date(frontMatter.date),
-            content,
+        const file = readMdxFile(indexPath)
+        if (!file.data.published) {
+            continue
+        }
+
+        const {
+            client: clientSlug,
+            technologies: technologySlugs,
+            image_metadata,
+            ...frontMatter
+        } = parseFrontMatter(projectFrontMatterSchema, file)
+        const client = await getClientBySlug(clientSlug)
+        if (!client) {
+            continue
+        }
+
+        const technologies = await Promise.all(technologySlugs.map((techSlug) => getTechnologyBySlug(techSlug)))
+
+        projects.set(entry.name, {
+            ...frontMatter,
+            slug: entry.name,
+            client,
+            technologies: technologies.filter((tech): tech is Technology => tech !== null),
+            imageMetadata: image_metadata,
+            content: file.content,
+            iterations: loadProjectIterations(projectDirectory),
         })
     }
 
-    // Sort iterations by date (oldest first for chronological order)
-    return iterations.sort((a, b) => a.date.getTime() - b.date.getTime())
-}
-
-// Load all projects into cache (single filesystem scan)
-function loadProjectsCache(): Promise<Map<string, Project>> {
-    if (!projectsCachePromise) {
-        projectsCachePromise = (async () => {
-            const cache = new Map<string, Project>()
-            const slugs = scanProjectSlugs()
-
-            for (const slug of slugs) {
-                const projectDir = path.join(projectsDirectory, slug)
-                const indexPath = path.join(projectDir, 'index.mdx')
-                const fileContents = fs.readFileSync(indexPath, 'utf8')
-                const { data, content } = matter(fileContents)
-                const frontMatter = data as ProjectFrontMatter
-
-                // Skip unpublished projects
-                if (!frontMatter.published) {
-                    continue
-                }
-
-                // Lookup client metadata (uses cached client data)
-                const client = await getClientBySlug(frontMatter.client)
-                if (!client) {
-                    continue
-                }
-
-                // Lookup technology metadata (uses cached technology data)
-                const technologies = await Promise.all(
-                    frontMatter.technologies.map((techSlug) => getTechnologyBySlug(techSlug))
-                )
-
-                // Get iterations from the same directory scan
-                const iterations = parseProjectIterations(projectDir)
-
-                cache.set(slug, {
-                    slug,
-                    title: frontMatter.title,
-                    date: new Date(frontMatter.date),
-                    endDate: frontMatter.endDate ? new Date(frontMatter.endDate) : undefined,
-                    excerpt: frontMatter.excerpt,
-                    client,
-                    url: frontMatter.url,
-                    technologies: technologies.filter((tech): tech is Technology => tech !== null),
-                    published: frontMatter.published,
-                    content,
-                    iterations,
-                    scope: frontMatter.scope,
-                    codeOwnership: frontMatter.codeOwnership,
-                    category: frontMatter.category,
-                    name: frontMatter.name,
-                    engagement: frontMatter.engagement,
-                    image: frontMatter.image,
-                    imageMetadata: frontMatter.image_metadata,
-                    overview: frontMatter.overview,
-                    challenge: frontMatter.challenge,
-                    solution: frontMatter.solution,
-                })
-            }
-
-            return cache
-        })()
-    }
-    return projectsCachePromise
-}
+    return projects
+})
 
 // Get all project slugs
 export async function getAllProjectSlugs(): Promise<string[]> {
-    if (projectsCachePromise) {
-        const cache = await projectsCachePromise
-        return Array.from(cache.keys())
-    }
-    return scanProjectSlugs()
+    return Array.from((await loadProjects()).keys())
 }
 
 // Get a single project by slug
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
-    const cache = await loadProjectsCache()
-    return cache.get(slug) ?? null
+    return (await loadProjects()).get(slug) ?? null
 }
 
 // Get all project projects
 export async function getAllProjects(): Promise<Project[]> {
-    const cache = await loadProjectsCache()
-    return Array.from(cache.values()).sort((a, b) => b.date.getTime() - a.date.getTime())
+    return Array.from((await loadProjects()).values()).sort((a, b) => b.date.getTime() - a.date.getTime())
 }
 
 // Get projects by technology
@@ -396,7 +322,7 @@ export async function getProjectFilterData(): Promise<ProjectFilterData> {
 
         // Count categories
         if (project.category) {
-            const slug = project.category.toLowerCase().replace(/\s+/g, '-')
+            const slug = getCategorySlug(project.category)
             const existing = categoryCounts.get(slug)
             if (existing) {
                 existing.projectCount++
@@ -412,7 +338,7 @@ export async function getProjectFilterData(): Promise<ProjectFilterData> {
         // Count industries
         const industry = project.client.sector
         if (industry) {
-            const slug = industry.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')
+            const slug = getIndustrySlug(industry)
             const existing = industryCounts.get(slug)
             if (existing) {
                 existing.projectCount++

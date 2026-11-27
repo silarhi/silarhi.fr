@@ -1,11 +1,9 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { Fragment } from 'react'
 
 import { montserrat } from '@/app/fonts'
+import FooterFrame from '@/components/footer-frame'
 import Button from '@/components/ui/button'
 import iconEnvelope from '@/icons/envelope_hem0.svg'
 import { COMPANY_INFO } from '@/lib/schemas'
@@ -55,15 +53,9 @@ const footerSections = [
 ]
 
 export default function Footer() {
-    const pathname = usePathname()
-
     return (
-        <footer
-            className={cn('bg-surface-dark text-dark-foreground dark:bg-background print:hidden', {
-                'mt-20': pathname !== '/contact',
-            })}
-        >
-            {pathname !== '/contact' && (
+        <FooterFrame
+            banner={
                 <div className="bg-secondary text-dark py-6">
                     <div className="container mx-auto px-4">
                         <div className="flex flex-row flex-wrap items-center justify-center gap-2 text-center lg:justify-start lg:gap-8 lg:text-left">
@@ -92,7 +84,8 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-            )}
+            }
+        >
             <div className="border-surface-dark/10 dark:border-border border-t py-12">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
@@ -148,6 +141,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-        </footer>
+        </FooterFrame>
     )
 }
