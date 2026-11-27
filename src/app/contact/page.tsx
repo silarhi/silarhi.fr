@@ -7,6 +7,7 @@ import JsonLd from '@/components/json-ld'
 import { Clock, Envelope, Map, Phone } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import { COMPANY_INFO, generateWebPageSchema } from '@/lib/schemas'
+import { CONTACT_RESPONSE_TIME } from '@/utils/contact'
 import { cn } from '@/utils/lib'
 import { getCanonicalUrl } from '@/utils/url'
 
@@ -59,9 +60,12 @@ function ContactSection() {
     return (
         <>
             <div>
-                <h2 className="mb-4 text-3xl font-bold lg:text-4xl">Contact</h2>
-                <p className="text-foreground/80">
-                    Laissez-nous un message et nous vous répondrons dans les plus brefs délais.
+                <h2 className="mb-4 text-3xl font-bold lg:text-4xl">Parlez-nous de votre projet</h2>
+                <p className="text-foreground/80 flex items-center gap-2">
+                    <Clock className="text-primary shrink-0" aria-hidden="true" />
+                    <span>
+                        Laissez-nous un message : nous vous répondons <strong>{CONTACT_RESPONSE_TIME}</strong>.
+                    </span>
                 </p>
             </div>
             <div>
@@ -113,7 +117,7 @@ function InfoSection() {
     return (
         <>
             <div>
-                <h2 className="mb-4 text-3xl font-bold lg:text-4xl">SILARHI</h2>
+                <h2 className="mb-4 text-3xl font-bold lg:text-4xl">Nous joindre</h2>
                 <p className="text-foreground/80">Les infos pratiques, c&apos;est par ici.</p>
             </div>
             <div>
