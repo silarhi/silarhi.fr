@@ -32,6 +32,9 @@ interface ProjectPageProps {
     }>
 }
 
+// Unknown slugs get the static 404 page instead of a server render
+export const dynamicParams = false
+
 export async function generateStaticParams() {
     const slugs = await getAllProjectSlugs()
     return slugs.map((slug) => ({

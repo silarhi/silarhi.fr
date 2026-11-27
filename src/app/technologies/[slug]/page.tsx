@@ -14,9 +14,9 @@ import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import { generateTechnologyPageSchema, generateTechnologyProjectsListSchema } from '@/lib/schemas/technology'
 import { getPackagesByTechnology } from '@/utils/open-source'
-import { getProjectsByTechnology } from '@/utils/project'
+import { getProjectFilterData, getProjectsByTechnology } from '@/utils/project'
 import { getServicesByTechnology } from '@/utils/service'
-import { getAllTechnologySlugs, getTechnologyBySlug } from '@/utils/technology'
+import { getTechnologyBySlug } from '@/utils/technology'
 import { getCanonicalUrl } from '@/utils/url'
 
 interface TechnologyPageProps {
@@ -25,9 +25,13 @@ interface TechnologyPageProps {
     }>
 }
 
+// Unknown slugs get the static 404 page instead of a server render
+export const dynamicParams = false
+
+// A technology without published project has no page
 export async function generateStaticParams() {
-    const slugs = getAllTechnologySlugs()
-    return slugs.map((slug) => ({
+    const { technologies } = await getProjectFilterData()
+    return technologies.map(({ slug }) => ({
         slug,
     }))
 }
