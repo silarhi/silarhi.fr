@@ -6,9 +6,10 @@ import { useForm } from 'react-hook-form'
 import Input from '@/components/forms/input'
 import Textarea from '@/components/forms/textarea'
 import Button from '@/components/ui/button'
-import { Envelope, FileText, Person, Phone, Spinner } from '@/components/ui/icons'
+import { Check, Envelope, FileText, Person, Phone, Spinner } from '@/components/ui/icons'
 import { COMPANY_INFO } from '@/lib/schemas'
 import { track } from '@/utils/analytics'
+import { CONTACT_RESPONSE_TIME } from '@/utils/contact'
 
 interface ContactFormData {
     name: string
@@ -90,15 +91,7 @@ export default function ContactForm() {
     )
 
     if (success) {
-        return (
-            <div
-                className="text-success border-success/20 bg-success/10 dark:bg-success/20 mb-0 rounded border p-4"
-                role="alert"
-            >
-                <h4 className="mb-2 font-bold">Merci !</h4>
-                <p className="mb-0">Votre message a bien été envoyé, je vous répondrai dans les plus brefs délais.</p>
-            </div>
-        )
+        return <ContactFormSuccess onReset={() => setSuccess(false)} />
     }
 
     return (
@@ -221,5 +214,67 @@ export default function ContactForm() {
                 <Link href="/politique-de-confidentialite">En savoir plus</Link>
             </p>
         </form>
+    )
+}
+
+const NEXT_STEPS = [
+    {
+        title: 'Nous lisons votre message',
+        description: `Nous vous répondons ${CONTACT_RESPONSE_TIME}, par email, ou par téléphone si vous nous avez laissé votre numéro.`,
+    },
+    {
+        title: 'Un premier échange',
+        description: 'Nous faisons le point ensemble sur votre besoin, vos contraintes et vos délais, sans engagement.',
+    },
+    {
+        title: 'Une proposition claire',
+        description: 'Vous recevez un devis gratuit et détaillé : périmètre, planning et budget.',
+    },
+]
+
+// Replaces the form once Formspree accepted the message: confirms it and says what happens next
+function ContactFormSuccess({ onReset }: { onReset: () => void }) {
+    const headingRef = useRef<HTMLHeadingElement>(null)
+
+    // Move focus (and the viewport) to the confirmation, which replaced the button the visitor just pressed
+    useEffect(() => {
+        headingRef.current?.focus()
+    }, [])
+
+    return (
+        <div className="border-success/30 bg-success/5 dark:bg-success/10 rounded-2xl border p-6 lg:p-8" role="status">
+            <div className="mb-6 flex items-center gap-4">
+                <span className="bg-success text-surface flex size-10 shrink-0 items-center justify-center rounded-full">
+                    <Check className="size-5" aria-hidden="true" />
+                </span>
+                <h3 ref={headingRef} tabIndex={-1} className="text-2xl font-bold focus:outline-none">
+                    Merci, votre message est bien parti !
+                </h3>
+            </div>
+
+            <p className="text-foreground mb-4 font-semibold">Et maintenant ?</p>
+            <ol className="mb-8 space-y-4">
+                {NEXT_STEPS.map((step, index) => (
+                    <li key={step.title} className="flex gap-4">
+                        <span className="bg-primary/10 text-primary dark:bg-primary-light/20 dark:text-primary-light flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold">
+                            {index + 1}
+                        </span>
+                        <div>
+                            <p className="text-foreground mb-1 font-semibold">{step.title}</p>
+                            <p className="text-foreground/80 mb-0">{step.description}</p>
+                        </div>
+                    </li>
+                ))}
+            </ol>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+                <Button as="a" href="/projets">
+                    Découvrir nos projets
+                </Button>
+                <Button variant="outline-primary" type="button" onClick={onReset}>
+                    Envoyer un autre message
+                </Button>
+            </div>
+        </div>
     )
 }
