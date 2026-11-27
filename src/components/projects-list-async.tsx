@@ -1,7 +1,7 @@
 import Fuse from 'fuse.js'
 import { redirect } from 'next/navigation'
 
-import ProjectsContent from '@/components/projects-content'
+import ProjectsContent, { type ActiveFilterSummary } from '@/components/projects-content'
 import { getAllProjects, getCategorySlug, getIndustrySlug } from '@/utils/project'
 
 interface ProjectsListAsyncProps {
@@ -13,6 +13,7 @@ interface ProjectsListAsyncProps {
     industry?: string
     client?: string
     searchParams: string
+    activeFilter: ActiveFilterSummary | null
 }
 
 export default async function ProjectsListAsync({
@@ -24,6 +25,7 @@ export default async function ProjectsListAsync({
     industry,
     client,
     searchParams,
+    activeFilter,
 }: ProjectsListAsyncProps) {
     // Get all projects and filter by search query
     let filteredProjects = await getAllProjects()
@@ -89,6 +91,7 @@ export default async function ProjectsListAsync({
             totalPages={totalPages}
             searchQuery={searchQuery}
             searchParams={searchParams}
+            activeFilter={activeFilter}
         />
     )
 }

@@ -3,6 +3,13 @@ import { FaceSad } from '@/components/ui/icons'
 import Pagination from '@/components/ui/pagination'
 import type { Project } from '@/utils/project'
 
+export interface ActiveFilterSummary {
+    /** Kind of filter, singular ("Technologie") */
+    label: string
+    /** Name of the selected value ("Symfony") */
+    name: string
+}
+
 interface ProjectsContentProps {
     projects: Project[]
     filteredCount: number
@@ -10,6 +17,7 @@ interface ProjectsContentProps {
     totalPages: number
     searchQuery: string
     searchParams: string
+    activeFilter: ActiveFilterSummary | null
 }
 
 export default function ProjectsContent({
@@ -19,25 +27,37 @@ export default function ProjectsContent({
     totalPages,
     searchQuery,
     searchParams,
+    activeFilter,
 }: ProjectsContentProps) {
     return (
         <>
-            {/* Search result count */}
-            {searchQuery && (
-                <div className="mb-8">
+            {/* Result count of a search or a filter, announced to screen readers as it changes */}
+            <div role="status" className="mb-8 empty:hidden">
+                {(searchQuery || activeFilter) && (
                     <p className="text-foreground/80 text-sm">
                         {filteredCount > 0 ? (
                             <>
                                 <span className="font-semibold">{filteredCount}</span>{' '}
-                                {filteredCount === 1 ? 'projet trouvé' : 'projets trouvés'} pour{' '}
-                                <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
+                                {filteredCount === 1 ? 'projet trouvé' : 'projets trouvés'}
                             </>
                         ) : (
-                            <>Aucun projet trouvé pour &ldquo;{searchQuery}&rdquo;</>
+                            'Aucun projet trouvé'
+                        )}
+                        {searchQuery && (
+                            <>
+                                {' '}
+                                pour <span className="font-semibold">&ldquo;{searchQuery}&rdquo;</span>
+                            </>
+                        )}
+                        {activeFilter && (
+                            <>
+                                {' '}
+                                · {activeFilter.label}&nbsp;: <span className="font-semibold">{activeFilter.name}</span>
+                            </>
                         )}
                     </p>
-                </div>
-            )}
+                )}
+            </div>
 
             {projects.length === 0 ? (
                 <div className="py-12 text-center">

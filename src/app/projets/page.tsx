@@ -9,7 +9,7 @@ import Badge from '@/components/ui/badge'
 import Section from '@/components/ui/section'
 import { generateProjectsCollectionPageSchema, generateProjectsListSchema } from '@/lib/schemas/project'
 import { getProjectFilterData } from '@/utils/project'
-import { getProjectsCanonicalUrl } from '@/utils/url'
+import { FILTER_LABELS, getActiveFilter, getProjectsCanonicalUrl } from '@/utils/url'
 
 interface ProjectPageProps {
     searchParams: Promise<{
@@ -60,6 +60,15 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
     // Fetch pre-computed filter data (O(n) instead of O(n×m))
     const { technologies, categories, industries, clients, projects } = await getProjectFilterData()
 
+    // The filter in use, by name, for the result summary
+    const activeFilter = getActiveFilter(new URLSearchParams(searchParamsString))
+    const filterOptions = { technology: technologies, category: categories, industry: industries, client: clients }
+    const activeFilterName = activeFilter
+        ? filterOptions[activeFilter.type].find((option) => option.slug === activeFilter.value)?.name
+        : undefined
+    const activeFilterSummary =
+        activeFilter && activeFilterName ? { label: FILTER_LABELS[activeFilter.type], name: activeFilterName } : null
+
     // Generate projects page schemas
     const projectsPageSchemas = [generateProjectsCollectionPageSchema(projects), generateProjectsListSchema(projects)]
 
@@ -90,6 +99,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                     industry={industry}
                     client={client}
                     searchParams={searchParamsString}
+                    activeFilter={activeFilterSummary}
                 />
             </Section>
 
