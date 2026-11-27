@@ -279,7 +279,7 @@ function MethodologySection() {
                     <Fragment key={index}>
                         <FadeInWhenVisible delay={0.2 + index * 0.15}>
                             <div className={cn('flex items-start gap-3 md:gap-4')}>
-                                <div className="bg-surface border-border flex-1 overflow-hidden rounded-xl border shadow-lg transition-transform hover:scale-105">
+                                <div className="bg-surface border-border flex-1 overflow-hidden rounded-xl border shadow-lg">
                                     <div className="p-4 md:p-6">
                                         <div className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
                                             <div className="flex h-32 w-full shrink-0 items-center justify-center md:w-32">
@@ -426,7 +426,7 @@ function NumbersSection({ numbers }: { numbers: NumberData[] }) {
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
                 {numbers.map((number, key) => (
                     <FadeInWhenVisible key={key} delay={key * 0.1}>
-                        <div className="bg-surface dark:bg-surface-elevated border-border rounded-2xl border p-8 text-center shadow-sm transition-shadow hover:shadow-md">
+                        <div className="bg-surface dark:bg-surface-elevated border-border rounded-2xl border p-8 text-center shadow-sm">
                             <div className={cn(lato.className, 'text-primary mb-3 text-6xl font-bold')}>
                                 {number.value}
                             </div>
