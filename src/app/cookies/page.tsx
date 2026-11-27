@@ -43,7 +43,6 @@ export default function CookiesPage() {
             current="/cookies"
             title="Politique de cookies"
             lead="Ce que le site enregistre dans votre navigateur, et pourquoi aucun bandeau de consentement ne vous est présenté."
-            updated="2026-10-23"
         >
             <LegalSection id="en-bref" title="En bref">
                 <p>

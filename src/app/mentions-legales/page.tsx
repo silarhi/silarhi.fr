@@ -23,7 +23,6 @@ export default function LegalMentionPage() {
                 current="/mentions-legales"
                 title="Mentions légales"
                 lead="L’éditeur du site silarhi.fr, son hébergement, les conditions de son utilisation et le droit qui s’y applique."
-                updated="2026-10-23"
                 identity
             >
                 <LegalSection id="presentation" title="Présentation du site">

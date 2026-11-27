@@ -7,6 +7,7 @@ import LegalToc from '@/components/legal-toc'
 import Badge from '@/components/ui/badge'
 import { ChevronRight, Clock, Cookie, FileText, House, Landmark, ShieldCheck } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
+import { LEGAL_PAGE_UPDATES } from '@/utils/legal-pages'
 import { cn } from '@/utils/lib'
 
 const legalPages = [
@@ -23,8 +24,6 @@ interface LegalLayoutProps {
     current: (typeof legalPages)[number]['href']
     title: string
     lead: ReactNode
-    /** Date of the last update, as YYYY-MM-DD */
-    updated: string
     /** Extra actions under the date (e.g. a PDF download) */
     actions?: ReactNode
     /** Opens the content with the publisher and company card (mentions légales only) */
@@ -33,8 +32,9 @@ interface LegalLayoutProps {
     children: ReactNode
 }
 
-export default function LegalLayout({ current, title, lead, updated, actions, identity, children }: LegalLayoutProps) {
+export default function LegalLayout({ current, title, lead, actions, identity, children }: LegalLayoutProps) {
     const currentPage = legalPages.find((page) => page.href === current)
+    const updated = LEGAL_PAGE_UPDATES[current]
     const sections = Children.toArray(children)
         .filter(isValidElement<LegalSectionProps>)
         .map((section) => ({ id: section.props.id, title: section.props.title }))
