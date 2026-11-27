@@ -161,7 +161,7 @@ function getNumbers(clientsCount: number, projectsCount: number): NumberData[] {
 
 function HeroSection() {
     return (
-        <div className="relative h-screen w-full overflow-hidden">
+        <div className="relative h-svh w-full overflow-hidden">
             <div className="absolute top-0 left-0 z-1 h-full w-full bg-black opacity-60"></div>
             <Image
                 src={home}
