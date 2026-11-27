@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { type CSSProperties, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { montserrat } from '@/app/fonts'
 import ServicesMenu, { type NavService } from '@/components/services-menu'
@@ -43,8 +43,6 @@ interface NavbarProps {
 export default function Navbar({ services }: NavbarProps) {
     const ref = useRef<HTMLElement>(null)
     const [floating, setFloating] = useState<boolean>(false)
-    const [floatingStyle, setFloatingStyle] = useState<CSSProperties>({})
-    const [navbarHeight, setNavbarHeight] = useState<number>(56)
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
     const menuToggleRef = useRef<HTMLButtonElement>(null)
     const mobileMenuRef = useRef<HTMLDivElement>(null)
@@ -53,32 +51,44 @@ export default function Navbar({ services }: NavbarProps) {
     const pathname = usePathname()
     const isHomePage = pathname === '/'
 
+    // Past one bar height the navbar floats (fixed, dark); up to two bar heights it slides down and fades in.
+    // The slide is written straight to the element once per frame: React only re-renders when `floating` flips.
     useEffect(() => {
-        if (ref.current) {
-            setNavbarHeight(ref.current.clientHeight)
+        const nav = ref.current
+        if (!nav) {
+            return
         }
-    }, [])
 
-    useEffect(() => {
-        const onScroll = () => {
-            setFloating(window.scrollY > navbarHeight)
-            if (window.scrollY > navbarHeight && window.scrollY <= 2 * navbarHeight) {
-                setFloatingStyle({
-                    top: Math.round(window.scrollY - 2 * navbarHeight),
-                    opacity: 1 - (2 * navbarHeight - window.scrollY) / navbarHeight,
-                })
+        // Measured before floating shrinks the logo
+        const height = nav.clientHeight
+        let frame = 0
+
+        const update = () => {
+            frame = 0
+            const scrollY = window.scrollY
+            setFloating(scrollY > height)
+            if (scrollY > height && scrollY <= 2 * height) {
+                nav.style.top = `${Math.round(scrollY - 2 * height)}px`
+                nav.style.opacity = String(1 - (2 * height - scrollY) / height)
             } else {
-                setFloatingStyle({})
+                nav.style.top = ''
+                nav.style.opacity = ''
+            }
+        }
+        const onScroll = () => {
+            if (!frame) {
+                frame = requestAnimationFrame(update)
             }
         }
 
-        onScroll()
+        update()
         window.addEventListener('scroll', onScroll, { passive: true })
 
         return () => {
             window.removeEventListener('scroll', onScroll)
+            cancelAnimationFrame(frame)
         }
-    }, [navbarHeight, setFloating, setFloatingStyle])
+    }, [])
 
     // Open mobile menu: a modal dialog. Focus moves into it and stays there (Tab cycles), Escape closes it, the page
     // behind does not scroll; once closed, focus goes back to the toggle button.
@@ -137,7 +147,6 @@ export default function Navbar({ services }: NavbarProps) {
                     'bg-surface-dark': floating,
                     'bg-transparent': !floating,
                 })}
-                style={floatingStyle}
                 ref={ref}
             >
                 <div className="container mx-auto px-4">
