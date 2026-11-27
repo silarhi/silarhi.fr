@@ -1,3 +1,31 @@
+const isDev = process.env.NODE_ENV === 'development'
+
+// Origins the pages load from: Umami (script + events) and Formspree (contact form, sent with fetch).
+// 'unsafe-inline' stays for scripts: the App Router and next-themes inline their bootstrap scripts, and nonces
+// would turn every static page into a per-request render. Dev mode also needs eval and the HMR websocket.
+const contentSecurityPolicy = [
+    "default-src 'self'",
+    `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://analytics.silarhi.fr`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self'",
+    `connect-src 'self' https://analytics.silarhi.fr https://formspree.io${isDev ? ' ws:' : ''}`,
+    "frame-src 'none'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+].join('; ')
+
+// HSTS is already sent by Vercel
+const securityHeaders = [
+    { key: 'Content-Security-Policy', value: contentSecurityPolicy },
+    { key: 'X-Content-Type-Options', value: 'nosniff' },
+    { key: 'X-Frame-Options', value: 'DENY' },
+    { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+    { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()' },
+]
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
@@ -5,6 +33,8 @@ const nextConfig = {
         // AVIF first (about 20% lighter than WebP), WebP for browsers without AVIF support
         formats: ['image/avif', 'image/webp'],
     },
+    poweredByHeader: false,
+    headers: async () => [{ source: '/:path*', headers: securityHeaders }],
     redirects: async () => {
         return [
             {
