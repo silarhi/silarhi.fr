@@ -6,6 +6,7 @@ import {
     getCategorySlug,
     getEngagementTypeLabel,
     getIndustrySlug,
+    rankRelatedProjects,
 } from './project'
 
 const utc = (date: string) => new Date(date)
@@ -80,5 +81,44 @@ describe('getEngagementTypeLabel', () => {
         expect(getEngagementTypeLabel('project_based')).toBe('Projet à périmètre défini')
         expect(getEngagementTypeLabel('continuous_support')).toBe('Support continu')
         expect(getEngagementTypeLabel('consulting')).toBe('Consulting')
+    })
+})
+
+describe('rankRelatedProjects', () => {
+    const project = (slug: string, category: string, technologies: string[]) => ({
+        slug,
+        category,
+        technologies: technologies.map((tech) => ({ slug: tech })),
+    })
+    const current = project('current', 'Gestion', ['php', 'symfony', 'react'])
+
+    it('ranks by shared technologies, a shared category counting for two', () => {
+        const candidates = [
+            project('one-tech', 'Site vitrine', ['php']),
+            project('three-techs', 'Site vitrine', ['php', 'symfony', 'react']),
+            project('same-category', 'Gestion', ['php']),
+        ]
+
+        expect(rankRelatedProjects(current, candidates, 3).map((related) => related.slug)).toEqual([
+            'three-techs',
+            'same-category',
+            'one-tech',
+        ])
+    })
+
+    it('leaves the project itself out and keeps the given order on a tie', () => {
+        const candidates = [
+            project('current', 'Gestion', ['php', 'symfony', 'react']),
+            project('newer', 'Site vitrine', ['php']),
+            project('older', 'Site vitrine', ['symfony']),
+        ]
+
+        expect(rankRelatedProjects(current, candidates, 3).map((related) => related.slug)).toEqual(['newer', 'older'])
+    })
+
+    it('returns at most the requested number of projects', () => {
+        const candidates = ['a', 'b', 'c', 'd'].map((slug) => project(slug, 'Gestion', []))
+
+        expect(rankRelatedProjects(current, candidates, 3)).toHaveLength(3)
     })
 })

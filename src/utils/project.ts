@@ -235,6 +235,41 @@ export async function getProjectsByClient(clientSlug: string): Promise<Project[]
     return allProjects.filter((project) => project.client.slug === clientSlug)
 }
 
+interface RelatedCandidate {
+    slug: string
+    category: string
+    technologies: { slug: string }[]
+}
+
+// A shared category weighs as much as two shared technologies: PHP or Symfony alone link most projects
+const SAME_CATEGORY_WEIGHT = 2
+
+/**
+ * The projects closest to `project`, by shared technologies and category, the most recent first on a tie
+ * (`candidates` are expected newest first). The project itself is left out.
+ */
+export function rankRelatedProjects<T extends RelatedCandidate>(
+    project: RelatedCandidate,
+    candidates: T[],
+    limit: number
+): T[] {
+    const technologies = new Set(project.technologies.map((tech) => tech.slug))
+    const score = (candidate: RelatedCandidate) =>
+        candidate.technologies.filter((tech) => technologies.has(tech.slug)).length +
+        (candidate.category === project.category ? SAME_CATEGORY_WEIGHT : 0)
+
+    return candidates
+        .filter((candidate) => candidate.slug !== project.slug)
+        .map((candidate) => ({ candidate, score: score(candidate) }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit)
+        .map(({ candidate }) => candidate)
+}
+
+export async function getRelatedProjects(project: Project, limit = 3): Promise<Project[]> {
+    return rankRelatedProjects(project, await getAllProjects(), limit)
+}
+
 // Pre-computed filter data interface
 interface FilterItemWithCount {
     slug: string
