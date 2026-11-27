@@ -9,6 +9,7 @@ import OpenSourcePackages from '@/components/open-source-packages'
 import ProjectList from '@/components/project-list'
 import ProjectsCTA from '@/components/projects-cta'
 import Badge from '@/components/ui/badge'
+import Button from '@/components/ui/button'
 import { ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
@@ -129,7 +130,24 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 title={service.title}
                 description={service.excerpt}
                 className="border-0"
-            />
+            >
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <Button
+                        as="a"
+                        size="lg"
+                        href="/contact"
+                        data-analytics-event="cta"
+                        data-analytics-location="service-hero"
+                    >
+                        Parler de votre projet
+                    </Button>
+                    {projects.length > 0 && (
+                        <Button as="a" size="lg" href="#realisations" variant="outline-primary">
+                            Voir nos réalisations
+                        </Button>
+                    )}
+                </div>
+            </HeroSection>
 
             {/* Overview: the one-paragraph definition of the service */}
             <Section className="border-border bg-surface border-b pt-0 lg:pt-0">
@@ -151,7 +169,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </Section>
 
             {projects.length > 0 && (
-                <Section className="bg-light border-border border-y">
+                <Section id="realisations" className="bg-light border-border scroll-mt-20 border-y">
                     <SectionHeader
                         title={getProjectsTitle(service, projects.length)}
                         subtitle={
