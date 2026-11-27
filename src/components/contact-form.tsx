@@ -151,18 +151,19 @@ export default function ContactForm() {
                     <Input
                         id="phone"
                         name="phone"
-                        type="text"
+                        type="tel"
                         autoComplete="tel"
-                        label="Téléphone"
+                        label={
+                            <>
+                                Téléphone <span className="text-foreground/60 font-normal">(facultatif)</span>
+                            </>
+                        }
                         placeholder="06 12 34 56 78"
                         disabled={pending}
                         iconPrepend={<Phone />}
                         formState={formState}
                         getFieldState={getFieldState}
                         register={register}
-                        registerOptions={{
-                            required: 'Merci de renseigner votre numéro de téléphone pour être recontacté',
-                        }}
                     />
                 </div>
                 <div className="col-span-1 md:col-span-2">
