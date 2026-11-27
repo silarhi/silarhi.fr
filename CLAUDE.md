@@ -43,10 +43,13 @@ pnpm lint            # Biome check (lint + format) on src/ and scripts/
 pnpm lint:fix        # Biome check with --write (autofix)
 pnpm typecheck       # tsc --noEmit
 pnpm knip            # Check for unused files, exports, and dependencies
+pnpm test            # Vitest unit tests (test:watch to rerun on change)
 pnpm lint-ci         # lint + typecheck + knip + validate:technologies + validate:clients + validate:images (what CI runs)
 pnpm prettier        # Format CSS/SCSS/Markdown/MDX/YAML (prettier:check to only check)
 pnpm size            # Check bundle size budgets (.size-limit.json, needs a prior `pnpm build`)
 ```
+
+Tests are Vitest files next to the code they cover (`src/**/*.test.ts`, config in `vitest.config.mts`, which resolves the `@/` aliases). `collections.test.ts` loads the real `content/` directory, so a front matter error also fails the tests. Add or update a test with any change to `src/utils/` or `src/lib/`.
 
 Biome formats JS/TS/JSON (4-space indent, 120 columns, single quotes, no semicolons, trailing commas es5); Prettier is only used for non-JS files. A Husky pre-commit hook runs `lint-staged`, which applies `biome check --write` to `*.{js,jsx,ts,tsx,mjs,cjs,json}` and `prettier --write` to `*.{css,scss,md,mdx,yaml,yml}`.
 
@@ -385,7 +388,7 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 The site is deployed on **Vercel**, behind **Cloudflare**. GitHub Actions workflows (`.github/workflows/`, all on Node 24):
 
-- `continuous-integration.yml` - On pull requests and pushes to `main`: `pnpm lint-ci`, plus a `CI passed` aggregate job
+- `continuous-integration.yml` - On pull requests and pushes to `main`: `pnpm lint-ci` (Lint job) and `pnpm test` (Test job), plus a `CI passed` aggregate job
 - `bundle-size.yml` - On pull requests to `main`: builds the base and PR branches, runs `size-limit` (`.size-limit.json`: 500 kB JS / 100 kB CSS gzipped) and posts a comparison comment
 - `generate-image-metadata.yml` - On pushes to `main` and pull requests touching `content/**` or `public/images/**`: runs `pnpm generate:image-metadata` and commits changed MDX files back to the branch
 - `validate-urls.yml` - Weekly (Mondays 09:00 UTC) and on manual dispatch: `pnpm validate:urls`
