@@ -231,7 +231,7 @@ function PresentationSection() {
                         sur mesure.
                     </h2>
                     <p className="text-lg">
-                        Spécialistes de l&apos;écosystème PHP, nous développons ou reprennons vos projets en Symfony, du
+                        Spécialistes de l&apos;écosystème PHP, nous développons ou reprenons vos projets en Symfony, du
                         prototype à la mise en ligne.
                     </p>
                 </div>
