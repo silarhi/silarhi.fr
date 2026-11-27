@@ -36,6 +36,8 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
     if (!mounted) {
         return (
             <button
+                type="button"
+                aria-label="Changer de thème"
                 className={cn(
                     'cursor-pointer rounded-lg p-2 transition-colors duration-200',
                     'hover:bg-primary/10 dark:hover:bg-primary-light/10',
@@ -55,13 +57,14 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
 
     return (
         <button
+            type="button"
             onClick={toggleTheme}
             className={cn(
                 'relative cursor-pointer rounded-lg p-2 transition-colors duration-200',
                 'hover:bg-primary/10 dark:hover:bg-primary-light/10',
                 className
             )}
-            aria-label={resolvedTheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+            aria-label={resolvedTheme === 'light' ? 'Passer en thème sombre' : 'Passer en thème clair'}
         >
             {/* Moon - visible in light mode */}
             <Moon

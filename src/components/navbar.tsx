@@ -46,6 +46,9 @@ export default function Navbar({ services }: NavbarProps) {
     const [floatingStyle, setFloatingStyle] = useState<CSSProperties>({})
     const [navbarHeight, setNavbarHeight] = useState<number>(56)
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
+    const menuToggleRef = useRef<HTMLButtonElement>(null)
+    const mobileMenuRef = useRef<HTMLDivElement>(null)
+    const closeButtonRef = useRef<HTMLButtonElement>(null)
 
     const pathname = usePathname()
     const isHomePage = pathname === '/'
@@ -76,6 +79,46 @@ export default function Navbar({ services }: NavbarProps) {
             window.removeEventListener('scroll', onScroll)
         }
     }, [navbarHeight, setFloating, setFloatingStyle])
+
+    // Open mobile menu: a modal dialog. Focus moves into it and stays there (Tab cycles), Escape closes it, the page
+    // behind does not scroll; once closed, focus goes back to the toggle button.
+    useEffect(() => {
+        if (!mobileMenuOpen) {
+            return
+        }
+
+        const toggleButton = menuToggleRef.current
+        closeButtonRef.current?.focus()
+        document.body.style.overflow = 'hidden'
+
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setMobileMenuOpen(false)
+                return
+            }
+            if (event.key !== 'Tab' || !mobileMenuRef.current) {
+                return
+            }
+
+            const focusable = mobileMenuRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+            const first = focusable[0]
+            const last = focusable[focusable.length - 1]
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault()
+                last?.focus()
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault()
+                first?.focus()
+            }
+        }
+        document.addEventListener('keydown', onKeyDown)
+
+        return () => {
+            document.removeEventListener('keydown', onKeyDown)
+            document.body.style.overflow = ''
+            toggleButton?.focus()
+        }
+    }, [mobileMenuOpen])
 
     // The yellow accent only reads on the dark bars (home hero, floating bar, dark mode): on the light background of
     // the other pages it is 1.4:1, so the active and hovered links take the primary blue there
@@ -122,12 +165,16 @@ export default function Navbar({ services }: NavbarProps) {
                         <div className="flex items-center space-x-2 lg:hidden">
                             <ThemeToggle className="text-inherit" />
                             <button
+                                ref={menuToggleRef}
+                                type="button"
                                 className={cn(
                                     'cursor-pointer rounded-lg p-2 text-inherit transition-colors duration-200',
                                     'hover:bg-primary/10 dark:hover:bg-primary-light/10'
                                 )}
                                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                                aria-label="Toggle menu"
+                                aria-label="Ouvrir le menu"
+                                aria-expanded={mobileMenuOpen}
+                                aria-controls="mobile-menu"
                             >
                                 <MenuToggle className="h-5 w-5" open={mobileMenuOpen} />
                             </button>
@@ -179,10 +226,11 @@ export default function Navbar({ services }: NavbarProps) {
 
             {/* Mobile menu */}
             <div
-                className={cn('fixed inset-0 z-60 transition-[visibility] duration-200 lg:hidden', {
-                    invisible: !mobileMenuOpen,
+                // Visible at once when opening (so focus can move in), hidden only after the slide-out when closing
+                className={cn('fixed inset-0 z-60 lg:hidden', {
+                    'invisible transition-[visibility] duration-200': !mobileMenuOpen,
                 })}
-                aria-hidden={!mobileMenuOpen}
+                inert={!mobileMenuOpen}
             >
                 {/* Backdrop with fade transition */}
                 <div
@@ -194,6 +242,11 @@ export default function Navbar({ services }: NavbarProps) {
                 />
                 {/* Slide panel */}
                 <div
+                    ref={mobileMenuRef}
+                    id="mobile-menu"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Menu"
                     className={cn(
                         'bg-surface dark:bg-surface-dark fixed top-0 bottom-0 left-0 flex w-80 flex-col shadow-xl transition-transform duration-200 ease-in-out',
                         {
@@ -213,12 +266,14 @@ export default function Navbar({ services }: NavbarProps) {
                             <span className={cn('text-lg', montserrat.className)}>SILARHI</span>
                         </Link>
                         <button
+                            ref={closeButtonRef}
+                            type="button"
                             className={cn(
                                 'cursor-pointer rounded-lg p-2 transition-colors duration-200',
                                 'hover:bg-primary/10 dark:hover:bg-primary-light/10'
                             )}
                             onClick={() => setMobileMenuOpen(false)}
-                            aria-label="Close menu"
+                            aria-label="Fermer le menu"
                         >
                             <MenuToggle className="h-5 w-5" open={true} />
                         </button>
