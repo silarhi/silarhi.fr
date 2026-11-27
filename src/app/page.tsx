@@ -253,9 +253,18 @@ function HeroSection() {
                                 Transformez vos ambitions digitales en <span className="text-primary">réalité</span>
                             </p>
                         </div>
-                        <div>
-                            <Button as="a" size="lg" href="#presentation" className="mt-4 lg:mt-6">
-                                En savoir plus
+                        <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:mt-8">
+                            <Button
+                                as="a"
+                                size="lg"
+                                href="/contact"
+                                data-analytics-event="cta"
+                                data-analytics-location="home-hero"
+                            >
+                                Parler de votre projet
+                            </Button>
+                            <Button as="a" size="lg" href="/projets" variant="outline-light">
+                                Voir nos projets
                             </Button>
                         </div>
                     </div>
