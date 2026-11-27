@@ -105,7 +105,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/sitemap.ts` - Dynamic sitemap generation
 - `src/app/robots.ts` - robots.txt (disallows `/api/` and `/cdn-cgi/`, points to the sitemap)
 
-The four legal pages share `LegalLayout` (`src/components/legal-layout.tsx`): breadcrumb, H1, lead, last update date, tabs between the pages, a sticky "Sur cette page" table of contents with scrollspy (`legal-toc.tsx`) and the identity card (`legal-identity-card.tsx`, mentions légales only). Its children are `LegalSection` elements (`legal-section.tsx`), one numbered card each, listed in the table of contents.
+The four legal pages share `LegalLayout` (`src/components/legal-layout.tsx`): breadcrumb, H1, lead, last update date, tabs between the pages, a sticky "Sur cette page" table of contents with scrollspy (`table-of-contents.tsx`, also used by the service pages for their H2 sections) and the identity card (`legal-identity-card.tsx`, mentions légales only). Its children are `LegalSection` elements (`legal-section.tsx`), one numbered card each, listed in the table of contents.
 
 Dynamic routes (`projets/[slug]`, `technologies/[slug]`, `[slug]`) are pre-rendered at build time with `generateStaticParams()` and set `dynamicParams = false`, so an unknown slug gets the static 404 page instead of a server render. `/projets` reads `searchParams`, so it is rendered per request. Legacy WordPress URLs and old tags are redirected in `next.config.mjs`.
 

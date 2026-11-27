@@ -3,7 +3,7 @@ import { Children, isValidElement, type ReactNode } from 'react'
 
 import LegalIdentityCard from '@/components/legal-identity-card'
 import type { LegalSectionProps } from '@/components/legal-section'
-import LegalToc from '@/components/legal-toc'
+import TableOfContents from '@/components/table-of-contents'
 import Badge from '@/components/ui/badge'
 import { ChevronRight, Clock, Cookie, FileText, House, Landmark, ShieldCheck } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
@@ -120,7 +120,7 @@ export default function LegalLayout({ current, title, lead, actions, identity, c
             <Section className="py-10 lg:py-16 print:py-8">
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
                     <aside className="hidden lg:col-span-4 lg:block print:hidden">
-                        <LegalToc items={tocItems} />
+                        <TableOfContents items={tocItems} />
                     </aside>
                     <article className="space-y-6 [counter-reset:legal-section] lg:col-span-8">
                         {identity && <LegalIdentityCard />}
