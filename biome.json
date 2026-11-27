@@ -1,7 +1,7 @@
 {
     "$schema": "https://biomejs.dev/schemas/2.6.6/schema.json",
     "files": {
-        "includes": ["src/**", "scripts/**", "!src/**/*.css", "!src/**/*.scss"]
+        "includes": ["src/**", "scripts/**", "!src/**/*.css"]
     },
     "vcs": {
         "enabled": true,
