@@ -104,11 +104,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 
 The four legal pages share `LegalLayout` (`src/components/legal-layout.tsx`): breadcrumb, H1, lead, last update date, tabs between the pages, a sticky "Sur cette page" table of contents with scrollspy (`legal-toc.tsx`) and the identity card (`legal-identity-card.tsx`, mentions légales only). Its children are `LegalSection` elements (`legal-section.tsx`), one numbered card each, listed in the table of contents.
 
-Dynamic routes (`projets/[slug]`, `technologies/[slug]`) are pre-rendered at build time with `generateStaticParams()`. `/projets` reads `searchParams`, so it is rendered per request. Legacy WordPress URLs and old tags are redirected in `next.config.mjs`.
-
-**API Routes**:
-
-- `src/app/api/technologies/route.ts` - JSON endpoint returning the pre-computed project filter data (technologies, categories, industries, projects), cached 1 hour; not called by the site itself
+Dynamic routes (`projets/[slug]`, `technologies/[slug]`, `[slug]`) are pre-rendered at build time with `generateStaticParams()` and set `dynamicParams = false`, so an unknown slug gets the static 404 page instead of a server render. `/projets` reads `searchParams`, so it is rendered per request. Legacy WordPress URLs and old tags are redirected in `next.config.mjs`.
 
 **Fonts & Analytics**:
 
@@ -162,7 +158,7 @@ Projects and content are stored as MDX files in the `content/` directory at the 
     solution: object (description, points[])
     ```
 
-    The source of truth is the `ProjectFrontMatter` type in `src/utils/project.ts` (there is no runtime schema validation). Projects with `published: false` or an unknown `client` are skipped.
+    The source of truth is the `projectFrontMatterSchema` valibot schema in `src/utils/project.ts` (the TypeScript types are inferred from it). Front matter is validated when the content is loaded, so a missing or mistyped field fails the build with the file and field names; drafts (`published: false`) are skipped before validation, as are projects with an unknown `client`.
 
     Iteration files (`v1.mdx`, …) have `title`, `date` (when that iteration's work landed: release tag or merge date) and `published` frontmatter and are listed oldest first; an iteration with `published: false` is skipped (a missing flag counts as published).
 
@@ -182,7 +178,7 @@ Content processing pipeline:
     - `rehype-autolink-headings` - Adds anchor links to headings
     - `rehype-unwrap-images` - Removes wrapper paragraphs around images
     - Custom `rehype-auto-link-technologies` (`src/lib/rehype-auto-link-technologies.ts`) - Links technology names and `name_aliases` to `/technologies/[slug]` (class `tech-link`); can be disabled with `autoLinkTechnologies={false}`
-- Utilities in `src/utils/project.ts`, `src/utils/technology.ts`, `src/utils/client.ts` handle reading/parsing MDX files
+- `src/utils/content.ts` reads MDX files (`readMdxFile`, `readMdxDirectory`), validates their front matter against a valibot schema (`parseFrontMatter`) and caches each collection once per process (`lazy`); `src/utils/project.ts`, `technology.ts`, `client.ts` and `service.ts` each hold their collection's schema and getters
 
 ### Component Organization
 
@@ -213,7 +209,7 @@ Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes
 
 **Feature Components** (`src/components/`):
 
-- `navbar.tsx` / `footer.tsx` - Layout components
+- `navbar.tsx` / `footer.tsx` - Layout components; the footer is a server component, only `footer-frame.tsx` (client) reads the pathname to hide the contact banner on `/contact`
 - `hero-section.tsx` - Hero section wrapper
 - `project-list.tsx` - Project cards grid
 - `projects-content.tsx` - Search result count, project list and pagination
