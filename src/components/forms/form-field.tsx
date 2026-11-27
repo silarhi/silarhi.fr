@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { type ReactNode, useId } from 'react'
 import type { FieldValues } from 'react-hook-form'
 
 import { useFormFieldProps } from '@/hooks/form'
@@ -32,14 +32,28 @@ export default function FormField<TFieldValues extends FieldValues = FieldValues
         getFieldState,
     })
 
-    const widget = children({ isValid, isInvalid, registerProps })
+    // The widget carries the id the label points to (a generated one when none is given), and its error message
+    const generatedId = useId()
+    const fieldId = id ?? generatedId
+    const errorId = `${fieldId}-error`
+    const widget = children({
+        isValid,
+        isInvalid,
+        registerProps: {
+            ...registerProps,
+            id: fieldId,
+            'aria-invalid': isInvalid || undefined,
+            'aria-describedby': error ? errorId : undefined,
+        },
+    })
 
     return (
         <Group
             label={label}
             error={error}
             groupClassName={groupClassName}
-            id={id}
+            id={fieldId}
+            errorId={errorId}
             isInvalid={isInvalid}
             isValid={isValid}
         >

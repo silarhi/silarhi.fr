@@ -12,10 +12,21 @@ interface GroupProps {
     isValid?: boolean
     isInvalid?: boolean
     error?: ReactNode
+    /** Id of the error message, referenced by the field's aria-describedby */
+    errorId?: string
     children: ReactNode
 }
 
-export default function Group({ label, groupClassName = 'mb-4', id, error, children, isInvalid, isValid }: GroupProps) {
+export default function Group({
+    label,
+    groupClassName = 'mb-4',
+    id,
+    error,
+    errorId,
+    children,
+    isInvalid,
+    isValid,
+}: GroupProps) {
     return (
         <div className={groupClassName}>
             {label && (
@@ -31,7 +42,11 @@ export default function Group({ label, groupClassName = 'mb-4', id, error, child
             )}
             <div className="flex flex-col gap-1">
                 {children}
-                {error && <Help type="invalid">{error}</Help>}
+                {error && (
+                    <Help type="invalid" id={errorId}>
+                        {error}
+                    </Help>
+                )}
             </div>
         </div>
     )
