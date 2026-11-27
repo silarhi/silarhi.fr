@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import Input from '@/components/forms/input'
 import Textarea from '@/components/forms/textarea'
 import Button from '@/components/ui/button'
-import { Envelope, FileText, Person, Phone } from '@/components/ui/icons'
+import { Envelope, FileText, Person, Phone, Spinner } from '@/components/ui/icons'
 import { track } from '@/utils/analytics'
 
 interface ContactFormData {
@@ -186,7 +186,14 @@ export default function ContactForm() {
             </div>
 
             <Button variant="primary" type="submit" size="lg" className="mt-4 w-full" disabled={pending}>
-                Envoyer
+                {pending ? (
+                    <>
+                        <Spinner className="size-5 animate-spin" />
+                        Envoi en cours…
+                    </>
+                ) : (
+                    'Envoyer'
+                )}
             </Button>
             <p className="text-foreground/70 mt-3 mb-0 text-sm">
                 Vos données servent uniquement à répondre à votre demande et sont transmises via Formspree.{' '}
