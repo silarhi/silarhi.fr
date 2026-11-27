@@ -1,7 +1,7 @@
 'use client'
 
 import Image, { type StaticImageData } from 'next/image'
-import { type AnimationEvent, useCallback, useEffect, useState } from 'react'
+import { type AnimationEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 import { XMark } from '@/components/ui/icons'
 
@@ -20,24 +20,36 @@ export default function Lightbox({ src, blurDataURL, alt, isOpen, onClose }: Lig
         setIsMounted(true)
     }
 
+    const closeButtonRef = useRef<HTMLButtonElement>(null)
+
     const handleKeyDown = useCallback(
         (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 onClose()
+            } else if (e.key === 'Tab') {
+                // The close button is the only control: keep focus on it
+                e.preventDefault()
+                closeButtonRef.current?.focus()
             }
         },
         [onClose]
     )
 
     useEffect(() => {
-        if (isOpen) {
-            document.addEventListener('keydown', handleKeyDown)
-            document.body.style.overflow = 'hidden'
+        if (!isOpen) {
+            return
         }
+
+        // Focus moves into the dialog, then back to what opened it (the zoom button) once closed
+        const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
+        closeButtonRef.current?.focus()
+        document.addEventListener('keydown', handleKeyDown)
+        document.body.style.overflow = 'hidden'
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown)
             document.body.style.overflow = ''
+            opener?.focus()
         }
     }, [isOpen, handleKeyDown])
 
@@ -59,10 +71,11 @@ export default function Lightbox({ src, blurDataURL, alt, isOpen, onClose }: Lig
             onClick={onClose}
             role="dialog"
             aria-modal="true"
-            aria-label={`Image: ${alt}`}
+            aria-label={`Image : ${alt}`}
         >
             {/* Close button */}
             <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={(e) => {
                     e.stopPropagation()

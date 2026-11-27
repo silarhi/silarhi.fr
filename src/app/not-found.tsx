@@ -7,13 +7,22 @@ import Button from '@/components/ui/button'
 import { ArrowLeft } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import notFoundImage from '@/public/images/404.svg'
+import { getAllServices } from '@/utils/service'
 
 export const metadata: Metadata = {
     title: 'Page introuvable - SILARHI',
     description: "La page que vous recherchez n'existe pas ou a été déplacée.",
 }
 
-export default function NotFound() {
+const OTHER_LINKS = [
+    { href: '/technologies', label: 'Technologies' },
+    { href: '/open-source', label: 'Open source' },
+    { href: '/contact', label: 'Contact' },
+]
+
+export default async function NotFound() {
+    const services = await getAllServices()
+
     return (
         <>
             <HeroSection
@@ -53,16 +62,35 @@ export default function NotFound() {
                             </Button>
                         </div>
 
-                        <div className="mt-12">
-                            <p className="text-foreground/60 mb-4 text-sm">Liens utiles :</p>
-                            <ul className="text-primary flex flex-wrap justify-center gap-x-6 gap-y-2">
-                                <li>
-                                    <Link href="/contact" className="hover:text-primary-light underline">
-                                        Contact
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+                        <nav aria-label="Liens utiles" className="mt-12 space-y-8">
+                            <div>
+                                <p className="text-foreground/60 mb-4 text-sm">Nos services :</p>
+                                <ul className="text-primary flex flex-wrap justify-center gap-x-6 gap-y-2">
+                                    {services.map((service) => (
+                                        <li key={service.slug}>
+                                            <Link
+                                                href={`/${service.slug}`}
+                                                className="hover:text-primary-light underline"
+                                            >
+                                                {service.title}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <p className="text-foreground/60 mb-4 text-sm">Et aussi :</p>
+                                <ul className="text-primary flex flex-wrap justify-center gap-x-6 gap-y-2">
+                                    {OTHER_LINKS.map((link) => (
+                                        <li key={link.href}>
+                                            <Link href={link.href} className="hover:text-primary-light underline">
+                                                {link.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </nav>
                     </div>
                 </div>
             </Section>

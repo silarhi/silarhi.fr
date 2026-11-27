@@ -8,11 +8,15 @@ import Markdown from '@/components/markdown'
 import OpenSourcePackages from '@/components/open-source-packages'
 import ProjectList from '@/components/project-list'
 import ProjectsCTA from '@/components/projects-cta'
+import TableOfContents from '@/components/table-of-contents'
 import Badge from '@/components/ui/badge'
+import Button from '@/components/ui/button'
 import { ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import { generateServiceFaqSchema, generateServicePageSchema, generateServiceSchema } from '@/lib/schemas/service'
+import { cn } from '@/utils/lib'
+import { getMarkdownHeadings } from '@/utils/markdown-headings'
 import { getPackagesBySlugs } from '@/utils/open-source'
 import { getProjectBySlug, getProjectsByTechnology, type Project } from '@/utils/project'
 import { getAllServiceSlugs, getServiceBySlug, type Service } from '@/utils/service'
@@ -68,6 +72,9 @@ async function getServiceProjects(slugs: string[]): Promise<Project[]> {
         .sort((a, b) => b.date.getTime() - a.date.getTime())
 }
 
+// A table of contents only helps on a page with a few sections
+const MIN_TOC_HEADINGS = 3
+
 // Only the latest case studies are shown, as on the technology pages: the project pages stay the reference for each one
 const MAX_PROJECTS_DISPLAY = 3
 
@@ -113,6 +120,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     const projects = allProjects.slice(0, MAX_PROJECTS_DISPLAY)
     const packages = getPackagesBySlugs(service.packages)
     const projectsLink = await getProjectsLink(service, projects.length, allProjects.length)
+    const headings = getMarkdownHeadings(service.content)
+    const showToc = headings.length >= MIN_TOC_HEADINGS
 
     // Generate service page schemas (the FAQ block is only emitted when questions are visible on the page)
     const serviceSchemas = [
@@ -129,7 +138,24 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 title={service.title}
                 description={service.excerpt}
                 className="border-0"
-            />
+            >
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <Button
+                        as="a"
+                        size="lg"
+                        href="/contact"
+                        data-analytics-event="cta"
+                        data-analytics-location="service-hero"
+                    >
+                        Parler de votre projet
+                    </Button>
+                    {projects.length > 0 && (
+                        <Button as="a" size="lg" href="#realisations" variant="outline-primary">
+                            Voir nos réalisations
+                        </Button>
+                    )}
+                </div>
+            </HeroSection>
 
             {/* Overview: the one-paragraph definition of the service */}
             <Section className="border-border bg-surface border-b pt-0 lg:pt-0">
@@ -143,15 +169,26 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </div>
             </Section>
 
-            {/* Editorial content authored in the MDX body */}
+            {/* Editorial content authored in the MDX body, with its H2 sections listed aside on large screens */}
             <Section className="bg-surface">
-                <div className="mx-auto max-w-3xl [&_h2]:text-foreground [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2:first-child]:mt-0 lg:[&_h2]:text-3xl [&_h3]:text-foreground [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_p]:text-foreground/80 [&_p]:mb-4 [&_p]:text-lg [&_p]:leading-relaxed [&_li]:text-foreground/80 [&_li]:text-lg [&_li]:leading-relaxed [&_strong]:text-foreground [&_strong]:font-semibold [&_table]:my-6 [&_table]:block [&_table]:overflow-x-auto [&_th]:border-border [&_th]:border-b [&_th]:py-2 [&_th]:pr-4 [&_th]:text-left [&_th]:font-semibold [&_td]:border-border [&_td]:text-foreground/80 [&_td]:border-b [&_td]:py-2 [&_td]:pr-4 [&_td]:align-top">
-                    <Markdown source={service.content} />
+                <div
+                    className={cn({
+                        'lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-12 xl:gap-16': showToc,
+                    })}
+                >
+                    <div className="mx-auto max-w-3xl [&_h2]:scroll-mt-24 [&_h2]:text-foreground [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2:first-child]:mt-0 lg:[&_h2]:text-3xl [&_h3]:text-foreground [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_p]:text-foreground/80 [&_p]:mb-4 [&_p]:text-lg [&_p]:leading-relaxed [&_li]:text-foreground/80 [&_li]:text-lg [&_li]:leading-relaxed [&_strong]:text-foreground [&_strong]:font-semibold [&_table]:my-6 [&_table]:block [&_table]:overflow-x-auto [&_th]:border-border [&_th]:border-b [&_th]:py-2 [&_th]:pr-4 [&_th]:text-left [&_th]:font-semibold [&_td]:border-border [&_td]:text-foreground/80 [&_td]:border-b [&_td]:py-2 [&_td]:pr-4 [&_td]:align-top">
+                        <Markdown source={service.content} />
+                    </div>
+                    {showToc && (
+                        <aside className="hidden lg:block">
+                            <TableOfContents items={headings} />
+                        </aside>
+                    )}
                 </div>
             </Section>
 
             {projects.length > 0 && (
-                <Section className="bg-light border-border border-y">
+                <Section id="realisations" className="bg-light border-border scroll-mt-20 border-y">
                     <SectionHeader
                         title={getProjectsTitle(service, projects.length)}
                         subtitle={

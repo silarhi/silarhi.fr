@@ -87,11 +87,16 @@ export default function ProjectFilters({ technologies, categories, industries, c
         <div className="mt-8 flex flex-col gap-6">
             {/* Filter Section Buttons */}
             <div className="flex flex-wrap items-center gap-3">
-                <FilterIcon className={cn('text-foreground/80 h-5 w-5', { 'text-primary': hasActiveFilters })} />
-                Filter par:
+                <FilterIcon
+                    aria-hidden="true"
+                    className={cn('text-foreground/80 h-5 w-5', { 'text-primary': hasActiveFilters })}
+                />
+                Filtrer par&nbsp;:
                 <Button
                     variant={activeSection === 'technology' ? 'primary' : 'outline-primary'}
                     onClick={() => toggleExpandedSection('technology')}
+                    aria-expanded={activeSection === 'technology'}
+                    aria-controls="project-filter-options"
                     size="sm"
                 >
                     Technologies
@@ -99,6 +104,8 @@ export default function ProjectFilters({ technologies, categories, industries, c
                 <Button
                     variant={activeSection === 'category' ? 'primary' : 'outline-primary'}
                     onClick={() => toggleExpandedSection('category')}
+                    aria-expanded={activeSection === 'category'}
+                    aria-controls="project-filter-options"
                     size="sm"
                 >
                     Catégories
@@ -106,6 +113,8 @@ export default function ProjectFilters({ technologies, categories, industries, c
                 <Button
                     variant={activeSection === 'industry' ? 'primary' : 'outline-primary'}
                     onClick={() => toggleExpandedSection('industry')}
+                    aria-expanded={activeSection === 'industry'}
+                    aria-controls="project-filter-options"
                     size="sm"
                 >
                     Secteurs
@@ -113,6 +122,8 @@ export default function ProjectFilters({ technologies, categories, industries, c
                 <Button
                     variant={activeSection === 'client' ? 'primary' : 'outline-primary'}
                     onClick={() => toggleExpandedSection('client')}
+                    aria-expanded={activeSection === 'client'}
+                    aria-controls="project-filter-options"
                     size="sm"
                 >
                     Clients
@@ -126,12 +137,13 @@ export default function ProjectFilters({ technologies, categories, industries, c
 
             {/* Filter Options as Badges */}
             {activeSection && (
-                <div className="flex flex-wrap gap-3">
+                <div id="project-filter-options" className="flex flex-wrap gap-3">
                     {currentFilters.map((filter) => (
                         <Link
                             key={filter.slug}
                             href={buildFilterUrl(activeSection, activeFilterValue === filter.slug ? null : filter.slug)}
                             scroll={false}
+                            aria-current={activeFilterValue === filter.slug ? 'true' : undefined}
                         >
                             <Badge
                                 variant={activeFilterValue === filter.slug ? 'primary' : 'outline-primary'}

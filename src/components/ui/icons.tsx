@@ -4,6 +4,7 @@ import {
     LuArrowRight,
     LuCalendar,
     LuCheck,
+    LuChevronDown,
     LuClock,
     LuCode,
     LuCookie,
@@ -36,6 +37,7 @@ export const Phone = LuPhone
 export const Person = LuUser
 export const Envelope = LuMail
 export const Check = LuCheck
+export const ChevronDown = LuChevronDown
 export const XMark = LuX
 export const FilterIcon = LuFilter
 export const ArrowLeft = LuArrowLeft
@@ -54,19 +56,6 @@ export const ShieldCheck = LuShieldCheck
 export const Cookie = LuCookie
 
 // Custom SVG icons
-export function FaceSad(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" {...props}>
-            <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-        </svg>
-    )
-}
-
 export function MenuToggle({ open, className, ...props }: React.SVGProps<SVGSVGElement> & { open: boolean }) {
     return (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className={className} {...props}>

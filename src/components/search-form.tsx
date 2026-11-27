@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import SearchInput from './search-input'
@@ -16,6 +16,9 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
     const searchParams = useSearchParams()
     const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
     const [debouncedSearchQuery] = useDebounce(searchQuery, 300)
+    // Pending while the debounce runs and until the server has rendered the new results: the input stays usable
+    const [isPending, startTransition] = useTransition()
+    const isSearching = isPending || searchQuery !== debouncedSearchQuery
 
     // Update URL when debounced search query changes
     useEffect(() => {
@@ -30,7 +33,9 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
         params.delete('page')
 
         const queryString = params.toString()
-        router.replace(queryString ? `${baseUrl}?${queryString}` : baseUrl, { scroll: false })
+        startTransition(() => {
+            router.replace(queryString ? `${baseUrl}?${queryString}` : baseUrl, { scroll: false })
+        })
     }, [debouncedSearchQuery, searchParams, baseUrl, router])
 
     const handleSearchChange = (value: string) => {
@@ -39,7 +44,7 @@ export default function SearchForm({ baseUrl, className }: SearchFormProps) {
 
     return (
         <div role="search" aria-label="Rechercher des projets" className={className}>
-            <SearchInput name="search" value={searchQuery} onChange={handleSearchChange} />
+            <SearchInput name="search" value={searchQuery} onChange={handleSearchChange} isLoading={isSearching} />
         </div>
     )
 }

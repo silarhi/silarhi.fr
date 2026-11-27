@@ -105,7 +105,7 @@ This project uses **Next.js 16 App Router** (not Pages Router):
 - `src/app/sitemap.ts` - Dynamic sitemap generation
 - `src/app/robots.ts` - robots.txt (disallows `/api/` and `/cdn-cgi/`, points to the sitemap)
 
-The four legal pages share `LegalLayout` (`src/components/legal-layout.tsx`): breadcrumb, H1, lead, last update date, tabs between the pages, a sticky "Sur cette page" table of contents with scrollspy (`legal-toc.tsx`) and the identity card (`legal-identity-card.tsx`, mentions légales only). Its children are `LegalSection` elements (`legal-section.tsx`), one numbered card each, listed in the table of contents.
+The four legal pages share `LegalLayout` (`src/components/legal-layout.tsx`): breadcrumb, H1, lead, last update date, tabs between the pages, a sticky "Sur cette page" table of contents with scrollspy (`table-of-contents.tsx`, also used by the service pages for their H2 sections) and the identity card (`legal-identity-card.tsx`, mentions légales only). Its children are `LegalSection` elements (`legal-section.tsx`), one numbered card each, listed in the table of contents.
 
 Dynamic routes (`projets/[slug]`, `technologies/[slug]`, `[slug]`) are pre-rendered at build time with `generateStaticParams()` and set `dynamicParams = false`, so an unknown slug gets the static 404 page instead of a server render. `/projets` reads `searchParams`, so it is rendered per request. Legacy WordPress URLs and old tags are redirected in `next.config.mjs`.
 
@@ -118,13 +118,13 @@ Dynamic routes (`projets/[slug]`, `technologies/[slug]`, `[slug]`) are pre-rende
 
 `src/utils/analytics.ts` holds the `track()` helper and a delegated click listener, registered by `<Analytics />` (`src/components/analytics.tsx`, mounted in the root layout with the Umami script) and classifying links by their href. Tracked elements are marked with our own attributes, the same convention on all the owner's sites: `data-analytics-event="<name>"` plus one `data-analytics-<prop>="<value>"` per property (e.g. `data-analytics-event="cta" data-analytics-location="header"`); the listener collects them and calls `track(name, data)`. Only `analytics.ts` knows about `window.umami`, so the markup never names the analytics tool. Never use Umami's `data-umami-event`: its click handler calls `preventDefault()` then sets `location.href`, which turns a `next/link` navigation into a full reload. Each event is a goal to create in Umami (Reports → Goals, type "Event"):
 
-| Event            | Where it fires                                                                                                    | Data                                                                                                     |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `contact-form`   | Formspree answered 2xx to the contact form (`contact-form.tsx`, after `setSuccess(true)`)                         | none (the form has no subject/need field)                                                                |
-| `contact-direct` | click on any `tel:` / `mailto:` link (contact page, legal pages)                                                  | `channel`: `phone` / `email`                                                                             |
-| `cgv-download`   | click on `/pdf/CGV.pdf` (CGV page)                                                                                | none                                                                                                     |
-| `project-view`   | click on a project link in `ProjectList` (`/projets`, `/technologies/[slug]`), marked with `data-analytics-event` | `slug`                                                                                                   |
-| `cta`            | click on a link with `data-analytics-event="cta"`                                                                 | `location`: `header`, `mobile-menu`, `footer-banner`, `home` (`CallToAction`), `project`, `projects-cta` |
+| Event            | Where it fires                                                                                                                                        | Data                                                                                                                                  |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `contact-form`   | Formspree answered 2xx to the contact form (`contact-form.tsx`, after `setSuccess(true)`)                                                             | none (the form has no subject/need field)                                                                                             |
+| `contact-direct` | click on any `tel:` / `mailto:` link (contact page, footer, legal pages, contact form error)                                                          | `channel`: `phone` / `email`                                                                                                          |
+| `cgv-download`   | click on `/pdf/CGV.pdf` (CGV page)                                                                                                                    | none                                                                                                                                  |
+| `project-view`   | click on a project link in `ProjectList` (`/projets`, `/technologies/[slug]`) or `ProjectCard` (related projects), marked with `data-analytics-event` | `slug`                                                                                                                                |
+| `cta`            | click on a link with `data-analytics-event="cta"`                                                                                                     | `location`: `header`, `mobile-menu`, `home-hero`, `service-hero`, `footer-banner`, `home` (`CallToAction`), `project`, `projects-cta` |
 
 ### Content Management (MDX)
 
@@ -193,11 +193,10 @@ src/components/
 ├── *.tsx             # Feature-specific components (navbar, footer, project-list, etc.)
 ```
 
-Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes, `hash-provider.tsx` exposing `useHash()` for the URL hash). They are all mounted in `src/app/layout.tsx`.
+The context provider lives in `src/providers/` (`theme-provider.tsx` for next-themes) and is mounted in `src/app/layout.tsx`.
 
 **Reusable UI Components** (`src/components/ui/`):
 
-- `active-link.tsx` - Navigation link with active state styling
 - `badge.tsx` / `badge-group.tsx` - Badge components for labels and tags
 - `button.tsx` - Primary button component
 - `fade-in-when-visible.tsx` - CSS scroll-driven fade-in (server component)
@@ -212,9 +211,10 @@ Context providers live in `src/providers/` (`theme-provider.tsx` for next-themes
 
 **Feature Components** (`src/components/`):
 
-- `navbar.tsx` / `footer.tsx` - Layout components; the footer is a server component, only `footer-frame.tsx` (client) reads the pathname to hide the contact banner on `/contact`
+- `navbar.tsx` / `footer.tsx` - Layout components; the navbar lists the service pages under a "Services" dropdown (`services-menu.tsx`), fed by `DefaultLayout` from `content/services/`; the footer is a server component, only `footer-frame.tsx` (client) reads the pathname to hide the contact banner on `/contact`
 - `hero-section.tsx` - Hero section wrapper
 - `project-list.tsx` - Project cards grid
+- `project-card.tsx` - Compact project card, for the related projects of a project page (`getRelatedProjects()`)
 - `projects-content.tsx` - Search result count, project list and pagination
 - `projects-hero.tsx` - Projects page hero with search
 - `projects-cta.tsx` - Projects call-to-action section
@@ -323,8 +323,8 @@ Forms use **react-hook-form** with a custom hook pattern:
 
 - **ALWAYS import icons from `@/components/ui/icons.tsx`** instead of directly from `react-icons`
 - The icons file provides a centralized, curated set of Lucide icons via `react-icons/lu`
-- Available icons: `Download`, `Expand`, `Map`, `Clock`, `Phone`, `Person`, `Envelope`, `Check`, `XMark`, `FilterIcon`, `ArrowLeft`, `ArrowRight`, `FileText`, `Calendar`, `Repeat`, `Code`, `Zap`, `Moon`, `SunMoon`, `Sun`, `House`, `Landmark`, `ShieldCheck`, `Cookie`
-- Custom SVG icons: `FaceSad`, `MenuToggle`, `Spinner`, `Search`, `XCircle`, `ChevronLeft`, `ChevronRight`
+- Available icons: `Download`, `Expand`, `Map`, `Clock`, `Phone`, `Person`, `Envelope`, `Check`, `ChevronDown`, `XMark`, `FilterIcon`, `ArrowLeft`, `ArrowRight`, `FileText`, `Calendar`, `Repeat`, `Code`, `Zap`, `Moon`, `SunMoon`, `Sun`, `House`, `Landmark`, `ShieldCheck`, `Cookie`
+- Custom SVG icons: `MenuToggle`, `Spinner`, `Search`, `XCircle`, `ChevronLeft`, `ChevronRight`
 - If you need a new icon, add it to `@/components/ui/icons.tsx` first, then import it
 - Example:
     - ✅ Good: `import { Check, ArrowRight } from '@/components/ui/icons'`

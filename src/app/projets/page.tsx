@@ -9,7 +9,7 @@ import Badge from '@/components/ui/badge'
 import Section from '@/components/ui/section'
 import { generateProjectsCollectionPageSchema, generateProjectsListSchema } from '@/lib/schemas/project'
 import { getProjectFilterData } from '@/utils/project'
-import { getProjectsCanonicalUrl } from '@/utils/url'
+import { FILTER_LABELS, getActiveFilter, getProjectsCanonicalUrl } from '@/utils/url'
 
 interface ProjectPageProps {
     searchParams: Promise<{
@@ -43,6 +43,9 @@ export async function generateMetadata({ searchParams }: ProjectPageProps): Prom
 
 const ITEMS_PER_PAGE = 9
 
+// Technologies offered when a search or filter finds nothing
+const SUGGESTED_TECHNOLOGIES = 6
+
 export default async function ProjectPage({ searchParams }: ProjectPageProps) {
     const params = await searchParams
     const searchQuery = params.search || ''
@@ -59,6 +62,19 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
 
     // Fetch pre-computed filter data (O(n) instead of O(n×m))
     const { technologies, categories, industries, clients, projects } = await getProjectFilterData()
+
+    // The filter in use, by name, for the result summary
+    const activeFilter = getActiveFilter(new URLSearchParams(searchParamsString))
+    const filterOptions = { technology: technologies, category: categories, industry: industries, client: clients }
+    const activeFilterName = activeFilter
+        ? filterOptions[activeFilter.type].find((option) => option.slug === activeFilter.value)?.name
+        : undefined
+    const activeFilterSummary =
+        activeFilter && activeFilterName ? { label: FILTER_LABELS[activeFilter.type], name: activeFilterName } : null
+    const suggestions = [...technologies]
+        .sort((a, b) => b.projectCount - a.projectCount)
+        .slice(0, SUGGESTED_TECHNOLOGIES)
+        .map(({ slug, name }) => ({ slug, name }))
 
     // Generate projects page schemas
     const projectsPageSchemas = [generateProjectsCollectionPageSchema(projects), generateProjectsListSchema(projects)]
@@ -90,6 +106,8 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
                     industry={industry}
                     client={client}
                     searchParams={searchParamsString}
+                    activeFilter={activeFilterSummary}
+                    suggestions={suggestions}
                 />
             </Section>
 

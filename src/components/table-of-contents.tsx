@@ -4,20 +4,21 @@ import { useEffect, useState } from 'react'
 
 import { cn } from '@/utils/lib'
 
-interface LegalTocItem {
+interface TocItem {
     id: string
     title: string
     number?: number
 }
 
-interface LegalTocProps {
-    items: LegalTocItem[]
+interface TableOfContentsProps {
+    items: TocItem[]
 }
 
 /**
- * Sticky "Sur cette page" table of contents of a legal page, highlighting the section being read (scrollspy).
+ * Sticky "Sur cette page" table of contents (legal pages, service pages), highlighting the section being read
+ * (scrollspy). Each item points to the id of a section or heading of the page.
  */
-export default function LegalToc({ items }: LegalTocProps) {
+export default function TableOfContents({ items }: TableOfContentsProps) {
     const [activeId, setActiveId] = useState(items[0]?.id)
 
     useEffect(() => {

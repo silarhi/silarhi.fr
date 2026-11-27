@@ -113,12 +113,28 @@ export default function Footer() {
                                         </Fragment>
                                     ))}
                                 </p>
+                                <p className="mb-0 pt-3 font-semibold">Nous contacter</p>
+                                <p className="text-dark-foreground/80 dark:text-dark-foreground/90 mb-0">
+                                    <a
+                                        href={`tel:${COMPANY_INFO.telephone}`}
+                                        className="hover:text-secondary text-inherit transition-colors"
+                                    >
+                                        {COMPANY_INFO.telephoneDisplay}
+                                    </a>
+                                    <br />
+                                    <a
+                                        href={`mailto:${COMPANY_INFO.email}`}
+                                        className="hover:text-secondary text-inherit transition-colors"
+                                    >
+                                        {COMPANY_INFO.email}
+                                    </a>
+                                </p>
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4">
                             {footerSections.map((section) => (
                                 <div key={section.title}>
-                                    <h6 className="mb-4 text-base font-bold">{section.title}</h6>
+                                    <h2 className="mb-4 text-base font-bold">{section.title}</h2>
                                     <div className="space-y-2">
                                         {section.links.map((link) => (
                                             <Link

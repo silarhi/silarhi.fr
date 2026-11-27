@@ -17,9 +17,16 @@ export function LaptopMockup({ src, alt, blurDataURL }: LaptopMockupProps) {
 
     return (
         <>
-            <div className="group relative md:cursor-pointer" onClick={() => setIsLightboxOpen(true)}>
-                <div className="relative mx-auto h-73.5 max-w-lg rounded-t-xl border-8 border-gray-800 bg-gray-800 dark:border-gray-800">
-                    <div className="relative h-69.5 overflow-hidden rounded-lg bg-white dark:bg-gray-800">
+            {/* A button, so the zoom is reachable with the keyboard; spans because a button only takes phrasing content */}
+            <button
+                type="button"
+                aria-haspopup="dialog"
+                aria-label={`Agrandir la capture : ${alt}`}
+                className="group focus-visible:outline-primary relative block w-full cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4"
+                onClick={() => setIsLightboxOpen(true)}
+            >
+                <span className="relative mx-auto block h-73.5 max-w-lg rounded-t-xl border-8 border-gray-800 bg-gray-800 dark:border-gray-800">
+                    <span className="relative block h-69.5 overflow-hidden rounded-lg bg-white dark:bg-gray-800">
                         <Image
                             src={src}
                             alt={alt}
@@ -30,18 +37,18 @@ export function LaptopMockup({ src, alt, blurDataURL }: LaptopMockupProps) {
                             placeholder={blurDataURL ? 'blur' : 'empty'}
                             blurDataURL={blurDataURL}
                         />
-                    </div>
-                </div>
-                <div className="relative mx-auto h-5.25 max-w-149.25 rounded-t-sm rounded-b-xl bg-gray-900 dark:bg-gray-700">
-                    <div className="absolute top-0 left-1/2 h-2 w-24 -translate-x-1/2 rounded-b-xl bg-gray-800"></div>
-                </div>
-                {/* Hover overlay - only visible on md+ screens */}
-                <div className="pointer-events-none absolute inset-0 hidden items-center justify-center md:flex">
-                    <div className="scale-0 transform rounded-full bg-white/90 p-3 shadow-lg transition-transform group-hover:scale-100">
-                        <Expand className="h-6 w-6 text-gray-800" />
-                    </div>
-                </div>
-            </div>
+                    </span>
+                </span>
+                <span className="relative mx-auto block h-5.25 max-w-149.25 rounded-t-sm rounded-b-xl bg-gray-900 dark:bg-gray-700">
+                    <span className="absolute top-0 left-1/2 block h-2 w-24 -translate-x-1/2 rounded-b-xl bg-gray-800" />
+                </span>
+                {/* Zoom hint on hover or keyboard focus - only on md+ screens */}
+                <span className="pointer-events-none absolute inset-0 hidden items-center justify-center md:flex">
+                    <span className="scale-0 transform rounded-full bg-white/90 p-3 shadow-lg transition-transform group-hover:scale-100 group-focus-visible:scale-100">
+                        <Expand className="h-6 w-6 text-gray-800" aria-hidden="true" />
+                    </span>
+                </span>
+            </button>
 
             <Lightbox
                 src={src}

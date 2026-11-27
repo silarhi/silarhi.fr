@@ -47,6 +47,14 @@ export function getCanonicalUrl(path: string = ''): string {
 const FILTER_PARAMS = ['technology', 'category', 'industry', 'client'] as const
 export type FilterType = (typeof FILTER_PARAMS)[number]
 
+// Singular name of each filter, for the result summary ("Technologie : Symfony")
+export const FILTER_LABELS: Record<FilterType, string> = {
+    technology: 'Technologie',
+    category: 'Catégorie',
+    industry: 'Secteur',
+    client: 'Client',
+}
+
 interface ActiveFilter {
     type: FilterType
     value: string

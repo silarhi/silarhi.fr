@@ -5,14 +5,17 @@ import { notFound } from 'next/navigation'
 
 import JsonLd from '@/components/json-ld'
 import Markdown from '@/components/markdown'
+import ProjectCard from '@/components/project-card'
 import ProjectsCTA from '@/components/projects-cta'
 import Badge from '@/components/ui/badge'
 import BadgeGroup from '@/components/ui/badge-group'
 import Button from '@/components/ui/button'
+import CardGrid from '@/components/ui/card-grid'
 import { ArrowLeft, ArrowRight, Calendar, FileText } from '@/components/ui/icons'
 import { LaptopMockup } from '@/components/ui/mockup'
 import ProjectScopeBadge from '@/components/ui/project-scope-badge'
 import Section from '@/components/ui/section'
+import SectionHeader from '@/components/ui/section-header'
 import SectionTitle from '@/components/ui/section-title'
 import { generateProjectPageSchema, generateProjectSchema } from '@/lib/schemas/project'
 import { cn } from '@/utils/lib'
@@ -23,6 +26,7 @@ import {
     getEngagementTypeLabel,
     getProjectBySlug,
     getProjectsByClient,
+    getRelatedProjects,
 } from '@/utils/project'
 import { getCanonicalUrl } from '@/utils/url'
 
@@ -70,6 +74,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     // Get projects by this client to check if we should show a link (efficient lookup)
     const clientProjects = await getProjectsByClient(project.client.slug)
     const hasMultipleProjects = clientProjects.length > 1
+    const relatedProjects = await getRelatedProjects(project)
 
     // Generate project page schemas
     const projectSchemas = [generateProjectPageSchema(project), generateProjectSchema(project)]
@@ -301,7 +306,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                                     <Calendar className="h-4 w-4" />
                                     Le projet en détails
                                 </p>
-                                <div className="max-h-96 overflow-y-auto pr-4">
+                                <div>
                                     {project.iterations.map((iteration, idx) => (
                                         <div key={iteration.slug} className="flex gap-4">
                                             {project.iterations.length > 1 && (
@@ -384,6 +389,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     </div>
                 </div>
             </Section>
+
+            {/* Related projects: no dead end once the case study is read */}
+            {relatedProjects.length > 0 && (
+                <Section className="bg-light border-border border-t">
+                    <SectionHeader
+                        title="Projets similaires"
+                        subtitle="D'autres réalisations sur des besoins ou des technologies proches"
+                    />
+                    <CardGrid>
+                        {relatedProjects.map((relatedProject) => (
+                            <ProjectCard key={relatedProject.slug} project={relatedProject} />
+                        ))}
+                    </CardGrid>
+                </Section>
+            )}
 
             {/* CTA */}
             <ProjectsCTA
