@@ -63,7 +63,7 @@ export default async function TechnologiesPage() {
             />
 
             <Section className="bg-light border-border border-b">
-                <SectionHeader title="Les plus utilisées" subtitle="Classées par nombre de projets" />
+                <SectionHeader title="Les plus utilisées" description="Classées par nombre de projets" />
                 <CardGrid>
                     {top.map(({ technology, projects }) => (
                         <Link
@@ -93,7 +93,7 @@ export default async function TechnologiesPage() {
             </Section>
 
             <Section className="bg-surface">
-                <SectionHeader title="Toutes les technologies" subtitle="De A à Z" />
+                <SectionHeader title="Toutes les technologies" description="De A à Z" />
                 <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                     {entries.map(({ technology, projects, packageCount }) => (
                         <li key={technology.slug}>

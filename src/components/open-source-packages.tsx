@@ -11,7 +11,10 @@ export default function OpenSourcePackages({ packages }: OpenSourcePackagesProps
     return (
         <CardGrid>
             {packages.map((pkg) => (
-                <article key={pkg.slug} className="border-border bg-surface flex flex-col rounded-xl border p-6">
+                <article
+                    key={pkg.slug}
+                    className="bg-surface dark:bg-surface-elevated border-border flex flex-col rounded-2xl border p-6 shadow-sm"
+                >
                     <h3 className="text-foreground mb-3 text-lg font-semibold">
                         <a href={getDocsUrl(pkg)} target="_blank" rel="noopener" className="hover:text-primary">
                             {pkg.name}

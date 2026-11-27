@@ -395,7 +395,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <Section className="bg-light border-border border-t">
                     <SectionHeader
                         title="Projets similaires"
-                        subtitle="D'autres réalisations sur des besoins ou des technologies proches"
+                        description="D'autres réalisations sur des besoins ou des technologies proches"
                     />
                     <CardGrid>
                         {relatedProjects.map((relatedProject) => (
