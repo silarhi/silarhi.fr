@@ -1,26 +1,29 @@
 import type React from 'react'
 
-import { cn } from '@/utils/lib'
-
+import Badge from './badge'
 import FadeInWhenVisible from './fade-in-when-visible'
 
-interface SectionHeaderProps {
+export interface SectionHeaderProps {
     title: React.ReactNode
-    subtitle?: React.ReactNode
+    /** Short label shown as a badge above the title */
+    eyebrow?: React.ReactNode
+    /** One line under the title */
+    description?: React.ReactNode
 }
 
-export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
+export default function SectionHeader({ title, eyebrow, description }: SectionHeaderProps) {
     return (
-        <div className="py-6 text-center">
+        <div className="mb-6 py-6 text-center">
             <FadeInWhenVisible>
-                {subtitle}
-                <h2
-                    className={cn('mb-6 text-4xl font-bold', {
-                        'mt-4': subtitle,
-                    })}
-                >
-                    {title}
-                </h2>
+                {eyebrow && (
+                    <div className="mb-4">
+                        <Badge variant="secondary">{eyebrow}</Badge>
+                    </div>
+                )}
+                <h2 className="text-foreground text-3xl font-bold text-balance lg:text-4xl">{title}</h2>
+                {description && (
+                    <p className="text-foreground/80 mx-auto mt-4 max-w-2xl text-lg leading-relaxed">{description}</p>
+                )}
             </FadeInWhenVisible>
         </div>
     )

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import type React from 'react'
 import { Fragment } from 'react'
 
@@ -8,11 +7,12 @@ import CallToAction from '@/components/call-to-action'
 import ClientsSection from '@/components/clients-section'
 import JsonLd from '@/components/json-ld'
 import Markdown from '@/components/markdown'
+import ServiceCard from '@/components/service-card'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
 import CardGrid from '@/components/ui/card-grid'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
-import { ArrowRight, Check, XMark } from '@/components/ui/icons'
+import { Check, XMark } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import iconProgramming from '@/icons/dev-productivity_5wps.svg'
@@ -259,7 +259,7 @@ function MethodologySection() {
                         Un processus éprouvé pour <span className="text-primary">votre succès</span>
                     </span>
                 }
-                subtitle={<Badge variant="secondary">Notre méthodologie</Badge>}
+                eyebrow="Notre méthodologie"
             />
 
             <div className="mx-auto my-12 max-w-2xl space-y-4">
@@ -329,25 +329,6 @@ function MethodologySection() {
     )
 }
 
-function ServiceCard({ service }: { service: ServicePage }) {
-    return (
-        <Link
-            href={`/${service.slug}`}
-            className="bg-surface dark:bg-surface-elevated border-border hover:border-primary/40 group flex w-full flex-col rounded-2xl border p-6 text-inherit shadow-sm transition-[border-color,box-shadow] hover:no-underline hover:shadow-md"
-        >
-            <span className="text-primary dark:text-primary-light mb-2 text-xs font-semibold tracking-wide uppercase">
-                {service.category ?? 'Service'}
-            </span>
-            <h3 className="text-foreground mb-3 text-xl font-bold">{service.title}</h3>
-            <p className="text-foreground/80 mb-6 flex-1">{service.excerpt}</p>
-            <span className="text-primary dark:text-primary-light inline-flex items-center gap-2 font-medium">
-                En savoir plus
-                <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-1" />
-            </span>
-        </Link>
-    )
-}
-
 function ServiceList({ items, supported, title }: { items: string[]; supported: boolean; title: React.ReactNode }) {
     return (
         <div>
@@ -391,7 +372,7 @@ function ServicesSection({ services }: { services: ServicePage[] }) {
                         Des solutions pensées pour <span className="text-primary">votre réussite</span>
                     </span>
                 }
-                subtitle={<Badge variant="secondary">Nos services</Badge>}
+                eyebrow="Nos services"
             />
             <CardGrid>
                 {services.map((service, index) => (
@@ -421,7 +402,7 @@ function NumbersSection({ numbers }: { numbers: NumberData[] }) {
                         Des résultats qui <span className="text-primary">parlent d&#39;eux-mêmes</span>
                     </span>
                 }
-                subtitle={<Badge variant="secondary">Nos chiffres</Badge>}
+                eyebrow="Nos chiffres"
             />
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
                 {numbers.map((number, key) => (

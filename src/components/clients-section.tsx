@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import Badge from '@/components/ui/badge'
 import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
@@ -25,7 +24,7 @@ export default function ClientsSection({ clients, clientLinks }: ClientsSectionP
                         Ils nous font <span className="text-primary">confiance</span>
                     </span>
                 }
-                subtitle={<Badge variant="secondary">Nos clients</Badge>}
+                eyebrow="Nos clients"
             />
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-8">
                 {clientsWithProjects.map((client, index) => (

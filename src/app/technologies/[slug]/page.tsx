@@ -8,8 +8,10 @@ import Markdown from '@/components/markdown'
 import OpenSourcePackages from '@/components/open-source-packages'
 import ProjectList from '@/components/project-list'
 import ProjectsCTA from '@/components/projects-cta'
+import ServiceCard from '@/components/service-card'
 import CardGrid from '@/components/ui/card-grid'
-import { ArrowLeft, ArrowRight } from '@/components/ui/icons'
+import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
+import { ArrowLeft, ArrowRight, Check } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
 import { generateTechnologyPageSchema, generateTechnologyProjectsListSchema } from '@/lib/schemas/technology'
@@ -128,42 +130,48 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
             {/* Why Choose Section */}
             {technology.reasons.length > 0 && (
                 <Section className="bg-light border-border border-b">
-                    <div className="mx-auto max-w-4xl">
-                        <h2 className="text-foreground mb-8 text-center text-3xl font-bold lg:text-4xl">
-                            Pourquoi choisir {technology.name} ?
-                        </h2>
-                        <div className="grid gap-6 md:grid-cols-2">
-                            {technology.reasons.map((reason, idx) => (
-                                <div key={idx} className="border-border bg-surface rounded-xl border p-6">
-                                    <h3 className="text-foreground mb-3 text-lg font-semibold">{reason.title}</h3>
-                                    <p className="text-foreground/80">{reason.description}</p>
+                    <SectionHeader
+                        eyebrow="Points forts"
+                        title={
+                            <span>
+                                Pourquoi choisir <span className="text-primary">{technology.name}</span> ?
+                            </span>
+                        }
+                    />
+                    <CardGrid columns={2} className="mx-auto max-w-4xl">
+                        {technology.reasons.map((reason, index) => (
+                            <FadeInWhenVisible key={reason.title} delay={(index % 2) * 0.1} className="flex">
+                                <div className="bg-surface dark:bg-surface-elevated border-border flex w-full gap-4 rounded-2xl border p-6 shadow-sm">
+                                    <span className="bg-primary/10 text-primary flex size-8 shrink-0 items-center justify-center rounded-full">
+                                        <Check aria-hidden="true" className="size-4" />
+                                    </span>
+                                    <div>
+                                        <h3 className="text-foreground mb-2 text-lg font-semibold">{reason.title}</h3>
+                                        <p className="text-foreground/80 mb-0">{reason.description}</p>
+                                    </div>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                            </FadeInWhenVisible>
+                        ))}
+                    </CardGrid>
                 </Section>
             )}
 
             {/* Service pages built on this technology: the commercial offer behind the technical page */}
             {services.length > 0 && (
                 <Section className="bg-surface border-border border-b">
-                    <SectionHeader title={`Nos services liés à ${technology.name}`} />
+                    <SectionHeader
+                        eyebrow="Nos services"
+                        title={
+                            <span>
+                                Nos services liés à <span className="text-primary">{technology.name}</span>
+                            </span>
+                        }
+                    />
                     <CardGrid columns={2} className="mx-auto max-w-4xl">
-                        {services.map((service) => (
-                            <Link
-                                key={service.slug}
-                                href={`/${service.slug}`}
-                                className="group border-border bg-light hover:border-primary flex flex-col rounded-xl border p-6 transition-colors hover:no-underline"
-                            >
-                                <h3 className="text-foreground group-hover:text-primary mb-3 text-lg font-semibold">
-                                    {service.title}
-                                </h3>
-                                <p className="text-foreground/80 mb-6 grow">{service.excerpt}</p>
-                                <span className="text-primary inline-flex items-center gap-1.5 text-sm font-medium">
-                                    Découvrir le service
-                                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                </span>
-                            </Link>
+                        {services.map((service, index) => (
+                            <FadeInWhenVisible key={service.slug} delay={(index % 2) * 0.1} className="flex">
+                                <ServiceCard service={service} />
+                            </FadeInWhenVisible>
                         ))}
                     </CardGrid>
                 </Section>
@@ -171,6 +179,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
 
             <Section className="bg-surface">
                 <SectionHeader
+                    eyebrow="Nos réalisations"
                     title={
                         totalProjects > 1
                             ? `Nos ${Math.min(totalProjects, MAX_PROJECTS_DISPLAY)} derniers projets ${technology.name}`
@@ -195,7 +204,7 @@ export default async function TechnologyPage({ params }: TechnologyPageProps) {
 
             {packages.length > 0 && (
                 <Section className="bg-light border-border border-t">
-                    <SectionHeader title={`Nos packages open source ${technology.name}`} />
+                    <SectionHeader eyebrow="Open source" title={`Nos packages open source ${technology.name}`} />
                     <OpenSourcePackages packages={packages} />
                     <div className="mt-12 text-center">
                         <Link

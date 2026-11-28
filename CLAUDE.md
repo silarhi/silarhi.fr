@@ -207,7 +207,7 @@ The context provider lives in `src/providers/` (`theme-provider.tsx` for next-th
 - `pagination.tsx` - Server-side pagination component
 - `project-scope-badge.tsx` - Specialized badge for project scope
 - `card-grid.tsx` - Wrapping row of cards (2 or 3 per row) that centers an incomplete last row, or a single card
-- `section.tsx` / `section-header.tsx` / `section-title.tsx` - Section layout components
+- `section.tsx` / `section-header.tsx` / `section-title.tsx` - Section layout components; `SectionHeader` takes an `eyebrow` (badge above the title) and a `description` (line under it), the same on every page
 
 **Feature Components** (`src/components/`):
 
@@ -215,6 +215,7 @@ The context provider lives in `src/providers/` (`theme-provider.tsx` for next-th
 - `hero-section.tsx` - Hero section wrapper
 - `project-list.tsx` - Project cards grid
 - `project-card.tsx` - Compact project card, for the related projects of a project page (`getRelatedProjects()`)
+- `service-card.tsx` - Service page card (home page services, technology pages)
 - `projects-content.tsx` - Search result count, project list and pagination
 - `projects-hero.tsx` - Projects page hero with search
 - `projects-cta.tsx` - Projects call-to-action section

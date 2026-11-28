@@ -11,6 +11,7 @@ import ProjectsCTA from '@/components/projects-cta'
 import TableOfContents from '@/components/table-of-contents'
 import Badge from '@/components/ui/badge'
 import Button from '@/components/ui/button'
+import FadeInWhenVisible from '@/components/ui/fade-in-when-visible'
 import { ArrowRight } from '@/components/ui/icons'
 import Section from '@/components/ui/section'
 import SectionHeader from '@/components/ui/section-header'
@@ -176,7 +177,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
                         'lg:grid lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-12 xl:gap-16': showToc,
                     })}
                 >
-                    <div className="mx-auto max-w-3xl [&_h2]:scroll-mt-24 [&_h2]:text-foreground [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2:first-child]:mt-0 lg:[&_h2]:text-3xl [&_h3]:text-foreground [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_p]:text-foreground/80 [&_p]:mb-4 [&_p]:text-lg [&_p]:leading-relaxed [&_li]:text-foreground/80 [&_li]:text-lg [&_li]:leading-relaxed [&_strong]:text-foreground [&_strong]:font-semibold [&_table]:my-6 [&_table]:block [&_table]:overflow-x-auto [&_th]:border-border [&_th]:border-b [&_th]:py-2 [&_th]:pr-4 [&_th]:text-left [&_th]:font-semibold [&_td]:border-border [&_td]:text-foreground/80 [&_td]:border-b [&_td]:py-2 [&_td]:pr-4 [&_td]:align-top">
+                    <div className="max-w-3xl [&_h2]:scroll-mt-24 [&_h2]:text-foreground [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2:first-child]:mt-0 lg:[&_h2]:text-3xl [&_h3]:text-foreground [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_p]:text-foreground/80 [&_p]:mb-4 [&_p]:text-lg [&_p]:leading-relaxed [&_li]:text-foreground/80 [&_li]:text-lg [&_li]:leading-relaxed [&_strong]:text-foreground [&_strong]:font-semibold [&_table]:my-6 [&_table]:block [&_table]:overflow-x-auto [&_th]:border-border [&_th]:border-b [&_th]:py-2 [&_th]:pr-4 [&_th]:text-left [&_th]:font-semibold [&_td]:border-border [&_td]:text-foreground/80 [&_td]:border-b [&_td]:py-2 [&_td]:pr-4 [&_td]:align-top">
                         <Markdown source={service.content} />
                     </div>
                     {showToc && (
@@ -190,8 +191,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
             {projects.length > 0 && (
                 <Section id="realisations" className="bg-light border-border scroll-mt-20 border-y">
                     <SectionHeader
+                        eyebrow="Nos réalisations"
                         title={getProjectsTitle(service, projects.length)}
-                        subtitle={
+                        description={
                             service.projects_subtitle ??
                             'Des projets livrés et maintenus dans la durée pour ce type de besoin'
                         }
@@ -215,8 +217,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
             {packages.length > 0 && (
                 <Section className="bg-surface border-border border-b">
                     <SectionHeader
+                        eyebrow="Open source"
                         title="Nos outils open source"
-                        subtitle="Les bibliothèques que nous avons écrites pour ces projets, publiées et documentées"
+                        description="Les bibliothèques que nous avons écrites pour ces projets, publiées et documentées"
                     />
                     <OpenSourcePackages packages={packages} />
                 </Section>
@@ -224,17 +227,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
             {service.faq.length > 0 && (
                 <Section className="bg-surface">
-                    <div className="mx-auto max-w-3xl">
-                        <h2 className="text-foreground mb-8 text-3xl font-bold lg:text-4xl">Questions fréquentes</h2>
-                        <div className="space-y-8">
+                    <SectionHeader eyebrow="FAQ" title="Questions fréquentes" />
+                    <FadeInWhenVisible>
+                        <div className="bg-surface dark:bg-surface-elevated border-border divide-border mx-auto max-w-3xl divide-y rounded-2xl border shadow-sm">
                             {service.faq.map((item) => (
-                                <div key={item.question}>
+                                <div key={item.question} className="p-6 lg:p-8">
                                     <h3 className="text-foreground mb-2 text-lg font-semibold">{item.question}</h3>
-                                    <p className="text-foreground/80 leading-relaxed">{item.answer}</p>
+                                    <p className="text-foreground/80 mb-0 leading-relaxed">{item.answer}</p>
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </FadeInWhenVisible>
                 </Section>
             )}
 
